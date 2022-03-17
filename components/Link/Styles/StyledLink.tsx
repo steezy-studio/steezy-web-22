@@ -7,12 +7,13 @@ export const StyledLink = styled.span`
   text-underline-offset: 3px;
   cursor: pointer;
   position: relative;
+  font-family: inherit;
   &:after {
     content: "";
     display: block;
     width: 100%;
     position: absolute;
-    height: 100%;
+    height: 0.85em;
     top: 0;
     background-color: ${colors.primary400};
     left: 0;

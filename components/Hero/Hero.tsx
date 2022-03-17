@@ -2,7 +2,7 @@ import React from "react";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
 import { MainHeader } from "../Typo/MainHeader";
-import { SubHeader } from "../Typo/SubHeader";
+import { Caption } from "../Typo/Caption";
 import Video from "../Video/Video";
 import {
   HeroContent,
@@ -24,7 +24,7 @@ const Hero = ({ header, subHeader, children }: HeroProps) => {
     <StyledHero>
       <HeroContent>
         <HeroText>
-          <SubHeader>{subHeader}</SubHeader>
+          <Caption>{subHeader}</Caption>
           <MainHeader>{header}</MainHeader>
         </HeroText>
         <HeroSocials>

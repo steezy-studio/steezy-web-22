@@ -6,7 +6,14 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "agrandir", Arial, Helvetica, sans-serif;
   } 
+  a {
+    text-decoration: none;
+    &:visited {
+      color: ${colors.black}
+    }
+  }
   body {
     background-color: ${colors.primary300};
     padding: ${({ theme }) => theme.pageMargin};
@@ -18,4 +25,9 @@ export const GlobalStyle = createGlobalStyle`
     src: url("/fonts/MigraItalic-Italic.woff");
     font-weight: 400;
   }
+  @font-face {
+    font-family: "agrandir";
+    src: url("fonts/PPAgrandir-Medium.woff");
+    font-family: 500;
+  } 
 `;

@@ -1,0 +1,6 @@
+overwrite: true
+schema: https://graphql.prepr.io/dfd9a93c25e86512679d36e91a1fccecc4fff021b9304855beed89d41cbc8934
+generates:
+  generated/types.ts:
+    plugins:
+      - typescript
