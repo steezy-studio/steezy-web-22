@@ -3,12 +3,13 @@ import NextLink, { LinkProps as NextLinkProps } from "next/link";
 import { StyledLink } from "./Styles/StyledLink";
 
 interface LinkProps extends NextLinkProps {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[] | string;
+  className?: string;
 }
 
-const Link = ({ href, children }: LinkProps) => {
+const Link = ({ href, children, className }: LinkProps) => {
   return (
-    <StyledLink>
+    <StyledLink className={className}>
       <NextLink href={href}>{children}</NextLink>
     </StyledLink>
   );

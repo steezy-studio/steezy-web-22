@@ -9,9 +9,10 @@ export const GlobalStyle = createGlobalStyle`
     font-family: "agrandir", Arial, Helvetica, sans-serif;
   } 
   a {
+    color: inherit;
     text-decoration: none;
     &:visited {
-      color: ${colors.black}
+      color: inherit;
     }
   }
   body {
@@ -26,8 +27,18 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 400;
   }
   @font-face {
+    font-family: "migra-italic";
+    src: url("/fonts/MigraItalic-ExtraboldItalic.woff");
+    font-weight: 600;
+  }
+  @font-face {
     font-family: "agrandir";
-    src: url("fonts/PPAgrandir-Medium.woff");
-    font-family: 500;
+    src: url("/fonts/PPAgrandir-Medium.woff");
+    font-weight: 500;
+  } 
+  @font-face {
+    font-family: "agrandir";
+    src: url("/fonts/PPAgrandir-Light.woff");
+    font-weight: 300;
   } 
 `;

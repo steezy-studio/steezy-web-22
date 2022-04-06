@@ -13,7 +13,7 @@ export type Scalars = {
 };
 
 /** This union type holds all content models */
-export type AllModels = Area | LandingpageGrid | Project;
+export type AllModels = Area | LandingpageGrid | LandingpageGridRow | Project;
 
 /** Single Area */
 export type Area = {
@@ -288,7 +288,110 @@ export type LandingpageGrid = {
   /** Count of vote events */
   _votes?: Maybe<Scalars['Int']>;
   landingpage_grid?: Maybe<Scalars['String']>;
-  landingpage_project?: Maybe<Array<Project>>;
+  landingpage_projects_grid?: Maybe<Array<LandingpageGridRow>>;
+};
+
+export type LandingpageGridItem = {
+  __typename?: 'LandingpageGridItem';
+  _id?: Maybe<Scalars['String']>;
+  /** @deprecated Use `__typename` instead */
+  _type?: Maybe<Scalars['String']>;
+  offset_project?: Maybe<Scalars['Boolean']>;
+  projects?: Maybe<Array<Maybe<Project>>>;
+};
+
+/** Single LandingpageGridRow */
+export type LandingpageGridRow = {
+  __typename?: 'LandingpageGridRow';
+  _ab_testing_active?: Maybe<Scalars['Boolean']>;
+  _ab_testing_version?: Maybe<Scalars['String']>;
+  /** Count of bookmark events */
+  _bookmarks?: Maybe<Scalars['Int']>;
+  /** The time the content item was changed */
+  _changed_on: Scalars['String'];
+  /** Count of clicktrough events */
+  _clicktroughs?: Maybe<Scalars['Int']>;
+  /** Count of comment events */
+  _comments?: Maybe<Scalars['Int']>;
+  /** The time the content item was created */
+  _created_on: Scalars['String'];
+  /** Unique identifier for each content item */
+  _id: Scalars['String'];
+  /** Count of like events */
+  _likes?: Maybe<Scalars['Int']>;
+  _locale: Scalars['String'];
+  _locales: Array<Scalars['String']>;
+  /** The time for when the content item is or will be published */
+  _publish_on?: Maybe<Scalars['String']>;
+  /** Count of purchase events */
+  _purchases?: Maybe<Scalars['Int']>;
+  /** Calculated time to read in minutes */
+  _read_time?: Maybe<Scalars['Int']>;
+  /** Count of share events */
+  _shares?: Maybe<Scalars['Int']>;
+  /** Unique within Type, string identifier for each content item */
+  _slug?: Maybe<Scalars['String']>;
+  /** Count of subscribe events */
+  _subscribes?: Maybe<Scalars['Int']>;
+  /** Count of view events */
+  _views?: Maybe<Scalars['Int']>;
+  /** Count of vote events */
+  _votes?: Maybe<Scalars['Int']>;
+  grid_row?: Maybe<Array<Project>>;
+  offset?: Maybe<Scalars['Boolean']>;
+  prepr_name?: Maybe<Scalars['String']>;
+};
+
+export enum LandingpageGridRowSortInput {
+  ChangedOn = 'changed_on',
+  ChangedOnAsc = 'changed_on_ASC',
+  ChangedOnDesc = 'changed_on_DESC',
+  CreatedOn = 'created_on',
+  CreatedOnAsc = 'created_on_ASC',
+  CreatedOnDesc = 'created_on_DESC',
+  PreprNameAsc = 'prepr_name_ASC',
+  PreprNameDesc = 'prepr_name_DESC',
+  PublishOn = 'publish_on',
+  PublishOnAsc = 'publish_on_ASC',
+  PublishOnDesc = 'publish_on_DESC'
+}
+
+export type LandingpageGridRowWhereInput = {
+  /** Matches if the Id field is equal to one of the items in the given list */
+  _id_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Matches if the Id field is not equal to one of the items in the given list */
+  _id_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Matches any content item containing the given text term (full-text search) */
+  _search?: InputMaybe<Scalars['String']>;
+  _search_options?: InputMaybe<SearchOptionsInput>;
+  _slug_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  _slug_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Matches any content item tagged with all items from the given list */
+  _tags_all?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Matches any content item tagged with at least one item from the given list */
+  _tags_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Matches any content item that is tagged */
+  _tags_has?: InputMaybe<Scalars['Boolean']>;
+  /** Matches any content item not tagged with an item from the given list */
+  _tags_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  grid_row?: InputMaybe<ProjectWhereInput>;
+  /** Matches if the field is equal or not equal to the given value */
+  offset?: InputMaybe<Scalars['Boolean']>;
+  /** Matches if the field is equal to the given value */
+  prepr_name?: InputMaybe<Scalars['String']>;
+  /** Full fuzzy text search, not case sensitive */
+  prepr_name_contains?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is less then the given value */
+  prepr_name_ends_with?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is greater then the given value */
+  prepr_name_starts_with?: InputMaybe<Scalars['String']>;
+};
+
+/** List of LandingpageGridRows items */
+export type LandingpageGridRows = {
+  __typename?: 'LandingpageGridRows';
+  items: Array<LandingpageGridRow>;
+  total: Scalars['Int'];
 };
 
 export enum LandingpageGridSortInput {
@@ -331,7 +434,7 @@ export type LandingpageGridWhereInput = {
   landingpage_grid_ends_with?: InputMaybe<Scalars['String']>;
   /** Matches if the field is greater then the given value */
   landingpage_grid_starts_with?: InputMaybe<Scalars['String']>;
-  landingpage_project?: InputMaybe<ProjectWhereInput>;
+  landingpage_projects_grid?: InputMaybe<LandingpageGridRowWhereInput>;
 };
 
 /** List of LandingpageGrids items */
@@ -403,11 +506,21 @@ export type Project = {
   grid_image?: Maybe<Array<Maybe<Asset>>>;
   hero_image?: Maybe<Array<Maybe<Asset>>>;
   landingpage_grid_image?: Maybe<Array<Maybe<Asset>>>;
-  project_areas?: Maybe<Array<Area>>;
+  prepr_display_name?: Maybe<Scalars['String']>;
   project_description?: Maybe<Scalars['String']>;
+  project_detail_name?: Maybe<Scalars['String']>;
   project_facts?: Maybe<Array<Maybe<_Prepr_Types>>>;
-  project_name?: Maybe<Scalars['String']>;
+  project_grid_name?: Maybe<Scalars['String']>;
   project_presentation?: Maybe<Array<Maybe<_Prepr_Types>>>;
+  project_tags?: Maybe<Array<Area>>;
+};
+
+export type ProjectArea = {
+  __typename?: 'ProjectArea';
+  _id?: Maybe<Scalars['String']>;
+  /** @deprecated Use `__typename` instead */
+  _type?: Maybe<Scalars['String']>;
+  project_area?: Maybe<Array<Maybe<Area>>>;
 };
 
 export type ProjectFacts = {
@@ -451,10 +564,14 @@ export enum ProjectSortInput {
   CreatedOn = 'created_on',
   CreatedOnAsc = 'created_on_ASC',
   CreatedOnDesc = 'created_on_DESC',
+  PreprDisplayNameAsc = 'prepr_display_name_ASC',
+  PreprDisplayNameDesc = 'prepr_display_name_DESC',
   ProjectDescriptionAsc = 'project_description_ASC',
   ProjectDescriptionDesc = 'project_description_DESC',
-  ProjectNameAsc = 'project_name_ASC',
-  ProjectNameDesc = 'project_name_DESC',
+  ProjectDetailNameAsc = 'project_detail_name_ASC',
+  ProjectDetailNameDesc = 'project_detail_name_DESC',
+  ProjectGridNameAsc = 'project_grid_name_ASC',
+  ProjectGridNameDesc = 'project_grid_name_DESC',
   PublishOn = 'publish_on',
   PublishOnAsc = 'publish_on_ASC',
   PublishOnDesc = 'publish_on_DESC'
@@ -478,7 +595,14 @@ export type ProjectWhereInput = {
   _tags_has?: InputMaybe<Scalars['Boolean']>;
   /** Matches any content item not tagged with an item from the given list */
   _tags_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  project_areas?: InputMaybe<AreaWhereInput>;
+  /** Matches if the field is equal to the given value */
+  prepr_display_name?: InputMaybe<Scalars['String']>;
+  /** Full fuzzy text search, not case sensitive */
+  prepr_display_name_contains?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is less then the given value */
+  prepr_display_name_ends_with?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is greater then the given value */
+  prepr_display_name_starts_with?: InputMaybe<Scalars['String']>;
   /** Matches if the field is equal to the given value */
   project_description?: InputMaybe<Scalars['String']>;
   /** Full fuzzy text search, not case sensitive */
@@ -488,13 +612,22 @@ export type ProjectWhereInput = {
   /** Matches if the field is greater then the given value */
   project_description_starts_with?: InputMaybe<Scalars['String']>;
   /** Matches if the field is equal to the given value */
-  project_name?: InputMaybe<Scalars['String']>;
+  project_detail_name?: InputMaybe<Scalars['String']>;
   /** Full fuzzy text search, not case sensitive */
-  project_name_contains?: InputMaybe<Scalars['String']>;
+  project_detail_name_contains?: InputMaybe<Scalars['String']>;
   /** Matches if the field is less then the given value */
-  project_name_ends_with?: InputMaybe<Scalars['String']>;
+  project_detail_name_ends_with?: InputMaybe<Scalars['String']>;
   /** Matches if the field is greater then the given value */
-  project_name_starts_with?: InputMaybe<Scalars['String']>;
+  project_detail_name_starts_with?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is equal to the given value */
+  project_grid_name?: InputMaybe<Scalars['String']>;
+  /** Full fuzzy text search, not case sensitive */
+  project_grid_name_contains?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is less then the given value */
+  project_grid_name_ends_with?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is greater then the given value */
+  project_grid_name_starts_with?: InputMaybe<Scalars['String']>;
+  project_tags?: InputMaybe<AreaWhereInput>;
 };
 
 /** List of Projects items */
@@ -514,16 +647,24 @@ export type Query = {
   ContentItems?: Maybe<ContentItems>;
   /** Retrieve a single LandingpageGrid */
   LandingpageGrid?: Maybe<LandingpageGrid>;
+  /** Retrieve a single LandingpageGridRow */
+  LandingpageGridRow?: Maybe<LandingpageGridRow>;
+  /** Retrieve multiple LandingpageGridRows */
+  LandingpageGridRows?: Maybe<LandingpageGridRows>;
   /** Retrieve multiple LandingpageGrids */
   LandingpageGrids?: Maybe<LandingpageGrids>;
   /** Retrieve personalized Areas for the giving Customer ID */
   Personalized_Areas?: Maybe<Areas>;
+  /** Retrieve personalized LandingpageGridRows for the giving Customer ID */
+  Personalized_LandingpageGridRows?: Maybe<LandingpageGridRows>;
   /** Retrieve personalized LandingpageGrids for the giving Customer ID */
   Personalized_LandingpageGrids?: Maybe<LandingpageGrids>;
   /** Retrieve personalized Projects for the giving Customer ID */
   Personalized_Projects?: Maybe<Projects>;
   /** Recommendation recipe suitable for recommending globally popular Areas */
   Popular_Areas?: Maybe<Areas>;
+  /** Recommendation recipe suitable for recommending globally popular LandingpageGridRows */
+  Popular_LandingpageGridRows?: Maybe<LandingpageGridRows>;
   /** Recommendation recipe suitable for recommending globally popular LandingpageGrids */
   Popular_LandingpageGrids?: Maybe<LandingpageGrids>;
   /** Recommendation recipe suitable for recommending globally popular Projects */
@@ -534,6 +675,8 @@ export type Query = {
   Projects?: Maybe<Projects>;
   /** Recommendation recipe suitable for recommending Areas which are similar to the giving item */
   Similar_Areas?: Maybe<Areas>;
+  /** Recommendation recipe suitable for recommending LandingpageGridRows which are similar to the giving item */
+  Similar_LandingpageGridRows?: Maybe<LandingpageGridRows>;
   /** Recommendation recipe suitable for recommending LandingpageGrids which are similar to the giving item */
   Similar_LandingpageGrids?: Maybe<LandingpageGrids>;
   /** Recommendation recipe suitable for recommending Projects which are similar to the giving item */
@@ -576,6 +719,24 @@ export type QueryLandingpageGridArgs = {
 };
 
 
+export type QueryLandingpageGridRowArgs = {
+  id?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryLandingpageGridRowsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: Scalars['String'];
+  locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  sort?: InputMaybe<LandingpageGridRowSortInput>;
+  where?: InputMaybe<LandingpageGridRowWhereInput>;
+};
+
+
 export type QueryLandingpageGridsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: Scalars['String'];
@@ -587,6 +748,14 @@ export type QueryLandingpageGridsArgs = {
 
 
 export type QueryPersonalized_AreasArgs = {
+  id?: InputMaybe<Scalars['String']>;
+  locale?: InputMaybe<Scalars['String']>;
+  locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryPersonalized_LandingpageGridRowsArgs = {
   id?: InputMaybe<Scalars['String']>;
   locale?: InputMaybe<Scalars['String']>;
   locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -617,6 +786,16 @@ export type QueryPopular_AreasArgs = {
   locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<AreaWhereInput>;
+};
+
+
+export type QueryPopular_LandingpageGridRowsArgs = {
+  events?: InputMaybe<Array<InputMaybe<_Event>>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<LandingpageGridRowWhereInput>;
 };
 
 
@@ -665,6 +844,16 @@ export type QuerySimilar_AreasArgs = {
   locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<AreaWhereInput>;
+};
+
+
+export type QuerySimilar_LandingpageGridRowsArgs = {
+  id: Scalars['String'];
+  limit?: InputMaybe<Scalars['Int']>;
+  locale?: InputMaybe<Scalars['String']>;
+  locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<LandingpageGridRowWhereInput>;
 };
 
 
@@ -785,4 +974,4 @@ export enum _Event {
 }
 
 /** This union type contains all content elements */
-export type _Prepr_Types = Assets | ContentIntegrations | Coordinates | FacebookPost | InstagramPost | NavigationItem | Number | ProjectFacts | ProjectGridBlockquote | ProjectGridRow | ProjectGridVimeo | Quote | Resource | SoundCloudPost | SpotifyPlaylist | Text | TikTokPost | TwitterPost | VimeoPost | YouTubePost;
+export type _Prepr_Types = Assets | ContentIntegrations | Coordinates | FacebookPost | InstagramPost | LandingpageGridItem | NavigationItem | Number | ProjectArea | ProjectFacts | ProjectGridBlockquote | ProjectGridRow | ProjectGridVimeo | Quote | Resource | SoundCloudPost | SpotifyPlaylist | Text | TikTokPost | TwitterPost | VimeoPost | YouTubePost;

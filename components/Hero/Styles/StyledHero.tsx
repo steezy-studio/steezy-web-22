@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import u from "../../../helpers/unit";
+import { StyledProject } from "../../../pagestyles/StyledProject";
 
 export const StyledHero = styled.div`
   height: 100vh;
@@ -27,6 +28,9 @@ export const HeroText = styled.div`
   max-width: ${({ theme }) => u(4, theme.pageMargin)};
   margin-top: auto;
   margin-bottom: auto;
+  ${StyledProject} & {
+    max-width: ${({ theme }) => u(6, theme.pageMargin)};
+  }
 `;
 
 export const HeroMedia = styled.div`
@@ -34,11 +38,14 @@ export const HeroMedia = styled.div`
   right: 0;
   top: ${({ theme }) => theme.pageMargin};
   bottom: ${({ theme }) => theme.pageMargin};
-  width: ${({ theme }) => u(13, theme.pageMargin)};
+  width: ${({ theme }) => u(12, theme.pageMargin)};
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
 `;
 
-export const HeroMediaChildren = styled.div`
+export const HeroFooterChildren = styled.div`
   margin-top: auto;
+  display: flex;
+  width: 100%;
 `;

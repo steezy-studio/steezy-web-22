@@ -1,13 +1,17 @@
 import React, { useState } from "react";
+import { allProjects } from "../../consts";
 import strings from "../../data/strings";
+import { Area } from "../../generated/types";
 import Logo from "../Logo/Logo";
 import Burger from "./Burger";
 import NavLink from "./NavLink";
 import { NavLinks, StyledNavbar } from "./Styles/StyledNavbar";
 
-interface NavbarProps {}
+interface NavbarProps {
+  areas: { highlighted: boolean; link: string; name: string }[];
+}
 
-const Navbar = ({}: NavbarProps) => {
+const Navbar = ({ areas }: NavbarProps) => {
   const [isMenuOpen, openMenu] = useState(false);
 
   return (
@@ -23,7 +27,15 @@ const Navbar = ({}: NavbarProps) => {
           ease: [0.65, 0.05, 0.36, 1],
         }}
         variants={{ open: { scaleX: 1 }, close: { scaleX: 0 } }}>
-        {strings.navData.map(({ highlighted, link, name }) => (
+        {[
+          {
+            name: allProjects.area_name,
+            link: `/projects/${allProjects._slug}`,
+            highlighted: true,
+          },
+          ...areas,
+          ...strings.navData,
+        ].map(({ highlighted, link, name }) => (
           <NavLink highlighted={highlighted} href={link} key={link}>
             {name}
           </NavLink>

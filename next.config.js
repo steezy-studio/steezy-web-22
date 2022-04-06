@@ -3,6 +3,6 @@ module.exports = {
     styledComponents: true,
   },
   images: {
-    domains: ["25k0kg8jym1o.b-cdn.net"],
+    domains: ["25k0kg8jym1o.b-cdn.net", "5gp8ud67s4yn.b-cdn.net"],
   },
 };

@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const StyledVideo = styled.div<{ ratio: number }>`
   position: relative;
   padding-bottom: ${({ ratio }) => ratio * 100}%;
+  width: 100%;
+  height: 100%;
   video {
     width: 100%;
     position: absolute;

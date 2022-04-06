@@ -8,6 +8,7 @@ interface VideoProps {
 const Video = ({ src }: VideoProps) => {
   const [ratio, setRatio] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
+
   React.useEffect(() => {
     setRatio(videoRef.current.videoHeight / videoRef.current.videoWidth);
   }, []);

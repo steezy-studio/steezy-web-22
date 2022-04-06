@@ -9,3 +9,8 @@ export type ColorKeys = keyof typeof colors;
 
 export const theme = { pageMargin: "40px" };
 export type Theme = typeof theme;
+
+export const allProjects = {
+  _slug: "all-projects",
+  area_name: "All projects",
+};
