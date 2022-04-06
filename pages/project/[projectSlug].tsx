@@ -1,4 +1,4 @@
-import { GetStaticPaths, GetStaticPropsContext } from "next";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import React from "react";
 import client from "../../apollo/client";
 import Hero from "../../components/Hero/Hero";
@@ -107,6 +107,7 @@ export const getStaticProps = async ({
 
   return {
     props: { areas: data.data.Areas, projectData: data.data.Project },
+    revalidate: Number(process.env.REVALIDATE),
   };
 };
 

@@ -156,6 +156,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       areas: data.data.Areas,
       projects: data.data.Projects,
     },
+    revalidate: Number(process.env.REVALIDATE),
   };
 };
 
