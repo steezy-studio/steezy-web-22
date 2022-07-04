@@ -42,14 +42,14 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
       <Layout>
         <StyledIndex>
           <Hero
-            asset={{ url: `/videos/hero_loop.mp4`, _type: "Video" }}
+            asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }}
             header={
               <>
                 <Link href={`/`}>{landingpageStrings.hero.header.cta}</Link>
                 {landingpageStrings.hero.header.rest}
               </>
             }
-            subHeader={landingpageStrings.hero.subHeader}>
+            perex={landingpageStrings.hero.subHeader}>
             <LandingpageHeroClients>
               <Caption>{landingpageStrings.hero.clients.header}</Caption>
               <LandingHeroPageLogotypes>

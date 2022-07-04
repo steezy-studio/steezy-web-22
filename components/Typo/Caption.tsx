@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { colors } from "../../consts";
+import u from "../../helpers/unit";
 import { LandingpageHeroClients } from "../../pagestyles/StyledIndex";
+import { Quote, ServicesSection } from "../../pagestyles/StyledStudio";
 import { DetailedContact, StyledFooter } from "../Footer/Styles/StyledFooter";
 import { GridItemAreas } from "../GridItem/Styles/StyledGridItem";
 import { StyledHero } from "../Hero/Styles/StyledHero";
@@ -12,6 +14,30 @@ export const Caption = styled.span`
   line-height: 1.2em;
   color: ${colors.black};
   text-transform: uppercase;
+  display: inline-block;
+  &.dash-margin {
+    margin-left: ${({ theme }) => u(1, theme.pageMargin, 30)};
+  }
+  &.with-dash {
+    display: flex;
+    align-items: center;
+    &:after {
+      content: "";
+      display: block;
+      margin-left: 30px;
+      height: 1px;
+      width: ${({ theme }) => u(1, theme.pageMargin)};
+      background-color: ${colors.black};
+    }
+    &.reversed {
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      &:after {
+        margin-left: 0;
+        margin-right: 30px;
+      }
+    }
+  }
   &.lowcase {
     text-transform: none;
     letter-spacing: 0.04em;
@@ -19,6 +45,11 @@ export const Caption = styled.span`
   }
   ${StyledHero} & {
     white-space: pre-wrap;
+    &.perex {
+      padding-top: ${({ theme }) => u(0.5, theme.pageMargin)};
+      line-height: 1.6em;
+      max-width: 300px;
+    }
   }
   ${LandingpageHeroClients} & {
     text-align: right;
@@ -35,6 +66,7 @@ export const Caption = styled.span`
     display: block;
     white-space: pre-wrap;
   }
-  ${DetailedContact} & {
+  ${ServicesSection} & {
+    margin-top: 1.5em;
   }
 `;

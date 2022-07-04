@@ -17,18 +17,20 @@ import { Asset } from "../../generated/types";
 
 interface HeroProps {
   header: string | JSX.Element;
-  subHeader: string;
+  subHeader?: string;
+  perex?: string;
   children?: JSX.Element | JSX.Element[];
   asset: Asset;
 }
 
-const Hero = ({ header, subHeader, children, asset }: HeroProps) => {
+const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
   return (
     <StyledHero>
       <HeroContent>
         <HeroText>
-          <Caption>{subHeader}</Caption>
+          {subHeader && <Caption>{subHeader}</Caption>}
           <MainHeader>{header}</MainHeader>
+          {perex && <Caption className={`perex`}>{perex}</Caption>}
         </HeroText>
         <HeroSocials>
           <Instagram />
@@ -45,10 +47,10 @@ const Hero = ({ header, subHeader, children, asset }: HeroProps) => {
             height={asset.height}
             placeholder={`blur`}
             blurDataURL={asset.url}
-            layout={"responsive"}
+            layout={children ? "responsive" : "fill"}
           />
         )}
-        <HeroFooterChildren>{children}</HeroFooterChildren>
+        {children && <HeroFooterChildren>{children}</HeroFooterChildren>}
       </HeroMedia>
     </StyledHero>
   );

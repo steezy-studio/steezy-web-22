@@ -11,7 +11,7 @@ interface NavbarProps {
   areas: { highlighted: boolean; link: string; name: string }[];
 }
 
-const Navbar = ({ areas }: NavbarProps) => {
+const Navbar = ({ areas = [] }: NavbarProps) => {
   const [isMenuOpen, openMenu] = useState(false);
 
   return (

@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { colors } from "../../../consts";
+import { SubServicesList } from "../../../pagestyles/StyledStudio";
 import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
 
 export const StyledLink = styled.span`
@@ -38,7 +39,7 @@ export const StyledLink = styled.span`
         transform: scaleX(1);
       }
     }
-    ${StyledGridItem} & {
+    ${StyledGridItem} &, ${SubServicesList} & {
       font-size: 28px;
       font-weight: 300;
       strong {
@@ -58,6 +59,9 @@ export const StyledLink = styled.span`
           transform: scaleX(1);
         }
       }
+    }
+    ${SubServicesList} & {
+      line-height: 1.8em;
     }
   }
 `;
