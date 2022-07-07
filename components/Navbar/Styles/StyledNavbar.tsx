@@ -5,6 +5,7 @@ import u from "../../../helpers/unit";
 
 export const StyledNavbar = styled.nav`
   position: fixed;
+  pointer-events: none;
   z-index: 99;
   width: ${({ theme }) => u(16, theme.pageMargin)};
   top: ${({ theme }) => theme.pageMargin};

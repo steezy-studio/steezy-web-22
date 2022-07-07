@@ -18,13 +18,15 @@ const Footer = ({}: FooterProps) => {
       <Caption>{footerStrings.cta}</Caption>
       <ContactInfo>
         <MainHeader>
-          <Link href={`mailto:${footerStrings.email}`}>
-            {footerStrings.email}
+          <Link href={`mailto:${strings.globals.email}`}>
+            {strings.globals.email}
           </Link>
         </MainHeader>
         <DetailedContact>
-          <Caption className="lowcase">{footerStrings.address}</Caption>
-          <Caption className="lowcase">{footerStrings.other}</Caption>
+          <Caption className='lowcase'>{footerStrings.address}</Caption>
+          <Caption className='lowcase'>
+            {strings.globals.phone + `\n` + footerStrings.other}
+          </Caption>
         </DetailedContact>
       </ContactInfo>
     </StyledFooter>

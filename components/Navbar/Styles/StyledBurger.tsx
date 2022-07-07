@@ -3,6 +3,7 @@ import { colors } from "../../../consts";
 
 export const StyledBurger = styled.div`
   display: flex;
+  pointer-events: all;
   align-items: center;
   justify-content: center;
   background-color: ${colors.black};

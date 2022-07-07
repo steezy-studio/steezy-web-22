@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import u from "../../helpers/unit";
+import { StyledContact } from "../../pagestyles/StyledContact";
 import {
   ProjectsGridColumn,
   ProjectsHeroContent,
@@ -17,9 +18,13 @@ export const Perex = styled.p`
   ${ProjectsHeroContent} & {
     max-width: ${({ theme }) => u(5, theme.pageMargin)};
   }
-  ${TextBlock} & {
+  &.big-lh {
+    line-height: 1.5em;
+  }
+  &.big {
     font-weight: 400;
     font-size: 44px;
+    line-height: 1.3em;
     max-width: 700px;
     /* padding-left: 40px; */
   }

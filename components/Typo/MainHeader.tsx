@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../consts";
 import u from "../../helpers/unit";
+import { StyledContact } from "../../pagestyles/StyledContact";
 import { ProjectsHeroFilters } from "../../pagestyles/StyledProjects";
 import { Quote } from "../../pagestyles/StyledStudio";
 import { StyledFooter } from "../Footer/Styles/StyledFooter";
@@ -18,6 +19,9 @@ export const MainHeader = styled.h1`
   ${HeroContent} & {
     margin-top: ${({ theme }) => u(0.75, theme.pageMargin)};
     white-space: pre-wrap;
+  }
+  ${StyledContact} & {
+    line-height: 1.2em;
   }
   ${StyledFooter} & {
     font-size: 70px;

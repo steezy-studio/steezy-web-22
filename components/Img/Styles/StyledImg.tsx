@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import u from "../../../helpers/unit";
+import { StyledContact } from "../../../pagestyles/StyledContact";
 import { ProjectHeroFooter } from "../../../pagestyles/StyledProject";
 import { ValuesSection } from "../../../pagestyles/StyledStudio";
 import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";

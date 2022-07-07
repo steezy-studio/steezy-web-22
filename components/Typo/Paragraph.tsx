@@ -9,4 +9,7 @@ export const Paragraph = styled.p`
   ${TextBlock} & {
     width: 50%;
   }
+  &.big-lh {
+    line-height: 1.5em;
+  }
 `;

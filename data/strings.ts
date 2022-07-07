@@ -1,9 +1,16 @@
 export default {
   footer: {
     cta: "Are you interested? Tell us your story!",
-    email: "hello@steezy.studio",
     address: "STEEZY, s.r.o.\nObilní trh 4, 602 00 Brno\nCzech Republic",
-    other: "T: (+420) 728 088 996\nIČ: 07812558\nDIČ (VAT): CZ07812558",
+    other: "IČ: 07812558\nDIČ (VAT): CZ07812558",
+  },
+  contactPage: {
+    hero: {
+      subHeader:
+        "Do you have an interesting story to tell? Get in touch right now.",
+      perex:
+        "We support people who're not affraid to step out of line, who don't listen that something is not possible and who have courage to inspire the others.",
+    },
   },
   studioPage: {
     hero: {
@@ -37,7 +44,7 @@ export default {
         {
           header: "Global experience",
           perex:
-            "Since 2019 we are working for Fortune 100 transnational corporations as well as for clients from all over the world. From United States, Mexico to Spain, Swiss, Netherlands, Germany, UK, Ireland to Hong Kong or Dubai. And we’re happy that we can apply this diverse experience into all of our projects.",
+            "Since 2019 we are working for Fortune 100 transnational corporations as well as for clients from all over the world. From United States, Mexico to Spain, Swiss, Netherlands, Germany, UK, Ireland to Hong Kong or Dubai. And we're happy that we can apply this diverse experience into all of our projects.",
         },
         {
           header: "Intensive partnership approach",
@@ -221,6 +228,8 @@ export default {
   },
 
   globals: {
+    email: "hello@steezy.studio",
+    phone: "(+420) 728 088 996",
     nextImage: "next photo",
   },
   navData: [
@@ -231,7 +240,7 @@ export default {
     },
     {
       name: "contact",
-      link: "/projects/contact",
+      link: "/contact",
       highlighted: true,
     },
   ],

@@ -34,6 +34,7 @@ import {
   BrandsText,
   Logo,
   Logotypes,
+  Outro,
 } from "../pagestyles/StyledStudio";
 
 interface StudioProps {
@@ -68,7 +69,7 @@ const Studio = ({ areas }: StudioProps) => {
               <Caption className={"with-dash"}>
                 {studioStrings.intro.header}
               </Caption>
-              <Perex>{studioStrings.intro.perex}</Perex>
+              <Perex className='big'>{studioStrings.intro.perex}</Perex>
             </div>
             <Paragraph>{studioStrings.intro.paragraph}</Paragraph>
           </TextBlock>
@@ -91,7 +92,7 @@ const Studio = ({ areas }: StudioProps) => {
                       <Order>{n < 10 ? `0${n}` : n}</Order>
                       <ValueHeader>
                         <Header>{header}</Header>
-                        <Perex>{perex}</Perex>
+                        <Paragraph className='big-lh'>{perex}</Paragraph>
                       </ValueHeader>
                     </ValueItem>
                   );
@@ -188,6 +189,27 @@ const Studio = ({ areas }: StudioProps) => {
               ))}
             </Logotypes>
           </BrandsSection>
+          <Outro>
+            <Blockquote>
+              <Quote className='offset-y-3'>
+                <MainHeader className='offset-x-2'>
+                  {studioStrings.blockquotes[1].quote}
+                </MainHeader>
+                <Caption className='with-dash reversed'>
+                  {studioStrings.blockquotes[1].name}{" "}
+                </Caption>
+                <Caption className='lowcase dash-margin'>
+                  {studioStrings.blockquotes[1].position}
+                </Caption>
+              </Quote>
+            </Blockquote>
+            <Img
+              src={`/images/blockquote-03.jpg`}
+              width={2450}
+              height={1300}
+              layout={`intrinsic`}
+            />
+          </Outro>
         </StyledStudio>
       </Layout>
     </>
@@ -197,18 +219,13 @@ const Studio = ({ areas }: StudioProps) => {
 export const getStaticProps: GetStaticProps = async () => {
   try {
     const data = await client.query({ query: GET_ALL_AREAS });
-
     return {
-      props: {
-        areas: data.data.Areas,
-      },
+      props: { areas: data.data.Areas },
       revalidate: Number(process.env.REVALIDATE),
     };
   } catch (e) {
     return {
-      props: {
-        areas: null,
-      },
+      props: { areas: null },
       revalidate: Number(process.env.REVALIDATE),
     };
   }

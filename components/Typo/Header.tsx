@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ValueHeader } from "../../pagestyles/StyledStudio";
+import { BrandsText, ValueHeader } from "../../pagestyles/StyledStudio";
 
 export const Header = styled.h2`
   font-family: "agrandir";
@@ -7,5 +7,8 @@ export const Header = styled.h2`
   font-size: 44px;
   ${ValueHeader} & {
     width: 80%;
+  }
+  ${BrandsText} & {
+    margin-bottom: 30px;
   }
 `;

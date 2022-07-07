@@ -101,17 +101,27 @@ export const Quote = styled.div`
     align-self: end;
     margin-bottom: ${({ theme }) => u(1, theme.pageMargin)};
   }
+  &.offset-y-3 {
+    transform: translateY(40%);
+    position: relative;
+    z-index: 1;
+  }
 `;
 
 export const BrandsSection = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin: ${({ theme }) => u(3, theme.pageMargin)} 0
+    ${({ theme }) => u(1, theme.pageMargin)};
 `;
 
 export const BrandsText = styled.div`
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto ${({ theme }) => u(4, theme.pageMargin)};
   align-items: start;
+  justify-content: start;
+  grid-gap: 60px;
+  margin-top: 60px;
 `;
 
 export const Logotypes = styled.div`
@@ -119,3 +129,5 @@ export const Logotypes = styled.div`
   grid-template-columns: repeat(4, 1fr);
 `;
 export const Logo = styled.img``;
+
+export const Outro = styled.div``;

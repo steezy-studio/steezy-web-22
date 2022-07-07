@@ -17,9 +17,10 @@ export const GlobalStyle = createGlobalStyle`
   }
   body {
     background-color: ${colors.primary300};
-    padding: ${({ theme }) => theme.pageMargin};
-    padding-top: 0;
-    padding-bottom: 0;
+    // important flag for Radix dialog
+    padding: ${({ theme }) => theme.pageMargin} !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
   @font-face {
     font-family: "migra-italic";

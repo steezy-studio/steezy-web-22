@@ -20,7 +20,10 @@ const Navbar = ({ areas = [] }: NavbarProps) => {
       <NavLinks
         animate={isMenuOpen ? "open" : "close"}
         initial={false}
-        style={{ transformOrigin: "100% 0%" }}
+        style={{
+          transformOrigin: "100% 0%",
+          pointerEvents: isMenuOpen ? "all" : "none",
+        }}
         transition={{
           duration: 0.2,
           type: "tween",

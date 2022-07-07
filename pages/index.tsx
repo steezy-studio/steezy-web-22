@@ -5,6 +5,7 @@ import GridItem from "../components/GridItem/GridItem";
 import Hero from "../components/Hero/Hero";
 import Layout from "../components/Layout/Layout";
 import Link from "../components/Link/Link";
+import { StyledLink } from "../components/Link/Styles/StyledLink";
 import Navbar from "../components/Navbar/Navbar";
 import { Caption } from "../components/Typo/Caption";
 import { MainHeader } from "../components/Typo/MainHeader";
@@ -45,7 +46,9 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
             asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }}
             header={
               <>
-                <Link href={`/`}>{landingpageStrings.hero.header.cta}</Link>
+                <StyledLink as={`span`}>
+                  {landingpageStrings.hero.header.cta}
+                </StyledLink>
                 {landingpageStrings.hero.header.rest}
               </>
             }

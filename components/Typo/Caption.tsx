@@ -2,7 +2,12 @@ import styled from "styled-components";
 import { colors } from "../../consts";
 import u from "../../helpers/unit";
 import { LandingpageHeroClients } from "../../pagestyles/StyledIndex";
-import { Quote, ServicesSection } from "../../pagestyles/StyledStudio";
+import {
+  BrandsSection,
+  Quote,
+  ServicesSection,
+  TextBlock,
+} from "../../pagestyles/StyledStudio";
 import { DetailedContact, StyledFooter } from "../Footer/Styles/StyledFooter";
 import { GridItemAreas } from "../GridItem/Styles/StyledGridItem";
 import { StyledHero } from "../Hero/Styles/StyledHero";
@@ -11,7 +16,7 @@ export const Caption = styled.span`
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.1em;
-  line-height: 1.2em;
+  line-height: 1.5em;
   color: ${colors.black};
   text-transform: uppercase;
   display: inline-block;
@@ -50,6 +55,9 @@ export const Caption = styled.span`
       line-height: 1.6em;
       max-width: 300px;
     }
+    &.sub-header {
+      width: 400px;
+    }
   }
   ${LandingpageHeroClients} & {
     text-align: right;
@@ -66,7 +74,7 @@ export const Caption = styled.span`
     display: block;
     white-space: pre-wrap;
   }
-  ${ServicesSection} & {
+  ${ServicesSection} &, ${BrandsSection} &, ${TextBlock} & {
     margin-top: 1.5em;
   }
 `;

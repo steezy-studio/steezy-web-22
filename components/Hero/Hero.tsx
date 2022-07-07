@@ -14,6 +14,7 @@ import {
 } from "./Styles/StyledHero";
 import Img from "../Img/Img";
 import { Asset } from "../../generated/types";
+import { ImageProps } from "next/image";
 
 interface HeroProps {
   header: string | JSX.Element;
@@ -28,7 +29,7 @@ const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
     <StyledHero>
       <HeroContent>
         <HeroText>
-          {subHeader && <Caption>{subHeader}</Caption>}
+          {subHeader && <Caption className='sub-header'>{subHeader}</Caption>}
           <MainHeader>{header}</MainHeader>
           {perex && <Caption className={`perex`}>{perex}</Caption>}
         </HeroText>
