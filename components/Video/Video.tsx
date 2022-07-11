@@ -3,6 +3,7 @@ import Dialog from "../Dialog/Dialog";
 import { MainHeader } from "../Typo/MainHeader";
 import { Cursor, Loop, Showreel, StyledVideo } from "./Styles/StyledVideo";
 import Vimeo from "@u-wave/react-vimeo";
+import { Caption } from "../Typo/Caption";
 
 interface VideoProps {
   src: string;
@@ -39,12 +40,20 @@ const Video = ({ src }: VideoProps) => {
             show: { scale: 1, opacity: 1 },
             hide: { scale: 0, opacity: 0 },
           }}
-          src='/icons/play-cursor.svg'
+          // src='/icons/play-cursor.svg'
           style={{
             left: `${cursor.coords[0]}px`,
             top: `${cursor.coords[1]}px`,
-          }}
-        />
+          }}>
+          <Caption
+            className='fill'
+            style={{
+              width: 200,
+              fontSize: 21,
+            }}>
+            Play reel
+          </Caption>
+        </Cursor>
         <Dialog
           content={
             <Showreel>

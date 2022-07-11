@@ -1,3 +1,4 @@
+import Vimeo from "@u-wave/react-vimeo";
 import styled from "styled-components";
 import u from "../helpers/unit";
 
@@ -41,4 +42,9 @@ export const ProjectGridBlockquote = styled.div`
     ${({ theme }) => u(2, theme.pageMargin)}
     ${({ theme }) => u(2, theme.pageMargin)} 0;
   margin-left: auto;
+`;
+
+export const ProjectGridVimeo = styled(Vimeo)`
+  width: 100%;
+  height: 100%;
 `;

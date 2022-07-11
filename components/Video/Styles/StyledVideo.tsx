@@ -27,7 +27,7 @@ export const Showreel = styled.div`
   }
 `;
 
-export const Cursor = styled(motion.img)`
+export const Cursor = styled(motion.div)`
   position: absolute;
   z-index: 1;
   width: 80px;

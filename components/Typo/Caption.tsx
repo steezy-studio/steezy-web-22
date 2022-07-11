@@ -58,6 +58,12 @@ export const Caption = styled.span`
     &.sub-header {
       width: 400px;
     }
+    &.fill {
+      background-color: ${colors.primary300};
+      padding: 10px;
+      text-align: center;
+      /* border: 1px solid ${colors.black}; */
+    }
   }
   ${LandingpageHeroClients} & {
     text-align: right;

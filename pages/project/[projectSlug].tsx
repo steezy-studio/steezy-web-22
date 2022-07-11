@@ -1,3 +1,4 @@
+import Vimeo from "@u-wave/react-vimeo";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import React from "react";
 import client from "../../apollo/client";
@@ -14,6 +15,7 @@ import {
   ProjectGrid,
   ProjectGridBlockquote,
   ProjectGridRow,
+  ProjectGridVimeo,
   ProjectHeroFooter,
   ProjectHeroRole,
   ProjectHeroRoles,
@@ -47,7 +49,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                   return (
                     <ProjectHeroRole key={i}>
                       <Caption>{fact.header}</Caption>
-                      <Caption className="lowcase">{fact.content}</Caption>
+                      <Caption className='lowcase'>{fact.content}</Caption>
                     </ProjectHeroRole>
                   );
                 }
@@ -77,6 +79,9 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                   ))}
                 </ProjectGridRow>
               );
+            }
+            if (row.__typename === "ProjectGridVimeo") {
+              return <ProjectGridVimeo video={row.vimeo_id} responsive />;
             }
             if (row.__typename === "ProjectGridBlockquote") {
               return (
