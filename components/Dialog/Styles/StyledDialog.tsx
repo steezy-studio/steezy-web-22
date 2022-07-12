@@ -1,9 +1,19 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import * as RadixDialog from "@radix-ui/react-dialog";
 import { colors } from "../../../consts";
 import u from "../../../helpers/unit";
 
 export const StyledDialog = styled(RadixDialog.Root)``;
+
+const overlayShow = keyframes({
+  "0%": { opacity: 0 },
+  "100%": { opacity: 1 },
+});
+
+const contentShow = keyframes({
+  "0%": { opacity: 0, transform: "translate(-50%, -45%) scale(.96)" },
+  "100%": { opacity: 1, transform: "translate(-50%, -50%) scale(1)" },
+});
 
 export const Content = styled(RadixDialog.Content)`
   transform: translate(-50%, -50%);
@@ -12,6 +22,7 @@ export const Content = styled(RadixDialog.Content)`
   left: 50%;
   background-color: ${colors.black};
   z-index: 999;
+  animation: ${contentShow} 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 `;
 export const Close = styled(RadixDialog.Close)`
   width: 80px;
@@ -33,4 +44,5 @@ export const Overlay = styled(RadixDialog.Overlay)`
   inset: 0;
   z-index: 998;
   cursor: pointer;
+  animation: ${overlayShow} 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 `;

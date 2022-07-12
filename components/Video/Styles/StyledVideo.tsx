@@ -27,13 +27,13 @@ export const Showreel = styled.div`
   }
 `;
 
-export const Cursor = styled(motion.div)`
+export const Cursor = styled(motion.img)`
   position: absolute;
   z-index: 1;
-  width: 80px;
-  height: 80px;
+  width: 140px;
+  height: 140px;
   transform: translate(-50%, -50%);
-  margin-left: -40px;
-  margin-top: -40px;
+  margin-left: -70px;
+  margin-top: -70px;
   pointer-events: none;
 `;
