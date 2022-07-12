@@ -10,6 +10,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** The DateTime type adheres to ISO 8601 standard. */
+  _DateTime: any;
 };
 
 /** This union type holds all content models */
@@ -30,6 +32,8 @@ export type Area = {
   _comments?: Maybe<Scalars['Int']>;
   /** The time the content item was created */
   _created_on: Scalars['String'];
+  /** Id of your Prepr Environment */
+  _environment_id: Scalars['String'];
   /** Unique identifier for each content item */
   _id: Scalars['String'];
   /** Count of like events */
@@ -70,10 +74,16 @@ export enum AreaSortInput {
 }
 
 export type AreaWhereInput = {
+  _changed_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _changed_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_lt?: InputMaybe<Scalars['_DateTime']>;
   /** Matches if the Id field is equal to one of the items in the given list */
   _id_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Matches if the Id field is not equal to one of the items in the given list */
   _id_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  _publish_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _publish_on_lt?: InputMaybe<Scalars['_DateTime']>;
   /** Matches any content item containing the given text term (full-text search) */
   _search?: InputMaybe<Scalars['String']>;
   _search_options?: InputMaybe<SearchOptionsInput>;
@@ -265,6 +275,8 @@ export type LandingpageGrid = {
   _comments?: Maybe<Scalars['Int']>;
   /** The time the content item was created */
   _created_on: Scalars['String'];
+  /** Id of your Prepr Environment */
+  _environment_id: Scalars['String'];
   /** Unique identifier for each content item */
   _id: Scalars['String'];
   /** Count of like events */
@@ -315,6 +327,8 @@ export type LandingpageGridRow = {
   _comments?: Maybe<Scalars['Int']>;
   /** The time the content item was created */
   _created_on: Scalars['String'];
+  /** Id of your Prepr Environment */
+  _environment_id: Scalars['String'];
   /** Unique identifier for each content item */
   _id: Scalars['String'];
   /** Count of like events */
@@ -357,10 +371,16 @@ export enum LandingpageGridRowSortInput {
 }
 
 export type LandingpageGridRowWhereInput = {
+  _changed_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _changed_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_lt?: InputMaybe<Scalars['_DateTime']>;
   /** Matches if the Id field is equal to one of the items in the given list */
   _id_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Matches if the Id field is not equal to one of the items in the given list */
   _id_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  _publish_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _publish_on_lt?: InputMaybe<Scalars['_DateTime']>;
   /** Matches any content item containing the given text term (full-text search) */
   _search?: InputMaybe<Scalars['String']>;
   _search_options?: InputMaybe<SearchOptionsInput>;
@@ -409,10 +429,16 @@ export enum LandingpageGridSortInput {
 }
 
 export type LandingpageGridWhereInput = {
+  _changed_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _changed_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_lt?: InputMaybe<Scalars['_DateTime']>;
   /** Matches if the Id field is equal to one of the items in the given list */
   _id_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Matches if the Id field is not equal to one of the items in the given list */
   _id_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  _publish_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _publish_on_lt?: InputMaybe<Scalars['_DateTime']>;
   /** Matches any content item containing the given text term (full-text search) */
   _search?: InputMaybe<Scalars['String']>;
   _search_options?: InputMaybe<SearchOptionsInput>;
@@ -480,6 +506,8 @@ export type Project = {
   _comments?: Maybe<Scalars['Int']>;
   /** The time the content item was created */
   _created_on: Scalars['String'];
+  /** Id of your Prepr Environment */
+  _environment_id: Scalars['String'];
   /** Unique identifier for each content item */
   _id: Scalars['String'];
   /** Count of like events */
@@ -503,6 +531,10 @@ export type Project = {
   /** Count of vote events */
   _votes?: Maybe<Scalars['Int']>;
   client_logo?: Maybe<Array<Maybe<Asset>>>;
+  client_name?: Maybe<Scalars['String']>;
+  client_photo?: Maybe<Array<Maybe<Asset>>>;
+  client_position?: Maybe<Scalars['String']>;
+  client_quote?: Maybe<Scalars['String']>;
   grid_image?: Maybe<Array<Maybe<Asset>>>;
   hero_image?: Maybe<Array<Maybe<Asset>>>;
   landingpage_grid_image?: Maybe<Array<Maybe<Asset>>>;
@@ -561,6 +593,12 @@ export enum ProjectSortInput {
   ChangedOn = 'changed_on',
   ChangedOnAsc = 'changed_on_ASC',
   ChangedOnDesc = 'changed_on_DESC',
+  ClientNameAsc = 'client_name_ASC',
+  ClientNameDesc = 'client_name_DESC',
+  ClientPositionAsc = 'client_position_ASC',
+  ClientPositionDesc = 'client_position_DESC',
+  ClientQuoteAsc = 'client_quote_ASC',
+  ClientQuoteDesc = 'client_quote_DESC',
   CreatedOn = 'created_on',
   CreatedOnAsc = 'created_on_ASC',
   CreatedOnDesc = 'created_on_DESC',
@@ -578,10 +616,16 @@ export enum ProjectSortInput {
 }
 
 export type ProjectWhereInput = {
+  _changed_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _changed_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_lt?: InputMaybe<Scalars['_DateTime']>;
   /** Matches if the Id field is equal to one of the items in the given list */
   _id_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Matches if the Id field is not equal to one of the items in the given list */
   _id_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  _publish_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _publish_on_lt?: InputMaybe<Scalars['_DateTime']>;
   /** Matches any content item containing the given text term (full-text search) */
   _search?: InputMaybe<Scalars['String']>;
   _search_options?: InputMaybe<SearchOptionsInput>;
@@ -595,6 +639,30 @@ export type ProjectWhereInput = {
   _tags_has?: InputMaybe<Scalars['Boolean']>;
   /** Matches any content item not tagged with an item from the given list */
   _tags_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Matches if the field is equal to the given value */
+  client_name?: InputMaybe<Scalars['String']>;
+  /** Full fuzzy text search, not case sensitive */
+  client_name_contains?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is less then the given value */
+  client_name_ends_with?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is greater then the given value */
+  client_name_starts_with?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is equal to the given value */
+  client_position?: InputMaybe<Scalars['String']>;
+  /** Full fuzzy text search, not case sensitive */
+  client_position_contains?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is less then the given value */
+  client_position_ends_with?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is greater then the given value */
+  client_position_starts_with?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is equal to the given value */
+  client_quote?: InputMaybe<Scalars['String']>;
+  /** Full fuzzy text search, not case sensitive */
+  client_quote_contains?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is less then the given value */
+  client_quote_ends_with?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is greater then the given value */
+  client_quote_starts_with?: InputMaybe<Scalars['String']>;
   /** Matches if the field is equal to the given value */
   prepr_display_name?: InputMaybe<Scalars['String']>;
   /** Full fuzzy text search, not case sensitive */
@@ -842,6 +910,7 @@ export type QuerySimilar_AreasArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  rules?: InputMaybe<SimilarRulesInput>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<AreaWhereInput>;
 };
@@ -852,6 +921,7 @@ export type QuerySimilar_LandingpageGridRowsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  rules?: InputMaybe<SimilarRulesInput>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<LandingpageGridRowWhereInput>;
 };
@@ -862,6 +932,7 @@ export type QuerySimilar_LandingpageGridsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  rules?: InputMaybe<SimilarRulesInput>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<LandingpageGridWhereInput>;
 };
@@ -872,6 +943,7 @@ export type QuerySimilar_ProjectsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   locale?: InputMaybe<Scalars['String']>;
   locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  rules?: InputMaybe<SimilarRulesInput>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<ProjectWhereInput>;
 };
@@ -895,6 +967,15 @@ export type Resource = {
 
 export type SearchOptionsInput = {
   includeReferences?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type SimilarRulesInput = {
+  /** Adjust the weight of AI generated entities in the recommendation algorithm */
+  entities?: InputMaybe<Scalars['Float']>;
+  /** Adjust the weight of content references in the recommendation algorithm */
+  references?: InputMaybe<Scalars['Float']>;
+  /** Adjust the weight of tags in the recommendation algorithm */
+  tags?: InputMaybe<Scalars['Float']>;
 };
 
 export type SoundCloudPost = {

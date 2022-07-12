@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
 import { MainHeader } from "../Typo/MainHeader";
 import { Caption } from "../Typo/Caption";
-import Video from "../Video/Video";
+import HeroVideo from "./HeroVideo";
 import {
   HeroContent,
   HeroMedia,
@@ -17,7 +17,10 @@ import { Asset } from "../../generated/types";
 import { ImageProps } from "next/image";
 
 interface HeroProps {
-  header: string | JSX.Element;
+  header: (
+    openDialog: boolean,
+    setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>
+  ) => string | JSX.Element;
   subHeader?: string;
   perex?: string;
   children?: JSX.Element | JSX.Element[];
@@ -25,12 +28,13 @@ interface HeroProps {
 }
 
 const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
+  const [openDialog, setOpenDialog] = useState(false);
   return (
     <StyledHero>
       <HeroContent>
         <HeroText>
           {subHeader && <Caption className='sub-header'>{subHeader}</Caption>}
-          <MainHeader>{header}</MainHeader>
+          <MainHeader>{header(openDialog, setOpenDialog)}</MainHeader>
           {perex && <Caption className={`perex`}>{perex}</Caption>}
         </HeroText>
         <HeroSocials>
@@ -40,7 +44,11 @@ const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
       </HeroContent>
       <HeroMedia>
         {asset._type === "Video" ? (
-          <Video src={asset.url} />
+          <HeroVideo
+            src={asset.url}
+            open={openDialog}
+            onOpenChange={() => setOpenDialog((prev) => !prev)}
+          />
         ) : (
           <Img
             src={asset.url}

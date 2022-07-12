@@ -8,14 +8,14 @@ import {
   Close,
 } from "./Styles/StyledDialog";
 
-interface DialogProps {
+interface DialogProps extends RadixDialog.DialogProps {
   content: JSX.Element;
   trigger: JSX.Element;
 }
 
-const Dialog = ({ content, trigger }: DialogProps) => {
+const Dialog = ({ content, trigger, ...rest }: DialogProps) => {
   return (
-    <StyledDialog>
+    <StyledDialog {...rest}>
       <Trigger>{trigger}</Trigger>
       <RadixDialog.Portal>
         <Overlay />

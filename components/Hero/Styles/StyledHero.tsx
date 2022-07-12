@@ -39,7 +39,7 @@ export const HeroText = styled.div`
     max-width: ${({ theme }) => u(6, theme.pageMargin)};
   }
   ${StyledProject} & {
-    max-width: ${({ theme }) => u(6, theme.pageMargin)};
+    max-width: ${({ theme }) => u(7, theme.pageMargin)};
   }
   ${StyledContact} & {
     padding-top: 15%;

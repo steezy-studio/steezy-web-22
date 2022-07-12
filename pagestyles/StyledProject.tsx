@@ -11,6 +11,7 @@ export const ProjectHeroRoles = styled.div`
 `;
 export const ProjectHeroRole = styled.div`
   display: grid;
+  grid-template-rows: auto 1fr;
   grid-gap: 30px;
 `;
 
@@ -21,8 +22,8 @@ export const ProjectHeroFooter = styled.div`
 `;
 
 export const ProjectDescription = styled.div`
-  padding: ${({ theme }) => u(2, theme.pageMargin)} 0;
-  width: ${({ theme }) => u(8, theme.pageMargin)};
+  padding: ${({ theme }) => u(1, theme.pageMargin)} 0;
+  width: ${({ theme }) => u(6, theme.pageMargin)};
 `;
 
 export const ProjectGrid = styled.div`
@@ -38,13 +39,39 @@ export const ProjectGridRow = styled.div`
 `;
 
 export const ProjectGridBlockquote = styled.div`
-  padding: ${({ theme }) => u(2, theme.pageMargin)}
-    ${({ theme }) => u(2, theme.pageMargin)}
-    ${({ theme }) => u(2, theme.pageMargin)} 0;
+  padding: ${({ theme }) => u(1, theme.pageMargin)}
+    ${({ theme }) => u(4, theme.pageMargin)}
+    ${({ theme }) => u(1, theme.pageMargin)} 0;
   margin-left: auto;
 `;
 
 export const ProjectGridVimeo = styled(Vimeo)`
   width: 100%;
   height: 100%;
+`;
+
+export const ClientQuote = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: ${({ theme }) => theme.pageMargin};
+  margin-top: ${({ theme }) => u(2, theme.pageMargin)};
+`;
+
+export const ClientQuoteLeft = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  &:after {
+    content: "“";
+    display: block;
+    transform: translateY(-0.15em);
+    /* margin-top: 20px; */
+    font-weight: 600;
+    font-family: "migra-italic";
+    font-size: 110px;
+    margin-left: 40px;
+  }
+`;
+
+export const ClientQuoteRight = styled.div`
+  width: ${({ theme }) => u(6, theme.pageMargin)};
 `;

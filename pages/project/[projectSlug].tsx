@@ -7,10 +7,14 @@ import Img from "../../components/Img/Img";
 import { StyledImg } from "../../components/Img/Styles/StyledImg";
 import Navbar from "../../components/Navbar/Navbar";
 import { Caption } from "../../components/Typo/Caption";
+import { MainHeader } from "../../components/Typo/MainHeader";
 import { Perex } from "../../components/Typo/Perex";
 import { Areas, Project as ProjectType, Query } from "../../generated/types";
 import { GET_PROJECT } from "../../graphql/GetProject";
 import {
+  ClientQuote,
+  ClientQuoteLeft,
+  ClientQuoteRight,
   ProjectDescription,
   ProjectGrid,
   ProjectGridBlockquote,
@@ -21,6 +25,7 @@ import {
   ProjectHeroRoles,
   StyledProject,
 } from "../../pagestyles/StyledProject";
+import { Quote } from "../../pagestyles/StyledStudio";
 
 interface ProjectProps {
   projectData: ProjectType;
@@ -40,7 +45,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
       <StyledProject>
         <Hero
           asset={projectData.hero_image[0]}
-          header={projectData.project_detail_name}
+          header={() => projectData.project_detail_name}
           subHeader={``}>
           <ProjectHeroFooter>
             <ProjectHeroRoles>
@@ -95,6 +100,29 @@ const Project = ({ projectData, areas }: ProjectProps) => {
             }
           })}
         </ProjectGrid>
+        {projectData.client_quote && (
+          <ClientQuote>
+            <ClientQuoteLeft>
+              <Img
+                src={
+                  projectData.client_photo?.[0]?.url ||
+                  `/icons/avatar-default.svg`
+                }
+                width={250}
+                height={250}
+                layout={"responsive"}
+              />
+            </ClientQuoteLeft>
+            <ClientQuoteRight>
+              <Perex>{projectData.client_quote}</Perex>
+              <Caption>{projectData.client_name}</Caption>
+              <br />
+              <Caption className='lowcase'>
+                {projectData.client_position}
+              </Caption>
+            </ClientQuoteRight>
+          </ClientQuote>
+        )}
       </StyledProject>
     </>
   );

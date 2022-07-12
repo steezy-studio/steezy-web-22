@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import { colors } from "../../../consts";
 import { SubServicesList } from "../../../pagestyles/StyledStudio";
 import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
+import { Header } from "../../Typo/Header";
 
 export const StyledLink = styled.span`
   &,
@@ -62,6 +63,11 @@ export const StyledLink = styled.span`
     }
     ${SubServicesList} & {
       line-height: 1.8em;
+    }
+    ${Header} & {
+      &:after {
+        height: 1.2em;
+      }
     }
   }
 `;

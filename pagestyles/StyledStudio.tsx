@@ -90,6 +90,9 @@ export const Blockquote = styled.div`
   &._1 {
     margin-top: ${({ theme }) => u(6, theme.pageMargin)};
   }
+  &._2 {
+    transform: translateY(${({ theme }) => u(-1, theme.pageMargin)});
+  }
 `;
 
 export const Quote = styled.div`
@@ -111,7 +114,7 @@ export const Quote = styled.div`
 export const BrandsSection = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: ${({ theme }) => u(3, theme.pageMargin)} 0
+  margin: ${({ theme }) => u(2, theme.pageMargin)} 0
     ${({ theme }) => u(1, theme.pageMargin)};
 `;
 

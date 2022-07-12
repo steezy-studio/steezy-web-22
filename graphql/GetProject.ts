@@ -25,6 +25,12 @@ export const GET_PROJECT = gql`
         area_name
         _slug
       }
+      client_name
+      client_position
+      client_quote
+      client_photo {
+        url
+      }
       project_facts {
         ... on ProjectFacts {
           __typename

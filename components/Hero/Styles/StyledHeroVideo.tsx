@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const StyledVideo = styled.div<{ ratio: number }>`
+export const StyledHeroVideo = styled.div<{ ratio: number }>`
   position: relative;
   padding-bottom: ${({ ratio }) => ratio * 100}%;
   width: 100%;

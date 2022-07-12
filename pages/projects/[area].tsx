@@ -76,7 +76,7 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
             </HeroSocials>
           </ProjectsHero>
           <ProjectsGrid>
-            <ProjectsGridColumn className="even">
+            <ProjectsGridColumn className='even'>
               {projects.items.map(
                 (
                   { project_tags, project_grid_name, _slug, grid_image, _id },
@@ -86,6 +86,7 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
                     return (
                       <ProjectsGridItem>
                         <GridItem
+                          type={"Photo"}
                           areas={project_tags}
                           height={grid_image?.[0].height}
                           projectName={project_grid_name}
@@ -100,7 +101,7 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
                 }
               )}
             </ProjectsGridColumn>
-            <ProjectsGridColumn className="odd">
+            <ProjectsGridColumn className='odd'>
               {projects.items.map(
                 (
                   { project_tags, project_grid_name, _slug, grid_image, _id },
@@ -110,6 +111,7 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
                     return (
                       <ProjectsGridItem>
                         <GridItem
+                          type={"Photo"}
                           areas={project_tags}
                           height={grid_image?.[0].height}
                           projectName={project_grid_name}

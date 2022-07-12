@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import u from "../../../helpers/unit";
 import { StyledContact } from "../../../pagestyles/StyledContact";
-import { ProjectHeroFooter } from "../../../pagestyles/StyledProject";
+import {
+  ClientQuote,
+  ProjectHeroFooter,
+} from "../../../pagestyles/StyledProject";
 import { ValuesSection } from "../../../pagestyles/StyledStudio";
 import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
 import { HeroMedia } from "../../Hero/Styles/StyledHero";
@@ -25,5 +28,9 @@ export const StyledImg = styled.div`
   }
   ${StyledImageSlider} & {
     padding-right: 10px;
+  }
+  ${ClientQuote} & {
+    width: 250px;
+    height: 250px;
   }
 `;

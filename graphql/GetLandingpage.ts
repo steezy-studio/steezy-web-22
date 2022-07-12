@@ -23,9 +23,16 @@ export const GET_LANDINGPAGE = gql`
             }
             landingpage_grid_image {
               url(format: "webp")
+              _type
               description
               width
               height
+              cdn_files {
+                _id
+                _type
+                profile
+                url
+              }
             }
           }
         }

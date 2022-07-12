@@ -10,6 +10,7 @@ import Navbar from "../components/Navbar/Navbar";
 import { Caption } from "../components/Typo/Caption";
 import { MainHeader } from "../components/Typo/MainHeader";
 import strings from "../data/strings";
+import { allProjects } from "../consts/index";
 import { Area, Areas, LandingpageGrids } from "../generated/types";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
 import {
@@ -44,14 +45,16 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
         <StyledIndex>
           <Hero
             asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }}
-            header={
+            header={(openDialog, setOpenDialog) => (
               <>
-                <StyledLink as={`span`}>
+                <StyledLink
+                  as={`span`}
+                  onClick={() => setOpenDialog(!openDialog)}>
                   {landingpageStrings.hero.header.cta}
                 </StyledLink>
                 {landingpageStrings.hero.header.rest}
               </>
-            }
+            )}
             perex={landingpageStrings.hero.subHeader}>
             <LandingpageHeroClients>
               <Caption>{landingpageStrings.hero.clients.header}</Caption>
@@ -78,7 +81,11 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                     return body;
                   }
                   if (type === `link`) {
-                    return <Link href={"/projects"}>{body}</Link>;
+                    return (
+                      <Link href={`/projects/${allProjects._slug}`}>
+                        {body}
+                      </Link>
+                    );
                   }
                 })}
               </MainHeader>
@@ -98,23 +105,31 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                         project_tags,
                         _slug,
                         _id,
-                      }) => (
-                        <GridItemWrapper
-                          key={_id}
-                          className={`${row.offset ? "offset" : ""} ${
-                            isSingle ? "single" : ""
-                          }`}>
-                          <GridItem
-                            areas={project_tags}
-                            projectName={project_grid_name}
-                            width={landingpage_grid_image[0].width}
-                            height={landingpage_grid_image[0].height}
-                            src={landingpage_grid_image[0].url}
-                            slug={_slug}
-                            key={_slug}
-                          />
-                        </GridItemWrapper>
-                      )
+                      }) => {
+                        return (
+                          <GridItemWrapper
+                            key={_id}
+                            className={`${row.offset ? "offset" : ""} ${
+                              isSingle ? "single" : ""
+                            }`}>
+                            <GridItem
+                              type={landingpage_grid_image[0]._type}
+                              areas={project_tags}
+                              projectName={project_grid_name}
+                              videoThumb={landingpage_grid_image[0].cover}
+                              width={landingpage_grid_image[0].width}
+                              height={landingpage_grid_image[0].height}
+                              src={
+                                landingpage_grid_image[0]._type === "Video"
+                                  ? landingpage_grid_image[0].cdn_files[0].url
+                                  : landingpage_grid_image[0].url
+                              }
+                              slug={_slug}
+                              key={_slug}
+                            />
+                          </GridItemWrapper>
+                        );
+                      }
                     )}
                   </LandingpageGridRow>
                 );

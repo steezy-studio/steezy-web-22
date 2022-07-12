@@ -5,6 +5,7 @@ import Hero from "../components/Hero/Hero";
 import ImageSlider from "../components/ImageSlider/ImageSlider";
 import Img from "../components/Img/Img";
 import Layout from "../components/Layout/Layout";
+import Link from "../components/Link/Link";
 import { StyledLink } from "../components/Link/Styles/StyledLink";
 import Navbar from "../components/Navbar/Navbar";
 import { Caption } from "../components/Typo/Caption";
@@ -12,6 +13,7 @@ import { Header } from "../components/Typo/Header";
 import { MainHeader } from "../components/Typo/MainHeader";
 import { Paragraph } from "../components/Typo/Paragraph";
 import { Perex } from "../components/Typo/Perex";
+import { allProjects } from "../consts";
 import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
@@ -55,7 +57,7 @@ const Studio = ({ areas }: StudioProps) => {
       <Layout>
         <StyledStudio>
           <Hero
-            header={studioStrings.hero.header.rest}
+            header={() => studioStrings.hero.header.rest}
             perex={studioStrings.hero.subHeader}
             asset={{
               url: `/images/studio-hero.jpg`,
@@ -122,10 +124,14 @@ const Studio = ({ areas }: StudioProps) => {
               {studioStrings.services.servicesList.map(
                 ({ header, servicesSubList }) => (
                   <div key={header}>
-                    <Header>{header}</Header>
+                    <Header>
+                      <Link href={`/projects/${allProjects._slug}`}>
+                        {header}
+                      </Link>
+                    </Header>
                     <SubServicesList>
                       {servicesSubList.map((subService) => (
-                        <StyledLink key={subService}>{subService}</StyledLink>
+                        <Paragraph key={subService}>{subService}</Paragraph>
                       ))}
                     </SubServicesList>
                   </div>
@@ -153,7 +159,7 @@ const Studio = ({ areas }: StudioProps) => {
                 </Caption>
               </Quote>
             </Blockquote>
-            <Blockquote>
+            <Blockquote className='_2'>
               <Quote className='offset-y-2'>
                 <MainHeader className='offset-x-2'>
                   {studioStrings.blockquotes[1].quote}

@@ -1,19 +1,26 @@
+import { open } from "fs";
 import React, { useRef, useState } from "react";
+import { useIntersectionVideoObserver } from "../../hooks/useIntersectionVideoObserver";
 import Dialog from "../Dialog/Dialog";
-import { MainHeader } from "../Typo/MainHeader";
-import { Cursor, Loop, Showreel, StyledVideo } from "./Styles/StyledVideo";
-import Vimeo from "@u-wave/react-vimeo";
 import { Caption } from "../Typo/Caption";
+import {
+  Cursor,
+  Loop,
+  Showreel,
+  StyledHeroVideo,
+} from "./Styles/StyledHeroVideo";
 
 interface VideoProps {
   src: string;
+  open?: boolean;
+  onOpenChange?: () => void;
 }
 
-const Video = ({ src }: VideoProps) => {
+const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
   const [ratio, setRatio] = useState(0);
-  const [dialog, toggleDialog] = useState(0);
   const [cursor, setCursor] = useState({ coords: [0, 0], show: false });
   const videoRef = useRef<HTMLVideoElement>(null);
+  useIntersectionVideoObserver(videoRef);
 
   React.useEffect(() => {
     setRatio(videoRef.current.videoHeight / videoRef.current.videoWidth);
@@ -28,21 +35,19 @@ const Video = ({ src }: VideoProps) => {
     setCursor((prev) => ({
       show:
         x >= padding &&
-        boundingBox.width - padding >= x &&
+        videoRef.current.clientWidth - padding >= x &&
         y >= padding &&
-        boundingBox.height - padding >= y,
+        videoRef.current.clientHeight - padding >= y,
       coords: [x, y],
     }));
   };
 
   return (
     <>
-      <StyledVideo
+      <StyledHeroVideo
         ratio={ratio}
         onMouseMove={handleMouseMove}
-        // onMouseLeave={() => setCursor((prev) => ({ ...prev, show: false }))}
-        // onMouseEnter={() => setCursor((prev) => ({ ...prev, show: true }))}>
-      >
+        onMouseLeave={() => setCursor((prev) => ({ ...prev, show: false }))}>
         <Cursor
           animate={cursor.show ? "show" : "hide"}
           variants={{
@@ -54,15 +59,18 @@ const Video = ({ src }: VideoProps) => {
             left: `${cursor.coords[0]}px`,
             top: `${cursor.coords[1]}px`,
           }}>
-          {/* <Caption className='fill'
+          {/* <Capttion
+            className='fill'
             style={{
               width: 200,
               fontSize: 21,
             }}>
             Play reel
-          </Caption> */}
+          </Capttion> */}
         </Cursor>
         <Dialog
+          open={open}
+          onOpenChange={onOpenChange}
           content={
             <Showreel>
               <video
@@ -86,9 +94,9 @@ const Video = ({ src }: VideoProps) => {
             />
           }
         />
-      </StyledVideo>
+      </StyledHeroVideo>
     </>
   );
 };
 
-export default Video;
+export default HeroVideo;

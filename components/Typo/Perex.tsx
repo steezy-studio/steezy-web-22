@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import u from "../../helpers/unit";
 import { StyledContact } from "../../pagestyles/StyledContact";
+import { ClientQuote } from "../../pagestyles/StyledProject";
 import {
   ProjectsGridColumn,
   ProjectsHeroContent,
@@ -16,7 +17,7 @@ export const Perex = styled.p`
     margin-bottom: ${({ theme }) => u(2, theme.pageMargin)};
   }
   ${ProjectsHeroContent} & {
-    max-width: ${({ theme }) => u(5, theme.pageMargin)};
+    max-width: ${({ theme }) => u(4, theme.pageMargin)};
   }
   &.big-lh {
     line-height: 1.5em;
@@ -27,5 +28,12 @@ export const Perex = styled.p`
     line-height: 1.3em;
     max-width: 700px;
     /* padding-left: 40px; */
+  }
+  ${ClientQuote} & {
+    margin-bottom: 60px;
+    font-size: 48px;
+    line-height: 1.3em;
+    letter-spacing: 0.03em;
+    font-family: "migra-italic";
   }
 `;

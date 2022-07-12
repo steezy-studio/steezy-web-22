@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { allProjects } from "../../consts";
 import strings from "../../data/strings";
@@ -13,6 +14,9 @@ interface NavbarProps {
 
 const Navbar = ({ areas = [] }: NavbarProps) => {
   const [isMenuOpen, openMenu] = useState(false);
+  const router = useRouter();
+  // const path = asPath.split(`/`);
+  console.log(router);
 
   return (
     <StyledNavbar>

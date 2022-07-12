@@ -29,7 +29,7 @@ const Contact = ({ areas }: ContactProps) => {
         <StyledContact>
           <Hero
             subHeader={strings.contactPage.hero.subHeader}
-            header={
+            header={() => (
               <>
                 <Link href={`mailto: ${strings.globals.email}`}>
                   {strings.globals.email}
@@ -38,7 +38,7 @@ const Contact = ({ areas }: ContactProps) => {
                   {strings.globals.phone}
                 </Link>
               </>
-            }
+            )}
             asset={{
               url: "/images/contact-hero.jpg",
               width: 1815,
