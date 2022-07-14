@@ -4,7 +4,7 @@ import u from "../helpers/unit";
 export const StyledProjects = styled.div``;
 
 export const ProjectsHero = styled.div`
-  height: 100vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   padding: ${({ theme }) => theme.pageMargin} 0;
@@ -35,5 +35,7 @@ export const ProjectsGridColumn = styled.div`
 `;
 
 export const ProjectsGridItem = styled.div`
-  margin-bottom: ${({ theme }) => u(1, theme.pageMargin)};
+  &:not(:last-child) {
+    margin-bottom: ${({ theme }) => u(1, theme.pageMargin)};
+  }
 `;

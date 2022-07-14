@@ -48,5 +48,5 @@ export const Intro = styled.div`
   position: relative;
   z-index: 2;
   display: grid;
-  grid-gap: ${({ theme }) => u(1, theme.pageMargin)};
+  grid-gap: 60px;
 `;

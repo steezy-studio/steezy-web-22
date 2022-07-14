@@ -5,7 +5,7 @@ import Hero from "../components/Hero/Hero";
 import Layout from "../components/Layout/Layout";
 import Link from "../components/Link/Link";
 import Navbar from "../components/Navbar/Navbar";
-import { Perex } from "../components/Typo/Perex";
+import { Medium } from "../components/Typo/Medium";
 import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
@@ -44,7 +44,7 @@ const Contact = ({ areas }: ContactProps) => {
               width: 1815,
               height: 1089,
             }}>
-            <Perex className='big'>{strings.contactPage.hero.perex}</Perex>
+            <Medium className='big'>{strings.contactPage.hero.perex}</Medium>
           </Hero>
         </StyledContact>
       </Layout>

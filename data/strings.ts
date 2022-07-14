@@ -220,9 +220,12 @@ export default {
     intro: {
       subHeader: "You asking who we are?",
       perex: [
-        { type: "text", body: "we are designers of\u00a0compelling " },
-        { type: "link", body: "stories\u00a0&\u00a0visuals" },
-        { type: "text", body: " behind distinctive brands" },
+        {
+          type: "text",
+          body: "we\u00a0are\u00a0designers\nof\u00a0compelling ",
+        },
+        { type: "link", body: "stories\u00a0&\u00a0visuals " },
+        { type: "text", body: "behindy\u00a0distinctive\nbrands" },
       ],
     },
   },

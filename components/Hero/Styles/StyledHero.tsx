@@ -1,9 +1,6 @@
 import styled from "styled-components";
 import u from "../../../helpers/unit";
 import { StyledContact } from "../../../pagestyles/StyledContact";
-import { StyledIndex } from "../../../pagestyles/StyledIndex";
-import { StyledProject } from "../../../pagestyles/StyledProject";
-import { StyledStudio } from "../../../pagestyles/StyledStudio";
 
 export const StyledHero = styled.div`
   height: 100vh;
@@ -26,21 +23,17 @@ export const HeroContent = styled.div`
 export const HeroSocials = styled.div`
   display: flex;
   gap: 20px;
+  position: fixed;
+  bottom: ${({ theme }) => theme.pageMargin};
 `;
 
 export const HeroText = styled.div`
   * {
     pointer-events: all;
   }
-  max-width: ${({ theme }) => u(4, theme.pageMargin)};
+  width: ${({ theme }) => u(6, theme.pageMargin)};
   margin-top: auto;
   margin-bottom: auto;
-  ${StyledIndex} &, ${StyledStudio} &, ${StyledContact} & {
-    max-width: ${({ theme }) => u(6, theme.pageMargin)};
-  }
-  ${StyledProject} & {
-    max-width: ${({ theme }) => u(7, theme.pageMargin)};
-  }
   ${StyledContact} & {
     padding-top: 15%;
   }

@@ -1,42 +1,39 @@
 import { GetStaticProps } from "next";
-import React from "react";
 import client from "../apollo/client";
 import Hero from "../components/Hero/Hero";
 import ImageSlider from "../components/ImageSlider/ImageSlider";
 import Img from "../components/Img/Img";
 import Layout from "../components/Layout/Layout";
 import Link from "../components/Link/Link";
-import { StyledLink } from "../components/Link/Styles/StyledLink";
 import Navbar from "../components/Navbar/Navbar";
-import { Caption } from "../components/Typo/Caption";
-import { Header } from "../components/Typo/Header";
-import { MainHeader } from "../components/Typo/MainHeader";
-import { Paragraph } from "../components/Typo/Paragraph";
-import { Perex } from "../components/Typo/Perex";
+import { Large } from "../components/Typo/Large";
+import { Medium } from "../components/Typo/Medium";
+import { Micro } from "../components/Typo/Micro";
+import { Small } from "../components/Typo/Small";
 import { allProjects } from "../consts";
 import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import {
-  Order,
-  StyledStudio,
-  TextBlock,
-  ValueHeader,
-  ValueItem,
-  ValuesList,
-  ValuesInner,
-  ValuesSection,
-  ServicesSection,
-  ServicesList,
-  SubServicesList,
-  BlockquoteSection,
   Blockquote,
-  Quote,
+  BlockquoteSection,
   BrandsSection,
   BrandsText,
   Logo,
   Logotypes,
+  Order,
   Outro,
+  Quote,
+  ServicesList,
+  ServicesSection,
+  StyledStudio,
+  SubServicesList,
+  TextBlock,
+  ValueHeader,
+  ValueItem,
+  ValuesInner,
+  ValuesList,
+  ValuesSection,
 } from "../pagestyles/StyledStudio";
 
 interface StudioProps {
@@ -68,12 +65,12 @@ const Studio = ({ areas }: StudioProps) => {
           />
           <TextBlock>
             <div className='header'>
-              <Caption className={"with-dash"}>
+              <Micro className={"with-dash"}>
                 {studioStrings.intro.header}
-              </Caption>
-              <Perex className='big'>{studioStrings.intro.perex}</Perex>
+              </Micro>
+              <Medium className='big'>{studioStrings.intro.perex}</Medium>
             </div>
-            <Paragraph>{studioStrings.intro.paragraph}</Paragraph>
+            <Small>{studioStrings.intro.paragraph}</Small>
           </TextBlock>
           <Img
             src={`/images/steezy_interier-04.jpg`}
@@ -83,9 +80,7 @@ const Studio = ({ areas }: StudioProps) => {
           />
           <ValuesSection>
             <ValuesInner>
-              <Caption className='with-dash'>
-                {studioStrings.values.header}
-              </Caption>
+              <Micro className='with-dash'>{studioStrings.values.header}</Micro>
               <ValuesList>
                 {studioStrings.values.list.map(({ header, perex }, i) => {
                   const n = i + 1;
@@ -93,8 +88,8 @@ const Studio = ({ areas }: StudioProps) => {
                     <ValueItem key={i}>
                       <Order>{n < 10 ? `0${n}` : n}</Order>
                       <ValueHeader>
-                        <Header>{header}</Header>
-                        <Paragraph className='big-lh'>{perex}</Paragraph>
+                        <Medium className='big'>{header}</Medium>
+                        <Small className='big-lh'>{perex}</Small>
                       </ValueHeader>
                     </ValueItem>
                   );
@@ -117,21 +112,19 @@ const Studio = ({ areas }: StudioProps) => {
             }))}
           />
           <ServicesSection>
-            <Caption className='with-dash'>
-              {studioStrings.services.header}
-            </Caption>
+            <Micro className='with-dash'>{studioStrings.services.header}</Micro>
             <ServicesList>
               {studioStrings.services.servicesList.map(
                 ({ header, servicesSubList }) => (
                   <div key={header}>
-                    <Header>
+                    <Medium className='big'>
                       <Link href={`/projects/${allProjects._slug}`}>
                         {header}
                       </Link>
-                    </Header>
+                    </Medium>
                     <SubServicesList>
                       {servicesSubList.map((subService) => (
-                        <Paragraph key={subService}>{subService}</Paragraph>
+                        <Medium key={subService}>{subService}</Medium>
                       ))}
                     </SubServicesList>
                   </div>
@@ -148,28 +141,29 @@ const Studio = ({ areas }: StudioProps) => {
                 layout={"intrinsic"}
               />
               <Quote className='offset-y-1'>
-                <MainHeader className='offset-x-1'>
+                <Large className='offset-x-1'>
                   {studioStrings.blockquotes[0].quote}
-                </MainHeader>
-                <Caption className='with-dash reversed'>
+                </Large>
+
+                <Micro className='with-dash reversed'>
                   {studioStrings.blockquotes[0].name}{" "}
-                </Caption>
-                <Caption className='lowcase dash-margin'>
+                </Micro>
+                <Micro className='lowcase dash-margin '>
                   {studioStrings.blockquotes[0].position}
-                </Caption>
+                </Micro>
               </Quote>
             </Blockquote>
             <Blockquote className='_2'>
               <Quote className='offset-y-2'>
-                <MainHeader className='offset-x-2'>
+                <Large className='offset-x-2'>
                   {studioStrings.blockquotes[1].quote}
-                </MainHeader>
-                <Caption className='with-dash reversed'>
+                </Large>
+                <Micro className='with-dash dash-margin'>
                   {studioStrings.blockquotes[1].name}{" "}
-                </Caption>
-                <Caption className='lowcase dash-margin'>
+                </Micro>
+                <Micro className='lowcase dash-margin'>
                   {studioStrings.blockquotes[1].position}
-                </Caption>
+                </Micro>
               </Quote>
               <Img
                 src={"/images/blockquote-02.jpg"}
@@ -181,12 +175,12 @@ const Studio = ({ areas }: StudioProps) => {
           </BlockquoteSection>
           <BrandsSection>
             <BrandsText>
-              <Caption className='with-dash'>
+              <Micro className='with-dash'>
                 {studioStrings.breands.header}
-              </Caption>
+              </Micro>
               <div>
-                <Header>{studioStrings.breands.claim}</Header>
-                <Paragraph>{studioStrings.breands.perex}</Paragraph>
+                <Medium className='big'>{studioStrings.breands.claim}</Medium>
+                <Small>{studioStrings.breands.perex}</Small>
               </div>
             </BrandsText>
             <Logotypes>
@@ -198,22 +192,22 @@ const Studio = ({ areas }: StudioProps) => {
           <Outro>
             <Blockquote>
               <Quote className='offset-y-3'>
-                <MainHeader className='offset-x-2'>
+                <Large className='offset-x-2'>
                   {studioStrings.blockquotes[1].quote}
-                </MainHeader>
-                <Caption className='with-dash reversed'>
+                </Large>
+                <Micro className='with-dash reversed'>
                   {studioStrings.blockquotes[1].name}{" "}
-                </Caption>
-                <Caption className='lowcase dash-margin'>
+                </Micro>
+                <Micro className='lowcase dash-margin'>
                   {studioStrings.blockquotes[1].position}
-                </Caption>
+                </Micro>
               </Quote>
             </Blockquote>
             <Img
               src={`/images/blockquote-03.jpg`}
               width={2450}
               height={1300}
-              layout={`intrinsic`}
+              layout={`responsive`}
             />
           </Outro>
         </StyledStudio>

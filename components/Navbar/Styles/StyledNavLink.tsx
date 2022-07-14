@@ -6,9 +6,15 @@ export const StyledNavLink = styled.a`
   text-transform: uppercase;
   font-size: 14px;
   letter-spacing: 0.1em;
+  padding: 0 20px;
   &,
   &:visited {
     color: ${colors.gray500};
+  }
+  &.active {
+    & {
+      color: ${colors.primary400} !important;
+    }
   }
   &.highlighted {
     &,

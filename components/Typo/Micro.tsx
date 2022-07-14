@@ -12,7 +12,7 @@ import { DetailedContact, StyledFooter } from "../Footer/Styles/StyledFooter";
 import { GridItemAreas } from "../GridItem/Styles/StyledGridItem";
 import { StyledHero } from "../Hero/Styles/StyledHero";
 
-export const Caption = styled.span`
+export const Micro = styled.span`
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.1em;

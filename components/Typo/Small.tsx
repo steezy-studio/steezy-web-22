@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { TextBlock } from "../../pagestyles/StyledStudio";
 
-export const Paragraph = styled.p`
+export const Small = styled.p`
   font-size: 28px;
   line-height: 1.3em;
   font-family: "agrandir";

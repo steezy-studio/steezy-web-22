@@ -6,9 +6,9 @@ import Hero from "../../components/Hero/Hero";
 import Img from "../../components/Img/Img";
 import { StyledImg } from "../../components/Img/Styles/StyledImg";
 import Navbar from "../../components/Navbar/Navbar";
-import { Caption } from "../../components/Typo/Caption";
-import { MainHeader } from "../../components/Typo/MainHeader";
-import { Perex } from "../../components/Typo/Perex";
+import { Micro } from "../../components/Typo/Micro";
+import { Large } from "../../components/Typo/Large";
+import { Medium } from "../../components/Typo/Medium";
 import { Areas, Project as ProjectType, Query } from "../../generated/types";
 import { GET_PROJECT } from "../../graphql/GetProject";
 import {
@@ -53,8 +53,8 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                 if (fact.__typename === "ProjectFacts") {
                   return (
                     <ProjectHeroRole key={i}>
-                      <Caption>{fact.header}</Caption>
-                      <Caption className='lowcase'>{fact.content}</Caption>
+                      <Micro>{fact.header}</Micro>
+                      <Micro className='lowcase'>{fact.content}</Micro>
                     </ProjectHeroRole>
                   );
                 }
@@ -64,7 +64,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
           </ProjectHeroFooter>
         </Hero>
         <ProjectDescription>
-          <Perex>{projectData.project_description}</Perex>
+          <Medium>{projectData.project_description}</Medium>
         </ProjectDescription>
         <ProjectGrid>
           {projectData.project_presentation?.map((row, i) => {
@@ -93,7 +93,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                 <ProjectGridRow key={`${i}_row`}>
                   <div></div>
                   <ProjectGridBlockquote>
-                    <Perex key={row._id}>{row.blockquote_text}</Perex>
+                    <Medium key={row._id}>{row.blockquote_text}</Medium>
                   </ProjectGridBlockquote>
                 </ProjectGridRow>
               );
@@ -114,12 +114,10 @@ const Project = ({ projectData, areas }: ProjectProps) => {
               />
             </ClientQuoteLeft>
             <ClientQuoteRight>
-              <Perex>{projectData.client_quote}</Perex>
-              <Caption>{projectData.client_name}</Caption>
+              <Medium>{projectData.client_quote}</Medium>
+              <Micro>{projectData.client_name}</Micro>
               <br />
-              <Caption className='lowcase'>
-                {projectData.client_position}
-              </Caption>
+              <Micro className='lowcase'>{projectData.client_position}</Micro>
             </ClientQuoteRight>
           </ClientQuote>
         )}

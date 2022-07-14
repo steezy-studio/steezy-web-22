@@ -1,5 +1,4 @@
 import { GetStaticProps } from "next";
-import React from "react";
 import client from "../apollo/client";
 import GridItem from "../components/GridItem/GridItem";
 import Hero from "../components/Hero/Hero";
@@ -7,11 +6,11 @@ import Layout from "../components/Layout/Layout";
 import Link from "../components/Link/Link";
 import { StyledLink } from "../components/Link/Styles/StyledLink";
 import Navbar from "../components/Navbar/Navbar";
-import { Caption } from "../components/Typo/Caption";
-import { MainHeader } from "../components/Typo/MainHeader";
-import strings from "../data/strings";
+import { Large } from "../components/Typo/Large";
+import { Micro } from "../components/Typo/Micro";
 import { allProjects } from "../consts/index";
-import { Area, Areas, LandingpageGrids } from "../generated/types";
+import strings from "../data/strings";
+import { Areas, LandingpageGrids } from "../generated/types";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
 import {
   GridItemWrapper,
@@ -57,7 +56,7 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
             )}
             perex={landingpageStrings.hero.subHeader}>
             <LandingpageHeroClients>
-              <Caption>{landingpageStrings.hero.clients.header}</Caption>
+              <Micro>{landingpageStrings.hero.clients.header}</Micro>
               <LandingHeroPageLogotypes>
                 {landingpageStrings.hero.clients.logotypes.map(
                   ({ src, alt }, i) => (
@@ -72,9 +71,9 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
             </LandingpageHeroClients>
           </Hero>
           <Intro>
-            <Caption>{landingpageStrings.intro.subHeader}</Caption>
+            <Micro>{landingpageStrings.intro.subHeader}</Micro>
             <div>
-              <MainHeader as={`span`}>
+              <Large as={`span`}>
                 {landingpageStrings.intro.perex.map(({ type, body }, i) => {
                   const isText = type === `text`;
                   if (isText) {
@@ -88,7 +87,7 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                     );
                   }
                 })}
-              </MainHeader>
+              </Large>
             </div>
           </Intro>
           <LandingpageGrid>
@@ -137,9 +136,9 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
             })}
             <LandingpageGridRow>
               <div></div>
-              <MainHeader>
+              <Large>
                 <Link href={`/projects/all-projects`}>all projects</Link>
-              </MainHeader>
+              </Large>
             </LandingpageGridRow>
           </LandingpageGrid>
         </StyledIndex>

@@ -1,12 +1,11 @@
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ImageProps } from "next/image";
-import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import strings from "../../data/strings";
 import Img from "../Img/Img";
 import { StyledLink } from "../Link/Styles/StyledLink";
-import { Header } from "../Typo/Header";
-import { MainHeader } from "../Typo/MainHeader";
+import { Large } from "../Typo/Large";
+import { Medium } from "../Typo/Medium";
 import {
   ImageSliderInner,
   StyledImageSlider,
@@ -81,11 +80,11 @@ const ImageSlider = ({ imgList }: ImageSliderProps) => {
           ))}
         </AnimatePresence>
       </ImageSliderInner>
-      <MainHeader>
+      <Large>
         <StyledLink onClick={handleClick}>
           {strings.globals.nextImage}
         </StyledLink>
-      </MainHeader>
+      </Large>
     </StyledImageSlider>
   );
 };

@@ -1,8 +1,8 @@
 import React from "react";
 import strings from "../../data/strings";
 import Link from "../Link/Link";
-import { Caption } from "../Typo/Caption";
-import { MainHeader } from "../Typo/MainHeader";
+import { Micro } from "../Typo/Micro";
+import { Large } from "../Typo/Large";
 import {
   ContactInfo,
   DetailedContact,
@@ -15,18 +15,18 @@ const Footer = ({}: FooterProps) => {
   const footerStrings = strings.footer;
   return (
     <StyledFooter>
-      <Caption>{footerStrings.cta}</Caption>
+      <Micro>{footerStrings.cta}</Micro>
       <ContactInfo>
-        <MainHeader>
+        <Large>
           <Link href={`mailto:${strings.globals.email}`}>
             {strings.globals.email}
           </Link>
-        </MainHeader>
+        </Large>
         <DetailedContact>
-          <Caption className='lowcase'>{footerStrings.address}</Caption>
-          <Caption className='lowcase'>
+          <Micro className='lowcase'>{footerStrings.address}</Micro>
+          <Micro className='lowcase'>
             {strings.globals.phone + `\n` + footerStrings.other}
-          </Caption>
+          </Micro>
         </DetailedContact>
       </ContactInfo>
     </StyledFooter>

@@ -1,41 +1,82 @@
+import { useLazyQuery } from "@apollo/client";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import React from "react";
-import client from "../../apollo/client";
+import React, { useState } from "react";
+import client, { withApolloClient } from "../../apollo/client";
 import GridItem from "../../components/GridItem/GridItem";
 import { HeroSocials } from "../../components/Hero/Styles/StyledHero";
 import Instagram from "../../components/Icons/Instagram";
 import Vimeo from "../../components/Icons/Vimeo";
 import Layout from "../../components/Layout/Layout";
 import Link from "../../components/Link/Link";
+import { StyledLink } from "../../components/Link/Styles/StyledLink";
 import Navbar from "../../components/Navbar/Navbar";
-import { MainHeader } from "../../components/Typo/MainHeader";
-import { Perex } from "../../components/Typo/Perex";
-import { allProjects } from "../../consts";
-import {
-  Area,
-  Areas,
-  Projects as ProjectsType,
-  Query,
-} from "../../generated/types";
+import { Large } from "../../components/Typo/Large";
+import { Medium } from "../../components/Typo/Medium";
+import { allProjects, projectsPerPage } from "../../consts";
+import { Areas, Projects as ProjectsType, Query } from "../../generated/types";
 import { GET_ALL_AREAS } from "../../graphql/GetAllAreas";
 import { GET_ALL_PROJECTS } from "../../graphql/GetAllProjects";
+import { GET_PROJECTS } from "../../graphql/GetProjects";
 import {
   ProjectsGrid,
   ProjectsGridColumn,
   ProjectsGridItem,
   ProjectsHero,
-  ProjectsHeroFilters,
   ProjectsHeroContent,
+  ProjectsHeroFilters,
   StyledProjects,
 } from "../../pagestyles/StyledProjects";
 
 interface ProjectsProps {
   areas: Areas;
   projects: ProjectsType;
+  projectsCount: number;
 }
 
-const Projects = ({ areas, projects }: ProjectsProps) => {
+const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
+  const [projectsData, setProjectsData] = useState({
+    data: projects.items,
+    skip: 0,
+    hasMore: projectsCount > projectsPerPage,
+  });
+  const [getProjects, { loading, error, data: newData }] = useLazyQuery(
+    GET_PROJECTS,
+    {
+      variables: {
+        skip: projectsData.skip,
+        limit: projectsPerPage,
+      },
+      onCompleted: (newData) => {
+        if (newData.Projects === null) return;
+
+        setProjectsData((prev) => ({
+          ...prev,
+          data: [...prev.data, ...newData.Projects.items],
+        }));
+      },
+    }
+  );
+
+  const handleIndexInc = () => {
+    setProjectsData((prev) => ({
+      ...prev,
+      skip: prev.skip + projectsPerPage,
+      hasMore: projectsCount - (prev.data.length + projectsPerPage) > 0,
+    }));
+  };
+
+  React.useEffect(() => {
+    if (projectsData.skip !== 0) {
+      getProjects({
+        variables: {
+          skip: projectsData.skip,
+          limit: projectsPerPage,
+        },
+      });
+    }
+  }, [projectsData.skip]);
+
   const router = useRouter();
 
   return (
@@ -55,20 +96,20 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
                 {[allProjects, ...areas.items].map(({ area_name, _slug }) => {
                   const isActive = router.query.area === _slug;
                   return (
-                    <MainHeader key={_slug}>
+                    <Large key={_slug}>
                       <Link
                         href={`/projects/${_slug}`}
                         className={`${isActive ? "active" : ""}`}>
                         {area_name}
                       </Link>
-                    </MainHeader>
+                    </Large>
                   );
                 })}
               </ProjectsHeroFilters>
-              <Perex>
+              <Medium>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                 eget arcu mollis, faucibus erat eget, sollicitudin leo.
-              </Perex>
+              </Medium>
             </ProjectsHeroContent>
             <HeroSocials>
               <Instagram />
@@ -77,14 +118,14 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
           </ProjectsHero>
           <ProjectsGrid>
             <ProjectsGridColumn className='even'>
-              {projects.items.map(
+              {projectsData.data.map(
                 (
                   { project_tags, project_grid_name, _slug, grid_image, _id },
                   i
                 ) => {
                   if (i % 2 !== 0) {
                     return (
-                      <ProjectsGridItem>
+                      <ProjectsGridItem key={_id}>
                         <GridItem
                           type={"Photo"}
                           areas={project_tags}
@@ -93,7 +134,6 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
                           slug={_slug}
                           src={grid_image?.[0].url}
                           width={grid_image?.[0].width}
-                          key={_id}
                         />
                       </ProjectsGridItem>
                     );
@@ -102,14 +142,14 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
               )}
             </ProjectsGridColumn>
             <ProjectsGridColumn className='odd'>
-              {projects.items.map(
+              {projectsData.data.map(
                 (
                   { project_tags, project_grid_name, _slug, grid_image, _id },
                   i
                 ) => {
                   if (i % 2 === 0) {
                     return (
-                      <ProjectsGridItem>
+                      <ProjectsGridItem key={_id}>
                         <GridItem
                           type={"Photo"}
                           areas={project_tags}
@@ -118,23 +158,21 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
                           slug={_slug}
                           src={grid_image?.[0].url}
                           width={grid_image?.[0].width}
-                          key={_id}
                         />
                       </ProjectsGridItem>
                     );
                   }
                 }
               )}
-              <MainHeader>
-                <Link href={`/projects/all-projects`}>more projects</Link>
-              </MainHeader>
+              {projectsData.hasMore && (
+                <Large>
+                  <StyledLink onClick={handleIndexInc}>
+                    more projects
+                  </StyledLink>
+                </Large>
+              )}
             </ProjectsGridColumn>
-
-            {/* <div></div>
-
-           */}
           </ProjectsGrid>
-          {/* <pre>{JSON.stringify({ areas, projects }, null, 2)}</pre> */}
         </StyledProjects>
       </Layout>
     </>
@@ -145,6 +183,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const data = await client.query<Query>({
     query: GET_ALL_PROJECTS,
     variables: {
+      limit: projectsPerPage,
       where: {
         project_tags: {
           _slug_any: allProjects._slug === params.area ? null : params.area,
@@ -157,6 +196,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       areas: data.data.Areas,
       projects: data.data.Projects,
+      projectsCount: data.data.Projects.total,
     },
     revalidate: Number(process.env.REVALIDATE),
   };
@@ -175,4 +215,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export default Projects;
+export default withApolloClient(Projects);

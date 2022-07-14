@@ -14,3 +14,5 @@ export const allProjects = {
   _slug: "all-projects",
   area_name: "All projects",
 };
+
+export const projectsPerPage = 12;

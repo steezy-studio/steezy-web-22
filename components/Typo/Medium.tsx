@@ -6,28 +6,33 @@ import {
   ProjectsGridColumn,
   ProjectsHeroContent,
 } from "../../pagestyles/StyledProjects";
-import { TextBlock } from "../../pagestyles/StyledStudio";
+import {
+  BrandsText,
+  TextBlock,
+  ValueHeader,
+} from "../../pagestyles/StyledStudio";
 
-export const Perex = styled.p`
+export const Medium = styled.p`
   font-size: 34px;
   font-weight: 300;
   line-height: 1.2em;
+  &.big {
+    font-family: "agrandir";
+    font-weight: 500;
+    font-size: 44px;
+    ${ValueHeader} & {
+      width: 80%;
+    }
+    ${BrandsText} & {
+      margin-bottom: 30px;
+    }
+  }
   ${ProjectsGridColumn} & {
     width: ${({ theme }) => u(5, theme.pageMargin)};
     margin-bottom: ${({ theme }) => u(2, theme.pageMargin)};
   }
   ${ProjectsHeroContent} & {
     max-width: ${({ theme }) => u(4, theme.pageMargin)};
-  }
-  &.big-lh {
-    line-height: 1.5em;
-  }
-  &.big {
-    font-weight: 400;
-    font-size: 44px;
-    line-height: 1.3em;
-    max-width: 700px;
-    /* padding-left: 40px; */
   }
   ${ClientQuote} & {
     margin-bottom: 60px;

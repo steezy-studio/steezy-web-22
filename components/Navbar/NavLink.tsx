@@ -5,11 +5,16 @@ interface NavLinkProps {
   highlighted: boolean;
   href: string;
   children: string;
+  active: boolean;
 }
 
-const NavLink = ({ highlighted, href, children }: NavLinkProps) => {
+const NavLink = ({ highlighted, href, children, active }: NavLinkProps) => {
   return (
-    <StyledNavLink className={highlighted ? `highlighted` : ``} href={href}>
+    <StyledNavLink
+      className={`${highlighted ? `highlighted` : ``} ${
+        active ? `active` : ``
+      }`}
+      href={href}>
       {children}
     </StyledNavLink>
   );

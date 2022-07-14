@@ -20,7 +20,7 @@ export const NavLinks = styled(motion.div)`
   background-color: ${colors.black};
   width: 100%;
   display: flex;
-  gap: 30px;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  padding-right: 60px;
 `;

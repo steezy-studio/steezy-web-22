@@ -8,7 +8,7 @@ import { StyledFooter } from "../Footer/Styles/StyledFooter";
 import { HeroContent } from "../Hero/Styles/StyledHero";
 import { StyledImageSlider } from "../ImageSlider/Styles/StyledImageSlider";
 
-export const MainHeader = styled.h1`
+export const Large = styled.h1`
   font-family: "migra-italic", Arial, Helvetica, sans-serif;
   font-size: 110px;
   line-height: 1em;

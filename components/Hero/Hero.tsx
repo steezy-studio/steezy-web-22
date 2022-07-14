@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
-import { MainHeader } from "../Typo/MainHeader";
-import { Caption } from "../Typo/Caption";
+import { Large } from "../Typo/Large";
+import { Micro } from "../Typo/Micro";
 import HeroVideo from "./HeroVideo";
 import {
   HeroContent,
@@ -33,9 +33,9 @@ const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
     <StyledHero>
       <HeroContent>
         <HeroText>
-          {subHeader && <Caption className='sub-header'>{subHeader}</Caption>}
-          <MainHeader>{header(openDialog, setOpenDialog)}</MainHeader>
-          {perex && <Caption className={`perex`}>{perex}</Caption>}
+          {subHeader && <Micro className='sub-header'>{subHeader}</Micro>}
+          <Large>{header(openDialog, setOpenDialog)}</Large>
+          {perex && <Micro className={`perex`}>{perex}</Micro>}
         </HeroText>
         <HeroSocials>
           <Instagram />

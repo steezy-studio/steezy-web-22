@@ -15,8 +15,6 @@ interface NavbarProps {
 const Navbar = ({ areas = [] }: NavbarProps) => {
   const [isMenuOpen, openMenu] = useState(false);
   const router = useRouter();
-  // const path = asPath.split(`/`);
-  console.log(router);
 
   return (
     <StyledNavbar>
@@ -35,15 +33,20 @@ const Navbar = ({ areas = [] }: NavbarProps) => {
         }}
         variants={{ open: { scaleX: 1 }, close: { scaleX: 0 } }}>
         {[
+          strings.navData[0],
           {
             name: allProjects.area_name,
             link: `/projects/${allProjects._slug}`,
             highlighted: true,
           },
           ...areas,
-          ...strings.navData,
+          strings.navData[1],
         ].map(({ highlighted, link, name }) => (
-          <NavLink highlighted={highlighted} href={link} key={link}>
+          <NavLink
+            active={router.asPath === link}
+            highlighted={highlighted}
+            href={link}
+            key={link}>
             {name}
           </NavLink>
         ))}

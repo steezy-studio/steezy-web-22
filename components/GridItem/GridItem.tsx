@@ -9,7 +9,7 @@ import { useRef, useState } from "react";
 import { Area } from "../../generated/types";
 import Img from "../Img/Img";
 import { StyledLink } from "../Link/Styles/StyledLink";
-import { Caption } from "../Typo/Caption";
+import { Micro } from "../Typo/Micro";
 import {
   GridItemAreas,
   GridItemCoverWrapper,
@@ -102,9 +102,9 @@ const GridItem = ({
       </GridItemCoverWrapper>
       <GridItemAreas>
         {areas.map(({ area_name, _slug }) => (
-          <Caption key={_slug} className='lowcase'>
+          <Micro key={_slug} className='lowcase'>
             {area_name}
-          </Caption>
+          </Micro>
         ))}
       </GridItemAreas>
       <GridItemHeader>{parse(projectName, options)}</GridItemHeader>

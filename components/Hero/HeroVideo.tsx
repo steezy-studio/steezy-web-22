@@ -2,7 +2,7 @@ import { open } from "fs";
 import React, { useRef, useState } from "react";
 import { useIntersectionVideoObserver } from "../../hooks/useIntersectionVideoObserver";
 import Dialog from "../Dialog/Dialog";
-import { Caption } from "../Typo/Caption";
+import { Micro } from "../Typo/Micro";
 import {
   Cursor,
   Loop,
