@@ -5,6 +5,7 @@ export const FRAGMENT_GET_ALL_AREAS = gql`
     items {
       area_name
       _slug
+      sub_areas
     }
   }
 `;

@@ -180,6 +180,8 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  console.log(params.area);
+
   const data = await client.query<Query>({
     query: GET_ALL_PROJECTS,
     variables: {

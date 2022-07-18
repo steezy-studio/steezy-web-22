@@ -114,22 +114,16 @@ const Studio = ({ areas }: StudioProps) => {
           <ServicesSection>
             <Micro className='with-dash'>{studioStrings.services.header}</Micro>
             <ServicesList>
-              {studioStrings.services.servicesList.map(
-                ({ header, servicesSubList }) => (
-                  <div key={header}>
-                    <Medium className='big'>
-                      <Link href={`/projects/${allProjects._slug}`}>
-                        {header}
-                      </Link>
-                    </Medium>
-                    <SubServicesList>
-                      {servicesSubList.map((subService) => (
-                        <Medium key={subService}>{subService}</Medium>
-                      ))}
-                    </SubServicesList>
-                  </div>
-                )
-              )}
+              {areas.items.map(({ sub_areas, area_name, _slug }) => (
+                <div key={area_name}>
+                  <Medium className='big'>
+                    <Link href={`/projects/${_slug}`}>{area_name}</Link>
+                  </Medium>
+                  <SubServicesList>
+                    <Medium>{sub_areas}</Medium>
+                  </SubServicesList>
+                </div>
+              ))}
             </ServicesList>
           </ServicesSection>
           <BlockquoteSection>

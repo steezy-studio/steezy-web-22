@@ -74,10 +74,10 @@ export const ServicesList = styled.div`
 `;
 
 export const SubServicesList = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 10px; */
   margin-top: 30px;
 `;
 

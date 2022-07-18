@@ -8,6 +8,7 @@ import {
 } from "../../pagestyles/StyledProjects";
 import {
   BrandsText,
+  SubServicesList,
   TextBlock,
   ValueHeader,
 } from "../../pagestyles/StyledStudio";
@@ -40,5 +41,9 @@ export const Medium = styled.p`
     line-height: 1.3em;
     letter-spacing: 0.03em;
     font-family: "migra-italic";
+  }
+  ${SubServicesList} & {
+    white-space: pre-wrap;
+    line-height: 1.6em;
   }
 `;

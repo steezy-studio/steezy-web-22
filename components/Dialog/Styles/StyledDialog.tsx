@@ -36,7 +36,11 @@ export const Close = styled(RadixDialog.Close)`
   cursor: pointer;
 `;
 
-export const Trigger = styled(RadixDialog.Trigger)``;
+export const Trigger = styled(RadixDialog.Trigger)`
+  border: none;
+  outline: none;
+  border-radius: 0;
+`;
 
 export const Overlay = styled(RadixDialog.Overlay)`
   background-color: ${colors.primary300};
