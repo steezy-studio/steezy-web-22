@@ -26,6 +26,7 @@ import {
   StyledProject,
 } from "../../pagestyles/StyledProject";
 import { Quote } from "../../pagestyles/StyledStudio";
+import Video from "../../components/Video/Video";
 
 interface ProjectProps {
   projectData: ProjectType;
@@ -71,17 +72,25 @@ const Project = ({ projectData, areas }: ProjectProps) => {
             if (row.__typename === "ProjectGridRow") {
               return (
                 <ProjectGridRow key={`${i}_row`}>
-                  {row.grid_item_image.map((img, i) => (
-                    <Img
-                      key={`${i}_col`}
-                      src={img.url}
-                      width={img.width}
-                      height={img.height}
-                      layout={"responsive"}
-                      blurDataURL={img.url}
-                      placeholder={"blur"}
-                    />
-                  ))}
+                  {row.grid_item_image.map((img, i) => {
+                    if (img._type === "Video") {
+                      return <Video key={img._id} src={img.cdn_files[0].url} />;
+                    }
+                    console.log(img._type);
+                    if (img._type === "Photo") {
+                      return (
+                        <Img
+                          key={`${i}_col`}
+                          src={img.url || ``}
+                          width={img.width || 0}
+                          height={img.height || 0}
+                          layout={"responsive"}
+                          blurDataURL={img.url}
+                          placeholder={"blur"}
+                        />
+                      );
+                    }
+                  })}
                 </ProjectGridRow>
               );
             }

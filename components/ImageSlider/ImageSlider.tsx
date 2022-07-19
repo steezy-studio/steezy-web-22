@@ -1,7 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ImageProps } from "next/image";
 import React, { useState } from "react";
+import { useTheme } from "styled-components";
 import strings from "../../data/strings";
+import u from "../../helpers/unit";
 import Img from "../Img/Img";
 import { StyledLink } from "../Link/Styles/StyledLink";
 import { Large } from "../Typo/Large";
@@ -45,12 +47,16 @@ const ImageSlider = ({ imgList }: ImageSliderProps) => {
   const [visibleImages, setVisibleImages] = useState(
     range.slice(0, itemsToDisplay)
   );
-  const firstIndex = wrap(0, imgsLength, index);
-  const secondIndex = wrap(0, imgsLength, index + 1);
-  const thirdIndex = wrap(0, imgsLength, index + 2);
+  const theme = useTheme();
 
   React.useEffect(() => {
-    setVisibleImages([firstIndex, secondIndex, thirdIndex]);
+    const firstIndex = wrap(0, imgsLength, index);
+    const secondIndex = wrap(0, imgsLength, index + 1);
+    const thirdIndex = wrap(0, imgsLength, index + 2);
+
+    setVisibleImages((prev) => {
+      return [...prev, firstIndex];
+    });
   }, [index]);
 
   const handleClick = () => {
@@ -60,25 +66,21 @@ const ImageSlider = ({ imgList }: ImageSliderProps) => {
   return (
     <StyledImageSlider>
       <ImageSliderInner
+        animate={{ x: `${u(-1 * index * (8 - 15 / 16), theme.pageMargin)}` }}
         drag='x'
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={1}
         onDragEnd={(e, { offset, velocity }) => {
-          console.log(e);
-
           const swipe = swipePower(offset.x, velocity.x);
-
           handleClick();
           if (swipe < -swipeConfidenceThreshold) {
           }
         }}>
-        <AnimatePresence>
-          {visibleImages.map((i) => (
-            <motion.div layout key={i}>
-              <Img {...imgList[i]} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
+        {visibleImages.map((i, order) => (
+          <div key={order}>
+            <Img {...imgList[i]} />
+          </div>
+        ))}
       </ImageSliderInner>
       <Large>
         <StyledLink onClick={handleClick}>

@@ -10,7 +10,6 @@ import { Large } from "../components/Typo/Large";
 import { Medium } from "../components/Typo/Medium";
 import { Micro } from "../components/Typo/Micro";
 import { Small } from "../components/Typo/Small";
-import { allProjects } from "../consts";
 import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";

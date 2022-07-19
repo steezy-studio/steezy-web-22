@@ -16,3 +16,21 @@ export const allProjects = {
 };
 
 export const projectsPerPage = 12;
+
+export const device = {
+  phone: 600,
+  tabletPortrait: 900,
+  tabletLandscape: 1200,
+  smallNotebook: 1400,
+  largeNotebook: 1920,
+  monitor: 2500,
+} as const;
+
+export const breakpoint = {
+  phone: `@media (max-width: ${device.phone}px)`,
+  tabletPortrait: `@media (max-width: ${device.tabletPortrait}px) `,
+  tabletLandscape: `@media (max-width: ${device.tabletLandscape}px) `,
+  smallNotebook: `@media (max-width: ${device.smallNotebook}px)`,
+  largeNotebook: `@media (max-width: ${device.largeNotebook}px)`,
+  monitor: `@media (min-width: ${device.monitor}px) `,
+} as const;

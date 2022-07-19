@@ -5,7 +5,7 @@ export const StyledFooter = styled.footer`
   display: grid;
   grid-gap: ${({ theme }) => `calc(2 * ${theme.pageMargin})`};
   margin-top: ${({ theme }) => u(2, theme.pageMargin)};
-  margin-bottom: ${({ theme }) => u(0.5, theme.pageMargin)};
+  margin-bottom: 100px;
 `;
 
 export const ContactInfo = styled.div`

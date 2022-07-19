@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { colors } from "../consts";
+import { breakpoint, colors } from "../consts";
 import u from "../helpers/unit";
 
 export const StyledStudio = styled.div``;
 
 export const TextBlock = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 50% 25%;
   grid-gap: 60px;
   margin: ${({ theme }) => u(1.5, theme.pageMargin)} 0;
   .header {
@@ -56,6 +56,9 @@ export const Order = styled.span`
   position: absolute;
   left: 0;
   top: -0.45em;
+  ${breakpoint.largeNotebook} {
+    font-size: 80px;
+  }
 `;
 
 export const ServicesSection = styled.section`

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../consts";
+import { breakpoint, colors } from "../../consts";
 import u from "../../helpers/unit";
 import { LandingpageHeroClients } from "../../pagestyles/StyledIndex";
 import {
@@ -47,6 +47,9 @@ export const Micro = styled.span`
     text-transform: none;
     letter-spacing: 0.04em;
     line-height: 1.8em;
+  }
+  ${breakpoint.largeNotebook} {
+    font-size: 12px;
   }
   ${StyledHero} & {
     white-space: pre-wrap;

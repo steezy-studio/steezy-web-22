@@ -35,16 +35,27 @@ interface ProjectsProps {
 }
 
 const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
-  const [projectsData, setProjectsData] = useState({
+  const initialState = {
     data: projects.items,
     skip: 0,
     hasMore: projectsCount > projectsPerPage,
-  });
+  };
+  const router = useRouter();
+  const [projectsData, setProjectsData] = useState(initialState);
+
   const [getProjects, { loading, error, data: newData }] = useLazyQuery(
     GET_PROJECTS,
     {
       variables: {
         skip: projectsData.skip,
+        where: {
+          project_tags: {
+            _slug_any:
+              allProjects._slug === router.query.area
+                ? null
+                : router.query.area,
+          },
+        },
         limit: projectsPerPage,
       },
       onCompleted: (newData) => {
@@ -66,18 +77,30 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
     }));
   };
 
+  // next preserves state when query changes
+  // otherwise it doesn't render correct data
+  React.useEffect(() => {
+    setProjectsData(initialState);
+  }, [router.query.area]);
+
   React.useEffect(() => {
     if (projectsData.skip !== 0) {
       getProjects({
         variables: {
           skip: projectsData.skip,
+          where: {
+            project_tags: {
+              _slug_any:
+                allProjects._slug === router.query.area
+                  ? null
+                  : router.query.area,
+            },
+          },
           limit: projectsPerPage,
         },
       });
     }
   }, [projectsData.skip]);
-
-  const router = useRouter();
 
   return (
     <>
@@ -98,6 +121,7 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                   return (
                     <Large key={_slug}>
                       <Link
+                        shallow
                         href={`/projects/${_slug}`}
                         className={`${isActive ? "active" : ""}`}>
                         {area_name}

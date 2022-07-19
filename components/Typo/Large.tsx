@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../consts";
+import { breakpoint, colors } from "../../consts";
 import u from "../../helpers/unit";
 import { StyledContact } from "../../pagestyles/StyledContact";
 import { ProjectsHeroFilters } from "../../pagestyles/StyledProjects";
@@ -16,6 +16,9 @@ export const Large = styled.h1`
   font-weight: 400;
   color: ${colors.black};
   position: relative;
+  ${breakpoint.largeNotebook} {
+    font-size: 80px;
+  }
   ${HeroContent} & {
     margin-top: ${({ theme }) => u(0.75, theme.pageMargin)};
     white-space: pre-wrap;
@@ -30,6 +33,9 @@ export const Large = styled.h1`
     text-transform: lowercase;
     font-size: 85px;
     padding: 0.05em 0;
+    ${breakpoint.largeNotebook} {
+      font-size: 70px;
+    }
   }
   ${StyledImageSlider} & {
     margin: 30px ${({ theme }) => theme.pageMargin} 0;

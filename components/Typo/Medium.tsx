@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakpoint } from "../../consts";
 import u from "../../helpers/unit";
 import { StyledContact } from "../../pagestyles/StyledContact";
 import { ClientQuote } from "../../pagestyles/StyledProject";
@@ -28,6 +29,12 @@ export const Medium = styled.p`
       margin-bottom: 30px;
     }
   }
+  ${breakpoint.largeNotebook} {
+    font-size: 24px;
+    &.big {
+      font-size: 33px;
+    }
+  }
   ${ProjectsGridColumn} & {
     width: ${({ theme }) => u(5, theme.pageMargin)};
     margin-bottom: ${({ theme }) => u(2, theme.pageMargin)};
@@ -41,6 +48,9 @@ export const Medium = styled.p`
     line-height: 1.3em;
     letter-spacing: 0.03em;
     font-family: "migra-italic";
+    ${breakpoint.largeNotebook} {
+      font-size: 36px;
+    }
   }
   ${SubServicesList} & {
     white-space: pre-wrap;

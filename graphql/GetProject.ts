@@ -48,10 +48,17 @@ export const GET_PROJECT = gql`
         ... on ProjectGridRow {
           _id
           grid_item_image {
+            _type
             url(format: "webp")
             width
             height
             description
+            cdn_files {
+              _id
+              _type
+              profile
+              url
+            }
           }
         }
         ... on ProjectGridVimeo {
