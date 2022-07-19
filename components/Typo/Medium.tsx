@@ -1,30 +1,21 @@
 import styled from "styled-components";
 import { breakpoint } from "../../consts";
 import u from "../../helpers/unit";
-import { StyledContact } from "../../pagestyles/StyledContact";
 import { ClientQuote } from "../../pagestyles/StyledProject";
 import {
   ProjectsGridColumn,
   ProjectsHeroContent,
 } from "../../pagestyles/StyledProjects";
-import {
-  BrandsText,
-  SubServicesList,
-  TextBlock,
-  ValueHeader,
-} from "../../pagestyles/StyledStudio";
+import { BrandsText, SubServicesList } from "../../pagestyles/StyledStudio";
 
 export const Medium = styled.p`
-  font-size: 34px;
+  font-size: 30px;
   font-weight: 300;
   line-height: 1.2em;
   &.big {
     font-family: "agrandir";
     font-weight: 500;
-    font-size: 44px;
-    ${ValueHeader} & {
-      width: 80%;
-    }
+    font-size: 35px;
     ${BrandsText} & {
       margin-bottom: 30px;
     }
@@ -32,7 +23,13 @@ export const Medium = styled.p`
   ${breakpoint.largeNotebook} {
     font-size: 24px;
     &.big {
-      font-size: 33px;
+      font-size: 30px;
+    }
+  }
+  ${breakpoint.smallNotebook} {
+    font-size: 21px;
+    &.big {
+      font-size: 26px;
     }
   }
   ${ProjectsGridColumn} & {
@@ -51,9 +48,13 @@ export const Medium = styled.p`
     ${breakpoint.largeNotebook} {
       font-size: 36px;
     }
+    ${breakpoint.smallNotebook} {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
   }
   ${SubServicesList} & {
     white-space: pre-wrap;
-    line-height: 1.6em;
+    line-height: 1.5em;
   }
 `;

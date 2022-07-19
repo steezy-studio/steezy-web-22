@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../../consts";
+import { breakpoint, colors } from "../../../consts";
 
 export const StyledBurger = styled.div`
   display: flex;
@@ -11,4 +11,10 @@ export const StyledBurger = styled.div`
   width: 80px;
   height: 100%;
   flex-shrink: 0;
+  ${breakpoint.largeNotebook} {
+    width: 70px;
+  }
+  ${breakpoint.smallNotebook} {
+    width: 60px;
+  }
 `;

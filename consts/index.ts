@@ -7,9 +7,6 @@ export const colors = {
 } as const;
 export type ColorKeys = keyof typeof colors;
 
-export const theme = { pageMargin: "40px" };
-export type Theme = typeof theme;
-
 export const allProjects = {
   _slug: "all-projects",
   area_name: "All projects",
@@ -31,6 +28,13 @@ export const breakpoint = {
   tabletPortrait: `@media (max-width: ${device.tabletPortrait}px) `,
   tabletLandscape: `@media (max-width: ${device.tabletLandscape}px) `,
   smallNotebook: `@media (max-width: ${device.smallNotebook}px)`,
+  helperSmallNotebook: `@media (max-width: ${device.smallNotebook}px) and (max-width: 1600px)`,
+  helperLargeNotebook: `@media (min-width: 1600px) and (max-width: ${device.largeNotebook}px)`,
   largeNotebook: `@media (max-width: ${device.largeNotebook}px)`,
   monitor: `@media (min-width: ${device.monitor}px) `,
 } as const;
+
+export const theme = (width: number) => ({
+  pageMargin: width <= device.smallNotebook ? "20px" : "40px",
+});
+export type Theme = typeof theme;

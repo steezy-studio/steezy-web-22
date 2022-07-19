@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakpoint } from "../consts";
 import u from "../helpers/unit";
 
 export const StyledIndex = styled.div``;
@@ -7,6 +8,9 @@ export const LandingHeroPageLogotypes = styled.div`
   display: flex;
   align-items: center;
   grid-gap: 60px;
+  ${breakpoint.smallNotebook} {
+    grid-gap: 30px;
+  }
 `;
 
 export const LandingPageHeroLogotype = styled.img``;
@@ -16,6 +20,9 @@ export const LandingpageHeroClients = styled.div`
   width: 100%;
   grid-gap: 40px;
   justify-content: end;
+  ${breakpoint.smallNotebook} {
+    grid-gap: 30px;
+  }
 `;
 
 export const LandingpageGrid = styled.div`

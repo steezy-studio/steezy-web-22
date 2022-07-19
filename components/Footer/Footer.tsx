@@ -13,6 +13,7 @@ interface FooterProps {}
 
 const Footer = ({}: FooterProps) => {
   const footerStrings = strings.footer;
+
   return (
     <StyledFooter>
       <Micro>{footerStrings.cta}</Micro>

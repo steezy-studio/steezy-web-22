@@ -34,8 +34,9 @@ const Contact = ({ areas }: ContactProps) => {
                 <Link href={`mailto: ${strings.globals.email}`}>
                   {strings.globals.email}
                 </Link>
+                <br />
                 <Link href={`tel: ${strings.globals.phone}`}>
-                  {strings.globals.phone}
+                  {strings.globals.phone.split(` `).join(`\u00a0`)}
                 </Link>
               </>
             )}

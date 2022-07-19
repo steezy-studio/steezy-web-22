@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakpoint } from "../../../consts";
 import u from "../../../helpers/unit";
 import { StyledContact } from "../../../pagestyles/StyledContact";
 import {
@@ -32,5 +33,9 @@ export const StyledImg = styled.div`
   ${ClientQuote} & {
     width: 250px;
     height: 250px;
+    ${breakpoint.smallNotebook} {
+      width: 150px;
+      height: 150px;
+    }
   }
 `;

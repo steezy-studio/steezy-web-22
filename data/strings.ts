@@ -7,7 +7,7 @@ export default {
   contactPage: {
     hero: {
       subHeader:
-        "Do you have an interesting story to tell? Get in touch right now.",
+        "Do you have an interesting story to tell?\nGet in touch right now.",
       perex:
         "We support people who're not affraid to step out of line, who don't listen that something is not possible and who have courage to inspire the others.",
     },
@@ -67,7 +67,7 @@ export default {
         src: "slider-04.jpg",
       },
     ],
-    breands: {
+    brands: {
       header: "designing for",
       claim: "From local bistros to world-known brands",
       perex:

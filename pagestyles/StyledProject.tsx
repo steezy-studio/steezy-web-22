@@ -1,5 +1,6 @@
 import Vimeo from "@u-wave/react-vimeo";
 import styled from "styled-components";
+import { breakpoint } from "../consts";
 import u from "../helpers/unit";
 
 export const StyledProject = styled.div``;
@@ -13,6 +14,9 @@ export const ProjectHeroRole = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
   grid-gap: 30px;
+  ${breakpoint.smallNotebook} {
+    grid-gap: 10px;
+  }
 `;
 
 export const ProjectHeroFooter = styled.div`
@@ -40,9 +44,14 @@ export const ProjectGridRow = styled.div`
 
 export const ProjectGridBlockquote = styled.div`
   padding: ${({ theme }) => u(1, theme.pageMargin)}
-    ${({ theme }) => u(4, theme.pageMargin)}
+    ${({ theme }) => u(3, theme.pageMargin)}
     ${({ theme }) => u(1, theme.pageMargin)} 0;
   margin-left: auto;
+  ${breakpoint.smallNotebook} {
+    padding: ${({ theme }) => u(1, theme.pageMargin)}
+      ${({ theme }) => u(2, theme.pageMargin)}
+      ${({ theme }) => u(1, theme.pageMargin)} 0;
+  }
 `;
 
 export const ProjectGridVimeo = styled(Vimeo)`

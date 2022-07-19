@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useTheme } from "styled-components";
 import strings from "../../data/strings";
 import u from "../../helpers/unit";
+import { useWindowSize } from "../../hooks/useWindowSize";
 import Img from "../Img/Img";
 import { StyledLink } from "../Link/Styles/StyledLink";
 import { Large } from "../Typo/Large";

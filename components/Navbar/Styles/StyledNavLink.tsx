@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../../consts";
+import { breakpoint, colors } from "../../../consts";
 
 export const StyledNavLink = styled.a`
   text-decoration: none;
@@ -21,5 +21,12 @@ export const StyledNavLink = styled.a`
     &:visited {
       color: ${colors.white};
     }
+  }
+  ${breakpoint.largeNotebook} {
+    font-size: 12px;
+    padding: 0 15px;
+  }
+  ${breakpoint.smallNotebook} {
+    font-size: 11px;
   }
 `;

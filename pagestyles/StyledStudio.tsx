@@ -16,6 +16,15 @@ export const TextBlock = styled.div`
     grid-auto-columns: auto;
     grid-gap: 60px;
     padding-right: 60px;
+    ${breakpoint.smallNotebook} {
+      grid-auto-flow: row;
+    }
+  }
+  ${breakpoint.largeNotebook} {
+    grid-template-columns: 50% 30%;
+  }
+  ${breakpoint.smallNotebook} {
+    grid-template-columns: 50% 40%;
   }
 `;
 
@@ -29,7 +38,13 @@ export const ValuesInner = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: start;
-  column-gap: 60px;
+  grid-column-gap: 60px;
+  ${breakpoint.largeNotebook} {
+    grid-column-gap: 30px;
+  }
+  ${breakpoint.smallNotebook} {
+    column-gap: 40px;
+  }
 `;
 
 export const ValuesList = styled.div`
@@ -39,7 +54,11 @@ export const ValuesList = styled.div`
 
 export const ValueItem = styled.div`
   position: relative;
-  padding-left: ${({ theme }) => u(1, theme.pageMargin)};
+  padding-left: 140px;
+  max-width: 600px;
+  ${breakpoint.largeNotebook} {
+    padding-left: 100px;
+  }
 `;
 
 export const ValueHeader = styled.div`
@@ -48,39 +67,42 @@ export const ValueHeader = styled.div`
 `;
 
 export const Order = styled.span`
-  font-size: 110px;
+  font-size: 100px;
   font-family: "migra-italic";
   font-weight: 400;
   letter-spacing: 0.02em;
   color: ${colors.black};
   position: absolute;
   left: 0;
-  top: -0.45em;
+  top: -0.52em;
   ${breakpoint.largeNotebook} {
-    font-size: 80px;
+    font-size: 70px;
+  }
+  ${breakpoint.smallNotebook} {
+    font-size: 60px;
   }
 `;
 
 export const ServicesSection = styled.section`
   display: grid;
   grid-template-columns: auto 1fr;
-  column-gap: 60px;
+  grid-column-gap: 60px;
   align-items: start;
-  width: ${({ theme }) => u(12, theme.pageMargin)};
+  width: ${({ theme }) => u(13, theme.pageMargin)};
   margin: ${({ theme }) => u(2, theme.pageMargin)} 0;
+  ${breakpoint.largeNotebook} {
+    grid-column-gap: 30px;
+  }
 `;
 
 export const ServicesList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  row-gap: ${({ theme }) => u(0.5, theme.pageMargin)};
+  grid-row-gap: ${({ theme }) => u(0.5, theme.pageMargin)};
+  grid-column-gap: 100px;
 `;
 
 export const SubServicesList = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px; */
   margin-top: 30px;
 `;
 
@@ -116,7 +138,7 @@ export const Quote = styled.div`
 
 export const BrandsSection = styled.section`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 50% 40%;
   margin: ${({ theme }) => u(2, theme.pageMargin)} 0
     ${({ theme }) => u(1, theme.pageMargin)};
 `;
@@ -133,7 +155,13 @@ export const BrandsText = styled.div`
 export const Logotypes = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  justify-self: end;
+  grid-column-gap: 30px;
+  width: 100%;
 `;
-export const Logo = styled.img``;
+
+export const Logo = styled.img`
+  width: 100%;
+`;
 
 export const Outro = styled.div``;

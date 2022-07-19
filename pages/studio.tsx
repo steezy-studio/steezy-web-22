@@ -137,7 +137,6 @@ const Studio = ({ areas }: StudioProps) => {
                 <Large className='offset-x-1'>
                   {studioStrings.blockquotes[0].quote}
                 </Large>
-
                 <Micro className='with-dash reversed'>
                   {studioStrings.blockquotes[0].name}{" "}
                 </Micro>
@@ -168,16 +167,14 @@ const Studio = ({ areas }: StudioProps) => {
           </BlockquoteSection>
           <BrandsSection>
             <BrandsText>
-              <Micro className='with-dash'>
-                {studioStrings.breands.header}
-              </Micro>
+              <Micro className='with-dash'>{studioStrings.brands.header}</Micro>
               <div>
-                <Medium className='big'>{studioStrings.breands.claim}</Medium>
-                <Small>{studioStrings.breands.perex}</Small>
+                <Medium className='big'>{studioStrings.brands.claim}</Medium>
+                <Small>{studioStrings.brands.perex}</Small>
               </div>
             </BrandsText>
             <Logotypes>
-              {studioStrings.breands.logotypes.map((src) => (
+              {studioStrings.brands.logotypes.map((src) => (
                 <Logo key={src} src={`/logos/${src}`} />
               ))}
             </Logotypes>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakpoint } from "../../../consts";
 import u from "../../../helpers/unit";
 import { StyledContact } from "../../../pagestyles/StyledContact";
 
@@ -24,7 +25,11 @@ export const HeroSocials = styled.div`
   display: flex;
   gap: 20px;
   position: fixed;
+  z-index: 99;
   bottom: ${({ theme }) => theme.pageMargin};
+  ${breakpoint.largeNotebook} {
+    gap: 10px;
+  }
 `;
 
 export const HeroText = styled.div`
@@ -36,6 +41,10 @@ export const HeroText = styled.div`
   margin-bottom: auto;
   ${StyledContact} & {
     padding-top: 15%;
+    width: ${({ theme }) => u(10, theme.pageMargin)};
+  }
+  ${breakpoint.smallNotebook} {
+    width: ${({ theme }) => u(7, theme.pageMargin)};
   }
 `;
 
@@ -63,5 +72,8 @@ export const HeroFooterChildren = styled.div`
     top: ${({ theme }) => u(1, theme.pageMargin)};
     left: ${({ theme }) => u(4, theme.pageMargin, theme.pageMargin)};
     width: ${({ theme }) => u(5, theme.pageMargin)};
+    ${breakpoint.largeNotebook} {
+      width: ${({ theme }) => u(6, theme.pageMargin)};
+    }
   }
 `;

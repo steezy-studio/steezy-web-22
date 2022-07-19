@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../../consts";
+import { breakpoint, colors } from "../../../consts";
 import { SubServicesList } from "../../../pagestyles/StyledStudio";
 import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
 import { Medium } from "../../Typo/Medium";
@@ -59,6 +59,9 @@ export const StyledLink = styled.span`
         &:after {
           transform: scaleX(1);
         }
+      }
+      ${breakpoint.largeNotebook} {
+        font-size: 24px;
       }
     }
     ${SubServicesList} & {

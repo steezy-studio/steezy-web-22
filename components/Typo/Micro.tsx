@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { breakpoint, colors } from "../../consts";
 import u from "../../helpers/unit";
 import { LandingpageHeroClients } from "../../pagestyles/StyledIndex";
+import { ProjectHeroRole } from "../../pagestyles/StyledProject";
 import {
   BrandsSection,
   Quote,
@@ -22,6 +23,9 @@ export const Micro = styled.span`
   display: inline-block;
   &.dash-margin {
     margin-left: ${({ theme }) => u(1, theme.pageMargin, 30)};
+    ${breakpoint.helperSmallNotebook} {
+      margin-left: 90px;
+    }
   }
   &.with-dash {
     display: flex;
@@ -33,6 +37,10 @@ export const Micro = styled.span`
       height: 1px;
       width: ${({ theme }) => u(1, theme.pageMargin)};
       background-color: ${colors.black};
+      ${breakpoint.helperSmallNotebook} {
+        width: 60px;
+        margin-left: 20px;
+      }
     }
     &.reversed {
       flex-direction: row-reverse;
@@ -70,6 +78,11 @@ export const Micro = styled.span`
   }
   ${LandingpageHeroClients} & {
     text-align: right;
+  }
+  ${ProjectHeroRole} & {
+    ${breakpoint.smallNotebook} {
+      line-height: 1.5em;
+    }
   }
   ${GridItemAreas} & {
     letter-spacing: 0.02em;

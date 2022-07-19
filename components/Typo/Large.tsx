@@ -4,7 +4,6 @@ import u from "../../helpers/unit";
 import { StyledContact } from "../../pagestyles/StyledContact";
 import { ProjectsHeroFilters } from "../../pagestyles/StyledProjects";
 import { Quote } from "../../pagestyles/StyledStudio";
-import { StyledFooter } from "../Footer/Styles/StyledFooter";
 import { HeroContent } from "../Hero/Styles/StyledHero";
 import { StyledImageSlider } from "../ImageSlider/Styles/StyledImageSlider";
 
@@ -17,24 +16,28 @@ export const Large = styled.h1`
   color: ${colors.black};
   position: relative;
   ${breakpoint.largeNotebook} {
-    font-size: 80px;
+    font-size: 90px;
+  }
+  ${breakpoint.smallNotebook} {
+    font-size: 60px;
   }
   ${HeroContent} & {
     margin-top: ${({ theme }) => u(0.75, theme.pageMargin)};
     white-space: pre-wrap;
   }
   ${StyledContact} & {
+    font-size: 90px;
     line-height: 1.2em;
-  }
-  ${StyledFooter} & {
-    font-size: 70px;
   }
   ${ProjectsHeroFilters} & {
     text-transform: lowercase;
-    font-size: 85px;
+    font-size: 70px;
     padding: 0.05em 0;
     ${breakpoint.largeNotebook} {
-      font-size: 70px;
+      font-size: 60px;
+    }
+    ${breakpoint.smallNotebook} {
+      font-size: 50px;
     }
   }
   ${StyledImageSlider} & {
@@ -42,6 +45,7 @@ export const Large = styled.h1`
     float: right;
   }
   ${Quote} & {
+    font-size: 90px;
     &:before {
       content: "“";
       display: block;
@@ -53,6 +57,12 @@ export const Large = styled.h1`
     }
     &.offset-x-2 {
       margin-left: ${({ theme }) => u(1, theme.pageMargin, 30)};
+      ${breakpoint.helperSmallNotebook} {
+        margin-left: 90px;
+      }
+    }
+    ${breakpoint.largeNotebook} {
+      font-size: 80px;
     }
   }
 `;

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import { breakpoint } from "../../../consts";
 
 export const StyledHeroVideo = styled.div<{ ratio: number }>`
   position: relative;
@@ -36,4 +37,8 @@ export const Cursor = styled(motion.img)`
   margin-left: -70px;
   margin-top: -70px;
   pointer-events: none;
+  ${breakpoint.largeNotebook} {
+    width: 100px;
+    height: 100px;
+  }
 `;

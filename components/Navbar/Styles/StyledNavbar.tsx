@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { colors } from "../../../consts";
+import { breakpoint, colors } from "../../../consts";
 import u from "../../../helpers/unit";
 
 export const StyledNavbar = styled.nav`
@@ -14,6 +14,12 @@ export const StyledNavbar = styled.nav`
   height: 80px;
   display: flex;
   justify-content: space-between;
+  ${breakpoint.largeNotebook} {
+    height: 70px;
+  }
+  ${breakpoint.smallNotebook} {
+    height: 60px;
+  }
 `;
 
 export const NavLinks = styled(motion.div)`
@@ -23,4 +29,12 @@ export const NavLinks = styled(motion.div)`
   justify-content: flex-end;
   align-items: center;
   padding-right: 60px;
+  ${breakpoint.largeNotebook} {
+    padding-right: 0;
+    justify-content: center;
+  }
+  ${breakpoint.helperLargeNotebook} {
+    padding-right: 30px;
+    justify-content: flex-end;
+  }
 `;
