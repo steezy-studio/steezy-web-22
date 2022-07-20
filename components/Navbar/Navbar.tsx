@@ -1,8 +1,7 @@
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useState } from "react";
 import { allProjects } from "../../consts";
 import strings from "../../data/strings";
-import { Area } from "../../generated/types";
 import Logo from "../Logo/Logo";
 import Burger from "./Burger";
 import NavLink from "./NavLink";

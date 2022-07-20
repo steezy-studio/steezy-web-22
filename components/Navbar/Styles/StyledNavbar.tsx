@@ -20,6 +20,9 @@ export const StyledNavbar = styled.nav`
   ${breakpoint.smallNotebook} {
     height: 60px;
   }
+  ${breakpoint.tabletLandscape} {
+    width: auto;
+  }
 `;
 
 export const NavLinks = styled(motion.div)`
@@ -36,5 +39,19 @@ export const NavLinks = styled(motion.div)`
   ${breakpoint.helperLargeNotebook} {
     padding-right: 30px;
     justify-content: flex-end;
+  }
+  ${breakpoint.tabletLandscape} {
+    position: fixed;
+    top: ${({ theme }) => `calc((${theme.pageMargin} * 2) + 60px)`};
+    right: ${({ theme }) => theme.pageMargin};
+    left: ${({ theme }) => theme.pageMargin};
+    bottom: ${({ theme }) => theme.pageMargin};
+    flex-direction: column;
+    align-items: flex-end;
+    padding: ${({ theme }) => theme.pageMargin};
+    width: auto;
+    background-color: ${colors.primary300};
+    border: 1px solid ${colors.black};
+    /* margin: -1px; */
   }
 `;

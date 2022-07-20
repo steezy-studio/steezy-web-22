@@ -30,4 +30,15 @@ export const StyledNavLink = styled.a`
     font-size: 11px;
     padding: 0 10px;
   }
+  ${breakpoint.tabletLandscape} {
+    font-size: 28px;
+    padding: 5px 0;
+    letter-spacing: 0.03em;
+    &.highlighted {
+      &,
+      &:visited {
+        color: ${colors.black};
+      }
+    }
+  }
 `;
