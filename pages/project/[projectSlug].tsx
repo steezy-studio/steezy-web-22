@@ -15,6 +15,7 @@ import {
   ClientQuote,
   ClientQuoteLeft,
   ClientQuoteRight,
+  NextProjectSection,
   ProjectDescription,
   ProjectGrid,
   ProjectGridBlockquote,
@@ -27,6 +28,10 @@ import {
 } from "../../pagestyles/StyledProject";
 import { Quote } from "../../pagestyles/StyledStudio";
 import Video from "../../components/Video/Video";
+import strings from "../../data/strings";
+import GridItem from "../../components/GridItem/GridItem";
+import Link from "../../components/Link/Link";
+import { allProjects } from "../../consts";
 
 interface ProjectProps {
   projectData: ProjectType;
@@ -129,6 +134,25 @@ const Project = ({ projectData, areas }: ProjectProps) => {
               <Micro className='lowcase'>{projectData.client_position}</Micro>
             </ClientQuoteRight>
           </ClientQuote>
+        )}
+        {projectData.next_project[0] && (
+          <NextProjectSection>
+            <Large>{strings.globals.nextProject}</Large>
+            <GridItem
+              areas={projectData.next_project[0].project_tags}
+              type={"Photo"}
+              width={projectData.next_project[0].hero_image[0].width}
+              height={projectData.next_project[0].hero_image[0].height}
+              src={projectData.next_project[0].hero_image[0].url}
+              projectName={projectData.next_project[0].project_grid_name}
+              slug={projectData.next_project[0]._slug}
+            />
+            <Large className='back-link'>
+              <Link href={`/projects/${allProjects._slug}`}>
+                {strings.globals.backToProjects}
+              </Link>
+            </Large>
+          </NextProjectSection>
         )}
       </StyledProject>
     </>

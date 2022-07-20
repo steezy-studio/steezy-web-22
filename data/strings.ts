@@ -180,7 +180,7 @@ export default {
         position: "Managing Director at Infinit wellness",
       },
       {
-        quote: "Skilled creatives with amazing results!",
+        quote: "Skilled creatives\nwith amazing results!",
         name: "Adam Křena",
         position: "Head of Atelier @footshop",
       },
@@ -234,6 +234,8 @@ export default {
     email: "hello@steezy.studio",
     phone: "(+420) 728 088 996",
     nextImage: "next photo",
+    nextProject: "next project",
+    backToProjects: "back to projects",
   },
   navData: [
     {

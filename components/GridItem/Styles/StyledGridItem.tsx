@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const StyledGridItem = styled.a`
-  display: flex;
-  flex-direction: column;
+  display: grid;
   grid-gap: 20px;
   align-items: flex-start;
   color: unset;

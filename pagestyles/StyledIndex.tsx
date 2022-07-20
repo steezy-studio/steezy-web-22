@@ -5,7 +5,8 @@ import u from "../helpers/unit";
 export const StyledIndex = styled.div``;
 
 export const LandingHeroPageLogotypes = styled.div`
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: center;
   grid-gap: 60px;
   ${breakpoint.smallNotebook} {

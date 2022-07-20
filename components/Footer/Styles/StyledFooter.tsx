@@ -15,7 +15,9 @@ export const ContactInfo = styled.div`
 `;
 
 export const DetailedContact = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: start;
   align-items: center;
-  gap: ${({ theme }) => u(1, theme.pageMargin)};
+  grid-gap: 60px;
 `;

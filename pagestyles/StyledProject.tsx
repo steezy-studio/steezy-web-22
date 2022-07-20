@@ -6,22 +6,22 @@ import u from "../helpers/unit";
 export const StyledProject = styled.div``;
 
 export const ProjectHeroRoles = styled.div`
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: start;
   flex-shrink: 0;
-  gap: ${({ theme }) => u(1, theme.pageMargin)};
+  grid-gap: 90px;
 `;
 export const ProjectHeroRole = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
-  grid-gap: 30px;
-  ${breakpoint.smallNotebook} {
-    grid-gap: 10px;
-  }
+  grid-gap: 10px;
 `;
 
 export const ProjectHeroFooter = styled.div`
-  display: flex;
+  display: grid;
   margin-left: auto;
+  grid-auto-flow: column;
   grid-gap: ${({ theme }) => u(1, theme.pageMargin)};
 `;
 
@@ -73,7 +73,6 @@ export const ClientQuoteLeft = styled.div`
     content: "“";
     display: block;
     transform: translateY(-0.15em);
-    /* margin-top: 20px; */
     font-weight: 600;
     font-family: "migra-italic";
     font-size: 110px;
@@ -82,5 +81,20 @@ export const ClientQuoteLeft = styled.div`
 `;
 
 export const ClientQuoteRight = styled.div`
-  width: ${({ theme }) => u(6, theme.pageMargin)};
+  max-width: 900px;
+  ${breakpoint.largeNotebook} {
+    max-width: 600px;
+  }
+`;
+
+export const NextProjectSection = styled.div`
+  display: grid;
+  grid-row-gap: 60px;
+  margin: ${({ theme }) => u(2, theme.pageMargin)} 0;
+  position: relative;
+  .back-link {
+    position: absolute;
+    bottom: -30px;
+    right: 0;
+  }
 `;

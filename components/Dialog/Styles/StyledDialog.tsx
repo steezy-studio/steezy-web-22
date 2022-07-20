@@ -24,6 +24,7 @@ export const Content = styled(RadixDialog.Content)`
   z-index: 999;
   animation: ${contentShow} 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 `;
+
 export const Close = styled(RadixDialog.Close)`
   width: 80px;
   height: 80px;
@@ -37,6 +38,7 @@ export const Close = styled(RadixDialog.Close)`
 `;
 
 export const Trigger = styled(RadixDialog.Trigger)`
+  display: block;
   border: none;
   outline: none;
   border-radius: 0;
@@ -45,7 +47,10 @@ export const Trigger = styled(RadixDialog.Trigger)`
 export const Overlay = styled(RadixDialog.Overlay)`
   background-color: ${colors.primary300};
   position: fixed;
-  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
   z-index: 998;
   cursor: pointer;
   animation: ${overlayShow} 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;

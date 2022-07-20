@@ -22,13 +22,14 @@ export const HeroContent = styled.div`
 `;
 
 export const HeroSocials = styled.div`
-  display: flex;
-  gap: 20px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 20px;
   position: fixed;
   z-index: 99;
   bottom: ${({ theme }) => theme.pageMargin};
   ${breakpoint.largeNotebook} {
-    gap: 10px;
+    grid-gap: 10px;
   }
 `;
 
@@ -40,10 +41,10 @@ export const HeroText = styled.div`
   margin-top: auto;
   margin-bottom: auto;
   ${StyledContact} & {
-    padding-top: 15%;
+    padding-top: 10%;
     width: ${({ theme }) => u(10, theme.pageMargin)};
   }
-  ${breakpoint.smallNotebook} {
+  ${breakpoint.largeNotebook} {
     width: ${({ theme }) => u(7, theme.pageMargin)};
   }
 `;
@@ -71,9 +72,9 @@ export const HeroFooterChildren = styled.div`
     position: absolute;
     top: ${({ theme }) => u(1, theme.pageMargin)};
     left: ${({ theme }) => u(4, theme.pageMargin, theme.pageMargin)};
-    width: ${({ theme }) => u(5, theme.pageMargin)};
+    width: ${({ theme }) => u(4, theme.pageMargin)};
     ${breakpoint.largeNotebook} {
-      width: ${({ theme }) => u(6, theme.pageMargin)};
+      width: ${({ theme }) => u(5, theme.pageMargin)};
     }
   }
 `;

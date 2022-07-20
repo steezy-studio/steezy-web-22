@@ -42,6 +42,19 @@ export const GET_PROJECT = gql`
       client_logo {
         url
       }
+      next_project {
+        _slug
+        project_tags {
+          _id
+          area_name
+        }
+        hero_image {
+          url
+          width
+          height
+        }
+        project_grid_name
+      }
       project_description
       project_presentation {
         __typename

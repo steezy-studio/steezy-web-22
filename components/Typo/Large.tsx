@@ -64,5 +64,8 @@ export const Large = styled.h1`
     ${breakpoint.largeNotebook} {
       font-size: 80px;
     }
+    ${breakpoint.helperSmallNotebook} {
+      font-size: 60px;
+    }
   }
 `;
