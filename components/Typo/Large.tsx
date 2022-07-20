@@ -26,7 +26,6 @@ export const Large = styled.h1`
     white-space: pre-wrap;
   }
   ${StyledContact} & {
-    font-size: 90px;
     line-height: 1.2em;
   }
   ${ProjectsHeroFilters} & {
@@ -66,6 +65,9 @@ export const Large = styled.h1`
     }
     ${breakpoint.helperSmallNotebook} {
       font-size: 60px;
+    }
+    ${breakpoint.smallNotebook} {
+      font-size: 50px;
     }
   }
 `;

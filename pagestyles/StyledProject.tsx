@@ -77,6 +77,9 @@ export const ClientQuoteLeft = styled.div`
     font-family: "migra-italic";
     font-size: 110px;
     margin-left: 40px;
+    ${breakpoint.smallNotebook} {
+      font-size: 60px;
+    }
   }
 `;
 
@@ -94,7 +97,13 @@ export const NextProjectSection = styled.div`
   position: relative;
   .back-link {
     position: absolute;
-    bottom: -30px;
+    bottom: -0.2em;
     right: 0;
+  }
+  ${breakpoint.smallNotebook} {
+    grid-row-gap: 30px;
+    .back-link {
+      /* bottom: 0px; */
+    }
   }
 `;

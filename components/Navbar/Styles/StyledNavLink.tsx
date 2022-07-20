@@ -28,5 +28,6 @@ export const StyledNavLink = styled.a`
   }
   ${breakpoint.smallNotebook} {
     font-size: 11px;
+    padding: 0 10px;
   }
 `;

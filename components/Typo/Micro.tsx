@@ -8,6 +8,7 @@ import {
   Quote,
   ServicesSection,
   TextBlock,
+  ValuesSection,
 } from "../../pagestyles/StyledStudio";
 import { DetailedContact, StyledFooter } from "../Footer/Styles/StyledFooter";
 import { GridItemAreas } from "../GridItem/Styles/StyledGridItem";
@@ -25,6 +26,11 @@ export const Micro = styled.span`
     margin-left: ${({ theme }) => u(1, theme.pageMargin, 30)};
     ${breakpoint.helperSmallNotebook} {
       margin-left: 90px;
+    }
+    ${breakpoint.smallNotebook} {
+      ${ValuesSection} &, ${TextBlock} &, ${ServicesSection} &, ${BrandsSection} & {
+        margin-left: 0;
+      }
     }
   }
   &.with-dash {
@@ -48,6 +54,13 @@ export const Micro = styled.span`
       &:after {
         margin-left: 0;
         margin-right: 30px;
+      }
+    }
+    ${breakpoint.smallNotebook} {
+      ${ValuesSection} &, ${TextBlock} &, ${ServicesSection} &, ${BrandsSection} & {
+        &:after {
+          display: none;
+        }
       }
     }
   }
@@ -98,5 +111,8 @@ export const Micro = styled.span`
   }
   ${ServicesSection} &, ${BrandsSection} &, ${TextBlock} & {
     margin-top: 1.5em;
+    ${breakpoint.smallNotebook} {
+      margin-top: 0;
+    }
   }
 `;

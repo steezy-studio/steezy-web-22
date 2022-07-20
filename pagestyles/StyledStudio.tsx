@@ -59,6 +59,9 @@ export const ValueItem = styled.div`
   ${breakpoint.largeNotebook} {
     padding-left: 100px;
   }
+  ${breakpoint.smallNotebook} {
+    padding-left: 90px;
+  }
 `;
 
 export const ValueHeader = styled.div`
