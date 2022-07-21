@@ -16,9 +16,6 @@ export const Medium = styled.p`
     font-family: "agrandir";
     font-weight: 500;
     font-size: 35px;
-    ${BrandsText} & {
-      margin-bottom: 30px;
-    }
   }
   ${breakpoint.largeNotebook} {
     font-size: 24px;
@@ -37,7 +34,10 @@ export const Medium = styled.p`
     margin-bottom: ${({ theme }) => u(2, theme.pageMargin)};
   }
   ${ProjectsHeroContent} & {
-    max-width: ${({ theme }) => u(4, theme.pageMargin)};
+    width: ${({ theme }) => u(4, theme.pageMargin)};
+    ${breakpoint.tabletLandscape} {
+      width: ${({ theme }) => u(6, theme.pageMargin)};
+    }
   }
   ${ClientQuote} & {
     margin-bottom: 60px;

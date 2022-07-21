@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next";
+import styled from "styled-components";
 import client from "../apollo/client";
 import GridItem from "../components/GridItem/GridItem";
 import Hero from "../components/Hero/Hero";
@@ -27,7 +28,6 @@ interface indexProps {
   landingpageGrid: LandingpageGrids;
   areas: Areas;
 }
-
 const Index = ({ landingpageGrid, areas }: indexProps) => {
   const landingpageStrings = strings.landingPage;
 

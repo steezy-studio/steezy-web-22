@@ -2,6 +2,18 @@ import { createGlobalStyle, DefaultTheme } from "styled-components";
 import { colors } from "../consts";
 
 export const GlobalStyle = createGlobalStyle`
+  html,
+  body
+  {
+    width:100%;
+    height:100%
+  }
+  body {
+      padding: ${({ theme }) => theme.pageMargin} !important;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      background-color:#23272A;
+  }
   * {
     margin: 0;
     padding: 0;
@@ -16,11 +28,7 @@ export const GlobalStyle = createGlobalStyle`
     }
   }
   body {
-    background-color: ${colors.primary300};
-    // important flag for Radix dialog
-    padding: ${({ theme }) => theme.pageMargin} !important;
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    background-color: ${colors.primary300}; // important flag for Radix dialog
   }
   @font-face {
     font-family: "migra-italic";

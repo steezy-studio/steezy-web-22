@@ -17,16 +17,16 @@ export const projectsPerPage = 12;
 export const device = {
   phone: 600,
   tabletPortrait: 900,
-  tabletLandscape: 1200,
-  smallNotebook: 1400,
+  tabletLandscape: 1366,
+  smallNotebook: 1440,
   largeNotebook: 1920,
   monitor: 2500,
 } as const;
 
 export const breakpoint = {
   phone: `@media (max-width: ${device.phone}px)`,
-  tabletPortrait: `@media (max-width: ${device.tabletPortrait}px) `,
-  tabletLandscape: `@media (max-width: ${device.tabletLandscape}px) `,
+  tabletPortrait: `@media (max-width: ${device.tabletPortrait}px)`,
+  tabletLandscape: `@media (max-width: ${device.tabletLandscape}px) and (orientation: landscape)`,
   smallNotebook: `@media (max-width: ${device.smallNotebook}px)`,
   helperSmallNotebook: `@media (min-width: ${device.smallNotebook}px) and (max-width: 1600px)`,
   helperLargeNotebook: `@media (min-width: 1600px) and (max-width: ${device.largeNotebook}px)`,

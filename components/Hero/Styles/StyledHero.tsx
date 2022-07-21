@@ -4,21 +4,15 @@ import u from "../../../helpers/unit";
 import { StyledContact } from "../../../pagestyles/StyledContact";
 
 export const StyledHero = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   padding: ${({ theme }) => theme.pageMargin} 0;
   position: relative;
-`;
-
-export const HeroContent = styled.div`
   display: flex;
-  align-items: flex-start;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  position: relative;
-  z-index: 2;
-  padding-top: 80px;
-  pointer-events: none;
+  ${breakpoint.tabletLandscape} {
+    min-height: unset;
+    /* min-height: 90vh; */
+  }
 `;
 
 export const HeroSocials = styled.div`
@@ -31,6 +25,9 @@ export const HeroSocials = styled.div`
   ${breakpoint.largeNotebook} {
     grid-gap: 10px;
   }
+  ${breakpoint.tabletLandscape} {
+    display: none;
+  }
 `;
 
 export const HeroText = styled.div`
@@ -38,34 +35,45 @@ export const HeroText = styled.div`
     pointer-events: all;
   }
   width: ${({ theme }) => u(6, theme.pageMargin)};
-  margin-top: auto;
-  margin-bottom: auto;
+  position: absolute;
+  top: 50vh;
+  transform: translateY(-50%);
+  z-index: 1;
+  display: grid;
+  grid-row-gap: 30px;
+  .perex {
+    max-width: 300px;
+  }
   ${StyledContact} & {
-    padding-top: 10%;
     width: ${({ theme }) => u(10, theme.pageMargin)};
   }
   ${breakpoint.largeNotebook} {
     width: ${({ theme }) => u(7, theme.pageMargin)};
   }
+  ${breakpoint.smallNotebook} {
+    width: ${({ theme }) => u(5, theme.pageMargin)};
+  }
+  ${breakpoint.tabletLandscape} {
+    top: 50%;
+  }
 `;
 
 export const HeroMedia = styled.div`
-  position: absolute;
-  right: 0;
-  top: ${({ theme }) => theme.pageMargin};
-  bottom: ${({ theme }) => theme.pageMargin};
   width: ${({ theme }) => u(13, theme.pageMargin)};
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  margin-left: auto;
   ${StyledContact} & {
-    width: ${({ theme }) => u(12, theme.pageMargin)};
-    justify-content: flex-end;
+    /* width: ${({ theme }) => u(12, theme.pageMargin)};
+    justify-content: flex-end; */
+  }
+  ${breakpoint.tabletLandscape} {
+    /* width: ${({ theme }) => u(16, theme.pageMargin)};
+    position: static; */
   }
 `;
 
 export const HeroFooterChildren = styled.div`
   margin-top: auto;
+  padding-top: 30px;
   display: flex;
   width: 100%;
   ${StyledContact} & {
@@ -76,5 +84,9 @@ export const HeroFooterChildren = styled.div`
     ${breakpoint.largeNotebook} {
       width: ${({ theme }) => u(5, theme.pageMargin)};
     }
+  }
+  ${breakpoint.tabletLandscape} {
+    /* margin-top: ${({ theme }) => u(1, theme.pageMargin)}; */
+    /* margin-top: 30px; */
   }
 `;

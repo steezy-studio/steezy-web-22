@@ -4,7 +4,6 @@ import u from "../../helpers/unit";
 import { StyledContact } from "../../pagestyles/StyledContact";
 import { ProjectsHeroFilters } from "../../pagestyles/StyledProjects";
 import { Quote } from "../../pagestyles/StyledStudio";
-import { HeroContent } from "../Hero/Styles/StyledHero";
 import { StyledImageSlider } from "../ImageSlider/Styles/StyledImageSlider";
 
 export const Large = styled.h1`
@@ -21,9 +20,8 @@ export const Large = styled.h1`
   ${breakpoint.smallNotebook} {
     font-size: 60px;
   }
-  ${HeroContent} & {
-    margin-top: ${({ theme }) => u(0.75, theme.pageMargin)};
-    white-space: pre-wrap;
+  ${breakpoint.tabletLandscape} {
+    font-size: 50px;
   }
   ${StyledContact} & {
     line-height: 1.2em;
@@ -36,7 +34,7 @@ export const Large = styled.h1`
       font-size: 60px;
     }
     ${breakpoint.smallNotebook} {
-      font-size: 50px;
+      font-size: 40px;
     }
   }
   ${StyledImageSlider} & {
@@ -59,6 +57,9 @@ export const Large = styled.h1`
       ${breakpoint.helperSmallNotebook} {
         margin-left: 90px;
       }
+      ${breakpoint.tabletLandscape} {
+        margin-left: 0;
+      }
     }
     ${breakpoint.largeNotebook} {
       font-size: 80px;
@@ -68,6 +69,9 @@ export const Large = styled.h1`
     }
     ${breakpoint.smallNotebook} {
       font-size: 50px;
+    }
+    ${breakpoint.tabletLandscape} {
+      font-size: 40px;
     }
   }
 `;

@@ -28,6 +28,11 @@ export const ProjectHeroFooter = styled.div`
 export const ProjectDescription = styled.div`
   padding: ${({ theme }) => u(1, theme.pageMargin)} 0;
   width: ${({ theme }) => u(6, theme.pageMargin)};
+  ${breakpoint.tabletLandscape} {
+    width: ${({ theme }) => u(9, theme.pageMargin)};
+    padding: ${({ theme }) => u(1, theme.pageMargin)} 0
+      ${({ theme }) => u(2, theme.pageMargin)};
+  }
 `;
 
 export const ProjectGrid = styled.div`
@@ -50,6 +55,11 @@ export const ProjectGridBlockquote = styled.div`
   ${breakpoint.smallNotebook} {
     padding: ${({ theme }) => u(1, theme.pageMargin)}
       ${({ theme }) => u(2, theme.pageMargin)}
+      ${({ theme }) => u(1, theme.pageMargin)} 0;
+  }
+  ${breakpoint.tabletLandscape} {
+    padding: ${({ theme }) => u(1, theme.pageMargin)}
+      ${({ theme }) => u(1, theme.pageMargin)}
       ${({ theme }) => u(1, theme.pageMargin)} 0;
   }
 `;

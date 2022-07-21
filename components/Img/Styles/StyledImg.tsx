@@ -19,7 +19,10 @@ export const StyledImg = styled.div`
     height: auto;
     min-width: 150px;
     max-width: 200px;
-    align-self: flex-start;
+    align-self: start;
+    ${breakpoint.tabletLandscape} {
+      justify-self: end;
+    }
   }
   ${HeroMedia} & {
     width: 100%;

@@ -10,19 +10,27 @@ export const LandingHeroPageLogotypes = styled.div`
   align-items: center;
   grid-gap: 60px;
   ${breakpoint.smallNotebook} {
-    grid-gap: 30px;
+    grid-gap: 20px;
   }
 `;
 
-export const LandingPageHeroLogotype = styled.img``;
+export const LandingPageHeroLogotype = styled.img`
+  height: 70px;
+  ${breakpoint.smallNotebook} {
+    height: 40px;
+  }
+`;
 
 export const LandingpageHeroClients = styled.div`
   display: grid;
   width: 100%;
-  grid-gap: 40px;
+  grid-row-gap: 40px;
   justify-content: end;
   ${breakpoint.smallNotebook} {
-    grid-gap: 30px;
+    grid-row-gap: 30px;
+  }
+  ${breakpoint.tabletLandscape} {
+    grid-row-gap: 10px;
   }
 `;
 
@@ -57,4 +65,8 @@ export const Intro = styled.div`
   z-index: 2;
   display: grid;
   grid-gap: 60px;
+  ${breakpoint.tabletLandscape} {
+    margin-left: ${({ theme }) => u(3, theme.pageMargin)};
+    transform: unset;
+  }
 `;

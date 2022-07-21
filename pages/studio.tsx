@@ -18,6 +18,7 @@ import {
   BlockquoteSection,
   BrandsSection,
   BrandsText,
+  BrandsTextInner,
   Logo,
   Logotypes,
   Order,
@@ -168,10 +169,10 @@ const Studio = ({ areas }: StudioProps) => {
           <BrandsSection>
             <BrandsText>
               <Micro className='with-dash'>{studioStrings.brands.header}</Micro>
-              <div>
+              <BrandsTextInner>
                 <Medium className='big'>{studioStrings.brands.claim}</Medium>
                 <Small>{studioStrings.brands.perex}</Small>
-              </div>
+              </BrandsTextInner>
             </BrandsText>
             <Logotypes>
               {studioStrings.brands.logotypes.map((src) => (

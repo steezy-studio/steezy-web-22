@@ -39,6 +39,7 @@ export const Close = styled(RadixDialog.Close)`
 
 export const Trigger = styled(RadixDialog.Trigger)`
   display: block;
+  width: 100%;
   border: none;
   outline: none;
   border-radius: 0;

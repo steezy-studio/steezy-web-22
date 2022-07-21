@@ -1,10 +1,14 @@
 import styled from "styled-components";
+import { breakpoint } from "../../../consts";
 
 export const StyledGridItem = styled.a`
   display: grid;
   grid-gap: 20px;
-  align-items: flex-start;
+  align-items: start;
   color: unset;
+  ${breakpoint.tabletLandscape} {
+    grid-row-gap: 10px;
+  }
 `;
 
 export const GridItemAreas = styled.div``;

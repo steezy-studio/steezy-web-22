@@ -45,6 +45,10 @@ export const ValuesInner = styled.div`
   ${breakpoint.smallNotebook} {
     column-gap: 40px;
   }
+  ${breakpoint.tabletLandscape} {
+    grid-template-columns: unset;
+    grid-row-gap: 60px;
+  }
 `;
 
 export const ValuesList = styled.div`
@@ -94,7 +98,11 @@ export const ServicesSection = styled.section`
   width: ${({ theme }) => u(13, theme.pageMargin)};
   margin: ${({ theme }) => u(2, theme.pageMargin)} 0;
   ${breakpoint.largeNotebook} {
-    grid-column-gap: 30px;
+  }
+  ${breakpoint.tabletLandscape} {
+    grid-template-columns: unset;
+    grid-row-gap: 30px;
+    width: 100%;
   }
 `;
 
@@ -144,6 +152,9 @@ export const BrandsSection = styled.section`
   grid-template-columns: 50% 40%;
   margin: ${({ theme }) => u(2, theme.pageMargin)} 0
     ${({ theme }) => u(1, theme.pageMargin)};
+  ${breakpoint.tabletLandscape} {
+    grid-template-columns: 50% 50%;
+  }
 `;
 
 export const BrandsText = styled.div`
@@ -151,8 +162,18 @@ export const BrandsText = styled.div`
   grid-template-columns: auto ${({ theme }) => u(4, theme.pageMargin)};
   align-items: start;
   justify-content: start;
-  grid-gap: 60px;
+  grid-column-gap: 60px;
   margin-top: 60px;
+  ${breakpoint.tabletLandscape} {
+    grid-template-columns: unset;
+    grid-template-rows: min-content auto;
+    grid-row-gap: 30px;
+  }
+`;
+
+export const BrandsTextInner = styled.div`
+  display: grid;
+  grid-row-gap: 30px;
 `;
 
 export const Logotypes = styled.div`

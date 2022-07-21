@@ -7,6 +7,7 @@ import { useWindowSize } from "../hooks/useWindowSize";
 
 function MyApp({ Component, pageProps }) {
   const { w } = useWindowSize();
+
   return (
     <ThemeProvider theme={theme(w)}>
       <GlobalStyle />

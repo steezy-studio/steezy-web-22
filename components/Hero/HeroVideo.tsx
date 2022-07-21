@@ -1,5 +1,5 @@
 import { open } from "fs";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useIntersectionVideoObserver } from "../../hooks/useIntersectionVideoObserver";
 import Dialog from "../Dialog/Dialog";
 import { Micro } from "../Typo/Micro";
@@ -9,6 +9,7 @@ import {
   Showreel,
   StyledHeroVideo,
 } from "./Styles/StyledHeroVideo";
+import { useRatio } from "../../hooks/useRatio";
 
 interface VideoProps {
   src: string;
@@ -17,14 +18,10 @@ interface VideoProps {
 }
 
 const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
-  const [ratio, setRatio] = useState(0);
   const [cursor, setCursor] = useState({ coords: [0, 0], show: false });
   const videoRef = useRef<HTMLVideoElement>(null);
+  const ratio = useRatio(videoRef);
   useIntersectionVideoObserver(videoRef);
-
-  React.useEffect(() => {
-    setRatio(videoRef.current.videoHeight / videoRef.current.videoWidth);
-  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const boundingBox = e.currentTarget.getBoundingClientRect();
@@ -44,46 +41,40 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
 
   return (
     <>
-      <StyledHeroVideo
-        ratio={ratio}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={() => setCursor((prev) => ({ ...prev, show: false }))}>
-        <Cursor
-          animate={cursor.show ? "show" : "hide"}
-          variants={{
-            show: { scale: 1, opacity: 1 },
-            hide: { scale: 0, opacity: 0 },
-          }}
-          src='/icons/play-cursor.svg'
-          style={{
-            left: `${cursor.coords[0]}px`,
-            top: `${cursor.coords[1]}px`,
-          }}>
-          {/* <Capttion
-            className='fill'
-            style={{
-              width: 200,
-              fontSize: 21,
-            }}>
-            Play reel
-          </Capttion> */}
-        </Cursor>
-        <Dialog
-          open={open}
-          onOpenChange={onOpenChange}
-          content={
-            <Showreel>
-              <video
-                src={src}
-                autoPlay={true}
-                controls
-                playsInline={true}
-                muted={true}
-                loop={true}
-              />
-            </Showreel>
-          }
-          trigger={
+      <Dialog
+        open={open}
+        onOpenChange={onOpenChange}
+        content={
+          <Showreel>
+            <video
+              src={src}
+              autoPlay={true}
+              controls
+              playsInline={true}
+              muted={true}
+              loop={true}
+            />
+          </Showreel>
+        }
+        trigger={
+          <StyledHeroVideo
+            ratio={ratio}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={() =>
+              setCursor((prev) => ({ ...prev, show: false }))
+            }>
+            <Cursor
+              animate={cursor.show ? "show" : "hide"}
+              variants={{
+                show: { scale: 1, opacity: 1 },
+                hide: { scale: 0, opacity: 0 },
+              }}
+              src='/icons/play-cursor.svg'
+              style={{
+                left: `${cursor.coords[0]}px`,
+                top: `${cursor.coords[1]}px`,
+              }}
+            />
             <Loop
               ref={videoRef}
               src={src}
@@ -92,9 +83,9 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
               muted={true}
               loop={true}
             />
-          }
-        />
-      </StyledHeroVideo>
+          </StyledHeroVideo>
+        }
+      />
     </>
   );
 };

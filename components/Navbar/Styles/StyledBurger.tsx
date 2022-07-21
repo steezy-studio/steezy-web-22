@@ -11,10 +11,19 @@ export const StyledBurger = styled.div`
   width: 80px;
   height: 100%;
   flex-shrink: 0;
+  z-index: 999;
+  padding: 10px;
+  svg {
+    width: 100%;
+    height: auto;
+  }
   ${breakpoint.largeNotebook} {
     width: 70px;
   }
   ${breakpoint.smallNotebook} {
     width: 60px;
+  }
+  ${breakpoint.tabletLandscape} {
+    width: 50px;
   }
 `;

@@ -63,6 +63,9 @@ export const StyledLink = styled.span`
       ${breakpoint.largeNotebook} {
         font-size: 24px;
       }
+      ${breakpoint.tabletLandscape} {
+        font-size: 16px;
+      }
     }
     ${SubServicesList} & {
       line-height: 1.8em;

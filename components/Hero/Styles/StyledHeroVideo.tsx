@@ -1,18 +1,20 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../../../consts";
+import u from "../../../helpers/unit";
 
 export const StyledHeroVideo = styled.div<{ ratio: number }>`
   position: relative;
   padding-bottom: ${({ ratio }) => ratio * 100}%;
-  width: 100%;
 `;
 
 export const Loop = styled.video`
   width: 100%;
+  height: 100%;
   cursor: none;
   position: absolute;
   inset: 0;
+  object-fit: contain;
 `;
 
 export const Showreel = styled.div`
@@ -21,10 +23,11 @@ export const Showreel = styled.div`
   max-height: 80vh;
   padding-bottom: 56.25%;
   video {
-    width: 100%;
-    height: 100%;
     position: absolute;
-    inset: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
 `;
 

@@ -4,13 +4,13 @@ import u from "../../helpers/unit";
 import { LandingpageHeroClients } from "../../pagestyles/StyledIndex";
 import { ProjectHeroRole } from "../../pagestyles/StyledProject";
 import {
+  Blockquote,
   BrandsSection,
-  Quote,
   ServicesSection,
   TextBlock,
   ValuesSection,
 } from "../../pagestyles/StyledStudio";
-import { DetailedContact, StyledFooter } from "../Footer/Styles/StyledFooter";
+import { StyledFooter } from "../Footer/Styles/StyledFooter";
 import { GridItemAreas } from "../GridItem/Styles/StyledGridItem";
 import { StyledHero } from "../Hero/Styles/StyledHero";
 
@@ -29,6 +29,11 @@ export const Micro = styled.span`
     }
     ${breakpoint.smallNotebook} {
       ${ValuesSection} &, ${TextBlock} &, ${ServicesSection} &, ${BrandsSection} & {
+        margin-left: 0;
+      }
+    }
+    ${breakpoint.tabletLandscape} {
+      ${Blockquote} & {
         margin-left: 0;
       }
     }
@@ -63,6 +68,13 @@ export const Micro = styled.span`
         }
       }
     }
+    ${breakpoint.tabletLandscape} {
+      ${Blockquote} & ._2 & {
+        &.reversed {
+          flex-direction: row;
+        }
+      }
+    }
   }
   &.lowcase {
     text-transform: none;
@@ -72,21 +84,13 @@ export const Micro = styled.span`
   ${breakpoint.largeNotebook} {
     font-size: 12px;
   }
+  ${breakpoint.tabletLandscape} {
+    font-size: 11px;
+  }
   ${StyledHero} & {
     white-space: pre-wrap;
     &.perex {
-      padding-top: ${({ theme }) => u(0.5, theme.pageMargin)};
       line-height: 1.6em;
-      max-width: 300px;
-    }
-    &.sub-header {
-      width: 400px;
-    }
-    &.fill {
-      background-color: ${colors.primary300};
-      padding: 10px;
-      text-align: center;
-      /* border: 1px solid ${colors.black}; */
     }
   }
   ${LandingpageHeroClients} & {
@@ -108,11 +112,5 @@ export const Micro = styled.span`
   ${StyledFooter} & {
     display: block;
     white-space: pre-wrap;
-  }
-  ${ServicesSection} &, ${BrandsSection} &, ${TextBlock} & {
-    margin-top: 1.5em;
-    ${breakpoint.smallNotebook} {
-      margin-top: 0;
-    }
   }
 `;

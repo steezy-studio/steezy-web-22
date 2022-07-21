@@ -1,20 +1,18 @@
 import React, { useState } from "react";
+import { Asset } from "../../generated/types";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
+import Img from "../Img/Img";
 import { Large } from "../Typo/Large";
 import { Micro } from "../Typo/Micro";
 import HeroVideo from "./HeroVideo";
 import {
-  HeroContent,
-  HeroMedia,
   HeroFooterChildren,
+  HeroMedia,
   HeroSocials,
   HeroText,
   StyledHero,
 } from "./Styles/StyledHero";
-import Img from "../Img/Img";
-import { Asset } from "../../generated/types";
-import { ImageProps } from "next/image";
 
 interface HeroProps {
   header: (
@@ -29,19 +27,18 @@ interface HeroProps {
 
 const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
   const [openDialog, setOpenDialog] = useState(false);
+
   return (
     <StyledHero>
-      <HeroContent>
-        <HeroText>
-          {subHeader && <Micro className='sub-header'>{subHeader}</Micro>}
-          <Large>{header(openDialog, setOpenDialog)}</Large>
-          {perex && <Micro className={`perex`}>{perex}</Micro>}
-        </HeroText>
-        <HeroSocials>
-          <Instagram />
-          <Vimeo />
-        </HeroSocials>
-      </HeroContent>
+      <HeroText>
+        {subHeader && <Micro className='sub-header'>{subHeader}</Micro>}
+        <Large>{header(openDialog, setOpenDialog)}</Large>
+        {perex && <Micro className={`perex`}>{perex}</Micro>}
+      </HeroText>
+      <HeroSocials>
+        <Instagram />
+        <Vimeo />
+      </HeroSocials>
       <HeroMedia>
         {asset._type === "Video" ? (
           <HeroVideo
@@ -56,11 +53,11 @@ const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
             height={asset.height}
             placeholder={`blur`}
             blurDataURL={asset.url}
-            layout={children ? "responsive" : "fill"}
+            layout={"responsive"}
           />
         )}
-        {children && <HeroFooterChildren>{children}</HeroFooterChildren>}
       </HeroMedia>
+      {children && <HeroFooterChildren>{children}</HeroFooterChildren>}
     </StyledHero>
   );
 };

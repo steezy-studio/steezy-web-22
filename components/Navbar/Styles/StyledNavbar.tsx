@@ -7,7 +7,6 @@ export const StyledNavbar = styled.nav`
   position: fixed;
   pointer-events: none;
   z-index: 99;
-  width: ${({ theme }) => u(16, theme.pageMargin)};
   top: ${({ theme }) => theme.pageMargin};
   left: ${({ theme }) => theme.pageMargin};
   right: ${({ theme }) => theme.pageMargin};
@@ -22,6 +21,7 @@ export const StyledNavbar = styled.nav`
   }
   ${breakpoint.tabletLandscape} {
     width: auto;
+    height: 50px;
   }
 `;
 
