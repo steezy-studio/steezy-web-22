@@ -9,7 +9,7 @@ import { StyledLink } from "../components/Link/Styles/StyledLink";
 import Navbar from "../components/Navbar/Navbar";
 import { Large } from "../components/Typo/Large";
 import { Micro } from "../components/Typo/Micro";
-import { allProjects } from "../consts/index";
+import { allProjects } from "../helpers/consts";
 import strings from "../data/strings";
 import { Areas, LandingpageGrids } from "../generated/types";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
@@ -81,9 +81,12 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                   }
                   if (type === `link`) {
                     return (
-                      <Link href={`/projects/${allProjects._slug}`}>
-                        {body}
-                      </Link>
+                      <>
+                        <Link href={`/projects/${allProjects._slug}`}>
+                          {body}
+                        </Link>
+                        <br />
+                      </>
                     );
                   }
                 })}

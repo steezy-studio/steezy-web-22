@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function useWindowSize() {
-  const [dim, setDim] = useState({ w: 0, h: 0 });
+  const initialState = { w: 0, h: 0 };
+  const [dim, setDim] = useState(initialState);
+  const prevDim = useRef(initialState);
 
   const handleResize = () => {
-    setDim({ w: window.innerWidth, h: window.innerHeight });
+    const newdim = { w: window.innerWidth, h: window.innerHeight };
+    if (prevDim.current.w !== newdim.w) {
+      prevDim.current = newdim;
+      setDim(newdim);
+    }
   };
 
   useEffect(() => {

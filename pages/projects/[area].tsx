@@ -13,7 +13,7 @@ import { StyledLink } from "../../components/Link/Styles/StyledLink";
 import Navbar from "../../components/Navbar/Navbar";
 import { Large } from "../../components/Typo/Large";
 import { Medium } from "../../components/Typo/Medium";
-import { allProjects, projectsPerPage } from "../../consts";
+import { allProjects, projectsPerPage } from "../../helpers/consts";
 import { Areas, Projects as ProjectsType, Query } from "../../generated/types";
 import { GET_ALL_AREAS } from "../../graphql/GetAllAreas";
 import { GET_ALL_PROJECTS } from "../../graphql/GetAllProjects";
@@ -204,8 +204,6 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  console.log(params.area);
-
   const data = await client.query<Query>({
     query: GET_ALL_PROJECTS,
     variables: {

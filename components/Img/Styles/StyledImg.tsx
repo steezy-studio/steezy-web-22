@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoint } from "../../../consts";
+import { breakpoint } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
 import { StyledContact } from "../../../pagestyles/StyledContact";
 import {
@@ -26,9 +26,16 @@ export const StyledImg = styled.div`
   }
   ${HeroMedia} & {
     width: 100%;
+    ${breakpoint.phone} {
+      position: relative;
+      padding-bottom: ${(5 / 4) * 100}%;
+    }
   }
   ${ValuesSection} & {
     padding-left: ${({ theme }) => u(1, theme.pageMargin)};
+    ${breakpoint.phone} {
+      display: none;
+    }
   }
   ${StyledImageSlider} & {
     padding-right: 10px;
@@ -39,6 +46,10 @@ export const StyledImg = styled.div`
     ${breakpoint.smallNotebook} {
       width: 150px;
       height: 150px;
+    }
+    ${breakpoint.tabletPortrait} {
+      width: 100px;
+      height: 100px;
     }
   }
 `;

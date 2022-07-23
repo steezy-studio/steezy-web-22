@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoint, colors } from "../../../consts";
+import { breakpoint, colors } from "../../../helpers/consts";
 
 export const StyledNavLink = styled.a`
   text-decoration: none;

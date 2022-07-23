@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { breakpoint, colors } from "../../consts";
+import { breakpoint, colors } from "../../helpers/consts";
 import u from "../../helpers/unit";
 import { StyledContact } from "../../pagestyles/StyledContact";
+import { Intro } from "../../pagestyles/StyledIndex";
 import { ProjectsHeroFilters } from "../../pagestyles/StyledProjects";
 import { Quote } from "../../pagestyles/StyledStudio";
 import { StyledImageSlider } from "../ImageSlider/Styles/StyledImageSlider";
@@ -23,6 +24,12 @@ export const Large = styled.h1`
   ${breakpoint.tabletLandscape} {
     font-size: 50px;
   }
+  ${breakpoint.tabletPortrait} {
+    font-size: 50px;
+  }
+  ${breakpoint.phone} {
+    font-size: 40px;
+  }
   ${StyledContact} & {
     line-height: 1.2em;
   }
@@ -40,6 +47,9 @@ export const Large = styled.h1`
   ${StyledImageSlider} & {
     margin: 30px ${({ theme }) => theme.pageMargin} 0;
     float: right;
+  }
+  ${Intro} & {
+    white-space: pre-wrap;
   }
   ${Quote} & {
     font-size: 90px;
@@ -72,6 +82,9 @@ export const Large = styled.h1`
     }
     ${breakpoint.tabletLandscape} {
       font-size: 40px;
+    }
+    ${breakpoint.tabletPortrait} {
+      font-size: 35px;
     }
   }
 `;

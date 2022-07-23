@@ -1,5 +1,5 @@
 import { createGlobalStyle, DefaultTheme } from "styled-components";
-import { colors } from "../consts";
+import { colors } from "../helpers/consts";
 
 export const GlobalStyle = createGlobalStyle`
   html,

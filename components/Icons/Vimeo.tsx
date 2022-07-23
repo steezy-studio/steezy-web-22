@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { breakpoint, ColorKeys, colors } from "../../consts";
+import { breakpoint, ColorKeys, colors } from "../../helpers/consts";
 
 interface InstagramProps {
   fill?: ColorKeys;

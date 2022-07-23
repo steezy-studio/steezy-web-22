@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import { breakpoint } from "../../consts";
+import { breakpoint } from "../../helpers/consts";
 import u from "../../helpers/unit";
 import { ClientQuote } from "../../pagestyles/StyledProject";
 import {
   ProjectsGridColumn,
   ProjectsHeroContent,
 } from "../../pagestyles/StyledProjects";
-import { BrandsText, SubServicesList } from "../../pagestyles/StyledStudio";
+import { SubServicesList } from "../../pagestyles/StyledStudio";
 
 export const Medium = styled.p`
   font-size: 30px;
@@ -27,6 +27,18 @@ export const Medium = styled.p`
     font-size: 21px;
     &.big {
       font-size: 26px;
+    }
+  }
+  ${breakpoint.tabletPortrait} {
+    font-size: 18px;
+    &.big {
+      font-size: 21px;
+    }
+  }
+  ${breakpoint.phone} {
+    font-size: 16px;
+    &.big {
+      font-size: 18px;
     }
   }
   ${ProjectsGridColumn} & {
@@ -51,6 +63,9 @@ export const Medium = styled.p`
     ${breakpoint.smallNotebook} {
       font-size: 28px;
       margin-bottom: 30px;
+    }
+    ${breakpoint.tabletPortrait} {
+      font-size: 21px;
     }
   }
   ${SubServicesList} & {

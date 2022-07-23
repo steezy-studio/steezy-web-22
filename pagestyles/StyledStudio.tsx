@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoint, colors } from "../consts";
+import { breakpoint, colors } from "../helpers/consts";
 import u from "../helpers/unit";
 
 export const StyledStudio = styled.div``;
@@ -26,12 +26,29 @@ export const TextBlock = styled.div`
   ${breakpoint.smallNotebook} {
     grid-template-columns: 50% 40%;
   }
+  ${breakpoint.tabletPortrait} {
+    .header {
+      grid-gap: 30px;
+    }
+  }
+  ${breakpoint.phone} {
+    grid-template-columns: unset;
+    margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
+    grid-gap: 20px;
+    .header {
+      padding-right: unset;
+      grid-gap: 20px;
+    }
+  }
 `;
 
 export const ValuesSection = styled.section`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin: ${({ theme }) => u(2, theme.pageMargin)} 0;
+  ${breakpoint.phone} {
+    grid-template-columns: unset;
+  }
 `;
 
 export const ValuesInner = styled.div`
@@ -49,11 +66,17 @@ export const ValuesInner = styled.div`
     grid-template-columns: unset;
     grid-row-gap: 60px;
   }
+  ${breakpoint.phone} {
+    grid-row-gap: 30px;
+  }
 `;
 
 export const ValuesList = styled.div`
   display: grid;
   row-gap: ${({ theme }) => u(1, theme.pageMargin)};
+  ${breakpoint.phone} {
+    row-gap: ${({ theme }) => u(3, theme.pageMargin)};
+  }
 `;
 
 export const ValueItem = styled.div`
@@ -66,11 +89,17 @@ export const ValueItem = styled.div`
   ${breakpoint.smallNotebook} {
     padding-left: 90px;
   }
+  ${breakpoint.phone} {
+    padding-left: 0;
+  }
 `;
 
 export const ValueHeader = styled.div`
   display: grid;
-  row-gap: 30px;
+  grid-row-gap: 30px;
+  ${breakpoint.phone} {
+    grid-row-gap: 10px;
+  }
 `;
 
 export const Order = styled.span`
@@ -87,6 +116,9 @@ export const Order = styled.span`
   }
   ${breakpoint.smallNotebook} {
     font-size: 60px;
+  }
+  ${breakpoint.phone} {
+    position: static;
   }
 `;
 
@@ -111,6 +143,13 @@ export const ServicesList = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-row-gap: ${({ theme }) => u(0.5, theme.pageMargin)};
   grid-column-gap: 100px;
+  ${breakpoint.tabletPortrait} {
+    grid-column-gap: 30px;
+    grid-row-gap: ${({ theme }) => u(1, theme.pageMargin)};
+  }
+  ${breakpoint.phone} {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 export const SubServicesList = styled.div`
@@ -154,6 +193,11 @@ export const BrandsSection = styled.section`
     ${({ theme }) => u(1, theme.pageMargin)};
   ${breakpoint.tabletLandscape} {
     grid-template-columns: 50% 50%;
+    grid-column-gap: ${({ theme }) => `calc(2 * ${theme.pageMargin})`};
+  }
+  ${breakpoint.tabletPortrait} {
+    grid-template-columns: unset;
+    grid-row-gap: 30px;
   }
 `;
 
@@ -168,6 +212,10 @@ export const BrandsText = styled.div`
     grid-template-columns: unset;
     grid-template-rows: min-content auto;
     grid-row-gap: 30px;
+    margin-top: 0;
+  }
+  ${breakpoint.tabletPortrait} {
+    width: ${({ theme }) => u(10, theme.pageMargin)};
   }
 `;
 
@@ -182,6 +230,9 @@ export const Logotypes = styled.div`
   justify-self: end;
   grid-column-gap: 30px;
   width: 100%;
+  ${breakpoint.tabletPortrait} {
+    grid-template-columns: repeat(7, 1fr);
+  }
 `;
 
 export const Logo = styled.img`

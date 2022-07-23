@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoint } from "../consts";
+import { breakpoint } from "../helpers/consts";
 import u from "../helpers/unit";
 
 export const StyledIndex = styled.div``;
@@ -12,12 +12,18 @@ export const LandingHeroPageLogotypes = styled.div`
   ${breakpoint.smallNotebook} {
     grid-gap: 20px;
   }
+  ${breakpoint.phone} {
+    grid-gap: 10px;
+  }
 `;
 
 export const LandingPageHeroLogotype = styled.img`
   height: 70px;
   ${breakpoint.smallNotebook} {
     height: 40px;
+  }
+  ${breakpoint.phone} {
+    height: 25px;
   }
 `;
 
@@ -32,17 +38,27 @@ export const LandingpageHeroClients = styled.div`
   ${breakpoint.tabletLandscape} {
     grid-row-gap: 10px;
   }
+  ${breakpoint.phone} {
+    justify-content: start;
+  }
 `;
 
 export const LandingpageGrid = styled.div`
   display: grid;
   grid-gap: ${({ theme }) => `calc(4 * ${theme.pageMargin})`};
+  ${breakpoint.phone} {
+    grid-gap: ${({ theme }) => `calc(2 * ${theme.pageMargin})`};
+  }
 `;
 
 export const LandingpageGridRow = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: ${({ theme }) => theme.pageMargin};
+  ${breakpoint.phone} {
+    grid-template-columns: unset;
+    grid-gap: ${({ theme }) => `calc(2 * ${theme.pageMargin})`};
+  }
 `;
 
 export const GridItemWrapper = styled.div`
@@ -54,6 +70,16 @@ export const GridItemWrapper = styled.div`
   }
   &.offset:not(:last-child) {
     margin-top: 40%;
+  }
+  ${breakpoint.phone} {
+    &.single {
+      width: 100%;
+      grid-column: 1;
+      justify-self: initial;
+    }
+    &.offset:not(:last-child) {
+      margin-top: unset;
+    }
   }
 `;
 
@@ -67,6 +93,15 @@ export const Intro = styled.div`
   grid-gap: 60px;
   ${breakpoint.tabletLandscape} {
     margin-left: ${({ theme }) => u(3, theme.pageMargin)};
+    /* transform: unset; */
+  }
+  ${breakpoint.tabletPortrait} {
+    margin-left: unset;
+    width: ${({ theme }) => u(8, theme.pageMargin)};
+  }
+  ${breakpoint.phone} {
     transform: unset;
+    grid-gap: 30px;
+    margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
   }
 `;

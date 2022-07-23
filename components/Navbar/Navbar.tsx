@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { allProjects } from "../../consts";
+import { allProjects } from "../../helpers/consts";
 import strings from "../../data/strings";
 import Logo from "../Logo/Logo";
 import Burger from "./Burger";

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoint } from "../../../consts";
+import { breakpoint } from "../../../helpers/consts";
 
 export const StyledGridItem = styled.a`
   display: grid;
@@ -8,6 +8,9 @@ export const StyledGridItem = styled.a`
   color: unset;
   ${breakpoint.tabletLandscape} {
     grid-row-gap: 10px;
+  }
+  ${breakpoint.tabletPortrait} {
+    grid-row-gap: 5px;
   }
 `;
 

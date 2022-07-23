@@ -16,7 +16,7 @@ export const projectsPerPage = 12;
 
 export const device = {
   phone: 600,
-  tabletPortrait: 900,
+  tabletPortrait: 1024,
   tabletLandscape: 1366,
   smallNotebook: 1440,
   largeNotebook: 1920,
@@ -26,7 +26,7 @@ export const device = {
 export const breakpoint = {
   phone: `@media (max-width: ${device.phone}px)`,
   tabletPortrait: `@media (max-width: ${device.tabletPortrait}px)`,
-  tabletLandscape: `@media (max-width: ${device.tabletLandscape}px) and (orientation: landscape)`,
+  tabletLandscape: `@media (max-width: ${device.tabletLandscape}px)`,
   smallNotebook: `@media (max-width: ${device.smallNotebook}px)`,
   helperSmallNotebook: `@media (min-width: ${device.smallNotebook}px) and (max-width: 1600px)`,
   helperLargeNotebook: `@media (min-width: 1600px) and (max-width: ${device.largeNotebook}px)`,
@@ -35,6 +35,11 @@ export const breakpoint = {
 } as const;
 
 export const theme = (width: number) => ({
-  pageMargin: width <= device.smallNotebook ? "20px" : "40px",
+  pageMargin:
+    width <= device.phone
+      ? "15px"
+      : width <= device.smallNotebook
+      ? "20px"
+      : "40px",
 });
 export type Theme = typeof theme;

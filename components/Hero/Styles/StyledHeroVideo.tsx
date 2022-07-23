@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { breakpoint } from "../../../consts";
+import { breakpoint } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
 
 export const StyledHeroVideo = styled.div<{ ratio: number }>`
@@ -15,6 +15,9 @@ export const Loop = styled.video`
   position: absolute;
   inset: 0;
   object-fit: contain;
+  ${breakpoint.phone} {
+    object-fit: cover;
+  }
 `;
 
 export const Showreel = styled.div`

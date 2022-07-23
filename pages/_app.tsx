@@ -1,7 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
-import { theme } from "../consts";
+import { theme } from "../helpers/consts";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
 import { useWindowSize } from "../hooks/useWindowSize";
 

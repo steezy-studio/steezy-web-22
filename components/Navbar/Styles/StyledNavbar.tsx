@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { breakpoint, colors } from "../../../consts";
+import { breakpoint, colors } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
 
 export const StyledNavbar = styled.nav`
@@ -9,10 +9,10 @@ export const StyledNavbar = styled.nav`
   z-index: 99;
   top: ${({ theme }) => theme.pageMargin};
   left: ${({ theme }) => theme.pageMargin};
-  right: ${({ theme }) => theme.pageMargin};
+  /* right: ${({ theme }) => theme.pageMargin}; */
+  width: ${({ theme }) => u(16, theme.pageMargin)};
   height: 80px;
   display: flex;
-  justify-content: space-between;
   ${breakpoint.largeNotebook} {
     height: 70px;
   }
@@ -20,8 +20,10 @@ export const StyledNavbar = styled.nav`
     height: 60px;
   }
   ${breakpoint.tabletLandscape} {
-    width: auto;
     height: 50px;
+  }
+  ${breakpoint.phone} {
+    height: 40px;
   }
 `;
 

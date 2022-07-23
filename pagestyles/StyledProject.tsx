@@ -1,6 +1,6 @@
 import Vimeo from "@u-wave/react-vimeo";
 import styled from "styled-components";
-import { breakpoint } from "../consts";
+import { breakpoint } from "../helpers/consts";
 import u from "../helpers/unit";
 
 export const StyledProject = styled.div``;
@@ -23,6 +23,9 @@ export const ProjectHeroFooter = styled.div`
   margin-left: auto;
   grid-auto-flow: column;
   grid-gap: ${({ theme }) => u(1, theme.pageMargin)};
+  ${breakpoint.tabletPortrait} {
+    margin-left: 0;
+  }
 `;
 
 export const ProjectDescription = styled.div`
@@ -60,6 +63,11 @@ export const ProjectGridBlockquote = styled.div`
   ${breakpoint.tabletLandscape} {
     padding: ${({ theme }) => u(1, theme.pageMargin)}
       ${({ theme }) => u(1, theme.pageMargin)}
+      ${({ theme }) => u(1, theme.pageMargin)} 0;
+  }
+  ${breakpoint.tabletPortrait} {
+    padding: ${({ theme }) => u(1, theme.pageMargin)}
+      ${({ theme }) => u(0, theme.pageMargin)}
       ${({ theme }) => u(1, theme.pageMargin)} 0;
   }
 `;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoint, colors } from "../../../consts";
+import { breakpoint, colors } from "../../../helpers/consts";
 import { SubServicesList } from "../../../pagestyles/StyledStudio";
 import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
 import { Medium } from "../../Typo/Medium";
@@ -65,6 +65,9 @@ export const StyledLink = styled.span`
       }
       ${breakpoint.tabletLandscape} {
         font-size: 16px;
+      }
+      ${breakpoint.tabletPortrait} {
+        font-size: 14px;
       }
     }
     ${SubServicesList} & {

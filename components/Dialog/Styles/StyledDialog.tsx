@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import * as RadixDialog from "@radix-ui/react-dialog";
-import { colors } from "../../../consts";
+import { colors } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
 
 export const StyledDialog = styled(RadixDialog.Root)``;

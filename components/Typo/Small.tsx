@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoint } from "../../consts";
+import { breakpoint } from "../../helpers/consts";
 import { TextBlock } from "../../pagestyles/StyledStudio";
 
 export const Small = styled.p`
@@ -15,5 +15,8 @@ export const Small = styled.p`
   }
   ${breakpoint.smallNotebook} {
     font-size: 18px;
+  }
+  ${breakpoint.tabletPortrait} {
+    font-size: 16px;
   }
 `;

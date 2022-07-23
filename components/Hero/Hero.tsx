@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Asset } from "../../generated/types";
+import { device } from "../../helpers/consts";
+import { useWindowSize } from "../../hooks/useWindowSize";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
 import Img from "../Img/Img";
@@ -27,6 +29,7 @@ interface HeroProps {
 
 const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
   const [openDialog, setOpenDialog] = useState(false);
+  const { w } = useWindowSize();
 
   return (
     <StyledHero>
@@ -53,7 +56,8 @@ const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
             height={asset.height}
             placeholder={`blur`}
             blurDataURL={asset.url}
-            layout={"responsive"}
+            objectFit={"cover"}
+            layout={w <= device.phone ? "fill" : "responsive"}
           />
         )}
       </HeroMedia>

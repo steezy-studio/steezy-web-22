@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakpoint } from "../helpers/consts";
 import u from "../helpers/unit";
 
 export const StyledProjects = styled.div``;
@@ -8,6 +9,10 @@ export const ProjectsHero = styled.div`
   display: flex;
   flex-direction: column;
   padding: ${({ theme }) => theme.pageMargin} 0;
+  ${breakpoint.tabletPortrait} {
+    height: auto;
+    padding: 20% 0;
+  }
 `;
 export const ProjectsHeroContent = styled.div`
   display: grid;

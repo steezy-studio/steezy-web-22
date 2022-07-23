@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoint } from "../../../consts";
+import { breakpoint } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
 import { StyledContact } from "../../../pagestyles/StyledContact";
 
@@ -11,7 +11,13 @@ export const StyledHero = styled.div`
   flex-direction: column;
   ${breakpoint.tabletLandscape} {
     min-height: unset;
-    /* min-height: 90vh; */
+  }
+  ${breakpoint.tabletPortrait} {
+    min-height: unset;
+  }
+  ${breakpoint.phone} {
+    min-height: 100vh;
+    padding-top: 70px;
   }
 `;
 
@@ -56,18 +62,35 @@ export const HeroText = styled.div`
   ${breakpoint.tabletLandscape} {
     top: 50%;
   }
+  ${breakpoint.tabletPortrait} {
+    width: ${({ theme }) => u(8, theme.pageMargin)};
+    position: static;
+    transform: unset;
+    margin-top: ${({ theme }) => u(-2, theme.pageMargin)};
+    order: 2;
+  }
+  ${breakpoint.phone} {
+    width: ${({ theme }) => u(15, theme.pageMargin)};
+  }
 `;
 
 export const HeroMedia = styled.div`
   width: ${({ theme }) => u(13, theme.pageMargin)};
   margin-left: auto;
   ${StyledContact} & {
-    /* width: ${({ theme }) => u(12, theme.pageMargin)};
-    justify-content: flex-end; */
+    width: ${({ theme }) => u(12, theme.pageMargin)};
+    margin-top: ${({ theme }) => u(2, theme.pageMargin)};
+    ${breakpoint.tabletPortrait} {
+      width: inherit;
+      /* margin-top: 0; */
+    }
   }
-  ${breakpoint.tabletLandscape} {
-    /* width: ${({ theme }) => u(16, theme.pageMargin)};
-    position: static; */
+  ${breakpoint.tabletPortrait} {
+    width: ${({ theme }) => u(16, theme.pageMargin)};
+    margin-left: unset;
+    order: 1;
+  }
+  ${breakpoint.phone} {
   }
 `;
 
@@ -84,9 +107,13 @@ export const HeroFooterChildren = styled.div`
     ${breakpoint.largeNotebook} {
       width: ${({ theme }) => u(5, theme.pageMargin)};
     }
+    ${breakpoint.tabletLandscape} {
+      width: ${({ theme }) => u(6, theme.pageMargin)};
+      left: unset;
+      right: ${({ theme }) => u(2, theme.pageMargin)};
+    }
   }
-  ${breakpoint.tabletLandscape} {
-    /* margin-top: ${({ theme }) => u(1, theme.pageMargin)}; */
-    /* margin-top: 30px; */
+  ${breakpoint.tabletPortrait} {
+    order: 3;
   }
 `;

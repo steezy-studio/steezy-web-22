@@ -1,5 +1,5 @@
 import "styled-components";
-import { Theme } from "./consts";
+import { Theme } from "./helpers/consts";
 
 declare module "styled-components" {
   export interface DefaultTheme {

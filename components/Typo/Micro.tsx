@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoint, colors } from "../../consts";
+import { breakpoint, colors } from "../../helpers/consts";
 import u from "../../helpers/unit";
 import { LandingpageHeroClients } from "../../pagestyles/StyledIndex";
 import { ProjectHeroRole } from "../../pagestyles/StyledProject";
@@ -95,6 +95,9 @@ export const Micro = styled.span`
   }
   ${LandingpageHeroClients} & {
     text-align: right;
+    ${breakpoint.phone} {
+      text-align: left;
+    }
   }
   ${ProjectHeroRole} & {
     ${breakpoint.smallNotebook} {

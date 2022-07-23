@@ -31,7 +31,7 @@ import Video from "../../components/Video/Video";
 import strings from "../../data/strings";
 import GridItem from "../../components/GridItem/GridItem";
 import Link from "../../components/Link/Link";
-import { allProjects } from "../../consts";
+import { allProjects } from "../../helpers/consts";
 
 interface ProjectProps {
   projectData: ProjectType;
@@ -81,7 +81,6 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                     if (img._type === "Video") {
                       return <Video key={img._id} src={img.cdn_files[0].url} />;
                     }
-                    console.log(img._type);
                     if (img._type === "Photo") {
                       return (
                         <Img

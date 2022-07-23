@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoint } from "../../../consts";
+import { breakpoint } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
 
 export const StyledFooter = styled.footer`
@@ -10,13 +10,16 @@ export const StyledFooter = styled.footer`
   ${breakpoint.tabletLandscape} {
     margin-bottom: 60px;
   }
+  ${breakpoint.phone} {
+    margin-top: ${({ theme }) => u(4, theme.pageMargin)};
+  }
 `;
 
 export const ContactInfo = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: ${({ theme }) => theme.pageMargin};
-  ${breakpoint.tabletPortrait} {
+  ${breakpoint.phone} {
     grid-template-columns: unset;
     grid-row-gap: 30px;
   }
@@ -28,4 +31,11 @@ export const DetailedContact = styled.div`
   justify-content: start;
   align-items: center;
   grid-gap: 60px;
+  ${breakpoint.tabletPortrait} {
+    grid-gap: 30px;
+    justify-content: end;
+  }
+  ${breakpoint.phone} {
+    justify-content: start;
+  }
 `;

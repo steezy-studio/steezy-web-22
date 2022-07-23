@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
-import { colors } from "../../consts";
+import { colors } from "../../helpers/consts";
 import { StyledBurger } from "./Styles/StyledBurger";
 
 interface BurgerProps {
@@ -10,15 +10,15 @@ interface BurgerProps {
 }
 
 const Line = (props) => (
-  <motion.line fill="none" stroke={colors.white} strokeWidth="2" {...props} />
+  <motion.line fill='none' stroke={colors.white} strokeWidth='2' {...props} />
 );
 
 const Burger = ({ onClick, isOpen }: BurgerProps) => {
   return (
     <StyledBurger onClick={onClick}>
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 45 45"
+        xmlns='http://www.w3.org/2000/svg'
+        viewBox='0 0 45 45'
         width={45}
         height={45}>
         <Line

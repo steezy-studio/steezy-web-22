@@ -10,6 +10,8 @@ import {
   StyledHeroVideo,
 } from "./Styles/StyledHeroVideo";
 import { useRatio } from "../../hooks/useRatio";
+import { useWindowSize } from "../../hooks/useWindowSize";
+import { device } from "../../helpers/consts";
 
 interface VideoProps {
   src: string;
@@ -21,6 +23,7 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
   const [cursor, setCursor] = useState({ coords: [0, 0], show: false });
   const videoRef = useRef<HTMLVideoElement>(null);
   const ratio = useRatio(videoRef);
+  const { w } = useWindowSize();
   useIntersectionVideoObserver(videoRef);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -58,7 +61,7 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
         }
         trigger={
           <StyledHeroVideo
-            ratio={ratio}
+            ratio={w < device.phone ? 5 / 4 : ratio}
             onMouseMove={handleMouseMove}
             onMouseLeave={() =>
               setCursor((prev) => ({ ...prev, show: false }))
