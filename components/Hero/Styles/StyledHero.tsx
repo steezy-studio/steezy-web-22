@@ -82,7 +82,9 @@ export const HeroMedia = styled.div`
     margin-top: ${({ theme }) => u(2, theme.pageMargin)};
     ${breakpoint.tabletPortrait} {
       width: inherit;
-      /* margin-top: 0; */
+    }
+    ${breakpoint.phone} {
+      margin-top: 0;
     }
   }
   ${breakpoint.tabletPortrait} {
@@ -111,6 +113,10 @@ export const HeroFooterChildren = styled.div`
       width: ${({ theme }) => u(6, theme.pageMargin)};
       left: unset;
       right: ${({ theme }) => u(2, theme.pageMargin)};
+    }
+    ${breakpoint.phone} {
+      position: static;
+      width: auto;
     }
   }
   ${breakpoint.tabletPortrait} {

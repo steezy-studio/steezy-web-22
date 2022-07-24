@@ -31,7 +31,8 @@ import Video from "../../components/Video/Video";
 import strings from "../../data/strings";
 import GridItem from "../../components/GridItem/GridItem";
 import Link from "../../components/Link/Link";
-import { allProjects } from "../../helpers/consts";
+import { allProjects, device } from "../../helpers/consts";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 interface ProjectProps {
   projectData: ProjectType;
@@ -39,6 +40,8 @@ interface ProjectProps {
 }
 
 const Project = ({ projectData, areas }: ProjectProps) => {
+  const { w } = useWindowSize();
+
   return (
     <>
       <Navbar
@@ -60,7 +63,14 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                   return (
                     <ProjectHeroRole key={i}>
                       <Micro>{fact.header}</Micro>
-                      <Micro className='lowcase'>{fact.content}</Micro>
+                      <Micro className='lowcase'>
+                        {w <= device.phone
+                          ? fact.content
+                              .trim()
+                              .split(`\r\n`)
+                              .join(`\u2002•\u2002`)
+                          : fact.content}
+                      </Micro>
                     </ProjectHeroRole>
                   );
                 }

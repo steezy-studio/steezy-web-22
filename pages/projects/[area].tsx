@@ -13,7 +13,7 @@ import { StyledLink } from "../../components/Link/Styles/StyledLink";
 import Navbar from "../../components/Navbar/Navbar";
 import { Large } from "../../components/Typo/Large";
 import { Medium } from "../../components/Typo/Medium";
-import { allProjects, projectsPerPage } from "../../helpers/consts";
+import { allProjects, device, projectsPerPage } from "../../helpers/consts";
 import { Areas, Projects as ProjectsType, Query } from "../../generated/types";
 import { GET_ALL_AREAS } from "../../graphql/GetAllAreas";
 import { GET_ALL_PROJECTS } from "../../graphql/GetAllProjects";
@@ -27,6 +27,9 @@ import {
   ProjectsHeroFilters,
   StyledProjects,
 } from "../../pagestyles/StyledProjects";
+import Head from "../../components/Head/Head";
+import strings from "../../data/strings";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 interface ProjectsProps {
   areas: Areas;
@@ -42,6 +45,7 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
   };
   const router = useRouter();
   const [projectsData, setProjectsData] = useState(initialState);
+  const { w } = useWindowSize();
 
   const [getProjects, { loading, error, data: newData }] = useLazyQuery(
     GET_PROJECTS,
@@ -104,6 +108,13 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
 
   return (
     <>
+      <Head
+        pageName={[
+          strings.projectsPage.head.pageName,
+          areas.items.find((area) => area._slug === router.query.area)
+            ?.area_name || allProjects.area_name,
+        ]}
+      />
       <Navbar
         areas={areas.items.map(({ area_name, _slug }) => ({
           highlighted: false,
@@ -147,7 +158,7 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                   { project_tags, project_grid_name, _slug, grid_image, _id },
                   i
                 ) => {
-                  if (i % 2 !== 0) {
+                  if (i % 2 !== 0 || w <= device.phone) {
                     return (
                       <ProjectsGridItem key={_id}>
                         <GridItem
@@ -165,37 +176,39 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                 }
               )}
             </ProjectsGridColumn>
-            <ProjectsGridColumn className='odd'>
-              {projectsData.data.map(
-                (
-                  { project_tags, project_grid_name, _slug, grid_image, _id },
-                  i
-                ) => {
-                  if (i % 2 === 0) {
-                    return (
-                      <ProjectsGridItem key={_id}>
-                        <GridItem
-                          type={"Photo"}
-                          areas={project_tags}
-                          height={grid_image?.[0].height}
-                          projectName={project_grid_name}
-                          slug={_slug}
-                          src={grid_image?.[0].url}
-                          width={grid_image?.[0].width}
-                        />
-                      </ProjectsGridItem>
-                    );
+            {w > device.phone && (
+              <ProjectsGridColumn className='odd'>
+                {projectsData.data.map(
+                  (
+                    { project_tags, project_grid_name, _slug, grid_image, _id },
+                    i
+                  ) => {
+                    if (i % 2 === 0) {
+                      return (
+                        <ProjectsGridItem key={_id}>
+                          <GridItem
+                            type={"Photo"}
+                            areas={project_tags}
+                            height={grid_image?.[0].height}
+                            projectName={project_grid_name}
+                            slug={_slug}
+                            src={grid_image?.[0].url}
+                            width={grid_image?.[0].width}
+                          />
+                        </ProjectsGridItem>
+                      );
+                    }
                   }
-                }
-              )}
-              {projectsData.hasMore && (
-                <Large>
-                  <StyledLink onClick={handleIndexInc}>
-                    more projects
-                  </StyledLink>
-                </Large>
-              )}
-            </ProjectsGridColumn>
+                )}
+                {projectsData.hasMore && (
+                  <Large>
+                    <StyledLink onClick={handleIndexInc}>
+                      more projects
+                    </StyledLink>
+                  </Large>
+                )}
+              </ProjectsGridColumn>
+            )}
           </ProjectsGrid>
         </StyledProjects>
       </Layout>

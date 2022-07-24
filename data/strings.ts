@@ -5,6 +5,7 @@ export default {
     other: "IČ: 07812558\nDIČ (VAT): CZ07812558",
   },
   contactPage: {
+    head: { pageName: "Contact" },
     hero: {
       subHeader:
         "Do you have an interesting story to tell?\nGet in touch right now.",
@@ -13,6 +14,7 @@ export default {
     },
   },
   studioPage: {
+    head: { pageName: "Studio" },
     hero: {
       subHeader:
         "Everything that looks beautiful, simple and intuitive on the outside requires a sh*t lot of time and effort, which cannot be seen at first glance.",
@@ -186,7 +188,11 @@ export default {
       },
     ],
   },
+  projectsPage: {
+    head: { pageName: "Projects" },
+  },
   landingPage: {
+    head: {},
     hero: {
       subHeader:
         "Steezy is a creative studio focused on a comprehensive solutionS for visual communication.",
@@ -235,6 +241,7 @@ export default {
     phone: "(+420) 728 088 996",
     nextImage: "next photo",
     nextProject: "next project",
+    allProjects: "all projects",
     backToProjects: "back to projects",
   },
   navData: [

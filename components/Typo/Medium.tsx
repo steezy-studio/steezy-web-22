@@ -50,6 +50,11 @@ export const Medium = styled.p`
     ${breakpoint.tabletLandscape} {
       width: ${({ theme }) => u(6, theme.pageMargin)};
     }
+    ${breakpoint.phone} {
+      width: ${({ theme }) => u(13, theme.pageMargin)};
+      visibility: hidden;
+      position: absolute;
+    }
   }
   ${ClientQuote} & {
     margin-bottom: 60px;

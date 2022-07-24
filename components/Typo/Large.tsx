@@ -61,6 +61,9 @@ export const Large = styled.h1`
     margin-bottom: ${({ theme }) => u(0.5, theme.pageMargin)};
     &.offset-x-1 {
       transform: translateX(${({ theme }) => u(-1, theme.pageMargin)});
+      ${breakpoint.phone} {
+        transform: unset;
+      }
     }
     &.offset-x-2 {
       margin-left: ${({ theme }) => u(1, theme.pageMargin, 30)};
@@ -85,6 +88,10 @@ export const Large = styled.h1`
     }
     ${breakpoint.tabletPortrait} {
       font-size: 35px;
+    }
+    ${breakpoint.phone} {
+      font-size: 28px;
+      margin-bottom: ${({ theme }) => u(1, theme.pageMargin)};
     }
   }
 `;

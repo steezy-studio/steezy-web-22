@@ -103,6 +103,9 @@ export const Micro = styled.span`
     ${breakpoint.smallNotebook} {
       line-height: 1.5em;
     }
+    ${breakpoint.phone} {
+      white-space: unset;
+    }
   }
   ${GridItemAreas} & {
     letter-spacing: 0.02em;

@@ -23,6 +23,8 @@ import {
   LandingPageHeroLogotype,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
+import Head from "../components/Head/Head";
+import { Fragment } from "react";
 
 interface indexProps {
   landingpageGrid: LandingpageGrids;
@@ -33,6 +35,7 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
 
   return (
     <>
+      <Head />
       <Navbar
         areas={areas.items.map(({ area_name, _slug }) => ({
           highlighted: false,
@@ -77,16 +80,16 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                 {landingpageStrings.intro.perex.map(({ type, body }, i) => {
                   const isText = type === `text`;
                   if (isText) {
-                    return body;
+                    return <Fragment key={i}>{body}</Fragment>;
                   }
                   if (type === `link`) {
                     return (
-                      <>
+                      <Fragment key={i}>
                         <Link href={`/projects/${allProjects._slug}`}>
                           {body}
                         </Link>
                         <br />
-                      </>
+                      </Fragment>
                     );
                   }
                 })}
@@ -140,7 +143,9 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
             <LandingpageGridRow>
               <div></div>
               <Large>
-                <Link href={`/projects/all-projects`}>all projects</Link>
+                <Link href={`/projects/all-projects`}>
+                  {strings.globals.allProjects}
+                </Link>
               </Large>
             </LandingpageGridRow>
           </LandingpageGrid>

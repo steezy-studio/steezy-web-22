@@ -67,7 +67,7 @@ export const ValuesInner = styled.div`
     grid-row-gap: 60px;
   }
   ${breakpoint.phone} {
-    grid-row-gap: 30px;
+    grid-row-gap: 20px;
   }
 `;
 
@@ -133,7 +133,7 @@ export const ServicesSection = styled.section`
   }
   ${breakpoint.tabletLandscape} {
     grid-template-columns: unset;
-    grid-row-gap: 30px;
+    grid-row-gap: 20px;
     width: 100%;
   }
 `;
@@ -149,11 +149,15 @@ export const ServicesList = styled.div`
   }
   ${breakpoint.phone} {
     grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: ${({ theme }) => u(2, theme.pageMargin)};
   }
 `;
 
 export const SubServicesList = styled.div`
   margin-top: 30px;
+  ${breakpoint.phone} {
+    margin-top: 10px;
+  }
 `;
 
 export const BlockquoteSection = styled.section``;
@@ -168,10 +172,24 @@ export const Blockquote = styled.div`
   &._2 {
     transform: translateY(${({ theme }) => u(-1, theme.pageMargin)});
   }
+  ${breakpoint.phone} {
+    grid-template-columns: unset;
+    &._2 {
+      grid-template-rows: auto;
+      grid-template-areas: "image" "quote";
+      transform: unset;
+      margin-top: 60px;
+    }
+    &._1 {
+      margin-top: 0;
+    }
+  }
 `;
 
 export const Quote = styled.div`
   white-space: pre-wrap;
+  position: relative;
+  z-index: 2;
   &.offset-y-1 {
     transform: translateY(-40%);
   }
@@ -183,6 +201,18 @@ export const Quote = styled.div`
     transform: translateY(40%);
     position: relative;
     z-index: 1;
+  }
+  ${breakpoint.phone} {
+    &.offset-y-1 {
+      transform: unset;
+    }
+    &.offset-y-2 {
+      transform: unset;
+    }
+    &.offset-y-3 {
+      transform: unset;
+      margin-bottom: 30px;
+    }
   }
 `;
 
@@ -197,7 +227,7 @@ export const BrandsSection = styled.section`
   }
   ${breakpoint.tabletPortrait} {
     grid-template-columns: unset;
-    grid-row-gap: 30px;
+    grid-row-gap: 20px;
   }
 `;
 
@@ -217,11 +247,18 @@ export const BrandsText = styled.div`
   ${breakpoint.tabletPortrait} {
     width: ${({ theme }) => u(10, theme.pageMargin)};
   }
+  ${breakpoint.phone} {
+    width: ${({ theme }) => u(15, theme.pageMargin)};
+    grid-row-gap: 20px;
+  }
 `;
 
 export const BrandsTextInner = styled.div`
   display: grid;
   grid-row-gap: 30px;
+  ${breakpoint.phone} {
+    grid-row-gap: 20px;
+  }
 `;
 
 export const Logotypes = styled.div`
@@ -233,10 +270,22 @@ export const Logotypes = styled.div`
   ${breakpoint.tabletPortrait} {
     grid-template-columns: repeat(7, 1fr);
   }
+  ${breakpoint.phone} {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 export const Logo = styled.img`
   width: 100%;
+  ${breakpoint.phone} {
+    &:nth-child(n + 16) {
+      display: none;
+    }
+  }
 `;
 
-export const Outro = styled.div``;
+export const Outro = styled.div`
+  ${breakpoint.phone} {
+    margin-top: ${({ theme }) => u(2, theme.pageMargin)};
+  }
+`;

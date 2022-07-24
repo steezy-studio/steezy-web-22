@@ -1,0 +1,26 @@
+{
+  "short_name": "STEEZY",
+  "name": "STEEZY Studio",
+  "icons": [
+    {
+      "src": "/icon-128.png",
+      "type": "image/png",
+      "sizes": "128x128"
+    },
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#f5ede5",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "#f5ede5"
+}

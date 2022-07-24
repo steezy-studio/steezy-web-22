@@ -1,4 +1,9 @@
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  AnimateSharedLayout,
+  LayoutGroup,
+} from "framer-motion";
 import { ImageProps } from "next/image";
 import React, { useState } from "react";
 import { useTheme } from "styled-components";
@@ -41,47 +46,39 @@ const makeRangeArray = (max: number) => {
 };
 
 const ImageSlider = ({ imgList }: ImageSliderProps) => {
+  const [activeImages, setActiveImages] = useState(imgList);
   const [index, setIndex] = useState(0);
-  const imgsLength = imgList.length;
-  const range = makeRangeArray(imgsLength);
-  const itemsToDisplay = 3;
-  const [visibleImages, setVisibleImages] = useState(
-    range.slice(0, itemsToDisplay)
-  );
-  const theme = useTheme();
+  const totalImages = imgList.length;
 
   React.useEffect(() => {
-    const firstIndex = wrap(0, imgsLength, index);
-    const secondIndex = wrap(0, imgsLength, index + 1);
-    const thirdIndex = wrap(0, imgsLength, index + 2);
-
-    setVisibleImages((prev) => {
-      return [...prev, firstIndex];
-    });
+    const first = wrap(0, totalImages, index);
+    const second = wrap(0, totalImages, index + 1);
+    const third = wrap(0, totalImages, index + 2);
+    const fourth = wrap(0, totalImages, index + 3);
+    setActiveImages([
+      imgList[first],
+      imgList[second],
+      imgList[third],
+      imgList[fourth],
+    ]);
   }, [index]);
 
   const handleClick = () => {
-    setIndex((i) => i + 1);
+    setIndex((prev) => prev + 1);
   };
 
   return (
     <StyledImageSlider>
-      <ImageSliderInner
-        animate={{ x: `${u(-1 * index * (8 - 15 / 16), theme.pageMargin)}` }}
-        drag='x'
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={1}
-        onDragEnd={(e, { offset, velocity }) => {
-          const swipe = swipePower(offset.x, velocity.x);
-          handleClick();
-          if (swipe < -swipeConfidenceThreshold) {
-          }
-        }}>
-        {visibleImages.map((i, order) => (
-          <div key={order}>
-            <Img {...imgList[i]} />
-          </div>
-        ))}
+      <ImageSliderInner>
+        <AnimatePresence exitBeforeEnter>
+          {activeImages.map((image, order) => (
+            <motion.div
+              key={String(order) + String(index)}
+              exit={{ x: `-100%` }}>
+              <Img {...image} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </ImageSliderInner>
       <Large>
         <StyledLink onClick={handleClick}>

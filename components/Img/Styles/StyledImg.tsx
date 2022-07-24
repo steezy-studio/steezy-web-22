@@ -6,7 +6,7 @@ import {
   ClientQuote,
   ProjectHeroFooter,
 } from "../../../pagestyles/StyledProject";
-import { ValuesSection } from "../../../pagestyles/StyledStudio";
+import { Outro, ValuesSection } from "../../../pagestyles/StyledStudio";
 import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
 import { HeroMedia } from "../../Hero/Styles/StyledHero";
 import { StyledImageSlider } from "../../ImageSlider/Styles/StyledImageSlider";
@@ -22,6 +22,11 @@ export const StyledImg = styled.div`
     align-self: start;
     ${breakpoint.tabletLandscape} {
       justify-self: end;
+    }
+    ${breakpoint.phone} {
+      min-width: 80px;
+      max-width: 100px;
+      justify-self: start;
     }
   }
   ${HeroMedia} & {
@@ -50,6 +55,12 @@ export const StyledImg = styled.div`
     ${breakpoint.tabletPortrait} {
       width: 100px;
       height: 100px;
+    }
+  }
+  ${Outro} & {
+    ${breakpoint.phone} {
+      position: relative;
+      padding-bottom: 100%;
     }
   }
 `;

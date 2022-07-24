@@ -1,5 +1,6 @@
 import { GetStaticProps } from "next";
 import client from "../apollo/client";
+import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
 import ImageSlider from "../components/ImageSlider/ImageSlider";
 import Img from "../components/Img/Img";
@@ -13,6 +14,8 @@ import { Small } from "../components/Typo/Small";
 import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
+import { device } from "../helpers/consts";
+import { useWindowSize } from "../hooks/useWindowSize";
 import {
   Blockquote,
   BlockquoteSection,
@@ -42,8 +45,10 @@ interface StudioProps {
 
 const Studio = ({ areas }: StudioProps) => {
   const studioStrings = strings.studioPage;
+  const { w } = useWindowSize();
   return (
     <>
+      <Head pageName={studioStrings.head.pageName} />
       <Navbar
         areas={areas?.items.map(({ area_name, _slug }) => ({
           highlighted: false,
@@ -115,7 +120,7 @@ const Studio = ({ areas }: StudioProps) => {
             <Micro className='with-dash'>{studioStrings.services.header}</Micro>
             <ServicesList>
               {areas.items.map(({ sub_areas, area_name, _slug }) => (
-                <div key={area_name}>
+                <div key={_slug}>
                   <Medium className='big'>
                     <Link href={`/projects/${_slug}`}>{area_name}</Link>
                   </Medium>
@@ -147,12 +152,12 @@ const Studio = ({ areas }: StudioProps) => {
               </Quote>
             </Blockquote>
             <Blockquote className='_2'>
-              <Quote className='offset-y-2'>
+              <Quote className='offset-y-2' style={{ gridArea: "quote" }}>
                 <Large className='offset-x-2'>
                   {studioStrings.blockquotes[1].quote}
                 </Large>
                 <Micro className='with-dash dash-margin'>
-                  {studioStrings.blockquotes[1].name}{" "}
+                  {studioStrings.blockquotes[1].name}
                 </Micro>
                 <Micro className='lowcase dash-margin'>
                   {studioStrings.blockquotes[1].position}
@@ -163,6 +168,7 @@ const Studio = ({ areas }: StudioProps) => {
                 width={1200}
                 height={1200}
                 layout={"intrinsic"}
+                style={{ gridArea: "image" }}
               />
             </Blockquote>
           </BlockquoteSection>
@@ -198,7 +204,8 @@ const Studio = ({ areas }: StudioProps) => {
               src={`/images/blockquote-03.jpg`}
               width={2450}
               height={1300}
-              layout={`responsive`}
+              objectFit={"cover"}
+              layout={w <= device.phone ? `fill` : `responsive`}
             />
           </Outro>
         </StyledStudio>
