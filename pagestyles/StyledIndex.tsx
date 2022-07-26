@@ -8,7 +8,7 @@ export const LandingHeroPageLogotypes = styled.div`
   display: grid;
   grid-auto-flow: column;
   align-items: center;
-  grid-gap: 60px;
+  grid-gap: 40px;
   ${breakpoint.smallNotebook} {
     grid-gap: 20px;
   }
@@ -18,7 +18,7 @@ export const LandingHeroPageLogotypes = styled.div`
 `;
 
 export const LandingPageHeroLogotype = styled.img`
-  height: 70px;
+  height: 60px;
   ${breakpoint.smallNotebook} {
     height: 40px;
   }

@@ -33,13 +33,12 @@ export const NavLinks = styled(motion.div)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding-right: 60px;
+  padding-right: ${({ theme }) => u(1, theme.pageMargin)};
   ${breakpoint.largeNotebook} {
     padding-right: 0;
     justify-content: center;
   }
   ${breakpoint.helperLargeNotebook} {
-    padding-right: 30px;
     justify-content: flex-end;
   }
   ${breakpoint.tabletLandscape} {
@@ -54,6 +53,5 @@ export const NavLinks = styled(motion.div)`
     width: auto;
     background-color: ${colors.primary300};
     border: 1px solid ${colors.black};
-    /* margin: -1px; */
   }
 `;

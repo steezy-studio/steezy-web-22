@@ -162,12 +162,16 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                     return (
                       <ProjectsGridItem key={_id}>
                         <GridItem
-                          type={"Photo"}
+                          type={grid_image[0]._type}
                           areas={project_tags}
                           height={grid_image?.[0].height}
                           projectName={project_grid_name}
                           slug={_slug}
-                          src={grid_image?.[0].url}
+                          src={
+                            grid_image[0]._type === "Video"
+                              ? grid_image[0].cdn_files[0].url
+                              : grid_image[0].url
+                          }
                           width={grid_image?.[0].width}
                         />
                       </ProjectsGridItem>
@@ -187,7 +191,7 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                       return (
                         <ProjectsGridItem key={_id}>
                           <GridItem
-                            type={"Photo"}
+                            type={grid_image[0]._type}
                             areas={project_tags}
                             height={grid_image?.[0].height}
                             projectName={project_grid_name}

@@ -3,17 +3,14 @@ import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
 
-export const StyledHeroVideo = styled.div<{ ratio: number }>`
+export const StyledHeroVideo = styled.div<{ ratio?: number }>`
   position: relative;
-  padding-bottom: ${({ ratio }) => ratio * 100}%;
 `;
 
 export const Loop = styled.video`
   width: 100%;
   height: 100%;
   cursor: none;
-  position: absolute;
-  inset: 0;
   object-fit: contain;
   ${breakpoint.phone} {
     object-fit: cover;

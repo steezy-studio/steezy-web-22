@@ -17,7 +17,7 @@ export const projectsPerPage = 12;
 export const device = {
   phone: 600,
   tabletPortrait: 1024,
-  tabletLandscape: 1366,
+  tabletLandscape: 1200,
   smallNotebook: 1440,
   largeNotebook: 1920,
   monitor: 2500,

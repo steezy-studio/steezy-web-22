@@ -5,6 +5,7 @@ import { StyledContact } from "../../pagestyles/StyledContact";
 import { Intro } from "../../pagestyles/StyledIndex";
 import { ProjectsHeroFilters } from "../../pagestyles/StyledProjects";
 import { Quote } from "../../pagestyles/StyledStudio";
+import { HeroText } from "../Hero/Styles/StyledHero";
 import { StyledImageSlider } from "../ImageSlider/Styles/StyledImageSlider";
 
 export const Large = styled.h1`
@@ -29,6 +30,9 @@ export const Large = styled.h1`
   }
   ${breakpoint.phone} {
     font-size: 40px;
+  }
+  ${HeroText} & {
+    white-space: pre-wrap;
   }
   ${StyledContact} & {
     line-height: 1.2em;

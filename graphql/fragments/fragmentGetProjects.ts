@@ -6,10 +6,14 @@ export const GET_PROJECTS = gql`
       _id
       _slug
       grid_image {
+        _type
         url(format: "webp")
         width
         height
         description
+        cdn_files {
+          url
+        }
       }
       project_grid_name
       project_tags {

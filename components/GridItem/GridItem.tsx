@@ -48,8 +48,11 @@ const GridItem = ({
 
   React.useEffect(() => {
     if (videoRef.current) {
+      console.dir(videoRef.current);
+
       setVideoAspect(
-        videoRef.current.videoHeight / videoRef.current.videoWidth
+        // videoRef.current.innerHeight / videoRef.current.videoWidth
+        0
       );
     }
   }, []);
@@ -86,7 +89,9 @@ const GridItem = ({
           />
         )}
         {type === "Video" && (
-          <VideoWrapper style={{ paddingBottom: `${videoAspect * 100}%` }}>
+          <VideoWrapper
+          // style={{ paddingBottom: `${videoAspect * 100}%` }}
+          >
             <GridItemVideo
               ref={videoRef}
               src={src}
