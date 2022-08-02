@@ -103,8 +103,9 @@ export const HeroFooterChildren = styled.div`
   width: 100%;
   ${StyledContact} & {
     position: absolute;
+    z-index: 100;
     top: ${({ theme }) => u(1, theme.pageMargin)};
-    left: ${({ theme }) => u(4, theme.pageMargin, theme.pageMargin)};
+    left: ${({ theme }) => u(7, theme.pageMargin, theme.pageMargin)};
     width: ${({ theme }) => u(4, theme.pageMargin)};
     ${breakpoint.largeNotebook} {
       width: ${({ theme }) => u(5, theme.pageMargin)};

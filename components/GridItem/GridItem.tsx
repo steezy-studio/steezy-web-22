@@ -18,7 +18,11 @@ import {
   GridItemVideo,
   VideoWrapper,
 } from "./Styles/StyledGridItem";
-import { useIntersectionVideoObserver } from "../../hooks/useIntersectionVideoObserver";
+import {
+  useIntersectionObserver,
+  videoCallback,
+} from "../../hooks/useIntersectionVideoObserver";
+import Animation from "../Animation/Animation";
 
 interface GridItemProps {
   src: string;
@@ -44,12 +48,12 @@ const GridItem = ({
   const [hover, sethover] = useState(false);
   const [videoAspect, setVideoAspect] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
-  useIntersectionVideoObserver(videoRef);
+  useIntersectionObserver(videoRef, (entries) =>
+    videoCallback(entries, videoRef)
+  );
 
   React.useEffect(() => {
     if (videoRef.current) {
-      console.dir(videoRef.current);
-
       setVideoAspect(
         // videoRef.current.innerHeight / videoRef.current.videoWidth
         0
@@ -72,48 +76,50 @@ const GridItem = ({
   };
 
   return (
-    <StyledGridItem
-      href={`/project/${slug}`}
-      onMouseEnter={() => sethover(true)}
-      onMouseLeave={() => sethover(false)}>
-      <GridItemCoverWrapper>
-        {type === "Photo" && (
-          <Img
-            src={src}
-            width={width}
-            placeholder={`blur`}
-            blurDataURL={src}
-            height={height}
-            layout={`responsive`}
-            style={{ transform: `scale(${hover ? 1.05 : 1})` }}
-          />
-        )}
-        {type === "Video" && (
-          <VideoWrapper
-          // style={{ paddingBottom: `${videoAspect * 100}%` }}
-          >
-            <GridItemVideo
-              ref={videoRef}
+    <Animation type={"fadeFromBottom"}>
+      <StyledGridItem
+        href={`/project/${slug}`}
+        onMouseEnter={() => sethover(true)}
+        onMouseLeave={() => sethover(false)}>
+        <GridItemCoverWrapper>
+          {type === "Photo" && (
+            <Img
               src={src}
-              poster={videoThumb}
-              autoPlay={true}
-              playsInline={true}
-              muted={true}
-              loop={true}
+              width={width}
+              placeholder={`blur`}
+              blurDataURL={src}
+              height={height}
+              layout={`responsive`}
               style={{ transform: `scale(${hover ? 1.05 : 1})` }}
             />
-          </VideoWrapper>
-        )}
-      </GridItemCoverWrapper>
-      <GridItemAreas>
-        {areas.map(({ area_name, _slug }) => (
-          <Micro key={_slug} className='lowcase'>
-            {area_name}
-          </Micro>
-        ))}
-      </GridItemAreas>
-      <GridItemHeader>{parse(projectName, options)}</GridItemHeader>
-    </StyledGridItem>
+          )}
+          {type === "Video" && (
+            <VideoWrapper
+            // style={{ paddingBottom: `${videoAspect * 100}%` }}
+            >
+              <GridItemVideo
+                ref={videoRef}
+                src={src}
+                poster={videoThumb}
+                autoPlay={true}
+                playsInline={true}
+                muted={true}
+                loop={true}
+                style={{ transform: `scale(${hover ? 1.05 : 1})` }}
+              />
+            </VideoWrapper>
+          )}
+        </GridItemCoverWrapper>
+        <GridItemAreas>
+          {areas.map(({ area_name, _slug }) => (
+            <Micro key={_slug} className='lowcase'>
+              {area_name}
+            </Micro>
+          ))}
+        </GridItemAreas>
+        <GridItemHeader>{parse(projectName, options)}</GridItemHeader>
+      </StyledGridItem>
+    </Animation>
   );
 };
 

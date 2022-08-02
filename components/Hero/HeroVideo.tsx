@@ -1,17 +1,15 @@
-import { open } from "fs";
-import React, { useEffect, useRef, useState } from "react";
-import { useIntersectionVideoObserver } from "../../hooks/useIntersectionVideoObserver";
+import React, { useRef, useState } from "react";
+import {
+  useIntersectionObserver,
+  videoCallback,
+} from "../../hooks/useIntersectionVideoObserver";
 import Dialog from "../Dialog/Dialog";
-import { Micro } from "../Typo/Micro";
 import {
   Cursor,
   Loop,
   Showreel,
   StyledHeroVideo,
 } from "./Styles/StyledHeroVideo";
-import { useRatio } from "../../hooks/useRatio";
-import { useWindowSize } from "../../hooks/useWindowSize";
-import { device } from "../../helpers/consts";
 
 interface VideoProps {
   src: string;
@@ -22,7 +20,9 @@ interface VideoProps {
 const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
   const [cursor, setCursor] = useState({ coords: [0, 0], show: false });
   const videoRef = useRef<HTMLVideoElement>(null);
-  useIntersectionVideoObserver(videoRef);
+  useIntersectionObserver(videoRef, (entries) =>
+    videoCallback(entries, videoRef)
+  );
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const boundingBox = e.currentTarget.getBoundingClientRect();

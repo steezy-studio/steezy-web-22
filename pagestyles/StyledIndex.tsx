@@ -86,7 +86,7 @@ export const GridItemWrapper = styled.div`
 export const Intro = styled.div`
   width: ${({ theme }) => u(6, theme.pageMargin)};
   margin-left: ${({ theme }) => u(4, theme.pageMargin)};
-  transform: translateY(${({ theme }) => u(1.75, theme.pageMargin)});
+  transform: translateY(${({ theme }) => u(2, theme.pageMargin)});
   position: relative;
   z-index: 2;
   display: grid;

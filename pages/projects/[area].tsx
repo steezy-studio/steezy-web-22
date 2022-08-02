@@ -7,7 +7,6 @@ import GridItem from "../../components/GridItem/GridItem";
 import { HeroSocials } from "../../components/Hero/Styles/StyledHero";
 import Instagram from "../../components/Icons/Instagram";
 import Vimeo from "../../components/Icons/Vimeo";
-import Layout from "../../components/Layout/Layout";
 import Link from "../../components/Link/Link";
 import { StyledLink } from "../../components/Link/Styles/StyledLink";
 import Navbar from "../../components/Navbar/Navbar";
@@ -30,6 +29,7 @@ import {
 import Head from "../../components/Head/Head";
 import strings from "../../data/strings";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import Layout from "../../components/Layout/Layout";
 
 interface ProjectsProps {
   areas: Areas;
@@ -122,43 +122,72 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
           name: area_name,
         }))}
       />
-      <Layout>
-        <StyledProjects>
-          <ProjectsHero>
-            <ProjectsHeroContent>
-              <ProjectsHeroFilters>
-                {[allProjects, ...areas.items].map(({ area_name, _slug }) => {
-                  const isActive = router.query.area === _slug;
+
+      <StyledProjects>
+        <ProjectsHero>
+          <ProjectsHeroContent>
+            <ProjectsHeroFilters>
+              {[allProjects, ...areas.items].map(({ area_name, _slug }) => {
+                const isActive = router.query.area === _slug;
+                return (
+                  <Large key={_slug}>
+                    <Link
+                      shallow
+                      href={`/projects/${_slug}`}
+                      className={`${isActive ? "active" : ""}`}>
+                      {area_name}
+                    </Link>
+                  </Large>
+                );
+              })}
+            </ProjectsHeroFilters>
+            <Medium>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget
+              arcu mollis, faucibus erat eget, sollicitudin leo.
+            </Medium>
+          </ProjectsHeroContent>
+          <HeroSocials>
+            <Instagram />
+            <Vimeo />
+          </HeroSocials>
+        </ProjectsHero>
+        <ProjectsGrid>
+          <ProjectsGridColumn className='even'>
+            {projectsData.data.map(
+              (
+                { project_tags, project_grid_name, _slug, grid_image, _id },
+                i
+              ) => {
+                if (i % 2 !== 0 || w <= device.phone) {
                   return (
-                    <Large key={_slug}>
-                      <Link
-                        shallow
-                        href={`/projects/${_slug}`}
-                        className={`${isActive ? "active" : ""}`}>
-                        {area_name}
-                      </Link>
-                    </Large>
+                    <ProjectsGridItem key={_id}>
+                      <GridItem
+                        type={grid_image[0]._type}
+                        areas={project_tags}
+                        height={grid_image?.[0].height}
+                        projectName={project_grid_name}
+                        slug={_slug}
+                        src={
+                          grid_image[0]._type === "Video"
+                            ? grid_image[0].cdn_files[0].url
+                            : grid_image[0].url
+                        }
+                        width={grid_image?.[0].width}
+                      />
+                    </ProjectsGridItem>
                   );
-                })}
-              </ProjectsHeroFilters>
-              <Medium>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                eget arcu mollis, faucibus erat eget, sollicitudin leo.
-              </Medium>
-            </ProjectsHeroContent>
-            <HeroSocials>
-              <Instagram />
-              <Vimeo />
-            </HeroSocials>
-          </ProjectsHero>
-          <ProjectsGrid>
-            <ProjectsGridColumn className='even'>
+                }
+              }
+            )}
+          </ProjectsGridColumn>
+          {w > device.phone && (
+            <ProjectsGridColumn className='odd'>
               {projectsData.data.map(
                 (
                   { project_tags, project_grid_name, _slug, grid_image, _id },
                   i
                 ) => {
-                  if (i % 2 !== 0 || w <= device.phone) {
+                  if (i % 2 === 0) {
                     return (
                       <ProjectsGridItem key={_id}>
                         <GridItem
@@ -167,11 +196,7 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                           height={grid_image?.[0].height}
                           projectName={project_grid_name}
                           slug={_slug}
-                          src={
-                            grid_image[0]._type === "Video"
-                              ? grid_image[0].cdn_files[0].url
-                              : grid_image[0].url
-                          }
+                          src={grid_image?.[0].url}
                           width={grid_image?.[0].width}
                         />
                       </ProjectsGridItem>
@@ -179,43 +204,17 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                   }
                 }
               )}
+              {projectsData.hasMore && (
+                <Large>
+                  <StyledLink onClick={handleIndexInc}>
+                    more projects
+                  </StyledLink>
+                </Large>
+              )}
             </ProjectsGridColumn>
-            {w > device.phone && (
-              <ProjectsGridColumn className='odd'>
-                {projectsData.data.map(
-                  (
-                    { project_tags, project_grid_name, _slug, grid_image, _id },
-                    i
-                  ) => {
-                    if (i % 2 === 0) {
-                      return (
-                        <ProjectsGridItem key={_id}>
-                          <GridItem
-                            type={grid_image[0]._type}
-                            areas={project_tags}
-                            height={grid_image?.[0].height}
-                            projectName={project_grid_name}
-                            slug={_slug}
-                            src={grid_image?.[0].url}
-                            width={grid_image?.[0].width}
-                          />
-                        </ProjectsGridItem>
-                      );
-                    }
-                  }
-                )}
-                {projectsData.hasMore && (
-                  <Large>
-                    <StyledLink onClick={handleIndexInc}>
-                      more projects
-                    </StyledLink>
-                  </Large>
-                )}
-              </ProjectsGridColumn>
-            )}
-          </ProjectsGrid>
-        </StyledProjects>
-      </Layout>
+          )}
+        </ProjectsGrid>
+      </StyledProjects>
     </>
   );
 };

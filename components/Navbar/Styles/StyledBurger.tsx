@@ -13,7 +13,7 @@ export const StyledBurger = styled.div`
   width: 80px;
   height: 100%;
   flex-shrink: 0;
-  z-index: 999;
+  z-index: 9999999;
   padding: 15px;
   svg {
     width: 100%;

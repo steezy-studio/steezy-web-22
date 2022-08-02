@@ -17,8 +17,8 @@ export const StyledImg = styled.div`
   }
   ${ProjectHeroFooter} & {
     height: auto;
-    min-width: 150px;
-    max-width: 200px;
+    min-width: 50px;
+    max-width: 80px;
     align-self: start;
     ${breakpoint.tabletLandscape} {
       justify-self: end;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Asset } from "../../generated/types";
 import { device } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import Animation from "../Animation/Animation";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
 import Img from "../Img/Img";
@@ -33,35 +34,45 @@ const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
 
   return (
     <StyledHero>
-      <HeroText>
-        {subHeader && <Micro className='sub-header'>{subHeader}</Micro>}
-        <Large>{header(openDialog, setOpenDialog)}</Large>
-        {perex && <Micro className={`perex`}>{perex}</Micro>}
-      </HeroText>
+      <Animation type={"fadeFromBottom"} delay={0.7} style={{ zIndex: 100 }}>
+        <HeroText>
+          {subHeader && <Micro className='sub-header'>{subHeader}</Micro>}
+          <Large data-scroll data-scroll-speed='2'>
+            {header(openDialog, setOpenDialog)}
+          </Large>
+          {perex && (
+            <Micro data-scroll data-scroll-speed='1' className={`perex`}>
+              {perex}
+            </Micro>
+          )}
+        </HeroText>
+      </Animation>
       <HeroSocials>
         <Instagram />
         <Vimeo />
       </HeroSocials>
-      <HeroMedia>
-        {asset._type === "Video" ? (
-          <HeroVideo
-            src={asset.url}
-            open={openDialog}
-            onOpenChange={() => setOpenDialog((prev) => !prev)}
-          />
-        ) : (
-          <Img
-            src={asset.url}
-            width={asset.width}
-            height={asset.height}
-            placeholder={`blur`}
-            blurDataURL={asset.url}
-            objectFit={"cover"}
-            layout={w <= device.phone ? "fill" : "responsive"}
-          />
-        )}
-      </HeroMedia>
-      {children && <HeroFooterChildren>{children}</HeroFooterChildren>}
+      <Animation type={"fadeIn"} delay={0.3} style={{ zIndex: 99 }}>
+        <HeroMedia>
+          {asset._type === "Video" ? (
+            <HeroVideo
+              src={asset.url}
+              open={openDialog}
+              onOpenChange={() => setOpenDialog((prev) => !prev)}
+            />
+          ) : (
+            <Img
+              src={asset.url}
+              width={asset.width}
+              height={asset.height}
+              placeholder={`blur`}
+              blurDataURL={asset.url}
+              objectFit={"cover"}
+              layout={w <= device.phone ? "fill" : "responsive"}
+            />
+          )}
+        </HeroMedia>
+        {children && <HeroFooterChildren>{children}</HeroFooterChildren>}
+      </Animation>
     </StyledHero>
   );
 };

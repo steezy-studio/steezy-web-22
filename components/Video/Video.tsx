@@ -1,6 +1,9 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
-import { useIntersectionVideoObserver } from "../../hooks/useIntersectionVideoObserver";
+import {
+  useIntersectionObserver,
+  videoCallback,
+} from "../../hooks/useIntersectionVideoObserver";
 
 interface VideoProps
   extends React.DetailedHTMLProps<
@@ -14,7 +17,7 @@ const StyledVideo = styled.video`
 
 const Video = ({ src }: VideoProps) => {
   const ref = useRef(null);
-  useIntersectionVideoObserver(ref);
+  useIntersectionObserver(ref, (entries) => videoCallback(entries, ref));
   return <StyledVideo ref={ref} src={src} autoPlay playsInline muted loop />;
 };
 
