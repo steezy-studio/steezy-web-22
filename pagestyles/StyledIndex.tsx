@@ -48,6 +48,7 @@ export const LandingpageGrid = styled.div`
   grid-gap: ${({ theme }) => `calc(4 * ${theme.pageMargin})`};
   ${breakpoint.phone} {
     grid-gap: ${({ theme }) => `calc(2 * ${theme.pageMargin})`};
+    margin-top: ${({ theme }) => u(3, theme.pageMargin)};
   }
 `;
 
@@ -100,6 +101,7 @@ export const Intro = styled.div`
     width: ${({ theme }) => u(8, theme.pageMargin)};
   }
   ${breakpoint.phone} {
+    display: none;
     transform: unset;
     grid-gap: 30px;
     margin: ${({ theme }) => u(3, theme.pageMargin)} 0;

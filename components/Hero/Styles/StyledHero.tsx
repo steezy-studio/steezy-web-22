@@ -67,7 +67,7 @@ export const HeroText = styled(motion.div)`
     width: ${({ theme }) => u(8, theme.pageMargin)};
     position: static;
     transform: unset;
-    margin-top: ${({ theme }) => u(-2, theme.pageMargin)};
+    margin-top: ${({ theme }) => u(1, theme.pageMargin)};
     order: 2;
   }
   ${breakpoint.phone} {

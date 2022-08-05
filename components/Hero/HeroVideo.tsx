@@ -19,27 +19,10 @@ interface VideoProps {
 }
 
 const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
-  const [cursor, setCursor] = useState({ coords: [0, 0], show: false });
   const videoRef = useRef<HTMLVideoElement>(null);
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
   );
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const boundingBox = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - boundingBox.x;
-    const y = e.clientY - boundingBox.y;
-    const padding = 40;
-
-    setCursor((prev) => ({
-      show:
-        x >= padding &&
-        videoRef.current.clientWidth - padding >= x &&
-        y >= padding &&
-        videoRef.current.clientHeight - padding >= y,
-      coords: [x, y],
-    }));
-  };
 
   return (
     <>
@@ -52,11 +35,7 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
           </Showreel>
         }
         trigger={
-          <StyledHeroVideo
-            onMouseMove={handleMouseMove}
-            onMouseLeave={() =>
-              setCursor((prev) => ({ ...prev, show: false }))
-            }>
+          <StyledHeroVideo>
             <PlayButton />
             <Loop
               whileHover={{ scale: 1.15 }}

@@ -6,6 +6,9 @@ import u from "../../../helpers/unit";
 export const StyledHeroVideo = styled.div<{ ratio?: number }>`
   position: relative;
   overflow: hidden;
+  ${breakpoint.phone} {
+    padding-bottom: ${(5 / 4) * 100}%;
+  }
 `;
 
 export const Loop = styled(motion.video)`
@@ -15,6 +18,12 @@ export const Loop = styled(motion.video)`
   cursor: pointer;
   ${breakpoint.phone} {
     object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* height: 60vh; */
   }
 `;
 
@@ -22,14 +31,6 @@ export const Showreel = styled.div`
   position: relative;
   width: 80vw;
   max-height: 80vh;
-  padding-bottom: 56.25%;
-  video {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
 `;
 
 export const PlayButton = styled.div`
@@ -54,5 +55,10 @@ export const PlayButton = styled.div`
   ${breakpoint.largeNotebook} {
     width: 70px;
     height: 70px;
+    padding: 10px;
+  }
+  ${breakpoint.phone} {
+    width: 40px;
+    height: 40px;
   }
 `;

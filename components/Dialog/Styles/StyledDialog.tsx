@@ -1,6 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import * as RadixDialog from "@radix-ui/react-dialog";
-import { colors } from "../../../helpers/consts";
+import { breakpoint, colors } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
 
 export const StyledDialog = styled(RadixDialog.Root)``;
@@ -21,7 +21,7 @@ export const Content = styled(RadixDialog.Content)`
   top: 50%;
   left: 50%;
   background-color: ${colors.black};
-  z-index: 999;
+  z-index: 99999999999;
   animation: ${contentShow} 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 `;
 
@@ -35,6 +35,31 @@ export const Close = styled(RadixDialog.Close)`
   top: -80px;
   border: 0;
   cursor: pointer;
+  padding: 5px;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  ${breakpoint.largeNotebook} {
+    height: 70px;
+    width: 70px;
+    top: -70px;
+  }
+  ${breakpoint.smallNotebook} {
+    height: 60px;
+    width: 60px;
+    top: -60px;
+  }
+  ${breakpoint.tabletLandscape} {
+    height: 50px;
+    width: 50px;
+    top: -50px;
+  }
+  ${breakpoint.phone} {
+    height: 40px;
+    width: 40px;
+    top: -40px;
+  }
 `;
 
 export const Trigger = styled(RadixDialog.Trigger)`
@@ -52,7 +77,7 @@ export const Overlay = styled(RadixDialog.Overlay)`
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 998;
+  z-index: 99999999998;
   cursor: pointer;
   animation: ${overlayShow} 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 `;
