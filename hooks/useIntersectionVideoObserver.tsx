@@ -11,7 +11,7 @@ export function useIntersectionObserver(
       observer.observe(videoRef.current);
       return () => observer.disconnect();
     }
-  }, []);
+  }, [videoRef.current]);
 }
 
 export const videoCallback = (
@@ -19,6 +19,7 @@ export const videoCallback = (
   videoRef: React.MutableRefObject<HTMLVideoElement>
 ) => {
   entries.forEach((entry) => {
+    if (!videoRef.current) return;
     entry.isIntersecting ? videoRef.current.play() : videoRef.current.pause();
   });
 };

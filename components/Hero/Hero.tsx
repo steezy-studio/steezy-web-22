@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import { motion } from "framer-motion";
+import React, { Fragment, useState } from "react";
 import { Asset } from "../../generated/types";
 import { device } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import Animation from "../Animation/Animation";
+import Fixed from "../Fixed/Fixed";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
 import Img from "../Img/Img";
@@ -41,16 +43,13 @@ const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
             {header(openDialog, setOpenDialog)}
           </Large>
           {perex && (
-            <Micro data-scroll data-scroll-speed='1' className={`perex`}>
+            <Micro data-scroll data-scroll-speed='1.5' className={`perex`}>
               {perex}
             </Micro>
           )}
         </HeroText>
       </Animation>
-      <HeroSocials>
-        <Instagram />
-        <Vimeo />
-      </HeroSocials>
+
       <Animation type={"fadeIn"} delay={0.3} style={{ zIndex: 99 }}>
         <HeroMedia>
           {asset._type === "Video" ? (
@@ -71,6 +70,8 @@ const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
             />
           )}
         </HeroMedia>
+      </Animation>
+      <Animation type={"fadeIn"} delay={0.5}>
         {children && <HeroFooterChildren>{children}</HeroFooterChildren>}
       </Animation>
     </StyledHero>

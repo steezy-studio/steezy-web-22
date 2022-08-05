@@ -8,11 +8,7 @@ interface InstagramProps {
 
 const StyledVimeo = styled.a`
   svg {
-    width: 24px;
-    height: auto;
-    ${breakpoint.tabletLandscape} {
-      width: 18px;
-    }
+    height: 100%;
   }
 `;
 

@@ -8,10 +8,6 @@ export const StyledNavbar = styled.nav`
   pointer-events: none;
   z-index: 99999;
   top: ${({ theme }) => `calc(-100vh + ${theme.pageMargin})`};
-  /* top: -100vh; */
-
-  /* left: ${({ theme }) => theme.pageMargin}; */
-  /* right: ${({ theme }) => theme.pageMargin}; */
   width: ${({ theme }) => u(16, theme.pageMargin)};
   height: 80px;
   display: flex;
@@ -25,6 +21,7 @@ export const StyledNavbar = styled.nav`
     height: 50px;
   }
   ${breakpoint.phone} {
+    top: ${({ theme }) => theme.pageMargin};
     height: 40px;
   }
 `;
@@ -57,12 +54,4 @@ export const NavLinks = styled(motion.div)`
     background-color: ${colors.primary300};
     border: 1px solid ${colors.black};
   }
-`;
-
-export const FixedTarget = styled.div`
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: -100vh;
-  bottom: -100vh;
 `;

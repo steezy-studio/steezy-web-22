@@ -5,7 +5,8 @@ import strings from "../../data/strings";
 import Logo from "../Logo/Logo";
 import Burger from "./Burger";
 import NavLink from "./NavLink";
-import { FixedTarget, NavLinks, StyledNavbar } from "./Styles/StyledNavbar";
+import { NavLinks, StyledNavbar } from "./Styles/StyledNavbar";
+import Fixed from "../Fixed/Fixed";
 
 interface NavbarProps {
   areas: { highlighted: boolean; link: string; name: string }[];
@@ -16,13 +17,8 @@ const Navbar = ({ areas = [] }: NavbarProps) => {
   const router = useRouter();
 
   return (
-    <>
-      <FixedTarget id='fixed-target' />
-      <StyledNavbar
-        data-scroll
-        data-scroll-persistent
-        data-scroll-sticky
-        data-scroll-target='#fixed-target'>
+    <Fixed id={"fixed-navbar"}>
+      <StyledNavbar>
         <Logo />
         <NavLinks
           animate={isMenuOpen ? "open" : "close"}
@@ -58,7 +54,7 @@ const Navbar = ({ areas = [] }: NavbarProps) => {
         </NavLinks>
         <Burger onClick={() => openMenu((prev) => !prev)} isOpen={isMenuOpen} />
       </StyledNavbar>
-    </>
+    </Fixed>
   );
 };
 

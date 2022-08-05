@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useRef } from "react";
 import styled from "styled-components";
 import {
@@ -11,7 +12,7 @@ interface VideoProps
     HTMLVideoElement
   > {}
 
-const StyledVideo = styled.video`
+const StyledVideo = styled(motion.video)`
   width: 100%;
 `;
 

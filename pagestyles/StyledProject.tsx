@@ -1,4 +1,5 @@
 import Vimeo from "@u-wave/react-vimeo";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
 import u from "../helpers/unit";
@@ -60,7 +61,7 @@ export const ProjectGrid = styled.div`
   }
 `;
 
-export const ProjectGridRow = styled.div`
+export const ProjectGridRow = styled(motion.div)`
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
@@ -103,7 +104,7 @@ export const ProjectGridVimeo = styled(Vimeo)`
   height: 100%;
 `;
 
-export const ClientQuote = styled.div`
+export const ClientQuote = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: ${({ theme }) => theme.pageMargin};
@@ -147,7 +148,7 @@ export const ClientQuoteRight = styled.div`
   }
 `;
 
-export const NextProjectSection = styled.div`
+export const NextProjectSection = styled(motion.div)`
   display: grid;
   grid-row-gap: 60px;
   margin: ${({ theme }) => u(2, theme.pageMargin)} 0;

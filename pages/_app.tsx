@@ -8,6 +8,10 @@ import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 import { useRef } from "react";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout/Layout";
+import Fixed from "../components/Fixed/Fixed";
+import { HeroSocials } from "../components/Hero/Styles/StyledHero";
+import Instagram from "../components/Icons/Instagram";
+import Vimeo from "../components/Icons/Vimeo";
 
 function MyApp({ Component, pageProps }) {
   const { w } = useWindowSize();
@@ -25,6 +29,12 @@ function MyApp({ Component, pageProps }) {
         <GlobalStyle />
         <main data-scroll-container ref={containerRef}>
           <Layout>
+            <Fixed id={"fixed-socials"}>
+              <HeroSocials>
+                <Instagram />
+                <Vimeo />
+              </HeroSocials>
+            </Fixed>
             <Component {...pageProps} />
             <Footer />
           </Layout>

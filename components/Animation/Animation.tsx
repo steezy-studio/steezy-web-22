@@ -1,5 +1,6 @@
 import { motion, Variants } from "framer-motion";
-import React, { useRef, useState } from "react";
+import React, { Fragment, ReactNode, useRef, useState } from "react";
+import { ReactElement } from "react";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import styled from "styled-components";
 import { useIntersectionObserver } from "../../hooks/useIntersectionVideoObserver";
@@ -18,17 +19,13 @@ const variants = {
 };
 
 interface AnimationProps {
-  children: JSX.Element | JSX.Element[];
+  children: ReactElement;
   type: keyof typeof variants;
   delay?: number;
   style?: React.CSSProperties;
   staggerChildren?: number;
   once?: boolean;
 }
-
-const StyledAnimation = styled(motion.div)`
-  position: relative;
-`;
 
 const Animation = ({
   children,
@@ -53,26 +50,35 @@ const Animation = ({
         });
       });
     },
-    { threshold: 0.1 }
+    { threshold: 0 }
   );
 
-  return (
-    <StyledAnimation
-      ref={ref}
-      initial={"enter"}
-      animate={visible ? "animate" : "initial"}
-      exit={"exit"}
-      variants={variants[type]}
-      style={style}
-      transition={{
-        delay: delay ? delay : 0,
-        duration: 0.9,
-        ease: "anticipate",
-        staggerChildren: staggerChildren || 0,
-      }}>
-      {children}
-    </StyledAnimation>
+  const animProps = {
+    ref: ref,
+    initial: "enter",
+    animate: visible ? "animate" : "initial",
+    exit: "exit",
+    variants: variants[type],
+    style: style,
+    transition: {
+      delay: delay ? delay : 0,
+      duration: 0.9,
+      ease: "anticipate",
+      staggerChildren: staggerChildren || 0,
+    },
+  };
+
+  const childrenWithProps = React.Children.map<ReactNode, ReactNode>(
+    children,
+    (child) => {
+      if (React.isValidElement(child)) {
+        return React.cloneElement<typeof animProps>(child, animProps);
+      }
+      return child;
+    }
   );
+
+  return <Fragment>{childrenWithProps}</Fragment>;
 };
 
 export default Animation;

@@ -1,17 +1,18 @@
 import { GetStaticProps } from "next";
-import styled from "styled-components";
+import { Fragment } from "react";
 import client from "../apollo/client";
 import GridItem from "../components/GridItem/GridItem";
+import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
 import Link from "../components/Link/Link";
 import { StyledLink } from "../components/Link/Styles/StyledLink";
 import Navbar from "../components/Navbar/Navbar";
 import { Large } from "../components/Typo/Large";
 import { Micro } from "../components/Typo/Micro";
-import { allProjects } from "../helpers/consts";
 import strings from "../data/strings";
 import { Areas, LandingpageGrids } from "../generated/types";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
+import { allProjects } from "../helpers/consts";
 import {
   GridItemWrapper,
   Intro,
@@ -22,10 +23,6 @@ import {
   LandingPageHeroLogotype,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
-import Head from "../components/Head/Head";
-import { Fragment } from "react";
-import Layout from "../components/Layout/Layout";
-import Animation from "../components/Animation/Animation";
 
 interface indexProps {
   landingpageGrid: LandingpageGrids;

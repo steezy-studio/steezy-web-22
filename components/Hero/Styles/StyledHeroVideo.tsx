@@ -1,17 +1,18 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { breakpoint } from "../../../helpers/consts";
+import { breakpoint, colors } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
 
 export const StyledHeroVideo = styled.div<{ ratio?: number }>`
   position: relative;
+  overflow: hidden;
 `;
 
-export const Loop = styled.video`
+export const Loop = styled(motion.video)`
   width: 100%;
   height: 100%;
-  cursor: none;
   object-fit: contain;
+  cursor: pointer;
   ${breakpoint.phone} {
     object-fit: cover;
   }
@@ -31,17 +32,27 @@ export const Showreel = styled.div`
   }
 `;
 
-export const Cursor = styled(motion.img)`
+export const PlayButton = styled.div`
   position: absolute;
   z-index: 1;
-  width: 140px;
-  height: 140px;
-  transform: translate(-50%, -50%);
-  margin-left: -70px;
-  margin-top: -70px;
+  width: 80px;
+  height: 80px;
   pointer-events: none;
+  right: 0;
+  bottom: 0;
+  background-color: ${colors.primary300};
+  padding: 15px;
+  &:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("/icons/play-button.svg");
+  }
   ${breakpoint.largeNotebook} {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
   }
 `;

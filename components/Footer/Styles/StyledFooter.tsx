@@ -6,9 +6,9 @@ export const StyledFooter = styled.footer`
   display: grid;
   grid-gap: ${({ theme }) => `calc(2 * ${theme.pageMargin})`};
   margin-top: ${({ theme }) => u(2, theme.pageMargin)};
-  margin-bottom: 100px;
+  padding-bottom: 100px;
   ${breakpoint.tabletLandscape} {
-    margin-bottom: 60px;
+    padding-bottom: 60px;
   }
   ${breakpoint.phone} {
     margin-top: ${({ theme }) => u(4, theme.pageMargin)};

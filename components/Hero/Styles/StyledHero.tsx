@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
@@ -26,8 +27,9 @@ export const HeroSocials = styled.div`
   grid-auto-flow: column;
   grid-gap: 20px;
   position: fixed;
+  height: 24px;
+  top: ${({ theme }) => `calc(-1 * ${theme.pageMargin} - 24px)`};
   z-index: 99;
-  bottom: ${({ theme }) => theme.pageMargin};
   ${breakpoint.largeNotebook} {
     grid-gap: 10px;
   }
@@ -36,14 +38,13 @@ export const HeroSocials = styled.div`
   }
 `;
 
-export const HeroText = styled.div`
+export const HeroText = styled(motion.div)`
   * {
     pointer-events: all;
   }
   width: ${({ theme }) => u(6, theme.pageMargin)};
   position: absolute;
-  top: 50vh;
-  transform: translateY(-50%);
+  top: 30vh;
   z-index: 1;
   display: grid;
   grid-row-gap: 30px;
@@ -74,7 +75,7 @@ export const HeroText = styled.div`
   }
 `;
 
-export const HeroMedia = styled.div`
+export const HeroMedia = styled(motion.div)`
   width: ${({ theme }) => u(13, theme.pageMargin)};
   margin-left: auto;
   ${StyledContact} & {
@@ -96,7 +97,7 @@ export const HeroMedia = styled.div`
   }
 `;
 
-export const HeroFooterChildren = styled.div`
+export const HeroFooterChildren = styled(motion.div)`
   margin-top: auto;
   padding-top: 30px;
   display: flex;

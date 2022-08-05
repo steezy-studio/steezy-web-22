@@ -1,3 +1,4 @@
+import Vimeo from "@u-wave/react-vimeo";
 import React, { useRef, useState } from "react";
 import {
   useIntersectionObserver,
@@ -5,7 +6,7 @@ import {
 } from "../../hooks/useIntersectionVideoObserver";
 import Dialog from "../Dialog/Dialog";
 import {
-  Cursor,
+  PlayButton,
   Loop,
   Showreel,
   StyledHeroVideo,
@@ -47,14 +48,7 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
         onOpenChange={onOpenChange}
         content={
           <Showreel>
-            <video
-              src={src}
-              autoPlay={true}
-              controls
-              playsInline={true}
-              muted={true}
-              loop={true}
-            />
+            <Vimeo autoplay video={"663954804"} responsive />
           </Showreel>
         }
         trigger={
@@ -63,19 +57,10 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
             onMouseLeave={() =>
               setCursor((prev) => ({ ...prev, show: false }))
             }>
-            <Cursor
-              animate={cursor.show ? "show" : "hide"}
-              variants={{
-                show: { scale: 1, opacity: 1 },
-                hide: { scale: 0, opacity: 0 },
-              }}
-              src='/icons/play-cursor.svg'
-              style={{
-                left: `${cursor.coords[0]}px`,
-                top: `${cursor.coords[1]}px`,
-              }}
-            />
+            <PlayButton />
             <Loop
+              whileHover={{ scale: 1.15 }}
+              transition={{ duration: 0.3 }}
               ref={videoRef}
               src={src}
               autoPlay={true}

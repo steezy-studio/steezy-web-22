@@ -8,11 +8,8 @@ interface InstagramProps {
 
 const StyledInstagram = styled.a`
   svg {
-    width: 24px;
-    height: auto;
-    ${breakpoint.tabletLandscape} {
-      width: 18px;
-    }
+    width: auto;
+    height: 100%;
   }
 `;
 

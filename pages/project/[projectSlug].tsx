@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import client from "../../apollo/client";
 import Animation from "../../components/Animation/Animation";
@@ -97,14 +98,16 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                     if (img._type === "Photo") {
                       return (
                         <Animation key={`${i}_col`} type={"fadeFromBottom"}>
-                          <Img
-                            src={img.url || ``}
-                            width={img.width || 0}
-                            height={img.height || 0}
-                            layout={"responsive"}
-                            blurDataURL={img.url}
-                            placeholder={"blur"}
-                          />
+                          <motion.div>
+                            <Img
+                              src={img.url || ``}
+                              width={img.width || 0}
+                              height={img.height || 0}
+                              layout={"responsive"}
+                              blurDataURL={img.url}
+                              placeholder={"blur"}
+                            />
+                          </motion.div>
                         </Animation>
                       );
                     }
@@ -115,7 +118,9 @@ const Project = ({ projectData, areas }: ProjectProps) => {
             if (row.__typename === "ProjectGridVimeo") {
               return (
                 <Animation key={`${i}_row`} type={"fadeFromBottom"}>
-                  <ProjectGridVimeo video={row.vimeo_id} responsive />
+                  <motion.div>
+                    <ProjectGridVimeo video={row.vimeo_id} responsive />
+                  </motion.div>
                 </Animation>
               );
             }

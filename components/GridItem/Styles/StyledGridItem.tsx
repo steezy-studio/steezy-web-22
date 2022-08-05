@@ -1,7 +1,8 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
 
-export const StyledGridItem = styled.a`
+export const StyledGridItem = styled(motion.a)`
   display: grid;
   grid-gap: 20px;
   align-items: start;
