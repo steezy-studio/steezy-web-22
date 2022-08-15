@@ -13,7 +13,8 @@ export const ProjectHeroRoles = styled.div`
   flex-shrink: 0;
   grid-gap: 90px;
   ${breakpoint.phone} {
-    grid-auto-flow: row;
+    grid-auto-flow: unset;
+    grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
   }
 `;
@@ -36,6 +37,7 @@ export const ProjectHeroFooter = styled.div`
   }
   ${breakpoint.phone} {
     grid-auto-flow: row;
+    width: 100%;
     grid-gap: ${({ theme }) => u(2, theme.pageMargin)};
   }
 `;

@@ -196,7 +196,11 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                           height={grid_image?.[0].height}
                           projectName={project_grid_name}
                           slug={_slug}
-                          src={grid_image?.[0].url}
+                          src={
+                            grid_image[0]._type === "Video"
+                              ? grid_image[0].cdn_files[0].url
+                              : grid_image[0].url
+                          }
                           width={grid_image?.[0].width}
                         />
                       </ProjectsGridItem>

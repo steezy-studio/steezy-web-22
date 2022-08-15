@@ -43,15 +43,38 @@ export const NavLinks = styled(motion.div)`
   }
   ${breakpoint.tabletLandscape} {
     position: fixed;
-    top: ${({ theme }) => `calc((${theme.pageMargin} * 2) + 60px)`};
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* top: ${({ theme }) => `calc((${theme.pageMargin} * 2) + 60px)`};
     right: ${({ theme }) => theme.pageMargin};
     left: ${({ theme }) => theme.pageMargin};
-    bottom: ${({ theme }) => theme.pageMargin};
+    bottom: ${({ theme }) => theme.pageMargin}; */
     flex-direction: column;
     align-items: flex-end;
     padding: ${({ theme }) => theme.pageMargin};
     width: auto;
     background-color: ${colors.primary300};
-    border: 1px solid ${colors.black};
   }
+`;
+
+export const PhoneDecoration = styled(motion.div)`
+  display: none;
+  ${breakpoint.phone} {
+    position: absolute;
+    bottom: ${({ theme }) => theme.pageMargin};
+    left: ${({ theme }) => theme.pageMargin};
+    right: ${({ theme }) => theme.pageMargin};
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
+export const ContactUs = styled.a`
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  column-gap: 10px;
+  align-items: center;
 `;

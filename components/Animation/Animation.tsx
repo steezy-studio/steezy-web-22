@@ -62,7 +62,7 @@ const Animation = ({
     style: style,
     transition: {
       delay: delay ? delay : 0,
-      duration: 0.9,
+      duration: 1.2,
       ease: "anticipate",
       staggerChildren: staggerChildren || 0,
     },

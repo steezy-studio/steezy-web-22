@@ -1,16 +1,19 @@
+import { LayoutGroup, motion } from "framer-motion";
 import { GetStaticProps } from "next";
+import { useTheme } from "styled-components";
 import client from "../apollo/client";
+import Animation from "../components/Animation/Animation";
 import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
 import ImageSlider from "../components/ImageSlider/ImageSlider";
 import Img from "../components/Img/Img";
-import Layout from "../components/Layout/Layout";
 import Link from "../components/Link/Link";
 import Navbar from "../components/Navbar/Navbar";
 import { Large } from "../components/Typo/Large";
 import { Medium } from "../components/Typo/Medium";
 import { Micro } from "../components/Typo/Micro";
 import { Small } from "../components/Typo/Small";
+import ValueItem from "../components/ValueItem";
 import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
@@ -24,7 +27,6 @@ import {
   BrandsTextInner,
   Logo,
   Logotypes,
-  Order,
   Outro,
   Quote,
   ServicesList,
@@ -32,8 +34,6 @@ import {
   StyledStudio,
   SubServicesList,
   TextBlock,
-  ValueHeader,
-  ValueItem,
   ValuesInner,
   ValuesList,
   ValuesSection,
@@ -45,6 +45,8 @@ interface StudioProps {
 
 const Studio = ({ areas }: StudioProps) => {
   const studioStrings = strings.studioPage;
+  const theme = useTheme();
+
   const { w } = useWindowSize();
   return (
     <>
@@ -68,64 +70,76 @@ const Studio = ({ areas }: StudioProps) => {
             height: 1211,
           }}
         />
-        <TextBlock>
-          <div className='header'>
-            <Micro className={"with-dash"}>{studioStrings.intro.header}</Micro>
-            <Medium className='big'>{studioStrings.intro.perex}</Medium>
-          </div>
-          <Small>{studioStrings.intro.paragraph}</Small>
-        </TextBlock>
-        <Img
-          src={`/images/steezy_interier-04.jpg`}
-          width={2450}
-          height={1300}
-          layout={`responsive`}
-        />
-        <ValuesSection>
-          <ValuesInner>
-            <Micro className='with-dash'>{studioStrings.values.header}</Micro>
-            <ValuesList>
-              {studioStrings.values.list.map(({ header, perex }, i) => {
+        <Animation type='fadeFromBottom'>
+          <TextBlock>
+            <div className='header'>
+              <Micro className={"with-dash"}>
+                {studioStrings.intro.header}
+              </Micro>
+              <Medium className='big'>{studioStrings.intro.perex}</Medium>
+            </div>
+            <Small>{studioStrings.intro.paragraph}</Small>
+          </TextBlock>
+        </Animation>
+
+        <ValuesSection id='values-section'>
+          <ValuesList>
+            <LayoutGroup>
+              {studioStrings.values.list.map(({ header, perex, src }, i) => {
                 const n = i + 1;
                 return (
-                  <ValueItem key={i}>
-                    <Order>{n < 10 ? `0${n}` : n}</Order>
-                    <ValueHeader>
-                      <Medium className='big'>{header}</Medium>
-                      <Small className='big-lh'>{perex}</Small>
-                    </ValueHeader>
-                  </ValueItem>
+                  <ValueItem
+                    order={String(n < 10 ? `0${n}` : n)}
+                    header={header}
+                    src={src}
+                    perex={perex}
+                    key={i}
+                  />
                 );
               })}
-            </ValuesList>
-          </ValuesInner>
-          <Img
-            src={`/images/steezy_interier-08.jpg`}
-            width={1100}
-            height={1100}
-            layout={`responsive`}
-          />
+            </LayoutGroup>
+          </ValuesList>
+
+          {/* <motion.div
+            data-scroll
+            data-scroll-sticky
+            data-scroll-target='#values-section'
+            data-scroll-offset={"-50%,50%"}
+            style={{ position: "sticky" }}>
+            <Img
+              src={`/images/steezy_interier-08.jpg`}
+              width={1100}
+              height={1100}
+              layout={`responsive`}
+            />
+          </motion.div> */}
         </ValuesSection>
-        <ImageSlider
-          imgList={strings.studioPage.slider.map((img) => ({
-            layout: "responsive",
-            width: 1200,
-            height: 950,
-            src: `/images/${img.src}`,
-          }))}
-        />
+        <Animation type='fadeFromBottom'>
+          <ImageSlider
+            imgList={strings.studioPage.slider.map((img) => ({
+              layout: "responsive",
+              width: 1200,
+              height: 950,
+              src: `/images/${img.src}`,
+            }))}
+          />
+        </Animation>
         <ServicesSection>
-          <Micro className='with-dash'>{studioStrings.services.header}</Micro>
+          <Animation type='fadeFromBottom'>
+            <Micro className='with-dash'>{studioStrings.services.header}</Micro>
+          </Animation>
           <ServicesList>
-            {areas.items.map(({ sub_areas, area_name, _slug }) => (
-              <div key={_slug}>
-                <Medium className='big'>
-                  <Link href={`/projects/${_slug}`}>{area_name}</Link>
-                </Medium>
-                <SubServicesList>
-                  <Medium>{sub_areas}</Medium>
-                </SubServicesList>
-              </div>
+            {areas.items.map(({ sub_areas, area_name, _slug }, i) => (
+              <Animation type='fadeFromBottom' key={_slug} delay={0.2 * i}>
+                <motion.div>
+                  <Medium className='big'>
+                    <Link href={`/projects/${_slug}`}>{area_name}</Link>
+                  </Medium>
+                  <SubServicesList>
+                    <Medium>{sub_areas}</Medium>
+                  </SubServicesList>
+                </motion.div>
+              </Animation>
             ))}
           </ServicesList>
         </ServicesSection>
@@ -137,7 +151,8 @@ const Studio = ({ areas }: StudioProps) => {
               height={1200}
               layout={"intrinsic"}
             />
-            <Quote className='offset-y-1'>
+
+            <Quote className='offset-y-1' data-scroll data-scroll-speed='2'>
               <Large className='offset-x-1'>
                 {studioStrings.blockquotes[0].quote}
               </Large>
@@ -150,7 +165,7 @@ const Studio = ({ areas }: StudioProps) => {
             </Quote>
           </Blockquote>
           <Blockquote className='_2'>
-            <Quote className='offset-y-2' style={{ gridArea: "quote" }}>
+            <Quote className='offset-y-2' data-scroll data-scroll-speed='2'>
               <Large className='offset-x-2'>
                 {studioStrings.blockquotes[1].quote}
               </Large>
@@ -161,32 +176,37 @@ const Studio = ({ areas }: StudioProps) => {
                 {studioStrings.blockquotes[1].position}
               </Micro>
             </Quote>
+
             <Img
               src={"/images/blockquote-02.jpg"}
               width={1200}
               height={1200}
               layout={"intrinsic"}
-              style={{ gridArea: "image" }}
             />
           </Blockquote>
         </BlockquoteSection>
         <BrandsSection>
-          <BrandsText>
-            <Micro className='with-dash'>{studioStrings.brands.header}</Micro>
-            <BrandsTextInner>
-              <Medium className='big'>{studioStrings.brands.claim}</Medium>
-              <Small>{studioStrings.brands.perex}</Small>
-            </BrandsTextInner>
-          </BrandsText>
+          <Animation type='fadeFromBottom'>
+            <BrandsText>
+              <Micro className='with-dash'>{studioStrings.brands.header}</Micro>
+              <BrandsTextInner>
+                <Medium className='big'>{studioStrings.brands.claim}</Medium>
+                <Small>{studioStrings.brands.perex}</Small>
+              </BrandsTextInner>
+            </BrandsText>
+          </Animation>
+
           <Logotypes>
-            {studioStrings.brands.logotypes.map((src) => (
-              <Logo key={src} src={`/logos/${src}`} />
+            {studioStrings.brands.logotypes.map((src, i) => (
+              <Animation type='fadeFromBottom' key={src} delay={0.05 * i}>
+                <Logo src={`/logos/${src}`} />
+              </Animation>
             ))}
           </Logotypes>
         </BrandsSection>
         <Outro>
           <Blockquote>
-            <Quote className='offset-y-3'>
+            <Quote className='offset-y-3' data-scroll data-scroll-speed='2'>
               <Large className='offset-x-2'>
                 {studioStrings.blockquotes[1].quote}
               </Large>
@@ -198,6 +218,7 @@ const Studio = ({ areas }: StudioProps) => {
               </Micro>
             </Quote>
           </Blockquote>
+
           <Img
             src={`/images/blockquote-03.jpg`}
             width={2450}

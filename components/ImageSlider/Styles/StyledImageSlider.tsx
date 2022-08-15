@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
 
-export const StyledImageSlider = styled.div`
+export const StyledImageSlider = styled(motion.div)`
   margin: 0 ${({ theme }) => `calc(-1 * ${theme.pageMargin})`};
   max-width: 100vw;
   overflow: hidden;

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint, colors } from "../../helpers/consts";
 import u from "../../helpers/unit";
@@ -13,8 +14,9 @@ import {
 import { StyledFooter } from "../Footer/Styles/StyledFooter";
 import { GridItemAreas } from "../GridItem/Styles/StyledGridItem";
 import { StyledHero } from "../Hero/Styles/StyledHero";
+import { PhoneDecoration } from "../Navbar/Styles/StyledNavbar";
 
-export const Micro = styled.span`
+export const Micro = styled(motion.span)`
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -93,6 +95,10 @@ export const Micro = styled.span`
       line-height: 1.6em;
     }
   }
+  ${PhoneDecoration} & {
+    white-space: pre-wrap;
+    line-height: 1.1em;
+  }
   ${LandingpageHeroClients} & {
     text-align: right;
     ${breakpoint.phone} {
@@ -103,9 +109,9 @@ export const Micro = styled.span`
     ${breakpoint.smallNotebook} {
       line-height: 1.5em;
     }
-    ${breakpoint.phone} {
+    /* ${breakpoint.phone} {
       white-space: unset;
-    }
+    } */
   }
   ${GridItemAreas} & {
     letter-spacing: 0.02em;

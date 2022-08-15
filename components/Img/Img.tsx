@@ -7,9 +7,9 @@ interface ImgProps extends ImageProps {
   style?: CSSProperties | undefined;
 }
 
-const Img = ({ src, layout, width, height, style, ...rest }: ImgProps) => {
+const Img = ({ src, layout, width, height, style, ...rest }: ImgProps, ref) => {
   return (
-    <StyledImg style={style}>
+    <StyledImg style={style} ref={ref}>
       <NextImage
         src={src}
         layout={layout}
@@ -21,4 +21,4 @@ const Img = ({ src, layout, width, height, style, ...rest }: ImgProps) => {
   );
 };
 
-export default Img;
+export default React.forwardRef(Img);

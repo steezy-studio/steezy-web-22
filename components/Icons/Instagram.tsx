@@ -8,8 +8,8 @@ interface InstagramProps {
 
 const StyledInstagram = styled.a`
   svg {
-    width: auto;
-    height: 100%;
+    width: 100%;
+    height: 21px;
   }
 `;
 
@@ -23,18 +23,7 @@ const Instagram = ({ fill = "black" }: InstagramProps) => {
         width='24.328'
         height='24.47'
         viewBox='0 0 24.328 24.47'>
-        <defs>
-          <clipPath id='clip-path'>
-            <rect
-              id='Rectangle_622'
-              data-name='Rectangle 622'
-              width='24.328'
-              height='24.47'
-              fill='none'
-            />
-          </clipPath>
-        </defs>
-        <g id='Group_6243' data-name='Group 6243' clipPath='url(#clip-path)'>
+        <g id='Group_6243' data-name='Group 6243'>
           <path
             id='Path_14540'
             data-name='Path 14540'

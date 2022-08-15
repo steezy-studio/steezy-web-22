@@ -1,10 +1,11 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint, colors } from "../helpers/consts";
 import u from "../helpers/unit";
 
 export const StyledStudio = styled.div``;
 
-export const TextBlock = styled.div`
+export const TextBlock = styled(motion.div)`
   display: grid;
   grid-template-columns: 50% 25%;
   grid-gap: 60px;
@@ -25,6 +26,7 @@ export const TextBlock = styled.div`
   }
   ${breakpoint.smallNotebook} {
     grid-template-columns: 50% 40%;
+    align-items: end;
   }
   ${breakpoint.tabletPortrait} {
     .header {
@@ -43,11 +45,8 @@ export const TextBlock = styled.div`
 `;
 
 export const ValuesSection = styled.section`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
   margin: ${({ theme }) => u(2, theme.pageMargin)} 0;
   ${breakpoint.phone} {
-    grid-template-columns: unset;
   }
 `;
 
@@ -76,49 +75,6 @@ export const ValuesList = styled.div`
   row-gap: ${({ theme }) => u(1, theme.pageMargin)};
   ${breakpoint.phone} {
     row-gap: ${({ theme }) => u(3, theme.pageMargin)};
-  }
-`;
-
-export const ValueItem = styled.div`
-  position: relative;
-  padding-left: 140px;
-  max-width: 600px;
-  ${breakpoint.largeNotebook} {
-    padding-left: 100px;
-  }
-  ${breakpoint.smallNotebook} {
-    padding-left: 90px;
-  }
-  ${breakpoint.phone} {
-    padding-left: 0;
-  }
-`;
-
-export const ValueHeader = styled.div`
-  display: grid;
-  grid-row-gap: 30px;
-  ${breakpoint.phone} {
-    grid-row-gap: 10px;
-  }
-`;
-
-export const Order = styled.span`
-  font-size: 100px;
-  font-family: "migra-italic";
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  color: ${colors.black};
-  position: absolute;
-  left: 0;
-  top: -0.52em;
-  ${breakpoint.largeNotebook} {
-    font-size: 70px;
-  }
-  ${breakpoint.smallNotebook} {
-    font-size: 60px;
-  }
-  ${breakpoint.phone} {
-    position: static;
   }
 `;
 
@@ -167,7 +123,7 @@ export const Blockquote = styled.div`
   grid-template-columns: repeat(2, 1fr);
   grid-gap: ${({ theme }) => theme.pageMargin};
   &._1 {
-    margin-top: ${({ theme }) => u(6, theme.pageMargin)};
+    margin-top: ${({ theme }) => u(4, theme.pageMargin)};
   }
   &._2 {
     transform: translateY(${({ theme }) => u(-1, theme.pageMargin)});
@@ -186,7 +142,7 @@ export const Blockquote = styled.div`
   }
 `;
 
-export const Quote = styled.div`
+export const Quote = styled(motion.div)`
   white-space: pre-wrap;
   position: relative;
   z-index: 2;
@@ -208,6 +164,7 @@ export const Quote = styled.div`
     }
     &.offset-y-2 {
       transform: unset;
+      grid-area: "quote";
     }
     &.offset-y-3 {
       transform: unset;
@@ -231,7 +188,7 @@ export const BrandsSection = styled.section`
   }
 `;
 
-export const BrandsText = styled.div`
+export const BrandsText = styled(motion.div)`
   display: grid;
   grid-template-columns: auto ${({ theme }) => u(4, theme.pageMargin)};
   align-items: start;
@@ -275,7 +232,7 @@ export const Logotypes = styled.div`
   }
 `;
 
-export const Logo = styled.img`
+export const Logo = styled(motion.img)`
   width: 100%;
   ${breakpoint.phone} {
     &:nth-child(n + 16) {

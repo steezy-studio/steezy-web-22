@@ -6,18 +6,19 @@ export const GlobalStyle = createGlobalStyle`
   body
   {
     width:100%;
-    height:100%
+    height:100%;
+      background-color:${colors.primary300};
   }
   body {
       padding: ${({ theme }) => theme.pageMargin} !important;
       padding-top: 0 !important;
       padding-bottom: 0 !important;
-      background-color:#23272A;
   }
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    cursor: none !important;
     font-family: "agrandir", Arial, Helvetica, sans-serif;
   } 
   a {

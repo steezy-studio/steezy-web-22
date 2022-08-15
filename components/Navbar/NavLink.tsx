@@ -11,6 +11,7 @@ interface NavLinkProps {
 const NavLink = ({ highlighted, href, children, active }: NavLinkProps) => {
   return (
     <StyledNavLink
+      variants={{ open: { opacity: 1 }, close: { opacity: 0 } }}
       className={`${highlighted ? `highlighted` : ``} ${
         active ? `active` : ``
       }`}

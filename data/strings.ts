@@ -37,21 +37,25 @@ export default {
           header: "Multidisciplinary expertise",
           perex:
             "We believe that complicated times requires complex solutions. Our designers are not narrowly focused specialists but professionals with general knowledge and experience throughout different media – from graphic design, photography, video or CGI to product design design and architecture.",
+          src: "blockquote-01.jpg",
         },
         {
           header: "Cultural & tech background",
           perex:
             "We found beauty in functional systems as well as in purposless fragments that might catch your heart without a hint of manipulation. A colaboration between artists and engineers in the studio brings a human touch into sophisticated technological projects and a drop of common sense into cultural related activities.  ",
+          src: "blockquote-02.jpg",
         },
         {
           header: "Global experience",
           perex:
             "Since 2019 we are working for Fortune 100 transnational corporations as well as for clients from all over the world. From United States, Mexico to Spain, Swiss, Netherlands, Germany, UK, Ireland to Hong Kong or Dubai. And we're happy that we can apply this diverse experience into all of our projects.",
+          src: "blockquote-03.jpg",
         },
         {
           header: "Intensive partnership approach",
           perex:
             "We believe that design is a strong weapon that can have impact on the culture, our well-being or the economy. Therefore it must aim responsibly at the right targets.  We build strong and long-lasting partnerships with our clients who share our values and our worldview to make sure that our efforts do no harm to society.",
+          src: "steezy_interier-04.jpg",
         },
       ],
     },
@@ -243,6 +247,7 @@ export default {
     nextProject: "next project",
     allProjects: "all projects",
     backToProjects: "back to projects",
+    tellUsYourStory: "Tell us\nyour story!",
   },
   navData: [
     {

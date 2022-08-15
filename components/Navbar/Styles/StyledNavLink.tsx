@@ -1,7 +1,8 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint, colors } from "../../../helpers/consts";
 
-export const StyledNavLink = styled.a`
+export const StyledNavLink = styled(motion.a)`
   text-decoration: none;
   text-transform: uppercase;
   font-size: 14px;
@@ -31,9 +32,33 @@ export const StyledNavLink = styled.a`
     padding: 0 10px;
   }
   ${breakpoint.tabletLandscape} {
-    font-size: 28px;
-    padding: 5px 0;
+    font-size: 44px;
+    font-family: "migra-italic";
+    text-transform: lowercase;
+    text-decoration: underline;
     letter-spacing: 0.03em;
+    padding: 2px 0;
+    &.active {
+      & {
+        color: ${colors.black} !important;
+        position: relative;
+        &:after {
+          content: "";
+          display: block;
+          background-color: ${colors.primary400};
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 1em;
+          z-index: -1;
+        }
+      }
+    }
+    &,
+    &:visited {
+      color: ${colors.black};
+    }
     &.highlighted {
       &,
       &:visited {

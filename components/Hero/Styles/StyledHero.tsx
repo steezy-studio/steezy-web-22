@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
 import { StyledContact } from "../../../pagestyles/StyledContact";
+import { StyledIndex } from "../../../pagestyles/StyledIndex";
+import { PhoneDecoration } from "../../Navbar/Styles/StyledNavbar";
 
 export const StyledHero = styled.div`
   min-height: 100vh;
@@ -25,16 +27,20 @@ export const StyledHero = styled.div`
 export const HeroSocials = styled.div`
   display: grid;
   grid-auto-flow: column;
-  grid-gap: 20px;
+  align-items: center;
+  grid-gap: 25px;
   position: fixed;
-  height: 24px;
   top: ${({ theme }) => `calc(-1 * ${theme.pageMargin} - 24px)`};
   z-index: 99;
   ${breakpoint.largeNotebook} {
-    grid-gap: 10px;
+    grid-gap: 15px;
   }
   ${breakpoint.tabletLandscape} {
     display: none;
+    ${PhoneDecoration} & {
+      display: grid;
+      position: static;
+    }
   }
 `;
 
@@ -49,7 +55,7 @@ export const HeroText = styled(motion.div)`
   display: grid;
   grid-row-gap: 30px;
   .perex {
-    max-width: 300px;
+    max-width: 250px;
   }
   ${StyledContact} & {
     width: ${({ theme }) => u(10, theme.pageMargin)};
@@ -69,6 +75,9 @@ export const HeroText = styled(motion.div)`
     transform: unset;
     margin-top: ${({ theme }) => u(1, theme.pageMargin)};
     order: 2;
+    ${StyledIndex} & {
+      order: 3;
+    }
   }
   ${breakpoint.phone} {
     width: ${({ theme }) => u(15, theme.pageMargin)};
@@ -123,5 +132,8 @@ export const HeroFooterChildren = styled(motion.div)`
   }
   ${breakpoint.tabletPortrait} {
     order: 3;
+    ${StyledIndex} & {
+      order: 2;
+    }
   }
 `;

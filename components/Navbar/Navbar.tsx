@@ -5,8 +5,20 @@ import strings from "../../data/strings";
 import Logo from "../Logo/Logo";
 import Burger from "./Burger";
 import NavLink from "./NavLink";
-import { NavLinks, StyledNavbar } from "./Styles/StyledNavbar";
+import {
+  ContactUs,
+  NavLinks,
+  PhoneDecoration,
+  StyledNavbar,
+} from "./Styles/StyledNavbar";
 import Fixed from "../Fixed/Fixed";
+import { StyledImg } from "../Img/Styles/StyledImg";
+import Contact from "../../pages/contact";
+import { Small } from "../Typo/Small";
+import { HeroSocials } from "../Hero/Styles/StyledHero";
+import Instagram from "../Icons/Instagram";
+import Vimeo from "../Icons/Vimeo";
+import { Micro } from "../Typo/Micro";
 
 interface NavbarProps {
   areas: { highlighted: boolean; link: string; name: string }[];
@@ -32,16 +44,32 @@ const Navbar = ({ areas = [] }: NavbarProps) => {
             type: "tween",
             ease: [0.65, 0.05, 0.36, 1],
           }}
-          variants={{ open: { scaleX: 1 }, close: { scaleX: 0 } }}>
+          variants={{
+            open: {
+              scaleX: 1,
+              transition: {
+                when: "beforeChildren",
+                staggerDirection: -1,
+                staggerChildren: 0.03,
+              },
+            },
+            close: {
+              scaleX: 0,
+              transition: {
+                when: "afterChildren",
+                staggerDirection: 1,
+                staggerChildren: 0.03,
+              },
+            },
+          }}>
           {[
-            strings.navData[0],
             {
               name: allProjects.area_name,
               link: `/projects/${allProjects._slug}`,
               highlighted: true,
             },
             ...areas,
-            strings.navData[1],
+            ...strings.navData,
           ].map(({ highlighted, link, name }) => (
             <NavLink
               active={router.asPath === link}
@@ -51,6 +79,19 @@ const Navbar = ({ areas = [] }: NavbarProps) => {
               {name}
             </NavLink>
           ))}
+          <PhoneDecoration
+            variants={{ open: { opacity: 1 }, close: { opacity: 0 } }}>
+            <ContactUs href={`/contact`}>
+              <StyledImg as={"img"} src={"/icons/contact-icon.svg"} />
+              <Micro className='uppercase break-lines'>
+                {strings.globals.tellUsYourStory}
+              </Micro>
+            </ContactUs>
+            <HeroSocials>
+              <Instagram />
+              <Vimeo />
+            </HeroSocials>
+          </PhoneDecoration>
         </NavLinks>
         <Burger onClick={() => openMenu((prev) => !prev)} isOpen={isMenuOpen} />
       </StyledNavbar>

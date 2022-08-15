@@ -9,6 +9,7 @@ interface InstagramProps {
 const StyledVimeo = styled.a`
   svg {
     height: 100%;
+    width: 21px;
   }
 `;
 

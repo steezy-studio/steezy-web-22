@@ -12,6 +12,7 @@ export const Medium = styled.p`
   font-size: 30px;
   font-weight: 300;
   line-height: 1.2em;
+  letter-spacing: 0.04em;
   &.big {
     font-family: "agrandir";
     font-weight: 500;

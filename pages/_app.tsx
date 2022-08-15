@@ -12,6 +12,8 @@ import Fixed from "../components/Fixed/Fixed";
 import { HeroSocials } from "../components/Hero/Styles/StyledHero";
 import Instagram from "../components/Icons/Instagram";
 import Vimeo from "../components/Icons/Vimeo";
+import { useMouseCoordinates } from "../hooks/useMouseCoordinates";
+import Cursor from "../components/Cursor/Cursor";
 
 function MyApp({ Component, pageProps }) {
   const { w } = useWindowSize();
@@ -26,6 +28,7 @@ function MyApp({ Component, pageProps }) {
       watch={[asPath]}
       containerRef={containerRef}>
       <ThemeProvider theme={theme(w)}>
+        <Cursor />
         <GlobalStyle />
         <main data-scroll-container ref={containerRef}>
           <Layout>

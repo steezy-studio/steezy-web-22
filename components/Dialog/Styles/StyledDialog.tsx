@@ -67,6 +67,7 @@ export const Trigger = styled(RadixDialog.Trigger)`
   width: 100%;
   border: none;
   outline: none;
+  background-color: transparent;
   border-radius: 0;
 `;
 

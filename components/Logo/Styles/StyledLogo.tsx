@@ -5,8 +5,10 @@ export const StyledLogo = styled.div`
   pointer-events: all;
   position: relative;
   z-index: 99;
+
+  height: 100%;
   svg {
-    width: auto;
+    /* width: auto; */
     height: 100%;
   }
 `;

@@ -63,14 +63,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                   return (
                     <ProjectHeroRole key={i}>
                       <Micro>{fact.header}</Micro>
-                      <Micro className='lowcase'>
-                        {w <= device.phone
-                          ? fact.content
-                              .trim()
-                              .split(`\r\n`)
-                              .join(`\u2002•\u2002`)
-                          : fact.content}
-                      </Micro>
+                      <Micro className='lowcase'>{fact.content}</Micro>
                     </ProjectHeroRole>
                   );
                 }

@@ -45,7 +45,7 @@ const makeRangeArray = (max: number) => {
   return [...new Array(max)].map((_, i) => i);
 };
 
-const ImageSlider = ({ imgList }: ImageSliderProps) => {
+const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
   const [activeImages, setActiveImages] = useState(imgList);
   const [index, setIndex] = useState(0);
   const totalImages = imgList.length;
@@ -68,7 +68,7 @@ const ImageSlider = ({ imgList }: ImageSliderProps) => {
   };
 
   return (
-    <StyledImageSlider>
+    <StyledImageSlider ref={ref}>
       <ImageSliderInner>
         <AnimatePresence exitBeforeEnter>
           {activeImages.map((image, order) => (
@@ -89,4 +89,4 @@ const ImageSlider = ({ imgList }: ImageSliderProps) => {
   );
 };
 
-export default ImageSlider;
+export default React.forwardRef(ImageSlider);

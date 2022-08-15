@@ -1,17 +1,21 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
-import { StyledContact } from "../../../pagestyles/StyledContact";
 import {
   ClientQuote,
   ProjectHeroFooter,
 } from "../../../pagestyles/StyledProject";
-import { Outro, ValuesSection } from "../../../pagestyles/StyledStudio";
+import {
+  Blockquote,
+  Outro,
+  ValuesSection,
+} from "../../../pagestyles/StyledStudio";
 import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
 import { HeroMedia } from "../../Hero/Styles/StyledHero";
 import { StyledImageSlider } from "../../ImageSlider/Styles/StyledImageSlider";
 
-export const StyledImg = styled.div`
+export const StyledImg = styled(motion.div)`
   ${StyledGridItem} & {
     transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
   }
@@ -34,6 +38,13 @@ export const StyledImg = styled.div`
     ${breakpoint.phone} {
       position: relative;
       padding-bottom: ${(5 / 4) * 100}%;
+    }
+  }
+  ${Blockquote} & {
+    ${breakpoint.phone} {
+      &._2 {
+        grid-area: "image";
+      }
     }
   }
   ${ValuesSection} & {

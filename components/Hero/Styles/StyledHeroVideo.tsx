@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint, colors } from "../../../helpers/consts";
-import u from "../../../helpers/unit";
 
 export const StyledHeroVideo = styled.div<{ ratio?: number }>`
   position: relative;
@@ -31,33 +30,41 @@ export const Showreel = styled.div`
   position: relative;
   width: 80vw;
   max-height: 80vh;
+  ${breakpoint.phone} {
+    width: ${({ theme }) => `calc(100vw - ${theme.pageMargin} * 2)`};
+  }
 `;
 
-export const PlayButton = styled.div`
+export const PlayButton = styled(motion.div)`
   position: absolute;
   z-index: 1;
   width: 80px;
   height: 80px;
-  pointer-events: none;
+  cursor: pointer;
   right: 0;
   bottom: 0;
-  background-color: ${colors.primary300};
+  background-color: ${colors.white};
   padding: 15px;
+  &:hover {
+    background-color: ${colors.primary400};
+  }
   &:after {
     content: "";
     display: block;
     width: 100%;
     height: 100%;
     background-position: center;
+    background-size: 25%;
     background-repeat: no-repeat;
     background-image: url("/icons/play-button.svg");
   }
   ${breakpoint.largeNotebook} {
     width: 70px;
     height: 70px;
-    padding: 10px;
+    padding: 0px;
   }
   ${breakpoint.phone} {
+    padding: 10px;
     width: 40px;
     height: 40px;
   }
