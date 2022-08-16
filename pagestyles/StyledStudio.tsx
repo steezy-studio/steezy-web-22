@@ -135,6 +135,7 @@ export const Blockquote = styled.div`
       grid-template-areas: "image" "quote";
       transform: unset;
       margin-top: 60px;
+      display: none;
     }
     &._1 {
       margin-top: 0;
@@ -244,5 +245,9 @@ export const Logo = styled(motion.img)`
 export const Outro = styled.div`
   ${breakpoint.phone} {
     margin-top: ${({ theme }) => u(2, theme.pageMargin)};
+    display: flex;
+    // TODO refactor to grid
+    gap: ${({ theme }) => u(1, theme.pageMargin)};
+    flex-direction: column-reverse;
   }
 `;

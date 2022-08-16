@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { HoverProvider } from "../../pages/_app";
 import { StyledNavLink } from "./Styles/StyledNavLink";
 
 interface NavLinkProps {
@@ -9,8 +10,11 @@ interface NavLinkProps {
 }
 
 const NavLink = ({ highlighted, href, children, active }: NavLinkProps) => {
+  const { setCursorHover } = useContext(HoverProvider);
   return (
     <StyledNavLink
+      onMouseEnter={() => setCursorHover(true)}
+      onMouseLeave={() => setCursorHover(false)}
       variants={{ open: { opacity: 1 }, close: { opacity: 0 } }}
       className={`${highlighted ? `highlighted` : ``} ${
         active ? `active` : ``

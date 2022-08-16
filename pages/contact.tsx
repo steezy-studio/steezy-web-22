@@ -6,6 +6,7 @@ import Layout from "../components/Layout/Layout";
 import Link from "../components/Link/Link";
 import Navbar from "../components/Navbar/Navbar";
 import { Medium } from "../components/Typo/Medium";
+import { Micro } from "../components/Typo/Micro";
 import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
@@ -44,9 +45,7 @@ const Contact = ({ areas }: ContactProps) => {
             url: "/images/contact-hero.jpg",
             width: 1815,
             height: 1089,
-          }}>
-          <Medium className='big'>{strings.contactPage.hero.perex}</Medium>
-        </Hero>
+          }}></Hero>
       </StyledContact>
     </>
   );

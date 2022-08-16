@@ -65,7 +65,7 @@ const ValueItem = ({ header, order, perex, src }: ValueItemProps) => {
         layout
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}>
-        <Img src={`/images/${src}`} layout={`fill`} objectFit='cover' />
+        <Img src={`/images/${src}`} layout={`fill`} />
       </ValueCover>
     </StyledValueItem>
   );

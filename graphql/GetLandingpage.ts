@@ -4,7 +4,7 @@ import { FRAGMENT_GET_ALL_AREAS } from "./fragments/FragmentGetAllAreas";
 export const GET_LANDINGPAGE = gql`
   ${FRAGMENT_GET_ALL_AREAS}
   query getLandingpage {
-    Areas {
+    Areas(sort: area_order_ASC) {
       ...FragmentGetAreas
     }
     LandingpageGrids {

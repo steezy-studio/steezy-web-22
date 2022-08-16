@@ -20,8 +20,10 @@ export const StyledNavbar = styled.nav`
   ${breakpoint.tabletLandscape} {
     height: 50px;
   }
-  ${breakpoint.phone} {
+  ${breakpoint.tabletPortrait} {
     top: ${({ theme }) => theme.pageMargin};
+  }
+  ${breakpoint.phone} {
     height: 40px;
   }
 `;

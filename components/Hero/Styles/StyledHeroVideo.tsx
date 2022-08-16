@@ -14,7 +14,7 @@ export const Loop = styled(motion.video)`
   width: 100%;
   height: 100%;
   object-fit: contain;
-  cursor: pointer;
+  /* cursor: pointer; */
   ${breakpoint.phone} {
     object-fit: cover;
     position: absolute;
@@ -40,7 +40,7 @@ export const PlayButton = styled(motion.div)`
   z-index: 1;
   width: 80px;
   height: 80px;
-  cursor: pointer;
+  /* cursor: pointer; */
   right: 0;
   bottom: 0;
   background-color: ${colors.white};

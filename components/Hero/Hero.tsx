@@ -1,12 +1,8 @@
-import { motion } from "framer-motion";
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { Asset } from "../../generated/types";
 import { device } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import Animation from "../Animation/Animation";
-import Fixed from "../Fixed/Fixed";
-import Instagram from "../Icons/Instagram";
-import Vimeo from "../Icons/Vimeo";
 import Img from "../Img/Img";
 import { Large } from "../Typo/Large";
 import { Micro } from "../Typo/Micro";
@@ -14,7 +10,6 @@ import HeroVideo from "./HeroVideo";
 import {
   HeroFooterChildren,
   HeroMedia,
-  HeroSocials,
   HeroText,
   StyledHero,
 } from "./Styles/StyledHero";

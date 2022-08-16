@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { breakpoint, ColorKeys, colors } from "../../helpers/consts";
+import { HoverProvider } from "../../pages/_app";
 
 interface InstagramProps {
   fill?: ColorKeys;
@@ -14,8 +15,17 @@ const StyledVimeo = styled.a`
 `;
 
 const Vimeo = ({ fill = "black" }: InstagramProps) => {
+  const { setCursorHover } = useContext(HoverProvider);
   return (
-    <StyledVimeo href='https://vimeo.com/steezystudio' target={`_blank`}>
+    <StyledVimeo
+      href='https://vimeo.com/steezystudio'
+      target={`_blank`}
+      onMouseEnter={() => {
+        setCursorHover(true);
+      }}
+      onMouseLeave={() => {
+        setCursorHover(false);
+      }}>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='25.053'

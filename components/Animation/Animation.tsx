@@ -22,6 +22,7 @@ interface AnimationProps {
   children: ReactElement;
   type: keyof typeof variants;
   delay?: number;
+  duration?: number;
   style?: React.CSSProperties;
   staggerChildren?: number;
   once?: boolean;
@@ -30,6 +31,7 @@ interface AnimationProps {
 const Animation = ({
   children,
   type,
+  duration,
   delay,
   style,
   staggerChildren,
@@ -62,8 +64,8 @@ const Animation = ({
     style: style,
     transition: {
       delay: delay ? delay : 0,
-      duration: 1.2,
-      ease: "anticipate",
+      duration: duration ? duration : 0.9,
+      ease: [0.22, 1, 0.36, 1],
       staggerChildren: staggerChildren || 0,
     },
   };

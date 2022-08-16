@@ -2,6 +2,7 @@ export default {
   footer: {
     cta: "Are you interested? Tell us your story!",
     address: "STEEZY, s.r.o.\nObilní trh 4, 602 00 Brno\nCzech Republic",
+    ig: "ig: @steezy.studio",
     other: "IČ: 07812558\nDIČ (VAT): CZ07812558",
   },
   contactPage: {

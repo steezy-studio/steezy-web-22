@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
+import { NextProjectSection } from "../../../pagestyles/StyledProject";
 
 export const StyledGridItem = styled(motion.a)`
   display: grid;
@@ -13,20 +14,33 @@ export const StyledGridItem = styled(motion.a)`
   ${breakpoint.tabletPortrait} {
     grid-row-gap: 5px;
   }
+  ${NextProjectSection} & {
+    grid-template-areas: "areas" "header" "cover";
+  }
 `;
 
-export const GridItemAreas = styled.div``;
+export const GridItemAreas = styled.div`
+  ${NextProjectSection} & {
+    grid-area: areas;
+  }
+`;
 
 export const GridItemCoverWrapper = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  ${NextProjectSection} & {
+    grid-area: cover;
+  }
 `;
 
 export const GridItemHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  ${NextProjectSection} & {
+    grid-area: header;
+  }
 `;
 
 export const GridItemVideo = styled.video`

@@ -9,7 +9,7 @@ export const StyledBurger = styled.div`
   background-color: ${colors.black};
   position: absolute;
   right: 0;
-  cursor: pointer;
+  /* cursor: pointer; */
   width: 80px;
   height: 100%;
   flex-shrink: 0;

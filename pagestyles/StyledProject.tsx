@@ -101,11 +101,6 @@ export const ProjectGridBlockquote = styled.div`
   }
 `;
 
-export const ProjectGridVimeo = styled(Vimeo)`
-  width: 100%;
-  height: 100%;
-`;
-
 export const ClientQuote = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -151,24 +146,10 @@ export const ClientQuoteRight = styled.div`
 `;
 
 export const NextProjectSection = styled(motion.div)`
-  display: grid;
-  grid-row-gap: 60px;
   margin: ${({ theme }) => u(2, theme.pageMargin)} 0;
   position: relative;
-  .back-link {
-    position: absolute;
-    bottom: -0.2em;
-    right: 0;
-  }
   ${breakpoint.smallNotebook} {
-    grid-row-gap: 30px;
-    .back-link {
-      /* bottom: 0px; */
-    }
   }
   ${breakpoint.phone} {
-    .back-link {
-      position: static;
-    }
   }
 `;

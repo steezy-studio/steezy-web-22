@@ -7,7 +7,7 @@ import { Medium } from "../../Typo/Medium";
 export const StyledLink = styled.span`
   &,
   a {
-    cursor: pointer;
+    /* cursor: pointer; */
     position: relative;
     font-family: inherit;
     color: inherit;
@@ -35,7 +35,7 @@ export const StyledLink = styled.span`
     }
     &.active,
     &.active a {
-      cursor: default;
+      /* cursor: default; */
       &:after {
         transform: scaleX(1);
       }

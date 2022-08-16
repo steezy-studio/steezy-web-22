@@ -5,7 +5,7 @@ import { breakpoint, colors } from "../helpers/consts";
 export const StyledValueItem = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: auto 1fr 1fr;
+  grid-template-columns: auto 1fr 100px;
   column-gap: 20px;
 `;
 

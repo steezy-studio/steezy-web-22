@@ -6,7 +6,7 @@ export const GET_ALL_PROJECTS = gql`
   ${FRAGMENT_GET_ALL_AREAS}
   ${GET_PROJECTS}
   query getAllProjects($limit: Int, $where: ProjectWhereInput) {
-    Areas {
+    Areas(sort: area_order_ASC) {
       ...FragmentGetAreas
     }
     Projects(where: $where, limit: $limit) {

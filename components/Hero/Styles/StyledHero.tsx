@@ -112,7 +112,7 @@ export const HeroFooterChildren = styled(motion.div)`
   display: flex;
   width: 100%;
   ${StyledContact} & {
-    position: absolute;
+    /* position: absolute;
     z-index: 100;
     top: ${({ theme }) => u(1, theme.pageMargin)};
     left: ${({ theme }) => u(7, theme.pageMargin, theme.pageMargin)};
@@ -128,7 +128,7 @@ export const HeroFooterChildren = styled(motion.div)`
     ${breakpoint.phone} {
       position: static;
       width: auto;
-    }
+    } */
   }
   ${breakpoint.tabletPortrait} {
     order: 3;

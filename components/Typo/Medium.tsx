@@ -63,6 +63,7 @@ export const Medium = styled.p`
     line-height: 1.3em;
     letter-spacing: 0.03em;
     font-family: "migra-italic";
+    font-weight: 300;
     ${breakpoint.largeNotebook} {
       font-size: 36px;
     }

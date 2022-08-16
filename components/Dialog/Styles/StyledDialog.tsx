@@ -34,7 +34,7 @@ export const Close = styled(RadixDialog.Close)`
   right: 0;
   top: -80px;
   border: 0;
-  cursor: pointer;
+  /* cursor: pointer; */
   padding: 5px;
   img {
     width: 100%;

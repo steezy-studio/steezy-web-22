@@ -4,7 +4,7 @@ import { FRAGMENT_GET_ALL_AREAS } from "./fragments/FragmentGetAllAreas";
 export const GET_PROJECT = gql`
   ${FRAGMENT_GET_ALL_AREAS}
   query GetProject($slug: String!) {
-    Areas {
+    Areas(sort: area_order_ASC) {
       ...FragmentGetAreas
     }
     Project(slug: $slug) {

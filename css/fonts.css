@@ -1,0 +1,25 @@
+@font-face {
+  font-family: "migra-italic";
+  src: url("/fonts/MigraItalic-Italic.woff");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "migra-italic";
+  src: url("/fonts/MigraItalic-ExtralightItalic.woff");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "migra-italic";
+  src: url("/fonts/MigraItalic-ExtraboldItalic.woff");
+  font-weight: 600;
+}
+@font-face {
+  font-family: "agrandir";
+  src: url("/fonts/PPAgrandir-Medium.woff");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "agrandir";
+  src: url("/fonts/PPAgrandir-Light.woff");
+  font-weight: 300;
+}

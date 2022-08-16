@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { colors } from "../../helpers/consts";
+import { HoverProvider } from "../../pages/_app";
 import { StyledBurger } from "./Styles/StyledBurger";
 
 interface BurgerProps {
@@ -14,8 +15,12 @@ const Line = (props) => (
 );
 
 const Burger = ({ onClick, isOpen }: BurgerProps) => {
+  const { setCursorHover } = useContext(HoverProvider);
   return (
-    <StyledBurger onClick={onClick}>
+    <StyledBurger
+      onClick={onClick}
+      onMouseEnter={() => setCursorHover(true)}
+      onMouseLeave={() => setCursorHover(false)}>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 45 45'

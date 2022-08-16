@@ -4,6 +4,7 @@ import { breakpoint } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
 import {
   ClientQuote,
+  NextProjectSection,
   ProjectHeroFooter,
 } from "../../../pagestyles/StyledProject";
 import {
@@ -18,6 +19,9 @@ import { StyledImageSlider } from "../../ImageSlider/Styles/StyledImageSlider";
 export const StyledImg = styled(motion.div)`
   ${StyledGridItem} & {
     transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
+    ${NextProjectSection} & {
+      max-height: 800px;
+    }
   }
   ${ProjectHeroFooter} & {
     height: auto;

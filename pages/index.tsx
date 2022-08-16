@@ -1,5 +1,5 @@
 import { GetStaticProps } from "next";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import client from "../apollo/client";
 import GridItem from "../components/GridItem/GridItem";
 import Head from "../components/Head/Head";
@@ -23,6 +23,7 @@ import {
   LandingPageHeroLogotype,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
+import { HoverProvider } from "./_app";
 
 interface indexProps {
   landingpageGrid: LandingpageGrids;
@@ -30,6 +31,7 @@ interface indexProps {
 }
 const Index = ({ landingpageGrid, areas }: indexProps) => {
   const landingpageStrings = strings.landingPage;
+  const { setCursorHover } = useContext(HoverProvider);
 
   return (
     <>
@@ -49,6 +51,8 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
             <>
               <StyledLink
                 as={`span`}
+                onMouseEnter={() => setCursorHover(true)}
+                onMouseLeave={() => setCursorHover(false)}
                 onClick={() => setOpenDialog(!openDialog)}>
                 {landingpageStrings.hero.header.cta}
               </StyledLink>

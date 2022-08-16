@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { breakpoint, ColorKeys, colors } from "../../helpers/consts";
+import { HoverProvider } from "../../pages/_app";
 
 interface InstagramProps {
   fill?: ColorKeys;
@@ -14,8 +15,15 @@ const StyledInstagram = styled.a`
 `;
 
 const Instagram = ({ fill = "black" }: InstagramProps) => {
+  const { setCursorHover } = useContext(HoverProvider);
   return (
     <StyledInstagram
+      onMouseEnter={() => {
+        setCursorHover(true);
+      }}
+      onMouseLeave={() => {
+        setCursorHover(false);
+      }}
       href='https://www.instagram.com/steezy.studio/'
       target={`_blank`}>
       <svg

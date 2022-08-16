@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import parse, {
   domToReact,
   Element,
@@ -23,6 +23,7 @@ import {
   videoCallback,
 } from "../../hooks/useIntersectionVideoObserver";
 import Animation from "../Animation/Animation";
+import { HoverProvider } from "../../pages/_app";
 
 interface GridItemProps {
   src: string;
@@ -47,6 +48,7 @@ const GridItem = ({
 }: GridItemProps) => {
   const [hover, sethover] = useState(false);
   const [videoAspect, setVideoAspect] = useState(0);
+  const { setCursorHover } = useContext(HoverProvider);
   const videoRef = useRef<HTMLVideoElement>(null);
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
@@ -76,11 +78,17 @@ const GridItem = ({
   };
 
   return (
-    <Animation type={"fadeFromBottom"}>
+    <Animation type={"fadeFromBottom"} delay={0.2} duration={1.2}>
       <StyledGridItem
         href={`/project/${slug}`}
-        onMouseEnter={() => sethover(true)}
-        onMouseLeave={() => sethover(false)}>
+        onMouseEnter={() => {
+          sethover(true);
+          setCursorHover(true);
+        }}
+        onMouseLeave={() => {
+          sethover(false);
+          setCursorHover(false);
+        }}>
         <GridItemCoverWrapper>
           {type === "Photo" && (
             <Img
@@ -112,7 +120,7 @@ const GridItem = ({
         </GridItemCoverWrapper>
         <GridItemAreas>
           {areas.map(({ area_name, _slug }) => (
-            <Micro key={_slug} className='lowcase'>
+            <Micro key={area_name} className='lowcase'>
               {area_name}
             </Micro>
           ))}

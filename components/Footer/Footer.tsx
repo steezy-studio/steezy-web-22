@@ -8,20 +8,26 @@ import {
   DetailedContact,
   StyledFooter,
 } from "./Styles/StyledFooter";
+import { useRouter } from "next/router";
 
 interface FooterProps {}
 
 const Footer = ({}: FooterProps) => {
   const footerStrings = strings.footer;
+  const router = useRouter();
 
   return (
     <StyledFooter>
       <Micro>{footerStrings.cta}</Micro>
       <ContactInfo>
         <Large>
-          <Link href={`mailto:${strings.globals.email}`}>
-            {strings.globals.email}
-          </Link>
+          {router.asPath === "/contact" ? (
+            <Link href={`#`}>{strings.footer.ig}</Link>
+          ) : (
+            <Link href={`mailto:${strings.globals.email}`}>
+              {strings.globals.email}
+            </Link>
+          )}
         </Large>
         <DetailedContact>
           <Micro className='lowcase'>{footerStrings.address}</Micro>

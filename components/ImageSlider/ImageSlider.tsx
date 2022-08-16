@@ -5,11 +5,12 @@ import {
   LayoutGroup,
 } from "framer-motion";
 import { ImageProps } from "next/image";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useTheme } from "styled-components";
 import strings from "../../data/strings";
 import u from "../../helpers/unit";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { HoverProvider } from "../../pages/_app";
 import Img from "../Img/Img";
 import { StyledLink } from "../Link/Styles/StyledLink";
 import { Large } from "../Typo/Large";
@@ -47,6 +48,7 @@ const makeRangeArray = (max: number) => {
 
 const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
   const [activeImages, setActiveImages] = useState(imgList);
+  const { setCursorHover } = useContext(HoverProvider);
   const [index, setIndex] = useState(0);
   const totalImages = imgList.length;
 
@@ -73,6 +75,7 @@ const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
         <AnimatePresence exitBeforeEnter>
           {activeImages.map((image, order) => (
             <motion.div
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               key={String(order) + String(index)}
               exit={{ x: `-100%` }}>
               <Img {...image} />
@@ -81,7 +84,14 @@ const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
         </AnimatePresence>
       </ImageSliderInner>
       <Large>
-        <StyledLink onClick={handleClick}>
+        <StyledLink
+          onClick={handleClick}
+          onMouseEnter={() => {
+            setCursorHover(true);
+          }}
+          onMouseLeave={() => {
+            setCursorHover(false);
+          }}>
           {strings.globals.nextImage}
         </StyledLink>
       </Large>

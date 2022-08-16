@@ -6,9 +6,9 @@ import GridItem from "../../components/GridItem/GridItem";
 import Hero from "../../components/Hero/Hero";
 import Img from "../../components/Img/Img";
 import { StyledImg } from "../../components/Img/Styles/StyledImg";
-import Layout from "../../components/Layout/Layout";
 import Link from "../../components/Link/Link";
 import Navbar from "../../components/Navbar/Navbar";
+import ProjectGridVimeo from "../../components/ProjectGridVimeo/ProjectGridVimeo";
 import { Large } from "../../components/Typo/Large";
 import { Medium } from "../../components/Typo/Medium";
 import { Micro } from "../../components/Typo/Micro";
@@ -16,7 +16,6 @@ import Video from "../../components/Video/Video";
 import strings from "../../data/strings";
 import { Areas, Project as ProjectType, Query } from "../../generated/types";
 import { GET_PROJECT } from "../../graphql/GetProject";
-import { allProjects, device } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import {
   ClientQuote,
@@ -27,7 +26,6 @@ import {
   ProjectGrid,
   ProjectGridBlockquote,
   ProjectGridRow,
-  ProjectGridVimeo,
   ProjectHeroFooter,
   ProjectHeroRole,
   ProjectHeroRoles,
@@ -111,9 +109,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
             if (row.__typename === "ProjectGridVimeo") {
               return (
                 <Animation key={`${i}_row`} type={"fadeFromBottom"}>
-                  <motion.div>
-                    <ProjectGridVimeo video={row.vimeo_id} responsive />
-                  </motion.div>
+                  <ProjectGridVimeo vimeoId={row.vimeo_id} />
                 </Animation>
               );
             }
@@ -167,11 +163,6 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                 projectName={projectData.next_project[0].project_grid_name}
                 slug={projectData.next_project[0]._slug}
               />
-              <Large className='back-link'>
-                <Link href={`/projects/${allProjects._slug}`}>
-                  {strings.globals.backToProjects}
-                </Link>
-              </Large>
             </NextProjectSection>
           </Animation>
         )}

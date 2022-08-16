@@ -1,40 +1,47 @@
+import events from "events";
+import { motion } from "framer-motion";
 import React, { useEffect, useRef } from "react";
-import styled from "styled-components";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
+import styled, { createGlobalStyle } from "styled-components";
+import { breakpoint, colors } from "../../helpers/consts";
+import Fixed from "../Fixed/Fixed";
 
-interface CursorProps {}
+interface CursorProps {
+  hover?: boolean;
+  isCursorDisabled?: boolean;
+}
 
-const StyledCursor = styled.div`
+const StyledCursor = styled(motion.div)`
   position: absolute;
-  z-index: 99999999999999999999999999;
-  img {
+  mix-blend-mode: difference;
+  z-index: 999999999999999999999999999999999999999999999999;
+  pointer-events: none;
+  div {
     width: 10px;
     height: 10px;
+    background-color: ${colors.white};
+    transform: translate(-50%, -50%);
+  }
+  ${breakpoint.tabletLandscape} {
+    display: none;
   }
 `;
 
-const Cursor = ({}: CursorProps) => {
-  const delay = 3;
-  const endX = useRef(0);
-  const endY = useRef(0);
-  const _x = useRef(0);
-  const _y = useRef(0);
+const Cursor = ({ hover, isCursorDisabled }: CursorProps) => {
+  const x = useRef(0);
+  const y = useRef(0);
   const requestRef = useRef(null);
-  const dot = useRef(null);
-  const dotOutline = useRef(null);
+  const cursorRef = useRef(null);
 
   const mouseMoveEvent = (e) => {
-    endX.current = e.clientX;
-    endY.current = e.clientY;
+    x.current = e.clientX;
+    y.current = e.clientY;
 
-    dot.current.style.top = endY.current + "px";
-    dot.current.style.left = endX.current + "px";
+    cursorRef.current.style.top = y.current + "px";
+    cursorRef.current.style.left = x.current + "px";
   };
 
   const animateDotOutline = () => {
-    _x.current += (endX.current - _x.current) / delay;
-    _y.current += (endY.current - _y.current) / delay;
-    dotOutline.current && (dotOutline.current.style.top = _y.current + "px");
-    dotOutline.current && (dotOutline.current.style.left = _x.current + "px");
     requestRef.current = requestAnimationFrame(animateDotOutline);
   };
 
@@ -48,8 +55,14 @@ const Cursor = ({}: CursorProps) => {
   }, []);
 
   return (
-    <StyledCursor ref={dot}>
-      <img src='/icons/cursor.svg' alt='' />
+    <StyledCursor ref={cursorRef}>
+      <motion.div
+        animate={{
+          rotate: hover ? 45 : 0,
+          scale: hover ? 1.5 : 1,
+          opacity: isCursorDisabled ? 0 : 1,
+        }}
+      />
     </StyledCursor>
   );
 };

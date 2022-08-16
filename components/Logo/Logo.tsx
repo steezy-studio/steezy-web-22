@@ -1,15 +1,19 @@
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ColorKeys, colors } from "../../helpers/consts";
+import { HoverProvider } from "../../pages/_app";
 import { StyledLogo } from "./Styles/StyledLogo";
 
 interface LogoProps {}
 
 const Logo = ({}: LogoProps) => {
   const [hover, toggleHover] = useState(false);
+  const { setCursorHover } = useContext(HoverProvider);
 
   return (
-    <StyledLogo>
+    <StyledLogo
+      onMouseEnter={() => setCursorHover(true)}
+      onMouseLeave={() => setCursorHover(false)}>
       <a href={"/"}>
         <svg
           xmlns='http://www.w3.org/2000/svg'
