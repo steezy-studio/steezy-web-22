@@ -1,9 +1,10 @@
 import Vimeo from "@u-wave/react-vimeo";
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   useIntersectionObserver,
   videoCallback,
 } from "../../hooks/useIntersectionVideoObserver";
+import { HoverProvider } from "../../pages/_app";
 import Dialog from "../Dialog/Dialog";
 import {
   PlayButton,
@@ -20,6 +21,7 @@ interface VideoProps {
 
 const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { setCursorHover } = useContext(HoverProvider);
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
   );
@@ -35,7 +37,9 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
           </Showreel>
         }
         trigger={
-          <StyledHeroVideo>
+          <StyledHeroVideo
+            onMouseEnter={() => setCursorHover(true)}
+            onMouseLeave={() => setCursorHover(false)}>
             <PlayButton />
             <Loop
               whileHover={{ scale: 1.15 }}

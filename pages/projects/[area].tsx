@@ -141,10 +141,7 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                 );
               })}
             </ProjectsHeroFilters>
-            <Medium>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget
-              arcu mollis, faucibus erat eget, sollicitudin leo.
-            </Medium>
+            <Medium></Medium>
           </ProjectsHeroContent>
           <HeroSocials>
             <Instagram />
