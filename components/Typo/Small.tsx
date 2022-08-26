@@ -21,7 +21,7 @@ export const Small = styled.p`
   ${breakpoint.smallNotebook} {
     font-size: 18px;
   }
-  ${breakpoint.tabletPortrait} {
+  ${breakpoint.tabletLandscape} {
     font-size: 16px;
   }
 `;

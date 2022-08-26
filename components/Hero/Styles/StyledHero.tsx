@@ -67,7 +67,7 @@ export const HeroText = styled(motion.div)`
     width: ${({ theme }) => u(5, theme.pageMargin)};
   }
   ${breakpoint.tabletLandscape} {
-    top: 50%;
+    top: 25vh;
   }
   ${breakpoint.tabletPortrait} {
     width: ${({ theme }) => u(8, theme.pageMargin)};
@@ -82,21 +82,14 @@ export const HeroText = styled(motion.div)`
   ${breakpoint.phone} {
     width: ${({ theme }) => u(15, theme.pageMargin)};
   }
+  ${StyledContact} & {
+    top: 40vh;
+  }
 `;
 
 export const HeroMedia = styled(motion.div)`
   width: ${({ theme }) => u(13, theme.pageMargin)};
   margin-left: auto;
-  ${StyledContact} & {
-    width: ${({ theme }) => u(12, theme.pageMargin)};
-    margin-top: ${({ theme }) => u(2, theme.pageMargin)};
-    ${breakpoint.tabletPortrait} {
-      width: inherit;
-    }
-    ${breakpoint.phone} {
-      margin-top: 0;
-    }
-  }
   ${breakpoint.tabletPortrait} {
     width: ${({ theme }) => u(16, theme.pageMargin)};
     margin-left: unset;
@@ -111,25 +104,6 @@ export const HeroFooterChildren = styled(motion.div)`
   padding-top: 30px;
   display: flex;
   width: 100%;
-  ${StyledContact} & {
-    /* position: absolute;
-    z-index: 100;
-    top: ${({ theme }) => u(1, theme.pageMargin)};
-    left: ${({ theme }) => u(7, theme.pageMargin, theme.pageMargin)};
-    width: ${({ theme }) => u(4, theme.pageMargin)};
-    ${breakpoint.largeNotebook} {
-      width: ${({ theme }) => u(5, theme.pageMargin)};
-    }
-    ${breakpoint.tabletLandscape} {
-      width: ${({ theme }) => u(6, theme.pageMargin)};
-      left: unset;
-      right: ${({ theme }) => u(2, theme.pageMargin)};
-    }
-    ${breakpoint.phone} {
-      position: static;
-      width: auto;
-    } */
-  }
   ${breakpoint.tabletPortrait} {
     order: 3;
     ${StyledIndex} & {

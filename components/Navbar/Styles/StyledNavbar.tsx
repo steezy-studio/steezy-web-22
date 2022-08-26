@@ -9,22 +9,10 @@ export const StyledNavbar = styled.nav`
   z-index: 99999;
   top: ${({ theme }) => `calc(-100vh + ${theme.pageMargin})`};
   width: ${({ theme }) => u(16, theme.pageMargin)};
-  height: 80px;
+  height: ${({ theme }) => theme.navbarHeight};
   display: flex;
-  ${breakpoint.largeNotebook} {
-    height: 70px;
-  }
-  ${breakpoint.smallNotebook} {
-    height: 60px;
-  }
-  ${breakpoint.tabletLandscape} {
-    height: 50px;
-  }
-  ${breakpoint.tabletPortrait} {
-    top: ${({ theme }) => theme.pageMargin};
-  }
   ${breakpoint.phone} {
-    height: 40px;
+    top: ${({ theme }) => theme.pageMargin};
   }
 `;
 
@@ -45,14 +33,12 @@ export const NavLinks = styled(motion.div)`
   }
   ${breakpoint.tabletLandscape} {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    /* top: ${({ theme }) => `calc((${theme.pageMargin} * 2) + 60px)`};
-    right: ${({ theme }) => theme.pageMargin};
-    left: ${({ theme }) => theme.pageMargin};
-    bottom: ${({ theme }) => theme.pageMargin}; */
+    top: ${({ theme }) => "-" + theme.pageMargin};
+    left: ${({ theme }) => "-" + theme.pageMargin};
+    right: ${({ theme }) => "-" + theme.pageMargin};
+    bottom: ${({ theme }) => "-" + theme.pageMargin};
+    width: 100vw;
+    height: 100vh;
     flex-direction: column;
     align-items: flex-end;
     padding: ${({ theme }) => theme.pageMargin};
@@ -63,7 +49,7 @@ export const NavLinks = styled(motion.div)`
 
 export const PhoneDecoration = styled(motion.div)`
   display: none;
-  ${breakpoint.phone} {
+  ${breakpoint.tabletLandscape} {
     position: absolute;
     bottom: ${({ theme }) => theme.pageMargin};
     left: ${({ theme }) => theme.pageMargin};

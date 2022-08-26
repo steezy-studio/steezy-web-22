@@ -43,9 +43,7 @@ const ValueItem = ({
     valueRef,
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          onFocusChange(id);
-        }
+        if (entry.isIntersecting) onFocusChange(id);
       });
     },
     {

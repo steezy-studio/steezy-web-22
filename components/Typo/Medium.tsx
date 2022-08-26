@@ -30,7 +30,7 @@ export const Medium = styled.p`
       font-size: 26px;
     }
   }
-  ${breakpoint.tabletPortrait} {
+  ${breakpoint.tabletLandscape} {
     font-size: 18px;
     &.big {
       font-size: 21px;

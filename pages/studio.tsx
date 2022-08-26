@@ -37,6 +37,7 @@ import {
   SubServicesList,
   TextBlock,
   ValuesCover,
+  ValuesCoverInner,
   ValuesList,
   ValuesSection,
 } from "../pagestyles/StyledStudio";
@@ -107,14 +108,20 @@ const Studio = ({ areas }: StudioProps) => {
             data-scroll
             data-scroll-sticky
             data-scroll-target='#values-section'
-            data-scroll-offset={"-50%,50%"}
-            style={{ position: "sticky" }}>
-            <Img
-              src={"/images/steezy_interier-04.jpg"}
-              width={1500}
-              height={1500}
-              layout={`intrinsic`}
-            />
+            data-scroll-offset={`${
+              -1 *
+              (Number(theme.pageMargin.split("px")[0]) * 2 +
+                Number(theme.navbarHeight.split("px")[0]))
+            }px,10%`}>
+            <ValuesCoverInner>
+              <Img
+                src={"/images/steezy_interier-04.jpg"}
+                width={1500}
+                height={2000}
+                objectFit={"cover"}
+                layout={`intrinsic`}
+              />
+            </ValuesCoverInner>
           </ValuesCover>
         </ValuesSection>
         <Animation type='fadeFromBottom'>

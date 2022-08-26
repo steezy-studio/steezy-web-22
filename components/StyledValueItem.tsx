@@ -8,7 +8,10 @@ export const StyledValueItem = styled.div<{ order: number }>`
   position: relative;
   display: grid;
   grid-template-columns: 300px 1fr;
-  column-gap: ${({ theme }) => `calc( 2* ${theme.pageMargin} )`};
+  column-gap: ${({ theme }) => `calc( ${theme.pageMargin} )`};
+  ${breakpoint.smallNotebook} {
+    grid-template-columns: 230px 1fr;
+  }
 `;
 
 export const ValueCover = styled(motion.div)`
@@ -35,10 +38,9 @@ export const ValueBody = styled.div`
     padding-left: 100px;
   }
   ${breakpoint.smallNotebook} {
-    padding-left: 90px;
+    padding-left: 0;
   }
   ${breakpoint.phone} {
-    padding-left: 0;
   }
 `;
 
@@ -64,8 +66,11 @@ export const Order = styled.span`
   }
   ${breakpoint.smallNotebook} {
     font-size: 60px;
+    position: relative;
+  }
+  ${breakpoint.tabletLandscape} {
+    font-size: 50px;
   }
   ${breakpoint.phone} {
-    position: static;
   }
 `;

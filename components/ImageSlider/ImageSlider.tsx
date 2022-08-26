@@ -38,11 +38,9 @@ function cloneArray<T>(arr: T[], multiplier: number): T[] {
 
 const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
   const imageSlideRef = useRef(null);
-  const imageSliderInnerRef = useRef(null);
   const touchStart = useRef({ x: 0, y: 0 });
   const touchEnd = useRef({ x: 0, y: 0 });
   const multiplier = 3;
-  const slidesPerView = 3;
   const { setCursorHover } = useContext(HoverProvider);
 
   const clonedImgList = useMemo(() => {
