@@ -12,15 +12,16 @@ export const StyledImageSlider = styled(motion.div)`
 export const SliderInner = styled(motion.div)`
   display: grid;
   grid-auto-flow: column;
+  overflow: hidden;
+  width: 100%;
   grid-auto-columns: ${({ theme }) => u(8 - 15 / 16, theme.pageMargin)};
   ${breakpoint.phone} {
+    grid-auto-columns: ${({ theme }) => u(16 - 15 / 16, theme.pageMargin)};
   }
 `;
 
-export const ImageSlide = styled(motion.div)`
-  width: ${({ theme }) => u(8 - 15 / 16, theme.pageMargin)};
-`;
+export const ImageSlide = styled(motion.div)``;
 
 export const Slider = styled(motion.div)`
-  /* width: fit-content; */
+  overflow: hidden;
 `;

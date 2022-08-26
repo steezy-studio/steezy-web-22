@@ -7,7 +7,7 @@ import u from "../helpers/unit";
 export const StyledValueItem = styled.div<{ order: number }>`
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 300px 1fr;
   column-gap: ${({ theme }) => `calc( 2* ${theme.pageMargin} )`};
 `;
 

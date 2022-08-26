@@ -36,6 +36,7 @@ import {
   StyledStudio,
   SubServicesList,
   TextBlock,
+  ValuesCover,
   ValuesList,
   ValuesSection,
 } from "../pagestyles/StyledStudio";
@@ -87,7 +88,7 @@ const Studio = ({ areas }: StudioProps) => {
 
         <ValuesSection id='values-section'>
           <ValuesList>
-            {studioStrings.values.list.map(({ header, perex, src }, i) => {
+            {studioStrings.values.list.map(({ header, perex }, i) => {
               const n = i + 1;
               return (
                 <ValueItem
@@ -96,13 +97,25 @@ const Studio = ({ areas }: StudioProps) => {
                   id={i}
                   order={i}
                   header={header}
-                  src={src}
                   perex={perex}
                   key={i}
                 />
               );
             })}
           </ValuesList>
+          <ValuesCover
+            data-scroll
+            data-scroll-sticky
+            data-scroll-target='#values-section'
+            data-scroll-offset={"-50%,50%"}
+            style={{ position: "sticky" }}>
+            <Img
+              src={"/images/steezy_interier-04.jpg"}
+              width={1500}
+              height={1500}
+              layout={`intrinsic`}
+            />
+          </ValuesCover>
         </ValuesSection>
         <Animation type='fadeFromBottom'>
           <ImageSlider

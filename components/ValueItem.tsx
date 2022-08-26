@@ -19,7 +19,6 @@ import { Small } from "./Typo/Small";
 interface ValueItemProps {
   header: string;
   perex: string;
-  src: string;
   order: number;
   onFocusChange: (id: number) => void;
   isFocused: boolean;
@@ -30,7 +29,6 @@ const ValueItem = ({
   header,
   order,
   perex,
-  src,
   onFocusChange,
   id,
   isFocused,
@@ -71,29 +69,27 @@ const ValueItem = ({
 
   return (
     <StyledValueItem ref={valueRef} order={order}>
-      <ValueItemContent>
-        <div>
-          {isFocused && (
-            <motion.div
-              layoutId={`value-header`}
-              transition={{ ease: [0.22, 1, 0.36, 1], duration: 1 }}>
-              <Micro className='with-dash'>
-                {strings.studioPage.values.header}
-              </Micro>
-            </motion.div>
-          )}
-        </div>
+      <div>
+        {isFocused && (
+          <motion.div
+            layoutId={`value-header`}
+            transition={{ ease: [0.22, 1, 0.36, 1], duration: 1 }}>
+            <Micro className='with-dash'>
+              {strings.studioPage.values.header}
+            </Micro>
+          </motion.div>
+        )}
+      </div>
 
-        <ValueBody>
-          <Order>{formatedOrder}</Order>
-          <ValueHeader>
-            <Medium className='big'>{header}</Medium>
-            <Small className='big-lh'>{perex}</Small>
-          </ValueHeader>
-        </ValueBody>
-      </ValueItemContent>
+      <ValueBody>
+        <Order>{formatedOrder}</Order>
+        <ValueHeader>
+          <Medium className='big'>{header}</Medium>
+          <Small className='big-lh'>{perex}</Small>
+        </ValueHeader>
+      </ValueBody>
 
-      <ValueCoverWrapper>
+      {/* <ValueCoverWrapper>
         {isFocused && (
           <ValueCover
             initial={{ opacity: 0.1 }}
@@ -111,7 +107,7 @@ const ValueItem = ({
             />
           </ValueCover>
         )}
-      </ValueCoverWrapper>
+      </ValueCoverWrapper> */}
     </StyledValueItem>
   );
 };

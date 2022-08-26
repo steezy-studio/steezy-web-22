@@ -1,6 +1,6 @@
-import { AnimatePresence } from "framer-motion";
 import { ImageProps } from "next/image";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useMemo, useRef, useState } from "react";
+import shortid from "shortid";
 import strings from "../../data/strings";
 import { HoverProvider } from "../../pages/_app";
 import Img from "../Img/Img";
@@ -12,11 +12,8 @@ import {
   SliderInner,
   StyledImageSlider,
 } from "./Styles/StyledImageSlider";
-import shortid from "shortid";
 
-interface ImgList extends ImageProps {
-  id: string;
-}
+interface ImgList extends ImageProps {}
 
 interface ImageSliderProps {
   imgList: ImgList[];
@@ -31,59 +28,95 @@ const makeRangeArray = (max: number) => {
   return [...new Array(max)].map((_, i) => i);
 };
 
+function addUniqueIds<T>(arr: T[]): T[] {
+  return arr.map((item) => ({ ...item, id: shortid.generate() }));
+}
+
+function cloneArray<T>(arr: T[], multiplier: number): T[] {
+  return new Array(multiplier).fill(arr).flat();
+}
+
 const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
-  const [activeImages, setActiveImages] = useState(imgList);
+  const imageSlideRef = useRef(null);
+  const imageSliderInnerRef = useRef(null);
+  const touchStart = useRef({ x: 0, y: 0 });
+  const touchEnd = useRef({ x: 0, y: 0 });
+  const multiplier = 3;
+  const slidesPerView = 3;
   const { setCursorHover } = useContext(HoverProvider);
-  const [index, setIndex] = useState(0);
-  const totalImages = imgList.length;
 
-  React.useEffect(() => {
-    const rangeArr = makeRangeArray(totalImages);
-    const dynImgList = rangeArr.map((i, n) => {
-      const _i = wrap(0, totalImages, index + i);
-      if (n + 1 === totalImages) {
-        return { ...imgList[_i], id: shortid.generate() };
-      }
-      return imgList[_i];
-    });
+  const clonedImgList = useMemo(() => {
+    const clonedArray = cloneArray(imgList, multiplier);
+    return addUniqueIds(clonedArray);
+  }, []);
 
-    setActiveImages(dynImgList);
-  }, [index]);
+  const totalImgList = imgList.length;
+  const [index, setIndex] = useState({
+    index: totalImgList,
+    shouldAnimate: true,
+  });
+  const [sliderItems, setSliderItems] = useState(clonedImgList);
+  const totalSliderItems = sliderItems.length;
 
   const handleClick = (dir) => {
-    setIndex((prev) => prev + dir);
+    const nextIndex = index.index + dir;
+
+    if (nextIndex < 0 || nextIndex > totalSliderItems - totalImgList) return;
+    setIndex({ index: nextIndex, shouldAnimate: true });
+  };
+
+  const handleTouchStart = (e) => {
+    touchStart.current = {
+      x: e.changedTouches[0].clientX,
+      y: e.changedTouches[0].clientY,
+    };
+  };
+
+  const handleTouchEnd = (e) => {
+    touchEnd.current = {
+      x: e.changedTouches[0].clientX,
+      y: e.changedTouches[0].clientY,
+    };
+
+    if (touchStart.current.x - touchEnd.current.x < 0) {
+      handleClick(-1);
+    } else {
+      handleClick(1);
+    }
   };
 
   return (
     <StyledImageSlider ref={ref}>
-      <Slider drag={"x"} dragConstraints={{ right: 0, left: 0 }}>
-        <SliderInner>
-          <AnimatePresence>
-            {activeImages.map((image, order) => {
-              return (
-                <ImageSlide
-                  key={image.id}
-                  layout
-                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
-                  <Img {...image} />
-                </ImageSlide>
-              );
-            })}
-          </AnimatePresence>
+      <Slider>
+        <SliderInner
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}>
+          {sliderItems.map((image, order) => {
+            return (
+              <ImageSlide
+                key={image.id}
+                ref={imageSlideRef}
+                custom={{ index }}
+                initial={{ x: `${index.index * 100}%` }}
+                animate={{ x: `${index.index * -100}%` }}
+                onAnimationComplete={(e) => {
+                  if (
+                    index.index === totalSliderItems - totalImgList ||
+                    index.index === 0
+                  ) {
+                    setIndex({ index: 4, shouldAnimate: false });
+                  }
+                }}
+                transition={{
+                  duration: index.shouldAnimate ? 0.7 : 0,
+                  ease: [0.22, 1, 0.36, 1],
+                }}>
+                <Img {...image} />
+              </ImageSlide>
+            );
+          })}
         </SliderInner>
       </Slider>
-      <Large>
-        <StyledLink
-          onClick={() => handleClick(-1)}
-          onMouseEnter={() => {
-            setCursorHover(true);
-          }}
-          onMouseLeave={() => {
-            setCursorHover(false);
-          }}>
-          -1
-        </StyledLink>
-      </Large>
       <Large>
         <StyledLink
           onClick={() => handleClick(1)}
@@ -101,37 +134,6 @@ const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
 };
 
 export default React.forwardRef(ImageSlider);
-// const touchStart = useRef({ x: 0, y: 0 });
-// const touchEnd = useRef({ x: 0, y: 0 });
-
-// const handleTouchStart = (e: TouchEvent) => {
-//   touchStart.current = {
-//     x: e.changedTouches[0].clientX,
-//     y: e.changedTouches[0].clientY,
-//   };
-// };
-
-// const handleTouchEnd = (e: TouchEvent) => {
-//   touchEnd.current = {
-//     x: e.changedTouches[0].clientX,
-//     y: e.changedTouches[0].clientY,
-//   };
-
-//   if (touchStart.current.x - touchEnd.current.x < 0) {
-//     handleClick(-1);
-//   } else {
-//     handleClick(1);
-//   }
-// };
-
-// React.useEffect(() => {
-//   ref.current.addEventListener("touchstart", handleTouchStart);
-//   ref.current.addEventListener("touchend", handleTouchEnd);
-//   return () => {
-//     ref.current.removeEventListener("touchstart", handleTouchStart);
-//     ref.current.removeEventListener("touchend", handleTouchEnd);
-//   };
-// }, []);
 
 const swipeConfidenceThreshold = 10000;
 const swipePower = (offset: number, velocity: number) => {
