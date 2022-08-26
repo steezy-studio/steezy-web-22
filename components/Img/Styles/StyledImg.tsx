@@ -1,17 +1,12 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
-import u from "../../../helpers/unit";
 import {
   ClientQuote,
   NextProjectSection,
   ProjectHeroFooter,
 } from "../../../pagestyles/StyledProject";
-import {
-  Blockquote,
-  Outro,
-  ValuesSection,
-} from "../../../pagestyles/StyledStudio";
+import { Blockquote, Outro } from "../../../pagestyles/StyledStudio";
 import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
 import { HeroMedia } from "../../Hero/Styles/StyledHero";
 import { StyledImageSlider } from "../../ImageSlider/Styles/StyledImageSlider";
@@ -21,6 +16,9 @@ export const StyledImg = styled(motion.div)`
     transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
     ${NextProjectSection} & {
       max-height: 800px;
+      ${breakpoint.monitor} {
+        max-height: 70vh;
+      }
     }
   }
   ${ProjectHeroFooter} & {
@@ -49,12 +47,6 @@ export const StyledImg = styled(motion.div)`
       &._2 {
         grid-area: "image";
       }
-    }
-  }
-  ${ValuesSection} & {
-    padding-left: ${({ theme }) => u(1, theme.pageMargin)};
-    ${breakpoint.phone} {
-      display: none;
     }
   }
   ${StyledImageSlider} & {

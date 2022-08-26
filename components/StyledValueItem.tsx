@@ -1,17 +1,30 @@
-import { motion } from "framer-motion";
+import { m, motion } from "framer-motion";
+import { relative } from "path";
 import styled from "styled-components";
 import { breakpoint, colors } from "../helpers/consts";
+import u from "../helpers/unit";
 
-export const StyledValueItem = styled.div`
+export const StyledValueItem = styled.div<{ order: number }>`
   position: relative;
   display: grid;
-  grid-template-columns: auto 1fr 100px;
-  column-gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  column-gap: ${({ theme }) => `calc( 2* ${theme.pageMargin} )`};
 `;
 
 export const ValueCover = styled(motion.div)`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+`;
+
+export const ValueCoverWrapper = styled.div`
   position: relative;
-  padding-bottom: 100%;
+  transform: translateY(-50%);
+`;
+
+export const ValueItemContent = styled.div`
+  display: grid;
+  grid-template-columns: 300px auto;
 `;
 
 export const ValueBody = styled.div`

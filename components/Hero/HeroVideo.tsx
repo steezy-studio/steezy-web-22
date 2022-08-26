@@ -1,5 +1,5 @@
 import Vimeo from "@u-wave/react-vimeo";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import {
   useIntersectionObserver,
   videoCallback,
@@ -7,8 +7,8 @@ import {
 import { HoverProvider } from "../../pages/_app";
 import Dialog from "../Dialog/Dialog";
 import {
-  PlayButton,
   Loop,
+  PlayButton,
   Showreel,
   StyledHeroVideo,
 } from "./Styles/StyledHeroVideo";

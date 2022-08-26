@@ -22,6 +22,7 @@
     "@apollo/client": "^3.5.10",
     "@radix-ui/react-dialog": "^0.1.7",
     "@types/react-dom": "^18.0.5",
+    "@types/shortid": "^0.0.29",
     "@u-wave/react-vimeo": "^0.9.8",
     "framer-motion": "^6.2.8",
     "graphql": "^16.3.0",
@@ -31,6 +32,7 @@
     "react-apollo": "^3.1.5",
     "react-dom": "^17.0.2",
     "react-locomotive-scroll": "^0.2.2",
+    "shortid": "^2.2.16",
     "styled-components": "^5.3.3",
     "typescript": "^4.6.2"
   },

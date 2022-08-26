@@ -1,15 +1,17 @@
-import { motion, Variants } from "framer-motion";
-import React, { Fragment, ReactNode, useRef, useState } from "react";
-import { ReactElement } from "react";
-import { useLocomotiveScroll } from "react-locomotive-scroll";
-import styled from "styled-components";
+import React, {
+  Fragment,
+  ReactElement,
+  ReactNode,
+  useRef,
+  useState,
+} from "react";
 import { useIntersectionObserver } from "../../hooks/useIntersectionVideoObserver";
 
 const variants = {
   fadeFromBottom: {
-    enter: { y: 100, opacity: 0 },
-    animate: { y: 0, opacity: 1 },
-    exit: { y: -100, opacity: 0 },
+    enter: { y: `20%`, opacity: 0 },
+    animate: { y: `0%`, opacity: 1 },
+    exit: { y: `-20%`, opacity: 0 },
   },
   fadeIn: {
     enter: { opacity: 0 },

@@ -1,41 +1,26 @@
-import {
-  AnimatePresence,
-  motion,
-  AnimateSharedLayout,
-  LayoutGroup,
-} from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { ImageProps } from "next/image";
-import React, { useContext, useState } from "react";
-import { useTheme } from "styled-components";
+import React, { useContext, useRef, useState } from "react";
 import strings from "../../data/strings";
-import u from "../../helpers/unit";
-import { useWindowSize } from "../../hooks/useWindowSize";
 import { HoverProvider } from "../../pages/_app";
 import Img from "../Img/Img";
 import { StyledLink } from "../Link/Styles/StyledLink";
 import { Large } from "../Typo/Large";
-import { Medium } from "../Typo/Medium";
 import {
-  ImageSliderInner,
+  ImageSlide,
+  Slider,
+  SliderInner,
   StyledImageSlider,
 } from "./Styles/StyledImageSlider";
+import shortid from "shortid";
 
-interface ImageSliderProps {
-  imgList: ImageProps[];
+interface ImgList extends ImageProps {
+  id: string;
 }
 
-// [0 1 2] 3 4
-// v
-// 0 [1 2 3] 4
-// v
-// 0 1 [2 3 4]
-// v
-// 0] 1 2 [3 4
-
-const swipeConfidenceThreshold = 10000;
-const swipePower = (offset: number, velocity: number) => {
-  return Math.abs(offset) * velocity;
-};
+interface ImageSliderProps {
+  imgList: ImgList[];
+}
 
 const wrap = (min: number, max: number, v: number) => {
   const rangeSize = max - min;
@@ -53,39 +38,55 @@ const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
   const totalImages = imgList.length;
 
   React.useEffect(() => {
-    const first = wrap(0, totalImages, index);
-    const second = wrap(0, totalImages, index + 1);
-    const third = wrap(0, totalImages, index + 2);
-    const fourth = wrap(0, totalImages, index + 3);
-    setActiveImages([
-      imgList[first],
-      imgList[second],
-      imgList[third],
-      imgList[fourth],
-    ]);
+    const rangeArr = makeRangeArray(totalImages);
+    const dynImgList = rangeArr.map((i, n) => {
+      const _i = wrap(0, totalImages, index + i);
+      if (n + 1 === totalImages) {
+        return { ...imgList[_i], id: shortid.generate() };
+      }
+      return imgList[_i];
+    });
+
+    setActiveImages(dynImgList);
   }, [index]);
 
-  const handleClick = () => {
-    setIndex((prev) => prev + 1);
+  const handleClick = (dir) => {
+    setIndex((prev) => prev + dir);
   };
 
   return (
     <StyledImageSlider ref={ref}>
-      <ImageSliderInner>
-        <AnimatePresence exitBeforeEnter>
-          {activeImages.map((image, order) => (
-            <motion.div
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              key={String(order) + String(index)}
-              exit={{ x: `-100%` }}>
-              <Img {...image} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </ImageSliderInner>
+      <Slider drag={"x"} dragConstraints={{ right: 0, left: 0 }}>
+        <SliderInner>
+          <AnimatePresence>
+            {activeImages.map((image, order) => {
+              return (
+                <ImageSlide
+                  key={image.id}
+                  layout
+                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
+                  <Img {...image} />
+                </ImageSlide>
+              );
+            })}
+          </AnimatePresence>
+        </SliderInner>
+      </Slider>
       <Large>
         <StyledLink
-          onClick={handleClick}
+          onClick={() => handleClick(-1)}
+          onMouseEnter={() => {
+            setCursorHover(true);
+          }}
+          onMouseLeave={() => {
+            setCursorHover(false);
+          }}>
+          -1
+        </StyledLink>
+      </Large>
+      <Large>
+        <StyledLink
+          onClick={() => handleClick(1)}
           onMouseEnter={() => {
             setCursorHover(true);
           }}
@@ -100,3 +101,39 @@ const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
 };
 
 export default React.forwardRef(ImageSlider);
+// const touchStart = useRef({ x: 0, y: 0 });
+// const touchEnd = useRef({ x: 0, y: 0 });
+
+// const handleTouchStart = (e: TouchEvent) => {
+//   touchStart.current = {
+//     x: e.changedTouches[0].clientX,
+//     y: e.changedTouches[0].clientY,
+//   };
+// };
+
+// const handleTouchEnd = (e: TouchEvent) => {
+//   touchEnd.current = {
+//     x: e.changedTouches[0].clientX,
+//     y: e.changedTouches[0].clientY,
+//   };
+
+//   if (touchStart.current.x - touchEnd.current.x < 0) {
+//     handleClick(-1);
+//   } else {
+//     handleClick(1);
+//   }
+// };
+
+// React.useEffect(() => {
+//   ref.current.addEventListener("touchstart", handleTouchStart);
+//   ref.current.addEventListener("touchend", handleTouchEnd);
+//   return () => {
+//     ref.current.removeEventListener("touchstart", handleTouchStart);
+//     ref.current.removeEventListener("touchend", handleTouchEnd);
+//   };
+// }, []);
+
+const swipeConfidenceThreshold = 10000;
+const swipePower = (offset: number, velocity: number) => {
+  return Math.abs(offset) * velocity;
+};

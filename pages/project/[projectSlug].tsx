@@ -150,7 +150,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
             </ClientQuote>
           </Animation>
         )}
-        {projectData.next_project[0] && (
+        {/* {projectData.next_project[0] && (
           <Animation type='fadeFromBottom'>
             <NextProjectSection>
               <Large>{strings.globals.nextProject}</Large>
@@ -165,7 +165,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
               />
             </NextProjectSection>
           </Animation>
-        )}
+        )} */}
       </StyledProject>
     </>
   );

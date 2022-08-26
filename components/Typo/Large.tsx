@@ -99,9 +99,13 @@ export const Large = styled.h1`
       margin-bottom: ${({ theme }) => u(1, theme.pageMargin)};
     }
   }
+
   ${NextProjectSection} & {
     text-align: right;
     transform: translateY(100%);
+    ${breakpoint.monitor} {
+      transform: translateY(70%);
+    }
     ${breakpoint.phone} {
       transform: none;
       text-align: left;

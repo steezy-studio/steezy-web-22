@@ -45,7 +45,7 @@ export const TextBlock = styled(motion.div)`
 `;
 
 export const ValuesSection = styled.section`
-  margin: ${({ theme }) => u(2, theme.pageMargin)} 0;
+  margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
   ${breakpoint.phone} {
   }
 `;
@@ -72,7 +72,7 @@ export const ValuesInner = styled.div`
 
 export const ValuesList = styled.div`
   display: grid;
-  row-gap: ${({ theme }) => u(1, theme.pageMargin)};
+  row-gap: ${({ theme }) => u(2, theme.pageMargin)};
   ${breakpoint.phone} {
     row-gap: ${({ theme }) => u(3, theme.pageMargin)};
   }
