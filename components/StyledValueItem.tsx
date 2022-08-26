@@ -12,6 +12,13 @@ export const StyledValueItem = styled.div<{ order: number }>`
   ${breakpoint.smallNotebook} {
     grid-template-columns: 230px 1fr;
   }
+  ${breakpoint.tabletPortrait} {
+    grid-template-columns: unset;
+    row-gap: 30px;
+  }
+  ${breakpoint.phone} {
+    width: 80%;
+  }
 `;
 
 export const ValueCover = styled(motion.div)`
@@ -71,6 +78,7 @@ export const Order = styled.span`
   ${breakpoint.tabletLandscape} {
     font-size: 50px;
   }
-  ${breakpoint.phone} {
+  ${breakpoint.tabletPortrait} {
+    position: static;
   }
 `;

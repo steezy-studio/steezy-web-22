@@ -48,6 +48,10 @@ export const Large = styled.h1`
     ${breakpoint.smallNotebook} {
       font-size: 40px;
     }
+    ${breakpoint.phone} {
+      font-size: 30px;
+      padding: 0.1em 0;
+    }
   }
   ${StyledImageSlider} & {
     margin: 30px ${({ theme }) => theme.pageMargin} 0;

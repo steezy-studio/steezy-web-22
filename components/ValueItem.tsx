@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import strings from "../data/strings";
+import { device } from "../helpers/consts";
 import { useIntersectionObserver } from "../hooks/useIntersectionVideoObserver";
+import { useWindowSize } from "../hooks/useWindowSize";
 import Img from "./Img/Img";
 import {
   Order,
@@ -38,12 +40,14 @@ const ValueItem = ({
 
   const formatedOrder = _order < 10 ? `0${_order}` : String(_order);
   const [scrollDirection, setScrollDirection] = useState("down");
+  const { w } = useWindowSize();
+  const isTooSmall = w > device.tabletPortrait;
 
   useIntersectionObserver(
     valueRef,
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) onFocusChange(id);
+        if (entry.isIntersecting && isTooSmall) onFocusChange(id);
       });
     },
     {
@@ -59,18 +63,20 @@ const ValueItem = ({
   };
 
   useEffect(() => {
-    window.addEventListener("wheel", handleScroll);
-    return () => {
-      window.removeEventListener("wheel", handleScroll);
-    };
-  }, []);
+    if (isTooSmall) {
+      window.addEventListener("wheel", handleScroll);
+      return () => {
+        window.removeEventListener("wheel", handleScroll);
+      };
+    }
+  }, [w]);
 
   return (
     <StyledValueItem ref={valueRef} order={order}>
       <div>
         {isFocused && (
           <motion.div
-            layoutId={`value-header`}
+            layoutId={w <= device.phone ? undefined : `value-header`}
             transition={{ ease: [0.22, 1, 0.36, 1], duration: 1 }}>
             <Micro className='with-dash'>
               {strings.studioPage.values.header}
@@ -86,26 +92,6 @@ const ValueItem = ({
           <Small className='big-lh'>{perex}</Small>
         </ValueHeader>
       </ValueBody>
-
-      {/* <ValueCoverWrapper>
-        {isFocused && (
-          <ValueCover
-            initial={{ opacity: 0.1 }}
-            animate={{ opacity: 1 }}
-            transition={{ ease: [0.22, 1, 0.36, 1], duration: 1 }}
-            layoutId='value-image'>
-            <Img
-              src={`/images/${src}`}
-              blurDataURL={`/images/${src}`}
-              placeholder='blur'
-              layout={`intrinsic`}
-              objectFit={"cover"}
-              width={1500}
-              height={1000}
-            />
-          </ValueCover>
-        )}
-      </ValueCoverWrapper> */}
     </StyledValueItem>
   );
 };

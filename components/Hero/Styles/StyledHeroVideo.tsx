@@ -61,7 +61,4 @@ export const PlayButton = styled(motion.div)`
   ${breakpoint.largeNotebook} {
     padding: 0px;
   }
-  ${breakpoint.phone} {
-    padding: 10px;
-  }
 `;

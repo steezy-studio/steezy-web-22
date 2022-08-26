@@ -9,7 +9,7 @@ import { HeroSocials } from "../components/Hero/Styles/StyledHero";
 import Instagram from "../components/Icons/Instagram";
 import Vimeo from "../components/Icons/Vimeo";
 import Layout from "../components/Layout/Layout";
-import { theme } from "../helpers/consts";
+import { device, theme } from "../helpers/consts";
 import { useWindowSize } from "../hooks/useWindowSize";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
 import "../css/fonts.css";
@@ -29,7 +29,8 @@ function MyApp({ Component, pageProps }) {
       <LocomotiveScrollProvider
         options={{
           smooth: true,
-          tablet: { smooth: true },
+          tablet: { smooth: true, breakpoint: device.phone },
+          smartphone: { smooth: false },
         }}
         watch={[asPath, w]}
         containerRef={containerRef}>

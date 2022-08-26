@@ -37,8 +37,6 @@ export const LandingpageHeroClients = styled.div`
   }
   ${breakpoint.tabletLandscape} {
     grid-row-gap: 10px;
-  }
-  ${breakpoint.phone} {
     justify-content: start;
   }
 `;
@@ -97,11 +95,11 @@ export const Intro = styled.div`
     /* transform: unset; */
   }
   ${breakpoint.tabletPortrait} {
+    display: none;
     margin-left: unset;
     width: ${({ theme }) => u(8, theme.pageMargin)};
   }
   ${breakpoint.phone} {
-    display: none;
     transform: unset;
     grid-gap: 30px;
     margin: ${({ theme }) => u(3, theme.pageMargin)} 0;

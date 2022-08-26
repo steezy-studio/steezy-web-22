@@ -45,6 +45,12 @@ export const NavLinks = styled(motion.div)`
     width: auto;
     background-color: ${colors.primary300};
   }
+  ${breakpoint.phone} {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 `;
 
 export const PhoneDecoration = styled(motion.div)`

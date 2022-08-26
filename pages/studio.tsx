@@ -216,7 +216,7 @@ const Studio = ({ areas }: StudioProps) => {
           </Logotypes>
         </BrandsSection>
         <Outro>
-          <Blockquote>
+          <Blockquote className='_3'>
             <Quote className='offset-y-3' data-scroll data-scroll-speed='2'>
               <Large className='offset-x-2'>
                 {studioStrings.blockquotes[1].quote}

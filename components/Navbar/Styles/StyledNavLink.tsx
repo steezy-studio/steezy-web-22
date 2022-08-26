@@ -69,4 +69,7 @@ export const StyledNavLink = styled(motion.a)`
       }
     }
   }
+  ${breakpoint.phone} {
+    font-size: 28px;
+  }
 `;

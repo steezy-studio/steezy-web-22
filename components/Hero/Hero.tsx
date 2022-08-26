@@ -9,6 +9,7 @@ import { Micro } from "../Typo/Micro";
 import HeroVideo from "./HeroVideo";
 import {
   HeroFooterChildren,
+  HeroHeaderContainer,
   HeroMedia,
   HeroText,
   StyledHero,
@@ -33,14 +34,16 @@ const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
     <StyledHero>
       <Animation type={"fadeFromBottom"} delay={0.7} style={{ zIndex: 100 }}>
         <HeroText>
-          {subHeader && (
-            <Micro data-scroll data-scroll-speed='3' className='sub-header'>
-              {subHeader}
-            </Micro>
-          )}
-          <Large data-scroll data-scroll-speed='2'>
-            {header(openDialog, setOpenDialog)}
-          </Large>
+          <HeroHeaderContainer>
+            {subHeader && (
+              <Micro data-scroll data-scroll-speed='3' className='sub-header'>
+                {subHeader}
+              </Micro>
+            )}
+            <Large data-scroll data-scroll-speed='2'>
+              {header(openDialog, setOpenDialog)}
+            </Large>
+          </HeroHeaderContainer>
           {perex && (
             <Micro data-scroll data-scroll-speed='1.5' className={`perex`}>
               {perex}

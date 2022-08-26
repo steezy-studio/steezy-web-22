@@ -14,7 +14,7 @@ export const ProjectsHero = styled.div`
     padding: 20% 0;
   }
   ${breakpoint.phone} {
-    padding: 30% 0;
+    padding: 25% 0;
   }
 `;
 export const ProjectsHeroContent = styled.div`
@@ -45,6 +45,9 @@ export const ProjectsGridColumn = styled.div`
   &.odd {
     /* transform: translateY(${({ theme }) => u(-4, theme.pageMargin)}); */
     margin-top: ${({ theme }) => u(-4, theme.pageMargin)};
+    ${breakpoint.smallNotebook} {
+      margin-top: ${({ theme }) => u(-2, theme.pageMargin)};
+    }
   }
 `;
 

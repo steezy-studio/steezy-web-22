@@ -24,6 +24,9 @@ export const Micro = styled(motion.span)`
   color: ${colors.black};
   text-transform: uppercase;
   display: inline-block;
+  ${breakpoint.phone} {
+    font-size: 12px;
+  }
   &.dash-margin {
     margin-left: ${({ theme }) => u(1, theme.pageMargin, 30)};
     ${breakpoint.helperSmallNotebook} {
@@ -65,7 +68,6 @@ export const Micro = styled(motion.span)`
       }
     }
     ${breakpoint.smallNotebook} {
-      /* ${ValuesSection} &,  */
       ${TextBlock} &, ${ServicesSection} &, ${BrandsSection} & {
         &:after {
           display: none;
@@ -76,6 +78,13 @@ export const Micro = styled(motion.span)`
       ${Blockquote} & ._2 & {
         &.reversed {
           flex-direction: row;
+        }
+      }
+    }
+    ${breakpoint.tabletPortrait} {
+      ${ValuesSection} & {
+        &:after {
+          display: none;
         }
       }
     }
@@ -103,7 +112,7 @@ export const Micro = styled(motion.span)`
   }
   ${LandingpageHeroClients} & {
     text-align: right;
-    ${breakpoint.phone} {
+    ${breakpoint.tabletPortrait} {
       text-align: left;
     }
   }
@@ -111,9 +120,6 @@ export const Micro = styled(motion.span)`
     ${breakpoint.smallNotebook} {
       line-height: 1.5em;
     }
-    /* ${breakpoint.phone} {
-      white-space: unset;
-    } */
   }
   ${GridItemAreas} & {
     letter-spacing: 0.02em;

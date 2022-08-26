@@ -7,8 +7,8 @@ export const StyledStudio = styled.div``;
 
 export const TextBlock = styled(motion.div)`
   display: grid;
-  grid-template-columns: 50% 25%;
-  grid-gap: 60px;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: ${({ theme }) => theme.pageMargin};
   margin: ${({ theme }) => u(1.5, theme.pageMargin)} 0;
   .header {
     display: grid;
@@ -22,10 +22,10 @@ export const TextBlock = styled(motion.div)`
     }
   }
   ${breakpoint.largeNotebook} {
-    grid-template-columns: 50% 30%;
+    grid-template-columns: 5fr 3fr;
   }
   ${breakpoint.smallNotebook} {
-    grid-template-columns: 50% 40%;
+    grid-template-columns: 1fr 1fr;
     align-items: end;
   }
   ${breakpoint.tabletPortrait} {
@@ -35,6 +35,7 @@ export const TextBlock = styled(motion.div)`
   }
   ${breakpoint.phone} {
     grid-template-columns: unset;
+    width: 80%;
     margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
     grid-gap: 20px;
     .header {
@@ -51,7 +52,12 @@ export const ValuesSection = styled.section`
   justify-content: start;
   justify-items: start;
   margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
+  ${breakpoint.tabletPortrait} {
+    grid-template-columns: 2fr 2fr;
+  }
   ${breakpoint.phone} {
+    display: flex;
+    flex-direction: column-reverse;
   }
 `;
 
@@ -78,6 +84,9 @@ export const ValuesInner = styled.div`
 export const ValuesCover = styled.div`
   position: sticky;
   align-self: start;
+  ${breakpoint.phone} {
+    margin-bottom: ${({ theme }) => u(3, theme.pageMargin)};
+  }
 `;
 
 export const ValuesCoverInner = styled.div``;
@@ -101,8 +110,11 @@ export const ServicesSection = styled.section`
   }
   ${breakpoint.tabletLandscape} {
     grid-template-columns: unset;
-    grid-row-gap: 20px;
+    grid-row-gap: 30px;
     width: 100%;
+  }
+  ${breakpoint.phone} {
+    margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
   }
 `;
 
@@ -140,6 +152,11 @@ export const Blockquote = styled.div`
   &._2 {
     transform: translateY(${({ theme }) => u(-1, theme.pageMargin)});
   }
+  ${breakpoint.tabletPortrait} {
+    &._3 {
+      margin-top: ${({ theme }) => u(2, theme.pageMargin)};
+    }
+  }
   ${breakpoint.phone} {
     grid-template-columns: unset;
     &._2 {
@@ -150,7 +167,8 @@ export const Blockquote = styled.div`
       display: none;
     }
     &._1 {
-      margin-top: 0;
+      /* margin-top: 0; */
+      margin-bottom: ${({ theme }) => u(4, theme.pageMargin)};
     }
   }
 `;

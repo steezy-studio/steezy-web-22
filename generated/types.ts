@@ -20,7 +20,9 @@ export type AllModels = Area | LandingpageGrid | LandingpageGridRow | Project;
 /** Single Area */
 export type Area = {
   __typename?: 'Area';
+  /** Returns true if an A/B test is active for this locale */
   _ab_testing_active?: Maybe<Scalars['Boolean']>;
+  /** Returns the version if an A/B test is active */
   _ab_testing_version?: Maybe<Scalars['String']>;
   /** Count of bookmark events */
   _bookmarks?: Maybe<Scalars['Int']>;
@@ -56,13 +58,19 @@ export type Area = {
   _views?: Maybe<Scalars['Int']>;
   /** Count of vote events */
   _votes?: Maybe<Scalars['Int']>;
+  area_description?: Maybe<Scalars['String']>;
   area_name?: Maybe<Scalars['String']>;
+  area_order?: Maybe<Scalars['Int']>;
   sub_areas?: Maybe<Scalars['String']>;
 };
 
 export enum AreaSortInput {
+  AreaDescriptionAsc = 'area_description_ASC',
+  AreaDescriptionDesc = 'area_description_DESC',
   AreaNameAsc = 'area_name_ASC',
   AreaNameDesc = 'area_name_DESC',
+  AreaOrderAsc = 'area_order_ASC',
+  AreaOrderDesc = 'area_order_DESC',
   ChangedOn = 'changed_on',
   ChangedOnAsc = 'changed_on_ASC',
   ChangedOnDesc = 'changed_on_DESC',
@@ -101,6 +109,14 @@ export type AreaWhereInput = {
   /** Matches any content item not tagged with an item from the given list */
   _tags_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Matches if the field is equal to the given value */
+  area_description?: InputMaybe<Scalars['String']>;
+  /** Full fuzzy text search, not case sensitive */
+  area_description_contains?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is less then the given value */
+  area_description_ends_with?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is greater then the given value */
+  area_description_starts_with?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is equal to the given value */
   area_name?: InputMaybe<Scalars['String']>;
   /** Full fuzzy text search, not case sensitive */
   area_name_contains?: InputMaybe<Scalars['String']>;
@@ -108,6 +124,12 @@ export type AreaWhereInput = {
   area_name_ends_with?: InputMaybe<Scalars['String']>;
   /** Matches if the field is greater then the given value */
   area_name_starts_with?: InputMaybe<Scalars['String']>;
+  /** Matches if the field is equal to the given value */
+  area_order?: InputMaybe<Scalars['Int']>;
+  /** Matches if the field is greater then the given value */
+  area_order_gt?: InputMaybe<Scalars['Int']>;
+  /** Matches if the field is less then the given value */
+  area_order_lt?: InputMaybe<Scalars['Int']>;
   /** Matches if the field is equal to the given value */
   sub_areas?: InputMaybe<Scalars['String']>;
   /** Full fuzzy text search, not case sensitive */
@@ -128,11 +150,13 @@ export type Areas = {
 /** Prepr Asset model */
 export type Asset = {
   __typename?: 'Asset';
+  /** Unique identifier for each asset */
   _id?: Maybe<Scalars['String']>;
   _type?: Maybe<Scalars['String']>;
   alignment?: Maybe<AssetAlignment>;
   author?: Maybe<Scalars['String']>;
   caption?: Maybe<Scalars['String']>;
+  /** Audio & Video assets stored on AWS legacy streaming playback files */
   cdn_files?: Maybe<Array<Maybe<CdnFile>>>;
   cover?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
@@ -174,7 +198,7 @@ export enum AssetAlignment {
   Right = 'right'
 }
 
-/** Assets holds multiple Asset items in a content item */
+/** Collection of assets used in a content item */
 export type Assets = {
   __typename?: 'Assets';
   _type?: Maybe<Scalars['String']>;
@@ -205,6 +229,7 @@ export type ContentIntegration = {
   data?: Maybe<Array<Maybe<KeyValue>>>;
 };
 
+/** Collection of items out of an content integration */
 export type ContentIntegrations = {
   __typename?: 'ContentIntegrations';
   _id?: Maybe<Scalars['String']>;
@@ -274,7 +299,9 @@ export type KeyValue = {
 /** Single LandingpageGrid */
 export type LandingpageGrid = {
   __typename?: 'LandingpageGrid';
+  /** Returns true if an A/B test is active for this locale */
   _ab_testing_active?: Maybe<Scalars['Boolean']>;
+  /** Returns the version if an A/B test is active */
   _ab_testing_version?: Maybe<Scalars['String']>;
   /** Count of bookmark events */
   _bookmarks?: Maybe<Scalars['Int']>;
@@ -314,6 +341,7 @@ export type LandingpageGrid = {
   landingpage_projects_grid?: Maybe<Array<LandingpageGridRow>>;
 };
 
+/** LandingpageGridItem component */
 export type LandingpageGridItem = {
   __typename?: 'LandingpageGridItem';
   _id?: Maybe<Scalars['String']>;
@@ -326,7 +354,9 @@ export type LandingpageGridItem = {
 /** Single LandingpageGridRow */
 export type LandingpageGridRow = {
   __typename?: 'LandingpageGridRow';
+  /** Returns true if an A/B test is active for this locale */
   _ab_testing_active?: Maybe<Scalars['Boolean']>;
+  /** Returns the version if an A/B test is active */
   _ab_testing_version?: Maybe<Scalars['String']>;
   /** Count of bookmark events */
   _bookmarks?: Maybe<Scalars['Int']>;
@@ -505,7 +535,9 @@ export type Number = {
 /** Single Project */
 export type Project = {
   __typename?: 'Project';
+  /** Returns true if an A/B test is active for this locale */
   _ab_testing_active?: Maybe<Scalars['Boolean']>;
+  /** Returns the version if an A/B test is active */
   _ab_testing_version?: Maybe<Scalars['String']>;
   /** Count of bookmark events */
   _bookmarks?: Maybe<Scalars['Int']>;
@@ -559,6 +591,7 @@ export type Project = {
   project_tags?: Maybe<Array<Area>>;
 };
 
+/** ProjectArea component */
 export type ProjectArea = {
   __typename?: 'ProjectArea';
   _id?: Maybe<Scalars['String']>;
@@ -567,6 +600,7 @@ export type ProjectArea = {
   project_area?: Maybe<Array<Maybe<Area>>>;
 };
 
+/** ProjectFacts component */
 export type ProjectFacts = {
   __typename?: 'ProjectFacts';
   _id?: Maybe<Scalars['String']>;
@@ -576,6 +610,7 @@ export type ProjectFacts = {
   header?: Maybe<Scalars['String']>;
 };
 
+/** ProjectGridBlockquote component */
 export type ProjectGridBlockquote = {
   __typename?: 'ProjectGridBlockquote';
   _id?: Maybe<Scalars['String']>;
@@ -585,6 +620,7 @@ export type ProjectGridBlockquote = {
   blockquote_text?: Maybe<Scalars['String']>;
 };
 
+/** ProjectGridRow component */
 export type ProjectGridRow = {
   __typename?: 'ProjectGridRow';
   _id?: Maybe<Scalars['String']>;
@@ -593,6 +629,7 @@ export type ProjectGridRow = {
   grid_item_image?: Maybe<Array<Maybe<Asset>>>;
 };
 
+/** ProjectGridVimeo component */
 export type ProjectGridVimeo = {
   __typename?: 'ProjectGridVimeo';
   _id?: Maybe<Scalars['String']>;
@@ -1054,7 +1091,7 @@ export type YouTubePost = {
   url?: Maybe<Scalars['String']>;
 };
 
-/** Event type is specifying the kind of event the customer has with your content. */
+/** Event type is specifying the kind of event the customer has with your content */
 export enum _Event {
   Bookmark = 'Bookmark',
   Clickthrough = 'Clickthrough',

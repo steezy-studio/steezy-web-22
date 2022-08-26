@@ -37,9 +37,9 @@ export const Medium = styled.p`
     }
   }
   ${breakpoint.phone} {
-    font-size: 16px;
+    font-size: 14px;
     &.big {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
   ${ProjectsGridColumn} & {

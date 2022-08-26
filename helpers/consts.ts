@@ -10,6 +10,8 @@ export type ColorKeys = keyof typeof colors;
 export const allProjects = {
   _slug: "all-projects",
   area_name: "All projects",
+  area_description:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget arcu mollis, faucibus erat eget, sollicitudin leo.",
 };
 
 export const projectsPerPage = 12;

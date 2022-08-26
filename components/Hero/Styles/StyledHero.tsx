@@ -70,10 +70,12 @@ export const HeroText = styled(motion.div)`
     top: 25vh;
   }
   ${breakpoint.tabletPortrait} {
-    width: ${({ theme }) => u(8, theme.pageMargin)};
+    width: 100%;
     position: static;
-    transform: unset;
-    margin-top: ${({ theme }) => u(1, theme.pageMargin)};
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: ${({ theme }) => theme.pageMargin};
+    margin-top: ${({ theme }) => u(2, theme.pageMargin)};
     order: 2;
     ${StyledIndex} & {
       order: 3;
@@ -81,6 +83,8 @@ export const HeroText = styled(motion.div)`
   }
   ${breakpoint.phone} {
     width: ${({ theme }) => u(15, theme.pageMargin)};
+    grid-template-columns: unset;
+    row-gap: ${({ theme }) => theme.pageMargin};
   }
   ${StyledContact} & {
     top: 40vh;
@@ -109,5 +113,13 @@ export const HeroFooterChildren = styled(motion.div)`
     ${StyledIndex} & {
       order: 2;
     }
+  }
+`;
+
+export const HeroHeaderContainer = styled.div`
+  display: grid;
+  row-gap: 30px;
+  ${breakpoint.phone} {
+    row-gap: 15px;
   }
 `;

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import client, { withApolloClient } from "../../apollo/client";
 import GridItem from "../../components/GridItem/GridItem";
+import Head from "../../components/Head/Head";
 import { HeroSocials } from "../../components/Hero/Styles/StyledHero";
 import Instagram from "../../components/Icons/Instagram";
 import Vimeo from "../../components/Icons/Vimeo";
@@ -12,11 +13,13 @@ import { StyledLink } from "../../components/Link/Styles/StyledLink";
 import Navbar from "../../components/Navbar/Navbar";
 import { Large } from "../../components/Typo/Large";
 import { Medium } from "../../components/Typo/Medium";
-import { allProjects, device, projectsPerPage } from "../../helpers/consts";
+import strings from "../../data/strings";
 import { Areas, Projects as ProjectsType, Query } from "../../generated/types";
 import { GET_ALL_AREAS } from "../../graphql/GetAllAreas";
 import { GET_ALL_PROJECTS } from "../../graphql/GetAllProjects";
 import { GET_PROJECTS } from "../../graphql/GetProjects";
+import { allProjects, device, projectsPerPage } from "../../helpers/consts";
+import { useWindowSize } from "../../hooks/useWindowSize";
 import {
   ProjectsGrid,
   ProjectsGridColumn,
@@ -26,10 +29,6 @@ import {
   ProjectsHeroFilters,
   StyledProjects,
 } from "../../pagestyles/StyledProjects";
-import Head from "../../components/Head/Head";
-import strings from "../../data/strings";
-import { useWindowSize } from "../../hooks/useWindowSize";
-import Layout from "../../components/Layout/Layout";
 
 interface ProjectsProps {
   areas: Areas;
@@ -105,14 +104,16 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
       });
     }
   }, [projectsData.skip]);
+  const activeArea = areas.items.find(
+    (area) => area._slug === router.query.area
+  );
 
   return (
     <>
       <Head
         pageName={[
           strings.projectsPage.head.pageName,
-          areas.items.find((area) => area._slug === router.query.area)
-            ?.area_name || allProjects.area_name,
+          activeArea?.area_name || allProjects.area_name,
         ]}
       />
       <Navbar
@@ -141,7 +142,9 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                 );
               })}
             </ProjectsHeroFilters>
-            <Medium></Medium>
+            <Medium>
+              {activeArea?.area_description || allProjects.area_description}
+            </Medium>
           </ProjectsHeroContent>
           <HeroSocials>
             <Instagram />

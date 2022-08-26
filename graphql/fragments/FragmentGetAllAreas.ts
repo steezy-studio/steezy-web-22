@@ -6,6 +6,7 @@ export const FRAGMENT_GET_ALL_AREAS = gql`
       area_name
       _slug
       sub_areas
+      area_description
     }
   }
 `;
