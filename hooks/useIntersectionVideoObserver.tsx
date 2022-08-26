@@ -11,7 +11,7 @@ export function useIntersectionObserver(
       observer.observe(videoRef.current);
       return () => observer.disconnect();
     }
-  }, [videoRef.current]);
+  }, [videoRef.current, options?.rootMargin]);
 }
 
 export const videoCallback = (

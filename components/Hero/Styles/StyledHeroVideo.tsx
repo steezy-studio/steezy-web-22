@@ -38,8 +38,8 @@ export const Showreel = styled.div`
 export const PlayButton = styled(motion.div)`
   position: absolute;
   z-index: 1;
-  width: 80px;
-  height: 80px;
+  width: ${({ theme }) => theme.navbarHeight};
+  height: ${({ theme }) => theme.navbarHeight};
   /* cursor: pointer; */
   right: 0;
   bottom: 0;
@@ -59,13 +59,9 @@ export const PlayButton = styled(motion.div)`
     background-image: url("/icons/play-button.svg");
   }
   ${breakpoint.largeNotebook} {
-    width: 70px;
-    height: 70px;
     padding: 0px;
   }
   ${breakpoint.phone} {
     padding: 10px;
-    width: 40px;
-    height: 40px;
   }
 `;

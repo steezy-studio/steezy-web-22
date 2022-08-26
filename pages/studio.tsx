@@ -1,5 +1,7 @@
-import { LayoutGroup, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
+import { useState } from "react";
+import shortid from "shortid";
 import { useTheme } from "styled-components";
 import client from "../apollo/client";
 import Animation from "../components/Animation/Animation";
@@ -34,7 +36,8 @@ import {
   StyledStudio,
   SubServicesList,
   TextBlock,
-  ValuesInner,
+  ValuesCover,
+  ValuesCoverInner,
   ValuesList,
   ValuesSection,
 } from "../pagestyles/StyledStudio";
@@ -45,6 +48,8 @@ interface StudioProps {
 
 const Studio = ({ areas }: StudioProps) => {
   const studioStrings = strings.studioPage;
+  const [focusedValue, setFocusedValue] = useState(0);
+
   const theme = useTheme();
 
   const { w } = useWindowSize();
@@ -84,35 +89,40 @@ const Studio = ({ areas }: StudioProps) => {
 
         <ValuesSection id='values-section'>
           <ValuesList>
-            <LayoutGroup>
-              {studioStrings.values.list.map(({ header, perex, src }, i) => {
-                const n = i + 1;
-                return (
-                  <ValueItem
-                    order={String(n < 10 ? `0${n}` : n)}
-                    header={header}
-                    src={src}
-                    perex={perex}
-                    key={i}
-                  />
-                );
-              })}
-            </LayoutGroup>
+            {studioStrings.values.list.map(({ header, perex }, i) => {
+              const n = i + 1;
+              return (
+                <ValueItem
+                  onFocusChange={(id) => setFocusedValue(id)}
+                  isFocused={focusedValue === i}
+                  id={i}
+                  order={i}
+                  header={header}
+                  perex={perex}
+                  key={i}
+                />
+              );
+            })}
           </ValuesList>
-
-          {/* <motion.div
+          <ValuesCover
             data-scroll
             data-scroll-sticky
             data-scroll-target='#values-section'
-            data-scroll-offset={"-50%,50%"}
-            style={{ position: "sticky" }}>
-            <Img
-              src={`/images/steezy_interier-08.jpg`}
-              width={1100}
-              height={1100}
-              layout={`responsive`}
-            />
-          </motion.div> */}
+            data-scroll-offset={`${
+              -1 *
+              (Number(theme.pageMargin.split("px")[0]) * 2 +
+                Number(theme.navbarHeight.split("px")[0]))
+            }px,10%`}>
+            <ValuesCoverInner>
+              <Img
+                src={"/images/steezy_interier-04.jpg"}
+                width={1500}
+                height={2000}
+                objectFit={"cover"}
+                layout={`intrinsic`}
+              />
+            </ValuesCoverInner>
+          </ValuesCover>
         </ValuesSection>
         <Animation type='fadeFromBottom'>
           <ImageSlider
@@ -121,6 +131,7 @@ const Studio = ({ areas }: StudioProps) => {
               width: 1200,
               height: 950,
               src: `/images/${img.src}`,
+              id: shortid.generate(),
             }))}
           />
         </Animation>

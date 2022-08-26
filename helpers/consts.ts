@@ -41,5 +41,15 @@ export const theme = (width: number) => ({
       : width <= device.smallNotebook
       ? "20px"
       : "40px",
+  navbarHeight:
+    width <= device.phone
+      ? "40px"
+      : width <= device.tabletLandscape
+      ? "50px"
+      : width <= device.smallNotebook
+      ? "60px"
+      : width <= device.largeNotebook
+      ? "70px"
+      : "80px",
 });
 export type Theme = typeof theme;

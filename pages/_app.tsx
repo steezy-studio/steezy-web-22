@@ -29,8 +29,9 @@ function MyApp({ Component, pageProps }) {
       <LocomotiveScrollProvider
         options={{
           smooth: true,
+          tablet: { smooth: true },
         }}
-        watch={[asPath]}
+        watch={[asPath, w]}
         containerRef={containerRef}>
         <main data-scroll-container ref={containerRef}>
           <Cursor hover={cursorHover} isCursorDisabled={isCursorDisabled} />

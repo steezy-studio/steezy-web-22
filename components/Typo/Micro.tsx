@@ -30,7 +30,8 @@ export const Micro = styled(motion.span)`
       margin-left: 90px;
     }
     ${breakpoint.smallNotebook} {
-      ${ValuesSection} &, ${TextBlock} &, ${ServicesSection} &, ${BrandsSection} & {
+      ${ValuesSection} &, 
+      ${TextBlock} &, ${ServicesSection} &, ${BrandsSection} & {
         margin-left: 0;
       }
     }
@@ -64,7 +65,8 @@ export const Micro = styled(motion.span)`
       }
     }
     ${breakpoint.smallNotebook} {
-      ${ValuesSection} &, ${TextBlock} &, ${ServicesSection} &, ${BrandsSection} & {
+      /* ${ValuesSection} &,  */
+      ${TextBlock} &, ${ServicesSection} &, ${BrandsSection} & {
         &:after {
           display: none;
         }

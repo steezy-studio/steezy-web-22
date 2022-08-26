@@ -8,6 +8,9 @@ export const StyledNavLink = styled(motion.a)`
   font-size: 14px;
   letter-spacing: 0.1em;
   padding: 0 20px;
+  &:hover {
+    color: ${colors.primary400} !important;
+  }
   &,
   &:visited {
     color: ${colors.gray500};

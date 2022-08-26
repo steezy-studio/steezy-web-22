@@ -45,7 +45,12 @@ export const TextBlock = styled(motion.div)`
 `;
 
 export const ValuesSection = styled.section`
-  margin: ${({ theme }) => u(2, theme.pageMargin)} 0;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  column-gap: ${({ theme }) => u(1, theme.pageMargin)};
+  justify-content: start;
+  justify-items: start;
+  margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
   ${breakpoint.phone} {
   }
 `;
@@ -69,6 +74,13 @@ export const ValuesInner = styled.div`
     grid-row-gap: 20px;
   }
 `;
+
+export const ValuesCover = styled.div`
+  position: sticky;
+  align-self: start;
+`;
+
+export const ValuesCoverInner = styled.div``;
 
 export const ValuesList = styled.div`
   display: grid;
@@ -176,11 +188,11 @@ export const Quote = styled(motion.div)`
 
 export const BrandsSection = styled.section`
   display: grid;
-  grid-template-columns: 50% 40%;
+  grid-template-columns: 5fr 4fr;
   margin: ${({ theme }) => u(2, theme.pageMargin)} 0
     ${({ theme }) => u(1, theme.pageMargin)};
   ${breakpoint.tabletLandscape} {
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 1fr 1fr;
     grid-column-gap: ${({ theme }) => `calc(2 * ${theme.pageMargin})`};
   }
   ${breakpoint.tabletPortrait} {
