@@ -74,7 +74,11 @@ const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
         </HeroMedia>
       </Animation>
       <Animation type={"fadeIn"} delay={0.5}>
-        {children && <HeroFooterChildren>{children}</HeroFooterChildren>}
+        {children && (
+          <HeroFooterChildren data-scroll-speed='1.5' data-scroll>
+            {children}
+          </HeroFooterChildren>
+        )}
       </Animation>
     </StyledHero>
   );

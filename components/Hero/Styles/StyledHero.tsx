@@ -38,8 +38,10 @@ export const HeroSocials = styled.div`
   ${breakpoint.tabletLandscape} {
     display: none;
     ${PhoneDecoration} & {
-      display: grid;
       position: static;
+      display: grid;
+      margin-left: auto;
+      grid-auto-columns: 21px;
     }
   }
 `;
@@ -75,7 +77,7 @@ export const HeroText = styled(motion.div)`
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: ${({ theme }) => theme.pageMargin};
-    margin-top: ${({ theme }) => u(2, theme.pageMargin)};
+    margin-top: ${({ theme }) => u(1, theme.pageMargin)};
     order: 2;
     ${StyledIndex} & {
       order: 3;
@@ -85,6 +87,7 @@ export const HeroText = styled(motion.div)`
     width: ${({ theme }) => u(15, theme.pageMargin)};
     grid-template-columns: unset;
     row-gap: ${({ theme }) => theme.pageMargin};
+    margin-top: ${({ theme }) => u(2, theme.pageMargin)};
   }
   ${StyledContact} & {
     top: 40vh;

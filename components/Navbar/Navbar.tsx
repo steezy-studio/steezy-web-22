@@ -19,6 +19,7 @@ import { HeroSocials } from "../Hero/Styles/StyledHero";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
 import { Micro } from "../Typo/Micro";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 interface NavbarProps {
   areas: { highlighted: boolean; link: string; name: string }[];
@@ -26,13 +27,17 @@ interface NavbarProps {
 
 const Navbar = ({ areas = [] }: NavbarProps) => {
   const [isMenuOpen, openMenu] = useState(false);
+  const { w, h } = useWindowSize();
   const router = useRouter();
+
+  console.log(h);
 
   return (
     <Fixed id={"fixed-navbar"}>
       <StyledNavbar>
         <Logo />
         <NavLinks
+          windowHeight={h}
           animate={isMenuOpen ? "open" : "close"}
           initial={false}
           style={{

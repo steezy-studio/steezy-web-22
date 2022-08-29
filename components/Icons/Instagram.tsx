@@ -8,6 +8,8 @@ interface InstagramProps {
 }
 
 const StyledInstagram = styled.a`
+  width: 21px;
+  display: block;
   svg {
     width: 100%;
     height: 21px;

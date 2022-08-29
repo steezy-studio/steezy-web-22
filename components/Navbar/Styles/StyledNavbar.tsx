@@ -16,7 +16,7 @@ export const StyledNavbar = styled.nav`
   }
 `;
 
-export const NavLinks = styled(motion.div)`
+export const NavLinks = styled(motion.div)<{ windowHeight: number }>`
   background-color: ${colors.black};
   width: 100%;
   display: flex;
@@ -37,15 +37,16 @@ export const NavLinks = styled(motion.div)`
     left: ${({ theme }) => "-" + theme.pageMargin};
     right: ${({ theme }) => "-" + theme.pageMargin};
     bottom: ${({ theme }) => "-" + theme.pageMargin};
+    padding: ${({ theme }) => theme.pageMargin};
     width: 100vw;
-    height: 100vh;
     flex-direction: column;
     align-items: flex-end;
-    padding: ${({ theme }) => theme.pageMargin};
     width: auto;
     background-color: ${colors.primary300};
   }
   ${breakpoint.phone} {
+    padding: ${({ theme }) => theme.pageMargin};
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -60,15 +61,13 @@ export const PhoneDecoration = styled(motion.div)`
     bottom: ${({ theme }) => theme.pageMargin};
     left: ${({ theme }) => theme.pageMargin};
     right: ${({ theme }) => theme.pageMargin};
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: max-content auto;
   }
 `;
 
 export const ContactUs = styled.a`
   display: grid;
   grid-auto-flow: column;
-  justify-content: start;
   column-gap: 10px;
-  align-items: center;
 `;
