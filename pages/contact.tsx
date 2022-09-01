@@ -1,12 +1,9 @@
 import { GetStaticProps } from "next";
-import React from "react";
 import client from "../apollo/client";
+import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
-import Layout from "../components/Layout/Layout";
 import Link from "../components/Link/Link";
 import Navbar from "../components/Navbar/Navbar";
-import { Medium } from "../components/Typo/Medium";
-import { Micro } from "../components/Typo/Micro";
 import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
@@ -19,6 +16,12 @@ interface ContactProps {
 const Contact = ({ areas }: ContactProps) => {
   return (
     <>
+      <Head
+        pageName={"Contact"}
+        ogTitle={"Contact"}
+        ogDescription={strings.contactPage.hero.subHeader}
+        ogImageSrc={"/images/contact-hero.jpg"}
+      />
       <Navbar
         areas={areas.items.map(({ area_name, _slug }) => ({
           highlighted: false,

@@ -13,7 +13,6 @@ import { Micro } from "../../components/Typo/Micro";
 import Video from "../../components/Video/Video";
 import { Areas, Project as ProjectType, Query } from "../../generated/types";
 import { GET_PROJECT } from "../../graphql/GetProject";
-import { useWindowSize } from "../../hooks/useWindowSize";
 import {
   ClientQuote,
   ClientQuoteLeft,
@@ -38,6 +37,8 @@ const Project = ({ projectData, areas }: ProjectProps) => {
     <>
       <Head
         ogTitle={projectData.project_detail_name}
+        ogDescription={projectData.project_description}
+        ogImageSrc={projectData.hero_image[0].url}
         pageName={[`Project`, projectData.project_detail_name]}
       />
       <Navbar

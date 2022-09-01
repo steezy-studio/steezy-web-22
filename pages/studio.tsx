@@ -57,7 +57,12 @@ const Studio = ({ areas }: StudioProps) => {
   const { w } = useWindowSize();
   return (
     <>
-      <Head pageName={studioStrings.head.pageName} />
+      <Head
+        pageName={studioStrings.head.pageName}
+        ogDescription={studioStrings.hero.subHeader}
+        ogImageSrc={`/images/studio-hero.jpg`}
+        ogTitle={studioStrings.hero.header.rest}
+      />
       <Navbar
         areas={areas?.items.map(({ area_name, _slug }) => ({
           highlighted: false,

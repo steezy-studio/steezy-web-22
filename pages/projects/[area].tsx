@@ -110,11 +110,17 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
 
   return (
     <>
+      {/* TODO add og image */}
       <Head
         pageName={[
           strings.projectsPage.head.pageName,
           activeArea?.area_name || allProjects.area_name,
         ]}
+        ogDescription={
+          activeArea?.area_description || allProjects.area_description
+        }
+        ogTitle={activeArea?.area_name || allProjects.area_name}
+        ogImageSrc={""}
       />
       <Navbar
         areas={areas.items.map(({ area_name, _slug }) => ({

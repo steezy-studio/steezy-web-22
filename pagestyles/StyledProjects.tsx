@@ -43,8 +43,10 @@ export const ProjectsGrid = styled.div`
 
 export const ProjectsGridColumn = styled.div`
   &.odd {
-    /* transform: translateY(${({ theme }) => u(-4, theme.pageMargin)}); */
-    margin-top: ${({ theme }) => u(-4, theme.pageMargin)};
+    margin-top: ${({ theme }) => u(-3, theme.pageMargin)};
+    ${breakpoint.largeNotebook} {
+      margin-top: ${({ theme }) => u(-4, theme.pageMargin)};
+    }
     ${breakpoint.smallNotebook} {
       margin-top: ${({ theme }) => u(-2, theme.pageMargin)};
     }

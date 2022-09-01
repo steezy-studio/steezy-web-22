@@ -7,8 +7,11 @@ import u from "../helpers/unit";
 export const StyledValueItem = styled.div<{ order: number }>`
   position: relative;
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 400px 1fr;
   column-gap: ${({ theme }) => `calc( ${theme.pageMargin} )`};
+  ${breakpoint.largeNotebook} {
+    grid-template-columns: 300px 1fr;
+  }
   ${breakpoint.smallNotebook} {
     grid-template-columns: 230px 1fr;
   }
@@ -40,8 +43,9 @@ export const ValueItemContent = styled.div`
 export const ValueBody = styled.div`
   position: relative;
   padding-left: 140px;
-  max-width: 600px;
+  max-width: 800px;
   ${breakpoint.largeNotebook} {
+    max-width: 600px;
     padding-left: 100px;
   }
   ${breakpoint.smallNotebook} {

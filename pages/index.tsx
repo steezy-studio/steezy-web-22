@@ -35,7 +35,13 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
 
   return (
     <>
-      <Head />
+      {/* TODO add og image */}
+      <Head
+        ogDescription={landingpageStrings.hero.subHeader}
+        ogImageSrc={""}
+        pageName={"STEEZY Studio"}
+        ogTitle={"STEEZY Studio"}
+      />
       <Navbar
         areas={areas.items.map(({ area_name, _slug }) => ({
           highlighted: false,

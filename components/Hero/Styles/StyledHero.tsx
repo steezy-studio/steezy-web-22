@@ -57,12 +57,15 @@ export const HeroText = styled(motion.div)`
   display: grid;
   grid-row-gap: 30px;
   .perex {
-    max-width: 250px;
+    max-width: 350px;
   }
   ${StyledContact} & {
     width: ${({ theme }) => u(10, theme.pageMargin)};
   }
   ${breakpoint.largeNotebook} {
+    .perex {
+      max-width: 250px;
+    }
     width: ${({ theme }) => u(7, theme.pageMargin)};
   }
   ${breakpoint.smallNotebook} {

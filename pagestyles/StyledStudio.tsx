@@ -43,7 +43,10 @@ export const TextBlockHeader = styled.div`
   }
 `;
 export const TextBlockBody = styled.div`
-  max-width: 500px;
+  max-width: 800px;
+  ${breakpoint.largeNotebook} {
+    max-width: 500px;
+  }
 `;
 export const ValuesSection = styled.section`
   display: grid;
@@ -51,7 +54,10 @@ export const ValuesSection = styled.section`
   column-gap: ${({ theme }) => u(1, theme.pageMargin)};
   justify-content: start;
   justify-items: start;
-  margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
+  margin: ${({ theme }) => u(2, theme.pageMargin)} 0;
+  ${breakpoint.largeNotebook} {
+    margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
+  }
   ${breakpoint.tabletPortrait} {
     grid-template-columns: 2fr 2fr;
   }
@@ -148,7 +154,10 @@ export const Blockquote = styled.div`
   grid-template-columns: repeat(2, 1fr);
   grid-gap: ${({ theme }) => theme.pageMargin};
   &._1 {
-    margin-top: ${({ theme }) => u(4, theme.pageMargin)};
+    margin-top: ${({ theme }) => u(3, theme.pageMargin)};
+    ${breakpoint.largeNotebook} {
+      margin-top: ${({ theme }) => u(4, theme.pageMargin)};
+    }
   }
   &._2 {
     transform: translateY(${({ theme }) => u(-1, theme.pageMargin)});
@@ -208,8 +217,12 @@ export const Quote = styled(motion.div)`
 export const BrandsSection = styled.section`
   display: grid;
   grid-template-columns: 5fr 4fr;
-  margin: ${({ theme }) => u(2, theme.pageMargin)} 0
+  margin: ${({ theme }) => u(1, theme.pageMargin)} 0
     ${({ theme }) => u(1, theme.pageMargin)};
+  ${breakpoint.largeNotebook} {
+    margin: ${({ theme }) => u(2, theme.pageMargin)} 0
+      ${({ theme }) => u(1, theme.pageMargin)};
+  }
   ${breakpoint.tabletLandscape} {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: ${({ theme }) => `calc(2 * ${theme.pageMargin})`};
@@ -266,6 +279,7 @@ export const Logotypes = styled.div`
 
 export const Logo = styled(motion.img)`
   width: 100%;
+  max-width: 200px;
   ${breakpoint.phone} {
     &:nth-child(n + 16) {
       display: none;
