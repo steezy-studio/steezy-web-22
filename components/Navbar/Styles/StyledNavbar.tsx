@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { breakpoint, colors } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
 
-export const StyledNavbar = styled.nav`
+export const StyledNavbar = styled.nav<{ hasSmoothScroll: boolean }>`
   position: fixed;
   pointer-events: none;
   z-index: 99999;
@@ -11,12 +11,17 @@ export const StyledNavbar = styled.nav`
   width: ${({ theme }) => u(16, theme.pageMargin)};
   height: ${({ theme }) => theme.navbarHeight};
   display: flex;
+  ${({ hasSmoothScroll }) =>
+    !hasSmoothScroll &&
+    css`
+      top: ${({ theme }) => theme.pageMargin};
+    `};
   ${breakpoint.phone} {
     top: ${({ theme }) => theme.pageMargin};
   }
 `;
 
-export const NavLinks = styled(motion.div)<{ windowHeight: number }>`
+export const NavLinks = styled(motion.div)<{ hasSmoothScroll: boolean }>`
   background-color: ${colors.black};
   width: 100%;
   display: flex;
@@ -32,25 +37,29 @@ export const NavLinks = styled(motion.div)<{ windowHeight: number }>`
     justify-content: flex-end;
   }
   ${breakpoint.tabletLandscape} {
+    padding: ${({ theme }) => theme.pageMargin};
     position: fixed;
     top: ${({ theme }) => "-" + theme.pageMargin};
     left: ${({ theme }) => "-" + theme.pageMargin};
     right: ${({ theme }) => "-" + theme.pageMargin};
     bottom: ${({ theme }) => "-" + theme.pageMargin};
-    padding: ${({ theme }) => theme.pageMargin};
+    ${({ hasSmoothScroll }) =>
+      !hasSmoothScroll &&
+      css`
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      `};
     width: 100vw;
+    min-height: 100vh;
     flex-direction: column;
     align-items: flex-end;
     width: auto;
     background-color: ${colors.primary300};
   }
   ${breakpoint.phone} {
-    padding: ${({ theme }) => theme.pageMargin};
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
   }
 `;
 

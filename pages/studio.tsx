@@ -36,6 +36,8 @@ import {
   StyledStudio,
   SubServicesList,
   TextBlock,
+  TextBlockBody,
+  TextBlockHeader,
   ValuesCover,
   ValuesCoverInner,
   ValuesList,
@@ -77,13 +79,15 @@ const Studio = ({ areas }: StudioProps) => {
         />
         <Animation type='fadeFromBottom'>
           <TextBlock>
-            <div className='header'>
+            <TextBlockHeader>
               <Micro className={"with-dash"}>
                 {studioStrings.intro.header}
               </Micro>
               <Medium className='big'>{studioStrings.intro.perex}</Medium>
-            </div>
-            <Small>{studioStrings.intro.paragraph}</Small>
+            </TextBlockHeader>
+            <TextBlockBody>
+              <Small>{studioStrings.intro.paragraph}</Small>
+            </TextBlockBody>
           </TextBlock>
         </Animation>
 
@@ -112,7 +116,7 @@ const Studio = ({ areas }: StudioProps) => {
               -1 *
               (Number(theme.pageMargin.split("px")[0]) * 2 +
                 Number(theme.navbarHeight.split("px")[0]))
-            }px,10%`}>
+            }px,0%`}>
             <ValuesCoverInner>
               <Img
                 src={"/images/steezy_interier-04.jpg"}

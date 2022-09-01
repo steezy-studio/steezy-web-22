@@ -3,7 +3,7 @@ import { useContext, useRef } from "react";
 import {
   useIntersectionObserver,
   videoCallback,
-} from "../../hooks/useIntersectionVideoObserver";
+} from "../../hooks/useIntersectionObserver";
 import { HoverProvider } from "../../pages/_app";
 import Dialog from "../Dialog/Dialog";
 import {

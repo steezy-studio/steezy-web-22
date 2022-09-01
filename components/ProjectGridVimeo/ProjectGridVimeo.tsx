@@ -1,9 +1,8 @@
 import Vimeo from "@u-wave/react-vimeo";
 import { motion } from "framer-motion";
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { useLocomotiveScroll } from "react-locomotive-scroll";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import { colors } from "../../helpers/consts";
+import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import { HoverProvider } from "../../pages/_app";
 
 interface ProjectGridVimeoProps {
@@ -30,7 +29,19 @@ const Overlay = styled.div`
 const ProjectGridVimeo = ({ vimeoId }: ProjectGridVimeoProps, ref) => {
   const [isPaused, setIsPaused] = useState(true);
   const { setCursorHover, setIsCursorDisabled } = useContext(HoverProvider);
+  useIntersectionObserver(
+    ref,
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!isPaused) {
+          setIsPaused(!entry.isIntersecting);
+        }
+      });
+    },
+    { threshold: 0 }
+  );
 
+  // TODO pause video when el is out of viewport
   return (
     <motion.div ref={ref}>
       <StyledProjectGridVimeo

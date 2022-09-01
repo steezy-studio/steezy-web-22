@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useIntersectionObserver } from "../../hooks/useIntersectionVideoObserver";
+import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 
 const variants = {
   fadeFromBottom: {

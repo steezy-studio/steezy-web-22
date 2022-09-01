@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {
   useIntersectionObserver,
   videoCallback,
-} from "../../hooks/useIntersectionVideoObserver";
+} from "../../hooks/useIntersectionObserver";
 
 interface VideoProps
   extends React.DetailedHTMLProps<

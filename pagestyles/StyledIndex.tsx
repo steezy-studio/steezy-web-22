@@ -37,6 +37,12 @@ export const LandingpageHeroClients = styled.div`
   }
   ${breakpoint.tabletLandscape} {
     grid-row-gap: 10px;
+    justify-content: end;
+  }
+  ${breakpoint.tabletPortrait} {
+    justify-content: start;
+  }
+  ${breakpoint.phone} {
     justify-content: start;
   }
 `;

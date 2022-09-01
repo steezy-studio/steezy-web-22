@@ -1,8 +1,15 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { allProjects } from "../../helpers/consts";
+import { useLocomotiveScroll } from "react-locomotive-scroll";
 import strings from "../../data/strings";
+import { allProjects } from "../../helpers/consts";
+import Fixed from "../Fixed/Fixed";
+import { HeroSocials } from "../Hero/Styles/StyledHero";
+import Instagram from "../Icons/Instagram";
+import Vimeo from "../Icons/Vimeo";
+import { StyledImg } from "../Img/Styles/StyledImg";
 import Logo from "../Logo/Logo";
+import { Micro } from "../Typo/Micro";
 import Burger from "./Burger";
 import NavLink from "./NavLink";
 import {
@@ -11,15 +18,6 @@ import {
   PhoneDecoration,
   StyledNavbar,
 } from "./Styles/StyledNavbar";
-import Fixed from "../Fixed/Fixed";
-import { StyledImg } from "../Img/Styles/StyledImg";
-import Contact from "../../pages/contact";
-import { Small } from "../Typo/Small";
-import { HeroSocials } from "../Hero/Styles/StyledHero";
-import Instagram from "../Icons/Instagram";
-import Vimeo from "../Icons/Vimeo";
-import { Micro } from "../Typo/Micro";
-import { useWindowSize } from "../../hooks/useWindowSize";
 
 interface NavbarProps {
   areas: { highlighted: boolean; link: string; name: string }[];
@@ -27,17 +25,16 @@ interface NavbarProps {
 
 const Navbar = ({ areas = [] }: NavbarProps) => {
   const [isMenuOpen, openMenu] = useState(false);
-  const { w, h } = useWindowSize();
   const router = useRouter();
-
-  console.log(h);
+  const { scroll } = useLocomotiveScroll();
+  const hasSmoothScroll = !!scroll?.smooth;
 
   return (
-    <Fixed id={"fixed-navbar"}>
-      <StyledNavbar>
+    <Fixed id={"fixed-navbar"} hasSmoothScroll={hasSmoothScroll}>
+      <StyledNavbar hasSmoothScroll={hasSmoothScroll}>
         <Logo />
         <NavLinks
-          windowHeight={h}
+          hasSmoothScroll={hasSmoothScroll}
           animate={isMenuOpen ? "open" : "close"}
           initial={false}
           style={{

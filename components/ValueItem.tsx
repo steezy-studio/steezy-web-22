@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import strings from "../data/strings";
 import { device } from "../helpers/consts";
-import { useIntersectionObserver } from "../hooks/useIntersectionVideoObserver";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import { useWindowSize } from "../hooks/useWindowSize";
 import Img from "./Img/Img";
 import {

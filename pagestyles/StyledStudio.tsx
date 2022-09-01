@@ -10,17 +10,6 @@ export const TextBlock = styled(motion.div)`
   grid-template-columns: 1fr 1fr;
   grid-gap: ${({ theme }) => theme.pageMargin};
   margin: ${({ theme }) => u(1.5, theme.pageMargin)} 0;
-  .header {
-    display: grid;
-    align-items: start;
-    grid-auto-flow: column;
-    grid-auto-columns: auto;
-    grid-gap: 60px;
-    padding-right: 60px;
-    ${breakpoint.smallNotebook} {
-      grid-auto-flow: row;
-    }
-  }
   ${breakpoint.largeNotebook} {
     grid-template-columns: 5fr 3fr;
   }
@@ -28,23 +17,34 @@ export const TextBlock = styled(motion.div)`
     grid-template-columns: 1fr 1fr;
     align-items: end;
   }
-  ${breakpoint.tabletPortrait} {
-    .header {
-      grid-gap: 30px;
-    }
-  }
   ${breakpoint.phone} {
     grid-template-columns: unset;
     width: 80%;
     margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
     grid-gap: 20px;
-    .header {
-      padding-right: unset;
-      grid-gap: 20px;
-    }
   }
 `;
-
+export const TextBlockHeader = styled.div`
+  display: grid;
+  align-items: start;
+  grid-auto-flow: column;
+  grid-auto-columns: auto;
+  grid-gap: 60px;
+  padding-right: 60px;
+  ${breakpoint.smallNotebook} {
+    grid-auto-flow: row;
+  }
+  ${breakpoint.tabletPortrait} {
+    grid-gap: 30px;
+  }
+  ${breakpoint.phone} {
+    padding-right: unset;
+    grid-gap: 20px;
+  }
+`;
+export const TextBlockBody = styled.div`
+  max-width: 500px;
+`;
 export const ValuesSection = styled.section`
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -85,6 +85,7 @@ export const ValuesCover = styled.div`
   position: sticky;
   align-self: start;
   ${breakpoint.phone} {
+    position: static;
     margin-bottom: ${({ theme }) => u(3, theme.pageMargin)};
   }
 `;

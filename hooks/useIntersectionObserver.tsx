@@ -1,17 +1,17 @@
 import React, { ReactHTMLElement } from "react";
 
 export function useIntersectionObserver(
-  videoRef: React.MutableRefObject<Element>,
+  ref: React.MutableRefObject<Element>,
   callback: IntersectionObserverCallback,
   options?: IntersectionObserverInit
 ) {
   React.useEffect(() => {
-    if (videoRef.current) {
+    if (ref.current) {
       const observer = new IntersectionObserver(callback, options);
-      observer.observe(videoRef.current);
+      observer.observe(ref.current);
       return () => observer.disconnect();
     }
-  }, [videoRef.current, options?.rootMargin]);
+  }, [ref.current, options?.rootMargin]);
 }
 
 export const videoCallback = (

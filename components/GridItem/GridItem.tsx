@@ -21,7 +21,7 @@ import {
 import {
   useIntersectionObserver,
   videoCallback,
-} from "../../hooks/useIntersectionVideoObserver";
+} from "../../hooks/useIntersectionObserver";
 import Animation from "../Animation/Animation";
 import { HoverProvider } from "../../pages/_app";
 

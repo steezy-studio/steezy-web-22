@@ -18,7 +18,7 @@ export const HoverProvider = React.createContext(null);
 
 function MyApp({ Component, pageProps }) {
   const { w } = useWindowSize();
-  const { asPath } = useRouter();
+  const { asPath, basePath, pathname } = useRouter();
   const containerRef = useRef(null);
   const [cursorHover, setCursorHover] = useState(false);
   const [isCursorDisabled, setIsCursorDisabled] = useState(false);
@@ -28,8 +28,11 @@ function MyApp({ Component, pageProps }) {
       <GlobalStyle />
       <LocomotiveScrollProvider
         options={{
-          smooth: true,
-          tablet: { smooth: true, breakpoint: device.phone },
+          smooth: pathname !== "/project/[projectSlug]",
+          tablet: {
+            smooth: pathname !== "/project/[projectSlug]",
+            breakpoint: device.phone,
+          },
           smartphone: { smooth: false },
         }}
         watch={[asPath, w]}

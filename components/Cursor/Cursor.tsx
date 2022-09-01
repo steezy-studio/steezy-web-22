@@ -1,10 +1,7 @@
-import events from "events";
 import { motion } from "framer-motion";
-import React, { useEffect, useRef } from "react";
-import { useLocomotiveScroll } from "react-locomotive-scroll";
-import styled, { createGlobalStyle } from "styled-components";
+import { useEffect, useRef } from "react";
+import styled from "styled-components";
 import { breakpoint, colors } from "../../helpers/consts";
-import Fixed from "../Fixed/Fixed";
 
 interface CursorProps {
   hover?: boolean;
@@ -12,7 +9,7 @@ interface CursorProps {
 }
 
 const StyledCursor = styled(motion.div)`
-  position: absolute;
+  position: fixed;
   mix-blend-mode: difference;
   z-index: 999999999999999999999999999999999999999999999999;
   pointer-events: none;
