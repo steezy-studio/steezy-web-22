@@ -3,7 +3,8 @@ import React, { ReactHTMLElement } from "react";
 export function useIntersectionObserver(
   ref: React.MutableRefObject<Element>,
   callback: IntersectionObserverCallback,
-  options?: IntersectionObserverInit
+  options?: IntersectionObserverInit,
+  deps: any[] = []
 ) {
   React.useEffect(() => {
     if (ref.current) {
@@ -11,7 +12,7 @@ export function useIntersectionObserver(
       observer.observe(ref.current);
       return () => observer.disconnect();
     }
-  }, [ref.current, options?.rootMargin]);
+  }, [ref.current, options?.rootMargin, ...deps]);
 }
 
 export const videoCallback = (

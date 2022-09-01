@@ -29,19 +29,21 @@ const Overlay = styled.div`
 const ProjectGridVimeo = ({ vimeoId }: ProjectGridVimeoProps, ref) => {
   const [isPaused, setIsPaused] = useState(true);
   const { setCursorHover, setIsCursorDisabled } = useContext(HoverProvider);
+
   useIntersectionObserver(
     ref,
     (entries) => {
       entries.forEach((entry) => {
         if (!isPaused) {
+          console.log(!entry.isIntersecting);
           setIsPaused(!entry.isIntersecting);
         }
       });
     },
-    { threshold: 0 }
+    { threshold: 0 },
+    [isPaused]
   );
 
-  // TODO pause video when el is out of viewport
   return (
     <motion.div ref={ref}>
       <StyledProjectGridVimeo
