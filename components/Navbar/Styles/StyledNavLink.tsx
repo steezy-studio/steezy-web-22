@@ -13,7 +13,7 @@ export const StyledNavLink = styled(motion.a)`
   }
   &,
   &:visited {
-    color: ${colors.gray500};
+    color: ${colors.gray400};
   }
   &.active {
     & {
@@ -60,7 +60,7 @@ export const StyledNavLink = styled(motion.a)`
     }
     &,
     &:visited {
-      color: ${colors.black};
+      color: ${colors.gray400};
     }
     &.highlighted {
       &,

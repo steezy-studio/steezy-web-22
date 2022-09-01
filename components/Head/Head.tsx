@@ -22,7 +22,7 @@ const Head = ({ pageName, ogTitle, ogImageSrc, ogDescription }: Props) => {
       <link rel='manifest' href='/manifest.json'></link>
 
       <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      <meta name='theme-color' content={colors.white} />
+      <meta name='theme-color' content={colors.primary300} />
       <meta name='description' content={ogDescription} />
 
       <meta property='og:title' content={ogTitle} />

@@ -1,7 +1,6 @@
-import React, { CSSProperties, StyleHTMLAttributes } from "react";
 import NextImage, { ImageProps } from "next/image";
+import React, { CSSProperties } from "react";
 import { StyledImg } from "./Styles/StyledImg";
-import { StyledProps } from "styled-components";
 
 interface ImgProps extends ImageProps {
   style?: CSSProperties | undefined;

@@ -29,6 +29,7 @@ interface HeroProps {
 const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
   const [openDialog, setOpenDialog] = useState(false);
   const { w } = useWindowSize();
+  const isPhone = w <= device.phone;
 
   return (
     <StyledHero>
@@ -63,12 +64,12 @@ const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
           ) : (
             <Img
               src={asset.url}
-              width={asset.width}
-              height={asset.height}
+              width={isPhone ? undefined : asset.width}
+              height={isPhone ? undefined : asset.height}
               placeholder={`blur`}
               blurDataURL={asset.url}
               objectFit={"cover"}
-              layout={w <= device.phone ? "fill" : "responsive"}
+              layout={isPhone ? "fill" : "responsive"}
             />
           )}
         </HeroMedia>

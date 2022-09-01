@@ -21,7 +21,7 @@ export const StyledNavbar = styled.nav<{ hasSmoothScroll: boolean }>`
   }
 `;
 
-export const NavLinks = styled(motion.div)<{ hasSmoothScroll: boolean }>`
+export const NavLinks = styled(motion.div)<{ $hasSmoothScroll: boolean }>`
   background-color: ${colors.black};
   width: 100%;
   display: flex;
@@ -43,8 +43,8 @@ export const NavLinks = styled(motion.div)<{ hasSmoothScroll: boolean }>`
     left: ${({ theme }) => "-" + theme.pageMargin};
     right: ${({ theme }) => "-" + theme.pageMargin};
     bottom: ${({ theme }) => "-" + theme.pageMargin};
-    ${({ hasSmoothScroll }) =>
-      !hasSmoothScroll &&
+    ${({ $hasSmoothScroll }) =>
+      !$hasSmoothScroll &&
       css`
         top: 0;
         left: 0;
@@ -66,9 +66,9 @@ export const NavLinks = styled(motion.div)<{ hasSmoothScroll: boolean }>`
 export const PhoneDecoration = styled(motion.div)`
   display: none;
   ${breakpoint.tabletLandscape} {
-    position: absolute;
-    bottom: ${({ theme }) => theme.pageMargin};
+    position: fixed;
     left: ${({ theme }) => theme.pageMargin};
+    bottom: ${({ theme }) => theme.pageMargin};
     right: ${({ theme }) => theme.pageMargin};
     display: grid;
     grid-template-columns: max-content auto;

@@ -28,8 +28,8 @@ const makeRangeArray = (max: number) => {
   return [...new Array(max)].map((_, i) => i);
 };
 
-function addUniqueIds<T>(arr: T[]): T[] {
-  return arr.map((item) => ({ ...item, id: shortid.generate() }));
+function addUniqueIds(arr: ImgList[]): ImgList[] {
+  return arr.map((item, i) => ({ ...item, id: item.id + i }));
 }
 
 function cloneArray<T>(arr: T[], multiplier: number): T[] {

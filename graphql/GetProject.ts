@@ -62,6 +62,7 @@ export const GET_PROJECT = gql`
           _id
           grid_item_image {
             _type
+            _id
             url(format: "webp")
             width
             height

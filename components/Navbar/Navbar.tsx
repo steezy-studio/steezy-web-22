@@ -34,7 +34,7 @@ const Navbar = ({ areas = [] }: NavbarProps) => {
       <StyledNavbar hasSmoothScroll={hasSmoothScroll}>
         <Logo />
         <NavLinks
-          hasSmoothScroll={hasSmoothScroll}
+          $hasSmoothScroll={hasSmoothScroll}
           animate={isMenuOpen ? "open" : "close"}
           initial={false}
           style={{

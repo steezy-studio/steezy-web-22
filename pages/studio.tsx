@@ -130,12 +130,12 @@ const Studio = ({ areas }: StudioProps) => {
         </ValuesSection>
         <Animation type='fadeFromBottom'>
           <ImageSlider
-            imgList={strings.studioPage.slider.map((img) => ({
+            imgList={strings.studioPage.slider.map((img, i) => ({
               layout: "responsive",
               width: 1200,
               height: 950,
               src: `/images/${img.src}`,
-              id: shortid.generate(),
+              id: String(i),
             }))}
           />
         </Animation>

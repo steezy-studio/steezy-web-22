@@ -2,18 +2,15 @@ import { motion } from "framer-motion";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import client from "../../apollo/client";
 import Animation from "../../components/Animation/Animation";
-import GridItem from "../../components/GridItem/GridItem";
+import Head from "../../components/Head/Head";
 import Hero from "../../components/Hero/Hero";
 import Img from "../../components/Img/Img";
 import { StyledImg } from "../../components/Img/Styles/StyledImg";
-import Link from "../../components/Link/Link";
 import Navbar from "../../components/Navbar/Navbar";
 import ProjectGridVimeo from "../../components/ProjectGridVimeo/ProjectGridVimeo";
-import { Large } from "../../components/Typo/Large";
 import { Medium } from "../../components/Typo/Medium";
 import { Micro } from "../../components/Typo/Micro";
 import Video from "../../components/Video/Video";
-import strings from "../../data/strings";
 import { Areas, Project as ProjectType, Query } from "../../generated/types";
 import { GET_PROJECT } from "../../graphql/GetProject";
 import { useWindowSize } from "../../hooks/useWindowSize";
@@ -21,7 +18,6 @@ import {
   ClientQuote,
   ClientQuoteLeft,
   ClientQuoteRight,
-  NextProjectSection,
   ProjectDescription,
   ProjectGrid,
   ProjectGridBlockquote,
@@ -38,10 +34,12 @@ interface ProjectProps {
 }
 
 const Project = ({ projectData, areas }: ProjectProps) => {
-  const { w } = useWindowSize();
-
   return (
     <>
+      <Head
+        ogTitle={projectData.project_detail_name}
+        pageName={[`Project`, projectData.project_detail_name]}
+      />
       <Navbar
         areas={areas.items.map(({ area_name, _slug }) => ({
           highlighted: false,
