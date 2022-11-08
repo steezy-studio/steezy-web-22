@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import client from "../apollo/client";
 import { Query } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
-import { GET_ALL_PROJECTS } from "../graphql/GetAllProjects";
+import { GET_PROJECTS } from "../graphql/GetAllProjects";
 
 const Sitemap = () => {};
 
@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const projectAreas = client.query<Query>({ query: GET_ALL_AREAS });
   const projects = client.query<Query>({
-    query: GET_ALL_PROJECTS,
+    query: GET_PROJECTS,
     variables: { limit: null },
   });
   const timestamp = new Date().toISOString();
