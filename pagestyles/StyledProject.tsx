@@ -21,6 +21,9 @@ export const ProjectHeroRoles = styled.div`
   align-items: start;
   flex-shrink: 0;
   grid-gap: 90px;
+  ${breakpoint.tabletPortrait} {
+    grid-gap: 40px;
+  }
   ${breakpoint.phone} {
     grid-auto-flow: unset;
     grid-template-columns: 1fr 1fr;

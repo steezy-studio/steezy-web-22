@@ -26,14 +26,14 @@ export const StyledImg = styled(motion.div)`
     }
   }
   ${ProjectHeroFooter} & {
-    height: auto;
-    height: 70px;
+    height: 100%;
+    max-height: 70px;
     align-self: start;
     ${breakpoint.tabletLandscape} {
       justify-self: end;
     }
     ${breakpoint.phone} {
-      height: 50px;
+      max-height: 50px;
       justify-self: start;
     }
   }

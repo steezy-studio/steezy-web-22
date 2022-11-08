@@ -50,7 +50,6 @@ export const HeroText = styled(motion.div)`
   * {
     pointer-events: all;
   }
-  width: ${({ theme }) => u(6, theme.pageMargin)};
   position: absolute;
   top: 30vh;
   z-index: 1;
@@ -59,17 +58,10 @@ export const HeroText = styled(motion.div)`
   .perex {
     max-width: 350px;
   }
-  ${StyledContact} & {
-    width: ${({ theme }) => u(10, theme.pageMargin)};
-  }
   ${breakpoint.largeNotebook} {
     .perex {
       max-width: 250px;
     }
-    width: ${({ theme }) => u(7, theme.pageMargin)};
-  }
-  ${breakpoint.smallNotebook} {
-    width: ${({ theme }) => u(5, theme.pageMargin)};
   }
   ${breakpoint.tabletLandscape} {
     top: 25vh;
@@ -78,8 +70,7 @@ export const HeroText = styled(motion.div)`
     width: 100%;
     position: static;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: ${({ theme }) => theme.pageMargin};
+    row-gap: ${({ theme }) => theme.pageMargin};
     margin-top: ${({ theme }) => u(1, theme.pageMargin)};
     order: 2;
     ${StyledIndex} & {
