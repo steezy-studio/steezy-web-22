@@ -8,6 +8,9 @@ export const FRAGMENT_GET_ALL_AREAS = gql`
       sub_areas
       area_description
       is_default
+      projects {
+        _id
+      }
     }
   }
 `;

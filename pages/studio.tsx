@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
 import { useState } from "react";
-import shortid from "shortid";
 import { useTheme } from "styled-components";
 import client from "../apollo/client";
 import Animation from "../components/Animation/Animation";

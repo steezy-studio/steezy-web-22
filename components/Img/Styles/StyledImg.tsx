@@ -27,15 +27,13 @@ export const StyledImg = styled(motion.div)`
   }
   ${ProjectHeroFooter} & {
     height: auto;
-    min-width: 50px;
-    max-width: 80px;
+    height: 70px;
     align-self: start;
     ${breakpoint.tabletLandscape} {
       justify-self: end;
     }
     ${breakpoint.phone} {
-      min-width: 80px;
-      max-width: 100px;
+      height: 50px;
       justify-self: start;
     }
   }

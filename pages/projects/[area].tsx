@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { EnhancedProject } from "..";
 import client, { withApolloClient } from "../../apollo/client";
 import GridItem from "../../components/GridItem/GridItem";
 import Head from "../../components/Head/Head";
@@ -30,7 +31,7 @@ import {
 
 interface ProjectsProps {
   areas: Areas;
-  projects: Project[];
+  projects: EnhancedProject[];
   projectsCount: number;
 }
 
@@ -97,16 +98,13 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
         <ProjectsGrid>
           <ProjectsGridColumn className='even'>
             {paginatedProjects.map(
-              (
-                { project_tags, project_grid_name, _slug, grid_image, _id },
-                i
-              ) => {
+              ({ project_grid_name, _slug, grid_image, _id, areas }, i) => {
                 if (i % 2 !== 0 || w <= device.phone) {
                   return (
                     <ProjectsGridItem key={_id + router.query.area}>
                       <GridItem
                         type={grid_image[0]._type}
-                        areas={project_tags}
+                        areas={areas}
                         height={grid_image?.[0].height}
                         projectName={project_grid_name}
                         slug={_slug}
@@ -126,16 +124,13 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
           {w > device.phone && (
             <ProjectsGridColumn className='odd'>
               {paginatedProjects.map(
-                (
-                  { project_tags, project_grid_name, _slug, grid_image, _id },
-                  i
-                ) => {
+                ({ project_grid_name, _slug, grid_image, _id, areas }, i) => {
                   if (i % 2 === 0) {
                     return (
                       <ProjectsGridItem key={_id + router.query.area}>
                         <GridItem
                           type={grid_image[0]._type}
-                          areas={project_tags}
+                          areas={areas}
                           height={grid_image?.[0].height}
                           projectName={project_grid_name}
                           slug={_slug}
@@ -180,7 +175,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       areas: areasData.data.Areas,
-      projects: areaData.data.Area.projects,
+      projects: areaData.data.Area.projects.map((project) => {
+        return {
+          ...project,
+          areas: areasData.data.Areas.items.filter((area) => {
+            if (area._slug === "all-projects") return false;
+            return area.projects.some((item) => item._id === project._id);
+          }),
+        };
+      }),
       projectsCount: areaData.data.Area.projects.length,
     },
     revalidate: Number(process.env.REVALIDATE),

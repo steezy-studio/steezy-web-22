@@ -16,11 +16,6 @@ export const GET_PROJECTS = gql`
         }
       }
       project_grid_name
-      project_tags {
-        area_name
-        _id
-        _slug
-      }
     }
   }
 `;

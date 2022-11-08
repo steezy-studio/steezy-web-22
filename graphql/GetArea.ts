@@ -21,11 +21,6 @@ export const GET_AREA = gql`
           }
         }
         project_grid_name
-        project_tags {
-          area_name
-          _id
-          _slug
-        }
       }
     }
   }

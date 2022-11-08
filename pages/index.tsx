@@ -10,7 +10,13 @@ import Navbar from "../components/Navbar/Navbar";
 import { Large } from "../components/Typo/Large";
 import { Micro } from "../components/Typo/Micro";
 import strings from "../data/strings";
-import { Areas, LandingpageGrids } from "../generated/types";
+import {
+  Area,
+  Areas,
+  LandingpageGridRow as LandingpageGridRowType,
+  Project,
+  Query,
+} from "../generated/types";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
 import { allProjects } from "../helpers/consts";
 import {
@@ -25,8 +31,12 @@ import {
 } from "../pagestyles/StyledIndex";
 import { HoverProvider } from "./_app";
 
+export interface EnhancedProject extends Project {
+  areas: Area[];
+}
+
 interface indexProps {
-  landingpageGrid: LandingpageGrids;
+  landingpageGrid: LandingpageGridRowType[];
   areas: Areas;
 }
 const Index = ({ landingpageGrid, areas }: indexProps) => {
@@ -99,7 +109,7 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
           </div>
         </Intro>
         <LandingpageGrid>
-          {landingpageGrid.items[0].landingpage_projects_grid.map((row) => {
+          {landingpageGrid.map((row) => {
             if (row.__typename === `LandingpageGridRow`) {
               const isSingle = row.grid_row.length === 1;
 
@@ -109,10 +119,11 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                     ({
                       project_grid_name,
                       landingpage_grid_image,
-                      project_tags,
+
                       _slug,
                       _id,
-                    }) => {
+                      areas,
+                    }: EnhancedProject) => {
                       return (
                         <GridItemWrapper
                           key={_id}
@@ -121,7 +132,7 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                           }`}>
                           <GridItem
                             type={landingpage_grid_image[0]._type}
-                            areas={project_tags}
+                            areas={areas}
                             projectName={project_grid_name}
                             videoThumb={landingpage_grid_image[0].cover}
                             width={landingpage_grid_image[0].width}
@@ -157,11 +168,27 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await client.query({ query: GET_LANDINGPAGE });
+  const data = await client.query<Query>({ query: GET_LANDINGPAGE });
+
+  const enhancedGrid =
+    data.data.LandingpageGrids.items[0].landingpage_projects_grid.map((row) => {
+      return {
+        ...row,
+        grid_row: row.grid_row.map((project) => {
+          return {
+            ...project,
+            areas: data.data.Areas.items.filter((area) => {
+              if (area._slug === "all-projects") return false;
+              return area.projects.some((item) => item._id === project._id);
+            }),
+          };
+        }),
+      };
+    });
 
   return {
     props: {
-      landingpageGrid: data.data.LandingpageGrids,
+      landingpageGrid: enhancedGrid,
       areas: data.data.Areas,
     },
     revalidate: Number(process.env.REVALIDATE),

@@ -21,10 +21,6 @@ export const GET_PROJECT = gql`
         _type
       }
       project_detail_name
-      project_tags {
-        area_name
-        _slug
-      }
       client_name
       client_position
       client_quote
@@ -44,10 +40,6 @@ export const GET_PROJECT = gql`
       }
       next_project {
         _slug
-        project_tags {
-          _id
-          area_name
-        }
         hero_image {
           url
           width
