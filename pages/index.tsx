@@ -42,13 +42,7 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
         pageName={"STEEZY Studio"}
         ogTitle={"STEEZY Studio"}
       />
-      <Navbar
-        areas={areas.items.map(({ area_name, _slug }) => ({
-          highlighted: false,
-          link: `/projects/${_slug}`,
-          name: area_name,
-        }))}
-      />
+      <Navbar areas={areas.items} />
 
       <StyledIndex>
         <Hero

@@ -41,13 +41,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
         ogImageSrc={projectData.hero_image[0].url}
         pageName={[`Project`, projectData.project_detail_name]}
       />
-      <Navbar
-        areas={areas.items.map(({ area_name, _slug }) => ({
-          highlighted: false,
-          link: `/projects/${_slug}`,
-          name: area_name,
-        }))}
-      />
+      <Navbar areas={areas.items} />
       <StyledProject>
         <Hero
           asset={projectData.hero_image[0]}
