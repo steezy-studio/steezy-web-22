@@ -57,6 +57,8 @@ export const StyledImg = styled(motion.div)`
   ${ClientQuote} & {
     width: 250px;
     height: 250px;
+    border-radius: 9999999999999px;
+    overflow: hidden;
     ${breakpoint.smallNotebook} {
       width: 150px;
       height: 150px;

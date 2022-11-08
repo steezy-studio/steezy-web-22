@@ -1,10 +1,19 @@
-import Vimeo from "@u-wave/react-vimeo";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
 import u from "../helpers/unit";
 
 export const StyledProject = styled.div``;
+
+export const Breadcrumbs = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: ${({ theme }) => u(0.25, theme.pageMargin)};
+  ${breakpoint.phone} {
+    margin-bottom: 15px;
+  }
+`;
 
 export const ProjectHeroRoles = styled.div`
   display: grid;

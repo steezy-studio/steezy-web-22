@@ -6,6 +6,7 @@ import Head from "../../components/Head/Head";
 import Hero from "../../components/Hero/Hero";
 import Img from "../../components/Img/Img";
 import { StyledImg } from "../../components/Img/Styles/StyledImg";
+import Link from "../../components/Link/Link";
 import Navbar from "../../components/Navbar/Navbar";
 import ProjectGridVimeo from "../../components/ProjectGridVimeo/ProjectGridVimeo";
 import { Medium } from "../../components/Typo/Medium";
@@ -13,7 +14,9 @@ import { Micro } from "../../components/Typo/Micro";
 import Video from "../../components/Video/Video";
 import { Areas, Project as ProjectType, Query } from "../../generated/types";
 import { GET_PROJECT } from "../../graphql/GetProject";
+import { colors } from "../../helpers/consts";
 import {
+  Breadcrumbs,
   ClientQuote,
   ClientQuoteLeft,
   ClientQuoteRight,
@@ -33,6 +36,7 @@ interface ProjectProps {
 }
 
 const Project = ({ projectData, areas }: ProjectProps) => {
+  const defaultArea = areas.items.find((area) => area.is_default);
   return (
     <>
       <Head
@@ -46,7 +50,24 @@ const Project = ({ projectData, areas }: ProjectProps) => {
         <Hero
           asset={projectData.hero_image[0]}
           header={() => projectData.project_detail_name}
-          subHeader={``}>
+          subHeader={
+            <Breadcrumbs>
+              <Micro>
+                <Link href={`/projects/${defaultArea._slug}`}>
+                  {defaultArea.area_name}
+                </Link>
+              </Micro>
+              <div
+                style={{
+                  height: 1,
+                  width: 20,
+                  backgroundColor: colors.black,
+                  display: "inline-block",
+                }}
+              />
+              <Micro>{projectData.company_name}</Micro>
+            </Breadcrumbs>
+          }>
           <ProjectHeroFooter>
             <ProjectHeroRoles>
               {projectData.project_facts?.map((fact, i) => {

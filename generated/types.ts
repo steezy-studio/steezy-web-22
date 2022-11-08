@@ -67,9 +67,9 @@ export type Area = {
   area_description?: Maybe<Scalars["String"]>;
   area_name?: Maybe<Scalars["String"]>;
   area_order?: Maybe<Scalars["Int"]>;
+  is_default?: Maybe<Scalars["Boolean"]>;
   projects?: Maybe<Array<Project>>;
   sub_areas?: Maybe<Scalars["String"]>;
-  is_default?: Maybe<Scalars["Boolean"]>;
 };
 
 export enum AreaSortInput {
@@ -142,6 +142,8 @@ export type AreaWhereInput = {
   area_order_lt?: InputMaybe<Scalars["Int"]>;
   /** Matches if the field is less than or equal to the given value. */
   area_order_lte?: InputMaybe<Scalars["Int"]>;
+  /** Matches if the field is equal to the given value. */
+  is_default?: InputMaybe<Scalars["Boolean"]>;
   projects?: InputMaybe<ProjectWhereInput>;
   /** Matches if the field is equal to the given value. */
   sub_areas?: InputMaybe<Scalars["String"]>;
@@ -587,6 +589,7 @@ export type Project = {
   _votes?: Maybe<Scalars["Int"]>;
   client_logo?: Maybe<Array<Maybe<Asset>>>;
   client_name?: Maybe<Scalars["String"]>;
+  company_name?: Maybe<Scalars["String"]>;
   client_photo?: Maybe<Array<Maybe<Asset>>>;
   client_position?: Maybe<Scalars["String"]>;
   client_quote?: Maybe<Scalars["String"]>;
@@ -600,7 +603,6 @@ export type Project = {
   project_facts?: Maybe<Array<Maybe<_Prepr_Types>>>;
   project_grid_name?: Maybe<Scalars["String"]>;
   project_presentation?: Maybe<Array<Maybe<_Prepr_Types>>>;
-  project_tags?: Maybe<Array<Area>>;
 };
 
 /** ProjectArea component. */
@@ -757,7 +759,6 @@ export type ProjectWhereInput = {
   project_grid_name_ends_with?: InputMaybe<Scalars["String"]>;
   /** Matches if the field starts with the given value. */
   project_grid_name_starts_with?: InputMaybe<Scalars["String"]>;
-  project_tags?: InputMaybe<AreaWhereInput>;
 };
 
 /** List of Projects items. */
