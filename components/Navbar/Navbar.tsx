@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useLocomotiveScroll } from "react-locomotive-scroll";
 import strings from "../../data/strings";
-import { allProjects } from "../../helpers/consts";
+import { Area } from "../../generated/types";
 import Fixed from "../Fixed/Fixed";
 import { HeroSocials } from "../Hero/Styles/StyledHero";
 import Instagram from "../Icons/Instagram";
@@ -20,10 +20,10 @@ import {
 } from "./Styles/StyledNavbar";
 
 interface NavbarProps {
-  areas: { highlighted: boolean; link: string; name: string }[];
+  areas: Area[];
 }
 
-const Navbar = ({ areas = [] }: NavbarProps) => {
+const Navbar = ({ areas }: NavbarProps) => {
   const [isMenuOpen, openMenu] = useState(false);
   const router = useRouter();
   const { scroll } = useLocomotiveScroll();
@@ -64,15 +64,16 @@ const Navbar = ({ areas = [] }: NavbarProps) => {
               },
             },
           }}>
-          {[
-            {
-              name: allProjects.area_name,
-              link: `/projects/${allProjects._slug}`,
-              highlighted: true,
-            },
-            ...areas,
-            ...strings.navData,
-          ].map(({ highlighted, link, name }) => (
+          {areas.map(({ area_name, _slug, is_default }) => (
+            <NavLink
+              active={router.asPath === `/projects/${_slug}`}
+              highlighted={is_default}
+              href={`/projects/${_slug}`}
+              key={_slug}>
+              {area_name}
+            </NavLink>
+          ))}
+          {strings.navData.map(({ highlighted, link, name }) => (
             <NavLink
               active={router.asPath === link}
               highlighted={highlighted}

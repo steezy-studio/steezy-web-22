@@ -34,6 +34,10 @@ export const Large = styled.h1`
   }
   ${HeroText} & {
     white-space: pre-wrap;
+    ${breakpoint.phone} {
+      max-width: 400px;
+      white-space: normal;
+    }
   }
   ${StyledContact} & {
     line-height: 1.2em;

@@ -34,6 +34,7 @@ const Fixed = ({ children, id, hasSmoothScroll = true }: FixedProps) => {
     (child) => {
       if (React.isValidElement(child)) {
         return React.cloneElement<typeof scrollFixedProps>(
+          // @ts-ignore
           child,
           scrollFixedProps
         );

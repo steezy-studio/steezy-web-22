@@ -17,10 +17,6 @@ export const GET_LANDINGPAGE = gql`
             _slug
             _id
             project_grid_name
-            project_tags {
-              area_name
-              _slug
-            }
             landingpage_grid_image {
               url(format: "webp")
               _type

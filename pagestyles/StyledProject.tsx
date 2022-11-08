@@ -1,4 +1,3 @@
-import Vimeo from "@u-wave/react-vimeo";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
@@ -6,12 +5,25 @@ import u from "../helpers/unit";
 
 export const StyledProject = styled.div``;
 
+export const Breadcrumbs = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: ${({ theme }) => u(0.25, theme.pageMargin)};
+  ${breakpoint.phone} {
+    margin-bottom: 15px;
+  }
+`;
+
 export const ProjectHeroRoles = styled.div`
   display: grid;
   grid-auto-flow: column;
   align-items: start;
   flex-shrink: 0;
   grid-gap: 90px;
+  ${breakpoint.tabletPortrait} {
+    grid-gap: 40px;
+  }
   ${breakpoint.phone} {
     grid-auto-flow: unset;
     grid-template-columns: 1fr 1fr;
@@ -65,9 +77,15 @@ export const ProjectGrid = styled.div`
 
 export const ProjectGridRow = styled(motion.div)`
   display: grid;
-  grid-auto-flow: column;
   grid-auto-columns: 1fr;
+  grid-auto-flow: column;
   grid-gap: ${({ theme }) => `calc(${theme.pageMargin} / 2)`};
+  &.blockquote {
+    grid-template-areas: ". blockquote";
+    &.reverse {
+      grid-template-areas: "blockquote .";
+    }
+  }
   ${breakpoint.phone} {
     grid-auto-flow: row;
     grid-gap: ${({ theme }) => `calc(${theme.pageMargin})`};
@@ -75,6 +93,7 @@ export const ProjectGridRow = styled(motion.div)`
 `;
 
 export const ProjectGridBlockquote = styled.div`
+  grid-area: blockquote;
   padding: ${({ theme }) => u(1, theme.pageMargin)}
     ${({ theme }) => u(3, theme.pageMargin)}
     ${({ theme }) => u(1, theme.pageMargin)} 0;

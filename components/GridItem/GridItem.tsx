@@ -6,7 +6,7 @@ import parse, {
 } from "html-react-parser";
 import { type } from "os";
 import { useRef, useState } from "react";
-import { Area } from "../../generated/types";
+import { Area, Areas } from "../../generated/types";
 import Img from "../Img/Img";
 import { StyledLink } from "../Link/Styles/StyledLink";
 import { Micro } from "../Typo/Micro";
@@ -102,9 +102,7 @@ const GridItem = ({
             />
           )}
           {type === "Video" && (
-            <VideoWrapper
-            // style={{ paddingBottom: `${videoAspect * 100}%` }}
-            >
+            <VideoWrapper>
               <GridItemVideo
                 ref={videoRef}
                 src={src}

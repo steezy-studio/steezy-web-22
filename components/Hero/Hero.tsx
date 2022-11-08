@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { Asset } from "../../generated/types";
 import { device } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
@@ -20,7 +20,7 @@ interface HeroProps {
     openDialog: boolean,
     setOpenDialog: React.Dispatch<React.SetStateAction<boolean>>
   ) => string | JSX.Element;
-  subHeader?: string;
+  subHeader?: ReactNode;
   perex?: string;
   children?: JSX.Element | JSX.Element[];
   asset: Asset;
@@ -36,10 +36,15 @@ const Hero = ({ header, subHeader, children, asset, perex }: HeroProps) => {
       <Animation type={"fadeFromBottom"} delay={0.7} style={{ zIndex: 100 }}>
         <HeroText>
           <HeroHeaderContainer>
-            {subHeader && (
+            {subHeader && typeof subHeader === "string" && (
               <Micro data-scroll data-scroll-speed='3' className='sub-header'>
                 {subHeader}
               </Micro>
+            )}
+            {typeof subHeader === "object" && (
+              <div data-scroll data-scroll-speed='3'>
+                {subHeader}
+              </div>
             )}
             <Large data-scroll data-scroll-speed='2'>
               {header(openDialog, setOpenDialog)}

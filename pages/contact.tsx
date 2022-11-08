@@ -22,13 +22,7 @@ const Contact = ({ areas }: ContactProps) => {
         ogDescription={strings.contactPage.hero.subHeader}
         ogImageSrc={"/images/contact-hero.jpg"}
       />
-      <Navbar
-        areas={areas.items.map(({ area_name, _slug }) => ({
-          highlighted: false,
-          link: `/projects/${_slug}`,
-          name: area_name,
-        }))}
-      />
+      <Navbar areas={areas.items} />
 
       <StyledContact>
         <Hero
@@ -48,7 +42,8 @@ const Contact = ({ areas }: ContactProps) => {
             url: "/images/contact-hero.jpg",
             width: 1815,
             height: 1089,
-          }}></Hero>
+          }}
+        />
       </StyledContact>
     </>
   );

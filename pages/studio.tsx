@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
 import { useState } from "react";
-import shortid from "shortid";
 import { useTheme } from "styled-components";
 import client from "../apollo/client";
 import Animation from "../components/Animation/Animation";
@@ -63,13 +62,7 @@ const Studio = ({ areas }: StudioProps) => {
         ogImageSrc={`/images/studio-hero.jpg`}
         ogTitle={studioStrings.hero.header.rest}
       />
-      <Navbar
-        areas={areas?.items.map(({ area_name, _slug }) => ({
-          highlighted: false,
-          link: `/projects/${_slug}`,
-          name: area_name,
-        }))}
-      />
+      <Navbar areas={areas?.items} />
 
       <StyledStudio>
         <Hero
@@ -149,18 +142,23 @@ const Studio = ({ areas }: StudioProps) => {
             <Micro className='with-dash'>{studioStrings.services.header}</Micro>
           </Animation>
           <ServicesList>
-            {areas.items.map(({ sub_areas, area_name, _slug }, i) => (
-              <Animation type='fadeFromBottom' key={_slug} delay={0.2 * i}>
-                <motion.div>
-                  <Medium className='big'>
-                    <Link href={`/projects/${_slug}`}>{area_name}</Link>
-                  </Medium>
-                  <SubServicesList>
-                    <Medium>{sub_areas}</Medium>
-                  </SubServicesList>
-                </motion.div>
-              </Animation>
-            ))}
+            {areas.items.map(
+              ({ sub_areas, area_name, _slug, is_default }, i) => {
+                if (is_default) return null;
+                return (
+                  <Animation type='fadeFromBottom' key={_slug} delay={0.2 * i}>
+                    <motion.div>
+                      <Medium className='big'>
+                        <Link href={`/projects/${_slug}`}>{area_name}</Link>
+                      </Medium>
+                      <SubServicesList>
+                        <Medium>{sub_areas}</Medium>
+                      </SubServicesList>
+                    </motion.div>
+                  </Animation>
+                );
+              }
+            )}
           </ServicesList>
         </ServicesSection>
         <BlockquoteSection>

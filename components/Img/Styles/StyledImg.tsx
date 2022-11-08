@@ -26,16 +26,14 @@ export const StyledImg = styled(motion.div)`
     }
   }
   ${ProjectHeroFooter} & {
-    height: auto;
-    min-width: 50px;
-    max-width: 80px;
+    height: 100%;
+    max-height: 70px;
     align-self: start;
     ${breakpoint.tabletLandscape} {
       justify-self: end;
     }
     ${breakpoint.phone} {
-      min-width: 80px;
-      max-width: 100px;
+      max-height: 50px;
       justify-self: start;
     }
   }
@@ -59,6 +57,8 @@ export const StyledImg = styled(motion.div)`
   ${ClientQuote} & {
     width: 250px;
     height: 250px;
+    border-radius: 9999999999999px;
+    overflow: hidden;
     ${breakpoint.smallNotebook} {
       width: 150px;
       height: 150px;

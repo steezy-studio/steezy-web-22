@@ -8,7 +8,7 @@ export const StyledNavbar = styled.nav<{ hasSmoothScroll: boolean }>`
   pointer-events: none;
   z-index: 99999;
   top: ${({ theme }) => `calc(-100vh + ${theme.pageMargin})`};
-  width: ${({ theme }) => u(16, theme.pageMargin)};
+  width: 100%;
   height: ${({ theme }) => theme.navbarHeight};
   display: flex;
   ${({ hasSmoothScroll }) =>
@@ -17,7 +17,10 @@ export const StyledNavbar = styled.nav<{ hasSmoothScroll: boolean }>`
       top: ${({ theme }) => theme.pageMargin};
     `};
   ${breakpoint.phone} {
+    width: auto;
     top: ${({ theme }) => theme.pageMargin};
+    left: ${({ theme }) => theme.pageMargin};
+    right: ${({ theme }) => theme.pageMargin};
   }
 `;
 

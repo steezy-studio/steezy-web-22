@@ -67,6 +67,14 @@ export const Micro = styled(motion.span)`
         margin-right: 30px;
       }
     }
+    &.small {
+      &:after {
+        width: 20px;
+      }
+    }
+    &.inline {
+      display: inline-flex;
+    }
     ${breakpoint.smallNotebook} {
       ${TextBlock} &, ${ServicesSection} &, ${BrandsSection} & {
         &:after {

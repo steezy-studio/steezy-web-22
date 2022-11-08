@@ -1,17 +1,11 @@
 import { gql } from "@apollo/client";
-import { FRAGMENT_GET_ALL_AREAS } from "./fragments/FragmentGetAllAreas";
-import { GET_PROJECTS } from "./fragments/fragmentGetProjects";
+import { GET_PROJECTS as GET_PROJECTS_FRAGMENT } from "./fragments/fragmentGetProjects";
 
-export const GET_ALL_PROJECTS = gql`
-  ${FRAGMENT_GET_ALL_AREAS}
-  ${GET_PROJECTS}
-  query getAllProjects($limit: Int, $where: ProjectWhereInput) {
-    Areas(sort: area_order_ASC) {
-      ...FragmentGetAreas
-    }
-    Projects(where: $where, limit: $limit) {
+export const GET_PROJECTS = gql`
+  ${GET_PROJECTS_FRAGMENT}
+  query getProjects($limit: Int, $skip: Int, $where: ProjectWhereInput) {
+    Projects(where: $where, limit: $limit, skip: $skip) {
       ...FragmentGetProjects
-      total
     }
   }
 `;

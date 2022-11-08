@@ -3,6 +3,7 @@ import { breakpoint, colors } from "../../../helpers/consts";
 import { SubServicesList } from "../../../pagestyles/StyledStudio";
 import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
 import { Medium } from "../../Typo/Medium";
+import { Micro } from "../../Typo/Micro";
 
 export const StyledLink = styled.span`
   &,
@@ -76,6 +77,11 @@ export const StyledLink = styled.span`
     ${Medium} & {
       &:after {
         height: 1.2em;
+      }
+    }
+    ${Micro} & {
+      &:after {
+        height: 1.4em;
       }
     }
   }

@@ -1,7 +1,7 @@
-import { useLazyQuery } from "@apollo/client";
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useState } from "react";
+import { EnhancedProject } from "..";
 import client, { withApolloClient } from "../../apollo/client";
 import GridItem from "../../components/GridItem/GridItem";
 import Head from "../../components/Head/Head";
@@ -14,10 +14,9 @@ import Navbar from "../../components/Navbar/Navbar";
 import { Large } from "../../components/Typo/Large";
 import { Medium } from "../../components/Typo/Medium";
 import strings from "../../data/strings";
-import { Areas, Projects as ProjectsType, Query } from "../../generated/types";
+import { Areas, Project, Query } from "../../generated/types";
 import { GET_ALL_AREAS } from "../../graphql/GetAllAreas";
-import { GET_ALL_PROJECTS } from "../../graphql/GetAllProjects";
-import { GET_PROJECTS } from "../../graphql/GetProjects";
+import { GET_AREA } from "../../graphql/GetArea";
 import { allProjects, device, projectsPerPage } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import {
@@ -32,81 +31,26 @@ import {
 
 interface ProjectsProps {
   areas: Areas;
-  projects: ProjectsType;
+  projects: EnhancedProject[];
   projectsCount: number;
 }
 
 const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
-  const initialState = {
-    data: projects.items,
-    skip: 0,
-    hasMore: projectsCount > projectsPerPage,
-  };
   const router = useRouter();
-  const [projectsData, setProjectsData] = useState(initialState);
+  const [projectsToDisplay, setProjectsToDisplay] = useState(projectsPerPage);
   const { w } = useWindowSize();
 
-  const [getProjects, { loading, error, data: newData }] = useLazyQuery(
-    GET_PROJECTS,
-    {
-      variables: {
-        skip: projectsData.skip,
-        where: {
-          project_tags: {
-            _slug_any:
-              allProjects._slug === router.query.area
-                ? null
-                : router.query.area,
-          },
-        },
-        limit: projectsPerPage,
-      },
-      onCompleted: (newData) => {
-        if (newData.Projects === null) return;
-
-        setProjectsData((prev) => ({
-          ...prev,
-          data: [...prev.data, ...newData.Projects.items],
-        }));
-      },
-    }
-  );
-
+  // we dont use fetch pagination, because prepr.io doesnt support it for content references
+  // it is a drawback for controlling order of projects, which is more important than load time
   const handleIndexInc = () => {
-    setProjectsData((prev) => ({
-      ...prev,
-      skip: prev.skip + projectsPerPage,
-      hasMore: projectsCount - (prev.data.length + projectsPerPage) > 0,
-    }));
+    setProjectsToDisplay((prev) => prev + projectsPerPage);
   };
 
-  // next preserves state when query changes
-  // otherwise it doesn't render correct data
-  React.useEffect(() => {
-    setProjectsData(initialState);
-  }, [router.query.area]);
-
-  React.useEffect(() => {
-    if (projectsData.skip !== 0) {
-      getProjects({
-        variables: {
-          skip: projectsData.skip,
-          where: {
-            project_tags: {
-              _slug_any:
-                allProjects._slug === router.query.area
-                  ? null
-                  : router.query.area,
-            },
-          },
-          limit: projectsPerPage,
-        },
-      });
-    }
-  }, [projectsData.skip]);
   const activeArea = areas.items.find(
     (area) => area._slug === router.query.area
   );
+
+  const paginatedProjects = projects.slice(0, projectsToDisplay);
 
   return (
     <>
@@ -122,19 +66,13 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
         ogTitle={activeArea?.area_name || allProjects.area_name}
         ogImageSrc={""}
       />
-      <Navbar
-        areas={areas.items.map(({ area_name, _slug }) => ({
-          highlighted: false,
-          link: `/projects/${_slug}`,
-          name: area_name,
-        }))}
-      />
+      <Navbar areas={areas.items} />
 
       <StyledProjects>
         <ProjectsHero>
           <ProjectsHeroContent>
             <ProjectsHeroFilters>
-              {[allProjects, ...areas.items].map(({ area_name, _slug }) => {
+              {areas.items.map(({ area_name, _slug }) => {
                 const isActive = router.query.area === _slug;
                 return (
                   <Large key={_slug}>
@@ -159,23 +97,20 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
         </ProjectsHero>
         <ProjectsGrid>
           <ProjectsGridColumn className='even'>
-            {projectsData.data.map(
-              (
-                { project_tags, project_grid_name, _slug, grid_image, _id },
-                i
-              ) => {
+            {paginatedProjects.map(
+              ({ project_grid_name, _slug, grid_image, _id, areas }, i) => {
                 if (i % 2 !== 0 || w <= device.phone) {
                   return (
-                    <ProjectsGridItem key={_id}>
+                    <ProjectsGridItem key={_id + router.query.area}>
                       <GridItem
                         type={grid_image[0]._type}
-                        areas={project_tags}
+                        areas={areas}
                         height={grid_image?.[0].height}
                         projectName={project_grid_name}
                         slug={_slug}
                         src={
                           grid_image[0]._type === "Video"
-                            ? grid_image[0].cdn_files[0].url
+                            ? grid_image[0].cdn_files?.[0].url
                             : grid_image[0].url
                         }
                         width={grid_image?.[0].width}
@@ -188,17 +123,14 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
           </ProjectsGridColumn>
           {w > device.phone && (
             <ProjectsGridColumn className='odd'>
-              {projectsData.data.map(
-                (
-                  { project_tags, project_grid_name, _slug, grid_image, _id },
-                  i
-                ) => {
+              {paginatedProjects.map(
+                ({ project_grid_name, _slug, grid_image, _id, areas }, i) => {
                   if (i % 2 === 0) {
                     return (
-                      <ProjectsGridItem key={_id}>
+                      <ProjectsGridItem key={_id + router.query.area}>
                         <GridItem
                           type={grid_image[0]._type}
-                          areas={project_tags}
+                          areas={areas}
                           height={grid_image?.[0].height}
                           projectName={project_grid_name}
                           slug={_slug}
@@ -214,7 +146,7 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                   }
                 }
               )}
-              {projectsData.hasMore && (
+              {!(projectsToDisplay >= projectsCount) && (
                 <Large>
                   <StyledLink onClick={handleIndexInc}>
                     more projects
@@ -230,23 +162,29 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const data = await client.query<Query>({
-    query: GET_ALL_PROJECTS,
+  const areaReq = client.query<Query>({
+    query: GET_AREA,
     variables: {
-      limit: projectsPerPage,
-      where: {
-        project_tags: {
-          _slug_any: allProjects._slug === params.area ? null : params.area,
-        },
-      },
+      slug: params.area,
     },
   });
+  const areasReq = client.query<Query>({ query: GET_ALL_AREAS });
+
+  const [areaData, areasData] = await Promise.all([areaReq, areasReq]);
 
   return {
     props: {
-      areas: data.data.Areas,
-      projects: data.data.Projects,
-      projectsCount: data.data.Projects.total,
+      areas: areasData.data.Areas,
+      projects: areaData.data.Area.projects.map((project) => {
+        return {
+          ...project,
+          areas: areasData.data.Areas.items.filter((area) => {
+            if (area._slug === "all-projects") return false;
+            return area.projects.some((item) => item._id === project._id);
+          }),
+        };
+      }),
+      projectsCount: areaData.data.Area.projects.length,
     },
     revalidate: Number(process.env.REVALIDATE),
   };
@@ -260,7 +198,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
 
   return {
-    paths: [...paths, { params: { area: `all-projects` } }],
+    paths: paths,
     fallback: false,
   };
 };
