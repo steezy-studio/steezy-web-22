@@ -77,9 +77,15 @@ export const ProjectGrid = styled.div`
 
 export const ProjectGridRow = styled(motion.div)`
   display: grid;
-  grid-auto-flow: column;
   grid-auto-columns: 1fr;
+  grid-auto-flow: column;
   grid-gap: ${({ theme }) => `calc(${theme.pageMargin} / 2)`};
+  &.blockquote {
+    grid-template-areas: ". blockquote";
+    &.reverse {
+      grid-template-areas: "blockquote .";
+    }
+  }
   ${breakpoint.phone} {
     grid-auto-flow: row;
     grid-gap: ${({ theme }) => `calc(${theme.pageMargin})`};
@@ -87,6 +93,7 @@ export const ProjectGridRow = styled(motion.div)`
 `;
 
 export const ProjectGridBlockquote = styled.div`
+  grid-area: blockquote;
   padding: ${({ theme }) => u(1, theme.pageMargin)}
     ${({ theme }) => u(3, theme.pageMargin)}
     ${({ theme }) => u(1, theme.pageMargin)} 0;

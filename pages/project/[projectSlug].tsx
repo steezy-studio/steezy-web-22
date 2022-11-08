@@ -130,8 +130,8 @@ const Project = ({ projectData, areas }: ProjectProps) => {
             if (row.__typename === "ProjectGridBlockquote") {
               return (
                 <Animation key={`${i}_row`} type='fadeFromBottom'>
-                  <ProjectGridRow>
-                    <div></div>
+                  <ProjectGridRow
+                    className={`blockquote ${row.alignment ? "reverse" : ""}`}>
                     <ProjectGridBlockquote>
                       <Medium>{row.blockquote_text}</Medium>
                     </ProjectGridBlockquote>
