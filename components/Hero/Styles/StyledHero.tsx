@@ -12,14 +12,10 @@ export const StyledHero = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  ${breakpoint.tabletLandscape} {
-    min-height: unset;
-  }
-  ${breakpoint.tabletPortrait} {
+  @media (max-aspect-ratio: 18/11) {
     min-height: unset;
   }
   ${breakpoint.phone} {
-    min-height: 100vh;
     padding-top: 70px;
   }
 `;
@@ -46,12 +42,13 @@ export const HeroSocials = styled.div`
   }
 `;
 
-export const HeroText = styled(motion.div)`
+export const HeroText = styled.div`
   * {
     pointer-events: all;
   }
   position: absolute;
-  top: 30vh;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 1;
   display: grid;
   grid-row-gap: 30px;
@@ -63,12 +60,10 @@ export const HeroText = styled(motion.div)`
       max-width: 250px;
     }
   }
-  ${breakpoint.tabletLandscape} {
-    top: 25vh;
-  }
   ${breakpoint.tabletPortrait} {
     width: 100%;
     position: static;
+    transform: none;
     display: grid;
     row-gap: ${({ theme }) => theme.pageMargin};
     margin-top: ${({ theme }) => u(1, theme.pageMargin)};
