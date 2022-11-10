@@ -15,6 +15,9 @@ export const ProjectsHero = styled.div`
   ${breakpoint.phone} {
     padding: 25% 0;
   }
+  ${breakpoint.monitor} {
+    padding: 10% 0;
+  }
 `;
 export const ProjectsHeroContent = styled.div`
   display: grid;
