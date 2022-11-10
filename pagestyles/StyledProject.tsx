@@ -151,6 +151,9 @@ export const ClientQuoteRight = styled.div`
   ${breakpoint.largeNotebook} {
     max-width: 600px;
   }
+  ${breakpoint.tabletPortrait} {
+    padding-right: ${({ theme }) => theme.pageMargin};
+  }
 `;
 
 export const NextProjectSection = styled(motion.div)`

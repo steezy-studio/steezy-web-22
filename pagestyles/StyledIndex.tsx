@@ -49,10 +49,13 @@ export const LandingpageHeroClients = styled.div`
 
 export const LandingpageGrid = styled.div`
   display: grid;
-  grid-gap: ${({ theme }) => `calc(4 * ${theme.pageMargin})`};
+  grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
   ${breakpoint.phone} {
     grid-gap: ${({ theme }) => `calc(2 * ${theme.pageMargin})`};
     margin-top: ${({ theme }) => u(3, theme.pageMargin)};
+  }
+  ${breakpoint.monitor} {
+    grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
   }
 `;
 
