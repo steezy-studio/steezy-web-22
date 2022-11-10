@@ -164,22 +164,6 @@ const Project = ({ projectData, areas }: ProjectProps) => {
             </ClientQuote>
           </Animation>
         )}
-        {/* {projectData.next_project[0] && (
-          <Animation type='fadeFromBottom'>
-            <NextProjectSection>
-              <Large>{strings.globals.nextProject}</Large>
-              <GridItem
-                areas={projectData.next_project[0].project_tags}
-                type={"Photo"}
-                width={projectData.next_project[0].hero_image[0].width}
-                height={projectData.next_project[0].hero_image[0].height}
-                src={projectData.next_project[0].hero_image[0].url}
-                projectName={projectData.next_project[0].project_grid_name}
-                slug={projectData.next_project[0]._slug}
-              />
-            </NextProjectSection>
-          </Animation>
-        )} */}
       </StyledProject>
     </>
   );
@@ -206,3 +190,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export default Project;
+
+{
+  /* {projectData.next_project[0] && (
+          <Animation type='fadeFromBottom'>
+            <NextProjectSection>
+              <Large>{strings.globals.nextProject}</Large>
+              <GridItem
+                areas={projectData.next_project[0].project_tags}
+                type={"Photo"}
+                width={projectData.next_project[0].hero_image[0].width}
+                height={projectData.next_project[0].hero_image[0].height}
+                src={projectData.next_project[0].hero_image[0].url}
+                projectName={projectData.next_project[0].project_grid_name}
+                slug={projectData.next_project[0]._slug}
+              />
+            </NextProjectSection>
+          </Animation>
+        )} */
+}

@@ -13,46 +13,50 @@ export const Medium = styled.p`
   font-weight: 300;
   line-height: 1.2em;
   letter-spacing: 0.04em;
+  max-width: 600px;
   &.big {
     font-family: "agrandir";
     font-weight: 500;
     font-size: 35px;
+    max-width: 650px;
   }
   ${breakpoint.largeNotebook} {
     font-size: 24px;
+    max-width: 550px;
     &.big {
       font-size: 30px;
+      max-width: 600px;
     }
   }
   ${breakpoint.smallNotebook} {
     font-size: 21px;
+    max-width: 500px;
     &.big {
       font-size: 26px;
+      max-width: 550px;
     }
   }
   ${breakpoint.tabletLandscape} {
     font-size: 18px;
+    max-width: 450px;
     &.big {
       font-size: 21px;
+      max-width: 500px;
     }
   }
   ${breakpoint.phone} {
     font-size: 14px;
+    max-width: 400px;
     &.big {
       font-size: 16px;
+      max-width: 450px;
     }
   }
   ${ProjectsGridColumn} & {
-    width: ${({ theme }) => u(5, theme.pageMargin)};
     margin-bottom: ${({ theme }) => u(2, theme.pageMargin)};
   }
   ${ProjectsHeroContent} & {
-    width: ${({ theme }) => u(4, theme.pageMargin)};
-    ${breakpoint.tabletLandscape} {
-      width: ${({ theme }) => u(6, theme.pageMargin)};
-    }
     ${breakpoint.phone} {
-      width: ${({ theme }) => u(13, theme.pageMargin)};
       visibility: hidden;
       position: absolute;
     }

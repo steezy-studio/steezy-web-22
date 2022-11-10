@@ -5,10 +5,9 @@ import u from "../helpers/unit";
 export const StyledProjects = styled.div``;
 
 export const ProjectsHero = styled.div`
-  height: 80vh;
   display: flex;
   flex-direction: column;
-  padding: ${({ theme }) => theme.pageMargin} 0;
+  padding: 15% 0;
   ${breakpoint.tabletPortrait} {
     height: auto;
     padding: 20% 0;

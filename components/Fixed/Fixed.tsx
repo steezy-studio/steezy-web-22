@@ -14,6 +14,7 @@ export const FixedTarget = styled.div`
   right: 0;
   top: -100vh;
   bottom: -100vh;
+  pointer-events: none;
   ${breakpoint.phone} {
     display: none;
   }

@@ -8,7 +8,7 @@ interface LinkProps extends NextLinkProps {
   className?: string;
 }
 
-const Link = ({ href, children, className }: LinkProps) => {
+const Link = ({ href, children, className, ...rest }: LinkProps) => {
   const { setCursorHover } = useContext(HoverProvider);
 
   return (
@@ -16,7 +16,9 @@ const Link = ({ href, children, className }: LinkProps) => {
       className={className}
       onMouseEnter={() => setCursorHover(true)}
       onMouseLeave={() => setCursorHover(false)}>
-      <NextLink href={href}>{children}</NextLink>
+      <NextLink href={href} {...rest}>
+        {children}
+      </NextLink>
     </StyledLink>
   );
 };

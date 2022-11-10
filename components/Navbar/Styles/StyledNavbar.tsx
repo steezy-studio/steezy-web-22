@@ -8,19 +8,19 @@ export const StyledNavbar = styled.nav<{ hasSmoothScroll: boolean }>`
   pointer-events: none;
   z-index: 99999;
   top: ${({ theme }) => `calc(-100vh + ${theme.pageMargin})`};
-  width: 100%;
+  right: 0;
+  left: 0;
   height: ${({ theme }) => theme.navbarHeight};
   display: flex;
   ${({ hasSmoothScroll }) =>
     !hasSmoothScroll &&
     css`
       top: ${({ theme }) => theme.pageMargin};
+      left: ${({ theme }) => theme.pageMargin};
+      right: ${({ theme }) => theme.pageMargin};
     `};
   ${breakpoint.phone} {
-    width: auto;
     top: ${({ theme }) => theme.pageMargin};
-    left: ${({ theme }) => theme.pageMargin};
-    right: ${({ theme }) => theme.pageMargin};
   }
 `;
 

@@ -53,7 +53,6 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
         ogTitle={"STEEZY Studio"}
       />
       <Navbar areas={areas.items} />
-
       <StyledIndex>
         <Hero
           asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }}
@@ -97,9 +96,11 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                 if (type === `link`) {
                   return (
                     <Fragment key={i}>
-                      <Link href={`/projects/${allProjects._slug}`}>
+                      <StyledLink
+                        as={"a"}
+                        href={`/projects/${allProjects._slug}`}>
                         {body}
-                      </Link>
+                      </StyledLink>
                       <br />
                     </Fragment>
                   );

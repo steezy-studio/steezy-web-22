@@ -89,34 +89,23 @@ export const ProjectGridRow = styled(motion.div)`
   ${breakpoint.phone} {
     grid-auto-flow: row;
     grid-gap: ${({ theme }) => `calc(${theme.pageMargin})`};
+    ${breakpoint.phone} {
+      &.blockquote {
+        grid-template-areas: unset;
+        &.reverse {
+          grid-template-areas: unset;
+        }
+      }
+    }
   }
 `;
 
 export const ProjectGridBlockquote = styled.div`
   grid-area: blockquote;
-  padding: ${({ theme }) => u(1, theme.pageMargin)}
-    ${({ theme }) => u(3, theme.pageMargin)}
-    ${({ theme }) => u(1, theme.pageMargin)} 0;
-  margin-left: auto;
-  ${breakpoint.smallNotebook} {
-    padding: ${({ theme }) => u(1, theme.pageMargin)}
-      ${({ theme }) => u(2, theme.pageMargin)}
-      ${({ theme }) => u(1, theme.pageMargin)} 0;
-  }
-  ${breakpoint.tabletLandscape} {
-    padding: ${({ theme }) => u(1, theme.pageMargin)}
-      ${({ theme }) => u(1, theme.pageMargin)}
-      ${({ theme }) => u(1, theme.pageMargin)} 0;
-  }
-  ${breakpoint.tabletPortrait} {
-    padding: ${({ theme }) => u(1, theme.pageMargin)}
-      ${({ theme }) => u(0, theme.pageMargin)}
-      ${({ theme }) => u(1, theme.pageMargin)} 0;
-  }
+  padding: ${({ theme }) => u(1, theme.pageMargin)} 0;
   ${breakpoint.phone} {
-    padding: ${({ theme }) => u(2, theme.pageMargin)}
-      ${({ theme }) => u(0, theme.pageMargin)}
-      ${({ theme }) => u(2, theme.pageMargin, theme.pageMargin)} 0;
+    padding: ${({ theme }) => u(2, theme.pageMargin)} 0;
+    grid-area: unset;
   }
 `;
 
