@@ -125,7 +125,7 @@ export const ServicesSection = styled.section`
   }
 `;
 
-export const ServicesHeaderWrapper = styled.div`
+export const HeaderWithDashOffset = styled.div`
   margin-top: 0.6em;
   ${breakpoint.smallNotebook} {
     margin-top: 0.4em;

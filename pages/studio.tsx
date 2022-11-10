@@ -30,7 +30,7 @@ import {
   Logotypes,
   Outro,
   Quote,
-  ServicesHeaderWrapper,
+  HeaderWithDashOffset,
   ServicesList,
   ServicesSection,
   StyledStudio,
@@ -139,13 +139,13 @@ const Studio = ({ areas }: StudioProps) => {
           />
         </Animation>
         <ServicesSection>
-          <ServicesHeaderWrapper>
+          <HeaderWithDashOffset>
             <Animation type='fadeFromBottom'>
               <Micro className='with-dash'>
                 {studioStrings.services.header}
               </Micro>
             </Animation>
-          </ServicesHeaderWrapper>
+          </HeaderWithDashOffset>
           <ServicesList>
             {areas.items.map(
               ({ sub_areas, area_name, _slug, is_default }, i) => {
@@ -211,7 +211,11 @@ const Studio = ({ areas }: StudioProps) => {
         <BrandsSection>
           <Animation type='fadeFromBottom'>
             <BrandsText>
-              <Micro className='with-dash'>{studioStrings.brands.header}</Micro>
+              <HeaderWithDashOffset>
+                <Micro className='with-dash'>
+                  {studioStrings.brands.header}
+                </Micro>
+              </HeaderWithDashOffset>
               <BrandsTextInner>
                 <Medium className='big'>{studioStrings.brands.claim}</Medium>
                 <Small>{studioStrings.brands.perex}</Small>
