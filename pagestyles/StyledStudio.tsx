@@ -125,6 +125,16 @@ export const ServicesSection = styled.section`
   }
 `;
 
+export const ServicesHeaderWrapper = styled.div`
+  margin-top: 0.6em;
+  ${breakpoint.smallNotebook} {
+    margin-top: 0.4em;
+  }
+  ${breakpoint.tabletLandscape} {
+    margin-top: unset;
+  }
+`;
+
 export const ServicesList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -279,7 +289,7 @@ export const Logotypes = styled.div`
 
 export const Logo = styled(motion.img)`
   width: 100%;
-  max-width: 200px;
+  max-width: 150px;
   ${breakpoint.phone} {
     &:nth-child(n + 16) {
       display: none;

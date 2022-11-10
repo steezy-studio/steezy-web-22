@@ -187,6 +187,12 @@ export default {
         name: "Adam Křena",
         position: "Head of Atelier @footshop",
       },
+      {
+        quote:
+          "We have chosen Steezy for their youthful, fresh and original ideas, which they always think through and elaborate in detail.",
+        name: "Daniel Urminský",
+        position: "Country Manager @Isobar",
+      },
     ],
   },
   projectsPage: {

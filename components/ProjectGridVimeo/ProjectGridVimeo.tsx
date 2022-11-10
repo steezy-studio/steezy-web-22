@@ -28,7 +28,7 @@ const Overlay = styled.div`
 
 const ProjectGridVimeo = ({ vimeoId }: ProjectGridVimeoProps, ref) => {
   const [isPaused, setIsPaused] = useState(true);
-  const { setCursorHover, setIsCursorDisabled } = useContext(HoverProvider);
+  const { setCursorType, setIsCursorDisabled } = useContext(HoverProvider);
 
   useIntersectionObserver(
     ref,
@@ -47,8 +47,8 @@ const ProjectGridVimeo = ({ vimeoId }: ProjectGridVimeoProps, ref) => {
   return (
     <motion.div ref={ref}>
       <StyledProjectGridVimeo
-        onMouseEnter={() => setCursorHover(true)}
-        onMouseLeave={() => setCursorHover(false)}>
+        onMouseEnter={() => setCursorType("hover")}
+        onMouseLeave={() => setCursorType("normal")}>
         {isPaused && <Overlay onClick={() => setIsPaused(false)} />}
         <VimeoWrapper
           video={vimeoId}

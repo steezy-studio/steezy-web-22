@@ -21,7 +21,7 @@ interface VideoProps {
 
 const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { setCursorHover } = useContext(HoverProvider);
+  const { setCursorType } = useContext(HoverProvider);
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
   );
@@ -38,8 +38,8 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
         }
         trigger={
           <StyledHeroVideo
-            onMouseEnter={() => setCursorHover(true)}
-            onMouseLeave={() => setCursorHover(false)}>
+            onMouseEnter={() => setCursorType("hover")}
+            onMouseLeave={() => setCursorType("normal")}>
             <PlayButton />
             <Loop
               whileHover={{ scale: 1.15 }}

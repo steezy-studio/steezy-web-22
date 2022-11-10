@@ -8,12 +8,12 @@ interface LogoProps {}
 
 const Logo = ({}: LogoProps) => {
   const [hover, toggleHover] = useState(false);
-  const { setCursorHover } = useContext(HoverProvider);
+  const { setCursorType } = useContext(HoverProvider);
 
   return (
     <StyledLogo
-      onMouseEnter={() => setCursorHover(true)}
-      onMouseLeave={() => setCursorHover(false)}>
+      onMouseEnter={() => setCursorType("hover")}
+      onMouseLeave={() => setCursorType("normal")}>
       <a href={"/"}>
         <svg
           xmlns='http://www.w3.org/2000/svg'

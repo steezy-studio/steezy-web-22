@@ -4,6 +4,7 @@ import { breakpoint } from "../../helpers/consts";
 export const Small = styled.p`
   font-size: 26px;
   line-height: 1.3em;
+  letter-spacing: 0.03em;
   font-family: "agrandir";
   font-weight: 300;
   &.break-lines {

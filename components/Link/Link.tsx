@@ -9,13 +9,13 @@ interface LinkProps extends NextLinkProps {
 }
 
 const Link = ({ href, children, className, ...rest }: LinkProps) => {
-  const { setCursorHover } = useContext(HoverProvider);
+  const { setCursorType } = useContext(HoverProvider);
 
   return (
     <StyledLink
       className={className}
-      onMouseEnter={() => setCursorHover(true)}
-      onMouseLeave={() => setCursorHover(false)}>
+      onMouseEnter={() => setCursorType("hover")}
+      onMouseLeave={() => setCursorType("normal")}>
       <NextLink href={href} {...rest}>
         {children}
       </NextLink>

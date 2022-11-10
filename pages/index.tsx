@@ -41,7 +41,7 @@ interface indexProps {
 }
 const Index = ({ landingpageGrid, areas }: indexProps) => {
   const landingpageStrings = strings.landingPage;
-  const { setCursorHover } = useContext(HoverProvider);
+  const { setCursorType } = useContext(HoverProvider);
 
   return (
     <>
@@ -60,8 +60,8 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
             <>
               <StyledLink
                 as={`span`}
-                onMouseEnter={() => setCursorHover(true)}
-                onMouseLeave={() => setCursorHover(false)}
+                onMouseEnter={() => setCursorType("hover")}
+                onMouseLeave={() => setCursorType("normal")}
                 onClick={() => setOpenDialog(!openDialog)}>
                 {landingpageStrings.hero.header.cta}
               </StyledLink>

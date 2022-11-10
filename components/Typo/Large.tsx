@@ -12,7 +12,7 @@ import { StyledImageSlider } from "../ImageSlider/Styles/StyledImageSlider";
 export const Large = styled.h1`
   font-family: "migra-italic", Arial, Helvetica, sans-serif;
   font-size: 110px;
-  line-height: 1em;
+  line-height: 1.1em;
   letter-spacing: 0.02em;
   font-weight: 400;
   color: ${colors.black};

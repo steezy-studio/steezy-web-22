@@ -21,6 +21,8 @@ export const StyledNavbar = styled.nav<{ hasSmoothScroll: boolean }>`
     `};
   ${breakpoint.phone} {
     top: ${({ theme }) => theme.pageMargin};
+    left: ${({ theme }) => theme.pageMargin};
+    right: ${({ theme }) => theme.pageMargin};
   }
 `;
 

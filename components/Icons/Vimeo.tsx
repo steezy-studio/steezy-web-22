@@ -17,16 +17,16 @@ const StyledVimeo = styled.a`
 `;
 
 const Vimeo = ({ fill = "black" }: InstagramProps) => {
-  const { setCursorHover } = useContext(HoverProvider);
+  const { setCursorType } = useContext(HoverProvider);
   return (
     <StyledVimeo
       href='https://vimeo.com/steezystudio'
       target={`_blank`}
       onMouseEnter={() => {
-        setCursorHover(true);
+        setCursorType("hover");
       }}
       onMouseLeave={() => {
-        setCursorHover(false);
+        setCursorType("normal");
       }}>
       <svg
         xmlns='http://www.w3.org/2000/svg'

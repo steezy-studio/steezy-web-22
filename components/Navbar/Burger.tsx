@@ -11,12 +11,12 @@ interface BurgerProps {
 const Line = (props) => <motion.line fill='none' strokeWidth='2' {...props} />;
 
 const Burger = ({ onClick, isOpen }: BurgerProps) => {
-  const { setCursorHover } = useContext(HoverProvider);
+  const { setCursorType } = useContext(HoverProvider);
   return (
     <StyledBurger
       onClick={onClick}
-      onMouseEnter={() => setCursorHover(true)}
-      onMouseLeave={() => setCursorHover(false)}>
+      onMouseEnter={() => setCursorType("hover")}
+      onMouseLeave={() => setCursorType("normal")}>
       <BurgerSvg
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 45 45'

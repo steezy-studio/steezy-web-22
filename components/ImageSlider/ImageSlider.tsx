@@ -1,15 +1,19 @@
+import { useAnimationControls } from "framer-motion";
 import { ImageProps } from "next/image";
-import React, { useContext, useMemo, useRef, useState } from "react";
-import shortid from "shortid";
-import strings from "../../data/strings";
+import React, {
+  MouseEventHandler,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { device, transition } from "../../helpers/consts";
+import { useWindowSize } from "../../hooks/useWindowSize";
 import { HoverProvider } from "../../pages/_app";
 import Img from "../Img/Img";
-import { StyledLink } from "../Link/Styles/StyledLink";
-import { Large } from "../Typo/Large";
 import {
   ImageSlide,
   Slider,
-  SliderInner,
   StyledImageSlider,
 } from "./Styles/StyledImageSlider";
 
@@ -19,48 +23,43 @@ interface ImageSliderProps {
   imgList: ImgList[];
 }
 
-const wrap = (min: number, max: number, v: number) => {
-  const rangeSize = max - min;
-  return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
-};
-
-const makeRangeArray = (max: number) => {
-  return [...new Array(max)].map((_, i) => i);
-};
-
-function addUniqueIds(arr: ImgList[]): ImgList[] {
-  return arr.map((item, i) => ({ ...item, id: item.id + i }));
-}
-
 function cloneArray<T>(arr: T[], multiplier: number): T[] {
   return new Array(multiplier).fill(arr).flat();
 }
 
 const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
-  const imageSlideRef = useRef(null);
+  const sideMultiplier = 2;
+  const multiplier = sideMultiplier * 2 + 1;
+  const clonedArray = cloneArray(imgList, multiplier);
+  const childrenLength = imgList.length;
+  const initialIndex = sideMultiplier * childrenLength;
+
+  const [index, setIndex] = useState(initialIndex);
+  const { cursorType, setCursorType, cursorRef } = useContext(HoverProvider);
+  const controls = useAnimationControls();
+  const { w } = useWindowSize();
+
+  const imageSlideRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const itemWidth = useRef<number>(null);
+  const isAnimating = useRef<boolean>(false);
   const touchStart = useRef({ x: 0, y: 0 });
   const touchEnd = useRef({ x: 0, y: 0 });
-  const multiplier = 3;
-  const { setCursorHover } = useContext(HoverProvider);
 
-  const clonedImgList = useMemo(() => {
-    const clonedArray = cloneArray(imgList, multiplier);
-    return addUniqueIds(clonedArray);
-  }, []);
-
-  const totalImgList = imgList.length;
-  const [index, setIndex] = useState({
-    index: totalImgList,
-    shouldAnimate: true,
-  });
-  const [sliderItems, setSliderItems] = useState(clonedImgList);
-  const totalSliderItems = sliderItems.length;
+  useEffect(() => {
+    const slidesPerView = w <= device.phone ? 1.2 : 2.2;
+    itemWidth.current = sliderRef.current.clientWidth / slidesPerView;
+    sliderRef.current.style.gridAutoColumns = `${itemWidth.current}px`;
+    controls.set({
+      x: `${-1 * index * itemWidth.current}px`,
+    });
+  }, [w]);
 
   const handleClick = (dir) => {
-    const nextIndex = index.index + dir;
-
-    if (nextIndex < 0 || nextIndex > totalSliderItems - totalImgList) return;
-    setIndex({ index: nextIndex, shouldAnimate: true });
+    if (isAnimating.current) return;
+    const nextIndex = index + dir;
+    setIndex(nextIndex);
+    controls.start({ x: `${-1 * nextIndex * itemWidth.current}px` });
   };
 
   const handleTouchStart = (e) => {
@@ -83,50 +82,59 @@ const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
     }
   };
 
+  const handleSliderMouseEnter: MouseEventHandler<HTMLDivElement> = (e) => {};
+
+  const handleSliderMouseLeave: MouseEventHandler<HTMLDivElement> = (e) => {
+    setCursorType("normal");
+  };
+
+  const handleSliderMouseMove: MouseEventHandler<HTMLDivElement> = (e) => {
+    const containerWidth = e.currentTarget.clientWidth;
+    const cursorBoundingBox = cursorRef.current.getBoundingClientRect();
+
+    if (containerWidth / 2 <= cursorBoundingBox.x) {
+      setCursorType("right");
+    } else {
+      setCursorType("left");
+    }
+  };
+
   return (
     <StyledImageSlider ref={ref}>
-      <Slider>
-        <SliderInner
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}>
-          {sliderItems.map((image, order) => {
-            return (
-              <ImageSlide
-                key={image.id}
-                ref={imageSlideRef}
-                custom={{ index }}
-                initial={{ x: `${index.index * 100}%` }}
-                animate={{ x: `${index.index * -100}%` }}
-                onAnimationComplete={(e) => {
-                  if (
-                    index.index === totalSliderItems - totalImgList ||
-                    index.index === 0
-                  ) {
-                    setIndex({ index: 4, shouldAnimate: false });
-                  }
-                }}
-                transition={{
-                  duration: index.shouldAnimate ? 0.7 : 0,
-                  ease: [0.22, 1, 0.36, 1],
-                }}>
-                <Img {...image} />
-              </ImageSlide>
-            );
-          })}
-        </SliderInner>
+      <Slider
+        ref={sliderRef}
+        animate={controls}
+        onMouseEnter={handleSliderMouseEnter}
+        onMouseMove={handleSliderMouseMove}
+        onMouseLeave={handleSliderMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        transition={transition}
+        onClick={() => {
+          const dir = cursorType === "left" ? -1 : 1;
+          handleClick(dir);
+        }}
+        onAnimationStart={() => {
+          isAnimating.current = true;
+        }}
+        onAnimationComplete={() => {
+          if (
+            index <= initialIndex - childrenLength ||
+            index >= initialIndex + childrenLength
+          ) {
+            controls.set({ x: `${-1 * itemWidth.current * initialIndex}px` });
+            setIndex(initialIndex);
+          }
+          isAnimating.current = false;
+        }}>
+        {clonedArray.map((image, i) => {
+          return (
+            <ImageSlide key={i} ref={imageSlideRef}>
+              <Img {...image} />
+            </ImageSlide>
+          );
+        })}
       </Slider>
-      <Large>
-        <StyledLink
-          onClick={() => handleClick(1)}
-          onMouseEnter={() => {
-            setCursorHover(true);
-          }}
-          onMouseLeave={() => {
-            setCursorHover(false);
-          }}>
-          {strings.globals.nextImage}
-        </StyledLink>
-      </Large>
     </StyledImageSlider>
   );
 };

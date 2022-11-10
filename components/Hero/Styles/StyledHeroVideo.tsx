@@ -5,7 +5,9 @@ import { breakpoint, colors } from "../../../helpers/consts";
 export const StyledHeroVideo = styled.div<{ ratio?: number }>`
   position: relative;
   overflow: hidden;
+  aspect-ratio: 16/9;
   ${breakpoint.phone} {
+    aspect-ratio: unset;
     padding-bottom: ${(5 / 4) * 100}%;
   }
 `;

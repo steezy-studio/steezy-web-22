@@ -10,11 +10,11 @@ interface NavLinkProps {
 }
 
 const NavLink = ({ highlighted, href, children, active }: NavLinkProps) => {
-  const { setCursorHover } = useContext(HoverProvider);
+  const { setCursorType } = useContext(HoverProvider);
   return (
     <StyledNavLink
-      onMouseEnter={() => setCursorHover(true)}
-      onMouseLeave={() => setCursorHover(false)}
+      onMouseEnter={() => setCursorType("hover")}
+      onMouseLeave={() => setCursorType("normal")}
       variants={{ open: { opacity: 1 }, close: { opacity: 0 } }}
       className={`${highlighted ? `highlighted` : ``} ${
         active ? `active` : ``

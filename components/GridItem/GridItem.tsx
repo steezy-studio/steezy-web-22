@@ -48,7 +48,7 @@ const GridItem = ({
 }: GridItemProps) => {
   const [hover, sethover] = useState(false);
   const [videoAspect, setVideoAspect] = useState(0);
-  const { setCursorHover } = useContext(HoverProvider);
+  const { setCursorType } = useContext(HoverProvider);
   const videoRef = useRef<HTMLVideoElement>(null);
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
@@ -83,11 +83,11 @@ const GridItem = ({
         href={`/project/${slug}`}
         onMouseEnter={() => {
           sethover(true);
-          setCursorHover(true);
+          setCursorType("hover");
         }}
         onMouseLeave={() => {
           sethover(false);
-          setCursorHover(false);
+          setCursorType("normal");
         }}>
         <GridItemCoverWrapper>
           {type === "Photo" && (

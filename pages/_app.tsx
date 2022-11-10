@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import React, { MutableRefObject, useRef, useState } from "react";
 import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 import { ThemeProvider } from "styled-components";
-import Cursor from "../components/Cursor/Cursor";
+import Cursor, { CursorTypes } from "../components/Cursor/Cursor";
 import Fixed from "../components/Fixed/Fixed";
 import Footer from "../components/Footer/Footer";
 import { HeroSocials } from "../components/Hero/Styles/StyledHero";
@@ -14,14 +14,20 @@ import { useWindowSize } from "../hooks/useWindowSize";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
 import "../css/fonts.css";
 
-export const HoverProvider = React.createContext(null);
+export const HoverProvider = React.createContext<{
+  setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
+  setCursorType: React.Dispatch<React.SetStateAction<CursorTypes>>;
+  cursorType: CursorTypes;
+  cursorRef: MutableRefObject<HTMLDivElement>;
+}>(null);
 
 function MyApp({ Component, pageProps }) {
   const { w } = useWindowSize();
   const { asPath, basePath, pathname } = useRouter();
   const containerRef = useRef(null);
-  const [cursorHover, setCursorHover] = useState(false);
   const [isCursorDisabled, setIsCursorDisabled] = useState(false);
+  const [cursorType, setCursorType] = useState<CursorTypes>("normal");
+  const cursorRef = useRef<HTMLDivElement>(null);
 
   return (
     <ThemeProvider theme={theme(w)}>
@@ -38,10 +44,19 @@ function MyApp({ Component, pageProps }) {
         watch={[asPath, w]}
         containerRef={containerRef}>
         <main data-scroll-container ref={containerRef}>
-          <Cursor hover={cursorHover} isCursorDisabled={isCursorDisabled} />
+          <Cursor
+            isCursorDisabled={isCursorDisabled}
+            cursorType={cursorType}
+            cursorRef={cursorRef}
+          />
           <Layout>
             <HoverProvider.Provider
-              value={{ cursorHover, setCursorHover, setIsCursorDisabled }}>
+              value={{
+                setIsCursorDisabled,
+                setCursorType,
+                cursorType,
+                cursorRef,
+              }}>
               <Fixed id={"fixed-socials"}>
                 <HeroSocials>
                   <Instagram />

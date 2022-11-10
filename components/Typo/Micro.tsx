@@ -125,9 +125,7 @@ export const Micro = styled(motion.span)`
     }
   }
   ${ProjectHeroRole} & {
-    ${breakpoint.smallNotebook} {
-      line-height: 1.5em;
-    }
+    line-height: 1.5em;
   }
   ${GridItemAreas} & {
     letter-spacing: 0.02em;

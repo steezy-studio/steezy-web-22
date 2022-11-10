@@ -17,14 +17,14 @@ const StyledInstagram = styled.a`
 `;
 
 const Instagram = ({ fill = "black" }: InstagramProps) => {
-  const { setCursorHover } = useContext(HoverProvider);
+  const { setCursorType } = useContext(HoverProvider);
   return (
     <StyledInstagram
       onMouseEnter={() => {
-        setCursorHover(true);
+        setCursorType("hover");
       }}
       onMouseLeave={() => {
-        setCursorHover(false);
+        setCursorType("normal");
       }}
       href='https://www.instagram.com/steezy.studio/'
       target={`_blank`}>

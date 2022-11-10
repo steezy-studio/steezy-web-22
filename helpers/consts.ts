@@ -56,3 +56,8 @@ export const theme = (width: number) => ({
       : "80px",
 });
 export type Theme = typeof theme;
+
+export const transition = {
+  duration: 0.7,
+  ease: [0.22, 1, 0.36, 1],
+};

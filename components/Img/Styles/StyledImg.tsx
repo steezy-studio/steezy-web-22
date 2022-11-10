@@ -27,7 +27,7 @@ export const StyledImg = styled(motion.div)`
   }
   ${ProjectHeroFooter} & {
     height: 100%;
-    max-height: 70px;
+    max-height: 100px;
     align-self: start;
     ${breakpoint.tabletLandscape} {
       justify-self: end;
@@ -53,6 +53,9 @@ export const StyledImg = styled(motion.div)`
   }
   ${StyledImageSlider} & {
     padding-right: 10px;
+    ${breakpoint.phone} {
+      padding-right: 5px;
+    }
   }
   ${ClientQuote} & {
     width: 250px;
