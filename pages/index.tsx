@@ -4,7 +4,6 @@ import client from "../apollo/client";
 import GridItem from "../components/GridItem/GridItem";
 import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
-import Link from "../components/Link/Link";
 import { StyledLink } from "../components/Link/Styles/StyledLink";
 import Navbar from "../components/Navbar/Navbar";
 import { Large } from "../components/Typo/Large";
@@ -157,9 +156,9 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
           <LandingpageGridRow>
             <div></div>
             <Large>
-              <Link href={`/projects/all-projects`}>
+              <StyledLink as={"a"} href={`/projects/all-projects`}>
                 {strings.globals.allProjects}
-              </Link>
+              </StyledLink>
             </Large>
           </LandingpageGridRow>
         </LandingpageGrid>

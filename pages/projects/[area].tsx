@@ -77,7 +77,6 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                 return (
                   <Large key={_slug}>
                     <Link
-                      shallow
                       href={`/projects/${_slug}`}
                       className={`${isActive ? "active" : ""}`}>
                       {area_name}
@@ -172,6 +171,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const [areaData, areasData] = await Promise.all([areaReq, areasReq]);
 
+  console.log(areaData.data.Area.projects);
   return {
     props: {
       areas: areasData.data.Areas,

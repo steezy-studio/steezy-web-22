@@ -52,6 +52,12 @@ export const Medium = styled.p`
       max-width: 450px;
     }
   }
+  ${breakpoint.monitor} {
+    max-width: 800px;
+    &.big {
+      max-width: 800px;
+    }
+  }
   ${ProjectsGridColumn} & {
     margin-bottom: ${({ theme }) => u(2, theme.pageMargin)};
   }
