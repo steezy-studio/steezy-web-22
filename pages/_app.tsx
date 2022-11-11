@@ -13,6 +13,7 @@ import { device, theme } from "../helpers/consts";
 import { useWindowSize } from "../hooks/useWindowSize";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
 import "../css/fonts.css";
+import { useGA } from "../hooks/useGA";
 
 export const HoverProvider = React.createContext<{
   setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,6 +25,7 @@ export const HoverProvider = React.createContext<{
 function MyApp({ Component, pageProps }) {
   const { w } = useWindowSize();
   const { asPath, basePath, pathname } = useRouter();
+  useGA();
   const containerRef = useRef(null);
   const [isCursorDisabled, setIsCursorDisabled] = useState(false);
   const [cursorType, setCursorType] = useState<CursorTypes>("normal");
