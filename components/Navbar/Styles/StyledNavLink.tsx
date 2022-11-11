@@ -35,12 +35,14 @@ export const StyledNavLink = styled(motion.a)`
     padding: 0 10px;
   }
   ${breakpoint.tabletLandscape} {
-    font-size: 44px;
+    font-size: 60px;
     font-family: "migra-italic";
+    font-weight: 300;
     text-transform: lowercase;
     text-decoration: underline;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.01em;
     padding: 2px 0;
+    &:hover,
     &.active {
       & {
         color: ${colors.black} !important;
@@ -62,6 +64,9 @@ export const StyledNavLink = styled(motion.a)`
     &:visited {
       color: ${colors.gray400};
     }
+    &.supressed {
+      display: none;
+    }
     &.highlighted {
       &,
       &:visited {
@@ -70,6 +75,8 @@ export const StyledNavLink = styled(motion.a)`
     }
   }
   ${breakpoint.phone} {
+  }
+  ${breakpoint.miniPhone} {
     font-size: 28px;
   }
 `;

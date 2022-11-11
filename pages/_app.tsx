@@ -14,6 +14,7 @@ import { useWindowSize } from "../hooks/useWindowSize";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
 import "../css/fonts.css";
 import { useGA } from "../hooks/useGA";
+import CookiesConsent from "../components/CookiesConsent/CookiesConsent";
 
 export const HoverProvider = React.createContext<{
   setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,6 +47,7 @@ function MyApp({ Component, pageProps }) {
         watch={[asPath, w]}
         containerRef={containerRef}>
         <main data-scroll-container ref={containerRef}>
+          <CookiesConsent />
           <Cursor
             isCursorDisabled={isCursorDisabled}
             cursorType={cursorType}

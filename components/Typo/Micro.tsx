@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import { addColorClasses } from "../../helpers/colorClasses";
 import { breakpoint, colors } from "../../helpers/consts";
 import u from "../../helpers/unit";
 import { LandingpageHeroClients } from "../../pagestyles/StyledIndex";
@@ -139,4 +140,5 @@ export const Micro = styled(motion.span)`
     display: block;
     white-space: pre-wrap;
   }
+  ${addColorClasses()}
 `;
