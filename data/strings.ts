@@ -86,7 +86,7 @@ export default {
       header: "designing for",
       claim: "From local bistros to world-known brands",
       perex:
-        "We form a diverse team of professionals with specializations in classical and digital creative fields. We build on an analysis of the problem and we think in the context of time and the market environment. We combine the latest technology and knowledge in the field but we still pay attention to the detail.",
+        "By years of creative work we’ve done for world-known brands we’ve learned how to successfully build and elevate local ones.",
       logotypes: [
         "honeywell.svg",
         "vut.svg",
