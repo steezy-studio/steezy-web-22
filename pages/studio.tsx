@@ -15,6 +15,7 @@ import { Medium } from "../components/Typo/Medium";
 import { Micro } from "../components/Typo/Micro";
 import { Small } from "../components/Typo/Small";
 import ValueItem from "../components/ValueItem";
+import Video from "../components/Video/Video";
 import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
@@ -117,13 +118,7 @@ const Studio = ({ areas }: StudioProps) => {
                 Number(theme.navbarHeight.split("px")[0]))
             }px,0%`}>
             <ValuesCoverInner>
-              <Img
-                src={"/images/steezy_interier-04.jpg"}
-                width={1500}
-                height={2000}
-                objectFit={"cover"}
-                layout={`intrinsic`}
-              />
+              <Video src={"/videos/loop_studio.mp4"} />
             </ValuesCoverInner>
           </ValuesCover>
         </ValuesSection>

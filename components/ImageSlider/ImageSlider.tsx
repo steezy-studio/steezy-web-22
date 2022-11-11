@@ -130,7 +130,7 @@ const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
         {clonedArray.map((image, i) => {
           return (
             <ImageSlide key={i} ref={imageSlideRef}>
-              <Img {...image} />
+              <Img {...image} objectFit='cover' />
             </ImageSlide>
           );
         })}

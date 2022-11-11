@@ -69,6 +69,18 @@ export default {
       {
         src: "slider-04.jpg",
       },
+      {
+        src: "slider-05.jpg",
+      },
+      {
+        src: "slider-06.jpg",
+      },
+      {
+        src: "slider-07.jpg",
+      },
+      {
+        src: "slider-08.jpg",
+      },
     ],
     brands: {
       header: "designing for",

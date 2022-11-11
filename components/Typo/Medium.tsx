@@ -11,7 +11,7 @@ import { SubServicesList } from "../../pagestyles/StyledStudio";
 export const Medium = styled.p`
   font-size: 30px;
   font-weight: 300;
-  line-height: 1.2em;
+  line-height: 1.3em;
   letter-spacing: 0.04em;
   max-width: 600px;
   &.big {
@@ -45,10 +45,10 @@ export const Medium = styled.p`
     }
   }
   ${breakpoint.phone} {
-    font-size: 14px;
+    font-size: 18px;
     max-width: 400px;
     &.big {
-      font-size: 16px;
+      font-size: 18px;
       max-width: 450px;
     }
   }

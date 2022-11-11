@@ -5,7 +5,7 @@ import { StyledContact } from "../../../pagestyles/StyledContact";
 import {
   ClientQuote,
   NextProjectSection,
-  ProjectHeroFooter,
+  StyledProject,
 } from "../../../pagestyles/StyledProject";
 import {
   Blockquote,
@@ -30,16 +30,18 @@ export const StyledImg = styled(motion.div)`
       }
     }
   }
-  ${ProjectHeroFooter} & {
-    height: 100%;
-    max-height: 100px;
-    align-self: start;
-    ${breakpoint.tabletLandscape} {
-      justify-self: end;
-    }
-    ${breakpoint.phone} {
-      max-height: 50px;
-      justify-self: start;
+  ${StyledProject} & {
+    &.client-logo {
+      height: 100%;
+      max-height: 100px;
+      align-self: start;
+      ${breakpoint.tabletLandscape} {
+        justify-self: end;
+      }
+      ${breakpoint.phone} {
+        max-height: 50px;
+        justify-self: start;
+      }
     }
   }
   ${HeroMedia} & {

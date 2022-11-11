@@ -17,8 +17,15 @@ const StyledVideo = styled(motion.video)`
 `;
 
 const Video = ({ src }: VideoProps, ref) => {
-  useIntersectionObserver(ref, (entries) => videoCallback(entries, ref));
-  return <StyledVideo ref={ref} src={src} autoPlay playsInline muted loop />;
+  const defRef = useRef<HTMLVideoElement>(null);
+  const activeRef = ref ? ref : defRef;
+  useIntersectionObserver(activeRef, (entries) =>
+    videoCallback(entries, activeRef)
+  );
+
+  return (
+    <StyledVideo ref={activeRef} src={src} autoPlay playsInline muted loop />
+  );
 };
 
 export default React.forwardRef(Video);
