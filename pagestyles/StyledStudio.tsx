@@ -125,7 +125,7 @@ export const ServicesSection = styled.section`
   }
 `;
 
-export const ServicesHeaderWrapper = styled.div`
+export const HeaderWithDashOffset = styled.div`
   margin-top: 0.6em;
   ${breakpoint.smallNotebook} {
     margin-top: 0.4em;
@@ -167,6 +167,11 @@ export const Blockquote = styled.div`
     margin-top: ${({ theme }) => u(3, theme.pageMargin)};
     ${breakpoint.largeNotebook} {
       margin-top: ${({ theme }) => u(4, theme.pageMargin)};
+    }
+    ${breakpoint.phone} {
+      grid-template-rows: auto;
+      grid-template-areas: "quote" "image";
+      grid-gap: 40px;
     }
   }
   &._2 {
@@ -212,10 +217,11 @@ export const Quote = styled(motion.div)`
   ${breakpoint.phone} {
     &.offset-y-1 {
       transform: unset;
+      grid-area: quote;
     }
     &.offset-y-2 {
       transform: unset;
-      grid-area: "quote";
+      grid-area: quote;
     }
     &.offset-y-3 {
       transform: unset;

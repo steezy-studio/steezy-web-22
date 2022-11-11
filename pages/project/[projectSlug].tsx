@@ -14,7 +14,8 @@ import { Micro } from "../../components/Typo/Micro";
 import Video from "../../components/Video/Video";
 import { Areas, Project as ProjectType, Query } from "../../generated/types";
 import { GET_PROJECT } from "../../graphql/GetProject";
-import { colors } from "../../helpers/consts";
+import { colors, device } from "../../helpers/consts";
+import { useWindowSize } from "../../hooks/useWindowSize";
 import {
   Breadcrumbs,
   ClientQuote,
@@ -37,6 +38,7 @@ interface ProjectProps {
 
 const Project = ({ projectData, areas }: ProjectProps) => {
   const defaultArea = areas.items.find((area) => area.is_default);
+  const { w } = useWindowSize();
   return (
     <>
       <Head
@@ -51,22 +53,30 @@ const Project = ({ projectData, areas }: ProjectProps) => {
           asset={projectData.hero_image[0]}
           header={() => projectData.project_detail_name}
           subHeader={
-            <Breadcrumbs>
-              <Micro>
-                <Link href={`/projects/${defaultArea._slug}`}>
-                  {defaultArea.area_name}
-                </Link>
-              </Micro>
-              <div
-                style={{
-                  height: 1,
-                  width: 20,
-                  backgroundColor: colors.black,
-                  display: "inline-block",
-                }}
+            w > device.phone ? (
+              <Breadcrumbs>
+                <Micro>
+                  <Link href={`/projects/${defaultArea._slug}`}>
+                    {defaultArea.area_name}
+                  </Link>
+                </Micro>
+                <div
+                  style={{
+                    height: 1,
+                    width: 20,
+                    backgroundColor: colors.black,
+                    display: "inline-block",
+                  }}
+                />
+                <Micro>{projectData.company_name}</Micro>
+              </Breadcrumbs>
+            ) : (
+              <StyledImg
+                className='client-logo'
+                as={"img"}
+                src={projectData.client_logo[0].url}
               />
-              <Micro>{projectData.company_name}</Micro>
-            </Breadcrumbs>
+            )
           }>
           <ProjectHeroFooter>
             <ProjectHeroRoles>
@@ -81,7 +91,13 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                 }
               })}
             </ProjectHeroRoles>
-            <StyledImg as={"img"} src={projectData.client_logo[0].url} />
+            {w > device.phone && (
+              <StyledImg
+                className='client-logo'
+                as={"img"}
+                src={projectData.client_logo[0].url}
+              />
+            )}
           </ProjectHeroFooter>
         </Hero>
         <ProjectDescription>

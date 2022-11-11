@@ -7,16 +7,13 @@ export const StyledProjects = styled.div``;
 export const ProjectsHero = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 15% 0;
+  padding: 10% 0;
   ${breakpoint.tabletPortrait} {
     height: auto;
     padding: 20% 0;
   }
   ${breakpoint.phone} {
-    padding: 25% 0;
-  }
-  ${breakpoint.monitor} {
-    padding: 10% 0;
+    padding: 20% 0;
   }
 `;
 export const ProjectsHeroContent = styled.div`
@@ -45,9 +42,9 @@ export const ProjectsGrid = styled.div`
 
 export const ProjectsGridColumn = styled.div`
   &.odd {
-    margin-top: ${({ theme }) => u(-3, theme.pageMargin)};
+    margin-top: ${({ theme }) => u(-2, theme.pageMargin)};
     ${breakpoint.largeNotebook} {
-      margin-top: ${({ theme }) => u(-4, theme.pageMargin)};
+      margin-top: ${({ theme }) => u(-3, theme.pageMargin)};
     }
     ${breakpoint.smallNotebook} {
       margin-top: ${({ theme }) => u(-2, theme.pageMargin)};

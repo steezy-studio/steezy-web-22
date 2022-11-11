@@ -71,7 +71,7 @@ export const NavLinks = styled(motion.div)<{ $hasSmoothScroll: boolean }>`
 export const PhoneDecoration = styled(motion.div)`
   display: none;
   ${breakpoint.tabletLandscape} {
-    position: fixed;
+    position: absolute;
     left: ${({ theme }) => theme.pageMargin};
     bottom: ${({ theme }) => theme.pageMargin};
     right: ${({ theme }) => theme.pageMargin};
@@ -83,5 +83,6 @@ export const PhoneDecoration = styled(motion.div)`
 export const ContactUs = styled.a`
   display: grid;
   grid-auto-flow: column;
+  align-items: center;
   column-gap: 10px;
 `;

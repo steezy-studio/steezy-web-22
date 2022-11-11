@@ -8,6 +8,7 @@ import React, {
   useState,
 } from "react";
 import { device, transition } from "../../helpers/consts";
+import { loadImage } from "../../helpers/loadImage";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { HoverProvider } from "../../pages/_app";
 import Img from "../Img/Img";
@@ -45,6 +46,14 @@ const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
   const isAnimating = useRef<boolean>(false);
   const touchStart = useRef({ x: 0, y: 0 });
   const touchEnd = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    async function fetchImages() {
+      const imgQueue = imgList.map((src) => loadImage(src.src as string));
+      return await Promise.all(imgQueue);
+    }
+    fetchImages();
+  }, []);
 
   useEffect(() => {
     const slidesPerView = w <= device.phone ? 1.2 : 2.2;
@@ -130,7 +139,7 @@ const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
         {clonedArray.map((image, i) => {
           return (
             <ImageSlide key={i} ref={imageSlideRef}>
-              <Img {...image} />
+              <Img {...image} objectFit='cover' />
             </ImageSlide>
           );
         })}

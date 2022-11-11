@@ -76,6 +76,7 @@ const Animation = ({
     children,
     (child) => {
       if (React.isValidElement(child)) {
+        // @ts-ignore
         return React.cloneElement<typeof animProps>(child, animProps);
       }
       return child;

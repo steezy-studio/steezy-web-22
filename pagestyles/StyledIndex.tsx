@@ -13,7 +13,7 @@ export const LandingHeroPageLogotypes = styled.div`
     grid-gap: 20px;
   }
   ${breakpoint.phone} {
-    grid-gap: 10px;
+    grid-gap: 15px;
   }
 `;
 
@@ -23,6 +23,9 @@ export const LandingPageHeroLogotype = styled.img`
     height: 40px;
   }
   ${breakpoint.phone} {
+    height: 30px;
+  }
+  ${breakpoint.miniPhone} {
     height: 25px;
   }
 `;

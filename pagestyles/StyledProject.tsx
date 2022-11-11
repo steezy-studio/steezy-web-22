@@ -11,7 +11,7 @@ export const Breadcrumbs = styled.div`
   gap: 10px;
   margin-bottom: ${({ theme }) => u(0.25, theme.pageMargin)};
   ${breakpoint.phone} {
-    margin-bottom: 15px;
+    display: none;
   }
 `;
 
@@ -28,6 +28,7 @@ export const ProjectHeroRoles = styled.div`
     grid-auto-flow: unset;
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
+    row-gap: 35px;
   }
 `;
 export const ProjectHeroRole = styled.div`

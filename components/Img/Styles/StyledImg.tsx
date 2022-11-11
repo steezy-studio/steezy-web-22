@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
+import { StyledContact } from "../../../pagestyles/StyledContact";
 import {
   ClientQuote,
   NextProjectSection,
-  ProjectHeroFooter,
+  StyledProject,
 } from "../../../pagestyles/StyledProject";
 import {
   Blockquote,
@@ -14,8 +15,12 @@ import {
 import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
 import { HeroMedia } from "../../Hero/Styles/StyledHero";
 import { StyledImageSlider } from "../../ImageSlider/Styles/StyledImageSlider";
+import { ContactUs } from "../../Navbar/Styles/StyledNavbar";
 
 export const StyledImg = styled(motion.div)`
+  ${ContactUs} & {
+    width: 20px;
+  }
   ${StyledGridItem} & {
     transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
     ${NextProjectSection} & {
@@ -25,16 +30,18 @@ export const StyledImg = styled(motion.div)`
       }
     }
   }
-  ${ProjectHeroFooter} & {
-    height: 100%;
-    max-height: 100px;
-    align-self: start;
-    ${breakpoint.tabletLandscape} {
-      justify-self: end;
-    }
-    ${breakpoint.phone} {
-      max-height: 50px;
-      justify-self: start;
+  ${StyledProject} & {
+    &.client-logo {
+      height: 100%;
+      max-height: 100px;
+      align-self: start;
+      ${breakpoint.tabletLandscape} {
+        justify-self: end;
+      }
+      ${breakpoint.phone} {
+        max-height: 50px;
+        justify-self: start;
+      }
     }
   }
   ${HeroMedia} & {
@@ -42,12 +49,21 @@ export const StyledImg = styled(motion.div)`
     ${breakpoint.phone} {
       position: relative;
       padding-bottom: ${(5 / 4) * 100}%;
+      ${StyledContact} & {
+        /* FIXME UGLY AF */
+        * {
+          object-position: right !important;
+        }
+      }
     }
   }
   ${Blockquote} & {
     ${breakpoint.phone} {
+      &._1 {
+        grid-area: image;
+      }
       &._2 {
-        grid-area: "image";
+        grid-area: image;
       }
     }
   }

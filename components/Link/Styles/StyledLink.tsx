@@ -65,10 +65,10 @@ export const StyledLink = styled.span`
         font-size: 24px;
       }
       ${breakpoint.tabletLandscape} {
-        font-size: 16px;
+        font-size: 18px;
       }
       ${breakpoint.tabletPortrait} {
-        font-size: 14px;
+        font-size: 16px;
       }
     }
     ${SubServicesList} & {

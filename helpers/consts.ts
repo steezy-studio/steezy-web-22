@@ -1,12 +1,17 @@
+import { Cookie, CookieSetOptions } from "universal-cookie";
+
 export const colors = {
   primary300: "#f5ede5",
   primary400: "#F8D269",
   black: "#000000",
-  gray400: "#808080",
+  gray400: "#b8afa6",
   gray500: "#333",
   white: "#FFFFFF",
 } as const;
+
 export type ColorKeys = keyof typeof colors;
+export type ColorKeysArray = ColorKeys[];
+export type ColorValues = typeof colors[ColorKeys];
 
 export const allProjects = {
   _slug: "all-projects",
@@ -18,6 +23,7 @@ export const allProjects = {
 export const projectsPerPage = 12;
 
 export const device = {
+  miniPhone: 400,
   phone: 600,
   tabletPortrait: 1024,
   tabletLandscape: 1200,
@@ -27,6 +33,7 @@ export const device = {
 } as const;
 
 export const breakpoint = {
+  miniPhone: `@media (max-width: ${device.miniPhone}px)`,
   phone: `@media (max-width: ${device.phone}px)`,
   tabletPortrait: `@media (max-width: ${device.tabletPortrait}px)`,
   tabletLandscape: `@media (max-width: ${device.tabletLandscape}px)`,
@@ -60,4 +67,16 @@ export type Theme = typeof theme;
 export const transition = {
   duration: 0.7,
   ease: [0.22, 1, 0.36, 1],
+};
+
+export const cookiesSettings = (domain: string): CookieSetOptions => ({
+  sameSite: true,
+  maxAge: 60 * 60 * 24 * 7,
+  secure: true,
+  domain: domain,
+  path: `/`,
+});
+
+export const cookiesConsts = {
+  cookiesConsent: "cookiesConsent",
 };

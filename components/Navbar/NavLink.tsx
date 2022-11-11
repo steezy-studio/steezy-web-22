@@ -16,7 +16,7 @@ const NavLink = ({ highlighted, href, children, active }: NavLinkProps) => {
       onMouseEnter={() => setCursorType("hover")}
       onMouseLeave={() => setCursorType("normal")}
       variants={{ open: { opacity: 1 }, close: { opacity: 0 } }}
-      className={`${highlighted ? `highlighted` : ``} ${
+      className={`${highlighted ? `highlighted` : `supressed`} ${
         active ? `active` : ``
       }`}
       href={href}>

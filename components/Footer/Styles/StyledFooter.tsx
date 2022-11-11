@@ -4,7 +4,7 @@ import u from "../../../helpers/unit";
 
 export const StyledFooter = styled.footer`
   display: grid;
-  grid-gap: ${({ theme }) => `calc(2 * ${theme.pageMargin})`};
+  grid-gap: ${({ theme }) => `calc(1.5 * ${theme.pageMargin})`};
   margin-top: ${({ theme }) => u(2, theme.pageMargin)};
   padding-bottom: 100px;
   ${breakpoint.tabletLandscape} {

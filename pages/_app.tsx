@@ -13,6 +13,9 @@ import { device, theme } from "../helpers/consts";
 import { useWindowSize } from "../hooks/useWindowSize";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
 import "../css/fonts.css";
+import { useGA } from "../hooks/useGA";
+import CookiesConsent from "../components/CookiesConsent/CookiesConsent";
+import NoSSR from "../components/NoSSR/NoSSR";
 
 export const HoverProvider = React.createContext<{
   setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,6 +27,7 @@ export const HoverProvider = React.createContext<{
 function MyApp({ Component, pageProps }) {
   const { w } = useWindowSize();
   const { asPath, basePath, pathname } = useRouter();
+  useGA();
   const containerRef = useRef(null);
   const [isCursorDisabled, setIsCursorDisabled] = useState(false);
   const [cursorType, setCursorType] = useState<CursorTypes>("normal");
@@ -49,14 +53,17 @@ function MyApp({ Component, pageProps }) {
             cursorType={cursorType}
             cursorRef={cursorRef}
           />
-          <Layout>
-            <HoverProvider.Provider
-              value={{
-                setIsCursorDisabled,
-                setCursorType,
-                cursorType,
-                cursorRef,
-              }}>
+          <HoverProvider.Provider
+            value={{
+              setIsCursorDisabled,
+              setCursorType,
+              cursorType,
+              cursorRef,
+            }}>
+            {/* <NoSSR>
+              <CookiesConsent />
+            </NoSSR> */}
+            <Layout>
               <Fixed id={"fixed-socials"}>
                 <HeroSocials>
                   <Instagram />
@@ -65,8 +72,8 @@ function MyApp({ Component, pageProps }) {
               </Fixed>
               <Component {...pageProps} />
               <Footer />
-            </HoverProvider.Provider>
-          </Layout>
+            </Layout>
+          </HoverProvider.Provider>
         </main>
       </LocomotiveScrollProvider>
     </ThemeProvider>

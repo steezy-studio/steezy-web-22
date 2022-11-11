@@ -84,7 +84,7 @@ const Cursor = ({ isCursorDisabled, cursorType, cursorRef }: CursorProps) => {
         <motion.svg
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 20 20'
-          vector-effect='non-scaling-stroke'
+          vectorEffect='non-scaling-stroke'
           style={{ transform: "rotate(-45deg)" }}
           animate={{
             opacity: cursorType === "left" || cursorType === "right" ? 1 : 0,
