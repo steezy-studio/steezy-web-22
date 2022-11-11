@@ -83,5 +83,6 @@ export const PhoneDecoration = styled(motion.div)`
 export const ContactUs = styled.a`
   display: grid;
   grid-auto-flow: column;
+  align-items: center;
   column-gap: 10px;
 `;

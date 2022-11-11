@@ -14,8 +14,12 @@ import {
 import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
 import { HeroMedia } from "../../Hero/Styles/StyledHero";
 import { StyledImageSlider } from "../../ImageSlider/Styles/StyledImageSlider";
+import { ContactUs } from "../../Navbar/Styles/StyledNavbar";
 
 export const StyledImg = styled(motion.div)`
+  ${ContactUs} & {
+    width: 20px;
+  }
   ${StyledGridItem} & {
     transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
     ${NextProjectSection} & {

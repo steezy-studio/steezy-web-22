@@ -9,6 +9,7 @@ import {
   Blockquote,
   BrandsSection,
   ServicesSection,
+  StyledStudio,
   TextBlock,
   ValuesSection,
 } from "../../pagestyles/StyledStudio";
@@ -113,6 +114,11 @@ export const Micro = styled(motion.span)`
     white-space: pre-wrap;
     &.perex {
       line-height: 1.6em;
+    }
+    ${StyledStudio} & {
+      ${breakpoint.phone} {
+        display: none;
+      }
     }
   }
   ${PhoneDecoration} & {
