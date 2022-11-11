@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
+import { StyledContact } from "../../../pagestyles/StyledContact";
 import {
   ClientQuote,
   NextProjectSection,
@@ -46,12 +47,21 @@ export const StyledImg = styled(motion.div)`
     ${breakpoint.phone} {
       position: relative;
       padding-bottom: ${(5 / 4) * 100}%;
+      ${StyledContact} & {
+        /* FIXME UGLY AF */
+        * {
+          object-position: right !important;
+        }
+      }
     }
   }
   ${Blockquote} & {
     ${breakpoint.phone} {
+      &._1 {
+        grid-area: image;
+      }
       &._2 {
-        grid-area: "image";
+        grid-area: image;
       }
     }
   }

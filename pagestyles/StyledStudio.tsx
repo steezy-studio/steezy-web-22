@@ -168,6 +168,11 @@ export const Blockquote = styled.div`
     ${breakpoint.largeNotebook} {
       margin-top: ${({ theme }) => u(4, theme.pageMargin)};
     }
+    ${breakpoint.phone} {
+      grid-template-rows: auto;
+      grid-template-areas: "quote" "image";
+      grid-gap: 40px;
+    }
   }
   &._2 {
     transform: translateY(${({ theme }) => u(-1, theme.pageMargin)});
@@ -212,10 +217,11 @@ export const Quote = styled(motion.div)`
   ${breakpoint.phone} {
     &.offset-y-1 {
       transform: unset;
+      grid-area: quote;
     }
     &.offset-y-2 {
       transform: unset;
-      grid-area: "quote";
+      grid-area: quote;
     }
     &.offset-y-3 {
       transform: unset;

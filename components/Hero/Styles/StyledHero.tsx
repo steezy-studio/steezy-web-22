@@ -78,9 +78,6 @@ export const HeroText = styled.div`
     row-gap: ${({ theme }) => theme.pageMargin};
     margin-top: ${({ theme }) => u(2, theme.pageMargin)};
   }
-  ${StyledContact} & {
-    top: 40vh;
-  }
 `;
 
 export const HeroMedia = styled(motion.div)`
