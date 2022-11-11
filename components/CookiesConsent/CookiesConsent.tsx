@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { useCookies } from "react-cookie";
 import strings from "../../data/strings";
+import { cookiesConsts, cookiesSettings } from "../../helpers/consts";
+import { HoverProvider } from "../../pages/_app";
 import { Micro } from "../Typo/Micro";
 import {
   CookiesButton,
+  CookiesConsentMessage,
   StyledCookiesConsent,
 } from "./Styles/StyledCookiesConsent";
 
@@ -10,12 +14,30 @@ interface CookiesConsentProps {}
 
 const CookiesConsent = ({}: CookiesConsentProps) => {
   const cookiesStrings = strings.globals.cookiesConsent;
-  const [consent, setConsent] = useState(false);
+  const { setCursorType } = useContext(HoverProvider);
+  const [cookies, setCookies] = useCookies();
+  const consent = cookies[cookiesConsts.cookiesConsent] || "";
+
+  if (consent) {
+    return null;
+  }
+
   return (
     <StyledCookiesConsent>
-      <Micro>{cookiesStrings.message}</Micro>
-      <CookiesButton onClick={() => setConsent(true)}>
-        <Micro className='white'>{cookiesStrings.button}</Micro>
+      <CookiesConsentMessage>
+        <Micro>{cookiesStrings.message}</Micro>
+      </CookiesConsentMessage>
+      <CookiesButton
+        onClick={() =>
+          setCookies(
+            cookiesConsts.cookiesConsent,
+            true,
+            cookiesSettings(window.location.hostname)
+          )
+        }
+        onMouseEnter={() => setCursorType("hover")}
+        onMouseLeave={() => setCursorType("normal")}>
+        <Micro>{cookiesStrings.button}</Micro>
       </CookiesButton>
     </StyledCookiesConsent>
   );

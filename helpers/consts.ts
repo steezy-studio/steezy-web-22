@@ -1,3 +1,5 @@
+import { Cookie, CookieSetOptions } from "universal-cookie";
+
 export const colors = {
   primary300: "#f5ede5",
   primary400: "#F8D269",
@@ -65,4 +67,16 @@ export type Theme = typeof theme;
 export const transition = {
   duration: 0.7,
   ease: [0.22, 1, 0.36, 1],
+};
+
+export const cookiesSettings = (domain: string): CookieSetOptions => ({
+  sameSite: true,
+  maxAge: 60 * 60 * 24 * 7,
+  secure: true,
+  domain: domain,
+  path: `/`,
+});
+
+export const cookiesConsts = {
+  cookiesConsent: "cookiesConsent",
 };

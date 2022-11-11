@@ -116,7 +116,7 @@ export const Micro = styled(motion.span)`
       line-height: 1.6em;
     }
     ${StyledStudio} & {
-      ${breakpoint.phone} {
+      ${breakpoint.tabletPortrait} {
         display: none;
       }
     }

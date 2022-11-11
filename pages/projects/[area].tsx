@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { EnhancedProject } from "..";
 import client, { withApolloClient } from "../../apollo/client";
 import GridItem from "../../components/GridItem/GridItem";
@@ -28,6 +28,7 @@ import {
   ProjectsHeroFilters,
   StyledProjects,
 } from "../../pagestyles/StyledProjects";
+import { HoverProvider } from "../_app";
 
 interface ProjectsProps {
   areas: Areas;
@@ -37,6 +38,7 @@ interface ProjectsProps {
 
 const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
   const router = useRouter();
+  const { setCursorType } = useContext(HoverProvider);
   const [projectsToDisplay, setProjectsToDisplay] = useState(projectsPerPage);
   const { w } = useWindowSize();
 
@@ -147,7 +149,10 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
               )}
               {!(projectsToDisplay >= projectsCount) && (
                 <Large>
-                  <StyledLink onClick={handleIndexInc}>
+                  <StyledLink
+                    onClick={handleIndexInc}
+                    onMouseEnter={() => setCursorType("hover")}
+                    onMouseLeave={() => setCursorType("normal")}>
                     more projects
                   </StyledLink>
                 </Large>

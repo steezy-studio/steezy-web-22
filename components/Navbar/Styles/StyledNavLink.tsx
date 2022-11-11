@@ -40,6 +40,8 @@ export const StyledNavLink = styled(motion.a)`
     font-weight: 300;
     text-transform: lowercase;
     text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
     letter-spacing: 0.01em;
     padding: 2px 0;
     &:hover,

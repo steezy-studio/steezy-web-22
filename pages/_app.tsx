@@ -15,6 +15,7 @@ import { GlobalStyle } from "../pagestyles/GlobalStyles";
 import "../css/fonts.css";
 import { useGA } from "../hooks/useGA";
 import CookiesConsent from "../components/CookiesConsent/CookiesConsent";
+import NoSSR from "../components/NoSSR/NoSSR";
 
 export const HoverProvider = React.createContext<{
   setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
@@ -47,20 +48,22 @@ function MyApp({ Component, pageProps }) {
         watch={[asPath, w]}
         containerRef={containerRef}>
         <main data-scroll-container ref={containerRef}>
-          <CookiesConsent />
           <Cursor
             isCursorDisabled={isCursorDisabled}
             cursorType={cursorType}
             cursorRef={cursorRef}
           />
-          <Layout>
-            <HoverProvider.Provider
-              value={{
-                setIsCursorDisabled,
-                setCursorType,
-                cursorType,
-                cursorRef,
-              }}>
+          <HoverProvider.Provider
+            value={{
+              setIsCursorDisabled,
+              setCursorType,
+              cursorType,
+              cursorRef,
+            }}>
+            {/* <NoSSR>
+              <CookiesConsent />
+            </NoSSR> */}
+            <Layout>
               <Fixed id={"fixed-socials"}>
                 <HeroSocials>
                   <Instagram />
@@ -69,8 +72,8 @@ function MyApp({ Component, pageProps }) {
               </Fixed>
               <Component {...pageProps} />
               <Footer />
-            </HoverProvider.Provider>
-          </Layout>
+            </Layout>
+          </HoverProvider.Provider>
         </main>
       </LocomotiveScrollProvider>
     </ThemeProvider>

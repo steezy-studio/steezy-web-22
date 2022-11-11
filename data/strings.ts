@@ -263,7 +263,7 @@ export default {
     allProjects: "all projects",
     backToProjects: "back to projects",
     tellUsYourStory: "Tell us\nyour story!",
-    cookiesConsent: { message: "We use analytical cookies", button: "OK" },
+    cookiesConsent: { message: "We use cookies", button: "OK" },
   },
   navData: [
     {
