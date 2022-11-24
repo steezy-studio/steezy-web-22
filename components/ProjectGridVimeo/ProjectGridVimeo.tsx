@@ -1,6 +1,6 @@
 import Vimeo from "@u-wave/react-vimeo";
 import { motion } from "framer-motion";
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import { HoverProvider } from "../../pages/_app";
@@ -26,9 +26,10 @@ const Overlay = styled.div`
   z-index: 1;
 `;
 
-const ProjectGridVimeo = ({ vimeoId }: ProjectGridVimeoProps, ref) => {
+const ProjectGridVimeo = ({ vimeoId }: ProjectGridVimeoProps) => {
   const [isPaused, setIsPaused] = useState(true);
   const { setCursorType, setIsCursorDisabled } = useContext(HoverProvider);
+  const ref = useRef<HTMLDivElement>(null);
 
   useIntersectionObserver(
     ref,
@@ -69,4 +70,4 @@ const ProjectGridVimeo = ({ vimeoId }: ProjectGridVimeoProps, ref) => {
   );
 };
 
-export default React.forwardRef(ProjectGridVimeo);
+export default ProjectGridVimeo;

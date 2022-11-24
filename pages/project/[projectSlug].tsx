@@ -137,9 +137,15 @@ const Project = ({ projectData, areas }: ProjectProps) => {
               );
             }
             if (row.__typename === "ProjectGridVimeo") {
+              const vimeoIds = row.vimeo_id.split("\r\n");
+
               return (
                 <Animation key={`${i}_row`} type={"fadeFromBottom"}>
-                  <ProjectGridVimeo vimeoId={row.vimeo_id} />
+                  <ProjectGridRow>
+                    {vimeoIds.map((id, i) => (
+                      <ProjectGridVimeo key={i} vimeoId={id} />
+                    ))}
+                  </ProjectGridRow>
                 </Animation>
               );
             }
