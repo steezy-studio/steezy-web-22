@@ -16,6 +16,11 @@ import { Areas, Project as ProjectType, Query } from "../../generated/types";
 import { GET_PROJECT } from "../../graphql/GetProject";
 import { colors, device } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import parse, {
+  domToReact,
+  Element,
+  HTMLReactParserOptions,
+} from "html-react-parser";
 import {
   Breadcrumbs,
   ClientQuote,
@@ -30,6 +35,8 @@ import {
   ProjectHeroRoles,
   StyledProject,
 } from "../../pagestyles/StyledProject";
+import { StyledLink } from "../../components/Link/Styles/StyledLink";
+import { parser } from "@apollo/client";
 
 interface ProjectProps {
   projectData: ProjectType;
@@ -38,6 +45,22 @@ interface ProjectProps {
 
 const Project = ({ projectData, areas }: ProjectProps) => {
   const defaultArea = areas.items.find((area) => area.is_default);
+
+  const options: HTMLReactParserOptions = {
+    replace: (domNode) => {
+      if (domNode instanceof Element && domNode.attribs) {
+        if (domNode.name === `a`) {
+          console.log(domNode);
+
+          return (
+            <Link href={domNode.attribs.href} target={domNode.attribs.target}>
+              {domToReact(domNode.children, options)}
+            </Link>
+          );
+        }
+      }
+    },
+  };
   const { w } = useWindowSize();
   return (
     <>
@@ -155,7 +178,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                   <ProjectGridRow
                     className={`blockquote ${row.alignment ? "reverse" : ""}`}>
                     <ProjectGridBlockquote>
-                      <Medium>{row.blockquote_text}</Medium>
+                      <Medium>{parse(row.blockquote_text, options)}</Medium>
                     </ProjectGridBlockquote>
                   </ProjectGridRow>
                 </Animation>
