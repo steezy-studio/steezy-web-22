@@ -1,7 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
-import { EnhancedProject } from "..";
 import client, { withApolloClient } from "../../apollo/client";
 import GridItem from "../../components/GridItem/GridItem";
 import Head from "../../components/Head/Head";
@@ -14,10 +13,14 @@ import Navbar from "../../components/Navbar/Navbar";
 import { Large } from "../../components/Typo/Large";
 import { Medium } from "../../components/Typo/Medium";
 import strings from "../../data/strings";
-import { Areas, Project, Query } from "../../generated/types";
+import { Areas, Query } from "../../generated/types";
 import { GET_ALL_AREAS } from "../../graphql/GetAllAreas";
 import { GET_AREA } from "../../graphql/GetArea";
 import { allProjects, device, projectsPerPage } from "../../helpers/consts";
+import {
+  EnhancedProject,
+  enhanceProjects,
+} from "../../helpers/enhanceProjects";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import {
   ProjectsGrid,
@@ -172,23 +175,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       slug: params.area,
     },
   });
-  const areasReq = client.query<Query>({ query: GET_ALL_AREAS });
 
+  const areasReq = client.query<Query>({ query: GET_ALL_AREAS });
   const [areaData, areasData] = await Promise.all([areaReq, areasReq]);
 
-  console.log(areaData.data.Area.projects);
   return {
     props: {
       areas: areasData.data.Areas,
-      projects: areaData.data.Area.projects.map((project) => {
-        return {
-          ...project,
-          areas: areasData.data.Areas.items.filter((area) => {
-            if (area._slug === "all-projects") return false;
-            return area.projects.some((item) => item._id === project._id);
-          }),
-        };
-      }),
+      projects: enhanceProjects(
+        areaData.data.Area.projects,
+        areasData.data.Areas
+      ),
       projectsCount: areaData.data.Area.projects.length,
     },
     revalidate: Number(process.env.REVALIDATE),

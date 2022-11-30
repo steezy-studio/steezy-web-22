@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import client from "../../apollo/client";
 import Animation from "../../components/Animation/Animation";
+import GridItem from "../../components/GridItem/GridItem";
 import Head from "../../components/Head/Head";
 import Hero from "../../components/Hero/Hero";
 import Img from "../../components/Img/Img";
@@ -15,12 +16,14 @@ import Video from "../../components/Video/Video";
 import { Areas, Project as ProjectType, Query } from "../../generated/types";
 import { GET_PROJECT } from "../../graphql/GetProject";
 import { colors, device } from "../../helpers/consts";
+import { enhanceProjects } from "../../helpers/enhanceProjects";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import {
   Breadcrumbs,
   ClientQuote,
   ClientQuoteLeft,
   ClientQuoteRight,
+  NextProjectSection,
   ProjectDescription,
   ProjectGrid,
   ProjectGridBlockquote,
@@ -39,6 +42,7 @@ interface ProjectProps {
 const Project = ({ projectData, areas }: ProjectProps) => {
   const defaultArea = areas.items.find((area) => area.is_default);
   const { w } = useWindowSize();
+
   return (
     <>
       <Head
@@ -180,6 +184,30 @@ const Project = ({ projectData, areas }: ProjectProps) => {
             </ClientQuote>
           </Animation>
         )}
+        <NextProjectSection>
+          {projectData.next_project.map(
+            (
+              // @ts-ignore
+              { project_grid_name, landingpage_grid_image, _slug, areas }
+            ) => (
+              <GridItem
+                type={landingpage_grid_image[0]._type}
+                areas={areas}
+                projectName={project_grid_name}
+                videoThumb={landingpage_grid_image[0].cover}
+                width={landingpage_grid_image[0].width}
+                height={landingpage_grid_image[0].height}
+                src={
+                  landingpage_grid_image[0]._type === "Video"
+                    ? landingpage_grid_image[0].cdn_files[0].url
+                    : landingpage_grid_image[0].url
+                }
+                slug={_slug}
+                key={_slug}
+              />
+            )
+          )}
+        </NextProjectSection>
       </StyledProject>
     </>
   );
@@ -196,7 +224,16 @@ export const getStaticProps = async ({
   });
 
   return {
-    props: { areas: data.data.Areas, projectData: data.data.Project },
+    props: {
+      areas: data.data.Areas,
+      projectData: {
+        ...data.data.Project,
+        next_project: enhanceProjects(
+          data.data.Project.next_project,
+          data.data.Areas
+        ),
+      },
+    },
     revalidate: Number(process.env.REVALIDATE),
   };
 };
@@ -206,22 +243,3 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export default Project;
-
-{
-  /* {projectData.next_project[0] && (
-          <Animation type='fadeFromBottom'>
-            <NextProjectSection>
-              <Large>{strings.globals.nextProject}</Large>
-              <GridItem
-                areas={projectData.next_project[0].project_tags}
-                type={"Photo"}
-                width={projectData.next_project[0].hero_image[0].width}
-                height={projectData.next_project[0].hero_image[0].height}
-                src={projectData.next_project[0].hero_image[0].url}
-                projectName={projectData.next_project[0].project_grid_name}
-                slug={projectData.next_project[0]._slug}
-              />
-            </NextProjectSection>
-          </Animation>
-        )} */
-}

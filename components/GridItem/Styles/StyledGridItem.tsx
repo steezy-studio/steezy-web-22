@@ -15,7 +15,7 @@ export const StyledGridItem = styled(motion.a)`
     grid-row-gap: 5px;
   }
   ${NextProjectSection} & {
-    grid-template-areas: "areas" "header" "cover";
+    grid-template-areas: "cover" "header" "areas";
   }
 `;
 

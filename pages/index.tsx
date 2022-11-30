@@ -10,14 +10,13 @@ import { Large } from "../components/Typo/Large";
 import { Micro } from "../components/Typo/Micro";
 import strings from "../data/strings";
 import {
-  Area,
   Areas,
   LandingpageGridRow as LandingpageGridRowType,
-  Project,
   Query,
 } from "../generated/types";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
 import { allProjects } from "../helpers/consts";
+import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
 import {
   GridItemWrapper,
   Intro,
@@ -30,14 +29,11 @@ import {
 } from "../pagestyles/StyledIndex";
 import { HoverProvider } from "./_app";
 
-export interface EnhancedProject extends Project {
-  areas: Area[];
-}
-
 interface indexProps {
   landingpageGrid: LandingpageGridRowType[];
   areas: Areas;
 }
+
 const Index = ({ landingpageGrid, areas }: indexProps) => {
   const landingpageStrings = strings.landingPage;
   const { setCursorType } = useContext(HoverProvider);
@@ -166,7 +162,6 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
     </>
   );
 };
-
 export const getStaticProps: GetStaticProps = async () => {
   const data = await client.query<Query>({ query: GET_LANDINGPAGE });
 
@@ -174,15 +169,7 @@ export const getStaticProps: GetStaticProps = async () => {
     data.data.LandingpageGrids.items[0].landingpage_projects_grid.map((row) => {
       return {
         ...row,
-        grid_row: row.grid_row.map((project) => {
-          return {
-            ...project,
-            areas: data.data.Areas.items.filter((area) => {
-              if (area._slug === "all-projects") return false;
-              return area.projects.some((item) => item._id === project._id);
-            }),
-          };
-        }),
+        grid_row: enhanceProjects(row.grid_row, data.data.Areas),
       };
     });
 

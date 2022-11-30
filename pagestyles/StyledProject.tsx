@@ -157,11 +157,4 @@ export const ClientQuoteRight = styled.div`
   }
 `;
 
-export const NextProjectSection = styled(motion.div)`
-  margin: ${({ theme }) => u(2, theme.pageMargin)} 0;
-  position: relative;
-  ${breakpoint.smallNotebook} {
-  }
-  ${breakpoint.phone} {
-  }
-`;
+export const NextProjectSection = styled(motion.div)``;
