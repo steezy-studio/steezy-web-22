@@ -47,21 +47,21 @@ const GridItem = ({
   videoThumb,
 }: GridItemProps) => {
   const [hover, sethover] = useState(false);
-  const [videoAspect, setVideoAspect] = useState(0);
+  // const [videoAspect, setVideoAspect] = useState(0);
   const { setCursorType } = useContext(HoverProvider);
   const videoRef = useRef<HTMLVideoElement>(null);
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
   );
 
-  React.useEffect(() => {
-    if (videoRef.current) {
-      setVideoAspect(
-        // videoRef.current.innerHeight / videoRef.current.videoWidth
-        0
-      );
-    }
-  }, []);
+  // React.useEffect(() => {
+  //   if (videoRef.current) {
+  //     setVideoAspect(
+  //       // videoRef.current.innerHeight / videoRef.current.videoWidth
+  //       0
+  //     );
+  //   }
+  // }, []);
 
   const options: HTMLReactParserOptions = {
     replace: (domNode) => {

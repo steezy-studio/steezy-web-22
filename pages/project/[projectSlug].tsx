@@ -1,18 +1,23 @@
 import { motion } from "framer-motion";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
+import { useContext } from "react";
 import client from "../../apollo/client";
 import Animation from "../../components/Animation/Animation";
+import ClassicGrid from "../../components/ClassicGrid/ClassicGrid";
 import GridItem from "../../components/GridItem/GridItem";
 import Head from "../../components/Head/Head";
 import Hero from "../../components/Hero/Hero";
 import Img from "../../components/Img/Img";
 import { StyledImg } from "../../components/Img/Styles/StyledImg";
 import Link from "../../components/Link/Link";
+import { StyledLink } from "../../components/Link/Styles/StyledLink";
 import Navbar from "../../components/Navbar/Navbar";
 import ProjectGridVimeo from "../../components/ProjectGridVimeo/ProjectGridVimeo";
+import { Large } from "../../components/Typo/Large";
 import { Medium } from "../../components/Typo/Medium";
 import { Micro } from "../../components/Typo/Micro";
 import Video from "../../components/Video/Video";
+import strings from "../../data/strings";
 import { Areas, Project as ProjectType, Query } from "../../generated/types";
 import { GET_PROJECT } from "../../graphql/GetProject";
 import { colors, device } from "../../helpers/consts";
@@ -23,6 +28,7 @@ import {
   ClientQuote,
   ClientQuoteLeft,
   ClientQuoteRight,
+  NextProjectHead,
   NextProjectSection,
   ProjectDescription,
   ProjectGrid,
@@ -33,6 +39,7 @@ import {
   ProjectHeroRoles,
   StyledProject,
 } from "../../pagestyles/StyledProject";
+import { HoverProvider } from "../_app";
 
 interface ProjectProps {
   projectData: ProjectType;
@@ -41,6 +48,7 @@ interface ProjectProps {
 
 const Project = ({ projectData, areas }: ProjectProps) => {
   const defaultArea = areas.items.find((area) => area.is_default);
+  const { setCursorType } = useContext(HoverProvider);
   const { w } = useWindowSize();
 
   return (
@@ -185,28 +193,42 @@ const Project = ({ projectData, areas }: ProjectProps) => {
           </Animation>
         )}
         <NextProjectSection>
-          {projectData.next_project.map(
-            (
-              // @ts-ignore
-              { project_grid_name, landingpage_grid_image, _slug, areas }
-            ) => (
-              <GridItem
-                type={landingpage_grid_image[0]._type}
-                areas={areas}
-                projectName={project_grid_name}
-                videoThumb={landingpage_grid_image[0].cover}
-                width={landingpage_grid_image[0].width}
-                height={landingpage_grid_image[0].height}
-                src={
-                  landingpage_grid_image[0]._type === "Video"
-                    ? landingpage_grid_image[0].cdn_files[0].url
-                    : landingpage_grid_image[0].url
-                }
-                slug={_slug}
-                key={_slug}
-              />
-            )
-          )}
+          <NextProjectHead>
+            <Large>{strings.globals.relatedProjects}</Large>
+            <Large>
+              <StyledLink
+                as={"a"}
+                href={"/projects/all-projects"}
+                onMouseEnter={() => setCursorType("hover")}
+                onMouseLeave={() => setCursorType("normal")}>
+                {strings.globals.backToProjects}
+              </StyledLink>
+            </Large>
+          </NextProjectHead>
+          <ClassicGrid>
+            {projectData.next_project.map(
+              (
+                // @ts-ignore
+                { project_grid_name, landingpage_grid_image, _slug, areas }
+              ) => (
+                <GridItem
+                  type={landingpage_grid_image[0]._type}
+                  areas={areas}
+                  projectName={project_grid_name}
+                  videoThumb={landingpage_grid_image[0].cover}
+                  width={landingpage_grid_image[0].width}
+                  height={landingpage_grid_image[0].height}
+                  src={
+                    landingpage_grid_image[0]._type === "Video"
+                      ? landingpage_grid_image[0].cdn_files[0].url
+                      : landingpage_grid_image[0].url
+                  }
+                  slug={_slug}
+                  key={_slug}
+                />
+              )
+            )}
+          </ClassicGrid>
         </NextProjectSection>
       </StyledProject>
     </>

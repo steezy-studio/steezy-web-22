@@ -259,7 +259,7 @@ export default {
     email: "hello@steezy.studio",
     phone: "(+420) 728 088 996",
     nextImage: "next photo",
-    nextProject: "next project",
+    relatedProjects: "related projects",
     allProjects: "all projects",
     backToProjects: "back to projects",
     tellUsYourStory: "Tell us\nyour story!",

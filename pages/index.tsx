@@ -152,7 +152,11 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
           <LandingpageGridRow>
             <div></div>
             <Large>
-              <StyledLink as={"a"} href={`/projects/all-projects`}>
+              <StyledLink
+                as={"a"}
+                href={`/projects/all-projects`}
+                onMouseEnter={() => setCursorType("hover")}
+                onMouseLeave={() => setCursorType("normal")}>
                 {strings.globals.allProjects}
               </StyledLink>
             </Large>

@@ -157,4 +157,12 @@ export const ClientQuoteRight = styled.div`
   }
 `;
 
-export const NextProjectSection = styled(motion.div)``;
+export const NextProjectSection = styled(motion.div)`
+  margin-top: ${({ theme }) => u(2, theme.pageMargin)};
+`;
+
+export const NextProjectHead = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 60px;
+`;

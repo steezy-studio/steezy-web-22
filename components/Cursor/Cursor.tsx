@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { MutableRefObject, RefObject, useEffect, useRef } from "react";
+import { MutableRefObject, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { breakpoint, colors } from "../../helpers/consts";
+import { colors } from "../../helpers/consts";
 
 export type CursorTypes = "normal" | "left" | "right" | "hover";
 
@@ -28,17 +28,11 @@ const StyledCursor = styled(motion.div)`
       transform-origin: center;
     }
   }
-  ${breakpoint.tabletLandscape} {
-    display: none;
-  }
 `;
 
-const ArrowWrapper = styled(motion.div)``;
-
 const Cursor = ({ isCursorDisabled, cursorType, cursorRef }: CursorProps) => {
-  const x = useRef(0);
-  const y = useRef(0);
-  const requestRef = useRef(null);
+  const x = useRef(-100);
+  const y = useRef(-100);
 
   const mouseMoveEvent = (e) => {
     x.current = e.clientX;
@@ -48,15 +42,11 @@ const Cursor = ({ isCursorDisabled, cursorType, cursorRef }: CursorProps) => {
     cursorRef.current.style.left = x.current + "px";
   };
 
-  const animateDotOutline = () => {
-    requestRef.current = requestAnimationFrame(animateDotOutline);
-  };
-
   useEffect(() => {
-    animateDotOutline();
+    cursorRef.current.style.top = y.current + "px";
+    cursorRef.current.style.left = x.current + "px";
     document.addEventListener("mousemove", mouseMoveEvent);
     return () => {
-      cancelAnimationFrame(requestRef.current);
       document.removeEventListener("mousemove", mouseMoveEvent);
     };
   }, []);
