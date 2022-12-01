@@ -177,6 +177,14 @@ export const Blockquote = styled.div`
   &._2 {
     transform: translateY(${({ theme }) => u(-1, theme.pageMargin)});
   }
+  &.landingpage {
+    transform: translate(
+      ${({ theme }) => u(-1, theme.pageMargin)},
+      ${({ theme }) => u(1.5, theme.pageMargin)}
+    );
+    position: relative;
+    z-index: 1;
+  }
   ${breakpoint.tabletPortrait} {
     &._3 {
       margin-top: ${({ theme }) => u(2, theme.pageMargin)};

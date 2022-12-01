@@ -1,6 +1,8 @@
+import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
 import { Fragment, useContext } from "react";
 import client from "../apollo/client";
+import Animation from "../components/Animation/Animation";
 import GridItem from "../components/GridItem/GridItem";
 import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
@@ -17,6 +19,7 @@ import {
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
 import { allProjects } from "../helpers/consts";
 import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
+import { splitArray } from "../helpers/splitArray";
 import {
   GridItemWrapper,
   Intro,
@@ -27,6 +30,7 @@ import {
   LandingPageHeroLogotype,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
+import { Blockquote, Quote } from "../pagestyles/StyledStudio";
 import { HoverProvider } from "./_app";
 
 interface indexProps {
@@ -37,6 +41,17 @@ interface indexProps {
 const Index = ({ landingpageGrid, areas }: indexProps) => {
   const landingpageStrings = strings.landingPage;
   const { setCursorType } = useContext(HoverProvider);
+
+  const [firstGridPart, secondGridPart] = splitArray<LandingpageGridRowType>(
+    landingpageGrid,
+    Math.floor(landingpageGrid.length / 2)
+  );
+
+  const landingpageGridWithQuotes = [
+    ...firstGridPart,
+    landingpageStrings.quotes[0],
+    ...secondGridPart,
+  ];
 
   return (
     <>
@@ -104,8 +119,33 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
             </Large>
           </div>
         </Intro>
+
         <LandingpageGrid>
-          {landingpageGrid.map((row) => {
+          {landingpageGridWithQuotes.map((row, i) => {
+            if (row.__typename === "Quote") {
+              return (
+                <Animation
+                  type={"fadeFromBottom"}
+                  delay={0.2}
+                  duration={1.2}
+                  key={i}>
+                  <motion.div>
+                    <Blockquote className='landingpage'>
+                      <div></div>
+                      <Quote className=''>
+                        <Large className=''>{row.quote}</Large>
+                        <Micro className='with-dash reversed'>
+                          {row.name}{" "}
+                        </Micro>
+                        <Micro className='lowcase dash-margin'>
+                          {row.position}
+                        </Micro>
+                      </Quote>
+                    </Blockquote>
+                  </motion.div>
+                </Animation>
+              );
+            }
             if (row.__typename === `LandingpageGridRow`) {
               const isSingle = row.grid_row.length === 1;
 

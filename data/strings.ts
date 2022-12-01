@@ -253,6 +253,15 @@ export default {
         { type: "text", body: "behind\u00a0distinctive\nbrands" },
       ],
     },
+    quotes: [
+      {
+        __typename: "Quote",
+        name: "ADAM KŘENA",
+        position: "Head of Atelier @footshop",
+        quote:
+          "I appreciate the creative approach, multi-dimensional overlap, fast and transparent communication in cooperation with steezy.studio",
+      },
+    ],
   },
 
   globals: {
@@ -277,4 +286,4 @@ export default {
       highlighted: true,
     },
   ],
-};
+} as const;
