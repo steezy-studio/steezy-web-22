@@ -53,6 +53,26 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
     ...secondGridPart,
   ];
 
+  const renderTextWithLink = ({ type, body, href }, i) => {
+    if (type === `text`) {
+      return <Fragment key={i}>{body}</Fragment>;
+    }
+    if (type === `link`) {
+      return (
+        <Fragment key={i}>
+          <StyledLink
+            as={"a"}
+            href={href}
+            onMouseEnter={() => setCursorType("hover")}
+            onMouseLeave={() => setCursorType("normal")}>
+            {body}
+          </StyledLink>
+          <br />
+        </Fragment>
+      );
+    }
+  };
+
   return (
     <>
       {/* TODO add og image */}
@@ -98,24 +118,7 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
           <Micro>{landingpageStrings.intro.subHeader}</Micro>
           <div>
             <Large as={`span`}>
-              {landingpageStrings.intro.perex.map(({ type, body }, i) => {
-                const isText = type === `text`;
-                if (isText) {
-                  return <Fragment key={i}>{body}</Fragment>;
-                }
-                if (type === `link`) {
-                  return (
-                    <Fragment key={i}>
-                      <StyledLink
-                        as={"a"}
-                        href={`/projects/${allProjects._slug}`}>
-                        {body}
-                      </StyledLink>
-                      <br />
-                    </Fragment>
-                  );
-                }
-              })}
+              {landingpageStrings.intro.perex.map(renderTextWithLink)}
             </Large>
           </div>
         </Intro>
@@ -124,7 +127,7 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
           {landingpageGridWithQuotes.map((row, i) => {
             if (row.__typename === "Quote") {
               return (
-                <LandingpageGridRow key={i}>
+                <LandingpageGridRow key={i} data-scroll data-scroll-speed='2'>
                   <GridItemWrapper className='single'>
                     <Animation
                       type={"fadeFromBottom"}
@@ -133,7 +136,9 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                       <motion.div>
                         <Blockquote className='landingpage'>
                           <Quote className=''>
-                            <Large className=''>{row.quote}</Large>
+                            <Large className=''>
+                              {row.quote.map(renderTextWithLink)}
+                            </Large>
                             <Micro className='with-dash reversed'>
                               {row.name}{" "}
                             </Micro>

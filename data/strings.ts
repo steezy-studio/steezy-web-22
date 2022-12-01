@@ -249,7 +249,11 @@ export default {
           type: "text",
           body: "we\u00a0are\u00a0designers\nof\u00a0compelling ",
         },
-        { type: "link", body: "stories\u00a0&\u00a0visuals" },
+        {
+          type: "link",
+          body: "stories\u00a0&\u00a0visuals",
+          href: "/projects/all-projects",
+        },
         { type: "text", body: "behind\u00a0distinctive\nbrands" },
       ],
     },
@@ -258,8 +262,13 @@ export default {
         __typename: "Quote",
         name: "ADAM KŘENA",
         position: "Head of Atelier @footshop",
-        quote:
-          "I appreciate the creative approach, multi-dimensional overlap, fast and transparent communication in cooperation with steezy.studio",
+        quote: [
+          {
+            type: "text",
+            body: "I appreciate the creative approach, multi-dimensional overlap, fast and transparent communication in cooperation with ",
+          },
+          { type: "link", body: "steezy.studio", href: "/studio" },
+        ],
       },
     ],
   },
