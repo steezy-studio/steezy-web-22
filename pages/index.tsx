@@ -124,26 +124,28 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
           {landingpageGridWithQuotes.map((row, i) => {
             if (row.__typename === "Quote") {
               return (
-                <Animation
-                  type={"fadeFromBottom"}
-                  delay={0.2}
-                  duration={1.2}
-                  key={i}>
-                  <motion.div>
-                    <Blockquote className='landingpage'>
-                      <div></div>
-                      <Quote className=''>
-                        <Large className=''>{row.quote}</Large>
-                        <Micro className='with-dash reversed'>
-                          {row.name}{" "}
-                        </Micro>
-                        <Micro className='lowcase dash-margin'>
-                          {row.position}
-                        </Micro>
-                      </Quote>
-                    </Blockquote>
-                  </motion.div>
-                </Animation>
+                <LandingpageGridRow key={i}>
+                  <GridItemWrapper className='single'>
+                    <Animation
+                      type={"fadeFromBottom"}
+                      delay={0.2}
+                      duration={1.2}>
+                      <motion.div>
+                        <Blockquote className='landingpage'>
+                          <Quote className=''>
+                            <Large className=''>{row.quote}</Large>
+                            <Micro className='with-dash reversed'>
+                              {row.name}{" "}
+                            </Micro>
+                            <Micro className='lowcase dash-margin'>
+                              {row.position}
+                            </Micro>
+                          </Quote>
+                        </Blockquote>
+                      </motion.div>
+                    </Animation>
+                  </GridItemWrapper>
+                </LandingpageGridRow>
               );
             }
             if (row.__typename === `LandingpageGridRow`) {
@@ -155,7 +157,6 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                     ({
                       project_grid_name,
                       landingpage_grid_image,
-
                       _slug,
                       _id,
                       areas,

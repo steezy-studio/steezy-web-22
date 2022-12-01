@@ -178,12 +178,15 @@ export const Blockquote = styled.div`
     transform: translateY(${({ theme }) => u(-1, theme.pageMargin)});
   }
   &.landingpage {
-    transform: translate(
-      ${({ theme }) => u(-1, theme.pageMargin)},
-      ${({ theme }) => u(1.5, theme.pageMargin)}
-    );
+    grid-template-columns: unset;
+    /* transform: translateY(${({ theme }) => u(1.5, theme.pageMargin)}); */
+    /* max-width: 500px; */
     position: relative;
     z-index: 1;
+    max-width: 700px;
+    ${breakpoint.monitor} {
+      max-width: 1200px;
+    }
   }
   ${breakpoint.tabletPortrait} {
     &._3 {
