@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import parse, { domToReact, Element } from "html-react-parser";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import { Fragment, useContext } from "react";
 import client from "../../apollo/client";
@@ -23,11 +24,6 @@ import { GET_PROJECT } from "../../graphql/GetProject";
 import { colors, device } from "../../helpers/consts";
 import { enhanceProjects } from "../../helpers/enhanceProjects";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import parse, {
-  domToReact,
-  Element,
-  HTMLReactParserOptions,
-} from "html-react-parser";
 import {
   Breadcrumbs,
   ClientQuote,
@@ -56,26 +52,6 @@ const Project = ({ projectData, areas }: ProjectProps) => {
 
   const { setCursorType } = useContext(HoverProvider);
   const { w } = useWindowSize();
-
-  const renderTextWithLink = ({ type, body, href }, i) => {
-    if (type === `text`) {
-      return <Fragment key={i}>{body}</Fragment>;
-    }
-    if (type === `link`) {
-      return (
-        <Fragment key={i}>
-          <StyledLink
-            as={"a"}
-            href={href}
-            onMouseEnter={() => setCursorType("hover")}
-            onMouseLeave={() => setCursorType("normal")}>
-            {body}
-          </StyledLink>
-          <br />
-        </Fragment>
-      );
-    }
-  };
 
   return (
     <>
@@ -188,8 +164,6 @@ const Project = ({ projectData, areas }: ProjectProps) => {
               );
             }
             if (row.__typename === "ProjectGridBlockquote") {
-              console.log(row.blockquote_text);
-
               return (
                 <Animation key={`${i}_row`} type='fadeFromBottom'>
                   <ProjectGridRow
@@ -229,6 +203,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
             <ClientQuote>
               <ClientQuoteLeft>
                 <Img
+                  className='desktop'
                   src={
                     projectData.client_photo?.[0]?.url ||
                     `/icons/avatar-default.svg`
@@ -240,6 +215,16 @@ const Project = ({ projectData, areas }: ProjectProps) => {
               </ClientQuoteLeft>
               <ClientQuoteRight>
                 <Medium>{projectData.client_quote}</Medium>
+                <Img
+                  className='phone'
+                  src={
+                    projectData.client_photo?.[0]?.url ||
+                    `/icons/avatar-default.svg`
+                  }
+                  width={250}
+                  height={250}
+                  layout={"responsive"}
+                />
                 <Micro>{projectData.client_name}</Micro>
                 <br />
                 <Micro className='lowcase'>{projectData.client_position}</Micro>
@@ -249,8 +234,14 @@ const Project = ({ projectData, areas }: ProjectProps) => {
         )}
         <NextProjectSection>
           <NextProjectHead>
-            <Large>{strings.globals.relatedProjects}</Large>
-            <Large>
+            {w >= device.phone ? (
+              <Large className='related-project'>
+                {strings.globals.relatedProject}
+              </Large>
+            ) : (
+              <Micro>{strings.globals.relatedProject}</Micro>
+            )}
+            <Large className='back-to-projects'>
               <StyledLink
                 as={"a"}
                 href={"/projects/all-projects"}
@@ -261,7 +252,10 @@ const Project = ({ projectData, areas }: ProjectProps) => {
             </Large>
           </NextProjectHead>
           <ClassicGrid>
-            {projectData.next_project.map(
+            {(w >= device.phone
+              ? projectData.next_project
+              : [projectData.next_project[0]]
+            ).map(
               (
                 // @ts-ignore
                 { project_grid_name, landingpage_grid_image, _slug, areas }

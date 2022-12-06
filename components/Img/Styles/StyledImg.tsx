@@ -34,7 +34,7 @@ export const StyledImg = styled(motion.div)`
         justify-self: end;
       }
       ${breakpoint.phone} {
-        max-height: 50px;
+        max-height: 70px;
         width: auto;
         justify-self: start;
       }
@@ -74,6 +74,9 @@ export const StyledImg = styled(motion.div)`
     height: 250px;
     border-radius: 9999999999999px;
     overflow: hidden;
+    &.phone {
+      display: none;
+    }
     ${breakpoint.smallNotebook} {
       width: 150px;
       height: 150px;
@@ -81,6 +84,17 @@ export const StyledImg = styled(motion.div)`
     ${breakpoint.tabletPortrait} {
       width: 100px;
       height: 100px;
+    }
+    ${breakpoint.phone} {
+      width: 80px;
+      height: 80px;
+      &.desktop {
+        display: none;
+      }
+      &.phone {
+        display: block;
+        margin-bottom: 10px;
+      }
     }
   }
   ${Outro} & {

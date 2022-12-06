@@ -162,7 +162,12 @@ export const NextProjectSection = styled(motion.div)`
 `;
 
 export const NextProjectHead = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-areas: "relatedProject backToProjects";
   margin-bottom: 60px;
+  ${breakpoint.phone} {
+    grid-template-areas: "backToProjects" "relatedProject";
+    row-gap: 40px;
+    margin-bottom: 20px;
+  }
 `;

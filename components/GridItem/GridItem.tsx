@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
 import parse, {
   domToReact,
   Element,
   HTMLReactParserOptions,
 } from "html-react-parser";
-import { type } from "os";
-import { useRef, useState } from "react";
-import { Area, Areas } from "../../generated/types";
+import { useContext, useRef, useState } from "react";
+import { Area } from "../../generated/types";
+import {
+  useIntersectionObserver,
+  videoCallback,
+} from "../../hooks/useIntersectionObserver";
+import { HoverProvider } from "../../pages/_app";
+import Animation from "../Animation/Animation";
 import Img from "../Img/Img";
 import { StyledLink } from "../Link/Styles/StyledLink";
 import { Micro } from "../Typo/Micro";
@@ -14,16 +18,10 @@ import {
   GridItemAreas,
   GridItemCoverWrapper,
   GridItemHeader,
-  StyledGridItem,
   GridItemVideo,
+  StyledGridItem,
   VideoWrapper,
 } from "./Styles/StyledGridItem";
-import {
-  useIntersectionObserver,
-  videoCallback,
-} from "../../hooks/useIntersectionObserver";
-import Animation from "../Animation/Animation";
-import { HoverProvider } from "../../pages/_app";
 
 interface GridItemProps {
   src: string;

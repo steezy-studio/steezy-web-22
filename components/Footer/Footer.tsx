@@ -1,14 +1,16 @@
-import React from "react";
+import { useRouter } from "next/router";
 import strings from "../../data/strings";
+import Instagram from "../Icons/Instagram";
+import Vimeo from "../Icons/Vimeo";
 import Link from "../Link/Link";
-import { Micro } from "../Typo/Micro";
 import { Large } from "../Typo/Large";
+import { Micro } from "../Typo/Micro";
 import {
   ContactInfo,
   DetailedContact,
+  FooterSocials,
   StyledFooter,
 } from "./Styles/StyledFooter";
-import { useRouter } from "next/router";
 
 interface FooterProps {}
 
@@ -34,6 +36,10 @@ const Footer = ({}: FooterProps) => {
           <Micro className='lowcase'>
             {strings.globals.phone + `\n` + footerStrings.other}
           </Micro>
+          <FooterSocials>
+            <Instagram />
+            <Vimeo />
+          </FooterSocials>
         </DetailedContact>
       </ContactInfo>
     </StyledFooter>

@@ -39,3 +39,14 @@ export const DetailedContact = styled.div`
     justify-content: start;
   }
 `;
+
+export const FooterSocials = styled.div`
+  display: none;
+  ${breakpoint.phone} {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    align-items: center;
+    column-gap: 10px;
+  }
+`;
