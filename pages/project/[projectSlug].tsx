@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
-import { useContext } from "react";
+import { Fragment, useContext } from "react";
 import client from "../../apollo/client";
 import Animation from "../../components/Animation/Animation";
 import ClassicGrid from "../../components/ClassicGrid/ClassicGrid";
@@ -56,6 +56,26 @@ const Project = ({ projectData, areas }: ProjectProps) => {
 
   const { setCursorType } = useContext(HoverProvider);
   const { w } = useWindowSize();
+
+  const renderTextWithLink = ({ type, body, href }, i) => {
+    if (type === `text`) {
+      return <Fragment key={i}>{body}</Fragment>;
+    }
+    if (type === `link`) {
+      return (
+        <Fragment key={i}>
+          <StyledLink
+            as={"a"}
+            href={href}
+            onMouseEnter={() => setCursorType("hover")}
+            onMouseLeave={() => setCursorType("normal")}>
+            {body}
+          </StyledLink>
+          <br />
+        </Fragment>
+      );
+    }
+  };
 
   return (
     <>
@@ -168,12 +188,35 @@ const Project = ({ projectData, areas }: ProjectProps) => {
               );
             }
             if (row.__typename === "ProjectGridBlockquote") {
+              console.log(row.blockquote_text);
+
               return (
                 <Animation key={`${i}_row`} type='fadeFromBottom'>
                   <ProjectGridRow
                     className={`blockquote ${row.alignment ? "reverse" : ""}`}>
                     <ProjectGridBlockquote>
-                      <Medium>{parse(row.blockquote_text, options)}</Medium>
+                      <Medium>
+                        {parse(row.blockquote_text, {
+                          replace(domNode) {
+                            if (domNode instanceof Element && domNode.attribs) {
+                              if (domNode.name === "a") {
+                                return (
+                                  <StyledLink
+                                    as={"a"}
+                                    href={domNode.attribs.href}
+                                    onMouseEnter={() => setCursorType("hover")}
+                                    onMouseLeave={() =>
+                                      setCursorType("normal")
+                                    }>
+                                    {domToReact(domNode.children)}
+                                  </StyledLink>
+                                );
+                              }
+                              return domNode;
+                            }
+                          },
+                        })}
+                      </Medium>
                     </ProjectGridBlockquote>
                   </ProjectGridRow>
                 </Animation>
