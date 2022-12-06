@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
+import { NextProjectSection } from "../../../pagestyles/StyledProject";
 
 export const StyledGridItem = styled(motion.a)`
   display: grid;
@@ -12,6 +13,9 @@ export const StyledGridItem = styled(motion.a)`
   }
   ${breakpoint.tabletPortrait} {
     grid-row-gap: 5px;
+  }
+  ${NextProjectSection} & {
+    align-content: start;
   }
 `;
 

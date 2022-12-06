@@ -28,6 +28,10 @@ const StyledCursor = styled(motion.div)`
       transform-origin: center;
     }
   }
+  /* smartphones, touchscreens */
+  @media (hover: none) and (pointer: coarse) {
+    display: none;
+  }
 `;
 
 const Cursor = ({ isCursorDisabled, cursorType, cursorRef }: CursorProps) => {
