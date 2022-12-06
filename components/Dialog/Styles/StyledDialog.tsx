@@ -21,7 +21,7 @@ export const Content = styled(RadixDialog.Content)`
   top: 50%;
   left: 50%;
   background-color: ${colors.black};
-  z-index: 99999999999;
+  z-index: 99;
   animation: ${contentShow} 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 `;
 
@@ -78,7 +78,7 @@ export const Overlay = styled(RadixDialog.Overlay)`
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 99999999998;
+  /* z-index: 99999999998; */
   cursor: pointer;
   animation: ${overlayShow} 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 `;

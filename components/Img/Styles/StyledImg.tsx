@@ -23,12 +23,6 @@ export const StyledImg = styled(motion.div)`
   }
   ${StyledGridItem} & {
     transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
-    ${NextProjectSection} & {
-      max-height: 800px;
-      ${breakpoint.monitor} {
-        max-height: 70vh;
-      }
-    }
   }
   ${StyledProject} & {
     &.client-logo {

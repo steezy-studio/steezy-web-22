@@ -3,7 +3,6 @@ import { breakpoint, colors } from "../../helpers/consts";
 import u from "../../helpers/unit";
 import { StyledContact } from "../../pagestyles/StyledContact";
 import { Intro } from "../../pagestyles/StyledIndex";
-import { NextProjectSection } from "../../pagestyles/StyledProject";
 import { ProjectsHeroFilters } from "../../pagestyles/StyledProjects";
 import { Quote } from "../../pagestyles/StyledStudio";
 import { HeroText } from "../Hero/Styles/StyledHero";
@@ -105,19 +104,6 @@ export const Large = styled.h1`
     ${breakpoint.phone} {
       font-size: 28px;
       margin-bottom: ${({ theme }) => u(1, theme.pageMargin)};
-    }
-  }
-
-  ${NextProjectSection} & {
-    text-align: right;
-    transform: translateY(100%);
-    ${breakpoint.monitor} {
-      transform: translateY(70%);
-    }
-    ${breakpoint.phone} {
-      transform: none;
-      text-align: left;
-      margin-bottom: 30px;
     }
   }
 `;

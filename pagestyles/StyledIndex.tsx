@@ -54,7 +54,7 @@ export const LandingpageGrid = styled.div`
   display: grid;
   grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
   ${breakpoint.phone} {
-    grid-gap: ${({ theme }) => `calc(2 * ${theme.pageMargin})`};
+    grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
     margin-top: ${({ theme }) => u(3, theme.pageMargin)};
   }
   ${breakpoint.monitor} {
@@ -68,7 +68,7 @@ export const LandingpageGridRow = styled.div`
   grid-gap: ${({ theme }) => theme.pageMargin};
   ${breakpoint.phone} {
     grid-template-columns: unset;
-    grid-gap: ${({ theme }) => `calc(2 * ${theme.pageMargin})`};
+    grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
   }
 `;
 

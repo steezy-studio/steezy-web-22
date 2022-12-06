@@ -1,6 +1,8 @@
+import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
 import { Fragment, useContext } from "react";
 import client from "../apollo/client";
+import Animation from "../components/Animation/Animation";
 import GridItem from "../components/GridItem/GridItem";
 import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
@@ -10,14 +12,14 @@ import { Large } from "../components/Typo/Large";
 import { Micro } from "../components/Typo/Micro";
 import strings from "../data/strings";
 import {
-  Area,
   Areas,
   LandingpageGridRow as LandingpageGridRowType,
-  Project,
   Query,
 } from "../generated/types";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
 import { allProjects } from "../helpers/consts";
+import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
+import { splitArray } from "../helpers/splitArray";
 import {
   GridItemWrapper,
   Intro,
@@ -28,19 +30,48 @@ import {
   LandingPageHeroLogotype,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
+import { Blockquote, Quote } from "../pagestyles/StyledStudio";
 import { HoverProvider } from "./_app";
-
-export interface EnhancedProject extends Project {
-  areas: Area[];
-}
 
 interface indexProps {
   landingpageGrid: LandingpageGridRowType[];
   areas: Areas;
 }
+
 const Index = ({ landingpageGrid, areas }: indexProps) => {
   const landingpageStrings = strings.landingPage;
   const { setCursorType } = useContext(HoverProvider);
+
+  const [firstGridPart, secondGridPart] = splitArray<LandingpageGridRowType>(
+    landingpageGrid,
+    Math.floor(landingpageGrid.length / 2)
+  );
+
+  const landingpageGridWithQuotes = [
+    ...firstGridPart,
+    landingpageStrings.quotes[0],
+    ...secondGridPart,
+  ];
+
+  const renderTextWithLink = ({ type, body, href }, i) => {
+    if (type === `text`) {
+      return <Fragment key={i}>{body}</Fragment>;
+    }
+    if (type === `link`) {
+      return (
+        <Fragment key={i}>
+          <StyledLink
+            as={"a"}
+            href={href}
+            onMouseEnter={() => setCursorType("hover")}
+            onMouseLeave={() => setCursorType("normal")}>
+            {body}
+          </StyledLink>
+          <br />
+        </Fragment>
+      );
+    }
+  };
 
   return (
     <>
@@ -87,31 +118,41 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
           <Micro>{landingpageStrings.intro.subHeader}</Micro>
           <div>
             <Large as={`span`}>
-              {landingpageStrings.intro.perex.map(({ type, body }, i) => {
-                const isText = type === `text`;
-                if (isText) {
-                  return <Fragment key={i}>{body}</Fragment>;
-                }
-                if (type === `link`) {
-                  return (
-                    <Fragment key={i}>
-                      <StyledLink
-                        as={"a"}
-                        onMouseEnter={() => setCursorType("hover")}
-                        onMouseLeave={() => setCursorType("normal")}
-                        href={`/projects/${allProjects._slug}`}>
-                        {body}
-                      </StyledLink>
-                      <br />
-                    </Fragment>
-                  );
-                }
-              })}
+              {landingpageStrings.intro.perex.map(renderTextWithLink)}
             </Large>
           </div>
         </Intro>
+
         <LandingpageGrid>
-          {landingpageGrid.map((row) => {
+          {landingpageGridWithQuotes.map((row, i) => {
+            if (row.__typename === "Quote") {
+              return (
+                <LandingpageGridRow key={i} data-scroll data-scroll-speed='2'>
+                  <GridItemWrapper className='single'>
+                    <Animation
+                      type={"fadeFromBottom"}
+                      delay={0.2}
+                      duration={1.2}>
+                      <motion.div>
+                        <Blockquote className='landingpage'>
+                          <Quote className=''>
+                            <Large className=''>
+                              {row.quote.map(renderTextWithLink)}
+                            </Large>
+                            <Micro className='with-dash reversed'>
+                              {row.name}{" "}
+                            </Micro>
+                            <Micro className='lowcase dash-margin'>
+                              {row.position}
+                            </Micro>
+                          </Quote>
+                        </Blockquote>
+                      </motion.div>
+                    </Animation>
+                  </GridItemWrapper>
+                </LandingpageGridRow>
+              );
+            }
             if (row.__typename === `LandingpageGridRow`) {
               const isSingle = row.grid_row.length === 1;
 
@@ -121,7 +162,6 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                     ({
                       project_grid_name,
                       landingpage_grid_image,
-
                       _slug,
                       _id,
                       areas,
@@ -172,7 +212,6 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
     </>
   );
 };
-
 export const getStaticProps: GetStaticProps = async () => {
   const data = await client.query<Query>({ query: GET_LANDINGPAGE });
 
@@ -180,15 +219,7 @@ export const getStaticProps: GetStaticProps = async () => {
     data.data.LandingpageGrids.items[0].landingpage_projects_grid.map((row) => {
       return {
         ...row,
-        grid_row: row.grid_row.map((project) => {
-          return {
-            ...project,
-            areas: data.data.Areas.items.filter((area) => {
-              if (area._slug === "all-projects") return false;
-              return area.projects.some((item) => item._id === project._id);
-            }),
-          };
-        }),
+        grid_row: enhanceProjects(row.grid_row, data.data.Areas),
       };
     });
 

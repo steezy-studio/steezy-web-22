@@ -177,6 +177,20 @@ export const Blockquote = styled.div`
   &._2 {
     transform: translateY(${({ theme }) => u(-1, theme.pageMargin)});
   }
+  &.landingpage {
+    grid-template-columns: unset;
+    transform: translateY(${({ theme }) => u(1.5, theme.pageMargin)});
+    /* max-width: 500px; */
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    ${breakpoint.tabletLandscape} {
+      max-width: 700px;
+    }
+    ${breakpoint.monitor} {
+      max-width: 1200px;
+    }
+  }
   ${breakpoint.tabletPortrait} {
     &._3 {
       margin-top: ${({ theme }) => u(2, theme.pageMargin)};

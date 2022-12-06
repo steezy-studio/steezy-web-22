@@ -40,7 +40,21 @@ export const GET_PROJECT = gql`
         url
       }
       next_project {
+        _id
         _slug
+        landingpage_grid_image {
+          url(format: "webp")
+          _type
+          description
+          width
+          height
+          cdn_files {
+            _id
+            _type
+            profile
+            url
+          }
+        }
         hero_image {
           url
           width

@@ -249,17 +249,35 @@ export default {
           type: "text",
           body: "we\u00a0are\u00a0designers\nof\u00a0compelling ",
         },
-        { type: "link", body: "stories\u00a0&\u00a0visuals" },
+        {
+          type: "link",
+          body: "stories\u00a0&\u00a0visuals",
+          href: "/projects/all-projects",
+        },
         { type: "text", body: "behind\u00a0distinctive\nbrands" },
       ],
     },
+    quotes: [
+      {
+        __typename: "Quote",
+        name: "ADAM KŘENA",
+        position: "Head of Atelier @footshop",
+        quote: [
+          {
+            type: "text",
+            body: "I appreciate the creative approach, multi-dimensional overlap, fast and transparent communication in cooperation with ",
+          },
+          { type: "link", body: "steezy.studio", href: "/studio" },
+        ],
+      },
+    ],
   },
 
   globals: {
     email: "hello@steezy.studio",
     phone: "(+420) 728 088 996",
     nextImage: "next photo",
-    nextProject: "next project",
+    relatedProjects: "related projects",
     allProjects: "all projects",
     backToProjects: "back to projects",
     tellUsYourStory: "Tell us\nyour story!",
@@ -277,4 +295,4 @@ export default {
       highlighted: true,
     },
   ],
-};
+} as const;
