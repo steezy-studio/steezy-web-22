@@ -23,6 +23,11 @@ import { GET_PROJECT } from "../../graphql/GetProject";
 import { colors, device } from "../../helpers/consts";
 import { enhanceProjects } from "../../helpers/enhanceProjects";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import parse, {
+  domToReact,
+  Element,
+  HTMLReactParserOptions,
+} from "html-react-parser";
 import {
   Breadcrumbs,
   ClientQuote,
@@ -48,6 +53,7 @@ interface ProjectProps {
 
 const Project = ({ projectData, areas }: ProjectProps) => {
   const defaultArea = areas.items.find((area) => area.is_default);
+
   const { setCursorType } = useContext(HoverProvider);
   const { w } = useWindowSize();
 
@@ -149,9 +155,15 @@ const Project = ({ projectData, areas }: ProjectProps) => {
               );
             }
             if (row.__typename === "ProjectGridVimeo") {
+              const vimeoIds = row.vimeo_id.split("\r\n");
+
               return (
                 <Animation key={`${i}_row`} type={"fadeFromBottom"}>
-                  <ProjectGridVimeo vimeoId={row.vimeo_id} />
+                  <ProjectGridRow>
+                    {vimeoIds.map((id, i) => (
+                      <ProjectGridVimeo key={i} vimeoId={id} />
+                    ))}
+                  </ProjectGridRow>
                 </Animation>
               );
             }
@@ -161,7 +173,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                   <ProjectGridRow
                     className={`blockquote ${row.alignment ? "reverse" : ""}`}>
                     <ProjectGridBlockquote>
-                      <Medium>{row.blockquote_text}</Medium>
+                      <Medium>{parse(row.blockquote_text, options)}</Medium>
                     </ProjectGridBlockquote>
                   </ProjectGridRow>
                 </Animation>

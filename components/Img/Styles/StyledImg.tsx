@@ -29,11 +29,13 @@ export const StyledImg = styled(motion.div)`
       height: 100%;
       max-height: 100px;
       align-self: start;
+      width: 100%;
       ${breakpoint.tabletLandscape} {
         justify-self: end;
       }
       ${breakpoint.phone} {
         max-height: 50px;
+        width: auto;
         justify-self: start;
       }
     }
