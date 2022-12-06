@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import parse, { domToReact, Element } from "html-react-parser";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
-import { Fragment, useContext } from "react";
+import { useContext } from "react";
 import client from "../../apollo/client";
 import Animation from "../../components/Animation/Animation";
 import ClassicGrid from "../../components/ClassicGrid/ClassicGrid";
@@ -232,53 +232,55 @@ const Project = ({ projectData, areas }: ProjectProps) => {
             </ClientQuote>
           </Animation>
         )}
-        <NextProjectSection>
-          <NextProjectHead>
-            {w >= device.phone ? (
-              <Large className='related-project'>
-                {strings.globals.relatedProject}
+        {projectData.next_project.length > 0 && (
+          <NextProjectSection>
+            <NextProjectHead>
+              {w >= device.phone ? (
+                <Large className='related-project'>
+                  {strings.globals.relatedProject}
+                </Large>
+              ) : (
+                <Micro>{strings.globals.relatedProject}</Micro>
+              )}
+              <Large className='back-to-projects'>
+                <StyledLink
+                  as={"a"}
+                  href={"/projects/all-projects"}
+                  onMouseEnter={() => setCursorType("hover")}
+                  onMouseLeave={() => setCursorType("normal")}>
+                  {strings.globals.backToProjects}
+                </StyledLink>
               </Large>
-            ) : (
-              <Micro>{strings.globals.relatedProject}</Micro>
-            )}
-            <Large className='back-to-projects'>
-              <StyledLink
-                as={"a"}
-                href={"/projects/all-projects"}
-                onMouseEnter={() => setCursorType("hover")}
-                onMouseLeave={() => setCursorType("normal")}>
-                {strings.globals.backToProjects}
-              </StyledLink>
-            </Large>
-          </NextProjectHead>
-          <ClassicGrid>
-            {(w >= device.phone
-              ? projectData.next_project
-              : [projectData.next_project[0]]
-            ).map(
-              (
-                // @ts-ignore
-                { project_grid_name, landingpage_grid_image, _slug, areas }
-              ) => (
-                <GridItem
-                  type={landingpage_grid_image[0]._type}
-                  areas={areas}
-                  projectName={project_grid_name}
-                  videoThumb={landingpage_grid_image[0].cover}
-                  width={landingpage_grid_image[0].width}
-                  height={landingpage_grid_image[0].height}
-                  src={
-                    landingpage_grid_image[0]._type === "Video"
-                      ? landingpage_grid_image[0].cdn_files[0].url
-                      : landingpage_grid_image[0].url
-                  }
-                  slug={_slug}
-                  key={_slug}
-                />
-              )
-            )}
-          </ClassicGrid>
-        </NextProjectSection>
+            </NextProjectHead>
+            <ClassicGrid>
+              {(w >= device.phone
+                ? projectData.next_project
+                : [projectData.next_project[0]]
+              ).map(
+                (
+                  // @ts-ignore
+                  { project_grid_name, landingpage_grid_image, _slug, areas }
+                ) => (
+                  <GridItem
+                    type={landingpage_grid_image[0]._type}
+                    areas={areas}
+                    projectName={project_grid_name}
+                    videoThumb={landingpage_grid_image[0].cover}
+                    width={landingpage_grid_image[0].width}
+                    height={landingpage_grid_image[0].height}
+                    src={
+                      landingpage_grid_image[0]._type === "Video"
+                        ? landingpage_grid_image[0].cdn_files[0].url
+                        : landingpage_grid_image[0].url
+                    }
+                    slug={_slug}
+                    key={_slug}
+                  />
+                )
+              )}
+            </ClassicGrid>
+          </NextProjectSection>
+        )}
       </StyledProject>
     </>
   );
