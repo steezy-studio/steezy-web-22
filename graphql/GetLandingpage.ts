@@ -12,6 +12,7 @@ export const GET_LANDINGPAGE = gql`
         _id
         landingpage_projects_grid {
           offset
+          offset_amount
           _id
           grid_row {
             _slug

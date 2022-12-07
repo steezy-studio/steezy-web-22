@@ -66,13 +66,17 @@ export const LandingpageGridRow = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: ${({ theme }) => theme.pageMargin};
+  &.blockquote {
+    position: relative;
+    z-index: 1;
+  }
   ${breakpoint.phone} {
     grid-template-columns: unset;
     grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
   }
 `;
 
-export const GridItemWrapper = styled.div`
+export const GridItemWrapper = styled.div<{ offset_amount?: number }>`
   width: 100%;
   &.single {
     width: 75%;
@@ -80,7 +84,7 @@ export const GridItemWrapper = styled.div`
     justify-self: end;
   }
   &.offset:not(:last-child) {
-    margin-top: 40%;
+    margin-top: ${({ offset_amount }) => `${offset_amount}%`};
   }
   ${breakpoint.phone} {
     &.single {
@@ -99,12 +103,10 @@ export const Intro = styled.div`
   margin-left: ${({ theme }) => u(4, theme.pageMargin)};
   transform: translateY(${({ theme }) => u(2, theme.pageMargin)});
   position: relative;
-  z-index: 2;
   display: grid;
   grid-gap: 60px;
   ${breakpoint.tabletLandscape} {
     margin-left: ${({ theme }) => u(3, theme.pageMargin)};
-    /* transform: unset; */
   }
   ${breakpoint.tabletPortrait} {
     display: none;
@@ -116,4 +118,9 @@ export const Intro = styled.div`
     grid-gap: 30px;
     margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
   }
+`;
+
+export const IntroWrapper = styled.div`
+  position: relative;
+  z-index: 2;
 `;

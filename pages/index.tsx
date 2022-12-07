@@ -23,6 +23,7 @@ import { splitArray } from "../helpers/splitArray";
 import {
   GridItemWrapper,
   Intro,
+  IntroWrapper,
   LandingHeroPageLogotypes,
   LandingpageGrid,
   LandingpageGridRow,
@@ -114,21 +115,26 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
             </LandingHeroPageLogotypes>
           </LandingpageHeroClients>
         </Hero>
-        <Intro data-scroll data-scroll-speed='2'>
-          <Micro>{landingpageStrings.intro.subHeader}</Micro>
-          <div>
-            <Large as={`span`}>
-              {landingpageStrings.intro.perex.map(renderTextWithLink)}
-            </Large>
-          </div>
-        </Intro>
+        <IntroWrapper data-scroll data-scroll-speed='2'>
+          <Intro>
+            <Micro>{landingpageStrings.intro.subHeader}</Micro>
+            <div>
+              <Large as={`span`}>
+                {landingpageStrings.intro.perex.map(renderTextWithLink)}
+              </Large>
+            </div>
+          </Intro>
+        </IntroWrapper>
 
         <LandingpageGrid>
           {landingpageGridWithQuotes.map((row, i) => {
             if (row.__typename === "Quote") {
               return (
-                <LandingpageGridRow key={i} data-scroll data-scroll-speed='2'>
-                  <GridItemWrapper className='single'>
+                <LandingpageGridRow key={i} className={"blockquote"}>
+                  <GridItemWrapper
+                    className='single'
+                    data-scroll
+                    data-scroll-speed='2'>
                     <Animation
                       type={"fadeFromBottom"}
                       delay={0.2}
@@ -169,6 +175,7 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                       return (
                         <GridItemWrapper
                           key={_id}
+                          offset_amount={row.offset_amount}
                           className={`${row.offset ? "offset" : ""} ${
                             isSingle ? "single" : ""
                           }`}>

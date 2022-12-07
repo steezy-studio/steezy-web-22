@@ -179,11 +179,8 @@ export const Blockquote = styled.div`
   }
   &.landingpage {
     grid-template-columns: unset;
-    transform: translateY(${({ theme }) => u(1.5, theme.pageMargin)});
-    /* max-width: 500px; */
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
+    transform: translateY(${({ theme }) => u(2.5, theme.pageMargin)});
+    max-width: 1100px;
     ${breakpoint.tabletLandscape} {
       max-width: 700px;
     }
@@ -191,7 +188,7 @@ export const Blockquote = styled.div`
       transform: unset;
     }
     ${breakpoint.monitor} {
-      max-width: 1200px;
+      max-width: 1100px;
     }
   }
   ${breakpoint.tabletPortrait} {
