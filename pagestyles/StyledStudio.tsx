@@ -187,6 +187,9 @@ export const Blockquote = styled.div`
     ${breakpoint.tabletLandscape} {
       max-width: 700px;
     }
+    ${breakpoint.phone} {
+      transform: unset;
+    }
     ${breakpoint.monitor} {
       max-width: 1200px;
     }

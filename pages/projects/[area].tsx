@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import client, { withApolloClient } from "../../apollo/client";
 import GridItem from "../../components/GridItem/GridItem";
 import Head from "../../components/Head/Head";
@@ -55,6 +55,17 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
     (area) => area._slug === router.query.area
   );
 
+  const loadMoreButton = (
+    <Large>
+      <StyledLink
+        onClick={handleIndexInc}
+        onMouseEnter={() => setCursorType("hover")}
+        onMouseLeave={() => setCursorType("normal")}>
+        more projects
+      </StyledLink>
+    </Large>
+  );
+
   const paginatedProjects = projects.slice(0, projectsToDisplay);
 
   return (
@@ -105,25 +116,28 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
               ({ project_grid_name, _slug, grid_image, _id, areas }, i) => {
                 if (i % 2 !== 0 || w <= device.phone) {
                   return (
-                    <ProjectsGridItem key={_id + router.query.area}>
-                      <GridItem
-                        type={grid_image[0]._type}
-                        areas={areas}
-                        height={grid_image?.[0].height}
-                        projectName={project_grid_name}
-                        slug={_slug}
-                        src={
-                          grid_image[0]._type === "Video"
-                            ? grid_image[0].cdn_files?.[0].url
-                            : grid_image[0].url
-                        }
-                        width={grid_image?.[0].width}
-                      />
-                    </ProjectsGridItem>
+                    <Fragment key={_id + router.query.area}>
+                      <ProjectsGridItem>
+                        <GridItem
+                          type={grid_image[0]._type}
+                          areas={areas}
+                          height={grid_image?.[0].height}
+                          projectName={project_grid_name}
+                          slug={_slug}
+                          src={
+                            grid_image[0]._type === "Video"
+                              ? grid_image[0].cdn_files?.[0].url
+                              : grid_image[0].url
+                          }
+                          width={grid_image?.[0].width}
+                        />
+                      </ProjectsGridItem>
+                    </Fragment>
                   );
                 }
               }
             )}
+            {w <= device.phone && loadMoreButton}
           </ProjectsGridColumn>
           {w > device.phone && (
             <ProjectsGridColumn className='odd'>
@@ -150,16 +164,7 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                   }
                 }
               )}
-              {!(projectsToDisplay >= projectsCount) && (
-                <Large>
-                  <StyledLink
-                    onClick={handleIndexInc}
-                    onMouseEnter={() => setCursorType("hover")}
-                    onMouseLeave={() => setCursorType("normal")}>
-                    more projects
-                  </StyledLink>
-                </Large>
-              )}
+              {!(projectsToDisplay >= projectsCount) && loadMoreButton}
             </ProjectsGridColumn>
           )}
         </ProjectsGrid>
