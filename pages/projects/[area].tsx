@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import client, { withApolloClient } from "../../apollo/client";
 import GridItem from "../../components/GridItem/GridItem";
 import Head from "../../components/Head/Head";
@@ -51,11 +51,17 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
     setProjectsToDisplay((prev) => prev + projectsPerPage);
   };
 
+  useEffect(() => {
+    setProjectsToDisplay(projectsPerPage);
+  }, [router.asPath]);
+
+  console.log(projectsToDisplay);
+
   const activeArea = areas.items.find(
     (area) => area._slug === router.query.area
   );
 
-  const loadMoreButton = (
+  const loadMoreButton = !(projectsToDisplay >= projectsCount) && (
     <Large>
       <StyledLink
         onClick={handleIndexInc}
@@ -164,7 +170,7 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                   }
                 }
               )}
-              {!(projectsToDisplay >= projectsCount) && loadMoreButton}
+              {loadMoreButton}
             </ProjectsGridColumn>
           )}
         </ProjectsGrid>
