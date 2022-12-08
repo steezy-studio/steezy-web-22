@@ -43,6 +43,7 @@ import {
   ValuesCoverInner,
   ValuesList,
   ValuesSection,
+  DividerPhoto,
 } from "../pagestyles/StyledStudio";
 
 interface StudioProps {
@@ -61,7 +62,7 @@ const Studio = ({ areas }: StudioProps) => {
       <Head
         pageName={studioStrings.head.pageName}
         ogDescription={studioStrings.hero.subHeader}
-        ogImageSrc={`/images/studio-hero.jpg`}
+        ogImageSrc={`/images/studio/studio_1.jpg`}
         ogTitle={studioStrings.hero.header.rest}
       />
       <Navbar areas={areas?.items} />
@@ -71,7 +72,7 @@ const Studio = ({ areas }: StudioProps) => {
           header={() => studioStrings.hero.header.rest}
           perex={studioStrings.hero.subHeader}
           asset={{
-            url: `/images/studio-hero.jpg`,
+            url: `/images/studio/studio_1.jpg`,
             _type: `Image`,
             width: 1920,
             height: 1211,
@@ -89,6 +90,18 @@ const Studio = ({ areas }: StudioProps) => {
               <Small>{studioStrings.intro.paragraph}</Small>
             </TextBlockBody>
           </TextBlock>
+        </Animation>
+
+        <Animation type='fadeFromBottom'>
+          <DividerPhoto>
+            <Img
+              src={"/images/studio/studio_2.jpg"}
+              layout={w <= device.phone ? `fill` : `responsive`}
+              width={2450}
+              height={1300}
+              objectFit={"cover"}
+            />
+          </DividerPhoto>
         </Animation>
 
         <ValuesSection id='values-section'>
@@ -118,7 +131,14 @@ const Studio = ({ areas }: StudioProps) => {
                 Number(theme.navbarHeight.split("px")[0]))
             }px,0%`}>
             <ValuesCoverInner>
-              <Video src={"/videos/loop_studio.mp4"} />
+              {/* <Video src={"/videos/loop_studio.mp4"} /> */}
+              <Img
+                src={"/images/studio/studio_3.jpg"}
+                layout={"intrinsic"}
+                width={1126}
+                height={1437}
+                objectFit={"cover"}
+              />
             </ValuesCoverInner>
           </ValuesCover>
         </ValuesSection>
@@ -128,7 +148,7 @@ const Studio = ({ areas }: StudioProps) => {
               layout: "responsive",
               width: 1200,
               height: 950,
-              src: `/images/${img.src}`,
+              src: `/images/studio/${img.src}`,
               id: String(i),
             }))}
           />
@@ -164,9 +184,9 @@ const Studio = ({ areas }: StudioProps) => {
         <BlockquoteSection>
           <Blockquote className='_1'>
             <Img
-              src={"/images/blockquote-01.jpg"}
+              src={"/images/studio/studio_4.jpg"}
               width={1200}
-              height={1200}
+              height={1510}
               layout={"intrinsic"}
             />
 
@@ -196,9 +216,10 @@ const Studio = ({ areas }: StudioProps) => {
             </Quote>
 
             <Img
-              src={"/images/blockquote-02.jpg"}
+              src={"/images/studio/studio_5.jpg"}
               width={1200}
               height={1200}
+              objectFit={"cover"}
               layout={"intrinsic"}
             />
           </Blockquote>
@@ -242,7 +263,7 @@ const Studio = ({ areas }: StudioProps) => {
           </Blockquote>
 
           <Img
-            src={`/images/blockquote-03.jpg`}
+            src={`/images/studio/studio_6.jpg`}
             width={2450}
             height={1300}
             objectFit={"cover"}

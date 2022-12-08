@@ -48,6 +48,13 @@ export const TextBlockBody = styled.div`
     max-width: 500px;
   }
 `;
+
+export const DividerPhoto = styled.div`
+  ${breakpoint.phone} {
+    display: none;
+  }
+`;
+
 export const ValuesSection = styled.section`
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -179,7 +186,7 @@ export const Blockquote = styled.div`
   }
   &.landingpage {
     grid-template-columns: unset;
-    transform: translateY(${({ theme }) => u(2.5, theme.pageMargin)});
+    transform: translateY(${({ theme }) => u(1.5, theme.pageMargin)});
     max-width: 1100px;
     ${breakpoint.tabletLandscape} {
       max-width: 700px;

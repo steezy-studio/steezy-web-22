@@ -134,7 +134,7 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                   <GridItemWrapper
                     className='single'
                     data-scroll
-                    data-scroll-speed='2'>
+                    data-scroll-speed='1'>
                     <Animation
                       type={"fadeFromBottom"}
                       delay={0.2}

@@ -58,28 +58,43 @@ export default {
     },
     slider: [
       {
-        src: "slider-01.jpg",
+        src: "studio_G1.jpg",
       },
       {
-        src: "slider-02.jpg",
+        src: "studio_G2.jpg",
       },
       {
-        src: "slider-03.jpg",
+        src: "studio_G3.jpg",
       },
       {
-        src: "slider-04.jpg",
+        src: "studio_G4.jpg",
       },
       {
-        src: "slider-05.jpg",
+        src: "studio_G5.jpg",
       },
       {
-        src: "slider-06.jpg",
+        src: "studio_G6.jpg",
       },
       {
-        src: "slider-07.jpg",
+        src: "studio_G7.jpg",
       },
       {
-        src: "slider-08.jpg",
+        src: "studio_G8.jpg",
+      },
+      {
+        src: "studio_G9.jpg",
+      },
+      {
+        src: "studio_G10.jpg",
+      },
+      {
+        src: "studio_G11.jpg",
+      },
+      {
+        src: "studio_G12.jpg",
+      },
+      {
+        src: "studio_G13.jpg",
       },
     ],
     brands: {
