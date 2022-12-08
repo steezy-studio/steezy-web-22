@@ -103,12 +103,4 @@ export const StyledImg = styled(motion.div)`
       padding-bottom: 100%;
     }
   }
-  ${ValuesCoverInner} & {
-    max-height: ${({ theme }) =>
-      `calc(100vh - (4 * ${theme.pageMargin}) - (2 * ${theme.navbarHeight}))`};
-    overflow: hidden;
-    ${breakpoint.phone} {
-      max-height: unset;
-    }
-  }
 `;

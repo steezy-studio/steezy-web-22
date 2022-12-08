@@ -147,8 +147,8 @@ const Studio = ({ areas }: StudioProps) => {
             imgList={strings.studioPage.slider.map((img, i) => ({
               layout: "responsive",
               priority: true,
-              width: 1200,
-              height: 950,
+              width: 689,
+              height: 800,
               src: `/images/studio/${img.src}`,
               id: String(i),
             }))}

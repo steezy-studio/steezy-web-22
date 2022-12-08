@@ -103,7 +103,17 @@ export const ValuesCover = styled.div`
   }
 `;
 
-export const ValuesCoverInner = styled.div``;
+export const ValuesCoverInner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: ${({ theme }) =>
+    `calc(100vh - (4 * ${theme.pageMargin}) - (2 * ${theme.navbarHeight}))`};
+  overflow: hidden;
+  ${breakpoint.phone} {
+    max-height: unset;
+  }
+`;
 
 export const ValuesList = styled.div`
   display: grid;
