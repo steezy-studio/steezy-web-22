@@ -48,14 +48,6 @@ const ImageSlider = ({ imgList }: ImageSliderProps, ref) => {
   const touchEnd = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    async function fetchImages() {
-      const imgQueue = imgList.map((src) => loadImage(src.src as string));
-      return await Promise.all(imgQueue);
-    }
-    fetchImages();
-  }, []);
-
-  useEffect(() => {
     const slidesPerView = w <= device.phone ? 1.2 : 2.2;
     itemWidth.current = sliderRef.current.clientWidth / slidesPerView;
     sliderRef.current.style.gridAutoColumns = `${itemWidth.current}px`;

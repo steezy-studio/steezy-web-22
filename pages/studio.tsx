@@ -146,6 +146,7 @@ const Studio = ({ areas }: StudioProps) => {
           <ImageSlider
             imgList={strings.studioPage.slider.map((img, i) => ({
               layout: "responsive",
+              priority: true,
               width: 1200,
               height: 950,
               src: `/images/studio/${img.src}`,
