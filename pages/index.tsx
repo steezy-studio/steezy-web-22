@@ -21,13 +21,13 @@ import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
 import { splitArray } from "../helpers/splitArray";
 import {
   GridItemWrapper,
+  HeroFooter,
   Intro,
   IntroWrapper,
   LandingHeroPageLogotypes,
   LandingPageHeroLogotype,
   LandingpageGrid,
   LandingpageGridRow,
-  LandingpageHeroClients,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
 import { Blockquote, Quote } from "../pagestyles/StyledStudio";
@@ -64,7 +64,8 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
             as={"a"}
             href={href}
             onMouseEnter={() => setCursorType("hover")}
-            onMouseLeave={() => setCursorType("normal")}>
+            onMouseLeave={() => setCursorType("normal")}
+          >
             {body}
           </StyledLink>
           <br />
@@ -84,36 +85,25 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
       />
       <Navbar areas={areas.items} header={landingpageStrings.navbar.header} />
       <StyledIndex>
-        <Hero
-          asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }}
-          header={(openDialog, setOpenDialog) => (
-            <>
-              <StyledLink
-                as={`span`}
-                onMouseEnter={() => setCursorType("hover")}
-                onMouseLeave={() => setCursorType("normal")}
-                onClick={() => setOpenDialog(!openDialog)}>
-                {landingpageStrings.hero.header.cta}
-              </StyledLink>
-              {landingpageStrings.hero.header.rest}
-            </>
-          )}
-          perex={landingpageStrings.hero.subHeader}>
-          <LandingpageHeroClients>
-            <Micro>{landingpageStrings.hero.clients.header}</Micro>
-            <LandingHeroPageLogotypes>
-              {landingpageStrings.hero.clients.logotypes.map(
-                ({ src, alt }, i) => (
-                  <LandingPageHeroLogotype
-                    key={i}
-                    src={`/icons/${src}`}
-                    alt={alt}
-                  />
-                )
-              )}
-            </LandingHeroPageLogotypes>
-          </LandingpageHeroClients>
-        </Hero>
+        <Hero asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }} />
+        <HeroFooter>
+          <Micro>
+            We work for world-known brands while sharing our knowledge and
+            passion with local start-ups and cultural pioneers.
+          </Micro>
+          <LandingHeroPageLogotypes>
+            {landingpageStrings.hero.clients.logotypes.map(
+              ({ src, alt }, i) => (
+                <LandingPageHeroLogotype
+                  key={i}
+                  src={`/icons/${src}`}
+                  alt={alt}
+                />
+              )
+            )}
+          </LandingHeroPageLogotypes>
+        </HeroFooter>
+
         <IntroWrapper data-scroll data-scroll-speed='2'>
           <Intro>
             <Micro>{landingpageStrings.intro.subHeader}</Micro>
@@ -133,11 +123,13 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                   <GridItemWrapper
                     className='single'
                     data-scroll
-                    data-scroll-speed='1'>
+                    data-scroll-speed='1'
+                  >
                     <Animation
                       type={"fadeFromBottom"}
                       delay={0.2}
-                      duration={1.2}>
+                      duration={1.2}
+                    >
                       <motion.div>
                         <Blockquote className='landingpage'>
                           <Quote className=''>
@@ -177,7 +169,8 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                           offset_amount={row.offset_amount}
                           className={`${row.offset ? "offset" : ""} ${
                             isSingle ? "single" : ""
-                          }`}>
+                          }`}
+                        >
                           <GridItem
                             type={landingpage_grid_image[0]._type}
                             areas={areas}
@@ -208,7 +201,8 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                 as={"a"}
                 href={`/projects/all-projects`}
                 onMouseEnter={() => setCursorType("hover")}
-                onMouseLeave={() => setCursorType("normal")}>
+                onMouseLeave={() => setCursorType("normal")}
+              >
                 {strings.globals.allProjects}
               </StyledLink>
             </Large>

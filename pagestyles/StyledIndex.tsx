@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
 import u from "../helpers/unit";
+import { spaces } from "../helpers/spaces";
 
 export const StyledIndex = styled.div``;
 
@@ -30,24 +31,12 @@ export const LandingPageHeroLogotype = styled.img`
   }
 `;
 
-export const LandingpageHeroClients = styled.div`
-  display: grid;
-  width: 100%;
-  grid-row-gap: 40px;
-  justify-content: end;
-  ${breakpoint.smallNotebook} {
-    grid-row-gap: 30px;
-  }
-  ${breakpoint.tabletLandscape} {
-    grid-row-gap: 10px;
-    justify-content: end;
-  }
-  ${breakpoint.tabletPortrait} {
-    justify-content: start;
-  }
-  ${breakpoint.phone} {
-    justify-content: start;
-  }
+export const HeroFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: ${spaces.xl}px;
+  margin-top: ${spaces.l}px;
 `;
 
 export const LandingpageGrid = styled.div`

@@ -5,7 +5,6 @@ import { useLocomotiveScroll } from "react-locomotive-scroll";
 import strings from "../../data/strings";
 import { Area } from "../../generated/types";
 import Fixed from "../Fixed/Fixed";
-import { HeroSocials } from "../Hero/Styles/StyledHero";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
 import { StyledImg } from "../Img/Styles/StyledImg";
@@ -114,10 +113,9 @@ const Navbar = ({ areas, header }: NavbarProps) => {
                       {strings.globals.tellUsYourStory}
                     </Micro>
                   </ContactUs>
-                  <HeroSocials>
-                    <Instagram />
-                    <Vimeo />
-                  </HeroSocials>
+
+                  <Instagram />
+                  <Vimeo />
                 </PhoneDecoration>
               </NavLinks>
             )}

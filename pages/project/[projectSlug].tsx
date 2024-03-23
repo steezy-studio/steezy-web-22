@@ -63,58 +63,28 @@ const Project = ({ projectData, areas }: ProjectProps) => {
       />
       <Navbar areas={areas.items} />
       <StyledProject>
-        <Hero
-          asset={projectData.hero_image[0]}
-          header={() => projectData.project_detail_name}
-          subHeader={
-            w > device.phone ? (
-              <Breadcrumbs>
-                <Micro>
-                  <Link href={`/projects/${defaultArea._slug}`}>
-                    {defaultArea.area_name}
-                  </Link>
-                </Micro>
-                <div
-                  style={{
-                    height: 1,
-                    width: 20,
-                    backgroundColor: colors.black,
-                    display: "inline-block",
-                  }}
-                />
-                <Micro>{projectData.company_name}</Micro>
-              </Breadcrumbs>
-            ) : (
-              <StyledImg
-                className='client-logo'
-                as={"img"}
-                src={projectData.client_logo[0].url}
-              />
-            )
-          }
-        >
-          <ProjectHeroFooter>
-            <ProjectHeroRoles>
-              {projectData.project_facts?.map((fact, i) => {
-                if (fact.__typename === "ProjectFacts") {
-                  return (
-                    <ProjectHeroRole key={i}>
-                      <Micro>{fact.header}</Micro>
-                      <Micro className='lowcase'>{fact.content}</Micro>
-                    </ProjectHeroRole>
-                  );
-                }
-              })}
-            </ProjectHeroRoles>
-            {w > device.phone && (
-              <StyledImg
-                className='client-logo'
-                as={"img"}
-                src={projectData.client_logo[0].url}
-              />
-            )}
-          </ProjectHeroFooter>
-        </Hero>
+        <Hero asset={projectData.hero_image[0]} />
+        <ProjectHeroFooter>
+          <ProjectHeroRoles>
+            {projectData.project_facts?.map((fact, i) => {
+              if (fact.__typename === "ProjectFacts") {
+                return (
+                  <ProjectHeroRole key={i}>
+                    <Micro>{fact.header}</Micro>
+                    <Micro className='lowcase'>{fact.content}</Micro>
+                  </ProjectHeroRole>
+                );
+              }
+            })}
+          </ProjectHeroRoles>
+          {w > device.phone && (
+            <StyledImg
+              className='client-logo'
+              as={"img"}
+              src={projectData.client_logo[0].url}
+            />
+          )}
+        </ProjectHeroFooter>
         <ProjectDescription>
           <Medium>{projectData.project_description}</Medium>
         </ProjectDescription>

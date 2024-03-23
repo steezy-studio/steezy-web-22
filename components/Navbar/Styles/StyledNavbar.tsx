@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import styled, { css } from "styled-components";
 import { breakpoint, colors } from "../../../helpers/consts";
+import { spaces } from "../../../helpers/spaces";
 
 export const StyledNavbar = styled.nav<{ hasSmoothScroll: boolean }>`
   position: fixed;
   pointer-events: none;
   z-index: 99999;
-  top: ${({ theme }) => `calc(-100vh + ${theme.pageMargin})`};
+  top: calc(-100vh + ${spaces.m}px);
   right: 0;
   left: 0;
   height: ${({ theme }) => theme.navbarHeight};

@@ -8,6 +8,7 @@ import { ProjectsHeroFilters } from "../../pagestyles/StyledProjects";
 import { Quote } from "../../pagestyles/StyledStudio";
 import { HeroText } from "../Hero/Styles/StyledHero";
 import { StyledImageSlider } from "../ImageSlider/Styles/StyledImageSlider";
+import { addColorClasses } from "../../helpers/colorClasses";
 
 export const Large = styled.h1`
   font-family: "migra-italic", Arial, Helvetica, sans-serif;
@@ -17,8 +18,16 @@ export const Large = styled.h1`
   font-weight: 400;
   color: ${colors.black};
   position: relative;
+  &.underline {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  &.big {
+    font-size: 100px;
+  }
   ${breakpoint.largeNotebook} {
-    font-size: 90px;
+    font-size: 80px;
   }
   ${breakpoint.smallNotebook} {
     font-size: 60px;
@@ -119,4 +128,5 @@ export const Large = styled.h1`
       margin-bottom: ${({ theme }) => u(1, theme.pageMargin)};
     }
   }
+  ${addColorClasses()}
 `;

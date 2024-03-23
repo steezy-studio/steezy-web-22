@@ -7,7 +7,7 @@ export const StyledBurger = styled.div`
   align-items: center;
   justify-content: center;
   border: 2px solid ${colors.black};
-  border-radius: 15px;
+  border-radius: ${({ theme }) => theme.bRad};
   width: ${({ theme }) => theme.navbarHeight};
   height: 100%;
   flex-shrink: 0;

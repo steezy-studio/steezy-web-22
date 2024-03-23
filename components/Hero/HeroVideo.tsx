@@ -6,12 +6,9 @@ import {
 } from "../../hooks/useIntersectionObserver";
 import { HoverProvider } from "../../pages/_app";
 import Dialog from "../Dialog/Dialog";
-import {
-  Loop,
-  PlayButton,
-  Showreel,
-  StyledHeroVideo,
-} from "./Styles/StyledHeroVideo";
+import { Loop, Showreel, StyledHeroVideo } from "./Styles/StyledHeroVideo";
+import { Large } from "../Typo/Large";
+import { PlayButton } from "./Styles/StyledHero";
 
 interface VideoProps {
   src: string;
@@ -39,8 +36,12 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
         trigger={
           <StyledHeroVideo
             onMouseEnter={() => setCursorType("hover")}
-            onMouseLeave={() => setCursorType("normal")}>
-            <PlayButton />
+            onMouseLeave={() => setCursorType("normal")}
+          >
+            <PlayButton>
+              <Large className='underline big white'>play video</Large>
+            </PlayButton>
+            {/* <PlayButton /> */}
             <Loop
               whileHover={{ scale: 1.15 }}
               transition={{ duration: 0.3 }}

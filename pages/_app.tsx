@@ -3,19 +3,13 @@ import React, { MutableRefObject, useRef, useState } from "react";
 import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 import { ThemeProvider } from "styled-components";
 import Cursor, { CursorTypes } from "../components/Cursor/Cursor";
-import Fixed from "../components/Fixed/Fixed";
 import Footer from "../components/Footer/Footer";
-import { HeroSocials } from "../components/Hero/Styles/StyledHero";
-import Instagram from "../components/Icons/Instagram";
-import Vimeo from "../components/Icons/Vimeo";
 import Layout from "../components/Layout/Layout";
+import "../css/fonts.css";
 import { device, theme } from "../helpers/consts";
+import { useGA } from "../hooks/useGA";
 import { useWindowSize } from "../hooks/useWindowSize";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
-import "../css/fonts.css";
-import { useGA } from "../hooks/useGA";
-import CookiesConsent from "../components/CookiesConsent/CookiesConsent";
-import NoSSR from "../components/NoSSR/NoSSR";
 
 export const HoverProvider = React.createContext<{
   setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,7 +40,8 @@ function MyApp({ Component, pageProps }) {
           smartphone: { smooth: false },
         }}
         watch={[asPath, w]}
-        containerRef={containerRef}>
+        containerRef={containerRef}
+      >
         <main data-scroll-container ref={containerRef}>
           <Cursor
             isCursorDisabled={isCursorDisabled}
@@ -59,17 +54,12 @@ function MyApp({ Component, pageProps }) {
               setCursorType,
               cursorType,
               cursorRef,
-            }}>
+            }}
+          >
             {/* <NoSSR>
               <CookiesConsent />
             </NoSSR> */}
             <Layout>
-              <Fixed id={"fixed-socials"}>
-                <HeroSocials>
-                  <Instagram />
-                  <Vimeo />
-                </HeroSocials>
-              </Fixed>
               <Component {...pageProps} />
               <Footer />
             </Layout>

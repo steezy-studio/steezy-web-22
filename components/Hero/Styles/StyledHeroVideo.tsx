@@ -5,7 +5,8 @@ import { breakpoint, colors } from "../../../helpers/consts";
 export const StyledHeroVideo = styled.div<{ ratio?: number }>`
   position: relative;
   overflow: hidden;
-  aspect-ratio: 16/9;
+  aspect-ratio: 2;
+  border-radius: ${({ theme }) => theme.bRad};
   ${breakpoint.phone} {
     aspect-ratio: unset;
     padding-bottom: ${(5 / 4) * 100}%;
@@ -15,10 +16,8 @@ export const StyledHeroVideo = styled.div<{ ratio?: number }>`
 export const Loop = styled(motion.video)`
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  /* cursor: pointer; */
+  object-fit: cover;
   ${breakpoint.phone} {
-    object-fit: cover;
     position: absolute;
     top: 0;
     left: 0;
@@ -34,33 +33,5 @@ export const Showreel = styled.div`
   max-height: 80vh;
   ${breakpoint.phone} {
     width: ${({ theme }) => `calc(100vw - ${theme.pageMargin} * 2)`};
-  }
-`;
-
-export const PlayButton = styled(motion.div)`
-  position: absolute;
-  z-index: 1;
-  width: ${({ theme }) => theme.navbarHeight};
-  height: ${({ theme }) => theme.navbarHeight};
-  /* cursor: pointer; */
-  right: 0;
-  bottom: 0;
-  background-color: ${colors.white};
-  padding: 15px;
-  &:hover {
-    background-color: ${colors.primary400};
-  }
-  &:after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-position: center;
-    background-size: 25%;
-    background-repeat: no-repeat;
-    background-image: url("/icons/play-button.svg");
-  }
-  ${breakpoint.largeNotebook} {
-    padding: 0px;
   }
 `;

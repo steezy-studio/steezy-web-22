@@ -231,7 +231,7 @@ export default {
     },
     hero: {
       subHeader:
-        "Steezy is a creative studio focused on a comprehensive solutionS for visual communication.",
+        "We work for world-known brands while sharing our knowledge and passion with local start-ups and cultural pioneers.",
       header: { cta: "We show", rest: "\nthe\u00a0world how\ngreat you are" },
       clients: {
         header: "PROUDLY DESIGNING FOR",
