@@ -1,4 +1,5 @@
 import parse, {
+  DOMNode,
   domToReact,
   Element,
   HTMLReactParserOptions,
@@ -67,7 +68,7 @@ const GridItem = ({
         if (domNode.name === `p`) {
           return (
             <StyledLink as={`div`} className={hover ? `hover` : ``}>
-              {domToReact(domNode.children, options)}
+              {domToReact((domNode as Element).children as DOMNode[], options)}
             </StyledLink>
           );
         }
@@ -86,7 +87,8 @@ const GridItem = ({
         onMouseLeave={() => {
           sethover(false);
           setCursorType("normal");
-        }}>
+        }}
+      >
         <GridItemCoverWrapper>
           {type === "Photo" && (
             <Img

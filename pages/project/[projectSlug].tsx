@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import parse, { domToReact, Element } from "html-react-parser";
+import parse, { DOMNode, domToReact, Element } from "html-react-parser";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import { useContext } from "react";
 import client from "../../apollo/client";
@@ -91,7 +91,8 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                 src={projectData.client_logo[0].url}
               />
             )
-          }>
+          }
+        >
           <ProjectHeroFooter>
             <ProjectHeroRoles>
               {projectData.project_facts?.map((fact, i) => {
@@ -167,7 +168,8 @@ const Project = ({ projectData, areas }: ProjectProps) => {
               return (
                 <Animation key={`${i}_row`} type='fadeFromBottom'>
                   <ProjectGridRow
-                    className={`blockquote ${row.alignment ? "reverse" : ""}`}>
+                    className={`blockquote ${row.alignment ? "reverse" : ""}`}
+                  >
                     <ProjectGridBlockquote>
                       <Medium>
                         {parse(row.blockquote_text, {
@@ -179,10 +181,11 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                                     as={"a"}
                                     href={domNode.attribs.href}
                                     onMouseEnter={() => setCursorType("hover")}
-                                    onMouseLeave={() =>
-                                      setCursorType("normal")
-                                    }>
-                                    {domToReact(domNode.children)}
+                                    onMouseLeave={() => setCursorType("normal")}
+                                  >
+                                    {domToReact(
+                                      (domNode as Element).children as DOMNode[]
+                                    )}
                                   </StyledLink>
                                 );
                               }
@@ -247,7 +250,8 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                   as={"a"}
                   href={"/projects/all-projects"}
                   onMouseEnter={() => setCursorType("hover")}
-                  onMouseLeave={() => setCursorType("normal")}>
+                  onMouseLeave={() => setCursorType("normal")}
+                >
                   {strings.globals.backToProjects}
                 </StyledLink>
               </Large>
