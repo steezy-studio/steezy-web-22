@@ -15,13 +15,16 @@ const Burger = ({ onClick, isOpen }: BurgerProps) => {
   return (
     <StyledBurger
       onClick={onClick}
+      className={isOpen ? "open" : ""}
       onMouseEnter={() => setCursorType("hover")}
-      onMouseLeave={() => setCursorType("normal")}>
+      onMouseLeave={() => setCursorType("normal")}
+    >
       <BurgerSvg
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 45 45'
         width={45}
-        height={45}>
+        height={45}
+      >
         <Line
           animate={isOpen ? "open" : "closed"}
           initial={false}

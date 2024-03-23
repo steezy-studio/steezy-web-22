@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
   {
     width:100%;
     height:100%;
-      background-color:${colors.primary300};
+    background-color:${colors.white};
   }
   body {
       padding: ${({ theme }) => theme.pageMargin} !important;
@@ -27,9 +27,6 @@ export const GlobalStyle = createGlobalStyle`
     &:visited {
       color: inherit;
     }
-  }
-  body {
-    background-color: ${colors.primary300}; // important flag for Radix dialog
   }
   html.has-scroll-smooth {
   position: fixed;

@@ -6,14 +6,12 @@ export const StyledBurger = styled.div`
   pointer-events: all;
   align-items: center;
   justify-content: center;
-  background-color: ${colors.black};
-  position: absolute;
-  right: 0;
-  /* cursor: pointer; */
-  /* width: 80px; */
+  border: 2px solid ${colors.black};
+  border-radius: 15px;
   width: ${({ theme }) => theme.navbarHeight};
   height: 100%;
   flex-shrink: 0;
+  position: relative;
   z-index: 9999999;
   padding: 15px;
   svg {
@@ -21,25 +19,27 @@ export const StyledBurger = styled.div`
     height: auto;
   }
   line {
-    stroke: ${colors.white};
+    stroke: ${colors.black};
   }
   &:hover {
-    background-color: ${colors.primary400};
+    background-color: ${colors.black};
     line {
-      stroke: ${colors.black};
+      stroke: ${colors.white};
     }
   }
-  ${breakpoint.largeNotebook} {
-    /* width: 70px; */
-  }
-  ${breakpoint.smallNotebook} {
-    /* width: 60px; */
-  }
-  ${breakpoint.tabletLandscape} {
-    /* width: 50px; */
+  &.open {
+    background-color: ${colors.black};
+    line {
+      stroke: ${colors.white};
+    }
+    &:hover {
+      background-color: ${colors.white};
+      line {
+        stroke: ${colors.black};
+      }
+    }
   }
   ${breakpoint.phone} {
-    /* width: 40px; */
     padding: 5px;
   }
 `;

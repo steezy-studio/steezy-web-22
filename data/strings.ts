@@ -16,6 +16,7 @@ export default {
   },
   studioPage: {
     head: { pageName: "Studio" },
+    navbar: { header: "We are STEEZY STUDIO" },
     hero: {
       subHeader:
         "Everything that looks beautiful, simple and intuitive on the outside requires a sh*t lot of time and effort, which cannot be seen at first glance.",
@@ -224,6 +225,10 @@ export default {
   },
   landingPage: {
     head: {},
+    navbar: {
+      header:
+        "WE’RE CREATIVE HOUSE BUILDING STRONG visual identities and communication strategies behind inspiring BRANDS",
+    },
     hero: {
       subHeader:
         "Steezy is a creative studio focused on a comprehensive solutionS for visual communication.",
@@ -299,12 +304,14 @@ export default {
     {
       name: "studio",
       link: "/studio",
-      highlighted: true,
     },
     {
-      name: "contact",
+      name: "steezy apparel",
+      link: "/apparel",
+    },
+    {
+      name: "get in touch",
       link: "/contact",
-      highlighted: true,
     },
   ],
 } as const;

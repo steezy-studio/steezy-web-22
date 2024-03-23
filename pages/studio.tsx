@@ -65,7 +65,7 @@ const Studio = ({ areas }: StudioProps) => {
         ogImageSrc={`/images/studio/studio_1.jpg`}
         ogTitle={studioStrings.hero.header.rest}
       />
-      <Navbar areas={areas?.items} />
+      <Navbar areas={areas?.items} header={studioStrings.navbar.header} />
 
       <StyledStudio>
         <Hero

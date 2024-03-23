@@ -4,14 +4,14 @@ export const colors = {
   primary300: "#f5ede5",
   primary400: "#F8D269",
   black: "#000000",
-  gray400: "#b8afa6",
+  gray400: "#888",
   gray500: "#333",
   white: "#FFFFFF",
 } as const;
 
 export type ColorKeys = keyof typeof colors;
 export type ColorKeysArray = ColorKeys[];
-export type ColorValues = typeof colors[ColorKeys];
+export type ColorValues = (typeof colors)[ColorKeys];
 
 export const allProjects = {
   _slug: "all-projects",

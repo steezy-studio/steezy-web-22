@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import styled, { css } from "styled-components";
 import { breakpoint, colors } from "../../../helpers/consts";
-import u from "../../../helpers/unit";
 
 export const StyledNavbar = styled.nav<{ hasSmoothScroll: boolean }>`
   position: fixed;
@@ -12,6 +11,8 @@ export const StyledNavbar = styled.nav<{ hasSmoothScroll: boolean }>`
   left: 0;
   height: ${({ theme }) => theme.navbarHeight};
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   ${({ hasSmoothScroll }) =>
     !hasSmoothScroll &&
     css`
@@ -27,20 +28,11 @@ export const StyledNavbar = styled.nav<{ hasSmoothScroll: boolean }>`
 `;
 
 export const NavLinks = styled(motion.div)<{ $hasSmoothScroll: boolean }>`
-  background-color: ${colors.black};
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding-right: ${({ theme }) => u(1, theme.pageMargin)};
-  ${breakpoint.largeNotebook} {
-    padding-right: 0;
-    justify-content: center;
-  }
-  ${breakpoint.helperLargeNotebook} {
-    padding-right: ${({ theme }) => u(1, theme.pageMargin)};
-    justify-content: flex-end;
-  }
   ${breakpoint.tabletLandscape} {
     padding: ${({ theme }) => theme.pageMargin};
     position: fixed;
@@ -85,4 +77,63 @@ export const ContactUs = styled.a`
   grid-auto-flow: column;
   align-items: center;
   column-gap: 10px;
+`;
+
+export const NavHeader = styled(motion.div)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  span {
+    display: block;
+    max-width: 500px;
+    text-align: center;
+  }
+`;
+
+export const LinksBlock = styled(motion.div)`
+  border-radius: 999px;
+  height: 100%;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 2px solid ${colors.black};
+  background-color: ${colors.white};
+  flex-shrink: 0;
+  &.stretch {
+    flex-shrink: 1;
+    width: 100%;
+  }
+`;
+
+export const linksBlockVariants = {
+  initial: {
+    y: "-100%",
+    transition: {
+      duration: 0.3,
+      when: "afterChildren",
+    },
+  },
+  animate: {
+    y: "0%",
+    transition: {
+      duration: 0.3,
+      when: "beforeChildren",
+    },
+  },
+  exit: {
+    y: "-100%",
+    transition: {
+      duration: 0.3,
+      when: "afterChildren",
+    },
+  },
+};
+
+export const NavlinksMask = styled.div`
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 `;

@@ -8,7 +8,7 @@ export const StyledLogo = styled.div`
 
   height: 100%;
   svg {
-    /* width: auto; */
+    width: auto;
     height: 100%;
   }
 `;

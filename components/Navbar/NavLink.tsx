@@ -3,23 +3,27 @@ import { HoverProvider } from "../../pages/_app";
 import { StyledNavLink } from "./Styles/StyledNavLink";
 
 interface NavLinkProps {
-  highlighted: boolean;
   href: string;
   children: string;
   active: boolean;
+  delay?: number;
 }
 
-const NavLink = ({ highlighted, href, children, active }: NavLinkProps) => {
+const NavLink = ({ href, children, active, delay = 0 }: NavLinkProps) => {
   const { setCursorType } = useContext(HoverProvider);
   return (
     <StyledNavLink
       onMouseEnter={() => setCursorType("hover")}
       onMouseLeave={() => setCursorType("normal")}
-      variants={{ open: { opacity: 1 }, close: { opacity: 0 } }}
-      className={`${highlighted ? `highlighted` : `supressed`} ${
-        active ? `active` : ``
-      }`}
-      href={href}>
+      variants={{
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        exit: { opacity: 0 },
+      }}
+      transition={{ delay: delay }}
+      className={`${active ? `active` : ``}`}
+      href={href}
+    >
       {children}
     </StyledNavLink>
   );

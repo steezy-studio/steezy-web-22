@@ -13,17 +13,11 @@ export const StyledNavLink = styled(motion.a)`
   }
   &,
   &:visited {
-    color: ${colors.gray400};
+    color: ${colors.black};
   }
   &.active {
     & {
       color: ${colors.primary400} !important;
-    }
-  }
-  &.highlighted {
-    &,
-    &:visited {
-      color: ${colors.white};
     }
   }
   ${breakpoint.largeNotebook} {
@@ -65,15 +59,6 @@ export const StyledNavLink = styled(motion.a)`
     &,
     &:visited {
       color: ${colors.gray400};
-    }
-    &.supressed {
-      display: none;
-    }
-    &.highlighted {
-      &,
-      &:visited {
-        color: ${colors.black};
-      }
     }
   }
   ${breakpoint.phone} {

@@ -17,7 +17,6 @@ import {
   Query,
 } from "../generated/types";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
-import { allProjects } from "../helpers/consts";
 import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
 import { splitArray } from "../helpers/splitArray";
 import {
@@ -25,10 +24,10 @@ import {
   Intro,
   IntroWrapper,
   LandingHeroPageLogotypes,
+  LandingPageHeroLogotype,
   LandingpageGrid,
   LandingpageGridRow,
   LandingpageHeroClients,
-  LandingPageHeroLogotype,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
 import { Blockquote, Quote } from "../pagestyles/StyledStudio";
@@ -83,7 +82,7 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
         pageName={"STEEZY Studio"}
         ogTitle={"STEEZY Studio"}
       />
-      <Navbar areas={areas.items} />
+      <Navbar areas={areas.items} header={landingpageStrings.navbar.header} />
       <StyledIndex>
         <Hero
           asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }}
