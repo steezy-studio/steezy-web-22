@@ -22,6 +22,7 @@ import { splitArray } from "../helpers/splitArray";
 import {
   GridItemWrapper,
   HeroFooter,
+  IndexHeroSection,
   Intro,
   IntroWrapper,
   LandingHeroPageLogotypes,
@@ -85,24 +86,26 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
       />
       <Navbar areas={areas.items} header={landingpageStrings.navbar.header} />
       <StyledIndex>
-        <Hero asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }} />
-        <HeroFooter>
-          <Micro>
-            We work for world-known brands while sharing our knowledge and
-            passion with local start-ups and cultural pioneers.
-          </Micro>
-          <LandingHeroPageLogotypes>
-            {landingpageStrings.hero.clients.logotypes.map(
-              ({ src, alt }, i) => (
-                <LandingPageHeroLogotype
-                  key={i}
-                  src={`/icons/${src}`}
-                  alt={alt}
-                />
-              )
-            )}
-          </LandingHeroPageLogotypes>
-        </HeroFooter>
+        <IndexHeroSection>
+          <Hero asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }} />
+          <HeroFooter>
+            <Micro as='h1'>
+              We work for world-known brands while sharing our knowledge and
+              passion with local start-ups and cultural pioneers.
+            </Micro>
+            <LandingHeroPageLogotypes>
+              {landingpageStrings.hero.clients.logotypes.map(
+                ({ src, alt }, i) => (
+                  <LandingPageHeroLogotype
+                    key={i}
+                    src={`/icons/${src}`}
+                    alt={alt}
+                  />
+                )
+              )}
+            </LandingHeroPageLogotypes>
+          </HeroFooter>
+        </IndexHeroSection>
 
         <IntroWrapper data-scroll data-scroll-speed='2'>
           <Intro>

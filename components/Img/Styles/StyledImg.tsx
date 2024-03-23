@@ -1,28 +1,14 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
-import { StyledContact } from "../../../pagestyles/StyledContact";
-import {
-  ClientQuote,
-  NextProjectSection,
-  StyledProject,
-} from "../../../pagestyles/StyledProject";
-import {
-  Blockquote,
-  Outro,
-  ValuesCoverInner,
-} from "../../../pagestyles/StyledStudio";
-import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
-import { HeroMedia } from "../../Hero/Styles/StyledHero";
+import { ClientQuote, StyledProject } from "../../../pagestyles/StyledProject";
+import { Blockquote, Outro } from "../../../pagestyles/StyledStudio";
 import { StyledImageSlider } from "../../ImageSlider/Styles/StyledImageSlider";
 import { ContactUs } from "../../Navbar/Styles/StyledNavbar";
 
 export const StyledImg = styled(motion.div)`
   ${ContactUs} & {
     width: 20px;
-  }
-  ${StyledGridItem} & {
-    transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
   }
   ${StyledProject} & {
     &.client-logo {
@@ -37,19 +23,6 @@ export const StyledImg = styled(motion.div)`
         max-height: 70px;
         width: auto;
         justify-self: start;
-      }
-    }
-  }
-  ${HeroMedia} & {
-    width: 100%;
-    ${breakpoint.phone} {
-      position: relative;
-      padding-bottom: ${(5 / 4) * 100}%;
-      ${StyledContact} & {
-        /* FIXME UGLY AF */
-        * {
-          object-position: right !important;
-        }
       }
     }
   }

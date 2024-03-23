@@ -25,7 +25,7 @@ export const Micro = styled(motion.span)`
   color: ${colors.black};
   text-transform: uppercase;
   display: inline-block;
-  max-width: 500px;
+  max-width: 400px;
   ${breakpoint.phone} {
     font-size: 12px;
   }

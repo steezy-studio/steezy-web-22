@@ -5,6 +5,8 @@ import { spaces } from "../helpers/spaces";
 
 export const StyledIndex = styled.div``;
 
+export const IndexHeroSection = styled.section``;
+
 export const LandingHeroPageLogotypes = styled.div`
   display: grid;
   grid-auto-flow: column;

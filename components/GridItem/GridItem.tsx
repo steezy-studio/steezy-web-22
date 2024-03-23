@@ -4,7 +4,7 @@ import parse, {
   Element,
   HTMLReactParserOptions,
 } from "html-react-parser";
-import { useContext, useRef, useState } from "react";
+import { Fragment, useContext, useRef, useState } from "react";
 import { Area } from "../../generated/types";
 import {
   useIntersectionObserver,
@@ -17,6 +17,7 @@ import { StyledLink } from "../Link/Styles/StyledLink";
 import { Micro } from "../Typo/Micro";
 import {
   GridItemAreas,
+  GridItemCover,
   GridItemCoverWrapper,
   GridItemHeader,
   GridItemVideo,
@@ -67,9 +68,9 @@ const GridItem = ({
       if (domNode instanceof Element && domNode.attribs) {
         if (domNode.name === `p`) {
           return (
-            <StyledLink as={`div`} className={hover ? `hover` : ``}>
+            <Fragment>
               {domToReact((domNode as Element).children as DOMNode[], options)}
-            </StyledLink>
+            </Fragment>
           );
         }
       }
@@ -91,7 +92,7 @@ const GridItem = ({
       >
         <GridItemCoverWrapper>
           {type === "Photo" && (
-            <Img
+            <GridItemCover
               src={src}
               width={width}
               placeholder={`blur`}
