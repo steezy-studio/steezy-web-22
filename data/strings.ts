@@ -58,9 +58,6 @@ export default {
     },
     slider: [
       {
-        src: "studio_G1.jpg",
-      },
-      {
         src: "studio_G2.jpg",
       },
       {
