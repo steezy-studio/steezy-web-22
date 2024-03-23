@@ -32,8 +32,7 @@ const Hero = ({ asset }: HeroProps) => {
             height={isPhone ? undefined : asset.height}
             placeholder={`blur`}
             blurDataURL={asset.url}
-            objectFit={"cover"}
-            layout={isPhone ? "fill" : "responsive"}
+            alt={asset.description}
           />
         )}
       </Animation>

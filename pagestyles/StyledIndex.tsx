@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
-import u from "../helpers/unit";
 import { spaces } from "../helpers/spaces";
+import u from "../helpers/unit";
 
 export const StyledIndex = styled.div``;
 

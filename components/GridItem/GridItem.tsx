@@ -100,6 +100,7 @@ const GridItem = ({
               height={height}
               layout={`responsive`}
               style={{ transform: `scale(${hover ? 1.05 : 1})` }}
+              alt={projectName}
             />
           )}
           {type === "Video" && (

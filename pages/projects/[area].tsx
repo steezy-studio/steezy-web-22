@@ -4,9 +4,6 @@ import { Fragment, useContext, useEffect, useState } from "react";
 import client, { withApolloClient } from "../../apollo/client";
 import GridItem from "../../components/GridItem/GridItem";
 import Head from "../../components/Head/Head";
-import { HeroSocials } from "../../components/Hero/Styles/StyledHero";
-import Instagram from "../../components/Icons/Instagram";
-import Vimeo from "../../components/Icons/Vimeo";
 import Link from "../../components/Link/Link";
 import { StyledLink } from "../../components/Link/Styles/StyledLink";
 import Navbar from "../../components/Navbar/Navbar";
@@ -66,7 +63,8 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
       <StyledLink
         onClick={handleIndexInc}
         onMouseEnter={() => setCursorType("hover")}
-        onMouseLeave={() => setCursorType("normal")}>
+        onMouseLeave={() => setCursorType("normal")}
+      >
         more projects
       </StyledLink>
     </Large>
@@ -100,7 +98,8 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
                   <Large key={_slug}>
                     <Link
                       href={`/projects/${_slug}`}
-                      className={`${isActive ? "active" : ""}`}>
+                      className={`${isActive ? "active" : ""}`}
+                    >
                       {area_name}
                     </Link>
                   </Large>
@@ -111,10 +110,6 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
               {activeArea?.area_description || allProjects.area_description}
             </Medium>
           </ProjectsHeroContent>
-          <HeroSocials>
-            <Instagram />
-            <Vimeo />
-          </HeroSocials>
         </ProjectsHero>
         <ProjectsGrid>
           <ProjectsGridColumn className='even'>

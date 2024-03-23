@@ -109,9 +109,9 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                               src={img.url || ``}
                               width={img.width || 0}
                               height={img.height || 0}
-                              layout={"responsive"}
                               blurDataURL={img.url}
                               placeholder={"blur"}
+                              alt={projectData.project_detail_name}
                             />
                           </motion.div>
                         </Animation>
@@ -183,7 +183,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                   }
                   width={250}
                   height={250}
-                  layout={"responsive"}
+                  alt={projectData.client_name}
                 />
               </ClientQuoteLeft>
               <ClientQuoteRight>
@@ -196,7 +196,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                   }
                   width={250}
                   height={250}
-                  layout={"responsive"}
+                  alt={projectData.client_name}
                 />
                 <Micro>{projectData.client_name}</Micro>
                 <br />

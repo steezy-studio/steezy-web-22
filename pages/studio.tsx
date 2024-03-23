@@ -15,7 +15,6 @@ import { Medium } from "../components/Typo/Medium";
 import { Micro } from "../components/Typo/Micro";
 import { Small } from "../components/Typo/Small";
 import ValueItem from "../components/ValueItem";
-import Video from "../components/Video/Video";
 import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
@@ -27,11 +26,12 @@ import {
   BrandsSection,
   BrandsText,
   BrandsTextInner,
+  DividerPhoto,
+  HeaderWithDashOffset,
   Logo,
   Logotypes,
   Outro,
   Quote,
-  HeaderWithDashOffset,
   ServicesList,
   ServicesSection,
   StyledStudio,
@@ -43,7 +43,6 @@ import {
   ValuesCoverInner,
   ValuesList,
   ValuesSection,
-  DividerPhoto,
 } from "../pagestyles/StyledStudio";
 
 interface StudioProps {
@@ -69,8 +68,6 @@ const Studio = ({ areas }: StudioProps) => {
 
       <StyledStudio>
         <Hero
-          header={() => studioStrings.hero.header.rest}
-          perex={studioStrings.hero.subHeader}
           asset={{
             url: `/images/studio/studio_1.jpg`,
             _type: `Image`,
@@ -96,10 +93,9 @@ const Studio = ({ areas }: StudioProps) => {
           <DividerPhoto>
             <Img
               src={"/images/studio/studio_2.jpg"}
-              layout={w <= device.phone ? `fill` : `responsive`}
               width={2450}
               height={1300}
-              objectFit={"cover"}
+              alt={"studio"}
             />
           </DividerPhoto>
         </Animation>
@@ -129,15 +125,15 @@ const Studio = ({ areas }: StudioProps) => {
               -1 *
               (Number(theme.pageMargin.split("px")[0]) * 2 +
                 Number(theme.navbarHeight.split("px")[0]))
-            }px,0%`}>
+            }px,0%`}
+          >
             <ValuesCoverInner>
               {/* <Video src={"/videos/loop_studio.mp4"} /> */}
               <Img
                 src={"/images/studio/studio_3.jpg"}
-                layout={"intrinsic"}
                 width={1126}
                 height={1437}
-                objectFit={"cover"}
+                alt='studio values'
               />
             </ValuesCoverInner>
           </ValuesCover>
@@ -151,6 +147,7 @@ const Studio = ({ areas }: StudioProps) => {
               height: 800,
               src: `/images/studio/${img.src}`,
               id: String(i),
+              alt: "studio",
             }))}
           />
         </Animation>
@@ -188,7 +185,7 @@ const Studio = ({ areas }: StudioProps) => {
               src={"/images/studio/studio_4.jpg"}
               width={1200}
               height={1510}
-              layout={"intrinsic"}
+              alt={"studio"}
             />
 
             <Quote className='offset-y-1' data-scroll data-scroll-speed='2'>
@@ -220,8 +217,7 @@ const Studio = ({ areas }: StudioProps) => {
               src={"/images/studio/studio_5.jpg"}
               width={1200}
               height={1200}
-              objectFit={"cover"}
-              layout={"intrinsic"}
+              alt='studio'
             />
           </Blockquote>
         </BlockquoteSection>
@@ -267,8 +263,7 @@ const Studio = ({ areas }: StudioProps) => {
             src={`/images/studio/studio_6.jpg`}
             width={2450}
             height={1300}
-            objectFit={"cover"}
-            layout={w <= device.phone ? `fill` : `responsive`}
+            alt='studio'
           />
         </Outro>
       </StyledStudio>

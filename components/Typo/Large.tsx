@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { addColorClasses } from "../../helpers/colorClasses";
 import { breakpoint, colors } from "../../helpers/consts";
 import u from "../../helpers/unit";
 import { StyledContact } from "../../pagestyles/StyledContact";
@@ -6,9 +7,7 @@ import { Intro } from "../../pagestyles/StyledIndex";
 import { NextProjectHead } from "../../pagestyles/StyledProject";
 import { ProjectsHeroFilters } from "../../pagestyles/StyledProjects";
 import { Quote } from "../../pagestyles/StyledStudio";
-import { HeroText } from "../Hero/Styles/StyledHero";
 import { StyledImageSlider } from "../ImageSlider/Styles/StyledImageSlider";
-import { addColorClasses } from "../../helpers/colorClasses";
 
 export const Large = styled.h1`
   font-family: "migra-italic", Arial, Helvetica, sans-serif;
@@ -51,13 +50,6 @@ export const Large = styled.h1`
       ${breakpoint.phone} {
         justify-self: unset;
       }
-    }
-  }
-  ${HeroText} & {
-    white-space: pre-wrap;
-    ${breakpoint.phone} {
-      max-width: 400px;
-      white-space: normal;
     }
   }
   ${StyledContact} & {

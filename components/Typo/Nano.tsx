@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { addColorClasses } from "../../helpers/colorClasses";
 import { breakpoint, colors } from "../../helpers/consts";
 import u from "../../helpers/unit";
-import { LandingpageHeroClients } from "../../pagestyles/StyledIndex";
 import { ProjectHeroRole } from "../../pagestyles/StyledProject";
 import {
   Blockquote,
@@ -124,12 +123,6 @@ export const Nano = styled(motion.span)`
   ${PhoneDecoration} & {
     white-space: pre-wrap;
     line-height: 1.1em;
-  }
-  ${LandingpageHeroClients} & {
-    text-align: right;
-    ${breakpoint.tabletPortrait} {
-      text-align: left;
-    }
   }
   ${ProjectHeroRole} & {
     line-height: 1.5em;

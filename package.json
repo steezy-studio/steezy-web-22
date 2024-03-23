@@ -29,7 +29,7 @@
     "graphql": "^16.3.0",
     "html-react-parser": "^5.1.9",
     "locomotive-scroll": "^4.1.4",
-    "next": "^12.3.3",
+    "next": "^14.1.4",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
