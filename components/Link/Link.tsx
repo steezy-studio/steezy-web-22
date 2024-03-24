@@ -16,7 +16,8 @@ const Link = ({ href, children, className, target, ...rest }: LinkProps) => {
     <StyledLink
       className={className}
       onMouseEnter={() => setCursorType("hover")}
-      onMouseLeave={() => setCursorType("normal")}>
+      onMouseLeave={() => setCursorType("normal")}
+    >
       <a href={href as string} target={target} {...rest}>
         {children}
       </a>
@@ -25,8 +26,9 @@ const Link = ({ href, children, className, target, ...rest }: LinkProps) => {
     <StyledLink
       className={className}
       onMouseEnter={() => setCursorType("hover")}
-      onMouseLeave={() => setCursorType("normal")}>
-      <NextLink href={href} {...rest}>
+      onMouseLeave={() => setCursorType("normal")}
+    >
+      <NextLink href={href} {...rest} className={className}>
         {children}
       </NextLink>
     </StyledLink>

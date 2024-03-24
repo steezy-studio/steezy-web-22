@@ -15,6 +15,9 @@ export const StyledLink = styled.span`
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
+    &.no-underline {
+      text-decoration: none !important;
+    }
     &:after {
       content: "";
       display: block;

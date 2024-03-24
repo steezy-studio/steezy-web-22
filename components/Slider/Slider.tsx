@@ -48,8 +48,22 @@ const Slider = (
 
   const handleIndexChange = (dir) => {
     const nextIndex = index + dir;
+    if (
+      nextIndex < 0 ||
+      nextIndex > clearedChildren.length - Math.floor(slidesPerView)
+    ) {
+      return;
+    }
     setIndex(nextIndex);
-    controls.start({ x: `${-1 * nextIndex * itemWidth.current}px` });
+    const pagesLenght = Math.round(
+      clearedChildren.length / Math.floor(slidesPerView)
+    );
+    const compensate = (nextIndex * offsetNav) / pagesLenght;
+    controls.start({
+      x: `${
+        -1 * nextIndex * itemWidth.current + compensate * itemWidth.current
+      }px`,
+    });
   };
 
   const handleSliderMouseEnter: MouseEventHandler<HTMLDivElement> = (e) => {

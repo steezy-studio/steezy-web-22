@@ -11,6 +11,16 @@ export const IndexLatestProjects = styled.section`
   margin-top: ${spaces.xxl}px;
 `;
 
+export const IndexSliderW = styled.div``;
+
+export const IndexLatestProjectsHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: ${spaces.xl}px;
+  margin-bottom: ${spaces.l}px;
+`;
+
 export const LandingHeroPageLogotypes = styled.div`
   display: grid;
   grid-auto-flow: column;

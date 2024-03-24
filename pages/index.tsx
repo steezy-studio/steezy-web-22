@@ -24,6 +24,8 @@ import {
   HeroFooter,
   IndexHeroSection,
   IndexLatestProjects,
+  IndexLatestProjectsHeader,
+  IndexSliderW,
   LandingHeroPageLogotypes,
   LandingPageHeroLogotype,
   LandingpageGrid,
@@ -33,6 +35,8 @@ import {
 import { Blockquote, Quote } from "../pagestyles/StyledStudio";
 import { HoverProvider } from "./_app";
 import Slider from "../components/Slider/Slider";
+import { Medium } from "../components/Typo/Medium";
+import Link from "../components/Link/Link";
 
 interface indexProps {
   landingpageGrid: LandingpageGridRowType[];
@@ -109,28 +113,36 @@ const Index = ({ landingpageGrid, areas, latestProjects }: indexProps) => {
         </IndexHeroSection>
 
         <IndexLatestProjects>
-          <Slider slidesPerView={4.2} offsetNav={0.2}>
-            {latestProjects.map(
-              (
-                { project_grid_name, areas, _slug, landingpage_grid_image },
-                i
-              ) => {
-                if (!landingpage_grid_image[0].url) return;
-                return (
-                  <GridItem
-                    key={i}
-                    areas={areas}
-                    height={1080}
-                    projectName={project_grid_name}
-                    slug={_slug}
-                    src={landingpage_grid_image[0].url}
-                    type='Photo'
-                    width={1920}
-                  />
-                );
-              }
-            )}
-          </Slider>
+          <IndexLatestProjectsHeader>
+            <Medium>See our latest projects</Medium>
+            <Link href={"/projects/all-projects"} className='no-underline'>
+              <Micro className='with-dash'>All projects</Micro>
+            </Link>
+          </IndexLatestProjectsHeader>
+          <IndexSliderW>
+            <Slider slidesPerView={4.2} offsetNav={0.2}>
+              {latestProjects.map(
+                (
+                  { project_grid_name, areas, _slug, landingpage_grid_image },
+                  i
+                ) => {
+                  if (!landingpage_grid_image[0].url) return;
+                  return (
+                    <GridItem
+                      key={i}
+                      areas={areas}
+                      height={1080}
+                      projectName={project_grid_name}
+                      slug={_slug}
+                      src={landingpage_grid_image[0].url}
+                      type='Photo'
+                      width={1920}
+                    />
+                  );
+                }
+              )}
+            </Slider>
+          </IndexSliderW>
         </IndexLatestProjects>
 
         {/* <LandingpageGrid>
