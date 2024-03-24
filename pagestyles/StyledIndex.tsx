@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
 import { spaces } from "../helpers/spaces";
 import u from "../helpers/unit";
+import { motion } from "framer-motion";
 
 export const StyledIndex = styled.div``;
 
@@ -128,4 +129,16 @@ export const Intro = styled.div`
 export const IntroWrapper = styled.div`
   position: relative;
   z-index: 2;
+`;
+
+export const IndexQuote = styled.div`
+  display: grid;
+  row-gap: ${spaces.l}px;
+`;
+
+export const IndexQuoteClient = styled(motion.div)``;
+
+export const IndexQuotesSlider = styled.div`
+  max-width: 1200px;
+  margin: ${spaces.xxxl}px 0;
 `;

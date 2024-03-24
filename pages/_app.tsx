@@ -1,12 +1,10 @@
-import { useRouter } from "next/router";
 import React, { MutableRefObject, useRef, useState } from "react";
-import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 import { ThemeProvider } from "styled-components";
 import Cursor, { CursorTypes } from "../components/Cursor/Cursor";
 import Footer from "../components/Footer/Footer";
 import Layout from "../components/Layout/Layout";
 import "../css/fonts.css";
-import { device, theme } from "../helpers/consts";
+import { theme } from "../helpers/consts";
 import { useGA } from "../hooks/useGA";
 import { useWindowSize } from "../hooks/useWindowSize";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
@@ -20,7 +18,6 @@ export const HoverProvider = React.createContext<{
 
 function MyApp({ Component, pageProps }) {
   const { w } = useWindowSize();
-  const { asPath, basePath, pathname } = useRouter();
   useGA();
   const containerRef = useRef(null);
   const [isCursorDisabled, setIsCursorDisabled] = useState(false);
@@ -30,42 +27,26 @@ function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme(w)}>
       <GlobalStyle />
-      <LocomotiveScrollProvider
-        options={{
-          smooth: pathname !== "/project/[projectSlug]",
-          tablet: {
-            smooth: pathname !== "/project/[projectSlug]",
-            breakpoint: device.phone,
-          },
-          smartphone: { smooth: false },
-        }}
-        watch={[asPath, w]}
-        containerRef={containerRef}
-      >
-        <main data-scroll-container ref={containerRef}>
-          <Cursor
-            isCursorDisabled={isCursorDisabled}
-            cursorType={cursorType}
-            cursorRef={cursorRef}
-          />
-          <HoverProvider.Provider
-            value={{
-              setIsCursorDisabled,
-              setCursorType,
-              cursorType,
-              cursorRef,
-            }}
-          >
-            {/* <NoSSR>
-              <CookiesConsent />
-            </NoSSR> */}
-            <Layout>
-              <Component {...pageProps} />
-              <Footer />
-            </Layout>
-          </HoverProvider.Provider>
-        </main>
-      </LocomotiveScrollProvider>
+      <main ref={containerRef}>
+        <Cursor
+          isCursorDisabled={isCursorDisabled}
+          cursorType={cursorType}
+          cursorRef={cursorRef}
+        />
+        <HoverProvider.Provider
+          value={{
+            setIsCursorDisabled,
+            setCursorType,
+            cursorType,
+            cursorRef,
+          }}
+        >
+          <Layout>
+            <Component {...pageProps} />
+            <Footer />
+          </Layout>
+        </HoverProvider.Provider>
+      </main>
     </ThemeProvider>
   );
 }

@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
+import { spaces } from "../../../helpers/spaces";
 
 export const StyledFooter = styled.footer`
   display: grid;
-  grid-gap: ${({ theme }) => `calc(1.5 * ${theme.pageMargin})`};
+  grid-gap: ${spaces.l}px;
   margin-top: ${({ theme }) => u(2, theme.pageMargin)};
   padding-bottom: 100px;
   ${breakpoint.tabletLandscape} {

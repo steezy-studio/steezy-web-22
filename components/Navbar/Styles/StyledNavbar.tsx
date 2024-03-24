@@ -3,24 +3,17 @@ import styled, { css } from "styled-components";
 import { breakpoint, colors } from "../../../helpers/consts";
 import { spaces } from "../../../helpers/spaces";
 
-export const StyledNavbar = styled.nav<{ hasSmoothScroll: boolean }>`
+export const StyledNavbar = styled.nav`
   position: fixed;
   pointer-events: none;
   z-index: 99999;
-  top: calc(-100vh + ${spaces.m}px);
-  right: 0;
-  left: 0;
+  top: ${spaces.m}px;
+  right: ${({ theme }) => theme.pageMargin};
+  left: ${({ theme }) => theme.pageMargin};
   height: ${({ theme }) => theme.navbarHeight};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  ${({ hasSmoothScroll }) =>
-    !hasSmoothScroll &&
-    css`
-      top: ${({ theme }) => theme.pageMargin};
-      left: ${({ theme }) => theme.pageMargin};
-      right: ${({ theme }) => theme.pageMargin};
-    `};
   ${breakpoint.phone} {
     top: ${({ theme }) => theme.pageMargin};
     left: ${({ theme }) => theme.pageMargin};
@@ -28,7 +21,7 @@ export const StyledNavbar = styled.nav<{ hasSmoothScroll: boolean }>`
   }
 `;
 
-export const NavLinks = styled(motion.div)<{ $hasSmoothScroll: boolean }>`
+export const NavLinks = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: flex;
@@ -41,14 +34,6 @@ export const NavLinks = styled(motion.div)<{ $hasSmoothScroll: boolean }>`
     left: ${({ theme }) => "-" + theme.pageMargin};
     right: ${({ theme }) => "-" + theme.pageMargin};
     bottom: ${({ theme }) => "-" + theme.pageMargin};
-    ${({ $hasSmoothScroll }) =>
-      !$hasSmoothScroll &&
-      css`
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-      `};
     width: 100vw;
     min-height: 100vh;
     flex-direction: column;

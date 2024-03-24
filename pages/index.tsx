@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { Transition, motion } from "framer-motion";
 import { GetStaticProps } from "next";
 import { Fragment, useContext } from "react";
 import client from "../apollo/client";
@@ -25,6 +25,9 @@ import {
   IndexHeroSection,
   IndexLatestProjects,
   IndexLatestProjectsHeader,
+  IndexQuote,
+  IndexQuoteClient,
+  IndexQuotesSlider,
   IndexSliderW,
   LandingHeroPageLogotypes,
   LandingPageHeroLogotype,
@@ -37,6 +40,9 @@ import { HoverProvider } from "./_app";
 import Slider from "../components/Slider/Slider";
 import { Medium } from "../components/Typo/Medium";
 import Link from "../components/Link/Link";
+import AnimateTextRows from "../components/AnimateTextRows/AnimateTextRows";
+import AutoSlider from "../components/AutoSlider/AutoSlider";
+import { easing, easingInOutCubic } from "../helpers/animationConfig";
 
 interface indexProps {
   landingpageGrid: LandingpageGridRowType[];
@@ -145,99 +151,51 @@ const Index = ({ landingpageGrid, areas, latestProjects }: indexProps) => {
           </IndexSliderW>
         </IndexLatestProjects>
 
-        {/* <LandingpageGrid>
-          {landingpageGridWithQuotes.map((row, i) => {
-            if (row.__typename === "Quote") {
-              return (
-                <LandingpageGridRow key={i} className={"blockquote"}>
-                  <GridItemWrapper
-                    className='single'
-                    data-scroll
-                    data-scroll-speed='1'
-                  >
-                    <Animation
-                      type={"fadeFromBottom"}
-                      delay={0.2}
-                      duration={1.2}
-                    >
-                      <motion.div>
-                        <Blockquote className='landingpage'>
-                          <Quote className=''>
-                            <Large className=''>
-                              {row.quote.map(renderTextWithLink)}
-                            </Large>
-                            <Micro className='with-dash reversed'>
-                              {row.name}{" "}
-                            </Micro>
-                            <Micro className='lowcase dash-margin'>
-                              {row.position}
-                            </Micro>
-                          </Quote>
-                        </Blockquote>
-                      </motion.div>
-                    </Animation>
-                  </GridItemWrapper>
-                </LandingpageGridRow>
-              );
-            }
-            if (row.__typename === `LandingpageGridRow`) {
-              const isSingle = row.grid_row.length === 1;
+        <IndexQuotesSlider>
+          <AutoSlider
+            interval={9000}
+            list={[0, 1, 2].map((_, j, a) => {
+              const delay = 0.02;
+
+              const createTransition = (delay) =>
+                ({
+                  delay: delay,
+                  duration: 1.2,
+                  ease: easingInOutCubic,
+                } as Transition);
 
               return (
-                <LandingpageGridRow key={row._id}>
-                  {row.grid_row.map(
-                    ({
-                      project_grid_name,
-                      landingpage_grid_image,
-                      _slug,
-                      _id,
-                      areas,
-                    }: EnhancedProject) => {
-                      return (
-                        <GridItemWrapper
-                          key={_id}
-                          offset_amount={row.offset_amount}
-                          className={`${row.offset ? "offset" : ""} ${
-                            isSingle ? "single" : ""
-                          }`}
-                        >
-                          <GridItem
-                            type={landingpage_grid_image[0]._type}
-                            areas={areas}
-                            projectName={project_grid_name}
-                            videoThumb={landingpage_grid_image[0].cover}
-                            width={landingpage_grid_image[0].width}
-                            height={landingpage_grid_image[0].height}
-                            src={
-                              landingpage_grid_image[0]._type === "Video"
-                                ? landingpage_grid_image[0].cdn_files[0].url
-                                : landingpage_grid_image[0].url
-                            }
-                            slug={_slug}
-                            key={_slug}
-                          />
-                        </GridItemWrapper>
-                      );
-                    }
-                  )}
-                </LandingpageGridRow>
+                <IndexQuote key={j}>
+                  <Large>
+                    <AnimateTextRows
+                      motionProps={(i) => ({
+                        initial: { x: `100%` },
+                        animate: { x: `0%` },
+                        exit: { x: `-100%` },
+                        transition: createTransition((i + 1) * delay),
+                      })}
+                    >
+                      {`„I appreciate the creative approach, multi-dimensional overlap
+                and fast & transparent communication with steezy.studio“`}
+                    </AnimateTextRows>
+                  </Large>
+                  <IndexQuoteClient
+                    initial={{ x: `100%` }}
+                    animate={{ x: `0%` }}
+                    exit={{ x: `-100%` }}
+                    transition={createTransition(delay + a.length * delay)}
+                  >
+                    <Micro>
+                      Adam Křena
+                      <br />
+                      Head of Atelier @footshop
+                    </Micro>
+                  </IndexQuoteClient>
+                </IndexQuote>
               );
-            }
-          })}
-          <LandingpageGridRow>
-            <div></div>
-            <Large>
-              <StyledLink
-                as={"a"}
-                href={`/projects/all-projects`}
-                onMouseEnter={() => setCursorType("hover")}
-                onMouseLeave={() => setCursorType("normal")}
-              >
-                {strings.globals.allProjects}
-              </StyledLink>
-            </Large>
-          </LandingpageGridRow>
-        </LandingpageGrid> */}
+            })}
+          />
+        </IndexQuotesSlider>
       </StyledIndex>
     </>
   );
