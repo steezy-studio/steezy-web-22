@@ -41,7 +41,6 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
             <PlayButton>
               <Large className='underline big white'>play video</Large>
             </PlayButton>
-            {/* <PlayButton /> */}
             <Loop
               whileHover={{ scale: 1.15 }}
               transition={{ duration: 0.3 }}

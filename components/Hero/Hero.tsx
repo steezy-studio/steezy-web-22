@@ -6,6 +6,7 @@ import Animation from "../Animation/Animation";
 import Img from "../Img/Img";
 import HeroVideo from "./HeroVideo";
 import { StyledHero } from "./Styles/StyledHero";
+import RevealAnimation from "../RevealAnimation/RevealAnimation";
 
 interface HeroProps {
   asset: Asset;
@@ -18,7 +19,7 @@ const Hero = ({ asset }: HeroProps) => {
 
   return (
     <StyledHero>
-      <Animation type={"fadeIn"} delay={0.3} style={{ zIndex: 99 }}>
+      <RevealAnimation delay={0.3} style={{ zIndex: 99 }}>
         {asset._type === "Video" ? (
           <HeroVideo
             src={asset.url}
@@ -35,7 +36,7 @@ const Hero = ({ asset }: HeroProps) => {
             alt={asset.description}
           />
         )}
-      </Animation>
+      </RevealAnimation>
     </StyledHero>
   );
 };

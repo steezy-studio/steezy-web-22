@@ -44,6 +44,8 @@ const Cursor = ({ isCursorDisabled, cursorType, cursorRef }: CursorProps) => {
 
     cursorRef.current.style.top = y.current + "px";
     cursorRef.current.style.left = x.current + "px";
+    cursorRef.current.dataset.y = String(y.current);
+    cursorRef.current.dataset.x = String(x.current);
   };
 
   useEffect(() => {
@@ -74,7 +76,8 @@ const Cursor = ({ isCursorDisabled, cursorType, cursorRef }: CursorProps) => {
               ? 7
               : 1,
           opacity: isCursorDisabled ? 0 : 1,
-        }}>
+        }}
+      >
         <motion.svg
           xmlns='http://www.w3.org/2000/svg'
           viewBox='0 0 20 20'
@@ -82,7 +85,8 @@ const Cursor = ({ isCursorDisabled, cursorType, cursorRef }: CursorProps) => {
           style={{ transform: "rotate(-45deg)" }}
           animate={{
             opacity: cursorType === "left" || cursorType === "right" ? 1 : 0,
-          }}>
+          }}
+        >
           <line
             y1='10'
             x2='20'

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
 import { ClientQuote, StyledProject } from "../../../pagestyles/StyledProject";
 import { Blockquote, Outro } from "../../../pagestyles/StyledStudio";
-import { StyledImageSlider } from "../../ImageSlider/Styles/StyledImageSlider";
+import { StyledSlider } from "../../Slider/Styles/StyledSlider";
 import { ContactUs } from "../../Navbar/Styles/StyledNavbar";
 
 export const StyledImg = styled(motion.div)`
@@ -36,7 +36,7 @@ export const StyledImg = styled(motion.div)`
       }
     }
   }
-  ${StyledImageSlider} & {
+  ${StyledSlider} & {
     padding-right: 10px;
     ${breakpoint.phone} {
       padding-right: 5px;

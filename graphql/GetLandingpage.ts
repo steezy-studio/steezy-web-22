@@ -3,9 +3,23 @@ import { FRAGMENT_GET_ALL_AREAS } from "./fragments/FragmentGetAllAreas";
 
 export const GET_LANDINGPAGE = gql`
   ${FRAGMENT_GET_ALL_AREAS}
-  query getLandingpage {
+  query getLandingpage($sortLatestProjects: ProjectSortInput) {
     Areas(sort: area_order_ASC) {
       ...FragmentGetAreas
+    }
+    Projects(sort: $sortLatestProjects, limit: 10) {
+      items {
+        project_grid_name
+        landingpage_grid_image {
+          width
+          url(format: "webp")
+          height
+          description
+          _id
+        }
+        _id
+        _slug
+      }
     }
     LandingpageGrids {
       items {

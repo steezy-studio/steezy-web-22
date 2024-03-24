@@ -19,6 +19,8 @@ export const GridItemAreas = styled.div`
   position: absolute;
   bottom: ${spaces.m}px;
   left: ${spaces.m}px;
+  display: flex;
+  column-gap: ${spaces.xxs}px;
 `;
 
 export const GridItemCoverWrapper = styled.div`
@@ -27,10 +29,21 @@ export const GridItemCoverWrapper = styled.div`
   overflow: hidden;
 `;
 
-export const GridItemHeader = styled.div`
+export const GridItemGrad = styled(motion.div)`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0) 30%);
+`;
+
+export const GridItemHeader = styled(motion.div)`
   position: absolute;
   top: ${spaces.m}px;
   left: ${spaces.m}px;
+  right: ${spaces.m}px;
+  z-index: 2;
 `;
 
 export const GridItemVideo = styled.video`
@@ -45,7 +58,7 @@ export const GridItemCover = styled(Image)`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: none;
+  transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
 `;
 
 export const VideoWrapper = styled.div`

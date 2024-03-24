@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { breakpoint } from "../../helpers/consts";
+import { addColorClasses } from "../../helpers/colorClasses";
 
 export const Small = styled.p`
-  font-size: 26px;
+  font-size: 24px;
   line-height: 1.3em;
   letter-spacing: 0.03em;
   font-family: "agrandir";
@@ -25,4 +26,5 @@ export const Small = styled.p`
   ${breakpoint.tabletLandscape} {
     font-size: 16px;
   }
+  ${addColorClasses()}
 `;

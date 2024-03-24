@@ -7,7 +7,7 @@ import { Intro } from "../../pagestyles/StyledIndex";
 import { NextProjectHead } from "../../pagestyles/StyledProject";
 import { ProjectsHeroFilters } from "../../pagestyles/StyledProjects";
 import { Quote } from "../../pagestyles/StyledStudio";
-import { StyledImageSlider } from "../ImageSlider/Styles/StyledImageSlider";
+import { StyledSlider } from "../Slider/Styles/StyledSlider";
 
 export const Large = styled.h1`
   font-family: "migra-italic", Arial, Helvetica, sans-serif;
@@ -70,7 +70,7 @@ export const Large = styled.h1`
       padding: 0.1em 0;
     }
   }
-  ${StyledImageSlider} & {
+  ${StyledSlider} & {
     margin: 30px ${({ theme }) => theme.pageMargin} 0;
     float: right;
   }

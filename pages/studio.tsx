@@ -6,7 +6,7 @@ import client from "../apollo/client";
 import Animation from "../components/Animation/Animation";
 import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
-import ImageSlider from "../components/ImageSlider/ImageSlider";
+import Slider from "../components/Slider/Slider";
 import Img from "../components/Img/Img";
 import Link from "../components/Link/Link";
 import Navbar from "../components/Navbar/Navbar";
@@ -138,7 +138,7 @@ const Studio = ({ areas }: StudioProps) => {
             </ValuesCoverInner>
           </ValuesCover>
         </ValuesSection>
-        <Animation type='fadeFromBottom'>
+        {/* <Animation type='fadeFromBottom'>
           <ImageSlider
             imgList={strings.studioPage.slider.map((img, i) => ({
               layout: "responsive",
@@ -150,7 +150,7 @@ const Studio = ({ areas }: StudioProps) => {
               alt: "studio",
             }))}
           />
-        </Animation>
+        </Animation> */}
         <ServicesSection>
           <HeaderWithDashOffset>
             <Animation type='fadeFromBottom'>

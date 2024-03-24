@@ -4,7 +4,7 @@ import parse, {
   Element,
   HTMLReactParserOptions,
 } from "html-react-parser";
-import { Fragment, useContext, useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Area } from "../../generated/types";
 import {
   useIntersectionObserver,
@@ -12,13 +12,13 @@ import {
 } from "../../hooks/useIntersectionObserver";
 import { HoverProvider } from "../../pages/_app";
 import Animation from "../Animation/Animation";
-import Img from "../Img/Img";
-import { StyledLink } from "../Link/Styles/StyledLink";
-import { Micro } from "../Typo/Micro";
+import AreaTag from "../AreaTag/AreaTag";
+import { Small } from "../Typo/Small";
 import {
   GridItemAreas,
   GridItemCover,
   GridItemCoverWrapper,
+  GridItemGrad,
   GridItemHeader,
   GridItemVideo,
   StyledGridItem,
@@ -47,30 +47,20 @@ const GridItem = ({
   videoThumb,
 }: GridItemProps) => {
   const [hover, sethover] = useState(false);
-  // const [videoAspect, setVideoAspect] = useState(0);
   const { setCursorType } = useContext(HoverProvider);
   const videoRef = useRef<HTMLVideoElement>(null);
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
   );
 
-  // React.useEffect(() => {
-  //   if (videoRef.current) {
-  //     setVideoAspect(
-  //       // videoRef.current.innerHeight / videoRef.current.videoWidth
-  //       0
-  //     );
-  //   }
-  // }, []);
-
   const options: HTMLReactParserOptions = {
     replace: (domNode) => {
       if (domNode instanceof Element && domNode.attribs) {
         if (domNode.name === `p`) {
           return (
-            <Fragment>
+            <Small className={"white"}>
               {domToReact((domNode as Element).children as DOMNode[], options)}
-            </Fragment>
+            </Small>
           );
         }
       }
@@ -91,6 +81,10 @@ const GridItem = ({
         }}
       >
         <GridItemCoverWrapper>
+          <GridItemGrad
+            animate={{ opacity: hover ? 1 : 0 }}
+            transition={{ duration: 0.2 }}
+          />
           {type === "Photo" && (
             <GridItemCover
               src={src}
@@ -98,7 +92,6 @@ const GridItem = ({
               placeholder={`blur`}
               blurDataURL={src}
               height={height}
-              layout={`responsive`}
               style={{ transform: `scale(${hover ? 1.05 : 1})` }}
               alt={projectName}
             />
@@ -120,12 +113,12 @@ const GridItem = ({
         </GridItemCoverWrapper>
         <GridItemAreas>
           {areas.map(({ area_name, _slug }) => (
-            <Micro key={area_name} className='lowcase'>
-              {area_name}
-            </Micro>
+            <AreaTag key={area_name} areaName={area_name} />
           ))}
         </GridItemAreas>
-        <GridItemHeader>{parse(projectName, options)}</GridItemHeader>
+        <GridItemHeader animate={{ y: hover ? "0%" : "-150%" }}>
+          {parse(projectName, options)}
+        </GridItemHeader>
       </StyledGridItem>
     </Animation>
   );

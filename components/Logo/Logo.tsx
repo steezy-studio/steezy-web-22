@@ -13,24 +13,28 @@ const Logo = ({}: LogoProps) => {
   return (
     <StyledLogo
       onMouseEnter={() => setCursorType("hover")}
-      onMouseLeave={() => setCursorType("normal")}>
+      onMouseLeave={() => setCursorType("normal")}
+    >
       <a href={"/"}>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='257'
           height='78'
-          viewBox='0 0 257 78'>
+          viewBox='0 0 257 78'
+        >
           <g
             id='Group_8571'
             data-name='Group 8571'
-            transform='translate(-187 -30)'>
+            transform='translate(-187 -30)'
+          >
             <g id='Group_8570' data-name='Group 8570'>
               <g
                 id='Rectangle_1940'
                 data-name='Rectangle 1940'
                 transform='translate(187 30)'
                 stroke='#000'
-                stroke-width='2'>
+                strokeWidth='2'
+              >
                 <rect width='184' height='78' rx='20' stroke='none' />
                 <rect x='1' y='1' width='182' height='76' rx='19' fill='none' />
               </g>
@@ -40,14 +44,16 @@ const Logo = ({}: LogoProps) => {
                 transform='translate(369 30)'
                 fill='#fff'
                 stroke='#000'
-                stroke-width='2'>
+                strokeWidth='2'
+              >
                 <rect width='75' height='78' rx='20' stroke='none' />
                 <rect x='1' y='1' width='73' height='76' rx='19' fill='none' />
               </g>
               <g
                 id='Group_6565'
                 data-name='Group 6565'
-                transform='translate(386.174 41.016)'>
+                transform='translate(386.174 41.016)'
+              >
                 <path
                   id='Path_14518'
                   data-name='Path 14518'
@@ -55,7 +61,7 @@ const Logo = ({}: LogoProps) => {
                   transform='translate(-10.5 -9.574)'
                   fill='#1b1b19'
                   stroke='#000'
-                  stroke-width='0.5'
+                  strokeWidth='0.5'
                 />
                 <path
                   id='Path_14519'
@@ -64,13 +70,14 @@ const Logo = ({}: LogoProps) => {
                   transform='translate(-2.975 0.077)'
                   fill='#1b1b19'
                   stroke='#000'
-                  stroke-width='0.5'
+                  strokeWidth='0.5'
                 />
               </g>
               <g
                 id='Group_6566'
                 data-name='Group 6566'
-                transform='translate(214.793 45.484)'>
+                transform='translate(214.793 45.484)'
+              >
                 <path
                   id='Path_14520'
                   data-name='Path 14520'

@@ -23,8 +23,7 @@ import {
   GridItemWrapper,
   HeroFooter,
   IndexHeroSection,
-  Intro,
-  IntroWrapper,
+  IndexLatestProjects,
   LandingHeroPageLogotypes,
   LandingPageHeroLogotype,
   LandingpageGrid,
@@ -33,13 +32,15 @@ import {
 } from "../pagestyles/StyledIndex";
 import { Blockquote, Quote } from "../pagestyles/StyledStudio";
 import { HoverProvider } from "./_app";
+import Slider from "../components/Slider/Slider";
 
 interface indexProps {
   landingpageGrid: LandingpageGridRowType[];
+  latestProjects: EnhancedProject[];
   areas: Areas;
 }
 
-const Index = ({ landingpageGrid, areas }: indexProps) => {
+const Index = ({ landingpageGrid, areas, latestProjects }: indexProps) => {
   const landingpageStrings = strings.landingPage;
   const { setCursorType } = useContext(HoverProvider);
 
@@ -107,18 +108,32 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
           </HeroFooter>
         </IndexHeroSection>
 
-        <IntroWrapper data-scroll data-scroll-speed='2'>
-          <Intro>
-            <Micro>{landingpageStrings.intro.subHeader}</Micro>
-            <div>
-              <Large as={`span`}>
-                {landingpageStrings.intro.perex.map(renderTextWithLink)}
-              </Large>
-            </div>
-          </Intro>
-        </IntroWrapper>
+        <IndexLatestProjects>
+          <Slider slidesPerView={4.2} offsetNav={0.2}>
+            {latestProjects.map(
+              (
+                { project_grid_name, areas, _slug, landingpage_grid_image },
+                i
+              ) => {
+                if (!landingpage_grid_image[0].url) return;
+                return (
+                  <GridItem
+                    key={i}
+                    areas={areas}
+                    height={1080}
+                    projectName={project_grid_name}
+                    slug={_slug}
+                    src={landingpage_grid_image[0].url}
+                    type='Photo'
+                    width={1920}
+                  />
+                );
+              }
+            )}
+          </Slider>
+        </IndexLatestProjects>
 
-        <LandingpageGrid>
+        {/* <LandingpageGrid>
           {landingpageGridWithQuotes.map((row, i) => {
             if (row.__typename === "Quote") {
               return (
@@ -210,13 +225,16 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
               </StyledLink>
             </Large>
           </LandingpageGridRow>
-        </LandingpageGrid>
+        </LandingpageGrid> */}
       </StyledIndex>
     </>
   );
 };
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await client.query<Query>({ query: GET_LANDINGPAGE });
+  const data = await client.query<Query>({
+    query: GET_LANDINGPAGE,
+    variables: { sortLatestProjects: "changed_on_DESC" },
+  });
 
   const enhancedGrid =
     data.data.LandingpageGrids.items[0].landingpage_projects_grid.map((row) => {
@@ -226,10 +244,16 @@ export const getStaticProps: GetStaticProps = async () => {
       };
     });
 
+  const enhancedLatestProjects = enhanceProjects(
+    data.data.Projects.items,
+    data.data.Areas
+  );
+
   return {
     props: {
       landingpageGrid: enhancedGrid,
       areas: data.data.Areas,
+      latestProjects: enhancedLatestProjects,
     },
     revalidate: Number(process.env.REVALIDATE),
   };

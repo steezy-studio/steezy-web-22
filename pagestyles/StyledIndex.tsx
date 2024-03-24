@@ -7,6 +7,10 @@ export const StyledIndex = styled.div``;
 
 export const IndexHeroSection = styled.section``;
 
+export const IndexLatestProjects = styled.section`
+  margin-top: ${spaces.xxl}px;
+`;
+
 export const LandingHeroPageLogotypes = styled.div`
   display: grid;
   grid-auto-flow: column;
