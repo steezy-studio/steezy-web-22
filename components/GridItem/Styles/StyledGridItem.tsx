@@ -5,13 +5,15 @@ import Image from "next/image";
 
 export const StyledGridItem = styled(motion.a)`
   all: unset;
+  width: 100%;
   display: block;
   position: relative;
-  border-radius: ${({ theme }) => theme.bRad};
-  aspect-ratio: 9/16;
   overflow: hidden;
+  border-radius: ${({ theme }) => theme.bRad};
+  padding-bottom: ${(16 / 9) * 100}%;
   &.wide {
-    aspect-ratio: 16/9;
+    background-color: red;
+    padding-bottom: ${(9 / 16) * 100}%;
   }
 `;
 
@@ -24,9 +26,11 @@ export const GridItemAreas = styled.div`
 `;
 
 export const GridItemCoverWrapper = styled.div`
+  overflow: hidden;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
 `;
 
 export const GridItemGrad = styled(motion.div)`
@@ -47,6 +51,8 @@ export const GridItemHeader = styled(motion.div)`
 `;
 
 export const GridItemVideo = styled.video`
+  /* position: absolute; */
+  /* inset: 0; */
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -55,14 +61,10 @@ export const GridItemVideo = styled.video`
 `;
 
 export const GridItemCover = styled(Image)`
+  /* position: absolute; */
+  /* inset: 0; */
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
-`;
-
-export const VideoWrapper = styled.div`
-  overflow: hidden;
-  position: relative;
-  height: 100%;
 `;

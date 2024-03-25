@@ -21,30 +21,22 @@ export const GET_LANDINGPAGE = gql`
         _slug
       }
     }
-    LandingpageGrids {
-      items {
+    FeaturedGrid {
+      featured_projects {
+        _slug
         _id
-        landingpage_projects_grid {
-          offset
-          offset_amount
-          _id
-          grid_row {
-            _slug
+        project_grid_name
+        landingpage_grid_image {
+          url(format: "webp")
+          _type
+          description
+          width
+          height
+          cdn_files {
             _id
-            project_grid_name
-            landingpage_grid_image {
-              url(format: "webp")
-              _type
-              description
-              width
-              height
-              cdn_files {
-                _id
-                _type
-                profile
-                url
-              }
-            }
+            _type
+            profile
+            url
           }
         }
       }

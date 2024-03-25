@@ -33,7 +33,7 @@ const Logo = ({}: LogoProps) => {
                 data-name='Rectangle 1940'
                 transform='translate(187 30)'
                 stroke='#000'
-                strokeWidth='2'
+                strokeWidth='1'
               >
                 <rect width='184' height='78' rx='20' stroke='none' />
                 <rect x='1' y='1' width='182' height='76' rx='19' fill='none' />
@@ -44,10 +44,18 @@ const Logo = ({}: LogoProps) => {
                 transform='translate(369 30)'
                 fill='#fff'
                 stroke='#000'
-                strokeWidth='2'
+                strokeWidth='1'
               >
                 <rect width='75' height='78' rx='20' stroke='none' />
-                <rect x='1' y='1' width='73' height='76' rx='19' fill='none' />
+                <rect
+                  x='1'
+                  y='1'
+                  width='73'
+                  height='76'
+                  rx='19'
+                  fill='none'
+                  vectorEffect={"non-scaling-stroke"}
+                />
               </g>
               <g
                 id='Group_6565'

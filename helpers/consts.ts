@@ -59,7 +59,7 @@ export const theme = (width: number) => ({
       : width <= device.smallNotebook
       ? "60px"
       : width <= device.largeNotebook
-      ? "70px"
+      ? "50px"
       : "80px",
   bRad: "15px",
 });

@@ -8,7 +8,14 @@ interface BurgerProps {
   isOpen: boolean;
 }
 
-const Line = (props) => <motion.line fill='none' strokeWidth='2' {...props} />;
+const Line = (props) => (
+  <motion.line
+    fill='none'
+    strokeWidth='1'
+    vectorEffect={"non-scaling-stroke"}
+    {...props}
+  />
+);
 
 const Burger = ({ onClick, isOpen }: BurgerProps) => {
   const { setCursorType } = useContext(HoverProvider);

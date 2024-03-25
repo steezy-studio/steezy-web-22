@@ -11,7 +11,6 @@ import {
   videoCallback,
 } from "../../hooks/useIntersectionObserver";
 import { HoverProvider } from "../../pages/_app";
-import Animation from "../Animation/Animation";
 import AreaTag from "../AreaTag/AreaTag";
 import { Small } from "../Typo/Small";
 import {
@@ -22,7 +21,6 @@ import {
   GridItemHeader,
   GridItemVideo,
   StyledGridItem,
-  VideoWrapper,
 } from "./Styles/StyledGridItem";
 
 interface GridItemProps {
@@ -34,6 +32,7 @@ interface GridItemProps {
   slug: string;
   type: string;
   videoThumb?: string;
+  wide?: boolean;
 }
 
 const GridItem = ({
@@ -45,6 +44,7 @@ const GridItem = ({
   slug,
   type,
   videoThumb,
+  wide,
 }: GridItemProps) => {
   const [hover, sethover] = useState(false);
   const { setCursorType } = useContext(HoverProvider);
@@ -52,6 +52,7 @@ const GridItem = ({
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
   );
+  // const wide = width > height;
 
   const options: HTMLReactParserOptions = {
     replace: (domNode) => {
@@ -68,59 +69,56 @@ const GridItem = ({
   };
 
   return (
-    <Animation type={"fadeFromBottom"} delay={0.2} duration={1.2}>
-      <StyledGridItem
-        href={`/project/${slug}`}
-        onMouseEnter={() => {
-          sethover(true);
-          setCursorType("hover");
-        }}
-        onMouseLeave={() => {
-          sethover(false);
-          setCursorType("normal");
-        }}
-      >
-        <GridItemCoverWrapper>
-          <GridItemGrad
-            animate={{ opacity: hover ? 1 : 0 }}
-            transition={{ duration: 0.2 }}
+    <StyledGridItem
+      className={wide ? "wide" : ""}
+      href={`/project/${slug}`}
+      onMouseEnter={() => {
+        sethover(true);
+        setCursorType("hover");
+      }}
+      onMouseLeave={() => {
+        sethover(false);
+        setCursorType("normal");
+      }}
+    >
+      <GridItemCoverWrapper>
+        <GridItemGrad
+          animate={{ opacity: hover ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
+        />
+        {type === "Photo" && (
+          <GridItemCover
+            src={src}
+            width={width}
+            placeholder={`blur`}
+            blurDataURL={src}
+            height={height}
+            style={{ transform: `scale(${hover ? 1.05 : 1})` }}
+            alt={projectName}
           />
-          {type === "Photo" && (
-            <GridItemCover
-              src={src}
-              width={width}
-              placeholder={`blur`}
-              blurDataURL={src}
-              height={height}
-              style={{ transform: `scale(${hover ? 1.05 : 1})` }}
-              alt={projectName}
-            />
-          )}
-          {type === "Video" && (
-            <VideoWrapper>
-              <GridItemVideo
-                ref={videoRef}
-                src={src}
-                poster={videoThumb}
-                autoPlay={true}
-                playsInline={true}
-                muted={true}
-                loop={true}
-                style={{ transform: `scale(${hover ? 1.05 : 1})` }}
-              />
-            </VideoWrapper>
-          )}
-        </GridItemCoverWrapper>
-        <GridItemAreas>
-          {areas.map(({ area_name, _slug }) => (
-            <AreaTag key={area_name} areaName={area_name} />
-          ))}
-        </GridItemAreas>
-        <GridItemHeader animate={{ y: hover ? "0%" : "-150%" }}>
-          {parse(projectName, options)}
-        </GridItemHeader>
-      </StyledGridItem>
-    </Animation>
+        )}
+        {type === "Video" && (
+          <GridItemVideo
+            ref={videoRef}
+            src={src}
+            poster={videoThumb}
+            autoPlay={true}
+            playsInline={true}
+            muted={true}
+            loop={true}
+            style={{ transform: `scale(${hover ? 1.05 : 1})` }}
+          />
+        )}
+      </GridItemCoverWrapper>
+      <GridItemAreas>
+        {areas.map(({ area_name, _slug }) => (
+          <AreaTag key={area_name} areaName={area_name} />
+        ))}
+      </GridItemAreas>
+      <GridItemHeader animate={{ y: hover ? "0%" : "-200%" }}>
+        {parse(projectName, options)}
+      </GridItemHeader>
+    </StyledGridItem>
   );
 };
 

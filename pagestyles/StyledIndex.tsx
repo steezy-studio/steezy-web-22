@@ -1,8 +1,7 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
 import { spaces } from "../helpers/spaces";
-import u from "../helpers/unit";
-import { motion } from "framer-motion";
 
 export const StyledIndex = styled.div``;
 
@@ -56,81 +55,6 @@ export const HeroFooter = styled.div`
   margin-top: ${spaces.l}px;
 `;
 
-export const LandingpageGrid = styled.div`
-  display: grid;
-  grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
-  ${breakpoint.phone} {
-    grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
-    margin-top: ${({ theme }) => u(3, theme.pageMargin)};
-  }
-  ${breakpoint.monitor} {
-    grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
-  }
-`;
-
-export const LandingpageGridRow = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: ${({ theme }) => theme.pageMargin};
-  &.blockquote {
-    position: relative;
-    z-index: 1;
-  }
-  ${breakpoint.phone} {
-    grid-template-columns: unset;
-    grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
-  }
-`;
-
-export const GridItemWrapper = styled.div<{ offset_amount?: number }>`
-  width: 100%;
-  &.single {
-    width: 75%;
-    grid-column: 1/3;
-    justify-self: end;
-  }
-  &.offset:not(:last-child) {
-    margin-top: ${({ offset_amount }) => `${offset_amount}%`};
-  }
-  ${breakpoint.phone} {
-    &.single {
-      width: 100%;
-      grid-column: 1;
-      justify-self: initial;
-    }
-    &.offset:not(:last-child) {
-      margin-top: unset;
-    }
-  }
-`;
-
-export const Intro = styled.div`
-  width: ${({ theme }) => u(6, theme.pageMargin)};
-  margin-left: ${({ theme }) => u(4, theme.pageMargin)};
-  transform: translateY(${({ theme }) => u(2, theme.pageMargin)});
-  position: relative;
-  display: grid;
-  grid-gap: 60px;
-  ${breakpoint.tabletLandscape} {
-    margin-left: ${({ theme }) => u(3, theme.pageMargin)};
-  }
-  ${breakpoint.tabletPortrait} {
-    display: none;
-    margin-left: unset;
-    width: ${({ theme }) => u(8, theme.pageMargin)};
-  }
-  ${breakpoint.phone} {
-    transform: unset;
-    grid-gap: 30px;
-    margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
-  }
-`;
-
-export const IntroWrapper = styled.div`
-  position: relative;
-  z-index: 2;
-`;
-
 export const IndexQuote = styled.div`
   display: grid;
   row-gap: ${spaces.l}px;
@@ -138,7 +62,7 @@ export const IndexQuote = styled.div`
 
 export const IndexQuoteClient = styled(motion.div)``;
 
-export const IndexQuotesSlider = styled.div`
+export const IndexQuotesSlider = styled.section`
   max-width: 1200px;
   margin: ${spaces.xxxl}px 0;
 `;

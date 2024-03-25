@@ -6,14 +6,14 @@ export const StyledBurger = styled.div`
   pointer-events: all;
   align-items: center;
   justify-content: center;
-  border: 2px solid ${colors.black};
+  border: 1px solid ${colors.black};
   border-radius: ${({ theme }) => theme.bRad};
   width: ${({ theme }) => theme.navbarHeight};
   height: 100%;
   flex-shrink: 0;
   position: relative;
   z-index: 9999999;
-  padding: 15px;
+  padding: 10px;
   svg {
     width: 100%;
     height: auto;

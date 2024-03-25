@@ -3,7 +3,6 @@ import { addColorClasses } from "../../helpers/colorClasses";
 import { breakpoint, colors } from "../../helpers/consts";
 import u from "../../helpers/unit";
 import { StyledContact } from "../../pagestyles/StyledContact";
-import { Intro } from "../../pagestyles/StyledIndex";
 import { NextProjectHead } from "../../pagestyles/StyledProject";
 import { ProjectsHeroFilters } from "../../pagestyles/StyledProjects";
 import { Quote } from "../../pagestyles/StyledStudio";
@@ -13,7 +12,7 @@ export const Large = styled.h1`
   &,
   * {
     font-family: "migra-italic", Arial, Helvetica, sans-serif;
-    font-size: 110px;
+    font-size: 90px;
     line-height: 1.1em;
     letter-spacing: 0.02em;
     font-weight: 400;
@@ -75,9 +74,6 @@ export const Large = styled.h1`
     ${StyledSlider} & {
       margin: 30px ${({ theme }) => theme.pageMargin} 0;
       float: right;
-    }
-    ${Intro} & {
-      white-space: pre-wrap;
     }
     ${Quote} & {
       font-size: 90px;

@@ -30,6 +30,7 @@ interface NavbarProps {
 const Navbar = ({ areas, header }: NavbarProps) => {
   const [isMenuOpen, openMenu] = useState(false);
   const router = useRouter();
+  const navLinksDelay = 0.04;
 
   return (
     <StyledNavbar>
@@ -77,7 +78,7 @@ const Navbar = ({ areas, header }: NavbarProps) => {
               <LinksBlock className='stretch'>
                 {areas.map(({ area_name, _slug, is_default }, i) => (
                   <NavLink
-                    delay={0.08 * i}
+                    delay={navLinksDelay * i}
                     active={router.asPath === `/projects/${_slug}`}
                     href={`/projects/${_slug}`}
                     key={_slug}
@@ -89,7 +90,7 @@ const Navbar = ({ areas, header }: NavbarProps) => {
               {strings.navData.map(({ link, name }, i) => (
                 <LinksBlock key={link}>
                   <NavLink
-                    delay={(areas.length - 1 + i) * 0.08}
+                    delay={(areas.length - 1 + i) * navLinksDelay}
                     active={router.asPath === link}
                     href={link}
                   >

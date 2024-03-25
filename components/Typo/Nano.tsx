@@ -18,7 +18,7 @@ import { StyledHero } from "../Hero/Styles/StyledHero";
 import { PhoneDecoration } from "../Navbar/Styles/StyledNavbar";
 
 export const Nano = styled(motion.span)`
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.1em;
   line-height: 1.5em;
@@ -104,7 +104,7 @@ export const Nano = styled(motion.span)`
     line-height: 1.8em;
   }
   ${breakpoint.largeNotebook} {
-    font-size: 12px;
+    font-size: 11px;
   }
   ${breakpoint.tabletLandscape} {
     font-size: 11px;

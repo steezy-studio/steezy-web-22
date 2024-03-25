@@ -85,7 +85,7 @@ export const LinksBlock = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  border: 2px solid ${colors.black};
+  border: 1px solid ${colors.black};
   background-color: ${colors.white};
   flex-shrink: 0;
   &.stretch {

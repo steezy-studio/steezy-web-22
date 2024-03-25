@@ -19,7 +19,6 @@ const AutoSlider = ({ list, interval = 3000 }: AutoSliderProps) => {
   useEffect(() => {
     const timer = setInterval(() => {
       const nextIndex = index + 1;
-      console.log(nextIndex);
       if (nextIndex === list.length) {
         setindex(0);
         return;

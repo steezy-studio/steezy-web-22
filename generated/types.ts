@@ -15,14 +15,31 @@ export type Scalars = {
 };
 
 /** This union type holds all content models. */
-export type AllModels = Area | LandingpageGrid | LandingpageGridRow | Project;
+export type AllModels = Area | FeaturedGrid | LandingpageGrid | LandingpageGridRow | Project;
+
+export type ApplePodcast = {
+  __typename?: 'ApplePodcast';
+  _id: Scalars['String'];
+  url: Scalars['String'];
+};
 
 /** Single Area. */
 export type Area = {
   __typename?: 'Area';
-  /** Returns true if an A/B test is active for this locale. */
+  /**
+   * Returns true if an A/B test is active for this locale.
+   * @deprecated Will be removed in next version.
+   */
   _ab_testing_active?: Maybe<Scalars['Boolean']>;
-  /** Returns the version if an A/B test is active. */
+  /**
+   * Returns the `B` variation for this content item.
+   * @deprecated Will be removed in next version.
+   */
+  _ab_testing_variation?: Maybe<Area>;
+  /**
+   * Returns the version if an A/B test is active.
+   * @deprecated Will be removed in next version.
+   */
   _ab_testing_version?: Maybe<Scalars['String']>;
   /** Count of bookmark events. */
   _bookmarks?: Maybe<Scalars['Int']>;
@@ -62,7 +79,7 @@ export type Area = {
   area_name?: Maybe<Scalars['String']>;
   area_order?: Maybe<Scalars['Int']>;
   is_default?: Maybe<Scalars['Boolean']>;
-  projects?: Maybe<Array<Project>>;
+  projects: Array<Project>;
   sub_areas?: Maybe<Scalars['String']>;
 };
 
@@ -88,15 +105,21 @@ export enum AreaSortInput {
 
 export type AreaWhereInput = {
   _changed_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _changed_on_gte?: InputMaybe<Scalars['_DateTime']>;
   _changed_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _changed_on_lte?: InputMaybe<Scalars['_DateTime']>;
   _created_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_gte?: InputMaybe<Scalars['_DateTime']>;
   _created_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_lte?: InputMaybe<Scalars['_DateTime']>;
   /** Matches if the Id field is equal to one of the items in the given list. */
   _id_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Matches if the Id field is not equal to one of the items in the given list. */
   _id_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _publish_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _publish_on_gte?: InputMaybe<Scalars['_DateTime']>;
   _publish_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _publish_on_lte?: InputMaybe<Scalars['_DateTime']>;
   /** Matches any content item containing the given text term (full-text search). */
   _search?: InputMaybe<Scalars['String']>;
   _search_options?: InputMaybe<SearchOptionsInput>;
@@ -128,9 +151,9 @@ export type AreaWhereInput = {
   area_name_starts_with?: InputMaybe<Scalars['String']>;
   /** Matches if the field is equal to the given value. */
   area_order?: InputMaybe<Scalars['Int']>;
-  /** Matches if the field is greater than or equal to the given value. */
-  area_order_gt?: InputMaybe<Scalars['Int']>;
   /** Matches if the field is greater than the given value. */
+  area_order_gt?: InputMaybe<Scalars['Int']>;
+  /** Matches if the field is greater than or equal to the given value. */
   area_order_gte?: InputMaybe<Scalars['Int']>;
   /** Matches if the field is less than the given value. */
   area_order_lt?: InputMaybe<Scalars['Int']>;
@@ -138,6 +161,7 @@ export type AreaWhereInput = {
   area_order_lte?: InputMaybe<Scalars['Int']>;
   /** Matches if the field is equal to the given value. */
   is_default?: InputMaybe<Scalars['Boolean']>;
+  /** Match on Project fields. */
   projects?: InputMaybe<ProjectWhereInput>;
   /** Matches if the field is equal to the given value. */
   sub_areas?: InputMaybe<Scalars['String']>;
@@ -167,6 +191,7 @@ export type Asset = {
   caption?: Maybe<Scalars['String']>;
   /** Audio & Video assets stored on AWS legacy streaming playback files. */
   cdn_files?: Maybe<Array<Maybe<CdnFile>>>;
+  /** Returns a cover image for audio/video files. */
   cover?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   duration?: Maybe<Scalars['Int']>;
@@ -194,7 +219,6 @@ export type AssetUrlArgs = {
   crop?: InputMaybe<Scalars['String']>;
   format?: InputMaybe<Scalars['String']>;
   height?: InputMaybe<Scalars['Int']>;
-  player?: InputMaybe<Scalars['String']>;
   preset?: InputMaybe<Scalars['String']>;
   quality?: InputMaybe<Scalars['Int']>;
   res?: InputMaybe<Scalars['String']>;
@@ -217,6 +241,7 @@ export type Assets = {
 export type CdnFile = {
   __typename?: 'CdnFile';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   profile?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
@@ -238,7 +263,7 @@ export type ContentIntegration = {
   data?: Maybe<Array<Maybe<KeyValue>>>;
 };
 
-/** Collection of items out of an content integration. */
+/** Collection of Remote Source items. */
 export type ContentIntegrations = {
   __typename?: 'ContentIntegrations';
   _id?: Maybe<Scalars['String']>;
@@ -265,10 +290,12 @@ export enum ContentItemsSortInput {
 
 export type ContentItemsWhereInput = {
   _channels_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  _customer_relation?: InputMaybe<CustomerRelationWhereInput>;
   _id_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _id_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _search?: InputMaybe<Scalars['String']>;
   _search_options?: InputMaybe<SearchOptionsInput>;
+  _slug_any?: InputMaybe<Array<Scalars['String']>>;
   _stories_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _stories_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _tags_all?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
@@ -282,21 +309,99 @@ export type ContentItemsWhereInput = {
 export type Coordinates = {
   __typename?: 'Coordinates';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   latitude?: Maybe<Scalars['Float']>;
   longitude?: Maybe<Scalars['Float']>;
 };
 
+/** The Customer Relation type is specifying the kind of relationship between the customer and your content. */
+export enum CustomerRelationType {
+  Bookmarked = 'BOOKMARKED',
+  Clicked = 'CLICKED',
+  Commented = 'COMMENTED',
+  Liked = 'LIKED',
+  Purchased = 'PURCHASED',
+  Shared = 'SHARED',
+  Subscribed = 'SUBSCRIBED',
+  Viewed = 'VIEWED',
+  Voted = 'VOTED'
+}
+
+export type CustomerRelationWhereInput = {
+  _type?: InputMaybe<CustomerRelationType>;
+  id?: InputMaybe<Scalars['String']>;
+  reference_id?: InputMaybe<Scalars['String']>;
+};
+
 export type FacebookPost = {
   __typename?: 'FacebookPost';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
+};
+
+/** Single FeaturedGrid. */
+export type FeaturedGrid = {
+  __typename?: 'FeaturedGrid';
+  /**
+   * Returns true if an A/B test is active for this locale.
+   * @deprecated Will be removed in next version.
+   */
+  _ab_testing_active?: Maybe<Scalars['Boolean']>;
+  /**
+   * Returns the `B` variation for this content item.
+   * @deprecated Will be removed in next version.
+   */
+  _ab_testing_variation?: Maybe<FeaturedGrid>;
+  /**
+   * Returns the version if an A/B test is active.
+   * @deprecated Will be removed in next version.
+   */
+  _ab_testing_version?: Maybe<Scalars['String']>;
+  /** Count of bookmark events. */
+  _bookmarks?: Maybe<Scalars['Int']>;
+  /** The time the content item was changed. */
+  _changed_on: Scalars['String'];
+  /** Count of clicktrough events. */
+  _clicktroughs?: Maybe<Scalars['Int']>;
+  /** Count of comment events. */
+  _comments?: Maybe<Scalars['Int']>;
+  /** The time the content item was created. */
+  _created_on: Scalars['String'];
+  /** Id of your Prepr Environment. */
+  _environment_id: Scalars['String'];
+  /** Unique identifier for each content item. */
+  _id: Scalars['String'];
+  /** Count of like events. */
+  _likes?: Maybe<Scalars['Int']>;
+  _locale: Scalars['String'];
+  _locales: Array<Scalars['String']>;
+  /** The time for when the content item is or will be published. */
+  _publish_on?: Maybe<Scalars['String']>;
+  /** Count of purchase events. */
+  _purchases?: Maybe<Scalars['Int']>;
+  /** Calculated time to read in minutes. */
+  _read_time?: Maybe<Scalars['Int']>;
+  /** Count of share events. */
+  _shares?: Maybe<Scalars['Int']>;
+  /** Unique within Type, string identifier for each content item. */
+  _slug?: Maybe<Scalars['String']>;
+  /** Count of subscribe events. */
+  _subscribes?: Maybe<Scalars['Int']>;
+  /** Count of view events. */
+  _views?: Maybe<Scalars['Int']>;
+  /** Count of vote events. */
+  _votes?: Maybe<Scalars['Int']>;
+  featured_projects: Array<Project>;
+  featuredgridname?: Maybe<Scalars['String']>;
 };
 
 export type InstagramPost = {
   __typename?: 'InstagramPost';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
 };
@@ -310,9 +415,20 @@ export type KeyValue = {
 /** Single LandingpageGrid. */
 export type LandingpageGrid = {
   __typename?: 'LandingpageGrid';
-  /** Returns true if an A/B test is active for this locale. */
+  /**
+   * Returns true if an A/B test is active for this locale.
+   * @deprecated Will be removed in next version.
+   */
   _ab_testing_active?: Maybe<Scalars['Boolean']>;
-  /** Returns the version if an A/B test is active. */
+  /**
+   * Returns the `B` variation for this content item.
+   * @deprecated Will be removed in next version.
+   */
+  _ab_testing_variation?: Maybe<LandingpageGrid>;
+  /**
+   * Returns the version if an A/B test is active.
+   * @deprecated Will be removed in next version.
+   */
   _ab_testing_version?: Maybe<Scalars['String']>;
   /** Count of bookmark events. */
   _bookmarks?: Maybe<Scalars['Int']>;
@@ -349,7 +465,7 @@ export type LandingpageGrid = {
   /** Count of vote events. */
   _votes?: Maybe<Scalars['Int']>;
   landingpage_grid?: Maybe<Scalars['String']>;
-  landingpage_projects_grid?: Maybe<Array<LandingpageGridRow>>;
+  landingpage_projects_grid: Array<LandingpageGridRow>;
 };
 
 /** LandingpageGridItem component. */
@@ -365,9 +481,20 @@ export type LandingpageGridItem = {
 /** Single LandingpageGridRow. */
 export type LandingpageGridRow = {
   __typename?: 'LandingpageGridRow';
-  /** Returns true if an A/B test is active for this locale. */
+  /**
+   * Returns true if an A/B test is active for this locale.
+   * @deprecated Will be removed in next version.
+   */
   _ab_testing_active?: Maybe<Scalars['Boolean']>;
-  /** Returns the version if an A/B test is active. */
+  /**
+   * Returns the `B` variation for this content item.
+   * @deprecated Will be removed in next version.
+   */
+  _ab_testing_variation?: Maybe<LandingpageGridRow>;
+  /**
+   * Returns the version if an A/B test is active.
+   * @deprecated Will be removed in next version.
+   */
   _ab_testing_version?: Maybe<Scalars['String']>;
   /** Count of bookmark events. */
   _bookmarks?: Maybe<Scalars['Int']>;
@@ -403,7 +530,7 @@ export type LandingpageGridRow = {
   _views?: Maybe<Scalars['Int']>;
   /** Count of vote events. */
   _votes?: Maybe<Scalars['Int']>;
-  grid_row?: Maybe<Array<Project>>;
+  grid_row: Array<Project>;
   offset?: Maybe<Scalars['Boolean']>;
   offset_amount?: Maybe<Scalars['Int']>;
   prepr_name?: Maybe<Scalars['String']>;
@@ -427,15 +554,21 @@ export enum LandingpageGridRowSortInput {
 
 export type LandingpageGridRowWhereInput = {
   _changed_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _changed_on_gte?: InputMaybe<Scalars['_DateTime']>;
   _changed_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _changed_on_lte?: InputMaybe<Scalars['_DateTime']>;
   _created_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_gte?: InputMaybe<Scalars['_DateTime']>;
   _created_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_lte?: InputMaybe<Scalars['_DateTime']>;
   /** Matches if the Id field is equal to one of the items in the given list. */
   _id_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Matches if the Id field is not equal to one of the items in the given list. */
   _id_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _publish_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _publish_on_gte?: InputMaybe<Scalars['_DateTime']>;
   _publish_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _publish_on_lte?: InputMaybe<Scalars['_DateTime']>;
   /** Matches any content item containing the given text term (full-text search). */
   _search?: InputMaybe<Scalars['String']>;
   _search_options?: InputMaybe<SearchOptionsInput>;
@@ -449,14 +582,15 @@ export type LandingpageGridRowWhereInput = {
   _tags_has?: InputMaybe<Scalars['Boolean']>;
   /** Matches any content item not tagged with an item from the given list. */
   _tags_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** Match on Project fields. */
   grid_row?: InputMaybe<ProjectWhereInput>;
   /** Matches if the field is equal to the given value. */
   offset?: InputMaybe<Scalars['Boolean']>;
   /** Matches if the field is equal to the given value. */
   offset_amount?: InputMaybe<Scalars['Int']>;
-  /** Matches if the field is greater than or equal to the given value. */
-  offset_amount_gt?: InputMaybe<Scalars['Int']>;
   /** Matches if the field is greater than the given value. */
+  offset_amount_gt?: InputMaybe<Scalars['Int']>;
+  /** Matches if the field is greater than or equal to the given value. */
   offset_amount_gte?: InputMaybe<Scalars['Int']>;
   /** Matches if the field is less than the given value. */
   offset_amount_lt?: InputMaybe<Scalars['Int']>;
@@ -495,15 +629,21 @@ export enum LandingpageGridSortInput {
 
 export type LandingpageGridWhereInput = {
   _changed_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _changed_on_gte?: InputMaybe<Scalars['_DateTime']>;
   _changed_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _changed_on_lte?: InputMaybe<Scalars['_DateTime']>;
   _created_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_gte?: InputMaybe<Scalars['_DateTime']>;
   _created_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_lte?: InputMaybe<Scalars['_DateTime']>;
   /** Matches if the Id field is equal to one of the items in the given list. */
   _id_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Matches if the Id field is not equal to one of the items in the given list. */
   _id_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _publish_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _publish_on_gte?: InputMaybe<Scalars['_DateTime']>;
   _publish_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _publish_on_lte?: InputMaybe<Scalars['_DateTime']>;
   /** Matches any content item containing the given text term (full-text search). */
   _search?: InputMaybe<Scalars['String']>;
   _search_options?: InputMaybe<SearchOptionsInput>;
@@ -525,6 +665,7 @@ export type LandingpageGridWhereInput = {
   landingpage_grid_ends_with?: InputMaybe<Scalars['String']>;
   /** Matches if the field starts with the given value. */
   landingpage_grid_starts_with?: InputMaybe<Scalars['String']>;
+  /** Match on LandingpageGridRow fields. */
   landingpage_projects_grid?: InputMaybe<LandingpageGridRowWhereInput>;
 };
 
@@ -538,6 +679,7 @@ export type LandingpageGrids = {
 export type NavigationItem = {
   __typename?: 'NavigationItem';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   body?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
@@ -559,9 +701,20 @@ export type Number = {
 /** Single Project. */
 export type Project = {
   __typename?: 'Project';
-  /** Returns true if an A/B test is active for this locale. */
+  /**
+   * Returns true if an A/B test is active for this locale.
+   * @deprecated Will be removed in next version.
+   */
   _ab_testing_active?: Maybe<Scalars['Boolean']>;
-  /** Returns the version if an A/B test is active. */
+  /**
+   * Returns the `B` variation for this content item.
+   * @deprecated Will be removed in next version.
+   */
+  _ab_testing_variation?: Maybe<Project>;
+  /**
+   * Returns the version if an A/B test is active.
+   * @deprecated Will be removed in next version.
+   */
   _ab_testing_version?: Maybe<Scalars['String']>;
   /** Count of bookmark events. */
   _bookmarks?: Maybe<Scalars['Int']>;
@@ -606,22 +759,13 @@ export type Project = {
   grid_image?: Maybe<Array<Maybe<Asset>>>;
   hero_image?: Maybe<Array<Maybe<Asset>>>;
   landingpage_grid_image?: Maybe<Array<Maybe<Asset>>>;
-  next_project?: Maybe<Array<Project>>;
+  next_project: Array<Project>;
   prepr_display_name?: Maybe<Scalars['String']>;
   project_description?: Maybe<Scalars['String']>;
   project_detail_name?: Maybe<Scalars['String']>;
   project_facts?: Maybe<Array<Maybe<_Prepr_Types>>>;
   project_grid_name?: Maybe<Scalars['String']>;
   project_presentation?: Maybe<Array<Maybe<_Prepr_Types>>>;
-};
-
-/** ProjectArea component. */
-export type ProjectArea = {
-  __typename?: 'ProjectArea';
-  _id?: Maybe<Scalars['String']>;
-  /** @deprecated Use `__typename` instead */
-  _type?: Maybe<Scalars['String']>;
-  project_area?: Maybe<Array<Maybe<Area>>>;
 };
 
 /** ProjectFacts component. */
@@ -692,15 +836,21 @@ export enum ProjectSortInput {
 
 export type ProjectWhereInput = {
   _changed_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _changed_on_gte?: InputMaybe<Scalars['_DateTime']>;
   _changed_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _changed_on_lte?: InputMaybe<Scalars['_DateTime']>;
   _created_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_gte?: InputMaybe<Scalars['_DateTime']>;
   _created_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _created_on_lte?: InputMaybe<Scalars['_DateTime']>;
   /** Matches if the Id field is equal to one of the items in the given list. */
   _id_any?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Matches if the Id field is not equal to one of the items in the given list. */
   _id_nany?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   _publish_on_gt?: InputMaybe<Scalars['_DateTime']>;
+  _publish_on_gte?: InputMaybe<Scalars['_DateTime']>;
   _publish_on_lt?: InputMaybe<Scalars['_DateTime']>;
+  _publish_on_lte?: InputMaybe<Scalars['_DateTime']>;
   /** Matches any content item containing the given text term (full-text search). */
   _search?: InputMaybe<Scalars['String']>;
   _search_options?: InputMaybe<SearchOptionsInput>;
@@ -746,6 +896,7 @@ export type ProjectWhereInput = {
   company_name_ends_with?: InputMaybe<Scalars['String']>;
   /** Matches if the field starts with the given value. */
   company_name_starts_with?: InputMaybe<Scalars['String']>;
+  /** Match on Project fields. */
   next_project?: InputMaybe<ProjectWhereInput>;
   /** Matches if the field is equal to the given value. */
   prepr_display_name?: InputMaybe<Scalars['String']>;
@@ -781,6 +932,15 @@ export type ProjectWhereInput = {
   project_grid_name_starts_with?: InputMaybe<Scalars['String']>;
 };
 
+/** ProjectArea component. */
+export type Project_Area = {
+  __typename?: 'Project_area';
+  _id?: Maybe<Scalars['String']>;
+  /** @deprecated Use `__typename` instead */
+  _type?: Maybe<Scalars['String']>;
+  project_area?: Maybe<Array<Maybe<Area>>>;
+};
+
 /** List of Projects items. */
 export type Projects = {
   __typename?: 'Projects';
@@ -796,6 +956,8 @@ export type Query = {
   Areas?: Maybe<Areas>;
   /** Retrieve content items from all models. */
   ContentItems?: Maybe<ContentItems>;
+  /** Retrieve FeaturedGrid. */
+  FeaturedGrid?: Maybe<FeaturedGrid>;
   /** Retrieve a single LandingpageGrid. */
   LandingpageGrid?: Maybe<LandingpageGrid>;
   /** Retrieve a single LandingpageGridRow. */
@@ -804,14 +966,6 @@ export type Query = {
   LandingpageGridRows?: Maybe<LandingpageGridRows>;
   /** Retrieve multiple LandingpageGrids. */
   LandingpageGrids?: Maybe<LandingpageGrids>;
-  /** Retrieve personalized Areas for the giving Customer ID. */
-  Personalized_Areas?: Maybe<Areas>;
-  /** Retrieve personalized LandingpageGridRows for the giving Customer ID. */
-  Personalized_LandingpageGridRows?: Maybe<LandingpageGridRows>;
-  /** Retrieve personalized LandingpageGrids for the giving Customer ID. */
-  Personalized_LandingpageGrids?: Maybe<LandingpageGrids>;
-  /** Retrieve personalized Projects for the giving Customer ID. */
-  Personalized_Projects?: Maybe<Projects>;
   /** Recommendation recipe suitable for recommending globally popular Areas */
   Popular_Areas?: Maybe<Areas>;
   /** Recommendation recipe suitable for recommending globally popular LandingpageGridRows */
@@ -862,6 +1016,12 @@ export type QueryContentItemsArgs = {
 };
 
 
+export type QueryFeaturedGridArgs = {
+  locale?: InputMaybe<Scalars['String']>;
+  locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
 export type QueryLandingpageGridArgs = {
   id?: InputMaybe<Scalars['String']>;
   locale?: InputMaybe<Scalars['String']>;
@@ -895,38 +1055,6 @@ export type QueryLandingpageGridsArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   sort?: InputMaybe<LandingpageGridSortInput>;
   where?: InputMaybe<LandingpageGridWhereInput>;
-};
-
-
-export type QueryPersonalized_AreasArgs = {
-  id?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  slug?: InputMaybe<Scalars['String']>;
-};
-
-
-export type QueryPersonalized_LandingpageGridRowsArgs = {
-  id?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  slug?: InputMaybe<Scalars['String']>;
-};
-
-
-export type QueryPersonalized_LandingpageGridsArgs = {
-  id?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  slug?: InputMaybe<Scalars['String']>;
-};
-
-
-export type QueryPersonalized_ProjectsArgs = {
-  id?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
-  locales?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-  slug?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1034,6 +1162,7 @@ export type QuerySimilar_ProjectsArgs = {
 export type Quote = {
   __typename?: 'Quote';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   author?: Maybe<Scalars['String']>;
   body?: Maybe<Scalars['String']>;
@@ -1042,6 +1171,7 @@ export type Quote = {
 export type Resource = {
   __typename?: 'Resource';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   body?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
@@ -1049,6 +1179,7 @@ export type Resource = {
 };
 
 export type SearchOptionsInput = {
+  includeNumeric?: InputMaybe<Scalars['Boolean']>;
   includeReferences?: InputMaybe<Scalars['Boolean']>;
 };
 
@@ -1064,6 +1195,7 @@ export type SimilarRulesInput = {
 export type SoundCloudPost = {
   __typename?: 'SoundCloudPost';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
 };
@@ -1071,6 +1203,7 @@ export type SoundCloudPost = {
 export type SpotifyPlaylist = {
   __typename?: 'SpotifyPlaylist';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
 };
@@ -1078,6 +1211,7 @@ export type SpotifyPlaylist = {
 export type Text = {
   __typename?: 'Text';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   body?: Maybe<Scalars['String']>;
   format?: Maybe<TextFormat>;
@@ -1099,6 +1233,7 @@ export enum TextFormat {
 export type TikTokPost = {
   __typename?: 'TikTokPost';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
 };
@@ -1106,6 +1241,7 @@ export type TikTokPost = {
 export type TwitterPost = {
   __typename?: 'TwitterPost';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
 };
@@ -1113,6 +1249,7 @@ export type TwitterPost = {
 export type VimeoPost = {
   __typename?: 'VimeoPost';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
 };
@@ -1120,6 +1257,7 @@ export type VimeoPost = {
 export type YouTubePost = {
   __typename?: 'YouTubePost';
   _id?: Maybe<Scalars['String']>;
+  /** @deprecated Will be removed in next version, use __typename instead. */
   _type?: Maybe<Scalars['String']>;
   url?: Maybe<Scalars['String']>;
 };
@@ -1137,5 +1275,5 @@ export enum _Event {
   Vote = 'Vote'
 }
 
-/** This union type contains all components. */
-export type _Prepr_Types = Assets | ContentIntegrations | Coordinates | FacebookPost | InstagramPost | LandingpageGridItem | NavigationItem | Number | ProjectArea | ProjectFacts | ProjectGridBlockquote | ProjectGridRow | ProjectGridVimeo | Quote | Resource | SoundCloudPost | SpotifyPlaylist | Text | TikTokPost | TwitterPost | VimeoPost | YouTubePost;
+/** This union type contains all components and remote sources. */
+export type _Prepr_Types = ApplePodcast | Assets | ContentIntegrations | Coordinates | FacebookPost | InstagramPost | LandingpageGridItem | NavigationItem | Number | ProjectFacts | ProjectGridBlockquote | ProjectGridRow | ProjectGridVimeo | Project_Area | Quote | Resource | SoundCloudPost | SpotifyPlaylist | Text | TikTokPost | TwitterPost | VimeoPost | YouTubePost;

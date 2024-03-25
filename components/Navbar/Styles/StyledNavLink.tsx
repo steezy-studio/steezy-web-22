@@ -5,7 +5,7 @@ import { breakpoint, colors } from "../../../helpers/consts";
 export const StyledNavLink = styled(motion.a)`
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: 0.1em;
   padding: 0 20px;
   &:hover {
@@ -21,7 +21,7 @@ export const StyledNavLink = styled(motion.a)`
     }
   }
   ${breakpoint.largeNotebook} {
-    font-size: 12px;
+    font-size: 11px;
     padding: 0 15px;
   }
   ${breakpoint.smallNotebook} {

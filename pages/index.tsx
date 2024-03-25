@@ -1,26 +1,24 @@
-import { Transition, motion } from "framer-motion";
+import { Transition } from "framer-motion";
 import { GetStaticProps } from "next";
-import { Fragment, useContext } from "react";
 import client from "../apollo/client";
-import Animation from "../components/Animation/Animation";
+import AnimateTextRows from "../components/AnimateTextRows/AnimateTextRows";
+import AutoSlider from "../components/AutoSlider/AutoSlider";
 import GridItem from "../components/GridItem/GridItem";
+import { Grid, GridRow } from "../components/GridItem/Styles/StyledGrid";
 import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
-import { StyledLink } from "../components/Link/Styles/StyledLink";
+import Link from "../components/Link/Link";
 import Navbar from "../components/Navbar/Navbar";
+import Slider from "../components/Slider/Slider";
 import { Large } from "../components/Typo/Large";
+import { Medium } from "../components/Typo/Medium";
 import { Micro } from "../components/Typo/Micro";
 import strings from "../data/strings";
-import {
-  Areas,
-  LandingpageGridRow as LandingpageGridRowType,
-  Query,
-} from "../generated/types";
+import { Areas, Query } from "../generated/types";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
+import { easingInOutCubic } from "../helpers/animationConfig";
 import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
-import { splitArray } from "../helpers/splitArray";
 import {
-  GridItemWrapper,
   HeroFooter,
   IndexHeroSection,
   IndexLatestProjects,
@@ -31,60 +29,17 @@ import {
   IndexSliderW,
   LandingHeroPageLogotypes,
   LandingPageHeroLogotype,
-  LandingpageGrid,
-  LandingpageGridRow,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
-import { Blockquote, Quote } from "../pagestyles/StyledStudio";
-import { HoverProvider } from "./_app";
-import Slider from "../components/Slider/Slider";
-import { Medium } from "../components/Typo/Medium";
-import Link from "../components/Link/Link";
-import AnimateTextRows from "../components/AnimateTextRows/AnimateTextRows";
-import AutoSlider from "../components/AutoSlider/AutoSlider";
-import { easing, easingInOutCubic } from "../helpers/animationConfig";
 
 interface indexProps {
-  landingpageGrid: LandingpageGridRowType[];
+  projects: EnhancedProject[];
   latestProjects: EnhancedProject[];
   areas: Areas;
 }
 
-const Index = ({ landingpageGrid, areas, latestProjects }: indexProps) => {
+const Index = ({ projects, areas, latestProjects }: indexProps) => {
   const landingpageStrings = strings.landingPage;
-  const { setCursorType } = useContext(HoverProvider);
-
-  const [firstGridPart, secondGridPart] = splitArray<LandingpageGridRowType>(
-    landingpageGrid,
-    Math.floor(landingpageGrid.length / 2)
-  );
-
-  const landingpageGridWithQuotes = [
-    ...firstGridPart,
-    landingpageStrings.quotes[0],
-    ...secondGridPart,
-  ];
-
-  const renderTextWithLink = ({ type, body, href }, i) => {
-    if (type === `text`) {
-      return <Fragment key={i}>{body}</Fragment>;
-    }
-    if (type === `link`) {
-      return (
-        <Fragment key={i}>
-          <StyledLink
-            as={"a"}
-            href={href}
-            onMouseEnter={() => setCursorType("hover")}
-            onMouseLeave={() => setCursorType("normal")}
-          >
-            {body}
-          </StyledLink>
-          <br />
-        </Fragment>
-      );
-    }
-  };
 
   return (
     <>
@@ -137,11 +92,12 @@ const Index = ({ landingpageGrid, areas, latestProjects }: indexProps) => {
                     <GridItem
                       key={i}
                       areas={areas}
-                      height={1080}
+                      wide={false}
                       projectName={project_grid_name}
                       slug={_slug}
                       src={landingpage_grid_image[0].url}
                       type='Photo'
+                      height={1080}
                       width={1920}
                     />
                   );
@@ -153,7 +109,7 @@ const Index = ({ landingpageGrid, areas, latestProjects }: indexProps) => {
 
         <IndexQuotesSlider>
           <AutoSlider
-            interval={9000}
+            interval={5000}
             list={[0, 1, 2].map((_, j, a) => {
               const delay = 0.02;
 
@@ -196,33 +152,68 @@ const Index = ({ landingpageGrid, areas, latestProjects }: indexProps) => {
             })}
           />
         </IndexQuotesSlider>
+        <Grid>
+          {projects
+            .reduce((acc: EnhancedProject[][], curr: EnhancedProject) => {
+              const lastItem = acc[acc.length - 1];
+              if (!lastItem) return [[curr]];
+              if (lastItem?.length === 2) return [...acc, [curr]];
+              return [...acc.slice(0, -1), [...lastItem, curr]];
+            }, [])
+            .map((row, j) => {
+              return (
+                <GridRow key={j}>
+                  {row.map((project, i) => {
+                    return (
+                      <GridItem
+                        key={i}
+                        slug={project._slug}
+                        wide={(i + j) % 2 === 0}
+                        projectName={project.project_grid_name}
+                        src={
+                          project.landingpage_grid_image[0]._type === "Video"
+                            ? project.landingpage_grid_image[0].cdn_files?.[0]
+                                .url
+                            : project.landingpage_grid_image[0].url
+                        }
+                        height={project.landingpage_grid_image[0].width}
+                        width={project.landingpage_grid_image[0].height}
+                        areas={project.areas}
+                        type={project.landingpage_grid_image[0]._type}
+                      />
+                    );
+                  })}
+                </GridRow>
+              );
+            })}
+        </Grid>
       </StyledIndex>
     </>
   );
 };
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await client.query<Query>({
+  const {
+    data: {
+      FeaturedGrid: featuredGrid,
+      Projects: latestProjects,
+      Areas: areas,
+    },
+  } = await client.query<Query>({
     query: GET_LANDINGPAGE,
     variables: { sortLatestProjects: "changed_on_DESC" },
   });
 
-  const enhancedGrid =
-    data.data.LandingpageGrids.items[0].landingpage_projects_grid.map((row) => {
-      return {
-        ...row,
-        grid_row: enhanceProjects(row.grid_row, data.data.Areas),
-      };
-    });
-
-  const enhancedLatestProjects = enhanceProjects(
-    data.data.Projects.items,
-    data.data.Areas
+  const enhancedFeaturedGrid = enhanceProjects(
+    featuredGrid.featured_projects,
+    areas
   );
+
+  const enhancedLatestProjects = enhanceProjects(latestProjects.items, areas);
 
   return {
     props: {
-      landingpageGrid: enhancedGrid,
-      areas: data.data.Areas,
+      areas: areas,
+      projects: enhancedFeaturedGrid,
       latestProjects: enhancedLatestProjects,
     },
     revalidate: Number(process.env.REVALIDATE),

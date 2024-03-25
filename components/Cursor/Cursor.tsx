@@ -24,6 +24,7 @@ const StyledCursor = styled(motion.div)`
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 1px;
     svg {
       transform-origin: center;
     }
