@@ -7,7 +7,6 @@ import { ProjectHeroRole } from "../../pagestyles/StyledProject";
 import {
   Blockquote,
   BrandsSection,
-  ServicesSection,
   StyledStudio,
   TextBlock,
   ValuesSection,
@@ -35,7 +34,7 @@ export const Nano = styled(motion.span)`
     }
     ${breakpoint.smallNotebook} {
       ${ValuesSection} &, 
-      ${TextBlock} &, ${ServicesSection} &, ${BrandsSection} & {
+      ${TextBlock} &,  ${BrandsSection} & {
         margin-left: 0;
       }
     }
@@ -77,7 +76,7 @@ export const Nano = styled(motion.span)`
       display: inline-flex;
     }
     ${breakpoint.smallNotebook} {
-      ${TextBlock} &, ${ServicesSection} &, ${BrandsSection} & {
+      ${TextBlock} &,  ${BrandsSection} & {
         &:after {
           display: none;
         }

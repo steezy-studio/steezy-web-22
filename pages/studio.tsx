@@ -1,14 +1,11 @@
-import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
 import { useState } from "react";
 import { useTheme } from "styled-components";
-import client from "../apollo/client";
+import getClient from "../apollo/client";
 import Animation from "../components/Animation/Animation";
 import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
-import Slider from "../components/Slider/Slider";
 import Img from "../components/Img/Img";
-import Link from "../components/Link/Link";
 import Navbar from "../components/Navbar/Navbar";
 import { Large } from "../components/Typo/Large";
 import { Medium } from "../components/Typo/Medium";
@@ -18,7 +15,6 @@ import ValueItem from "../components/ValueItem";
 import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
-import { device } from "../helpers/consts";
 import { useWindowSize } from "../hooks/useWindowSize";
 import {
   Blockquote,
@@ -32,10 +28,7 @@ import {
   Logotypes,
   Outro,
   Quote,
-  ServicesList,
-  ServicesSection,
   StyledStudio,
-  SubServicesList,
   TextBlock,
   TextBlockBody,
   TextBlockHeader,
@@ -151,34 +144,7 @@ const Studio = ({ areas }: StudioProps) => {
             }))}
           />
         </Animation> */}
-        <ServicesSection>
-          <HeaderWithDashOffset>
-            <Animation type='fadeFromBottom'>
-              <Micro className='with-dash'>
-                {studioStrings.services.header}
-              </Micro>
-            </Animation>
-          </HeaderWithDashOffset>
-          <ServicesList>
-            {areas.items.map(
-              ({ sub_areas, area_name, _slug, is_default }, i) => {
-                if (is_default) return null;
-                return (
-                  <Animation type='fadeFromBottom' key={_slug} delay={0.2 * i}>
-                    <motion.div>
-                      <Medium className='big'>
-                        <Link href={`/projects/${_slug}`}>{area_name}</Link>
-                      </Medium>
-                      <SubServicesList>
-                        <Medium>{sub_areas}</Medium>
-                      </SubServicesList>
-                    </motion.div>
-                  </Animation>
-                );
-              }
-            )}
-          </ServicesList>
-        </ServicesSection>
+
         <BlockquoteSection>
           <Blockquote className='_1'>
             <Img
@@ -272,6 +238,7 @@ const Studio = ({ areas }: StudioProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
+  const client = getClient();
   try {
     const data = await client.query({ query: GET_ALL_AREAS });
     return {

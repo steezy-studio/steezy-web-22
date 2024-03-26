@@ -5,7 +5,7 @@ import parse, {
   HTMLReactParserOptions,
 } from "html-react-parser";
 import { useContext, useRef, useState } from "react";
-import { Area } from "../../generated/types";
+import { Area, Asset } from "../../generated/types";
 import {
   useIntersectionObserver,
   videoCallback,
@@ -24,27 +24,21 @@ import {
 } from "./Styles/StyledGridItem";
 
 interface GridItemProps {
-  src: string;
-  width: number;
-  height: number;
   areas: Area[];
   projectName: string;
   slug: string;
-  type: string;
   videoThumb?: string;
   wide?: boolean;
+  cover: Asset[];
 }
 
 const GridItem = ({
   areas,
-  height,
-  src,
-  width,
   projectName,
   slug,
-  type,
   videoThumb,
   wide,
+  cover,
 }: GridItemProps) => {
   const [hover, sethover] = useState(false);
   const { setCursorType } = useContext(HoverProvider);
@@ -52,6 +46,7 @@ const GridItem = ({
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
   );
+
   // const wide = width > height;
 
   const options: HTMLReactParserOptions = {
@@ -86,21 +81,21 @@ const GridItem = ({
           animate={{ opacity: hover ? 1 : 0 }}
           transition={{ duration: 0.2 }}
         />
-        {type === "Photo" && (
+        {cover[0].url ? (
           <GridItemCover
-            src={src}
-            width={width}
+            src={cover[0].url}
+            width={cover[0].width}
             placeholder={`blur`}
-            blurDataURL={src}
-            height={height}
+            blurDataURL={cover[0].url}
+            height={cover[0].height}
             style={{ transform: `scale(${hover ? 1.05 : 1})` }}
             alt={projectName}
           />
-        )}
-        {type === "Video" && (
+        ) : (
           <GridItemVideo
             ref={videoRef}
-            src={src}
+            // @ts-ignore
+            src={cover[0].cdn_files[0].url}
             poster={videoThumb}
             autoPlay={true}
             playsInline={true}

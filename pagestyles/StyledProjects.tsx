@@ -30,16 +30,6 @@ export const ProjectsHeroContent = styled.div`
 
 export const ProjectsHeroFilters = styled.div``;
 
-export const ProjectsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: ${({ theme }) => theme.pageMargin};
-  row-gap: ${({ theme }) => u(1, theme.pageMargin)};
-  ${breakpoint.phone} {
-    grid-template-columns: unset;
-  }
-`;
-
 export const ProjectsGridColumn = styled.div`
   &.odd {
     margin-top: ${({ theme }) => u(-2, theme.pageMargin)};

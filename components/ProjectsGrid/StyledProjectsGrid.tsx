@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { spaces } from "../../../helpers/spaces";
+import { spaces } from "../../helpers/spaces";
 
-export const Grid = styled.div`
+export const StyledProjectsGrid = styled.div``;
+
+export const ProjectsGridRows = styled.div`
   display: grid;
   row-gap: ${spaces.xs}px;
 `;

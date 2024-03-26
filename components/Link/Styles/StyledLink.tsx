@@ -1,90 +1,43 @@
 import styled from "styled-components";
-import { breakpoint, colors } from "../../../helpers/consts";
-import { SubServicesList } from "../../../pagestyles/StyledStudio";
-import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
-import { Medium } from "../../Typo/Medium";
-import { Micro } from "../../Typo/Micro";
+import { colors } from "../../../helpers/consts";
+
+export const LinkBg = styled.div`
+  width: 100%;
+  position: absolute;
+  height: 0.85em;
+  top: 0;
+  background-color: ${colors.primary400};
+  left: 0;
+  mix-blend-mode: multiply;
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
+  &.agrandir {
+    height: 1.1em;
+  }
+`;
 
 export const StyledLink = styled.span`
   &,
   a {
-    /* cursor: pointer; */
     position: relative;
     font-family: inherit;
     color: inherit;
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
+    &:hover {
+      .bg {
+        transform: scaleX(1);
+      }
+    }
     &.no-underline {
       text-decoration: none !important;
     }
-    &:after {
-      content: "";
-      display: block;
-      width: 100%;
-      position: absolute;
-      height: 0.85em;
-      top: 0;
-      background-color: ${colors.primary400};
-      left: 0;
-      z-index: -1;
-      transform: scaleX(0);
-      transform-origin: 0 0;
-      transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
-    }
-    &:hover {
-      &:after {
-        transform: scaleX(1);
-      }
-    }
     &.active,
     &.active a {
-      /* cursor: default; */
       &:after {
         transform: scaleX(1);
-      }
-    }
-    ${StyledGridItem} &, ${SubServicesList} & {
-      font-size: 28px;
-      font-weight: 300;
-      strong {
-        font-family: "migra-italic";
-        font-weight: 600;
-      }
-      &:hover {
-        &:after {
-          transform: unset;
-        }
-      }
-      &:after {
-        height: 1.2em;
-      }
-      &.hover {
-        &:after {
-          transform: scaleX(1);
-        }
-      }
-      ${breakpoint.largeNotebook} {
-        font-size: 24px;
-      }
-      ${breakpoint.tabletLandscape} {
-        font-size: 18px;
-      }
-      ${breakpoint.tabletPortrait} {
-        font-size: 16px;
-      }
-    }
-    ${SubServicesList} & {
-      line-height: 1.8em;
-    }
-    ${Medium} & {
-      &:after {
-        height: 1.2em;
-      }
-    }
-    ${Micro} & {
-      &:after {
-        height: 1.4em;
       }
     }
   }

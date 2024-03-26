@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const StyledAnimateTextRows = styled.div`
   position: relative;
+  overflow: hidden;
 `;
 
 export const HiddenText = styled.span`

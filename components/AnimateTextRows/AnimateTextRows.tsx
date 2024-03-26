@@ -1,16 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import { MotionProps, motion } from "framer-motion";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import {
   HiddenText,
   StyledAnimateTextRows,
   Text,
 } from "./StyledAnimateTextRows";
-import { MotionProps, motion } from "framer-motion";
-import { useDidUpdateEffect } from "../../hooks/useDidUpdateEffect";
 
 interface AnimateTextRowsProps {
   children: string;
-  motionProps?: (i: number) => MotionProps;
+  motionProps?: (
+    i: number,
+    ref: MutableRefObject<HTMLDivElement>
+  ) => MotionProps;
 }
 
 const AnimateTextRows = ({ children, motionProps }: AnimateTextRowsProps) => {
@@ -56,7 +58,7 @@ const AnimateTextRows = ({ children, motionProps }: AnimateTextRowsProps) => {
       <Text>
         {rows &&
           rows.map((row, i) => (
-            <motion.div key={i} {...motionProps(i)}>
+            <motion.div key={i} {...motionProps(i, containerRef)}>
               {row.join(" ")}
             </motion.div>
           ))}

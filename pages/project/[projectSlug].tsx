@@ -41,6 +41,8 @@ import {
   StyledProject,
 } from "../../pagestyles/StyledProject";
 import { HoverProvider } from "../_app";
+import { get } from "http";
+import getClient from "../../apollo/client";
 
 interface ProjectProps {
   projectData: ProjectType;
@@ -226,7 +228,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                 </StyledLink>
               </Large>
             </NextProjectHead>
-            <ClassicGrid>
+            {/* <ClassicGrid>
               {(w >= device.phone
                 ? projectData.next_project
                 : [projectData.next_project[0]]
@@ -252,7 +254,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                   />
                 )
               )}
-            </ClassicGrid>
+            </ClassicGrid> */}
           </NextProjectSection>
         )}
       </StyledProject>
@@ -265,6 +267,7 @@ export const getStaticProps = async ({
 }: GetStaticPropsContext<{
   projectSlug: string;
 }>) => {
+  const client = getClient();
   const data = await client.query<Query>({
     query: GET_PROJECT,
     variables: { slug: params.projectSlug },

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { breakpoint, colors } from "../helpers/consts";
+import { breakpoint } from "../helpers/consts";
 import u from "../helpers/unit";
 
 export const StyledStudio = styled.div``;
@@ -123,25 +123,6 @@ export const ValuesList = styled.div`
   }
 `;
 
-export const ServicesSection = styled.section`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-column-gap: 60px;
-  align-items: start;
-  width: ${({ theme }) => u(13, theme.pageMargin)};
-  margin: ${({ theme }) => u(2, theme.pageMargin)} 0;
-  ${breakpoint.largeNotebook} {
-  }
-  ${breakpoint.tabletLandscape} {
-    grid-template-columns: unset;
-    grid-row-gap: 30px;
-    width: 100%;
-  }
-  ${breakpoint.phone} {
-    margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
-  }
-`;
-
 export const HeaderWithDashOffset = styled.div`
   margin-top: 0.6em;
   ${breakpoint.smallNotebook} {
@@ -149,28 +130,6 @@ export const HeaderWithDashOffset = styled.div`
   }
   ${breakpoint.tabletLandscape} {
     margin-top: unset;
-  }
-`;
-
-export const ServicesList = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-row-gap: ${({ theme }) => u(0.5, theme.pageMargin)};
-  grid-column-gap: 100px;
-  ${breakpoint.tabletPortrait} {
-    grid-column-gap: 30px;
-    grid-row-gap: ${({ theme }) => u(1, theme.pageMargin)};
-  }
-  ${breakpoint.phone} {
-    grid-template-columns: repeat(2, 1fr);
-    grid-row-gap: ${({ theme }) => u(2, theme.pageMargin)};
-  }
-`;
-
-export const SubServicesList = styled.div`
-  margin-top: 30px;
-  ${breakpoint.phone} {
-    margin-top: 10px;
   }
 `;
 

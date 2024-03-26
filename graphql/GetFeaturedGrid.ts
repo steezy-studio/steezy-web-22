@@ -1,22 +1,18 @@
 import { gql } from "@apollo/client";
 
-export const FRAGMENT_GET_ALL_AREAS = gql`
-  fragment FragmentGetAreas on Areas {
-    items {
-      area_name
-      _id
-      _slug
-      sub_areas
-      area_description
-      is_default
-      projects {
+export const GET_FEATURED_GRID = gql`
+  query getFeaturedGrid {
+    FeaturedGrid {
+      featured_projects {
+        _slug
         _id
+        project_grid_name
         grid_image {
-          width
           url(format: "webp")
-          height
+          _type
           description
-          _id
+          width
+          height
           cdn_files {
             _id
             _type

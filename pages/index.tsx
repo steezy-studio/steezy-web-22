@@ -1,17 +1,16 @@
 import { Transition } from "framer-motion";
 import { GetStaticProps } from "next";
-import client from "../apollo/client";
+import getClient from "../apollo/client";
 import AnimateTextRows from "../components/AnimateTextRows/AnimateTextRows";
 import AutoSlider from "../components/AutoSlider/AutoSlider";
 import GridItem from "../components/GridItem/GridItem";
-import { Grid, GridRow } from "../components/GridItem/Styles/StyledGrid";
 import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
-import Link from "../components/Link/Link";
 import Navbar from "../components/Navbar/Navbar";
+import ProjectsGrid from "../components/ProjectsGrid/ProjectsGrid";
+import SectionHeader from "../components/SectionHeader/SectionHeader";
 import Slider from "../components/Slider/Slider";
 import { Large } from "../components/Typo/Large";
-import { Medium } from "../components/Typo/Medium";
 import { Micro } from "../components/Typo/Micro";
 import strings from "../data/strings";
 import { Areas, Query } from "../generated/types";
@@ -20,17 +19,20 @@ import { easingInOutCubic } from "../helpers/animationConfig";
 import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
 import {
   HeroFooter,
+  IndexGrid,
   IndexHeroSection,
   IndexLatestProjects,
-  IndexLatestProjectsHeader,
   IndexQuote,
   IndexQuoteClient,
   IndexQuotesSlider,
+  IndexServices,
   IndexSliderW,
   LandingHeroPageLogotypes,
   LandingPageHeroLogotype,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
+import { GET_FEATURED_GRID } from "../graphql/GetFeaturedGrid";
+import ServicesSection from "../components/ServicesSection/ServicesSection";
 
 interface indexProps {
   projects: EnhancedProject[];
@@ -74,20 +76,15 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
         </IndexHeroSection>
 
         <IndexLatestProjects>
-          <IndexLatestProjectsHeader>
-            <Medium>See our latest projects</Medium>
-            <Link href={"/projects/all-projects"} className='no-underline'>
-              <Micro className='with-dash'>All projects</Micro>
-            </Link>
-          </IndexLatestProjectsHeader>
+          <SectionHeader
+            header='Latest projects'
+            linkText='All projects'
+            url='/projects/all-projects'
+          />
           <IndexSliderW>
             <Slider slidesPerView={4.2} offsetNav={0.2}>
               {latestProjects.map(
-                (
-                  { project_grid_name, areas, _slug, landingpage_grid_image },
-                  i
-                ) => {
-                  if (!landingpage_grid_image[0].url) return;
+                ({ project_grid_name, areas, _slug, grid_image }, i) => {
                   return (
                     <GridItem
                       key={i}
@@ -95,10 +92,7 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
                       wide={false}
                       projectName={project_grid_name}
                       slug={_slug}
-                      src={landingpage_grid_image[0].url}
-                      type='Photo'
-                      height={1080}
-                      width={1920}
+                      cover={grid_image}
                     />
                   );
                 }
@@ -110,7 +104,11 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
         <IndexQuotesSlider>
           <AutoSlider
             interval={5000}
-            list={[0, 1, 2].map((_, j, a) => {
+            list={[
+              `„I appreciate the creative approach, multi-dimensional overlap and fast & transparent communication with steezy.studio“`,
+              `„I appreciate the creative approach, multi-dimensional overlap and fast & transparent communication with steezy.studio“`,
+              `„I appreciate the creative approach, multi-dimensional overlap and fast & transparent communication with steezy.studio“`,
+            ].map((text, j, a) => {
               const delay = 0.02;
 
               const createTransition = (delay) =>
@@ -124,24 +122,29 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
                 <IndexQuote key={j}>
                   <Large>
                     <AnimateTextRows
-                      motionProps={(i) => ({
-                        initial: { x: `100%` },
-                        animate: { x: `0%` },
-                        exit: { x: `-100%` },
+                      motionProps={(i, ref) => ({
+                        initial: {
+                          y: `${ref.current.clientHeight + 50}px`,
+                          skewY: "3deg",
+                        },
+                        animate: { y: `0px`, skewY: "0deg" },
+                        exit: {
+                          y: `${-ref.current.clientHeight - 50}px`,
+                          skewY: "3deg",
+                        },
                         transition: createTransition((i + 1) * delay),
                       })}
                     >
-                      {`„I appreciate the creative approach, multi-dimensional overlap
-                and fast & transparent communication with steezy.studio“`}
+                      {text}
                     </AnimateTextRows>
                   </Large>
-                  <IndexQuoteClient
-                    initial={{ x: `100%` }}
-                    animate={{ x: `0%` }}
-                    exit={{ x: `-100%` }}
-                    transition={createTransition(delay + a.length * delay)}
-                  >
-                    <Micro>
+                  <IndexQuoteClient>
+                    <Micro
+                      initial={{ y: `100%`, skewY: "3deg" }}
+                      animate={{ y: `0%`, skewY: "0deg" }}
+                      exit={{ y: `-100%`, skewY: "3deg" }}
+                      transition={createTransition(delay + a.length * delay)}
+                    >
                       Adam Křena
                       <br />
                       Head of Atelier @footshop
@@ -152,46 +155,29 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
             })}
           />
         </IndexQuotesSlider>
-        <Grid>
-          {projects
-            .reduce((acc: EnhancedProject[][], curr: EnhancedProject) => {
-              const lastItem = acc[acc.length - 1];
-              if (!lastItem) return [[curr]];
-              if (lastItem?.length === 2) return [...acc, [curr]];
-              return [...acc.slice(0, -1), [...lastItem, curr]];
-            }, [])
-            .map((row, j) => {
-              return (
-                <GridRow key={j}>
-                  {row.map((project, i) => {
-                    return (
-                      <GridItem
-                        key={i}
-                        slug={project._slug}
-                        wide={(i + j) % 2 === 0}
-                        projectName={project.project_grid_name}
-                        src={
-                          project.landingpage_grid_image[0]._type === "Video"
-                            ? project.landingpage_grid_image[0].cdn_files?.[0]
-                                .url
-                            : project.landingpage_grid_image[0].url
-                        }
-                        height={project.landingpage_grid_image[0].width}
-                        width={project.landingpage_grid_image[0].height}
-                        areas={project.areas}
-                        type={project.landingpage_grid_image[0]._type}
-                      />
-                    );
-                  })}
-                </GridRow>
-              );
-            })}
-        </Grid>
+        <IndexGrid>
+          <SectionHeader
+            header='Featured projects'
+            url='/projects/all-projects'
+            linkText='all projects'
+          />
+          <IndexGrid>
+            <ProjectsGrid
+              initialProjects={projects}
+              areas={areas}
+              query={GET_FEATURED_GRID}
+            />
+          </IndexGrid>
+        </IndexGrid>
+        <IndexServices>
+          <ServicesSection areas={areas} />
+        </IndexServices>
       </StyledIndex>
     </>
   );
 };
 export const getStaticProps: GetStaticProps = async () => {
+  const client = getClient();
   const {
     data: {
       FeaturedGrid: featuredGrid,

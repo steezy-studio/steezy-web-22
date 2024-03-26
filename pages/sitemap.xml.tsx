@@ -4,6 +4,7 @@ import client from "../apollo/client";
 import { Query } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import { GET_PROJECTS } from "../graphql/GetAllProjects";
+import getClient from "../apollo/client";
 
 const Sitemap = () => {};
 
@@ -13,6 +14,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const siteUrl = "https://steezy.studio";
 
+  const client = getClient();
   const projectAreas = client.query<Query>({ query: GET_ALL_AREAS });
   const projects = client.query<Query>({
     query: GET_PROJECTS,

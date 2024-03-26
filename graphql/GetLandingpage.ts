@@ -10,12 +10,18 @@ export const GET_LANDINGPAGE = gql`
     Projects(sort: $sortLatestProjects, limit: 10) {
       items {
         project_grid_name
-        landingpage_grid_image {
+        grid_image {
           width
           url(format: "webp")
           height
           description
           _id
+          cdn_files {
+            _id
+            _type
+            profile
+            url
+          }
         }
         _id
         _slug
@@ -26,7 +32,7 @@ export const GET_LANDINGPAGE = gql`
         _slug
         _id
         project_grid_name
-        landingpage_grid_image {
+        grid_image {
           url(format: "webp")
           _type
           description

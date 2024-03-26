@@ -11,7 +11,7 @@ export const StyledAutoSlider = styled.div`
 
 export const AutoSliderItem = styled(motion.div)``;
 
-export const SliderItems = styled.div``;
+export const SliderItems = styled(motion.div)``;
 
 export const Indicators = styled.div`
   display: flex;

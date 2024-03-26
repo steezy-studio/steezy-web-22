@@ -6,7 +6,6 @@ import {
   ProjectsGridColumn,
   ProjectsHeroContent,
 } from "../../pagestyles/StyledProjects";
-import { SubServicesList } from "../../pagestyles/StyledStudio";
 
 export const Medium = styled.p`
   font-size: 30px;
@@ -14,6 +13,9 @@ export const Medium = styled.p`
   line-height: 1.3em;
   letter-spacing: 0.04em;
   max-width: 600px;
+  &.medium {
+    font-weight: 400;
+  }
   &.big {
     font-family: "agrandir";
     font-weight: 500;
@@ -84,9 +86,5 @@ export const Medium = styled.p`
     ${breakpoint.tabletPortrait} {
       font-size: 21px;
     }
-  }
-  ${SubServicesList} & {
-    white-space: pre-wrap;
-    line-height: 1.5em;
   }
 `;

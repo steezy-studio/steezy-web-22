@@ -13,14 +13,6 @@ export const IndexLatestProjects = styled.section`
 
 export const IndexSliderW = styled.div``;
 
-export const IndexLatestProjectsHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  column-gap: ${spaces.xl}px;
-  margin-bottom: ${spaces.l}px;
-`;
-
 export const LandingHeroPageLogotypes = styled.div`
   display: grid;
   grid-auto-flow: column;
@@ -33,6 +25,8 @@ export const LandingHeroPageLogotypes = styled.div`
     grid-gap: 15px;
   }
 `;
+
+export const IndexGrid = styled.div``;
 
 export const LandingPageHeroLogotype = styled.img`
   height: 40px;
@@ -60,9 +54,15 @@ export const IndexQuote = styled.div`
   row-gap: ${spaces.l}px;
 `;
 
-export const IndexQuoteClient = styled(motion.div)``;
+export const IndexQuoteClient = styled.div`
+  overflow: hidden;
+`;
 
-export const IndexQuotesSlider = styled.section`
+export const IndexQuotesSlider = styled(motion.section)`
   max-width: 1200px;
   margin: ${spaces.xxxl}px 0;
+`;
+
+export const IndexServices = styled.section`
+  margin-top: ${spaces.xxxxl}px;
 `;

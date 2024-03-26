@@ -8,6 +8,8 @@ import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import { StyledContact } from "../pagestyles/StyledContact";
+import { get } from "http";
+import getClient from "../apollo/client";
 
 interface ContactProps {
   areas: Areas;
@@ -38,6 +40,7 @@ const Contact = ({ areas }: ContactProps) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
+  const client = getClient();
   try {
     const data = await client.query({ query: GET_ALL_AREAS });
     return {

@@ -20,7 +20,6 @@ import {
 } from "../../helpers/enhanceProjects";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import {
-  ProjectsGrid,
   ProjectsGridColumn,
   ProjectsGridItem,
   ProjectsHero,
@@ -29,6 +28,7 @@ import {
   StyledProjects,
 } from "../../pagestyles/StyledProjects";
 import { HoverProvider } from "../_app";
+import getClient from "../../apollo/client";
 
 interface ProjectsProps {
   areas: Areas;
@@ -111,7 +111,7 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
             </Medium>
           </ProjectsHeroContent>
         </ProjectsHero>
-        <ProjectsGrid>
+        {/* <ProjectsGrid>
           <ProjectsGridColumn className='even'>
             {paginatedProjects.map(
               ({ project_grid_name, _slug, grid_image, _id, areas }, i) => {
@@ -168,13 +168,14 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
               {loadMoreButton}
             </ProjectsGridColumn>
           )}
-        </ProjectsGrid>
+        </ProjectsGrid> */}
       </StyledProjects>
     </>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const client = getClient();
   const areaReq = client.query<Query>({
     query: GET_AREA,
     variables: {
@@ -199,6 +200,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const client = getClient();
   const data = await client.query<Query>({ query: GET_ALL_AREAS });
 
   const paths = data.data.Areas.items.map(({ _slug }) => ({

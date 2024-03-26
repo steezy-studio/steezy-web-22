@@ -10,13 +10,19 @@ interface VideoProps
   extends React.DetailedHTMLProps<
     React.VideoHTMLAttributes<HTMLVideoElement>,
     HTMLVideoElement
-  > {}
+  > {
+  className?: string;
+}
 
 const StyledVideo = styled(motion.video)`
   width: 100%;
+  &.cover {
+    object-fit: cover;
+    height: 100%;
+  }
 `;
 
-const Video = ({ src }: VideoProps, ref) => {
+const Video = ({ src, className }: VideoProps, ref) => {
   const defRef = useRef<HTMLVideoElement>(null);
   const activeRef = ref ? ref : defRef;
   useIntersectionObserver(activeRef, (entries) =>
@@ -24,7 +30,15 @@ const Video = ({ src }: VideoProps, ref) => {
   );
 
   return (
-    <StyledVideo ref={activeRef} src={src} autoPlay playsInline muted loop />
+    <StyledVideo
+      ref={activeRef}
+      className={className}
+      src={src}
+      autoPlay
+      playsInline
+      muted
+      loop
+    />
   );
 };
 

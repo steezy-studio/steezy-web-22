@@ -15,7 +15,7 @@ export const Small = styled.p`
     text-transform: uppercase;
   }
   &.big-lh {
-    line-height: 1.3em;
+    line-height: 1.7em;
   }
   ${breakpoint.largeNotebook} {
     font-size: 21px;
