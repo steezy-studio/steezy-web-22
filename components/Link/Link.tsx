@@ -7,9 +7,17 @@ interface LinkProps extends NextLinkProps {
   children: JSX.Element | JSX.Element[] | string;
   className?: string;
   target?: string;
+  onClick?: () => void;
 }
 
-const Link = ({ href, children, className, target, ...rest }: LinkProps) => {
+const Link = ({
+  href,
+  children,
+  className,
+  onClick,
+  target,
+  ...rest
+}: LinkProps) => {
   const { setCursorType } = useContext(HoverProvider);
 
   return target ? (
@@ -18,7 +26,17 @@ const Link = ({ href, children, className, target, ...rest }: LinkProps) => {
       onMouseEnter={() => setCursorType("hover")}
       onMouseLeave={() => setCursorType("normal")}
     >
-      <a href={href as string} target={target} {...rest}>
+      <a
+        href={href as string}
+        target={target}
+        onClick={(e) => {
+          if (onClick) {
+            e.preventDefault();
+            onClick();
+          }
+        }}
+        {...rest}
+      >
         {children}
         <LinkBg className={`bg ${className}`} />
       </a>
@@ -29,7 +47,17 @@ const Link = ({ href, children, className, target, ...rest }: LinkProps) => {
       onMouseEnter={() => setCursorType("hover")}
       onMouseLeave={() => setCursorType("normal")}
     >
-      <NextLink href={href} {...rest} className={className}>
+      <NextLink
+        href={href}
+        {...rest}
+        className={className}
+        onClick={(e) => {
+          if (onClick) {
+            e.preventDefault();
+            onClick();
+          }
+        }}
+      >
         {children}
         <LinkBg className={`bg ${className}`} />
       </NextLink>

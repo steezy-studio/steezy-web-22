@@ -17,7 +17,7 @@ export const Large = styled.h1`
     letter-spacing: 0.02em;
     font-weight: 400;
     color: ${colors.black};
-    position: relative;
+    /* position: relative; */
     &.underline {
       text-decoration: underline;
       text-decoration-thickness: 1px;

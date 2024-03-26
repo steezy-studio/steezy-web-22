@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { colors } from "../../../helpers/consts";
 
-export const LinkBg = styled.div`
+export const LinkBg = styled.span`
+  display: block;
   width: 100%;
   position: absolute;
   height: 0.85em;
   top: 0;
-  background-color: ${colors.primary400};
   left: 0;
+  background-color: ${colors.primary400};
   mix-blend-mode: multiply;
   transform: scaleX(0);
   transform-origin: 0 0;
@@ -23,6 +24,7 @@ export const StyledLink = styled.span`
     position: relative;
     font-family: inherit;
     color: inherit;
+    display: inline-block;
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
@@ -36,7 +38,7 @@ export const StyledLink = styled.span`
     }
     &.active,
     &.active a {
-      &:after {
+      .bg {
         transform: scaleX(1);
       }
     }

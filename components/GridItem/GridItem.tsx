@@ -43,11 +43,10 @@ const GridItem = ({
   const [hover, sethover] = useState(false);
   const { setCursorType } = useContext(HoverProvider);
   const videoRef = useRef<HTMLVideoElement>(null);
+
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
   );
-
-  // const wide = width > height;
 
   const options: HTMLReactParserOptions = {
     replace: (domNode) => {

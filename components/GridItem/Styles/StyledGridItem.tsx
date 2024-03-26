@@ -12,7 +12,6 @@ export const StyledGridItem = styled(motion.a)`
   border-radius: ${({ theme }) => theme.bRad};
   padding-bottom: ${(16 / 9) * 100}%;
   &.wide {
-    background-color: red;
     padding-bottom: ${(9 / 16) * 100}%;
   }
 `;
@@ -51,8 +50,6 @@ export const GridItemHeader = styled(motion.div)`
 `;
 
 export const GridItemVideo = styled.video`
-  /* position: absolute; */
-  /* inset: 0; */
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -61,8 +58,6 @@ export const GridItemVideo = styled.video`
 `;
 
 export const GridItemCover = styled(Image)`
-  /* position: absolute; */
-  /* inset: 0; */
   width: 100%;
   height: 100%;
   object-fit: cover;

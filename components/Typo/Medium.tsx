@@ -2,10 +2,7 @@ import styled from "styled-components";
 import { breakpoint } from "../../helpers/consts";
 import u from "../../helpers/unit";
 import { ClientQuote } from "../../pagestyles/StyledProject";
-import {
-  ProjectsGridColumn,
-  ProjectsHeroContent,
-} from "../../pagestyles/StyledProjects";
+import { ProjectsGridColumn } from "../../pagestyles/StyledProjects";
 
 export const Medium = styled.p`
   font-size: 30px;
@@ -62,12 +59,6 @@ export const Medium = styled.p`
   }
   ${ProjectsGridColumn} & {
     margin-bottom: ${({ theme }) => u(2, theme.pageMargin)};
-  }
-  ${ProjectsHeroContent} & {
-    ${breakpoint.phone} {
-      visibility: hidden;
-      position: absolute;
-    }
   }
   ${ClientQuote} & {
     margin-bottom: 60px;

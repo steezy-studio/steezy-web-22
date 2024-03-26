@@ -1,47 +1,35 @@
-import { DocumentNode, useLazyQuery } from "@apollo/client";
 import { useContext, useState } from "react";
-import getClient from "../../apollo/client";
-import { Areas, Query, QueryProjectsArgs } from "../../generated/types";
-import { GET_PROJECTS } from "../../graphql/GetProjects";
-import {
-  EnhancedProject,
-  enhanceProjects,
-} from "../../helpers/enhanceProjects";
+import { EnhancedProject } from "../../helpers/enhanceProjects";
 import { HoverProvider } from "../../pages/_app";
 import GridItem from "../GridItem/GridItem";
 import { StyledLink } from "../Link/Styles/StyledLink";
 import { Large } from "../Typo/Large";
 import {
   GridRow,
+  LoadMoreProjects,
   ProjectsGridRows,
   StyledProjectsGrid,
 } from "./StyledProjectsGrid";
+import Link from "../Link/Link";
 
 interface ProjectsGridProps {
-  initialProjects: EnhancedProject[];
-  areas: Areas;
-  totalProjects?: number;
-  query: DocumentNode;
+  projects: EnhancedProject[];
+  projectsPerPage?: number;
 }
 
 const ProjectsGrid = ({
-  initialProjects,
-  areas,
-  totalProjects,
-  query,
+  projects,
+  projectsPerPage = 10,
 }: ProjectsGridProps) => {
-  const client = getClient();
-  const projectsPerPage = initialProjects.length;
   const { setCursorType } = useContext(HoverProvider);
-  const [projects, setProjects] = useState<EnhancedProject[]>(initialProjects);
-  const [hasMore, setHasMore] = useState(totalProjects > projectsPerPage);
-  const [getProjects, { loading }] = useLazyQuery<Query>(query, {
-    client,
-  });
+  const [visibleProjectsCount, setvisibleProjectsCount] =
+    useState<number>(projectsPerPage);
+
   return (
     <StyledProjectsGrid>
       <ProjectsGridRows>
         {projects
+          .slice(0, visibleProjectsCount)
           .reduce((acc: EnhancedProject[][], curr: EnhancedProject) => {
             const lastItem = acc[acc.length - 1];
             if (!lastItem) return [[curr]];
@@ -67,29 +55,19 @@ const ProjectsGrid = ({
             );
           })}
       </ProjectsGridRows>
-      {hasMore && (
-        <Large>
-          <StyledLink
-            onClick={() => {
-              getProjects({
-                variables: {
-                  limit: projectsPerPage,
-                  skip: projects.length,
-                } as QueryProjectsArgs,
-                onCompleted(data) {
-                  setProjects([
-                    ...projects,
-                    ...enhanceProjects(data.Projects.items, areas),
-                  ]);
-                },
-              });
-            }}
-            onMouseEnter={() => setCursorType("hover")}
-            onMouseLeave={() => setCursorType("normal")}
-          >
-            Show more
-          </StyledLink>
-        </Large>
+      {projects.length > visibleProjectsCount && (
+        <LoadMoreProjects>
+          <Large>
+            <Link
+              href={"#"}
+              onClick={() => {
+                setvisibleProjectsCount((prev) => prev + projectsPerPage);
+              }}
+            >
+              Show more
+            </Link>
+          </Large>
+        </LoadMoreProjects>
       )}
     </StyledProjectsGrid>
   );

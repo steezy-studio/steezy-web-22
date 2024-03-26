@@ -2,7 +2,7 @@ import { Cookie, CookieSetOptions } from "universal-cookie";
 
 export const colors = {
   primary300: "#f5ede5",
-  primary400: "#F8D269",
+  primary400: "#FFE96F",
   black: "#000000",
   gray400: "#888",
   gray500: "#333",

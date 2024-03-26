@@ -162,11 +162,7 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
             linkText='all projects'
           />
           <IndexGrid>
-            <ProjectsGrid
-              initialProjects={projects}
-              areas={areas}
-              query={GET_FEATURED_GRID}
-            />
+            <ProjectsGrid projects={projects} />
           </IndexGrid>
         </IndexGrid>
         <IndexServices>

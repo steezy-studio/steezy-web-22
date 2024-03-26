@@ -19,8 +19,14 @@ export const videoCallback = (
   entries: IntersectionObserverEntry[],
   videoRef: React.MutableRefObject<HTMLVideoElement>
 ) => {
+  async function playVideo() {
+    try {
+      await videoRef.current.play();
+    } catch (err) {}
+  }
+
   entries.forEach((entry) => {
     if (!videoRef.current) return;
-    entry.isIntersecting ? videoRef.current.play() : videoRef.current.pause();
+    entry.isIntersecting ? playVideo() : videoRef.current.pause();
   });
 };

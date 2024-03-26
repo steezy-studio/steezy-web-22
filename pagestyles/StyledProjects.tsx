@@ -1,34 +1,26 @@
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
 import u from "../helpers/unit";
+import { spaces } from "../helpers/spaces";
 
 export const StyledProjects = styled.div``;
 
 export const ProjectsHero = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10% 0;
-  ${breakpoint.tabletPortrait} {
-    height: auto;
-    padding: 20% 0;
-  }
-  ${breakpoint.phone} {
-    padding: 20% 0;
-  }
-`;
-export const ProjectsHeroContent = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: ${({ theme }) => theme.pageMargin};
-  margin: auto 0;
-  // optical correction
-  transform: translateY(5%);
-  ${breakpoint.phone} {
-    grid-template-columns: unset;
-  }
+  margin-top: ${spaces.xxxl}px;
+  margin-bottom: ${spaces.l}px;
 `;
 
-export const ProjectsHeroFilters = styled.div``;
+export const ProjectsHeroFilters = styled.div`
+  display: flex;
+  column-gap: ${spaces.l}px;
+`;
+
+export const Filter = styled.span`
+  display: flex;
+  column-gap: ${spaces.xxs}px;
+`;
 
 export const ProjectsGridColumn = styled.div`
   &.odd {

@@ -3,6 +3,10 @@ import { spaces } from "../../helpers/spaces";
 
 export const StyledProjectsGrid = styled.div``;
 
+export const LoadMoreProjects = styled.div`
+  margin-top: ${spaces.xl}px;
+`;
+
 export const ProjectsGridRows = styled.div`
   display: grid;
   row-gap: ${spaces.xs}px;
