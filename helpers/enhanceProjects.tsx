@@ -1,6 +1,8 @@
 import { Areas, Project, Area } from "../generated/types";
 
 export const enhanceProjects = (projects: Project[], areas: Areas) => {
+  console.log(areas);
+
   return projects.map((project) => {
     return {
       ...project,

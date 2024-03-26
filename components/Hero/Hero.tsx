@@ -2,11 +2,9 @@ import { useState } from "react";
 import { Asset } from "../../generated/types";
 import { device } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import Animation from "../Animation/Animation";
-import Img from "../Img/Img";
-import HeroVideo from "./HeroVideo";
-import { StyledHero } from "./Styles/StyledHero";
 import RevealAnimation from "../RevealAnimation/RevealAnimation";
+import HeroVideo from "./HeroVideo";
+import { HeroCover, StyledHero } from "./Styles/StyledHero";
 
 interface HeroProps {
   asset: Asset;
@@ -27,10 +25,10 @@ const Hero = ({ asset }: HeroProps) => {
             onOpenChange={() => setOpenDialog((prev) => !prev)}
           />
         ) : (
-          <Img
+          <HeroCover
             src={asset.url}
-            width={isPhone ? undefined : asset.width}
-            height={isPhone ? undefined : asset.height}
+            width={asset.width}
+            height={asset.height}
             placeholder={`blur`}
             blurDataURL={asset.url}
             alt={asset.description}

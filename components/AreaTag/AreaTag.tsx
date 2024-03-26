@@ -9,7 +9,7 @@ interface AreaTagProps {
 const AreaTag = ({ areaName }: AreaTagProps) => {
   return (
     <StyledAreaTag>
-      <Nano className='lowcase'>{areaName}</Nano>
+      <Nano className='lowcase'>{areaName.toLowerCase()}</Nano>
     </StyledAreaTag>
   );
 };

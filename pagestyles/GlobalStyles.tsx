@@ -1,5 +1,6 @@
 import { createGlobalStyle, DefaultTheme } from "styled-components";
 import { colors } from "../helpers/consts";
+import { spaces } from "../helpers/spaces";
 
 export const GlobalStyle = createGlobalStyle`
   html,
@@ -10,9 +11,9 @@ export const GlobalStyle = createGlobalStyle`
     background-color:${colors.white};
   }
   body {
-      padding: ${({ theme }) => theme.pageMargin} !important;
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
+      padding: ${({ theme }) => theme.pageMargin} ;
+      padding-top: ${spaces.xxxl}px ;
+      padding-bottom: 0 ;
   }
   * {
     margin: 0;

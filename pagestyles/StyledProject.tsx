@@ -1,58 +1,27 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
+import { spaces } from "../helpers/spaces";
 import u from "../helpers/unit";
 
 export const StyledProject = styled.div``;
 
-export const Breadcrumbs = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: ${({ theme }) => u(0.25, theme.pageMargin)};
-  ${breakpoint.phone} {
-    display: none;
-  }
+export const ProjectHeroHeader = styled.div`
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  column-gap: ${spaces.xl}px;
 `;
 
 export const ProjectHeroRoles = styled.div`
   display: grid;
-  grid-auto-flow: column;
-  align-items: start;
-  flex-shrink: 0;
-  grid-gap: 90px;
-  ${breakpoint.tabletPortrait} {
-    grid-gap: 40px;
-  }
-  ${breakpoint.phone} {
-    grid-auto-flow: unset;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-    row-gap: 35px;
-  }
-`;
-export const ProjectHeroRole = styled.div`
-  display: grid;
-  grid-template-rows: auto 1fr;
-  grid-gap: 10px;
-  ${breakpoint.phone} {
-    grid-gap: 5px;
-  }
+  align-content: start;
+  row-gap: ${spaces.xl}px;
 `;
 
-export const ProjectHeroFooter = styled.div`
+export const ProjectHeroRole = styled.div`
   display: grid;
-  margin-left: auto;
-  grid-auto-flow: column;
-  grid-gap: ${({ theme }) => u(1, theme.pageMargin)};
-  ${breakpoint.tabletPortrait} {
-    margin-left: 0;
-  }
-  ${breakpoint.phone} {
-    grid-auto-flow: row;
-    width: 100%;
-    grid-gap: ${({ theme }) => u(2, theme.pageMargin)};
-  }
+  align-content: start;
+  row-gap: ${spaces.s}px;
 `;
 
 export const ProjectDescription = styled.div`

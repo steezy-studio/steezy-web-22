@@ -5,15 +5,6 @@ import Image from "next/image";
 
 export const StyledGridItem = styled(motion.a)`
   all: unset;
-  width: 100%;
-  display: block;
-  position: relative;
-  overflow: hidden;
-  border-radius: ${({ theme }) => theme.bRad};
-  padding-bottom: ${(16 / 9) * 100}%;
-  &.wide {
-    padding-bottom: ${(9 / 16) * 100}%;
-  }
 `;
 
 export const GridItemAreas = styled.div`

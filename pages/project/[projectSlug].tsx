@@ -1,56 +1,39 @@
-import { motion } from "framer-motion";
-import parse, { DOMNode, domToReact, Element } from "html-react-parser";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import { useContext } from "react";
-import client from "../../apollo/client";
-import Animation from "../../components/Animation/Animation";
-import ClassicGrid from "../../components/ClassicGrid/ClassicGrid";
-import GridItem from "../../components/GridItem/GridItem";
+import getClient from "../../apollo/client";
 import Head from "../../components/Head/Head";
-import Hero from "../../components/Hero/Hero";
-import Img from "../../components/Img/Img";
-import { StyledImg } from "../../components/Img/Styles/StyledImg";
-import Link from "../../components/Link/Link";
-import { StyledLink } from "../../components/Link/Styles/StyledLink";
 import Navbar from "../../components/Navbar/Navbar";
-import ProjectGridVimeo from "../../components/ProjectGridVimeo/ProjectGridVimeo";
-import { Large } from "../../components/Typo/Large";
-import { Medium } from "../../components/Typo/Medium";
-import { Micro } from "../../components/Typo/Micro";
-import Video from "../../components/Video/Video";
-import strings from "../../data/strings";
-import { Areas, Project as ProjectType, Query } from "../../generated/types";
+import ProjectCard from "../../components/ProjectCard/ProjectCard";
+import { Nano } from "../../components/Typo/Nano";
+import { Small } from "../../components/Typo/Small";
+import { Areas, Query } from "../../generated/types";
 import { GET_PROJECT } from "../../graphql/GetProject";
-import { colors, device } from "../../helpers/consts";
-import { enhanceProjects } from "../../helpers/enhanceProjects";
+import {
+  EnhancedProject,
+  enhanceProjects,
+} from "../../helpers/enhanceProjects";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import {
-  Breadcrumbs,
-  ClientQuote,
-  ClientQuoteLeft,
-  ClientQuoteRight,
-  NextProjectHead,
-  NextProjectSection,
   ProjectDescription,
   ProjectGrid,
-  ProjectGridBlockquote,
-  ProjectGridRow,
-  ProjectHeroFooter,
+  ProjectHeroHeader,
   ProjectHeroRole,
   ProjectHeroRoles,
   StyledProject,
 } from "../../pagestyles/StyledProject";
 import { HoverProvider } from "../_app";
-import { get } from "http";
-import getClient from "../../apollo/client";
 
 interface ProjectProps {
-  projectData: ProjectType;
+  projectData: { project: EnhancedProject[]; nextProjects: EnhancedProject[] };
   areas: Areas;
 }
 
 const Project = ({ projectData, areas }: ProjectProps) => {
   const defaultArea = areas.items.find((area) => area.is_default);
+
+  const { project: _project, nextProjects } = projectData;
+  const project = _project[0];
+  console.log(project);
 
   const { setCursorType } = useContext(HoverProvider);
   const { w } = useWindowSize();
@@ -58,40 +41,40 @@ const Project = ({ projectData, areas }: ProjectProps) => {
   return (
     <>
       <Head
-        ogTitle={projectData.project_detail_name}
-        ogDescription={projectData.project_description}
-        ogImageSrc={projectData.hero_image[0].url}
-        pageName={[`Project`, projectData.project_detail_name]}
+        ogTitle={project.project_detail_name}
+        ogDescription={project.project_description}
+        ogImageSrc={project.hero_image[0].url}
+        pageName={[`Project`, project.project_detail_name]}
       />
-      <Navbar areas={areas.items} />
+      <Navbar areas={areas.items} header={project.company_name} />
       <StyledProject>
-        <Hero asset={projectData.hero_image[0]} />
-        <ProjectHeroFooter>
+        <ProjectHeroHeader>
+          <ProjectCard
+            projectName={project.project_detail_name}
+            areas={project.areas}
+            cover={project.hero_image}
+            videoThumb={project.hero_image[0].cover}
+            wide={true}
+            _static
+          />
           <ProjectHeroRoles>
-            {projectData.project_facts?.map((fact, i) => {
+            {project.project_facts?.map((fact, i) => {
               if (fact.__typename === "ProjectFacts") {
                 return (
                   <ProjectHeroRole key={i}>
-                    <Micro>{fact.header}</Micro>
-                    <Micro className='lowcase'>{fact.content}</Micro>
+                    <Nano>{fact.header}</Nano>
+                    <Small className='medium break-lines'>{fact.content}</Small>
                   </ProjectHeroRole>
                 );
               }
             })}
           </ProjectHeroRoles>
-          {w > device.phone && (
-            <StyledImg
-              className='client-logo'
-              as={"img"}
-              src={projectData.client_logo[0].url}
-            />
-          )}
-        </ProjectHeroFooter>
+        </ProjectHeroHeader>
         <ProjectDescription>
-          <Medium>{projectData.project_description}</Medium>
+          <Small className='medium'>{project.project_description}</Small>
         </ProjectDescription>
         <ProjectGrid>
-          {projectData.project_presentation?.map((row, i) => {
+          {/* {projectData.project_presentation?.map((row, i) => {
             if (row.__typename === "ProjectGridRow") {
               return (
                 <ProjectGridRow key={`${i}_row`}>
@@ -171,9 +154,9 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                 </Animation>
               );
             }
-          })}
+          })} */}
         </ProjectGrid>
-        {projectData.client_quote && (
+        {/* {projectData.client_quote && (
           <Animation type='fadeFromBottom'>
             <ClientQuote>
               <ClientQuoteLeft>
@@ -206,8 +189,8 @@ const Project = ({ projectData, areas }: ProjectProps) => {
               </ClientQuoteRight>
             </ClientQuote>
           </Animation>
-        )}
-        {projectData.next_project.length > 0 && (
+        )} */}
+        {/* {projectData.next_project.length > 0 && (
           <NextProjectSection>
             <NextProjectHead>
               {w >= device.phone ? (
@@ -228,7 +211,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                 </StyledLink>
               </Large>
             </NextProjectHead>
-            {/* <ClassicGrid>
+            <ClassicGrid>
               {(w >= device.phone
                 ? projectData.next_project
                 : [projectData.next_project[0]]
@@ -254,9 +237,9 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                   />
                 )
               )}
-            </ClassicGrid> */}
+            </ClassicGrid>
           </NextProjectSection>
-        )}
+        )} */}
       </StyledProject>
     </>
   );
@@ -277,7 +260,7 @@ export const getStaticProps = async ({
     props: {
       areas: data.data.Areas,
       projectData: {
-        ...data.data.Project,
+        project: enhanceProjects([data.data.Project], data.data.Areas),
         next_project: enhanceProjects(
           data.data.Project.next_project,
           data.data.Areas

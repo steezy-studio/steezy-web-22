@@ -8,6 +8,7 @@ export const GET_PROJECT = gql`
       ...FragmentGetAreas
     }
     Project(slug: $slug) {
+      _id
       company_name
       grid_image {
         url(format: "webp")
@@ -20,6 +21,12 @@ export const GET_PROJECT = gql`
         height
         description
         _type
+        cdn_files {
+          _id
+          _type
+          profile
+          url
+        }
       }
       project_detail_name
       client_name
