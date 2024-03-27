@@ -1,42 +1,56 @@
+import { motion } from "framer-motion";
+import HTMLReactParser, {
+  DOMNode,
+  Element,
+  domToReact,
+} from "html-react-parser";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
-import { useContext } from "react";
 import getClient from "../../apollo/client";
+import Animation from "../../components/Animation/Animation";
+import GridItem from "../../components/GridItem/GridItem";
 import Head from "../../components/Head/Head";
+import Link from "../../components/Link/Link";
 import Navbar from "../../components/Navbar/Navbar";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
+import ProjectGridVimeo from "../../components/ProjectGridVimeo/ProjectGridVimeo";
+import SectionHeader from "../../components/SectionHeader/SectionHeader";
+import Slider from "../../components/Slider/Slider";
 import { Nano } from "../../components/Typo/Nano";
 import { Small } from "../../components/Typo/Small";
-import { Areas, Query } from "../../generated/types";
+import Video from "../../components/Video/Video";
+import { Areas, Query, QuerySimilar_ProjectsArgs } from "../../generated/types";
 import { GET_PROJECT } from "../../graphql/GetProject";
+import { GET_SIMILAR_PROJECTS } from "../../graphql/GetSimilarProjects";
 import {
   EnhancedProject,
   enhanceProjects,
 } from "../../helpers/enhanceProjects";
-import { useWindowSize } from "../../hooks/useWindowSize";
 import {
   ProjectDescription,
+  ProjectDetailImg,
+  ProjectDetailQuote,
   ProjectGrid,
+  ProjectGridBlockquote,
+  ProjectGridRow,
   ProjectHeroHeader,
   ProjectHeroRole,
   ProjectHeroRoles,
+  SimilarProjectsSlider,
   StyledProject,
 } from "../../pagestyles/StyledProject";
-import { HoverProvider } from "../_app";
+import ClientQuote from "../../components/ClientQuote/ClientQuote";
 
 interface ProjectProps {
-  projectData: { project: EnhancedProject[]; nextProjects: EnhancedProject[] };
+  projectData: {
+    project: EnhancedProject[];
+    similar_projects: EnhancedProject[];
+  };
   areas: Areas;
 }
 
 const Project = ({ projectData, areas }: ProjectProps) => {
-  const defaultArea = areas.items.find((area) => area.is_default);
-
-  const { project: _project, nextProjects } = projectData;
+  const { project: _project, similar_projects } = projectData;
   const project = _project[0];
-  console.log(project);
-
-  const { setCursorType } = useContext(HoverProvider);
-  const { w } = useWindowSize();
 
   return (
     <>
@@ -74,7 +88,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
           <Small className='medium'>{project.project_description}</Small>
         </ProjectDescription>
         <ProjectGrid>
-          {/* {projectData.project_presentation?.map((row, i) => {
+          {project.project_presentation?.map((row, i) => {
             if (row.__typename === "ProjectGridRow") {
               return (
                 <ProjectGridRow key={`${i}_row`}>
@@ -90,13 +104,13 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                       return (
                         <Animation key={`${i}_col`} type={"fadeFromBottom"}>
                           <motion.div>
-                            <Img
+                            <ProjectDetailImg
                               src={img.url || ``}
-                              width={img.width || 0}
-                              height={img.height || 0}
+                              width={img.width}
+                              height={img.height}
                               blurDataURL={img.url}
                               placeholder={"blur"}
-                              alt={projectData.project_detail_name}
+                              alt={project.project_detail_name}
                             />
                           </motion.div>
                         </Animation>
@@ -126,120 +140,63 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                     className={`blockquote ${row.alignment ? "reverse" : ""}`}
                   >
                     <ProjectGridBlockquote>
-                      <Medium>
-                        {parse(row.blockquote_text, {
+                      <Small className='medium' as={"span"}>
+                        {HTMLReactParser(row.blockquote_text, {
                           replace(domNode) {
                             if (domNode instanceof Element && domNode.attribs) {
                               if (domNode.name === "a") {
                                 return (
-                                  <StyledLink
-                                    as={"a"}
-                                    href={domNode.attribs.href}
-                                    onMouseEnter={() => setCursorType("hover")}
-                                    onMouseLeave={() => setCursorType("normal")}
-                                  >
+                                  <Link as={"a"} href={domNode.attribs.href}>
                                     {domToReact(
                                       (domNode as Element).children as DOMNode[]
                                     )}
-                                  </StyledLink>
+                                  </Link>
                                 );
                               }
                               return domNode;
                             }
                           },
                         })}
-                      </Medium>
+                      </Small>
                     </ProjectGridBlockquote>
                   </ProjectGridRow>
                 </Animation>
               );
             }
-          })} */}
+          })}
         </ProjectGrid>
-        {/* {projectData.client_quote && (
-          <Animation type='fadeFromBottom'>
-            <ClientQuote>
-              <ClientQuoteLeft>
-                <Img
-                  className='desktop'
-                  src={
-                    projectData.client_photo?.[0]?.url ||
-                    `/icons/avatar-default.svg`
-                  }
-                  width={250}
-                  height={250}
-                  alt={projectData.client_name}
-                />
-              </ClientQuoteLeft>
-              <ClientQuoteRight>
-                <Medium>{projectData.client_quote}</Medium>
-                <Img
-                  className='phone'
-                  src={
-                    projectData.client_photo?.[0]?.url ||
-                    `/icons/avatar-default.svg`
-                  }
-                  width={250}
-                  height={250}
-                  alt={projectData.client_name}
-                />
-                <Micro>{projectData.client_name}</Micro>
-                <br />
-                <Micro className='lowcase'>{projectData.client_position}</Micro>
-              </ClientQuoteRight>
-            </ClientQuote>
-          </Animation>
-        )} */}
-        {/* {projectData.next_project.length > 0 && (
-          <NextProjectSection>
-            <NextProjectHead>
-              {w >= device.phone ? (
-                <Large className='related-project'>
-                  {strings.globals.relatedProject}
-                </Large>
-              ) : (
-                <Micro>{strings.globals.relatedProject}</Micro>
-              )}
-              <Large className='back-to-projects'>
-                <StyledLink
-                  as={"a"}
-                  href={"/projects/all-projects"}
-                  onMouseEnter={() => setCursorType("hover")}
-                  onMouseLeave={() => setCursorType("normal")}
-                >
-                  {strings.globals.backToProjects}
-                </StyledLink>
-              </Large>
-            </NextProjectHead>
-            <ClassicGrid>
-              {(w >= device.phone
-                ? projectData.next_project
-                : [projectData.next_project[0]]
-              ).map(
-                (
-                  // @ts-ignore
-                  { project_grid_name, landingpage_grid_image, _slug, areas }
-                ) => (
+        <ProjectDetailQuote>
+          {project.client_quote && (
+            <ClientQuote
+              clientName={project.client_name}
+              clientRole={project.client_position}
+              quote={project.client_quote}
+            />
+          )}
+        </ProjectDetailQuote>
+        <SimilarProjectsSlider>
+          <SectionHeader
+            header='Related projects'
+            linkText='All projects'
+            url='/projects/all-projects'
+          />
+          <Slider slidesPerView={4.2} offsetNav={0.2}>
+            {similar_projects.map(
+              ({ project_grid_name, areas, _slug, grid_image }, i) => {
+                return (
                   <GridItem
-                    type={landingpage_grid_image[0]._type}
+                    key={i}
                     areas={areas}
+                    wide={false}
                     projectName={project_grid_name}
-                    videoThumb={landingpage_grid_image[0].cover}
-                    width={landingpage_grid_image[0].width}
-                    height={landingpage_grid_image[0].height}
-                    src={
-                      landingpage_grid_image[0]._type === "Video"
-                        ? landingpage_grid_image[0].cdn_files[0].url
-                        : landingpage_grid_image[0].url
-                    }
                     slug={_slug}
-                    key={_slug}
+                    cover={grid_image}
                   />
-                )
-              )}
-            </ClassicGrid>
-          </NextProjectSection>
-        )} */}
+                );
+              }
+            )}
+          </Slider>
+        </SimilarProjectsSlider>
       </StyledProject>
     </>
   );
@@ -251,20 +208,25 @@ export const getStaticProps = async ({
   projectSlug: string;
 }>) => {
   const client = getClient();
-  const data = await client.query<Query>({
+  const {
+    data: { Project: project, Areas: areas },
+  } = await client.query<Query>({
     query: GET_PROJECT,
     variables: { slug: params.projectSlug },
+  });
+  const {
+    data: { Similar_Projects: similar_projects },
+  } = await client.query<Query>({
+    query: GET_SIMILAR_PROJECTS,
+    variables: { id: project._id, limit: 10 } as QuerySimilar_ProjectsArgs,
   });
 
   return {
     props: {
-      areas: data.data.Areas,
+      areas: areas,
       projectData: {
-        project: enhanceProjects([data.data.Project], data.data.Areas),
-        next_project: enhanceProjects(
-          data.data.Project.next_project,
-          data.data.Areas
-        ),
+        project: enhanceProjects([project], areas),
+        similar_projects: enhanceProjects(similar_projects.items, areas),
       },
     },
     revalidate: Number(process.env.REVALIDATE),

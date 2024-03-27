@@ -6,5 +6,4 @@ export const StyledSectionHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   column-gap: ${spaces.xl}px;
-  margin-bottom: ${spaces.l}px;
 `;

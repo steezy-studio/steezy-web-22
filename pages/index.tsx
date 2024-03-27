@@ -33,6 +33,7 @@ import {
 } from "../pagestyles/StyledIndex";
 import { GET_FEATURED_GRID } from "../graphql/GetFeaturedGrid";
 import ServicesSection from "../components/ServicesSection/ServicesSection";
+import ClientQuote from "../components/ClientQuote/ClientQuote";
 
 interface indexProps {
   projects: EnhancedProject[];
@@ -109,48 +110,13 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
               `„I appreciate the creative approach, multi-dimensional overlap and fast & transparent communication with steezy.studio“`,
               `„I appreciate the creative approach, multi-dimensional overlap and fast & transparent communication with steezy.studio“`,
             ].map((text, j, a) => {
-              const delay = 0.02;
-
-              const createTransition = (delay) =>
-                ({
-                  delay: delay,
-                  duration: 1.2,
-                  ease: easingInOutCubic,
-                } as Transition);
-
               return (
-                <IndexQuote key={j}>
-                  <Large>
-                    <AnimateTextRows
-                      motionProps={(i, ref) => ({
-                        initial: {
-                          y: `${ref.current.clientHeight + 50}px`,
-                          skewY: "3deg",
-                        },
-                        animate: { y: `0px`, skewY: "0deg" },
-                        exit: {
-                          y: `${-ref.current.clientHeight - 50}px`,
-                          skewY: "3deg",
-                        },
-                        transition: createTransition((i + 1) * delay),
-                      })}
-                    >
-                      {text}
-                    </AnimateTextRows>
-                  </Large>
-                  <IndexQuoteClient>
-                    <Micro
-                      initial={{ y: `100%`, skewY: "3deg" }}
-                      animate={{ y: `0%`, skewY: "0deg" }}
-                      exit={{ y: `-100%`, skewY: "3deg" }}
-                      transition={createTransition(delay + a.length * delay)}
-                    >
-                      Adam Křena
-                      <br />
-                      Head of Atelier @footshop
-                    </Micro>
-                  </IndexQuoteClient>
-                </IndexQuote>
+                <ClientQuote
+                  key={j}
+                  quote={text}
+                  clientName='John Doe'
+                  clientRole='CEO'
+                />
               );
             })}
           />

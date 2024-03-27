@@ -7,6 +7,6 @@ export const spaces = {
   xl: 60,
   xxl: 90,
   xxxl: 100,
-  xxxxl: 200,
+  xxxxl: 150,
   xxxxxl: 250,
 } as const;

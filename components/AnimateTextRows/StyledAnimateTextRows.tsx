@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-export const StyledAnimateTextRows = styled.div`
+export const StyledAnimateTextRows = styled.span`
+  display: block;
   position: relative;
   overflow: hidden;
 `;
@@ -14,7 +15,7 @@ export const HiddenText = styled.span`
   z-index: -1;
 `;
 
-export const Text = styled.div`
+export const Text = styled.span`
   display: block;
   width: 100%;
   height: 100%;

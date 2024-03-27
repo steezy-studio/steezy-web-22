@@ -60,7 +60,7 @@ export const IndexQuoteClient = styled.div`
 
 export const IndexQuotesSlider = styled(motion.section)`
   max-width: 1200px;
-  margin: ${spaces.xxxl}px 0;
+  margin: ${spaces.xxxxl}px 0;
 `;
 
 export const IndexServices = styled.section`
