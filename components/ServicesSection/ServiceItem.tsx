@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Area } from "../../generated/types";
+import { Area } from "../../generated/preprTypes";
 import Animation from "../Animation/Animation";
 import { Medium } from "../Typo/Medium";
 import Video from "../Video/Video";

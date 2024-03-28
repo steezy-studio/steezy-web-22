@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { StyledProjectCard } from "./StyledProjectCard";
-import { Area, Asset } from "../../generated/types";
+import { Area, Asset } from "../../generated/preprTypes";
 import AreaTag from "../AreaTag/AreaTag";
 import {
   GridItemCoverWrapper,

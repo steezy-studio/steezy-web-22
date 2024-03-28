@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Asset } from "../../generated/types";
+import { Asset } from "../../generated/preprTypes";
 import { device } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import RevealAnimation from "../RevealAnimation/RevealAnimation";

@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import strings from "../../data/strings";
-import { Area } from "../../generated/types";
+import { Area } from "../../generated/preprTypes";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
 import Logo from "../Logo/Logo";

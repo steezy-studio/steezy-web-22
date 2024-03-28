@@ -1,4 +1,4 @@
-import { Areas } from "../../generated/types";
+import { Areas } from "../../generated/preprTypes";
 import Animation from "../Animation/Animation";
 import HeaderLine from "../HeaderLine/HeaderLine";
 import { Micro } from "../Typo/Micro";

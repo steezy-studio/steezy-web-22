@@ -10,7 +10,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** The DateTime type adheres to ISO 8601 standard. */
   _DateTime: any;
 };
 

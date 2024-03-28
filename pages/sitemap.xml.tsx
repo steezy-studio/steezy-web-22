@@ -1,7 +1,7 @@
 import fs from "fs";
 import { GetServerSideProps } from "next";
 import client from "../apollo/client";
-import { Query } from "../generated/types";
+import { Query } from "../generated/preprTypes";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import { GET_PROJECTS } from "../graphql/GetAllProjects";
 import getClient from "../apollo/client";

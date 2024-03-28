@@ -14,7 +14,7 @@ import { Micro } from "../components/Typo/Micro";
 import { Small } from "../components/Typo/Small";
 import ValueItem from "../components/ValueItem";
 import strings from "../data/strings";
-import { Areas } from "../generated/types";
+import { Areas } from "../generated/preprTypes";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import {
   BrandsHeader,

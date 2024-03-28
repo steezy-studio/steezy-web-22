@@ -13,7 +13,7 @@ import Slider from "../components/Slider/Slider";
 import { Large } from "../components/Typo/Large";
 import { Micro } from "../components/Typo/Micro";
 import strings from "../data/strings";
-import { Areas, Query } from "../generated/types";
+import { Areas, Query } from "../generated/preprTypes";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
 import { easingInOutCubic } from "../helpers/animationConfig";
 import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";

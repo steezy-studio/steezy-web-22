@@ -1,4 +1,4 @@
-import { Areas, Project, Area } from "../generated/types";
+import { Areas, Project, Area } from "../generated/preprTypes";
 
 export const enhanceProjects = (projects: Project[], areas: Areas) => {
   console.log(areas);

@@ -19,7 +19,11 @@ import Slider from "../../components/Slider/Slider";
 import { Nano } from "../../components/Typo/Nano";
 import { Small } from "../../components/Typo/Small";
 import Video from "../../components/Video/Video";
-import { Areas, Query, QuerySimilar_ProjectsArgs } from "../../generated/types";
+import {
+  Areas,
+  Query,
+  QuerySimilar_ProjectsArgs,
+} from "../../generated/preprTypes";
 import { GET_PROJECT } from "../../graphql/GetProject";
 import { GET_SIMILAR_PROJECTS } from "../../graphql/GetSimilarProjects";
 import {

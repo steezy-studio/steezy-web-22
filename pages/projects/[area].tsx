@@ -8,7 +8,7 @@ import ProjectsGrid from "../../components/ProjectsGrid/ProjectsGrid";
 import { Medium } from "../../components/Typo/Medium";
 import { Nano } from "../../components/Typo/Nano";
 import strings from "../../data/strings";
-import { Areas, Query } from "../../generated/types";
+import { Areas, Query } from "../../generated/preprTypes";
 import { GET_ALL_AREAS } from "../../graphql/GetAllAreas";
 import { GET_AREA } from "../../graphql/GetArea";
 import { allProjects } from "../../helpers/consts";

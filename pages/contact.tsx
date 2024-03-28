@@ -11,7 +11,7 @@ import { Large } from "../components/Typo/Large";
 import { Nano } from "../components/Typo/Nano";
 import { Small } from "../components/Typo/Small";
 import strings from "../data/strings";
-import { Areas } from "../generated/types";
+import { Areas } from "../generated/preprTypes";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import {
   ContactDetail,
