@@ -8,8 +8,8 @@ export const StyledBurger = styled.div`
   justify-content: center;
   border: 1px solid ${colors.black};
   border-radius: ${({ theme }) => theme.bRad};
-  width: ${({ theme }) => theme.navbarHeight};
   height: 100%;
+  aspect-ratio: 1;
   flex-shrink: 0;
   position: relative;
   z-index: 9999999;

@@ -8,21 +8,13 @@ export const Medium = styled.p`
   letter-spacing: 0.04em;
   max-width: 600px;
   &.medium {
-    font-weight: 400;
+    font-weight: 500;
   }
   &.big {
     font-family: "agrandir";
     font-weight: 500;
     font-size: 35px;
     max-width: 650px;
-  }
-  ${breakpoint.largeNotebook} {
-    font-size: 24px;
-    max-width: 550px;
-    &.big {
-      font-size: 30px;
-      max-width: 600px;
-    }
   }
   ${breakpoint.smallNotebook} {
     font-size: 21px;

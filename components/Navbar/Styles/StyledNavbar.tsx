@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { breakpoint, colors } from "../../../helpers/consts";
 import { spaces } from "../../../helpers/spaces";
 
@@ -8,17 +8,12 @@ export const StyledNavbar = styled.nav`
   pointer-events: none;
   z-index: 99999;
   top: ${spaces.m}px;
-  right: ${({ theme }) => theme.pageMargin};
-  left: ${({ theme }) => theme.pageMargin};
-  height: ${({ theme }) => theme.navbarHeight};
+  right: ${spaces.xxxl}px;
+  left: ${spaces.xxxl}px;
+  height: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  ${breakpoint.phone} {
-    top: ${({ theme }) => theme.pageMargin};
-    left: ${({ theme }) => theme.pageMargin};
-    right: ${({ theme }) => theme.pageMargin};
-  }
 `;
 
 export const NavLinks = styled(motion.div)`
@@ -27,20 +22,6 @@ export const NavLinks = styled(motion.div)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  ${breakpoint.tabletLandscape} {
-    padding: ${({ theme }) => theme.pageMargin};
-    position: fixed;
-    top: ${({ theme }) => "-" + theme.pageMargin};
-    left: ${({ theme }) => "-" + theme.pageMargin};
-    right: ${({ theme }) => "-" + theme.pageMargin};
-    bottom: ${({ theme }) => "-" + theme.pageMargin};
-    width: 100vw;
-    min-height: 100vh;
-    flex-direction: column;
-    align-items: flex-end;
-    width: auto;
-    background-color: ${colors.primary300};
-  }
   ${breakpoint.phone} {
     inset: 0;
   }
@@ -50,9 +31,9 @@ export const PhoneDecoration = styled(motion.div)`
   display: none;
   ${breakpoint.tabletLandscape} {
     position: absolute;
-    left: ${({ theme }) => theme.pageMargin};
+    /* left: ${({ theme }) => theme.pageMargin};
     bottom: ${({ theme }) => theme.pageMargin};
-    right: ${({ theme }) => theme.pageMargin};
+    right: ${({ theme }) => theme.pageMargin}; */
     display: grid;
     grid-template-columns: max-content auto;
   }

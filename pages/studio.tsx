@@ -1,12 +1,13 @@
 import { GetStaticProps } from "next";
 import { useState } from "react";
-import { useTheme } from "styled-components";
 import getClient from "../apollo/client";
 import Animation from "../components/Animation/Animation";
 import Head from "../components/Head/Head";
+import HeaderLine from "../components/HeaderLine/HeaderLine";
 import Hero from "../components/Hero/Hero";
-import Img from "../components/Img/Img";
 import Navbar from "../components/Navbar/Navbar";
+import ServicesSection from "../components/ServicesSection/ServicesSection";
+import Slider from "../components/Slider/Slider";
 import { Large } from "../components/Typo/Large";
 import { Medium } from "../components/Typo/Medium";
 import { Micro } from "../components/Typo/Micro";
@@ -15,25 +16,23 @@ import ValueItem from "../components/ValueItem";
 import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
-import { useWindowSize } from "../hooks/useWindowSize";
 import {
-  Blockquote,
-  BlockquoteSection,
+  BrandsHeader,
   BrandsSection,
-  BrandsText,
-  BrandsTextInner,
-  DividerPhoto,
-  HeaderWithDashOffset,
   Logo,
   Logotypes,
-  Outro,
-  Quote,
+  OurStudio,
+  OurStudioSliderImg,
+  StudioHero,
+  StudioServiceCover,
+  StudioServices,
+  StudioServicesSectionW,
   StyledStudio,
   TextBlock,
   TextBlockBody,
   TextBlockHeader,
   ValuesCover,
-  ValuesCoverInner,
+  ValuesCoverW,
   ValuesList,
   ValuesSection,
 } from "../pagestyles/StyledStudio";
@@ -46,9 +45,6 @@ const Studio = ({ areas }: StudioProps) => {
   const studioStrings = strings.studioPage;
   const [focusedValue, setFocusedValue] = useState(0);
 
-  const theme = useTheme();
-
-  const { w } = useWindowSize();
   return (
     <>
       <Head
@@ -60,21 +56,20 @@ const Studio = ({ areas }: StudioProps) => {
       <Navbar areas={areas?.items} header={studioStrings.navbar.header} />
 
       <StyledStudio>
-        <Hero
-          asset={{
-            url: `/images/studio/studio_1.jpg`,
-            _type: `Image`,
-            width: 1920,
-            height: 1211,
-          }}
-        />
+        <StudioHero>
+          <Large>
+            We're creative house building strong visual identities and
+            strategies behind inspiring brands.
+          </Large>
+          <Hero asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }} />
+        </StudioHero>
         <Animation type='fadeFromBottom'>
           <TextBlock>
             <TextBlockHeader>
-              <Micro className={"with-dash"}>
-                {studioStrings.intro.header}
-              </Micro>
-              <Medium className='big'>{studioStrings.intro.perex}</Medium>
+              <HeaderLine>
+                <Micro>{studioStrings.intro.header}</Micro>
+              </HeaderLine>
+              <Medium className='medium'>{studioStrings.intro.perex}</Medium>
             </TextBlockHeader>
             <TextBlockBody>
               <Small>{studioStrings.intro.paragraph}</Small>
@@ -82,16 +77,19 @@ const Studio = ({ areas }: StudioProps) => {
           </TextBlock>
         </Animation>
 
-        <Animation type='fadeFromBottom'>
-          <DividerPhoto>
-            <Img
-              src={"/images/studio/studio_2.jpg"}
-              width={2450}
-              height={1300}
-              alt={"studio"}
-            />
-          </DividerPhoto>
-        </Animation>
+        <OurStudio>
+          <Slider>
+            {studioStrings.slider.map((img, i) => (
+              <OurStudioSliderImg
+                key={i}
+                src={`/images/studio/${img.src}`}
+                width={img.height}
+                height={img.width}
+                alt='studio'
+              />
+            ))}
+          </Slider>
+        </OurStudio>
 
         <ValuesSection id='values-section'>
           <ValuesList>
@@ -110,98 +108,38 @@ const Studio = ({ areas }: StudioProps) => {
               );
             })}
           </ValuesList>
-          <ValuesCover
-            data-scroll
-            data-scroll-sticky
-            data-scroll-target='#values-section'
-            data-scroll-offset={`${
-              -1 *
-              (Number(theme.pageMargin.split("px")[0]) * 2 +
-                Number(theme.navbarHeight.split("px")[0]))
-            }px,0%`}
-          >
-            <ValuesCoverInner>
-              {/* <Video src={"/videos/loop_studio.mp4"} /> */}
-              <Img
-                src={"/images/studio/studio_3.jpg"}
-                width={1126}
-                height={1437}
-                alt='studio values'
-              />
-            </ValuesCoverInner>
-          </ValuesCover>
+          <ValuesCoverW>
+            <ValuesCover
+              src={"/images/studio/studio_3.jpg"}
+              width={1126}
+              height={1437}
+              alt='studio values'
+            />
+          </ValuesCoverW>
         </ValuesSection>
-        {/* <Animation type='fadeFromBottom'>
-          <ImageSlider
-            imgList={strings.studioPage.slider.map((img, i) => ({
-              layout: "responsive",
-              priority: true,
-              width: 689,
-              height: 800,
-              src: `/images/studio/${img.src}`,
-              id: String(i),
-              alt: "studio",
-            }))}
+
+        <StudioServices>
+          <Large>
+            We’re able to cover the client’s needs from strategy and art
+            direction to production, design and communication.
+          </Large>
+          <StudioServiceCover
+            src={"/images/studio-hero.jpg"}
+            width={2101}
+            height={1326}
+            alt='studio values'
           />
-        </Animation> */}
+          <StudioServicesSectionW>
+            <ServicesSection areas={areas} />
+          </StudioServicesSectionW>
+        </StudioServices>
 
-        <BlockquoteSection>
-          <Blockquote className='_1'>
-            <Img
-              src={"/images/studio/studio_4.jpg"}
-              width={1200}
-              height={1510}
-              alt={"studio"}
-            />
-
-            <Quote className='offset-y-1' data-scroll data-scroll-speed='2'>
-              <Large className='offset-x-1'>
-                {studioStrings.blockquotes[0].quote}
-              </Large>
-              <Micro className='with-dash reversed'>
-                {studioStrings.blockquotes[0].name}{" "}
-              </Micro>
-              <Micro className='lowcase dash-margin '>
-                {studioStrings.blockquotes[0].position}
-              </Micro>
-            </Quote>
-          </Blockquote>
-          <Blockquote className='_2'>
-            <Quote className='offset-y-2' data-scroll data-scroll-speed='2'>
-              <Large className='offset-x-2'>
-                {studioStrings.blockquotes[1].quote}
-              </Large>
-              <Micro className='with-dash dash-margin'>
-                {studioStrings.blockquotes[1].name}
-              </Micro>
-              <Micro className='lowcase dash-margin'>
-                {studioStrings.blockquotes[1].position}
-              </Micro>
-            </Quote>
-
-            <Img
-              src={"/images/studio/studio_5.jpg"}
-              width={1200}
-              height={1200}
-              alt='studio'
-            />
-          </Blockquote>
-        </BlockquoteSection>
         <BrandsSection>
-          <Animation type='fadeFromBottom'>
-            <BrandsText>
-              <HeaderWithDashOffset>
-                <Micro className='with-dash'>
-                  {studioStrings.brands.header}
-                </Micro>
-              </HeaderWithDashOffset>
-              <BrandsTextInner>
-                <Medium className='big'>{studioStrings.brands.claim}</Medium>
-                <Small>{studioStrings.brands.perex}</Small>
-              </BrandsTextInner>
-            </BrandsText>
-          </Animation>
-
+          <BrandsHeader>
+            <HeaderLine>
+              <Micro className='with-dash'>{studioStrings.brands.header}</Micro>
+            </HeaderLine>
+          </BrandsHeader>
           <Logotypes>
             {studioStrings.brands.logotypes.map((src, i) => (
               <Animation type='fadeFromBottom' key={src} delay={0.05 * i}>
@@ -210,28 +148,6 @@ const Studio = ({ areas }: StudioProps) => {
             ))}
           </Logotypes>
         </BrandsSection>
-        <Outro>
-          <Blockquote className='_3'>
-            <Quote className='offset-y-3' data-scroll data-scroll-speed='2'>
-              <Large className='offset-x-2'>
-                {studioStrings.blockquotes[2].quote}
-              </Large>
-              <Micro className='with-dash reversed'>
-                {studioStrings.blockquotes[2].name}{" "}
-              </Micro>
-              <Micro className='lowcase dash-margin'>
-                {studioStrings.blockquotes[2].position}
-              </Micro>
-            </Quote>
-          </Blockquote>
-
-          <Img
-            src={`/images/studio/studio_6.jpg`}
-            width={2450}
-            height={1300}
-            alt='studio'
-          />
-        </Outro>
       </StyledStudio>
     </>
   );

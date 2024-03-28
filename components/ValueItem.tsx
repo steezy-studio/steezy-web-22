@@ -1,18 +1,15 @@
 import { motion } from "framer-motion";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import strings from "../data/strings";
 import { device } from "../helpers/consts";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import { useWindowSize } from "../hooks/useWindowSize";
-import Img from "./Img/Img";
+import HeaderLine from "./HeaderLine/HeaderLine";
 import {
   Order,
   StyledValueItem,
   ValueBody,
-  ValueCover,
-  ValueCoverWrapper,
   ValueHeader,
-  ValueItemContent,
 } from "./StyledValueItem";
 import { Medium } from "./Typo/Medium";
 import { Micro } from "./Typo/Micro";
@@ -77,10 +74,13 @@ const ValueItem = ({
         {isFocused && (
           <motion.div
             layoutId={w <= device.phone ? undefined : `value-header`}
-            transition={{ ease: [0.22, 1, 0.36, 1], duration: 1 }}>
-            <Micro className='with-dash'>
-              {strings.studioPage.values.header}
-            </Micro>
+            transition={{ ease: [0.22, 1, 0.36, 1], duration: 1 }}
+          >
+            <HeaderLine>
+              <Micro className='with-dash'>
+                {strings.studioPage.values.header}
+              </Micro>
+            </HeaderLine>
           </motion.div>
         )}
       </div>
@@ -88,7 +88,7 @@ const ValueItem = ({
       <ValueBody>
         <Order>{formatedOrder}</Order>
         <ValueHeader>
-          <Medium className='big'>{header}</Medium>
+          <Medium className='medium'>{header}</Medium>
           <Small className='big-lh'>{perex}</Small>
         </ValueHeader>
       </ValueBody>

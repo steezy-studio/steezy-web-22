@@ -3,9 +3,9 @@ import { breakpoint } from "../../helpers/consts";
 import { spaces } from "../../helpers/spaces";
 
 export const StyledServicesSection = styled.div`
-  display: flex;
-  column-gap: ${spaces.xl}px;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  align-items: start;
   max-width: 1600px;
 `;
 

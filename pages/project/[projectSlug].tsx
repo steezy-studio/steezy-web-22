@@ -7,6 +7,7 @@ import HTMLReactParser, {
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import getClient from "../../apollo/client";
 import Animation from "../../components/Animation/Animation";
+import ClientQuote from "../../components/ClientQuote/ClientQuote";
 import GridItem from "../../components/GridItem/GridItem";
 import Head from "../../components/Head/Head";
 import Link from "../../components/Link/Link";
@@ -38,7 +39,6 @@ import {
   SimilarProjectsSlider,
   StyledProject,
 } from "../../pagestyles/StyledProject";
-import ClientQuote from "../../components/ClientQuote/ClientQuote";
 
 interface ProjectProps {
   projectData: {

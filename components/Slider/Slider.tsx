@@ -23,13 +23,14 @@ interface SliderProps {
   children: ReactNode[];
   slidesPerView?: number;
   offsetNav?: number;
+  step?: number;
 }
 
 const Slider = (
-  { children, slidesPerView = 2.2, offsetNav = 1 }: SliderProps,
+  { children, slidesPerView = 0, offsetNav = 1, step = 1 }: SliderProps,
   ref: React.MutableRefObject<HTMLDivElement>
 ) => {
-  const [index, setIndex] = useState(0);
+  const [position, setPosition] = useState(0);
   const { cursorType, setCursorType, cursorRef } = useContext(HoverProvider);
   const controls = useAnimationControls();
   const { w } = useWindowSize();
@@ -39,30 +40,58 @@ const Slider = (
   const _ref = ref?.current ? ref : innerRef;
   const sliderRef = useRef<HTMLDivElement>(null);
   const itemWidth = useRef<number>(null);
+  const totalWidth = useRef<number>(null);
   const clearedChildren = clearEmptyVals(children);
 
   useEffect(() => {
-    itemWidth.current = sliderRef.current.clientWidth / slidesPerView;
-    sliderRef.current.style.gridAutoColumns = `${itemWidth.current}px`;
-  }, [w, slidesPerView, index]);
+    const innerC = _ref.current.querySelector(
+      "[data-slider-inner]"
+    ) as HTMLElement;
+    const slides = innerC.children;
+    itemWidth.current = 0;
+    totalWidth.current = 0;
+
+    for (const slide of slides) {
+      const slideEl = slide as HTMLElement;
+      if (slidesPerView) {
+        slideEl.style.width = `${_ref.current.clientWidth / slidesPerView}px`;
+      }
+      totalWidth.current += slide.clientWidth;
+    }
+    innerC.style.width = `${totalWidth.current}px`;
+    itemWidth.current = slidesPerView
+      ? _ref.current.clientWidth / slidesPerView
+      : (totalWidth.current - _ref.current.clientWidth) /
+        clearedChildren.length;
+  }, [w]);
 
   const handleIndexChange = (dir) => {
-    const nextIndex = index + dir;
+    const nextPosition = position + dir * step;
+
     if (
-      nextIndex < 0 ||
-      nextIndex > clearedChildren.length - Math.floor(slidesPerView)
+      nextPosition < 0 ||
+      nextPosition > clearedChildren.length - Math.trunc(slidesPerView)
     ) {
       return;
     }
-    setIndex(nextIndex);
-    const pagesLenght = Math.round(
-      clearedChildren.length / Math.floor(slidesPerView)
-    );
-    const compensate = (nextIndex * offsetNav) / pagesLenght;
+    setPosition(nextPosition);
+    const maxSteps = clearedChildren.length - Math.trunc(slidesPerView);
+
+    const compensateOffset =
+      itemWidth.current *
+      (slidesPerView - Math.floor(slidesPerView)) *
+      (nextPosition / maxSteps);
+
+    const x = itemWidth.current * nextPosition - compensateOffset;
+    if (
+      !slidesPerView &&
+      x - 100 > totalWidth.current - _ref.current.clientWidth
+    ) {
+      return;
+    }
+
     controls.start({
-      x: `${
-        -1 * nextIndex * itemWidth.current + compensate * itemWidth.current
-      }px`,
+      x: `${-x}px`,
     });
   };
 
@@ -78,7 +107,7 @@ const Slider = (
     const containerBB = _ref.current.getBoundingClientRect();
     const cursorX = Number(cursorRef.current.dataset.x);
     const nextPossibleIndex =
-      cursorX <= containerBB.width / 2 ? index - 1 : index + 1;
+      cursorX <= containerBB.width / 2 ? position - 1 : position + 1;
     const cursorInBounds = isCursorWithinBounds(
       _ref.current,
       cursorX,
@@ -140,6 +169,7 @@ const Slider = (
         style={{ width: `${(100 * offsetNav) / 2}%` }}
       />
       <_Slider
+        data-slider-inner
         ref={sliderRef}
         animate={controls}
         transition={transition}

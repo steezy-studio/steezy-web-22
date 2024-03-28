@@ -22,14 +22,4 @@ function getClient() {
   return client;
 }
 
-export const withApolloClient = (Page) => {
-  return (props) => {
-    return (
-      <ApolloProvider client={client}>
-        <Page {...props} />
-      </ApolloProvider>
-    );
-  };
-};
-
 export default getClient;

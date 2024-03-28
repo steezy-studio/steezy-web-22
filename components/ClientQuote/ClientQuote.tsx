@@ -22,7 +22,7 @@ const ClientQuote = ({ quote, clientName, clientRole }: ClientQuoteProps) => {
     } as Transition);
   return (
     <StyledClientQuote>
-      <Large className='project-detail-quote'>
+      <Large className='smaller'>
         <AnimateTextRows
           motionProps={(i, ref) => ({
             initial: {

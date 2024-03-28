@@ -60,39 +60,58 @@ export default {
     slider: [
       {
         src: "studio_G2.jpg",
+        width: 498,
+        height: 481,
       },
       {
         src: "studio_G3.jpg",
+        width: 369,
+        height: 481,
       },
       {
         src: "studio_G4.jpg",
+        width: 563,
+        height: 481,
       },
       {
         src: "studio_G5.jpg",
+        width: 578,
+        height: 481,
       },
       {
         src: "studio_G6.jpg",
+        width: 650,
+        height: 481,
       },
       {
         src: "studio_G7.jpg",
+        width: 563,
+        height: 481,
       },
       {
         src: "studio_G8.jpg",
+        width: 345,
+        height: 481,
       },
       {
         src: "studio_G9.jpg",
+        width: 650,
+        height: 481,
       },
       {
         src: "studio_G10.jpg",
+        width: 607,
+        height: 481,
       },
       {
         src: "studio_G11.jpg",
+        width: 391,
+        height: 481,
       },
       {
         src: "studio_G12.jpg",
-      },
-      {
-        src: "studio_G13.jpg",
+        width: 607,
+        height: 481,
       },
     ],
     brands: {

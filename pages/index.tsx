@@ -83,7 +83,7 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
             url='/projects/all-projects'
           />
           <IndexSliderW>
-            <Slider slidesPerView={4.2} offsetNav={0.2}>
+            <Slider slidesPerView={4.2} offsetNav={0.2} step={2}>
               {latestProjects.map(
                 ({ project_grid_name, areas, _slug, grid_image }, i) => {
                   return (

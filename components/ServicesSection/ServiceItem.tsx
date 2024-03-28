@@ -79,7 +79,7 @@ const ServiceItem = ({ area, i }: ServiceItemProps) => {
       </ServiceItemProject>
       <Animation type='fadeFromBottom' key={area._slug} delay={0.2 * i}>
         <motion.div>
-          <Medium className='big'>
+          <Medium className='medium'>
             <Link href={`/projects/${area._slug}`}>{area.area_name}</Link>
           </Medium>
           <SubServicesList>

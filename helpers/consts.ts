@@ -20,8 +20,6 @@ export const allProjects = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget arcu mollis, faucibus erat eget, sollicitudin leo.",
 };
 
-export const projectsPerPage = 12;
-
 export const device = {
   miniPhone: 400,
   phone: 600,
@@ -51,16 +49,6 @@ export const theme = (width: number) => ({
       : width <= device.smallNotebook
       ? "20px"
       : "120px",
-  navbarHeight:
-    width <= device.phone
-      ? "40px"
-      : width <= device.tabletLandscape
-      ? "50px"
-      : width <= device.smallNotebook
-      ? "60px"
-      : width <= device.largeNotebook
-      ? "50px"
-      : "80px",
   bRad: "15px",
 });
 export type Theme = typeof theme;

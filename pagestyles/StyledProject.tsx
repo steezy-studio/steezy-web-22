@@ -78,21 +78,6 @@ export const ProjectGridBlockquote = styled.div`
   }
 `;
 
-export const NextProjectSection = styled(motion.div)`
-  margin-top: ${({ theme }) => u(2, theme.pageMargin)};
-`;
-
-export const NextProjectHead = styled.div`
-  display: grid;
-  grid-template-areas: "relatedProject backToProjects";
-  margin-bottom: 60px;
-  ${breakpoint.phone} {
-    grid-template-areas: "backToProjects" "relatedProject";
-    row-gap: 40px;
-    margin-bottom: 20px;
-  }
-`;
-
 export const SimilarProjectsSlider = styled.section`
   margin-top: ${spaces.xxxl}px;
   display: grid;

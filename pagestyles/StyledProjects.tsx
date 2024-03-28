@@ -21,24 +21,3 @@ export const Filter = styled.span`
   display: flex;
   column-gap: ${spaces.xxs}px;
 `;
-
-export const ProjectsGridColumn = styled.div`
-  &.odd {
-    margin-top: ${({ theme }) => u(-2, theme.pageMargin)};
-    ${breakpoint.largeNotebook} {
-      margin-top: ${({ theme }) => u(-3, theme.pageMargin)};
-    }
-    ${breakpoint.smallNotebook} {
-      margin-top: ${({ theme }) => u(-2, theme.pageMargin)};
-    }
-  }
-`;
-
-export const ProjectsGridItem = styled.div`
-  &:not(:last-child) {
-    margin-bottom: ${({ theme }) => u(1, theme.pageMargin)};
-    ${breakpoint.phone} {
-      margin-bottom: ${({ theme }) => u(2, theme.pageMargin)};
-    }
-  }
-`;

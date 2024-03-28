@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: "agrandir", Arial, Helvetica, sans-serif;
   }
   body {
-      padding: ${({ theme }) => theme.pageMargin} ;
+      padding: ${spaces.xxxl}px ;
       padding-top: ${spaces.xxxl}px ;
       padding-bottom: 0 ;
   }

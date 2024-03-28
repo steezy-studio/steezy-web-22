@@ -1,17 +1,12 @@
-import { m, motion } from "framer-motion";
-import { relative } from "path";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint, colors } from "../helpers/consts";
-import u from "../helpers/unit";
 
 export const StyledValueItem = styled.div<{ order: number }>`
   position: relative;
   display: grid;
-  grid-template-columns: 400px 1fr;
+  grid-template-columns: 250px 1fr;
   column-gap: ${({ theme }) => `calc( ${theme.pageMargin} )`};
-  ${breakpoint.largeNotebook} {
-    grid-template-columns: 300px 1fr;
-  }
   ${breakpoint.smallNotebook} {
     grid-template-columns: 230px 1fr;
   }
@@ -22,22 +17,6 @@ export const StyledValueItem = styled.div<{ order: number }>`
   ${breakpoint.phone} {
     width: 80%;
   }
-`;
-
-export const ValueCover = styled(motion.div)`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-`;
-
-export const ValueCoverWrapper = styled.div`
-  position: relative;
-  transform: translateY(-50%);
-`;
-
-export const ValueItemContent = styled.div`
-  display: grid;
-  grid-template-columns: 300px auto;
 `;
 
 export const ValueBody = styled.div`

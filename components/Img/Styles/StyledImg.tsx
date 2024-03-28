@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
-import { ClientQuote, StyledProject } from "../../../pagestyles/StyledProject";
-import { Blockquote, Outro } from "../../../pagestyles/StyledStudio";
-import { StyledSlider } from "../../Slider/Styles/StyledSlider";
+import { StyledProject } from "../../../pagestyles/StyledProject";
 import { ContactUs } from "../../Navbar/Styles/StyledNavbar";
+import { StyledSlider } from "../../Slider/Styles/StyledSlider";
 
 export const StyledImg = styled(motion.div)`
   ${ContactUs} & {
@@ -26,54 +25,10 @@ export const StyledImg = styled(motion.div)`
       }
     }
   }
-  ${Blockquote} & {
-    ${breakpoint.phone} {
-      &._1 {
-        grid-area: image;
-      }
-      &._2 {
-        grid-area: image;
-      }
-    }
-  }
   ${StyledSlider} & {
     padding-right: 10px;
     ${breakpoint.phone} {
       padding-right: 5px;
-    }
-  }
-  ${ClientQuote} & {
-    width: 250px;
-    height: 250px;
-    border-radius: 9999999999999px;
-    overflow: hidden;
-    &.phone {
-      display: none;
-    }
-    ${breakpoint.smallNotebook} {
-      width: 150px;
-      height: 150px;
-    }
-    ${breakpoint.tabletPortrait} {
-      width: 100px;
-      height: 100px;
-    }
-    ${breakpoint.phone} {
-      width: 80px;
-      height: 80px;
-      &.desktop {
-        display: none;
-      }
-      &.phone {
-        display: block;
-        margin-bottom: 10px;
-      }
-    }
-  }
-  ${Outro} & {
-    ${breakpoint.phone} {
-      position: relative;
-      padding-bottom: 100%;
     }
   }
 `;

@@ -6,17 +6,18 @@ import { ProjectsHeroFilters } from "../../pagestyles/StyledProjects";
 
 export const Large = styled.h1`
   font-family: "migra-italic", Arial, Helvetica, sans-serif;
-  font-size: 80px;
+  font-size: 60px;
   line-height: 1.1em;
   letter-spacing: 0.02em;
   font-weight: 400;
   color: ${colors.black};
+  max-width: 900px;
   &.underline {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
   }
-  &.project-detail-quote {
+  &.smaller {
     font-size: 40px;
   }
   &.big {
