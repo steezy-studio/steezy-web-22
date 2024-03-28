@@ -135,7 +135,7 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
         <IndexServices>
           <ServicesSection areas={areas} />
         </IndexServices>
-        <InstagramFeed images={null} />
+        {/* <InstagramFeed images={null} /> */}
       </StyledIndex>
     </>
   );

@@ -23,6 +23,7 @@
   "dependencies": {
     "@apollo/client": "^3.9.9",
     "@radix-ui/react-dialog": "^1.0.5",
+    "@shopify/hydrogen-react": "^2024.1.1",
     "@types/react-dom": "^18.0.5",
     "@types/shortid": "^0.0.29",
     "@u-wave/react-vimeo": "^0.9.8",
