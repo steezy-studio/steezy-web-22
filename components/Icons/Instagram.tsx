@@ -9,6 +9,7 @@ interface InstagramProps {
 
 const StyledInstagram = styled.a`
   width: 21px;
+  height: 21px;
   display: block;
   svg {
     width: 100%;
@@ -27,12 +28,14 @@ const Instagram = ({ fill = "black" }: InstagramProps) => {
         setCursorType("normal");
       }}
       href='https://www.instagram.com/steezy.studio/'
-      target={`_blank`}>
+      target={`_blank`}
+    >
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='24.328'
         height='24.47'
-        viewBox='0 0 24.328 24.47'>
+        viewBox='0 0 24.328 24.47'
+      >
         <g id='Group_6243' data-name='Group 6243'>
           <path
             id='Path_14540'

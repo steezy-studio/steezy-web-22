@@ -137,7 +137,7 @@ const Studio = ({ areas }: StudioProps) => {
         <BrandsSection>
           <BrandsHeader>
             <HeaderLine>
-              <Micro className='with-dash'>{studioStrings.brands.header}</Micro>
+              <Micro>{studioStrings.brands.header}</Micro>
             </HeaderLine>
           </BrandsHeader>
           <Logotypes>

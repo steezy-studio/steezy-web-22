@@ -5,14 +5,11 @@ import strings from "../../data/strings";
 import { Area } from "../../generated/types";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
-import { StyledImg } from "../Img/Styles/StyledImg";
 import Logo from "../Logo/Logo";
-import { Micro } from "../Typo/Micro";
 import { Nano } from "../Typo/Nano";
 import Burger from "./Burger";
 import NavLink from "./NavLink";
 import {
-  ContactUs,
   LinksBlock,
   NavHeader,
   NavLinks,
@@ -101,12 +98,12 @@ const Navbar = ({ areas, header }: NavbarProps) => {
               <PhoneDecoration
                 variants={{ open: { opacity: 1 }, close: { opacity: 0 } }}
               >
-                <ContactUs href={`/contact`}>
+                {/* <ContactUs href={`/contact`}>
                   <StyledImg as={"img"} src={"/icons/contact-icon.svg"} />
                   <Micro className='uppercase break-lines'>
                     {strings.globals.tellUsYourStory}
                   </Micro>
-                </ContactUs>
+                </ContactUs> */}
 
                 <Instagram />
                 <Vimeo />

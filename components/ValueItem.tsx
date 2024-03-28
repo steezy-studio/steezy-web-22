@@ -77,9 +77,7 @@ const ValueItem = ({
             transition={{ ease: [0.22, 1, 0.36, 1], duration: 1 }}
           >
             <HeaderLine>
-              <Micro className='with-dash'>
-                {strings.studioPage.values.header}
-              </Micro>
+              <Micro>{strings.studioPage.values.header}</Micro>
             </HeaderLine>
           </motion.div>
         )}
