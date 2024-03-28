@@ -34,6 +34,7 @@ import {
 import { GET_FEATURED_GRID } from "../graphql/GetFeaturedGrid";
 import ServicesSection from "../components/ServicesSection/ServicesSection";
 import ClientQuote from "../components/ClientQuote/ClientQuote";
+import InstagramFeed from "../components/InstagramFeed/InstagramFeed";
 
 interface indexProps {
   projects: EnhancedProject[];
@@ -134,6 +135,7 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
         <IndexServices>
           <ServicesSection areas={areas} />
         </IndexServices>
+        <InstagramFeed images={null} />
       </StyledIndex>
     </>
   );

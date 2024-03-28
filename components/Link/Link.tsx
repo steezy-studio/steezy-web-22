@@ -19,49 +19,23 @@ const Link = ({
   ...rest
 }: LinkProps) => {
   const { setCursorType } = useContext(HoverProvider);
-
-  return target ? (
-    <StyledLink
-      className={className}
+  return (
+    <NextLink
+      href={href}
       onMouseEnter={() => setCursorType("hover")}
       onMouseLeave={() => setCursorType("normal")}
-    >
-      <a
-        href={href as string}
-        target={target}
-        onClick={(e) => {
-          if (onClick) {
-            e.preventDefault();
-            onClick();
-          }
-        }}
-        {...rest}
-      >
-        {children}
-        <LinkBg className={`bg ${className}`} />
-      </a>
-    </StyledLink>
-  ) : (
-    <StyledLink
+      {...rest}
       className={className}
-      onMouseEnter={() => setCursorType("hover")}
-      onMouseLeave={() => setCursorType("normal")}
+      onClick={(e) => {
+        if (onClick) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
     >
-      <NextLink
-        href={href}
-        {...rest}
-        className={className}
-        onClick={(e) => {
-          if (onClick) {
-            e.preventDefault();
-            onClick();
-          }
-        }}
-      >
-        {children}
-        <LinkBg className={`bg ${className}`} />
-      </NextLink>
-    </StyledLink>
+      {children}
+      <LinkBg className={`bg ${className}`} />
+    </NextLink>
   );
 };
 

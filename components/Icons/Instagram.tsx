@@ -5,6 +5,7 @@ import { HoverProvider } from "../../pages/_app";
 
 interface InstagramProps {
   fill?: ColorKeys;
+  as?: keyof JSX.IntrinsicElements;
 }
 
 const StyledInstagram = styled.a`
@@ -17,10 +18,11 @@ const StyledInstagram = styled.a`
   }
 `;
 
-const Instagram = ({ fill = "black" }: InstagramProps) => {
+const Instagram = ({ fill = "black", as = "a" }: InstagramProps) => {
   const { setCursorType } = useContext(HoverProvider);
   return (
     <StyledInstagram
+      as={as}
       onMouseEnter={() => {
         setCursorType("hover");
       }}

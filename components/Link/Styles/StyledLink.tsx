@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../../helpers/consts";
+import Link from "next/link";
 
 export const LinkBg = styled.span`
   display: block;
@@ -18,29 +19,26 @@ export const LinkBg = styled.span`
   }
 `;
 
-export const StyledLink = styled.span`
-  &,
-  a {
-    position: relative;
-    font-family: inherit;
-    color: inherit;
-    display: inline-block;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-    &:hover {
-      .bg {
-        transform: scaleX(1);
-      }
+export const StyledLink = styled(Link)`
+  position: relative;
+  font-family: inherit;
+  color: inherit;
+  display: inline-block;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  &:hover {
+    .bg {
+      transform: scaleX(1);
     }
-    &.no-underline {
-      text-decoration: none !important;
-    }
-    &.active,
-    &.active a {
-      .bg {
-        transform: scaleX(1);
-      }
+  }
+  &.no-underline {
+    text-decoration: none !important;
+  }
+  &.active,
+  &.active a {
+    .bg {
+      transform: scaleX(1);
     }
   }
 `;

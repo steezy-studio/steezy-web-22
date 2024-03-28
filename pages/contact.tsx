@@ -1,8 +1,15 @@
 import { GetStaticProps } from "next";
 import getClient from "../apollo/client";
 import Head from "../components/Head/Head";
-import Hero from "../components/Hero/Hero";
+import Human from "../components/Human/Human";
+import Instagram from "../components/Icons/Instagram";
+import Vimeo from "../components/Icons/Vimeo";
+import Link from "../components/Link/Link";
 import Navbar from "../components/Navbar/Navbar";
+import SectionHeader from "../components/SectionHeader/SectionHeader";
+import { Large } from "../components/Typo/Large";
+import { Nano } from "../components/Typo/Nano";
+import { Small } from "../components/Typo/Small";
 import strings from "../data/strings";
 import { Areas } from "../generated/types";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
@@ -17,14 +24,6 @@ import {
   FoundersGrid,
   StyledContact,
 } from "../pagestyles/StyledContact";
-import { Large } from "../components/Typo/Large";
-import { Nano } from "../components/Typo/Nano";
-import { Small } from "../components/Typo/Small";
-import Link from "../components/Link/Link";
-import Vimeo from "../components/Icons/Vimeo";
-import Instagram from "../components/Icons/Instagram";
-import SectionHeader from "../components/SectionHeader/SectionHeader";
-import Human from "../components/Human/Human";
 
 interface ContactProps {
   areas: Areas;
