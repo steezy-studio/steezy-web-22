@@ -8,7 +8,7 @@ import { spaces } from "../../../helpers/spaces";
 export const StyledCart = styled.div`
   position: fixed;
   inset: 0;
-  z-index: 99999;
+  z-index: 999999999;
   pointer-events: none;
   height: 100dvh;
 `;
@@ -23,7 +23,7 @@ export const Drawer = styled(motion.div)`
   right: 0;
   width: 600px;
   height: 100vh;
-  background-color: ${colors.gray400};
+  background-color: ${colors.white};
   display: flex;
   flex-direction: column;
   row-gap: ${spaces.xxl}px;

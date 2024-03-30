@@ -1,7 +1,7 @@
 import { useCartLine } from "@shopify/hydrogen-react";
 import { formatPrice } from "../../helpers/formatPrice";
-import { Big } from "../Typography/Big";
-import { Micro } from "../Typography/Micro";
+import { Large } from "../Typo/Large";
+import { Micro } from "../Typo/Micro";
 import CartQuantityInput from "./CartQuantityInput";
 import {
   CartItemSize,
@@ -17,12 +17,12 @@ const CartItem = ({}: CartItemProps) => {
   return (
     <StyledCartItem>
       <CartItemSize style={{ gridArea: "title" }}>
-        <Big className='uppercase black'>{merchandise.product.title}</Big>
+        <Large className='uppercase black'>{merchandise.product.title}</Large>
         <Micro className='black uppercase'>{`Velikost ${merchandise.title}`}</Micro>
       </CartItemSize>
-      <Big className='black' style={{ gridArea: "price" }}>
+      <Large className='black' style={{ gridArea: "price" }}>
         {formatPrice(cost.totalAmount.amount)}
-      </Big>
+      </Large>
       <QuantityContainer style={{ gridArea: "quantity" }}>
         <Micro className='black uppercase'>počet kusů</Micro>
         <CartQuantityInput />

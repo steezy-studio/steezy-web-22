@@ -16,6 +16,7 @@ interface VideoProps
 
 const StyledVideo = styled(motion.video)`
   width: 100%;
+  border-radius: ${({ theme }) => theme.bRad};
   &.cover {
     object-fit: cover;
     height: 100%;

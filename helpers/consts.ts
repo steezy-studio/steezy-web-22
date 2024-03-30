@@ -20,6 +20,21 @@ export const allProjects = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget arcu mollis, faucibus erat eget, sollicitudin leo.",
 };
 
+export const indetifiers = [
+  {
+    namespace: "custom",
+    key: "grid_image",
+  },
+  {
+    namespace: "custom",
+    key: "grid_image_hover",
+  },
+  {
+    namespace: "custom",
+    key: "product_video",
+  },
+];
+
 export const device = {
   miniPhone: 400,
   phone: 600,

@@ -57,7 +57,7 @@ const ProductCard = ({
         sethover(false);
       }}
       className={`${!availableForSale ? "inactive" : ""}`}
-      href={`/apparel/${slug}`}
+      href={`/product/${slug}`}
     >
       <ProductCardInfo>
         <ProductCardInfoHeader>

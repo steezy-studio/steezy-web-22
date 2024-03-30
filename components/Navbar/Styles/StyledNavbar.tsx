@@ -5,7 +5,7 @@ import { spaces } from "../../../helpers/spaces";
 
 export const StyledNavbar = styled.nav`
   position: fixed;
-  pointer-events: none;
+  /* pointer-events: none; */
   z-index: 99999;
   top: ${spaces.m}px;
   right: ${spaces.xxxl}px;
@@ -31,11 +31,25 @@ export const PhoneDecoration = styled(motion.div)`
   display: none;
   ${breakpoint.tabletLandscape} {
     position: absolute;
-    /* left: ${({ theme }) => theme.pageMargin};
-    bottom: ${({ theme }) => theme.pageMargin};
-    right: ${({ theme }) => theme.pageMargin}; */
     display: grid;
     grid-template-columns: max-content auto;
+  }
+`;
+
+export const NavbarCart = styled.div`
+  aspect-ratio: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid ${colors.black};
+  background-color: ${colors.black};
+  &:hover {
+    background-color: ${colors.white};
+    > * {
+      color: ${colors.black};
+    }
   }
 `;
 

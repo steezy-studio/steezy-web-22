@@ -1,7 +1,7 @@
 export const formatPrice = (
   price: number | string,
   currency: string = "CZK",
-  locale: string = "cs-CZ"
+  locale: string = "en-GB"
 ) => {
   return new Intl.NumberFormat(locale, {
     style: "currency",

@@ -8,6 +8,8 @@ import { theme } from "../helpers/consts";
 import { useGA } from "../hooks/useGA";
 import { useWindowSize } from "../hooks/useWindowSize";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
+import Cart, { CartToggleProvider } from "../components/Cart/Cart";
+import CartProvider from "../components/Cart/CartProvider";
 
 export const HoverProvider = React.createContext<{
   setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,29 +27,34 @@ function MyApp({ Component, pageProps }) {
   const cursorRef = useRef<HTMLDivElement>(null);
 
   return (
-    <ThemeProvider theme={theme(w)}>
-      <GlobalStyle />
-      <main ref={containerRef}>
-        <Cursor
-          isCursorDisabled={isCursorDisabled}
-          cursorType={cursorType}
-          cursorRef={cursorRef}
-        />
-        <HoverProvider.Provider
-          value={{
-            setIsCursorDisabled,
-            setCursorType,
-            cursorType,
-            cursorRef,
-          }}
-        >
-          <Layout>
-            <Component {...pageProps} />
-            <Footer />
-          </Layout>
-        </HoverProvider.Provider>
-      </main>
-    </ThemeProvider>
+    <CartToggleProvider>
+      <CartProvider>
+        <ThemeProvider theme={theme(w)}>
+          <GlobalStyle />
+          <main ref={containerRef}>
+            <Cursor
+              isCursorDisabled={isCursorDisabled}
+              cursorType={cursorType}
+              cursorRef={cursorRef}
+            />
+            <HoverProvider.Provider
+              value={{
+                setIsCursorDisabled,
+                setCursorType,
+                cursorType,
+                cursorRef,
+              }}
+            >
+              <Layout>
+                <Cart />
+                <Component {...pageProps} />
+                <Footer />
+              </Layout>
+            </HoverProvider.Provider>
+          </main>
+        </ThemeProvider>
+      </CartProvider>
+    </CartToggleProvider>
   );
 }
 

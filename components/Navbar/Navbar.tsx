@@ -1,6 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import strings from "../../data/strings";
 import { Area } from "../../generated/preprTypes";
 import Instagram from "../Icons/Instagram";
@@ -13,11 +13,15 @@ import {
   LinksBlock,
   NavHeader,
   NavLinks,
+  NavbarCart,
   NavlinksMask,
   PhoneDecoration,
   StyledNavbar,
   linksBlockVariants,
 } from "./Styles/StyledNavbar";
+import { HoverProvider } from "../../pages/_app";
+import Cart, { CartToggleContext } from "../Cart/Cart";
+import { useCart } from "@shopify/hydrogen-react";
 
 interface NavbarProps {
   areas: Area[];
@@ -26,6 +30,9 @@ interface NavbarProps {
 
 const Navbar = ({ areas, header }: NavbarProps) => {
   const [isMenuOpen, openMenu] = useState(false);
+  const { setCursorType } = useContext(HoverProvider);
+  const { setShowCart } = useContext(CartToggleContext);
+  const { lines } = useCart();
   const router = useRouter();
   const navLinksDelay = 0.04;
 
@@ -95,6 +102,7 @@ const Navbar = ({ areas, header }: NavbarProps) => {
                   </NavLink>
                 </LinksBlock>
               ))}
+
               <PhoneDecoration
                 variants={{ open: { opacity: 1 }, close: { opacity: 0 } }}
               >
@@ -113,6 +121,17 @@ const Navbar = ({ areas, header }: NavbarProps) => {
         </AnimatePresence>
       </NavlinksMask>
 
+      {lines.length !== 0 && (
+        <NavbarCart
+          onClick={() => {
+            setShowCart((p) => !p);
+          }}
+          onMouseEnter={() => setCursorType("hover")}
+          onMouseLeave={() => setCursorType("normal")}
+        >
+          <Nano className='white'>{lines.length}</Nano>
+        </NavbarCart>
+      )}
       <Burger onClick={() => openMenu((prev) => !prev)} isOpen={isMenuOpen} />
     </StyledNavbar>
   );

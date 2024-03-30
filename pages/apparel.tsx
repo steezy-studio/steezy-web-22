@@ -21,6 +21,7 @@ import {
   ProductsGridSection,
   StyledApparel,
 } from "../pagestyles/StyledApparel";
+import { indetifiers } from "../helpers/consts";
 
 interface apparelProps {
   products: ProductConnection;
@@ -99,6 +100,7 @@ export const getStaticProps: GetStaticProps = async () => {
   } = await preprClient.query<Query>({
     query: GET_ALL_AREAS,
   });
+
   const {
     data: { Projects: projects },
   } = await preprClient.query<Query>({
@@ -122,20 +124,7 @@ export const getStaticProps: GetStaticProps = async () => {
         preferredContentType: "WEBP",
       },
       imagesFirst2: 99,
-      identifiers: [
-        {
-          namespace: "custom",
-          key: "grid_image",
-        },
-        {
-          namespace: "custom",
-          key: "grid_image_hover",
-        },
-        {
-          namespace: "custom",
-          key: "product_video",
-        },
-      ],
+      identifiers: indetifiers,
     } as QueryRootProductsArgs,
   });
 

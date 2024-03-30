@@ -15,15 +15,13 @@ import {
   useEffect,
   useState,
 } from "react";
-import { DisableScroll } from "../../app/(client)/DisableScroll";
-import { easing } from "../../consts/animationConfig";
-import { colors } from "../../consts/colors";
+import { easing } from "../../helpers/animationConfig";
+import { colors } from "../../helpers/consts";
 import { formatPrice } from "../../helpers/formatPrice";
-import Button from "../Button/Button";
-import Burger from "../Icons/Burger";
-import Line from "../Line/Line";
+import Link from "../Link/Link";
+import Burger from "../Navbar/Burger";
 import Scrollbar from "../Scrollbar/Scrollbar";
-import { Big } from "../Typography/Big";
+import { Large } from "../Typo/Large";
 import CartItem from "./CartItem";
 import {
   CartCloseWrapper,
@@ -38,6 +36,7 @@ import {
   StyledCart,
   TotalPrice,
 } from "./Styles/StyledCart";
+import { DisableScroll } from "../../pagestyles/DisableScroll";
 
 interface CartProps {}
 
@@ -48,6 +47,7 @@ export const CartToggleContext = createContext<{
 
 export const CartToggleProvider = ({ children }) => {
   const [showCart, setShowCart] = useState(false);
+
   return (
     <CartToggleContext.Provider value={{ showCart, setShowCart }}>
       {children}
@@ -73,40 +73,36 @@ const Cart = ({}: CartProps) => {
           animate={{
             x: showCart ? "0%" : "100%",
             boxShadow: showCart
-              ? `10px 0 70px ${colors.red400}`
-              : `0px 0 0px ${colors.red400}`,
+              ? `10px 0 70px ${colors.black}`
+              : `0px 0 0px ${colors.black}`,
           }}
-          transition={{ ease: easing, duration: 0.5 }}>
+          transition={{ ease: easing, duration: 0.5 }}
+        >
           <CartHeader>
-            <Big className='uppercase black'>Košík</Big>
+            <Large className='uppercase black'>Košík</Large>
             <CartCloseWrapper>
-              <Burger
-                onClick={() => setShowCart(false)}
-                isOpen
-                width={80}
-                height={14}
-              />
+              <Burger onClick={() => setShowCart(false)} isOpen />
             </CartCloseWrapper>
           </CartHeader>
           <CartContent>
             {lines.length === 0 ? (
               <EmptyCart>
-                <Big className='black'>Váš košík je prázdný</Big>
-                <Button href={"/products"} onClick={() => setShowCart(false)}>
+                <Large className='black'>mrdko</Large>
+                <Link href={"/products"} onClick={() => setShowCart(false)}>
                   Přejít na produkty
-                </Button>
+                </Link>
               </EmptyCart>
             ) : (
-              <Scrollbar neutral autoHide>
+              <Scrollbar>
                 <CartItems>
                   {lines.map((line, i) => {
                     return (
                       <CartLineProvider line={line} key={i}>
                         <CartItemWrapper>
                           <CartItem />
-                          {!(lines.length === i + 1) && (
+                          {/* {!(lines.length === i + 1) && (
                             <Line stroke='gray500' diagonalSize={20} />
-                          )}
+                          )} */}
                         </CartItemWrapper>
                       </CartLineProvider>
                     );
@@ -118,16 +114,16 @@ const Cart = ({}: CartProps) => {
           {!(lines.length === 0) && (
             <CartFooter>
               <TotalPrice>
-                <Big className='black'>Celkem</Big>
-                <Big className='black'>
+                <Large className='black'>Celkem</Large>
+                <Large className='black'>
                   {formatPrice(cost?.totalAmount?.amount)}
-                </Big>
+                </Large>
               </TotalPrice>
-              <Button as={"span"} className='big full-width'>
+              <Link as={"span"} className='big full-width' href={""}>
                 <CartCheckoutButton style={{ all: "unset" }}>
                   pokračovat
                 </CartCheckoutButton>
-              </Button>
+              </Link>
             </CartFooter>
           )}
         </Drawer>
