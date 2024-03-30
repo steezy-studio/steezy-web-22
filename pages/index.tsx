@@ -1,40 +1,31 @@
-import { Transition } from "framer-motion";
 import { GetStaticProps } from "next";
 import getClient from "../apollo/client";
-import AnimateTextRows from "../components/AnimateTextRows/AnimateTextRows";
 import AutoSlider from "../components/AutoSlider/AutoSlider";
-import GridItem from "../components/GridItem/GridItem";
+import ClientQuote from "../components/ClientQuote/ClientQuote";
 import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
 import Navbar from "../components/Navbar/Navbar";
 import ProjectsGrid from "../components/ProjectsGrid/ProjectsGrid";
+import ProjectsSlider from "../components/ProjectsSlider/ProjectsSlider";
 import SectionHeader from "../components/SectionHeader/SectionHeader";
-import Slider from "../components/Slider/Slider";
-import { Large } from "../components/Typo/Large";
+import ServicesSection from "../components/ServicesSection/ServicesSection";
 import { Micro } from "../components/Typo/Micro";
 import strings from "../data/strings";
 import { Areas, Query } from "../generated/preprTypes";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
-import { easingInOutCubic } from "../helpers/animationConfig";
 import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
 import {
+  FeaturedGrid,
   HeroFooter,
   IndexGrid,
   IndexHeroSection,
   IndexLatestProjects,
-  IndexQuote,
-  IndexQuoteClient,
   IndexQuotesSlider,
   IndexServices,
-  IndexSliderW,
   LandingHeroPageLogotypes,
   LandingPageHeroLogotype,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
-import { GET_FEATURED_GRID } from "../graphql/GetFeaturedGrid";
-import ServicesSection from "../components/ServicesSection/ServicesSection";
-import ClientQuote from "../components/ClientQuote/ClientQuote";
-import InstagramFeed from "../components/InstagramFeed/InstagramFeed";
 
 interface indexProps {
   projects: EnhancedProject[];
@@ -78,29 +69,12 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
         </IndexHeroSection>
 
         <IndexLatestProjects>
-          <SectionHeader
+          <ProjectsSlider
             header='Latest projects'
-            linkText='All projects'
-            url='/projects/all-projects'
+            linkText={"All projects"}
+            url={"/projects/all-projects"}
+            projects={latestProjects}
           />
-          <IndexSliderW>
-            <Slider slidesPerView={4.2} offsetNav={0.2} step={2}>
-              {latestProjects.map(
-                ({ project_grid_name, areas, _slug, grid_image }, i) => {
-                  return (
-                    <GridItem
-                      key={i}
-                      areas={areas}
-                      wide={false}
-                      projectName={project_grid_name}
-                      slug={_slug}
-                      cover={grid_image}
-                    />
-                  );
-                }
-              )}
-            </Slider>
-          </IndexSliderW>
         </IndexLatestProjects>
 
         <IndexQuotesSlider>
@@ -122,7 +96,7 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
             })}
           />
         </IndexQuotesSlider>
-        <IndexGrid>
+        <FeaturedGrid>
           <SectionHeader
             header='Featured projects'
             url='/projects/all-projects'
@@ -131,7 +105,7 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
           <IndexGrid>
             <ProjectsGrid projects={projects} />
           </IndexGrid>
-        </IndexGrid>
+        </FeaturedGrid>
         <IndexServices>
           <ServicesSection areas={areas} />
         </IndexServices>

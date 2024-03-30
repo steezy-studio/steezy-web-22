@@ -80,6 +80,4 @@ export const ProjectGridBlockquote = styled.div`
 
 export const SimilarProjectsSlider = styled.section`
   margin-top: ${spaces.xxxl}px;
-  display: grid;
-  row-gap: ${spaces.l}px;
 `;

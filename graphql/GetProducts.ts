@@ -12,6 +12,8 @@ export const GET_PRODUCTS = gql`
     products(first: $first, after: $after) {
       nodes {
         title
+        handle
+        availableForSale
         variants(first: $variantsFirst2) {
           nodes {
             title
@@ -57,6 +59,7 @@ export const GET_PRODUCTS = gql`
               }
             }
             ... on Video {
+              __typename
               previewImage {
                 url
                 width

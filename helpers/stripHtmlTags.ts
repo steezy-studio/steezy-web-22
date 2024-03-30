@@ -1,5 +1,7 @@
+import he from "he";
 function stripHtmlTags(html: string): string {
-  return html.replace(/<[^>]*>?/gm, "").replace(/&nbsp;/g, " ");
+  const stringWithoutTgas = html.replace(/<[^>]*>?/gm, "");
+  return he.decode(stringWithoutTgas);
 }
 
 export default stripHtmlTags;

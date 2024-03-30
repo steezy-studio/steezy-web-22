@@ -43,6 +43,7 @@ import {
   SimilarProjectsSlider,
   StyledProject,
 } from "../../pagestyles/StyledProject";
+import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
 
 interface ProjectProps {
   projectData: {
@@ -179,27 +180,12 @@ const Project = ({ projectData, areas }: ProjectProps) => {
           )}
         </ProjectDetailQuote>
         <SimilarProjectsSlider>
-          <SectionHeader
-            header='Related projects'
-            linkText='All projects'
+          <ProjectsSlider
+            projects={similar_projects}
+            header={"Related projects"}
+            linkText={"All projects"}
             url='/projects/all-projects'
           />
-          <Slider slidesPerView={4.2} offsetNav={0.2}>
-            {similar_projects.map(
-              ({ project_grid_name, areas, _slug, grid_image }, i) => {
-                return (
-                  <GridItem
-                    key={i}
-                    areas={areas}
-                    wide={false}
-                    projectName={project_grid_name}
-                    slug={_slug}
-                    cover={grid_image}
-                  />
-                );
-              }
-            )}
-          </Slider>
         </SimilarProjectsSlider>
       </StyledProject>
     </>

@@ -63,6 +63,11 @@ export const IndexQuotesSlider = styled(motion.section)`
   margin: ${spaces.xxxxl}px 0;
 `;
 
+export const FeaturedGrid = styled.div`
+  display: grid;
+  row-gap: ${spaces.l}px;
+`;
+
 export const IndexServices = styled.section`
   margin-top: ${spaces.xxxxl}px;
 `;

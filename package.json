@@ -30,6 +30,7 @@
     "axios": "^1.6.8",
     "framer-motion": "^7.6.5",
     "graphql": "^16.3.0",
+    "he": "^1.2.0",
     "html-react-parser": "^5.1.9",
     "locomotive-scroll": "^4.1.4",
     "next": "^14.1.4",

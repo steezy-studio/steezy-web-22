@@ -12,7 +12,6 @@ export const StyledSlider = styled(motion.div)`
 export const Slide = styled.div`
   width: 100%;
   height: 100%;
-  padding-right: ${spaces.xs}px;
   z-index: 1;
 `;
 
@@ -20,10 +19,7 @@ export const _Slider = styled(motion.div)`
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: max-content;
-  /* display: flex;
-  flex-shrink: 0;
-  grid-auto-flow: column;
-  touch-action: none; */
+  column-gap: ${spaces.xs}px;
   height: 100%;
   z-index: 3;
 `;

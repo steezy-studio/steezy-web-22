@@ -1,13 +1,18 @@
 import styled from "styled-components";
-import { breakpoint } from "../../helpers/consts";
+import { breakpoint, colors } from "../../helpers/consts";
 import { addColorClasses } from "../../helpers/colorClasses";
+import { motion } from "framer-motion";
 
-export const Small = styled.p`
+export const Small = styled(motion.p)`
   font-size: 19px;
   line-height: 1.3em;
   letter-spacing: 0.03em;
   font-family: "agrandir";
   font-weight: 300;
+  &.difference {
+    color: ${colors.white};
+    mix-blend-mode: difference;
+  }
   &.medium {
     font-weight: 400;
   }

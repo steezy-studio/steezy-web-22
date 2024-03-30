@@ -5,7 +5,7 @@ import { Micro } from "../Typo/Micro";
 import HeaderLine from "../HeaderLine/HeaderLine";
 import Link from "../Link/Link";
 
-interface SectionHeaderProps {
+export interface SectionHeaderProps {
   header: string;
   linkText?: ReactNode;
   url?: string;
@@ -22,11 +22,11 @@ const SectionHeader = ({
     <StyledSectionHeader>
       <Medium className='medium'>{header}</Medium>
       {linkText && url && (
-        <HeaderLine>
-          <Link href={url} className='no-underline agrandir' target={target}>
+        <Link href={url} className='no-underline agrandir' target={target}>
+          <HeaderLine>
             <Micro>{linkText}</Micro>
-          </Link>
-        </HeaderLine>
+          </HeaderLine>
+        </Link>
       )}
     </StyledSectionHeader>
   );
