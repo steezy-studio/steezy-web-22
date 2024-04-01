@@ -37,7 +37,6 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
 
   return (
     <>
-      {/* TODO add og image */}
       <Head
         pageName={[
           strings.projectsPage.head.pageName,

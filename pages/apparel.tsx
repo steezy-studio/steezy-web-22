@@ -21,7 +21,8 @@ import {
   ProductsGridSection,
   StyledApparel,
 } from "../pagestyles/StyledApparel";
-import { indetifiers } from "../helpers/consts";
+import { allProjects, indetifiers } from "../helpers/consts";
+import Head from "../components/Head/Head";
 
 interface apparelProps {
   products: ProductConnection;
@@ -31,65 +32,73 @@ interface apparelProps {
 
 const apparel = ({ products, areas, projects }: apparelProps) => {
   return (
-    <StyledApparel>
-      <Navbar areas={areas.items} header='steezy apparel' />
-      <ProductsGridSection>
-        <Medium className='medium'>Spring/Summer 2024</Medium>
-        <ProductsGrid>
-          {products.nodes.map(
-            (
-              { title, metafields, priceRange, availableForSale, handle },
-              i
-            ) => {
-              const _metafields = metafields || [];
-              const gridImageRef = _metafields.find(
-                (metafield) => metafield?.key === "grid_image"
-              );
-              const gridImageHoverRef = _metafields.find(
-                (metafield) => metafield?.key === "grid_image_hover"
-              );
-              const gridImage = (gridImageRef?.reference as MediaImage).image;
-              const gridImageHover =
-                (gridImageHoverRef?.reference as MediaImage)?.image || null;
-              return (
-                <ProductCard
-                  key={handle}
-                  title={title}
-                  slug={handle}
-                  availableForSale={availableForSale}
-                  price={priceRange.minVariantPrice}
-                  hoverCover={
-                    gridImageHover
-                      ? {
-                          src: gridImageHover.url,
-                          alt: title,
-                          width: gridImageHover.width,
-                          height: gridImageHover.height,
-                        }
-                      : null
-                  }
-                  cover={{
-                    src: gridImage?.url || "",
-                    alt: title,
-                    width: gridImage?.width,
-                    height: gridImage?.height,
-                  }}
-                />
-              );
-            }
-          )}
-        </ProductsGrid>
-      </ProductsGridSection>
+    <>
+      <Head
+        pageName={"Apparel"}
+        ogDescription={"Spring/Summer 2024"}
+        ogTitle={"Apparel"}
+        ogImageSrc={""}
+      />
+      <StyledApparel>
+        <Navbar areas={areas.items} header='steezy apparel' />
+        <ProductsGridSection>
+          <Medium className='medium'>Spring/Summer 2024</Medium>
+          <ProductsGrid>
+            {products.nodes.map(
+              (
+                { title, metafields, priceRange, availableForSale, handle },
+                i
+              ) => {
+                const _metafields = metafields || [];
+                const gridImageRef = _metafields.find(
+                  (metafield) => metafield?.key === "grid_image"
+                );
+                const gridImageHoverRef = _metafields.find(
+                  (metafield) => metafield?.key === "grid_image_hover"
+                );
+                const gridImage = (gridImageRef?.reference as MediaImage).image;
+                const gridImageHover =
+                  (gridImageHoverRef?.reference as MediaImage)?.image || null;
+                return (
+                  <ProductCard
+                    key={handle}
+                    title={title}
+                    slug={handle}
+                    availableForSale={availableForSale}
+                    price={priceRange.minVariantPrice}
+                    hoverCover={
+                      gridImageHover
+                        ? {
+                            src: gridImageHover.url,
+                            alt: title,
+                            width: gridImageHover.width,
+                            height: gridImageHover.height,
+                          }
+                        : null
+                    }
+                    cover={{
+                      src: gridImage?.url || "",
+                      alt: title,
+                      width: gridImage?.width,
+                      height: gridImage?.height,
+                    }}
+                  />
+                );
+              }
+            )}
+          </ProductsGrid>
+        </ProductsGridSection>
 
-      <ApparelOtherProjects>
-        <ProjectsSlider
-          projects={projects}
-          header='See also our client work'
-          linkText={"All projects"}
-          url='/projects/all-projects'
-        />
-      </ApparelOtherProjects>
-    </StyledApparel>
+        <ApparelOtherProjects>
+          <ProjectsSlider
+            projects={projects}
+            header='See also our client work'
+            linkText={"All projects"}
+            url='/projects/all-projects'
+          />
+        </ApparelOtherProjects>
+      </StyledApparel>
+    </>
   );
 };
 

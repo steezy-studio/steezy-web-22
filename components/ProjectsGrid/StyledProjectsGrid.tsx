@@ -15,8 +15,8 @@ export const ProjectsGridRows = styled.div`
 export const GridRow = styled.div`
   display: grid;
   column-gap: ${spaces.xs}px;
-  grid-template-columns: 9fr ${(16 * 16) / 9 / 9}fr;
+  grid-template-columns: ${3.16}fr ${1}fr;
   &:nth-child(2n) {
-    grid-template-columns: ${(16 * 16) / 9 / 9}fr 9fr;
+    grid-template-columns: ${1}fr ${3.16}fr;
   }
 `;

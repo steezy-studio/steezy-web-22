@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Asset } from "../../generated/preprTypes";
-import { device } from "../../helpers/consts";
-import { useWindowSize } from "../../hooks/useWindowSize";
 import RevealAnimation from "../RevealAnimation/RevealAnimation";
 import HeroVideo from "./HeroVideo";
 import { HeroCover, StyledHero } from "./Styles/StyledHero";
@@ -12,8 +10,6 @@ interface HeroProps {
 
 const Hero = ({ asset }: HeroProps) => {
   const [openDialog, setOpenDialog] = useState(false);
-  const { w } = useWindowSize();
-  const isPhone = w <= device.phone;
 
   return (
     <StyledHero>

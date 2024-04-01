@@ -18,12 +18,15 @@ import {
 import { easing } from "../../helpers/animationConfig";
 import { colors } from "../../helpers/consts";
 import { formatPrice } from "../../helpers/formatPrice";
+import { DisableScroll } from "../../pagestyles/DisableScroll";
 import Link from "../Link/Link";
 import Burger from "../Navbar/Burger";
 import Scrollbar from "../Scrollbar/Scrollbar";
 import { Large } from "../Typo/Large";
+import { Small } from "../Typo/Small";
 import CartItem from "./CartItem";
 import {
+  CartCheckoutButtonW,
   CartCloseWrapper,
   CartContent,
   CartFooter,
@@ -32,11 +35,11 @@ import {
   CartItems,
   Drawer,
   EmptyCart,
-  Overlay,
   StyledCart,
   TotalPrice,
 } from "./Styles/StyledCart";
-import { DisableScroll } from "../../pagestyles/DisableScroll";
+import { HoverProvider } from "../../pages/_app";
+import BlurOverlay from "../BlurOverlay/BlurOverlay";
 
 interface CartProps {}
 
@@ -59,6 +62,7 @@ const Cart = ({}: CartProps) => {
   const { lines, cost } = useCart();
   const pathname = usePathname();
   const { setShowCart, showCart } = useContext(CartToggleContext);
+  const { setCursorType } = useContext(HoverProvider);
 
   useEffect(() => {
     setShowCart(false);
@@ -79,7 +83,7 @@ const Cart = ({}: CartProps) => {
           transition={{ ease: easing, duration: 0.5 }}
         >
           <CartHeader>
-            <Large className='uppercase black'>Košík</Large>
+            <Large className='uppercase black'>Cart</Large>
             <CartCloseWrapper>
               <Burger onClick={() => setShowCart(false)} isOpen />
             </CartCloseWrapper>
@@ -87,9 +91,11 @@ const Cart = ({}: CartProps) => {
           <CartContent>
             {lines.length === 0 ? (
               <EmptyCart>
-                <Large className='black'>mrdko</Large>
+                <Large className='black'>
+                  Your cart is empty, like our souls
+                </Large>
                 <Link href={"/products"} onClick={() => setShowCart(false)}>
-                  Přejít na produkty
+                  Fill it up
                 </Link>
               </EmptyCart>
             ) : (
@@ -100,9 +106,6 @@ const Cart = ({}: CartProps) => {
                       <CartLineProvider line={line} key={i}>
                         <CartItemWrapper>
                           <CartItem />
-                          {/* {!(lines.length === i + 1) && (
-                            <Line stroke='gray500' diagonalSize={20} />
-                          )} */}
                         </CartItemWrapper>
                       </CartLineProvider>
                     );
@@ -114,31 +117,27 @@ const Cart = ({}: CartProps) => {
           {!(lines.length === 0) && (
             <CartFooter>
               <TotalPrice>
-                <Large className='black'>Celkem</Large>
+                <Large className='black'>Total</Large>
                 <Large className='black'>
                   {formatPrice(cost?.totalAmount?.amount)}
                 </Large>
               </TotalPrice>
-              <Link as={"span"} className='big full-width' href={""}>
+              <CartCheckoutButtonW
+                onMouseEnter={() => {
+                  setCursorType("hover");
+                }}
+                onMouseLeave={() => {
+                  setCursorType("normal");
+                }}
+              >
                 <CartCheckoutButton style={{ all: "unset" }}>
-                  pokračovat
+                  <Small className='white uppercase'>Continue</Small>
                 </CartCheckoutButton>
-              </Link>
+              </CartCheckoutButtonW>
             </CartFooter>
           )}
         </Drawer>
-        <AnimatePresence>
-          {showCart && (
-            <Overlay
-              key={"overlay"}
-              onClick={() => setShowCart(false)}
-              initial={{ backdropFilter: "blur(0px)" }}
-              animate={{ backdropFilter: "blur( 5px )" }}
-              exit={{ backdropFilter: "blur(0px)" }}
-              transition={{ duration: 0.5 }}
-            />
-          )}
-        </AnimatePresence>
+        <BlurOverlay visible={showCart} onClick={() => setShowCart(false)} />
       </StyledCart>
     </>
   );

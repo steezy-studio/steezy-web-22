@@ -1,12 +1,18 @@
+import { ProductProvider, useCart } from "@shopify/hydrogen-react";
 import {
   CartLineInput,
   QueryRoot,
 } from "@shopify/hydrogen-react/storefront-api-types";
 import { GetStaticPaths, GetStaticProps } from "next";
 import getClient from "../../apollo/client";
+import QuantitySelect from "../../components/Inputs/QuantitySelect";
+import Link from "../../components/Link/Link";
 import Navbar from "../../components/Navbar/Navbar";
 import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
+import { Large } from "../../components/Typo/Large";
 import { Medium } from "../../components/Typo/Medium";
+import { Small } from "../../components/Typo/Small";
+import Video from "../../components/Video/Video";
 import { Areas, Query, QueryProjectsArgs } from "../../generated/preprTypes";
 import { Product, Video as VideoType } from "../../generated/shopifyTypes";
 import { GET_ALL_AREAS } from "../../graphql/GetAllAreas";
@@ -18,18 +24,20 @@ import {
   EnhancedProject,
   enhanceProjects,
 } from "../../helpers/enhanceProjects";
+import { formatPrice } from "../../helpers/formatPrice";
 import {
   ProductGallery,
   ProductGalleryImg,
   ProductInfo,
+  ProductOptions,
+  ProductProjects,
   ProductSection,
+  ProductText,
   StyledProduct,
 } from "../../pagestyles/StyledProduct";
-import { useCart } from "@shopify/hydrogen-react";
-import { Large } from "../../components/Typo/Large";
-import { formatPrice } from "../../helpers/formatPrice";
-import { Small } from "../../components/Typo/Small";
-import Video from "../../components/Video/Video";
+import { useState } from "react";
+import VariantsSelect from "../../components/Inputs/VariantsSelect";
+import Head from "../../components/Head/Head";
 
 interface productProps {
   areas: Areas;
@@ -39,60 +47,100 @@ interface productProps {
 
 const product = ({ areas, projects, product }: productProps) => {
   const { linesAdd, status, lines } = useCart();
-
-  const merchandise: CartLineInput = {
+  const [productVariant, setproductVariant] = useState<CartLineInput>({
     merchandiseId: product.variants.nodes[0].id,
     quantity: 1,
-  };
-  const video = product.metafields.find(({ key }) => key === "product_video")
+  });
+
+  const video = product.metafields.find((mf) => mf?.key === "product_video")
     .reference as VideoType;
 
-  console.log(product.metafields, video);
-
   return (
-    <StyledProduct>
-      <Navbar areas={areas.items} header={product.title} />
-      <ProductSection>
-        <ProductGallery>
-          <Video
-            src={video.sources.find(({ format }) => format === "mp4").url}
-          />
-          {product.images.nodes.map(({ url, width, height }, i) => (
-            <ProductGalleryImg
-              key={i}
-              src={url}
-              alt={product.title}
-              height={height}
-              width={width}
-            />
-          ))}
-        </ProductGallery>
-        <ProductInfo>
-          <Medium className='medium'>{product.title}</Medium>
-          <Large>
-            {formatPrice(
-              product.priceRange.maxVariantPrice.amount,
-              product.priceRange.maxVariantPrice.currencyCode
-            )}
-          </Large>
-          <Small>Tax included</Small>
-          <Small>Shipping only in Czechia</Small>
-          <Large
-            onClick={() => {
-              linesAdd([merchandise]);
-            }}
-          >
-            add to cart
-          </Large>
-        </ProductInfo>
-      </ProductSection>
-      <ProjectsSlider
-        projects={projects}
-        header='See also our client work'
-        linkText={"All projects"}
-        url='/projects/all-projects'
+    <>
+      <Head
+        pageName={[`Apparel`, product.title]}
+        ogDescription={product.description}
+        ogTitle={product.title}
+        ogImageSrc={""}
       />
-    </StyledProduct>
+      <ProductProvider data={product}>
+        <StyledProduct>
+          <Navbar areas={areas.items} header={product.title} />
+          <ProductSection>
+            <ProductGallery>
+              {video && (
+                <Video
+                  src={video.sources.find(({ format }) => format === "mp4").url}
+                />
+              )}
+              {product.images.nodes.map(({ url, width, height }, i) => (
+                <ProductGalleryImg
+                  key={i}
+                  src={url}
+                  alt={product.title}
+                  height={height}
+                  width={width}
+                />
+              ))}
+            </ProductGallery>
+            <ProductInfo>
+              <ProductText>
+                <Medium className='medium'>{product.title}</Medium>
+                <Large>
+                  {formatPrice(
+                    product.priceRange.maxVariantPrice.amount,
+                    product.priceRange.maxVariantPrice.currencyCode
+                  )}
+                </Large>
+                <div>
+                  <Small>Tax included</Small>
+                  <Small>Shipping only in Czechia</Small>
+                </div>
+              </ProductText>
+              <ProductOptions>
+                <VariantsSelect
+                  variants={product.variants}
+                  onChange={(id) =>
+                    setproductVariant((p) => ({
+                      ...p,
+                      merchandiseId: id,
+                    }))
+                  }
+                />
+                <QuantitySelect
+                  quantityAvaible={
+                    product.variants.nodes.find(
+                      (x) => x.id === productVariant.merchandiseId
+                    ).quantityAvailable
+                  }
+                  onQuantityChange={(val) => {
+                    setproductVariant((p) => ({ ...p, quantity: val }));
+                  }}
+                />
+              </ProductOptions>
+              <Large>
+                <Link
+                  href={""}
+                  onClick={() => {
+                    linesAdd([productVariant]);
+                  }}
+                >
+                  add to cart
+                </Link>
+              </Large>
+            </ProductInfo>
+          </ProductSection>
+          <ProductProjects>
+            <ProjectsSlider
+              projects={projects}
+              header='See also our client work'
+              linkText={"All projects"}
+              url='/projects/all-projects'
+            />
+          </ProductProjects>
+        </StyledProduct>
+      </ProductProvider>
+    </>
   );
 };
 

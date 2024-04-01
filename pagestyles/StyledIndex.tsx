@@ -68,6 +68,17 @@ export const FeaturedGrid = styled.div`
   row-gap: ${spaces.l}px;
 `;
 
+export const IndexApparel = styled.section`
+  margin-top: ${spaces.xxxxl}px;
+`;
+
+export const IndexApparelGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: ${spaces.s}px;
+  margin-top: ${spaces.l}px;
+`;
+
 export const IndexServices = styled.section`
   margin-top: ${spaces.xxxxl}px;
 `;

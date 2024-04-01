@@ -1,11 +1,11 @@
-import React from "react";
 import * as RadixDialog from "@radix-ui/react-dialog";
+import { useState } from "react";
 import {
+  Close,
+  Content,
+  Overlay,
   StyledDialog,
   Trigger,
-  Overlay,
-  Content,
-  Close,
 } from "./Styles/StyledDialog";
 
 interface DialogProps extends RadixDialog.DialogProps {

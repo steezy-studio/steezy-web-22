@@ -5,6 +5,7 @@ import Image from "next/image";
 
 export const StyledGridItem = styled(motion.a)`
   all: unset;
+  display: block;
 `;
 
 export const GridItemAreas = styled.div`

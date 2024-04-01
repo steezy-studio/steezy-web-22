@@ -6,7 +6,7 @@ import HTMLReactParser, {
 } from "html-react-parser";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import getClient from "../../apollo/client";
-import Animation from "../../components/Animation/Animation";
+import RevealAnimation from "../../components/RevealAnimation/RevealAnimation";
 import ClientQuote from "../../components/ClientQuote/ClientQuote";
 import GridItem from "../../components/GridItem/GridItem";
 import Head from "../../components/Head/Head";
@@ -100,14 +100,14 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                   {row.grid_item_image.map((img, i) => {
                     if (img._type === "Video") {
                       return (
-                        <Animation key={img._id} type='fadeFromBottom'>
+                        <RevealAnimation key={img._id}>
                           <Video src={img.cdn_files[0].url} />
-                        </Animation>
+                        </RevealAnimation>
                       );
                     }
                     if (img._type === "Photo") {
                       return (
-                        <Animation key={`${i}_col`} type={"fadeFromBottom"}>
+                        <RevealAnimation key={`${i}_col`}>
                           <motion.div>
                             <ProjectDetailImg
                               src={img.url || ``}
@@ -118,7 +118,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                               alt={project.project_detail_name}
                             />
                           </motion.div>
-                        </Animation>
+                        </RevealAnimation>
                       );
                     }
                   })}
@@ -129,18 +129,18 @@ const Project = ({ projectData, areas }: ProjectProps) => {
               const vimeoIds = row.vimeo_id.split("\r\n");
 
               return (
-                <Animation key={`${i}_row`} type={"fadeFromBottom"}>
+                <RevealAnimation key={`${i}_row`}>
                   <ProjectGridRow>
                     {vimeoIds.map((id, i) => (
                       <ProjectGridVimeo key={i} vimeoId={id} />
                     ))}
                   </ProjectGridRow>
-                </Animation>
+                </RevealAnimation>
               );
             }
             if (row.__typename === "ProjectGridBlockquote") {
               return (
-                <Animation key={`${i}_row`} type='fadeFromBottom'>
+                <RevealAnimation key={`${i}_row`}>
                   <ProjectGridRow
                     className={`blockquote ${row.alignment ? "reverse" : ""}`}
                   >
@@ -165,7 +165,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                       </Small>
                     </ProjectGridBlockquote>
                   </ProjectGridRow>
-                </Animation>
+                </RevealAnimation>
               );
             }
           })}

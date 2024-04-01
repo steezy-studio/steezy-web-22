@@ -9,6 +9,7 @@ export const StyledBurger = styled.div`
   border: 1px solid ${colors.black};
   border-radius: ${({ theme }) => theme.bRad};
   height: 100%;
+  backdrop-filter: blur(5px);
   aspect-ratio: 1;
   flex-shrink: 0;
   position: relative;

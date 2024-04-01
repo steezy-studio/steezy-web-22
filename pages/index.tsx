@@ -17,6 +17,8 @@ import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
 import {
   FeaturedGrid,
   HeroFooter,
+  IndexApparel,
+  IndexApparelGrid,
   IndexGrid,
   IndexHeroSection,
   IndexLatestProjects,
@@ -26,14 +28,24 @@ import {
   LandingPageHeroLogotype,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
+import {
+  MediaImage,
+  ProductConnection,
+  QueryRoot,
+  QueryRootProductsArgs,
+} from "../generated/shopifyTypes";
+import { GET_PRODUCTS } from "../graphql/GetProducts";
+import { indetifiers } from "../helpers/consts";
+import ProductCard from "../components/ProductCard/ProductCard";
 
 interface indexProps {
   projects: EnhancedProject[];
   latestProjects: EnhancedProject[];
   areas: Areas;
+  products: ProductConnection;
 }
 
-const Index = ({ projects, areas, latestProjects }: indexProps) => {
+const Index = ({ projects, areas, latestProjects, products }: indexProps) => {
   const landingpageStrings = strings.landingPage;
 
   return (
@@ -106,6 +118,57 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
             <ProjectsGrid projects={projects} />
           </IndexGrid>
         </FeaturedGrid>
+        <IndexApparel>
+          <SectionHeader
+            header='Steezy apparel'
+            url='/apparel'
+            linkText='Whole collection'
+          />
+          <IndexApparelGrid>
+            {products.nodes.map(
+              (
+                { title, metafields, priceRange, availableForSale, handle },
+                i
+              ) => {
+                const _metafields = metafields || [];
+                const gridImageRef = _metafields.find(
+                  (metafield) => metafield?.key === "grid_image"
+                );
+                const gridImageHoverRef = _metafields.find(
+                  (metafield) => metafield?.key === "grid_image_hover"
+                );
+                const gridImage = (gridImageRef?.reference as MediaImage).image;
+                const gridImageHover =
+                  (gridImageHoverRef?.reference as MediaImage)?.image || null;
+                return (
+                  <ProductCard
+                    key={handle}
+                    title={title}
+                    slug={handle}
+                    availableForSale={availableForSale}
+                    price={priceRange.minVariantPrice}
+                    hoverCover={
+                      gridImageHover
+                        ? {
+                            src: gridImageHover.url,
+                            alt: title,
+                            width: gridImageHover.width,
+                            height: gridImageHover.height,
+                          }
+                        : null
+                    }
+                    cover={{
+                      src: gridImage?.url || "",
+                      alt: title,
+                      width: gridImage?.width,
+                      height: gridImage?.height,
+                    }}
+                  />
+                );
+              }
+            )}
+          </IndexApparelGrid>
+        </IndexApparel>
         <IndexServices>
           <ServicesSection areas={areas} />
         </IndexServices>
@@ -115,14 +178,33 @@ const Index = ({ projects, areas, latestProjects }: indexProps) => {
   );
 };
 export const getStaticProps: GetStaticProps = async () => {
-  const client = getClient();
+  const preprClient = getClient();
+  const shopifyClient = getClient("shopify");
+
+  const {
+    data: { products },
+  } = await shopifyClient.query<QueryRoot>({
+    query: GET_PRODUCTS,
+    variables: {
+      first: 4,
+      variantsFirst2: 99,
+      transform: {
+        maxWidth: null,
+        maxHeight: null,
+        preferredContentType: "WEBP",
+      },
+      imagesFirst2: 99,
+      identifiers: indetifiers,
+    } as QueryRootProductsArgs,
+  });
+
   const {
     data: {
       FeaturedGrid: featuredGrid,
       Projects: latestProjects,
       Areas: areas,
     },
-  } = await client.query<Query>({
+  } = await preprClient.query<Query>({
     query: GET_LANDINGPAGE,
     variables: { sortLatestProjects: "changed_on_DESC" },
   });
@@ -139,6 +221,7 @@ export const getStaticProps: GetStaticProps = async () => {
       areas: areas,
       projects: enhancedFeaturedGrid,
       latestProjects: enhancedLatestProjects,
+      products,
     },
     revalidate: Number(process.env.REVALIDATE),
   };

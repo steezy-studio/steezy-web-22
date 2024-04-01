@@ -14,7 +14,10 @@ export const ProjectsHero = styled.div`
 
 export const ProjectsHeroFilters = styled.div`
   display: flex;
-  column-gap: ${spaces.l}px;
+  flex-wrap: wrap;
+  row-gap: ${spaces.s}px;
+  column-gap: ${spaces.s}px;
+  justify-content: space-between;
 `;
 
 export const Filter = styled.span`

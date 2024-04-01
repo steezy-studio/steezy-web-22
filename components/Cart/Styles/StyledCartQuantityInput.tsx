@@ -5,12 +5,16 @@ import { colors } from "../../../helpers/consts";
 
 export const StyledCartQuantityInput = styled.div`
   display: flex;
+  overflow: hidden;
+  width: fit-content;
+  border-radius: 5px;
+  border: 1px solid ${colors.black};
 `;
 
 export const QuantityField = styled.div`
   font-size: 40px;
+  font-family: "migra-italic", Arial, Helvetica, sans-serif;
   color: ${colors.black};
-  border: 1px solid ${colors.black};
   display: inline-block;
   aspect-ratio: 1;
   width: 70px;
@@ -19,7 +23,9 @@ export const QuantityField = styled.div`
   justify-content: center;
 `;
 
-export const AdjustButtons = styled.div``;
+export const AdjustButtons = styled.div`
+  border-left: 1px solid ${colors.black};
+`;
 
 export const AdjustButtonWrapper = styled.div`
   display: block;
@@ -28,13 +34,9 @@ export const AdjustButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid ${colors.black};
   border-left: unset;
   cursor: pointer;
-  &.minus {
-    border-top: unset;
-  }
   &:hover {
-    background-color: ${colors.primary300};
+    background-color: ${colors.primary400};
   }
 `;

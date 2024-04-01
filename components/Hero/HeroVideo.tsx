@@ -1,5 +1,5 @@
 import Vimeo from "@u-wave/react-vimeo";
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import {
   useIntersectionObserver,
   videoCallback,
@@ -22,6 +22,14 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
   );
+
+  useEffect(() => {
+    if (open) {
+      videoRef.current.pause();
+    } else {
+      videoRef.current.play();
+    }
+  }, [open]);
 
   return (
     <>

@@ -17,6 +17,7 @@ import {
   ProductCardInfoHeader,
   StyledProductCard,
 } from "./StyledProductCard";
+import RevealAnimation from "../RevealAnimation/RevealAnimation";
 
 interface Image {
   src: string;
@@ -47,80 +48,82 @@ const ProductCard = ({
   const transition = { ease: easing, duration: 0.3 };
 
   return (
-    <StyledProductCard
-      onMouseEnter={() => {
-        setCursorType("hover");
-        sethover(true);
-      }}
-      onMouseLeave={() => {
-        setCursorType("normal");
-        sethover(false);
-      }}
-      className={`${!availableForSale ? "inactive" : ""}`}
-      href={`/product/${slug}`}
-    >
-      <ProductCardInfo>
-        <ProductCardInfoHeader>
-          <Small className='white'>{title}</Small>
-        </ProductCardInfoHeader>
-        <ProductCardInfoFooter>
-          <AnimatePresence mode='popLayout'>
-            <Small
-              className='white'
-              layout={"position"}
-              key={slug + "price"}
-              transition={transition}
-            >
-              {formatPrice(price.amount, price.currencyCode, "en-GB")}
-            </Small>
-            <Small
-              className='white'
-              layout={"position"}
-              key={slug + "avaibility"}
-              transition={transition}
-            >
-              {availableForSale ? "in stock" : "out of stock"}
-            </Small>
-            {hover && (
-              <ProductCardButton
+    <RevealAnimation>
+      <StyledProductCard
+        onMouseEnter={() => {
+          setCursorType("hover");
+          sethover(true);
+        }}
+        onMouseLeave={() => {
+          setCursorType("normal");
+          sethover(false);
+        }}
+        className={`${!availableForSale ? "inactive" : ""}`}
+        href={`/product/${slug}`}
+      >
+        <ProductCardInfo>
+          <ProductCardInfoHeader>
+            <Small className='white'>{title}</Small>
+          </ProductCardInfoHeader>
+          <ProductCardInfoFooter>
+            <AnimatePresence mode='popLayout'>
+              <Small
+                className='white'
                 layout={"position"}
-                key={slug + "button"}
-                initial={{ y: "150%" }}
-                animate={{ y: "0%", transition }}
-                exit={{ y: "150%", transition }}
+                key={slug + "price"}
+                transition={transition}
               >
-                <Nano>buy now</Nano>
-              </ProductCardButton>
-            )}
-          </AnimatePresence>
-        </ProductCardInfoFooter>
-      </ProductCardInfo>
-      <ProductCardCoverW>
-        <ProductCardInfoGrad />
-        <ProductCardCoverWI
-          animate={{ opacity: hoverCover && hover ? 0 : 1 }}
-          transition={{ duration: 0.2 }}
-          style={{ zIndex: 2 }}
-        >
-          <ProductCardCover
-            src={cover.src}
-            width={cover.width}
-            height={cover.height}
-            alt={title}
-          />
-        </ProductCardCoverWI>
-        {hoverCover && (
-          <ProductCardCoverWI>
+                {formatPrice(price.amount, price.currencyCode, "en-GB")}
+              </Small>
+              <Small
+                className='white'
+                layout={"position"}
+                key={slug + "avaibility"}
+                transition={transition}
+              >
+                {availableForSale ? "in stock" : "out of stock"}
+              </Small>
+              {hover && (
+                <ProductCardButton
+                  layout={"position"}
+                  key={slug + "button"}
+                  initial={{ y: "150%" }}
+                  animate={{ y: "0%", transition }}
+                  exit={{ y: "150%", transition }}
+                >
+                  <Nano>buy now</Nano>
+                </ProductCardButton>
+              )}
+            </AnimatePresence>
+          </ProductCardInfoFooter>
+        </ProductCardInfo>
+        <ProductCardCoverW>
+          <ProductCardInfoGrad />
+          <ProductCardCoverWI
+            animate={{ opacity: hoverCover && hover ? 0 : 1 }}
+            transition={{ duration: 0.2 }}
+            style={{ zIndex: 2 }}
+          >
             <ProductCardCover
-              src={hoverCover.src}
-              width={hoverCover.width}
-              height={hoverCover.height}
+              src={cover.src}
+              width={cover.width}
+              height={cover.height}
               alt={title}
             />
           </ProductCardCoverWI>
-        )}
-      </ProductCardCoverW>
-    </StyledProductCard>
+          {hoverCover && (
+            <ProductCardCoverWI>
+              <ProductCardCover
+                src={hoverCover.src}
+                width={hoverCover.width}
+                height={hoverCover.height}
+                alt={title}
+              />
+            </ProductCardCoverWI>
+          )}
+        </ProductCardCoverW>
+      </StyledProductCard>
+    </RevealAnimation>
   );
 };
 

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "types": "tsc --noEmit",
+    "types": "tsc --noEmit --skipLibCheck",
     "prune": "ts-prune --project tsconfig.json",
     "codegen": "graphql-codegen --require dotenv/config --config ./codegen.ts dotenv_config_path=./.env"
   },
@@ -23,6 +23,8 @@
   "dependencies": {
     "@apollo/client": "^3.9.9",
     "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-icons": "^1.3.0",
+    "@radix-ui/react-select": "^2.0.0",
     "@shopify/hydrogen-react": "^2024.1.1",
     "@types/react-dom": "^18.0.5",
     "@types/shortid": "^0.0.29",

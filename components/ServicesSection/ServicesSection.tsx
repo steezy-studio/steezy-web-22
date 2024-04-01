@@ -1,6 +1,6 @@
 import { Areas } from "../../generated/preprTypes";
-import Animation from "../Animation/Animation";
 import HeaderLine from "../HeaderLine/HeaderLine";
+import RevealAnimation from "../RevealAnimation/RevealAnimation";
 import { Micro } from "../Typo/Micro";
 import ServiceItem from "./ServiceItem";
 import { ServicesList, StyledServicesSection } from "./StyledServicesSection";
@@ -12,11 +12,11 @@ interface ServicesSectionProps {
 const ServicesSection = ({ areas }: ServicesSectionProps) => {
   return (
     <StyledServicesSection>
-      <Animation type='fadeFromBottom'>
+      <RevealAnimation>
         <HeaderLine>
           <Micro>{"Services"}</Micro>
         </HeaderLine>
-      </Animation>
+      </RevealAnimation>
       <ServicesList>
         {areas.items.map((area, i) => {
           if (area.is_default) return null;

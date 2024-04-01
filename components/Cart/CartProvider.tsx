@@ -22,9 +22,7 @@ const CartProvider = ({ children }: CartProviderProps) => {
       storefrontToken={process.env.NEXT_PUBLIC_SHOPIFY_ACCESS_TOKEN}
     >
       <ShopifyCartProvider
-        onLineAdd={() => {
-          console.log("line added");
-        }}
+        onLineAdd={() => {}}
         onLineAddComplete={() => {
           setShowCart(true);
         }}

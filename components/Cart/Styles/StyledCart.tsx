@@ -42,14 +42,6 @@ export const Drawer = styled(motion.div)`
   }
 `;
 
-export const Overlay = styled(motion.div)`
-  pointer-events: all;
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  cursor: pointer;
-`;
-
 export const CartHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -57,7 +49,7 @@ export const CartHeader = styled.div`
 `;
 
 export const CartCloseWrapper = styled.div`
-  width: 70px;
+  width: 60px;
   div {
     width: 100%;
     height: 100%;
@@ -71,7 +63,7 @@ export const CartItemWrapper = styled.div`
 
 export const CartItems = styled.div`
   display: grid;
-  row-gap: ${spaces.l}px;
+  row-gap: ${spaces.xl}px;
 `;
 
 export const CartContent = styled.div`
@@ -81,8 +73,15 @@ export const CartContent = styled.div`
 
 export const EmptyCart = styled.div``;
 
-export const CartFooter = styled.div`
-  height: 100px;
+export const CartFooter = styled.div``;
+
+export const CartCheckoutButtonW = styled.div`
+  background-color: ${colors.black};
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
 `;
 
 export const TotalPrice = styled.div`

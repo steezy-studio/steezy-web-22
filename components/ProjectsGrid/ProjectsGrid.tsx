@@ -2,7 +2,8 @@ import { useContext, useState } from "react";
 import { EnhancedProject } from "../../helpers/enhanceProjects";
 import { HoverProvider } from "../../pages/_app";
 import GridItem from "../GridItem/GridItem";
-import { StyledLink } from "../Link/Styles/StyledLink";
+import Link from "../Link/Link";
+import RevealAnimation from "../RevealAnimation/RevealAnimation";
 import { Large } from "../Typo/Large";
 import {
   GridRow,
@@ -10,7 +11,6 @@ import {
   ProjectsGridRows,
   StyledProjectsGrid,
 } from "./StyledProjectsGrid";
-import Link from "../Link/Link";
 
 interface ProjectsGridProps {
   projects: EnhancedProject[];
@@ -38,17 +38,18 @@ const ProjectsGrid = ({
           }, [])
           .map((row, j) => {
             return (
-              <GridRow key={j}>
+              <GridRow>
                 {row.map((project, i) => {
                   return (
-                    <GridItem
-                      key={i}
-                      slug={project._slug}
-                      wide={(i + j) % 2 === 0}
-                      projectName={project.project_grid_name}
-                      cover={project.grid_image}
-                      areas={project.areas}
-                    />
+                    <RevealAnimation key={project._slug}>
+                      <GridItem
+                        slug={project._slug}
+                        wide={(i + j) % 2 === 0}
+                        projectName={project.project_grid_name}
+                        cover={project.grid_image}
+                        areas={project.areas}
+                      />
+                    </RevealAnimation>
                   );
                 })}
               </GridRow>

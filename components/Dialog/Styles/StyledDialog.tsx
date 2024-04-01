@@ -21,15 +21,16 @@ export const Content = styled(RadixDialog.Content)`
   top: 50%;
   left: 50%;
   background-color: ${colors.black};
-  z-index: 99;
+  z-index: 99999999;
   animation: ${contentShow} 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 `;
 
 export const Close = styled(RadixDialog.Close)`
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   background-color: ${colors.black};
-  border-radius: 0;
+  overflow: hidden;
+  border-radius: ${({ theme }) => theme.bRad};
   position: absolute;
   right: 0;
   top: -80px;
@@ -39,11 +40,6 @@ export const Close = styled(RadixDialog.Close)`
   img {
     width: 100%;
     height: 100%;
-  }
-  ${breakpoint.largeNotebook} {
-    height: 70px;
-    width: 70px;
-    top: -70px;
   }
   ${breakpoint.smallNotebook} {
     height: 60px;
@@ -72,13 +68,11 @@ export const Trigger = styled(RadixDialog.Trigger)`
 `;
 
 export const Overlay = styled(RadixDialog.Overlay)`
-  background-color: ${colors.primary300};
   position: fixed;
+  backdrop-filter: blur(5px);
   width: 100vw;
   height: 100vh;
   top: 0;
   left: 0;
-  /* z-index: 99999999998; */
-  cursor: pointer;
-  animation: ${overlayShow} 300ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  z-index: 99999998;
 `;

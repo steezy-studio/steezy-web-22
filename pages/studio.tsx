@@ -1,11 +1,11 @@
 import { GetStaticProps } from "next";
 import { useState } from "react";
 import getClient from "../apollo/client";
-import Animation from "../components/Animation/Animation";
 import Head from "../components/Head/Head";
 import HeaderLine from "../components/HeaderLine/HeaderLine";
 import Hero from "../components/Hero/Hero";
 import Navbar from "../components/Navbar/Navbar";
+import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 import ServicesSection from "../components/ServicesSection/ServicesSection";
 import Slider from "../components/Slider/Slider";
 import { Large } from "../components/Typo/Large";
@@ -63,7 +63,7 @@ const Studio = ({ areas }: StudioProps) => {
           </Large>
           <Hero asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }} />
         </StudioHero>
-        <Animation type='fadeFromBottom'>
+        <RevealAnimation>
           <TextBlock>
             <TextBlockHeader>
               <HeaderLine>
@@ -75,7 +75,7 @@ const Studio = ({ areas }: StudioProps) => {
               <Small>{studioStrings.intro.paragraph}</Small>
             </TextBlockBody>
           </TextBlock>
-        </Animation>
+        </RevealAnimation>
 
         <OurStudio>
           <Slider>
@@ -142,9 +142,9 @@ const Studio = ({ areas }: StudioProps) => {
           </BrandsHeader>
           <Logotypes>
             {studioStrings.brands.logotypes.map((src, i) => (
-              <Animation type='fadeFromBottom' key={src} delay={0.05 * i}>
+              <RevealAnimation key={src} delay={0.05 * i}>
                 <Logo src={`/logos/${src}`} />
-              </Animation>
+              </RevealAnimation>
             ))}
           </Logotypes>
         </BrandsSection>

@@ -21,6 +21,7 @@ export const Small = styled(motion.p)`
   }
   &.uppercase {
     text-transform: uppercase;
+    letter-spacing: 0.04em;
   }
   &.big-lh {
     line-height: 1.7em;

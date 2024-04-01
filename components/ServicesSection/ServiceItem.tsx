@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Area } from "../../generated/preprTypes";
-import Animation from "../Animation/Animation";
+import { HoverProvider } from "../../pages/_app";
+import RevealAnimation from "../RevealAnimation/RevealAnimation";
 import { Medium } from "../Typo/Medium";
+import { Small } from "../Typo/Small";
 import Video from "../Video/Video";
 import {
   ServiceItemProject,
@@ -11,9 +14,6 @@ import {
   StyledServiceItem,
 } from "./StyledServiceItem";
 import { SubServicesList } from "./StyledServicesSection";
-import { useContext, useEffect, useRef, useState } from "react";
-import { Small } from "../Typo/Small";
-import { HoverProvider } from "../../pages/_app";
 
 interface ServiceItemProps {
   area: Area;
@@ -77,7 +77,7 @@ const ServiceItem = ({ area, i }: ServiceItemProps) => {
           )}
         </ServiceItemProjectInner>
       </ServiceItemProject>
-      <Animation type='fadeFromBottom' key={area._slug} delay={0.2 * i}>
+      <RevealAnimation delay={0.2 * i}>
         <motion.div>
           <Medium className='medium'>
             <Link href={`/projects/${area._slug}`}>{area.area_name}</Link>
@@ -86,7 +86,7 @@ const ServiceItem = ({ area, i }: ServiceItemProps) => {
             <Small className='big-lh break-lines'>{area.sub_areas}</Small>
           </SubServicesList>
         </motion.div>
-      </Animation>
+      </RevealAnimation>
     </StyledServiceItem>
   );
 };

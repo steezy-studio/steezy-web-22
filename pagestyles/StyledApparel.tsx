@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { spaces } from "../helpers/spaces";
 
-export const StyledApparel = styled.main`
+export const StyledApparel = styled.div`
   margin-top: ${spaces.xl}px;
 `;
 
@@ -13,7 +13,7 @@ export const ProductsGrid = styled.section`
 `;
 
 export const ApparelOtherProjects = styled.div`
-  margin-top: ${spaces.xxl}px;
+  margin-top: ${spaces.xxxxl}px;
 `;
 
 export const ProductsGridSection = styled.section`

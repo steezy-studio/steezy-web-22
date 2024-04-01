@@ -1,27 +1,27 @@
-import React, { useRef } from "react";
-import { StyledProjectCard } from "./StyledProjectCard";
-import { Area, Asset } from "../../generated/preprTypes";
-import AreaTag from "../AreaTag/AreaTag";
 import {
-  GridItemCoverWrapper,
-  GridItemGrad,
-  GridItemCover,
-  GridItemVideo,
-  GridItemAreas,
-  GridItemHeader,
-} from "../GridItem/Styles/StyledGridItem";
+  DOMNode,
+  Element,
+  HTMLReactParserOptions,
+  domToReact,
+} from "html-react-parser";
+import { useRef } from "react";
+import { Area, Asset } from "../../generated/preprTypes";
+import stripHtmlTags from "../../helpers/stripHtmlTags";
 import {
   useIntersectionObserver,
   videoCallback,
 } from "../../hooks/useIntersectionObserver";
+import AreaTag from "../AreaTag/AreaTag";
+import {
+  GridItemAreas,
+  GridItemCover,
+  GridItemCoverWrapper,
+  GridItemGrad,
+  GridItemHeader,
+  GridItemVideo,
+} from "../GridItem/Styles/StyledGridItem";
 import { Small } from "../Typo/Small";
-import parse, {
-  DOMNode,
-  domToReact,
-  Element,
-  HTMLReactParserOptions,
-} from "html-react-parser";
-import stripHtmlTags from "../../helpers/stripHtmlTags";
+import { StyledProjectCard } from "./StyledProjectCard";
 
 interface ProjectCardProps {
   areas: Area[];

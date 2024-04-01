@@ -23,7 +23,6 @@ export const Loop = styled(motion.video)`
     left: 0;
     right: 0;
     bottom: 0;
-    /* height: 60vh; */
   }
 `;
 

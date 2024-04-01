@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
-import { LinkBg, StyledLink } from "./Styles/StyledLink";
+import { useContext } from "react";
 import { HoverProvider } from "../../pages/_app";
+import { LinkBg, StyledLink } from "./Styles/StyledLink";
 
 interface LinkProps extends NextLinkProps {
   children: JSX.Element | JSX.Element[] | string;
@@ -10,21 +10,14 @@ interface LinkProps extends NextLinkProps {
   onClick?: () => void;
 }
 
-const Link = ({
-  href,
-  children,
-  className,
-  onClick,
-  target,
-  ...rest
-}: LinkProps) => {
+const Link = ({ href, children, className, onClick, target }: LinkProps) => {
   const { setCursorType } = useContext(HoverProvider);
   return (
-    <NextLink
+    <StyledLink
       href={href}
       onMouseEnter={() => setCursorType("hover")}
       onMouseLeave={() => setCursorType("normal")}
-      {...rest}
+      target={target}
       className={className}
       onClick={(e) => {
         if (onClick) {
@@ -35,7 +28,7 @@ const Link = ({
     >
       {children}
       <LinkBg className={`bg ${className}`} />
-    </NextLink>
+    </StyledLink>
   );
 };
 

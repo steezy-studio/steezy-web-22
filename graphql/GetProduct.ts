@@ -15,6 +15,10 @@ export const GET_PRODUCT = gql`
       variants(first: $variantsFirst2) {
         nodes {
           title
+          selectedOptions {
+            value
+            name
+          }
           price {
             currencyCode
             amount
