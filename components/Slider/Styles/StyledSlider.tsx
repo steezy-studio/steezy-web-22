@@ -20,6 +20,7 @@ export const _Slider = styled(motion.div)`
   grid-auto-flow: column;
   grid-auto-columns: max-content;
   column-gap: ${spaces.xs}px;
+  --column-gap: ${spaces.xs};
   height: 100%;
   z-index: 3;
 `;

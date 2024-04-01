@@ -61,12 +61,15 @@ const Slider = (
     innerC.style.width = `${totalWidth.current}px`;
     itemWidth.current = slidesPerView
       ? _ref.current.clientWidth / slidesPerView
-      : (totalWidth.current - _ref.current.clientWidth) /
-        clearedChildren.length;
+      : totalWidth.current / clearedChildren.length;
   }, [w]);
 
   const handleIndexChange = (dir) => {
     const nextPosition = position + dir * step;
+    const columnGap = Number(
+      getComputedStyle(sliderRef.current).getPropertyValue("--column-gap")
+    );
+    const columnGapsTotalWidth = columnGap * (clearedChildren.length - 1);
 
     if (
       nextPosition < 0 ||
@@ -78,15 +81,13 @@ const Slider = (
     const maxSteps = clearedChildren.length - Math.trunc(slidesPerView);
 
     const compensateOffset =
-      itemWidth.current *
-      (slidesPerView - Math.floor(slidesPerView)) *
+      (_ref.current.clientWidth -
+        itemWidth.current * Math.floor(slidesPerView) -
+        columnGapsTotalWidth) *
       (nextPosition / maxSteps);
 
     const x = itemWidth.current * nextPosition - compensateOffset;
-    if (
-      !slidesPerView &&
-      x - 100 > totalWidth.current - _ref.current.clientWidth
-    ) {
+    if (!slidesPerView && x > totalWidth.current) {
       return;
     }
 

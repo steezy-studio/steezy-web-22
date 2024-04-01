@@ -72,6 +72,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
             projectName={project.project_detail_name}
             areas={project.areas}
             cover={project.hero_image}
+            // TODO replace with grid_image
             videoThumb={project.hero_image[0].cover}
             wide={true}
             _static
