@@ -24,6 +24,7 @@ import {
   FoundersGrid,
   StyledContact,
 } from "../pagestyles/StyledContact";
+import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 
 interface ContactProps {
   areas: Areas;
@@ -42,60 +43,72 @@ const Contact = ({ areas }: ContactProps) => {
 
       <StyledContact>
         <ContactHero>
-          <ContactHeroCover
-            src={"/images/contact-hero.jpg"}
-            alt={"Contact"}
-            height={1815}
-            width={1089}
-          />
+          <RevealAnimation>
+            <ContactHeroCover
+              src={"/images/contact-hero.jpg"}
+              alt={"Contact"}
+              height={1815}
+              width={1089}
+            />
+          </RevealAnimation>
           <ContactInfo>
-            <Large>Brno Office</Large>
+            <RevealAnimation delay={0.1}>
+              <Large>Brno Office</Large>
+            </RevealAnimation>
             <ContactDetails>
-              <ContactDetail>
-                <Nano>BRNO OFFICE</Nano>
-                <Small>
-                  STEEZY, s.r.o. <br />
-                  Obilní trh 4, 602 00 Brno <br />
-                  Czech Republic <br />
-                  <br />
-                  IČ: 07812558 <br />
-                  DIČ (VAT): CZ07812558
-                </Small>
-              </ContactDetail>
-              <ContactDetail>
-                <Nano>Recruiment</Nano>
-                <Small>
-                  We’re always looking for new talents
-                  <br />
-                  <br />
-                  Send your portfolio to{" "}
-                  <Link
-                    href={"mailto: hello@steezy.studio"}
-                    className='agrandir'
-                  >
-                    hello@steezy.studio
-                  </Link>
-                </Small>
-              </ContactDetail>
-              <ContactSocials>
-                <Instagram />
-                <Vimeo />
-              </ContactSocials>
-              <ContactDetail className='align-end'>
-                <Nano>New Business & media</Nano>
-                <Small>
-                  <Link
-                    href={"mailto: hello@steezy.studio"}
-                    className='agrandir'
-                  >
-                    hello@steezy.studio
-                  </Link>
-                  <br />
-                  <Link href={"tel: +420728088996"} className='agrandir'>
-                    (+420) 728 088 996
-                  </Link>
-                </Small>
-              </ContactDetail>
+              <RevealAnimation delay={0.2}>
+                <ContactDetail>
+                  <Nano>BRNO OFFICE</Nano>
+                  <Small>
+                    STEEZY, s.r.o. <br />
+                    Obilní trh 4, 602 00 Brno <br />
+                    Czech Republic <br />
+                    <br />
+                    IČ: 07812558 <br />
+                    DIČ (VAT): CZ07812558
+                  </Small>
+                </ContactDetail>
+              </RevealAnimation>
+              <RevealAnimation delay={0.3}>
+                <ContactDetail>
+                  <Nano>Recruiment</Nano>
+                  <Small>
+                    We’re always looking for new talents
+                    <br />
+                    <br />
+                    Send your portfolio to{" "}
+                    <Link
+                      href={"mailto: hello@steezy.studio"}
+                      className='agrandir'
+                    >
+                      hello@steezy.studio
+                    </Link>
+                  </Small>
+                </ContactDetail>
+              </RevealAnimation>
+              <RevealAnimation delay={0.4}>
+                <ContactSocials>
+                  <Instagram />
+                  <Vimeo />
+                </ContactSocials>
+              </RevealAnimation>
+              <RevealAnimation delay={0.5}>
+                <ContactDetail className='align-end'>
+                  <Nano>New Business & media</Nano>
+                  <Small>
+                    <Link
+                      href={"mailto: hello@steezy.studio"}
+                      className='agrandir'
+                    >
+                      hello@steezy.studio
+                    </Link>
+                    <br />
+                    <Link href={"tel: +420728088996"} className='agrandir'>
+                      (+420) 728 088 996
+                    </Link>
+                  </Small>
+                </ContactDetail>
+              </RevealAnimation>
             </ContactDetails>
           </ContactInfo>
         </ContactHero>
@@ -103,6 +116,7 @@ const Contact = ({ areas }: ContactProps) => {
           <SectionHeader header='Get in touch with co-founders' />
           <FoundersGrid>
             <Human
+              index={0}
               name={"Jakub Maca"}
               position={"Co-founder & Art director"}
               roles={"Branding, webdesign, spatial design"}
@@ -116,6 +130,7 @@ const Contact = ({ areas }: ContactProps) => {
               phone='(+420) 728 088 996'
             />
             <Human
+              index={1}
               name={"Tomáš Carda"}
               position={"Co-founder & Art director"}
               roles={"Campagns, video, motion design "}

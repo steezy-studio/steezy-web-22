@@ -14,6 +14,7 @@ import {
   StyledServiceItem,
 } from "./StyledServiceItem";
 import { SubServicesList } from "./StyledServicesSection";
+import useIsTouchDevice from "../../hooks/useIsTouchDevice";
 
 interface ServiceItemProps {
   area: Area;
@@ -27,6 +28,7 @@ const ServiceItem = ({ area, i }: ServiceItemProps) => {
   const [hover, sethover] = useState<boolean>(false);
   const isEven = i % 2 === 0;
   const { setCursorType } = useContext(HoverProvider);
+  const isTouchDevice = useIsTouchDevice();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -47,10 +49,12 @@ const ServiceItem = ({ area, i }: ServiceItemProps) => {
     <StyledServiceItem
       ref={ref}
       onMouseEnter={() => {
+        if (isTouchDevice) return;
         sethover(true);
         setCursorType("hover");
       }}
       onMouseLeave={() => {
+        if (isTouchDevice) return;
         sethover(false);
         setCursorType("normal");
       }}

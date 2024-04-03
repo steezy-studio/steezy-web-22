@@ -1,6 +1,4 @@
-import { motion } from "framer-motion";
-import React, { useContext, useState } from "react";
-import { ColorKeys, colors } from "../../helpers/consts";
+import { useContext, useState } from "react";
 import { HoverProvider } from "../../pages/_app";
 import { StyledLogo } from "./Styles/StyledLogo";
 

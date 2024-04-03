@@ -14,6 +14,24 @@ export const StyledNavbar = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${breakpoint.monitor} {
+    right: ${spaces.xxxxxl}px;
+    left: ${spaces.xxxxxl}px;
+  }
+  ${breakpoint.smallNotebook} {
+    height: 50px;
+    right: ${spaces.xl}px;
+    left: ${spaces.xl}px;
+  }
+  ${breakpoint.tabletPortrait} {
+    height: 40px;
+    right: ${spaces.l}px;
+    left: ${spaces.l}px;
+  }
+  ${breakpoint.phone} {
+    right: ${spaces.m}px;
+    left: ${spaces.m}px;
+  }
 `;
 
 export const NavLinks = styled(motion.div)`
@@ -22,8 +40,60 @@ export const NavLinks = styled(motion.div)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  ${breakpoint.phone} {
+  ${breakpoint.tabletLandscape} {
+    position: fixed;
     inset: 0;
+    display: grid;
+    justify-items: end;
+    align-content: center;
+    row-gap: ${spaces.xs}px;
+    background-color: ${colors.white};
+    padding: 0 ${spaces.xl}px;
+  }
+  ${breakpoint.tabletPortrait} {
+    padding: 0 ${spaces.l}px;
+  }
+  ${breakpoint.phone} {
+    padding: 0 ${spaces.l}px;
+  }
+`;
+
+export const LinksBlock = styled(motion.div)`
+  border-radius: 999px;
+  height: 100%;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 1px solid ${colors.black};
+  background-color: ${colors.white};
+  flex-shrink: 0;
+  padding: 0 ${spaces.s}px;
+  &.stretch {
+    flex-shrink: 1;
+    width: 100%;
+  }
+  ${breakpoint.tabletLandscape} {
+    display: grid;
+    height: auto;
+    justify-content: end;
+    justify-items: end;
+    width: 100%;
+    border: unset;
+    background-color: unset;
+    border: 1px solid ${colors.black};
+    width: fit-content;
+    padding: 0 ${spaces.m}px;
+    transform: translateX(${spaces.m}px);
+    &.stretch {
+      border: 0px solid ${colors.black};
+    }
+    &.active {
+      background-color: ${colors.primary400};
+    }
+  }
+  ${breakpoint.phone} {
+    padding: 0 ${spaces.s}px;
   }
 `;
 
@@ -31,8 +101,19 @@ export const PhoneDecoration = styled(motion.div)`
   display: none;
   ${breakpoint.tabletLandscape} {
     position: absolute;
+    bottom: ${spaces.xl}px;
+    left: ${spaces.xl}px;
     display: grid;
+    column-gap: ${spaces.xs}px;
     grid-template-columns: max-content auto;
+  }
+  ${breakpoint.tabletPortrait} {
+    bottom: ${spaces.l}px;
+    left: ${spaces.l}px;
+  }
+  ${breakpoint.phone} {
+    bottom: ${spaces.l}px;
+    left: ${spaces.l}px;
   }
 `;
 
@@ -70,22 +151,6 @@ export const NavHeader = styled(motion.div)`
     display: block;
     max-width: 500px;
     text-align: center;
-  }
-`;
-
-export const LinksBlock = styled(motion.div)`
-  border-radius: 999px;
-  height: 100%;
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  border: 1px solid ${colors.black};
-  background-color: ${colors.white};
-  flex-shrink: 0;
-  &.stretch {
-    flex-shrink: 1;
-    width: 100%;
   }
 `;
 

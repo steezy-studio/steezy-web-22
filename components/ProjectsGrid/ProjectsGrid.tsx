@@ -1,6 +1,5 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { EnhancedProject } from "../../helpers/enhanceProjects";
-import { HoverProvider } from "../../pages/_app";
 import GridItem from "../GridItem/GridItem";
 import Link from "../Link/Link";
 import RevealAnimation from "../RevealAnimation/RevealAnimation";
@@ -21,7 +20,6 @@ const ProjectsGrid = ({
   projects,
   projectsPerPage = 10,
 }: ProjectsGridProps) => {
-  const { setCursorType } = useContext(HoverProvider);
   const [visibleProjectsCount, setvisibleProjectsCount] =
     useState<number>(projectsPerPage);
 
@@ -38,10 +36,10 @@ const ProjectsGrid = ({
           }, [])
           .map((row, j) => {
             return (
-              <GridRow>
+              <GridRow key={j}>
                 {row.map((project, i) => {
                   return (
-                    <RevealAnimation key={project._slug}>
+                    <RevealAnimation key={project._slug} delay={i * 0.3}>
                       <GridItem
                         slug={project._slug}
                         wide={(i + j) % 2 === 0}

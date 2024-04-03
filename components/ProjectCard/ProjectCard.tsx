@@ -22,6 +22,9 @@ import {
 } from "../GridItem/Styles/StyledGridItem";
 import { Small } from "../Typo/Small";
 import { StyledProjectCard } from "./StyledProjectCard";
+import { useWindowSize } from "../../hooks/useWindowSize";
+import { device } from "../../helpers/consts";
+import useIsTouchDevice from "../../hooks/useIsTouchDevice";
 
 interface ProjectCardProps {
   areas: Area[];
@@ -43,6 +46,7 @@ const ProjectCard = ({
   _static,
 }: ProjectCardProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isTouchDevice = useIsTouchDevice();
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
   );
@@ -65,7 +69,7 @@ const ProjectCard = ({
     <StyledProjectCard className={wide ? "wide" : ""}>
       <GridItemCoverWrapper>
         <GridItemGrad
-          animate={{ opacity: _static ? 1 : hover ? 1 : 0 }}
+          animate={{ opacity: _static || isTouchDevice ? 1 : hover ? 1 : 0 }}
           transition={{ duration: 0.2 }}
         />
         {cover[0].url ? (
@@ -75,7 +79,9 @@ const ProjectCard = ({
             placeholder={`blur`}
             blurDataURL={cover[0].url}
             height={cover[0].height}
-            style={{ transform: `scale(${hover ? 1.05 : 1})` }}
+            style={{
+              transform: `scale(${isTouchDevice ? 1 : hover ? 1.05 : 1})`,
+            }}
             alt={projectName}
           />
         ) : (
@@ -88,7 +94,9 @@ const ProjectCard = ({
             playsInline={true}
             muted={true}
             loop={true}
-            style={{ transform: `scale(${hover ? 1.05 : 1})` }}
+            style={{
+              transform: `scale(${isTouchDevice ? 1 : hover ? 1.05 : 1})`,
+            }}
           />
         )}
       </GridItemCoverWrapper>
@@ -98,7 +106,11 @@ const ProjectCard = ({
             <AreaTag key={area_name} areaName={area_name} />
           ))}
       </GridItemAreas>
-      <GridItemHeader animate={{ y: _static ? "0%" : hover ? "0%" : "-200%" }}>
+      <GridItemHeader
+        animate={{
+          y: _static || isTouchDevice ? "0%" : hover ? "0%" : "-200%",
+        }}
+      >
         <Small className='white medium'>{stripHtmlTags(projectName)}</Small>
       </GridItemHeader>
     </StyledProjectCard>

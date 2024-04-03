@@ -1,26 +1,29 @@
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
-import u from "../../../helpers/unit";
 import { spaces } from "../../../helpers/spaces";
 
 export const StyledFooter = styled.footer`
   display: grid;
   grid-gap: ${spaces.l}px;
-  margin-top: ${({ theme }) => u(2, theme.pageMargin)};
+  margin-top: ${spaces.xxl}px;
   padding-bottom: 100px;
+  ${breakpoint.smallNotebook} {
+    margin-top: ${spaces.xxxl}px;
+  }
   ${breakpoint.tabletLandscape} {
-    padding-bottom: 60px;
+    padding-bottom: ${spaces.xl}px;
   }
   ${breakpoint.phone} {
-    margin-top: ${({ theme }) => u(4, theme.pageMargin)};
+    margin-top: ${spaces.l}px;
   }
 `;
 
 export const ContactInfo = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: ${({ theme }) => theme.pageMargin};
-  ${breakpoint.phone} {
+  grid-gap: ${spaces.l}px;
+  ${breakpoint.tabletPortrait} {
+    justify-items: start;
     grid-template-columns: unset;
     grid-row-gap: 30px;
   }

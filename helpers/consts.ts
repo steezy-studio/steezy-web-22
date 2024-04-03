@@ -1,4 +1,4 @@
-import { Cookie, CookieSetOptions } from "universal-cookie";
+import { CookieSetOptions } from "universal-cookie";
 
 export const colors = {
   primary300: "#f5ede5",
@@ -45,6 +45,8 @@ export const device = {
   monitor: 2500,
 } as const;
 
+export type DevicesKeys = keyof typeof device;
+
 export const breakpoint = {
   miniPhone: `@media (max-width: ${device.miniPhone}px)`,
   phone: `@media (max-width: ${device.phone}px)`,
@@ -64,7 +66,7 @@ export const theme = (width: number) => ({
       : width <= device.smallNotebook
       ? "20px"
       : "120px",
-  bRad: "15px",
+  bRad: width <= device.tabletPortrait ? "10px" : "15px",
 });
 export type Theme = typeof theme;
 

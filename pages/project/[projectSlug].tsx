@@ -68,31 +68,38 @@ const Project = ({ projectData, areas }: ProjectProps) => {
       <Navbar areas={areas.items} header={project.company_name} />
       <StyledProject>
         <ProjectHeroHeader>
-          <ProjectCard
-            projectName={project.project_detail_name}
-            areas={project.areas}
-            cover={project.hero_image}
-            // TODO replace with grid_image
-            videoThumb={project.hero_image[0].cover}
-            wide={true}
-            _static
-          />
+          <RevealAnimation>
+            <ProjectCard
+              projectName={project.project_detail_name}
+              areas={project.areas}
+              cover={project.hero_image}
+              videoThumb={project.grid_image[0].cover}
+              wide={true}
+              _static
+            />
+          </RevealAnimation>
           <ProjectHeroRoles>
             {project.project_facts?.map((fact, i) => {
               if (fact.__typename === "ProjectFacts") {
                 return (
-                  <ProjectHeroRole key={i}>
-                    <Nano>{fact.header}</Nano>
-                    <Small className='medium break-lines'>{fact.content}</Small>
-                  </ProjectHeroRole>
+                  <RevealAnimation key={i} delay={i * 0.3}>
+                    <ProjectHeroRole>
+                      <Nano>{fact.header}</Nano>
+                      <Small className='medium break-lines'>
+                        {fact.content}
+                      </Small>
+                    </ProjectHeroRole>
+                  </RevealAnimation>
                 );
               }
             })}
           </ProjectHeroRoles>
         </ProjectHeroHeader>
-        <ProjectDescription>
-          <Small className='medium'>{project.project_description}</Small>
-        </ProjectDescription>
+        <RevealAnimation>
+          <ProjectDescription>
+            <Small className='medium'>{project.project_description}</Small>
+          </ProjectDescription>
+        </RevealAnimation>
         <ProjectGrid>
           {project.project_presentation?.map((row, i) => {
             if (row.__typename === "ProjectGridRow") {
@@ -108,7 +115,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                     }
                     if (img._type === "Photo") {
                       return (
-                        <RevealAnimation key={`${i}_col`}>
+                        <RevealAnimation key={`${i}_col`} delay={i * 0.3}>
                           <motion.div>
                             <ProjectDetailImg
                               src={img.url || ``}

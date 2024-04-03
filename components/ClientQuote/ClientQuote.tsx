@@ -17,7 +17,7 @@ const ClientQuote = ({ quote, clientName, clientRole }: ClientQuoteProps) => {
   const createTransition = (delay) =>
     ({
       delay: delay,
-      duration: 1.2,
+      duration: 1.7,
       ease: easingInOutCubic,
     } as Transition);
   return (

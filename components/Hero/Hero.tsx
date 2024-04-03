@@ -27,7 +27,7 @@ const Hero = ({ asset }: HeroProps) => {
             height={asset.height}
             placeholder={`blur`}
             blurDataURL={asset.url}
-            alt={asset.description}
+            alt={asset.description || "Hero image"}
           />
         )}
       </RevealAnimation>

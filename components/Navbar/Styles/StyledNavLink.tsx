@@ -7,7 +7,6 @@ export const StyledNavLink = styled(motion.a)`
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 0.1em;
-  padding: 0 20px;
   &:hover {
     color: ${colors.primary400} !important;
   }
@@ -22,22 +21,19 @@ export const StyledNavLink = styled(motion.a)`
   }
   ${breakpoint.largeNotebook} {
     font-size: 11px;
-    padding: 0 15px;
   }
   ${breakpoint.smallNotebook} {
-    font-size: 11px;
-    padding: 0 10px;
+    font-size: 9px;
   }
   ${breakpoint.tabletLandscape} {
     font-size: 60px;
     font-family: "migra-italic";
     font-weight: 300;
+    width: fit-content;
     text-transform: lowercase;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
     letter-spacing: 0.01em;
     padding: 2px 0;
+    text-align: right;
     &:hover,
     &.active {
       & {
@@ -58,10 +54,14 @@ export const StyledNavLink = styled(motion.a)`
     }
     &,
     &:visited {
-      color: ${colors.gray400};
+      color: ${colors.black};
     }
   }
+  ${breakpoint.tabletPortrait} {
+    font-size: 50px;
+  }
   ${breakpoint.phone} {
+    font-size: 30px;
   }
   ${breakpoint.miniPhone} {
     font-size: 28px;

@@ -1,8 +1,13 @@
+import { useCart } from "@shopify/hydrogen-react";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import strings from "../../data/strings";
 import { Area } from "../../generated/preprTypes";
+import { device } from "../../helpers/consts";
+import { useWindowSize } from "../../hooks/useWindowSize";
+import { HoverProvider } from "../../pages/_app";
+import { CartToggleContext } from "../Cart/Cart";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
 import Logo from "../Logo/Logo";
@@ -19,9 +24,6 @@ import {
   StyledNavbar,
   linksBlockVariants,
 } from "./Styles/StyledNavbar";
-import { HoverProvider } from "../../pages/_app";
-import Cart, { CartToggleContext } from "../Cart/Cart";
-import { useCart } from "@shopify/hydrogen-react";
 
 interface NavbarProps {
   areas: Area[];
@@ -32,6 +34,8 @@ const Navbar = ({ areas, header }: NavbarProps) => {
   const [isMenuOpen, openMenu] = useState(false);
   const { setCursorType } = useContext(HoverProvider);
   const { setShowCart } = useContext(CartToggleContext);
+  const { w } = useWindowSize();
+  const isTabletPortrait = w <= device.tabletPortrait;
   const { lines } = useCart();
   const router = useRouter();
   const navLinksDelay = 0.04;
@@ -41,7 +45,7 @@ const Navbar = ({ areas, header }: NavbarProps) => {
       <Logo />
       <NavlinksMask>
         <AnimatePresence mode={"wait"}>
-          {!isMenuOpen && header && (
+          {!isMenuOpen && header && !isTabletPortrait && (
             <NavHeader
               key={"header"}
               initial={"initial"}
@@ -79,40 +83,34 @@ const Navbar = ({ areas, header }: NavbarProps) => {
               }}
               variants={linksBlockVariants}
             >
-              <LinksBlock className='stretch'>
-                {areas.map(({ area_name, _slug, is_default }, i) => (
-                  <NavLink
-                    delay={navLinksDelay * i}
-                    active={router.asPath === `/projects/${_slug}`}
-                    href={`/projects/${_slug}`}
-                    key={_slug}
-                  >
-                    {area_name}
-                  </NavLink>
-                ))}
+              <LinksBlock>
+                {/* {areas.map(({ area_name, _slug, is_default }, i) => ( */}
+                <NavLink
+                  delay={navLinksDelay}
+                  active={router.asPath === `/projects/all-projects`}
+                  href={`/projects/all-projects`}
+                  // key={_slug}
+                >
+                  {`Projects`}
+                </NavLink>
               </LinksBlock>
               {strings.navData.map(({ link, name }, i) => (
-                <LinksBlock key={link}>
+                <LinksBlock
+                  key={link}
+                  className={router.asPath === link ? "active" : ""}
+                >
                   <NavLink
                     delay={(areas.length - 1 + i) * navLinksDelay}
-                    active={router.asPath === link}
+                    active={false}
                     href={link}
                   >
                     {name}
                   </NavLink>
                 </LinksBlock>
               ))}
-
               <PhoneDecoration
                 variants={{ open: { opacity: 1 }, close: { opacity: 0 } }}
               >
-                {/* <ContactUs href={`/contact`}>
-                  <StyledImg as={"img"} src={"/icons/contact-icon.svg"} />
-                  <Micro className='uppercase break-lines'>
-                    {strings.globals.tellUsYourStory}
-                  </Micro>
-                </ContactUs> */}
-
                 <Instagram />
                 <Vimeo />
               </PhoneDecoration>

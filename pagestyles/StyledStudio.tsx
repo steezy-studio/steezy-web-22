@@ -11,6 +11,9 @@ export const StudioHero = styled.section`
   display: grid;
   margin-top: ${spaces.xl}px;
   row-gap: ${spaces.xl}px;
+  ${breakpoint.phone} {
+    margin-top: ${spaces.l}px;
+  }
 `;
 
 export const TextBlock = styled(motion.div)`
@@ -92,6 +95,10 @@ export const ValuesCoverW = styled.div`
   top: ${spaces.xxxl}px;
   width: 100%;
   align-self: start;
+  ${breakpoint.phone} {
+    position: static;
+    margin-bottom: ${spaces.xl}px;
+  }
 `;
 
 export const ValuesCover = styled(Image)`
@@ -108,11 +115,17 @@ export const OurStudioSliderImg = styled(Image)`
   width: 100%;
   height: 100%;
   border-radius: ${({ theme }) => theme.bRad};
+  ${breakpoint.monitor} {
+    min-height: 600px;
+  }
 `;
 
 export const ValuesList = styled.div`
   display: grid;
   row-gap: ${spaces.xxl}px;
+  ${breakpoint.phone} {
+    row-gap: ${spaces.l}px;
+  }
 `;
 
 export const BrandsSection = styled.section`
@@ -120,6 +133,10 @@ export const BrandsSection = styled.section`
   grid-template-columns: 350px 1fr;
   margin-top: ${spaces.xxxxl}px;
   align-items: start;
+  ${breakpoint.tabletPortrait} {
+    grid-template-columns: unset;
+    row-gap: ${spaces.l}px;
+  }
 `;
 
 export const BrandsHeader = styled.div`
@@ -132,7 +149,7 @@ export const Logotypes = styled.div`
   column-gap: 30px;
   width: 100%;
   ${breakpoint.tabletPortrait} {
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
   ${breakpoint.phone} {
     grid-template-columns: repeat(3, 1fr);

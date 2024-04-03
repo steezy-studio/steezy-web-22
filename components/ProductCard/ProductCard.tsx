@@ -18,6 +18,7 @@ import {
   StyledProductCard,
 } from "./StyledProductCard";
 import RevealAnimation from "../RevealAnimation/RevealAnimation";
+import useIsTouchDevice from "../../hooks/useIsTouchDevice";
 
 interface Image {
   src: string;
@@ -45,6 +46,7 @@ const ProductCard = ({
 }: ProductCardProps) => {
   const { setCursorType } = useContext(HoverProvider);
   const [hover, sethover] = useState<boolean>(false);
+  const isTouchDevice = useIsTouchDevice();
   const transition = { ease: easing, duration: 0.3 };
 
   return (
@@ -83,7 +85,7 @@ const ProductCard = ({
               >
                 {availableForSale ? "in stock" : "out of stock"}
               </Small>
-              {hover && (
+              {!isTouchDevice && hover && (
                 <ProductCardButton
                   layout={"position"}
                   key={slug + "button"}

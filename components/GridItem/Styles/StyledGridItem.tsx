@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import { spaces } from "../../../helpers/spaces";
 import Image from "next/image";
+import { breakpoint } from "../../../helpers/consts";
 
 export const StyledGridItem = styled(motion.a)`
   all: unset;
@@ -13,7 +14,16 @@ export const GridItemAreas = styled.div`
   bottom: ${spaces.m}px;
   left: ${spaces.m}px;
   display: flex;
-  column-gap: ${spaces.xxs}px;
+  gap: ${spaces.xxs}px;
+  ${breakpoint.tabletPortrait} {
+    bottom: ${spaces.s}px;
+    left: ${spaces.s}px;
+  }
+  ${breakpoint.phone} {
+    flex-wrap: wrap;
+    bottom: ${spaces.xs}px;
+    left: ${spaces.xs}px;
+  }
 `;
 
 export const GridItemCoverWrapper = styled.div`
@@ -39,6 +49,11 @@ export const GridItemHeader = styled(motion.div)`
   left: ${spaces.m}px;
   right: ${spaces.m}px;
   z-index: 2;
+  ${breakpoint.tabletPortrait} {
+    top: ${spaces.s}px;
+    left: ${spaces.s}px;
+    right: ${spaces.s}px;
+  }
 `;
 
 export const GridItemVideo = styled.video`

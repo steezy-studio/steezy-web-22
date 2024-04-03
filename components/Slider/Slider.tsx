@@ -1,5 +1,5 @@
 import { useAnimationControls } from "framer-motion";
-import React, {
+import {
   MouseEventHandler,
   ReactNode,
   useContext,
@@ -13,77 +13,102 @@ import { HoverProvider } from "../../pages/_app";
 import {
   Slide,
   SliderBound,
+  Slides,
   StyledSlider,
-  _Slider,
 } from "./Styles/StyledSlider";
-import { isCursorWithinBounds } from "./isCursorWithinBounds";
 import { clearEmptyVals } from "./clearEmptyVals";
+import { isCursorWithinBounds } from "./isCursorWithinBounds";
 
 interface SliderProps {
   children: ReactNode[];
-  slidesPerView?: number;
+  config?: { [key: number]: { slidesCount?: number; step: number } };
   offsetNav?: number;
-  step?: number;
 }
 
-const Slider = (
-  { children, slidesPerView = 0, offsetNav = 1, step = 1 }: SliderProps,
-  ref: React.MutableRefObject<HTMLDivElement>
-) => {
+const Slider = ({
+  children: _children,
+  config,
+  offsetNav = 1,
+}: SliderProps) => {
   const [position, setPosition] = useState(0);
+  const [slidesPerView, setSlidesPerView] = useState(0);
+  const [step, setstep] = useState(1);
   const { cursorType, setCursorType, cursorRef } = useContext(HoverProvider);
   const controls = useAnimationControls();
   const { w } = useWindowSize();
 
   const imageSlideRef = useRef<HTMLDivElement>(null);
-  const innerRef = useRef<HTMLDivElement>(null);
-  const _ref = ref?.current ? ref : innerRef;
+  const containerRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
   const itemWidth = useRef<number>(null);
   const totalWidth = useRef<number>(null);
-  const clearedChildren = clearEmptyVals(children);
+  const children = clearEmptyVals(_children);
 
   useEffect(() => {
-    const innerC = _ref.current.querySelector(
-      "[data-slider-inner]"
+    setPosition(0);
+    controls.start({
+      x: `${0}px`,
+    });
+
+    const sortedDevices = Object.keys(config).sort(
+      (a, b) => Number(a) - Number(b)
+    );
+    const currentDeviceKey =
+      sortedDevices.find((key) => w < Number(key) || w === Number(key)) ||
+      sortedDevices[sortedDevices.length - 1];
+    setSlidesPerView(config[currentDeviceKey].slidesCount || 0);
+    setstep(config[currentDeviceKey].step || 1);
+  }, [w]);
+
+  useEffect(() => {
+    const columnGap = Number(
+      getComputedStyle(sliderRef.current).getPropertyValue("--column-gap")
+    );
+    const slidesEl = containerRef.current.querySelector(
+      "[data-slides]"
     ) as HTMLElement;
-    const slides = innerC.children;
+    const slidesChildren = slidesEl.children;
     itemWidth.current = 0;
     totalWidth.current = 0;
 
-    for (const slide of slides) {
+    for (const slide of slidesChildren) {
       const slideEl = slide as HTMLElement;
       if (slidesPerView) {
-        slideEl.style.width = `${_ref.current.clientWidth / slidesPerView}px`;
+        slideEl.style.width = `${
+          containerRef.current.clientWidth / slidesPerView -
+          columnGap -
+          columnGap / children.length
+        }px`;
       }
-      totalWidth.current += slide.clientWidth;
+      totalWidth.current += slide.clientWidth + columnGap;
     }
-    innerC.style.width = `${totalWidth.current}px`;
+    totalWidth.current -= columnGap;
+
+    slidesEl.style.width = `${totalWidth.current}px`;
     itemWidth.current = slidesPerView
-      ? _ref.current.clientWidth / slidesPerView
-      : totalWidth.current / clearedChildren.length;
-  }, [w]);
+      ? containerRef.current.clientWidth / slidesPerView
+      : totalWidth.current / children.length;
+  }, [slidesPerView]);
 
   const handleIndexChange = (dir) => {
     const nextPosition = position + dir * step;
     const columnGap = Number(
       getComputedStyle(sliderRef.current).getPropertyValue("--column-gap")
     );
-    const columnGapsTotalWidth = columnGap * (clearedChildren.length - 1);
 
     if (
       nextPosition < 0 ||
-      nextPosition > clearedChildren.length - Math.trunc(slidesPerView)
+      nextPosition > children.length - Math.trunc(slidesPerView)
     ) {
       return;
     }
     setPosition(nextPosition);
-    const maxSteps = clearedChildren.length - Math.trunc(slidesPerView);
+    const maxSteps = children.length - Math.trunc(slidesPerView);
 
     const compensateOffset =
-      (_ref.current.clientWidth -
-        itemWidth.current * Math.floor(slidesPerView) -
-        columnGapsTotalWidth) *
+      (containerRef.current.clientWidth -
+        itemWidth.current * Math.floor(slidesPerView) +
+        2 * columnGap) *
       (nextPosition / maxSteps);
 
     const x = itemWidth.current * nextPosition - compensateOffset;
@@ -105,17 +130,21 @@ const Slider = (
   };
 
   const handleNextPossibleIndex = () => {
-    const containerBB = _ref.current.getBoundingClientRect();
+    const containerBB = containerRef.current.getBoundingClientRect();
     const cursorX = Number(cursorRef.current.dataset.x);
     const nextPossibleIndex =
       cursorX <= containerBB.width / 2 ? position - 1 : position + 1;
     const cursorInBounds = isCursorWithinBounds(
-      _ref.current,
+      containerRef.current,
       cursorX,
       offsetNav
     );
-    const leftBound = _ref.current.querySelector(".left") as HTMLDivElement;
-    const rightBound = _ref.current.querySelector(".right") as HTMLDivElement;
+    const leftBound = containerRef.current.querySelector(
+      ".left"
+    ) as HTMLDivElement;
+    const rightBound = containerRef.current.querySelector(
+      ".right"
+    ) as HTMLDivElement;
 
     if (cursorInBounds && nextPossibleIndex < 0) {
       leftBound.style.pointerEvents = "none";
@@ -125,7 +154,7 @@ const Slider = (
 
     if (
       cursorInBounds &&
-      nextPossibleIndex > clearedChildren.length - Math.floor(slidesPerView)
+      nextPossibleIndex > children.length - Math.floor(slidesPerView)
     ) {
       rightBound.style.pointerEvents = "none";
     } else {
@@ -136,7 +165,7 @@ const Slider = (
   const handleClick = (e) => {
     if (
       !isCursorWithinBounds(
-        _ref.current,
+        containerRef.current,
         Number(cursorRef.current.dataset.x),
         offsetNav
       )
@@ -150,7 +179,7 @@ const Slider = (
 
   return (
     <StyledSlider
-      ref={_ref}
+      ref={containerRef}
       onMouseEnter={handleSliderMouseEnter}
       onMouseMove={handleNextPossibleIndex}
       onMouseLeave={handleSliderMouseLeave}
@@ -169,8 +198,8 @@ const Slider = (
         onClick={handleClick}
         style={{ width: `${(100 * offsetNav) / 2}%` }}
       />
-      <_Slider
-        data-slider-inner
+      <Slides
+        data-slides
         ref={sliderRef}
         animate={controls}
         transition={transition}
@@ -178,16 +207,16 @@ const Slider = (
           handleNextPossibleIndex();
         }}
       >
-        {clearedChildren.map((batch, i) => {
+        {children.map((batch, i) => {
           return (
             <Slide key={i} ref={imageSlideRef}>
               {batch}
             </Slide>
           );
         })}
-      </_Slider>
+      </Slides>
     </StyledSlider>
   );
 };
 
-export default React.forwardRef(Slider);
+export default Slider;

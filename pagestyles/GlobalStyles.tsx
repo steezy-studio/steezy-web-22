@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { colors } from "../helpers/consts";
+import { breakpoint, colors } from "../helpers/consts";
 import { spaces } from "../helpers/spaces";
 
 export const GlobalStyle = createGlobalStyle`
@@ -14,9 +14,19 @@ export const GlobalStyle = createGlobalStyle`
   body {
   }
   main {
-    padding: ${spaces.xxxl}px ;
-      padding-top: ${spaces.xxxl}px ;
-      padding-bottom: 0 ;
+    padding: ${spaces.xxxl}px ${spaces.xxxl}px 0 ${spaces.xxxl}px;
+    ${breakpoint.monitor} {
+      padding: ${spaces.xxxxxl}px ${spaces.xxxl}px 0 ${spaces.xxxxxl}px;
+    }
+    ${breakpoint.smallNotebook} {
+      padding: ${spaces.xxxl}px ${spaces.xl}px 0 ${spaces.xl}px;
+    }
+    ${breakpoint.tabletPortrait} {
+      padding: ${spaces.xxl}px ${spaces.l}px 0 ${spaces.l}px;
+    }
+    ${breakpoint.phone} {
+      padding: ${spaces.xxl}px ${spaces.m}px 0 ${spaces.m}px;
+    }
   }
   * {
     margin: 0;

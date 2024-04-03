@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { spaces } from "../../helpers/spaces";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { colors } from "../../helpers/consts";
+import { breakpoint, colors } from "../../helpers/consts";
 
 export const StyledProductCard = styled(Link)`
   all: unset;
@@ -14,6 +14,9 @@ export const StyledProductCard = styled(Link)`
   border-radius: ${({ theme }) => theme.bRad};
   &.inactive {
     opacity: 0.5;
+  }
+  ${breakpoint.phone} {
+    aspect-ratio: 4/5;
   }
 `;
 

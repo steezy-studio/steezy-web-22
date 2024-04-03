@@ -8,5 +8,5 @@ export const StyledClientQuote = styled.div`
 `;
 
 export const QuoteClient = styled.div`
-  overflow: hidden;
+  overflow-y: hidden;
 `;

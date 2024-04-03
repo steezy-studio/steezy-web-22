@@ -21,7 +21,7 @@ const Dialog = ({ content, trigger, ...rest }: DialogProps) => {
         <Overlay />
         <Content>
           <Close>
-            <img src={"icons/close.svg"} />
+            <img src={"icons/close.svg"} alt={"close"} />
           </Close>
           {content}
         </Content>

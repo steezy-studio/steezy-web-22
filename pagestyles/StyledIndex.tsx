@@ -30,10 +30,10 @@ export const IndexGrid = styled.div``;
 
 export const LandingPageHeroLogotype = styled.img`
   height: 40px;
-  ${breakpoint.smallNotebook} {
-    height: 40px;
+  ${breakpoint.tabletLandscape} {
+    height: 35px;
   }
-  ${breakpoint.phone} {
+  ${breakpoint.tabletPortrait} {
     height: 30px;
   }
   ${breakpoint.miniPhone} {
@@ -47,6 +47,11 @@ export const HeroFooter = styled.div`
   align-items: center;
   column-gap: ${spaces.xl}px;
   margin-top: ${spaces.l}px;
+  ${breakpoint.tabletPortrait} {
+    flex-direction: column;
+    align-items: start;
+    row-gap: ${spaces.l}px;
+  }
 `;
 
 export const IndexQuote = styled.div`
@@ -59,24 +64,43 @@ export const IndexQuoteClient = styled.div`
 `;
 
 export const IndexQuotesSlider = styled(motion.section)`
-  max-width: 1200px;
+  max-width: 1500px;
   margin: ${spaces.xxxxl}px 0;
+  ${breakpoint.tabletPortrait} {
+    margin: ${spaces.xxl}px 0;
+  }
 `;
 
 export const FeaturedGrid = styled.div`
   display: grid;
   row-gap: ${spaces.l}px;
+  ${breakpoint.tabletPortrait} {
+    row-gap: ${spaces.m}px;
+  }
 `;
 
 export const IndexApparel = styled.section`
   margin-top: ${spaces.xxxxl}px;
+  ${breakpoint.tabletLandscape} {
+    margin-top: ${spaces.xxl}px;
+  }
 `;
 
 export const IndexApparelGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  column-gap: ${spaces.s}px;
+  gap: ${spaces.s}px;
   margin-top: ${spaces.l}px;
+  ${breakpoint.tabletPortrait} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  ${breakpoint.phone} {
+    grid-template-columns: repeat(1, 1fr);
+    gap: ${spaces.xs}px;
+    > :nth-child(4) {
+      display: none;
+    }
+  }
 `;
 
 export const IndexServices = styled.section`

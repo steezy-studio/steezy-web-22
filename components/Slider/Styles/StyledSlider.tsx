@@ -15,7 +15,7 @@ export const Slide = styled.div`
   z-index: 1;
 `;
 
-export const _Slider = styled(motion.div)`
+export const Slides = styled(motion.div)`
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: max-content;

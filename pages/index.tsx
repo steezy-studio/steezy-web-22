@@ -93,9 +93,9 @@ const Index = ({ projects, areas, latestProjects, products }: indexProps) => {
           <AutoSlider
             interval={5000}
             list={[
-              `„I appreciate the creative approach, multi-dimensional overlap and fast & transparent communication with steezy.studio“`,
-              `„I appreciate the creative approach, multi-dimensional overlap and fast & transparent communication with steezy.studio“`,
-              `„I appreciate the creative approach, multi-dimensional overlap and fast & transparent communication with steezy.studio“`,
+              `„I appreciate the creative approach, multi\u2011dimensional overlap and fast & transparent communication with steezy.studio“`,
+              `„I appreciate the creative approach, multi\u2011dimensional overlap and fast & transparent communication with steezy.studio“`,
+              `„I appreciate the creative approach, multi\u2011dimensional overlap and fast & transparent communication with steezy.studio“`,
             ].map((text, j, a) => {
               return (
                 <ClientQuote

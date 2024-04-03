@@ -36,6 +36,7 @@ import {
   ValuesList,
   ValuesSection,
 } from "../pagestyles/StyledStudio";
+import { device } from "../helpers/consts";
 
 interface StudioProps {
   areas: Areas;
@@ -78,7 +79,13 @@ const Studio = ({ areas }: StudioProps) => {
         </RevealAnimation>
 
         <OurStudio>
-          <Slider>
+          <Slider
+            config={{
+              [device.monitor]: { step: 2 },
+              [device.phone]: { step: 1 },
+              [device.largeNotebook]: { step: 2 },
+            }}
+          >
             {studioStrings.slider.map((img, i) => (
               <OurStudioSliderImg
                 key={i}

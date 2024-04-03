@@ -12,13 +12,19 @@ export const Large = styled.h1`
   font-weight: 400;
   color: ${colors.black};
   max-width: 900px;
+  &.wide {
+    max-width: unset;
+  }
+  &.tac {
+    text-align: center;
+  }
   &.underline {
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
   }
   &.smaller {
-    font-size: 40px;
+    font-size: 50px;
   }
   &.big {
     font-size: 100px;
@@ -28,12 +34,24 @@ export const Large = styled.h1`
   }
   ${breakpoint.tabletLandscape} {
     font-size: 50px;
+    &.big {
+      font-size: 70px;
+    }
   }
   ${breakpoint.tabletPortrait} {
     font-size: 50px;
+    &.big {
+      font-size: 70px;
+    }
   }
   ${breakpoint.phone} {
     font-size: 40px;
+    &.big {
+      font-size: 40px;
+    }
+    &.smaller {
+      font-size: 40px;
+    }
   }
   ${StyledContact} & {
     line-height: 1.2em;

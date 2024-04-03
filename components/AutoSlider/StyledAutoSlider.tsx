@@ -4,7 +4,7 @@ import { colors } from "../../helpers/consts";
 import { spaces } from "../../helpers/spaces";
 
 export const StyledAutoSlider = styled.div`
-  overflow: hidden;
+  overflow-y: hidden;
   display: grid;
   row-gap: ${spaces.xl}px;
 `;

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { spaces } from "../../helpers/spaces";
+import { breakpoint } from "../../helpers/consts";
 
 export const StyledProjectsGrid = styled.div``;
 
@@ -18,5 +19,12 @@ export const GridRow = styled.div`
   grid-template-columns: ${3.16}fr ${1}fr;
   &:nth-child(2n) {
     grid-template-columns: ${1}fr ${3.16}fr;
+  }
+  ${breakpoint.tabletPortrait} {
+    grid-template-columns: unset;
+    row-gap: ${spaces.xs}px;
+    &:nth-child(2n) {
+      grid-template-columns: unset;
+    }
   }
 `;

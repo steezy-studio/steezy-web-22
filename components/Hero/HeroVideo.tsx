@@ -38,7 +38,7 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
         onOpenChange={onOpenChange}
         content={
           <Showreel>
-            <Vimeo autoplay video={"663954804"} responsive />
+            <Vimeo autoplay video={"927412733"} responsive />
           </Showreel>
         }
         trigger={
@@ -47,7 +47,7 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
             onMouseLeave={() => setCursorType("normal")}
           >
             <PlayButton>
-              <Large className='underline big white'>play video</Large>
+              <Large className='underline big white tac wide'>play video</Large>
             </PlayButton>
             <Loop
               whileHover={{ scale: 1.15 }}

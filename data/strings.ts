@@ -108,11 +108,6 @@ export default {
         width: 391,
         height: 481,
       },
-      {
-        src: "studio_G12.jpg",
-        width: 607,
-        height: 481,
-      },
     ],
     brands: {
       header: "designing for",

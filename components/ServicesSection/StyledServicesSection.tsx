@@ -7,13 +7,26 @@ export const StyledServicesSection = styled.div`
   grid-template-columns: 350px 1fr;
   align-items: start;
   max-width: 1600px;
+  ${breakpoint.smallNotebook} {
+    grid-template-columns: 250px 1fr;
+  }
+  ${breakpoint.tabletPortrait} {
+    grid-template-columns: unset;
+    row-gap: ${spaces.xl}px;
+  }
 `;
 
 export const ServicesList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-row-gap: ${spaces.xxxl}px;
-  grid-column-gap: ${spaces.xxxxl}px;
+  row-gap: ${spaces.xxxl}px;
+  column-gap: ${spaces.xxxxl}px;
+  ${breakpoint.smallNotebook} {
+    gap: ${spaces.xl}px;
+  }
+  ${breakpoint.tabletPortrait} {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 export const SubServicesList = styled.div`
