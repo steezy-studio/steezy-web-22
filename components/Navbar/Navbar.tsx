@@ -83,30 +83,23 @@ const Navbar = ({ areas, header }: NavbarProps) => {
               }}
               variants={linksBlockVariants}
             >
-              <LinksBlock>
-                {/* {areas.map(({ area_name, _slug, is_default }, i) => ( */}
-                <NavLink
-                  delay={navLinksDelay}
-                  active={router.asPath === `/projects/all-projects`}
-                  href={`/projects/all-projects`}
-                  // key={_slug}
-                >
-                  {`Projects`}
-                </NavLink>
-              </LinksBlock>
+              {/* {areas.map(({ area_name, _slug, is_default }, i) => ( */}
+              <NavLink
+                delay={navLinksDelay}
+                active={router.asPath === `/projects/all-projects`}
+                href={`/projects/all-projects`}
+                // key={_slug}
+              >
+                {`Projects`}
+              </NavLink>
               {strings.navData.map(({ link, name }, i) => (
-                <LinksBlock
-                  key={link}
-                  className={router.asPath === link ? "active" : ""}
+                <NavLink
+                  delay={(areas.length - 1 + i) * navLinksDelay}
+                  active={false}
+                  href={link}
                 >
-                  <NavLink
-                    delay={(areas.length - 1 + i) * navLinksDelay}
-                    active={false}
-                    href={link}
-                  >
-                    {name}
-                  </NavLink>
-                </LinksBlock>
+                  {name}
+                </NavLink>
               ))}
               <PhoneDecoration
                 variants={{ open: { opacity: 1 }, close: { opacity: 0 } }}

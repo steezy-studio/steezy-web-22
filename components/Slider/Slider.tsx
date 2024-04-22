@@ -4,6 +4,7 @@ import {
   ReactNode,
   useContext,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -43,7 +44,9 @@ const Slider = ({
   const itemWidth = useRef<number>(null);
   const totalWidth = useRef<number>(null);
   const children = clearEmptyVals(_children);
+  console.log(step, slidesPerView);
 
+  // handle breakpoints
   useEffect(() => {
     setPosition(0);
     controls.start({
@@ -60,34 +63,49 @@ const Slider = ({
     setstep(config[currentDeviceKey].step || 1);
   }, [w]);
 
-  useEffect(() => {
+  // calculate item width and total width
+  useLayoutEffect(() => {
     const columnGap = Number(
       getComputedStyle(sliderRef.current).getPropertyValue("--column-gap")
     );
     const slidesEl = containerRef.current.querySelector(
       "[data-slides]"
     ) as HTMLElement;
-    const slidesChildren = slidesEl.children;
-    itemWidth.current = 0;
-    totalWidth.current = 0;
 
-    for (const slide of slidesChildren) {
-      const slideEl = slide as HTMLElement;
-      if (slidesPerView) {
-        slideEl.style.width = `${
-          containerRef.current.clientWidth / slidesPerView -
-          columnGap -
-          columnGap / children.length
-        }px`;
+    const images = [...imageSlideRef.current.children];
+    const imgPromises = images.map((image) => {
+      return new Promise((resolve) => {
+        if (slidesPerView === 0) {
+          (image as HTMLImageElement).onload = resolve;
+        } else {
+          resolve("");
+        }
+      });
+    });
+
+    Promise.all(imgPromises).then(() => {
+      const slidesChildren = slidesEl.children;
+      itemWidth.current = 0;
+      totalWidth.current = 0;
+
+      for (const slide of slidesChildren) {
+        const slideEl = slide as HTMLElement;
+        if (slidesPerView) {
+          slideEl.style.width = `${
+            containerRef.current.clientWidth / slidesPerView -
+            columnGap -
+            columnGap / children.length
+          }px`;
+        }
+        totalWidth.current += slide.clientWidth + columnGap;
       }
-      totalWidth.current += slide.clientWidth + columnGap;
-    }
-    totalWidth.current -= columnGap;
+      totalWidth.current -= columnGap;
 
-    slidesEl.style.width = `${totalWidth.current}px`;
-    itemWidth.current = slidesPerView
-      ? containerRef.current.clientWidth / slidesPerView
-      : totalWidth.current / children.length;
+      slidesEl.style.width = `${totalWidth.current}px`;
+      itemWidth.current = slidesPerView
+        ? containerRef.current.clientWidth / slidesPerView
+        : totalWidth.current / children.length;
+    });
   }, [slidesPerView]);
 
   const handleIndexChange = (dir) => {

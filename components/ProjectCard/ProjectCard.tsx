@@ -11,6 +11,7 @@ import {
   useIntersectionObserver,
   videoCallback,
 } from "../../hooks/useIntersectionObserver";
+import useIsTouchDevice from "../../hooks/useIsTouchDevice";
 import AreaTag from "../AreaTag/AreaTag";
 import {
   GridItemAreas,
@@ -22,9 +23,6 @@ import {
 } from "../GridItem/Styles/StyledGridItem";
 import { Small } from "../Typo/Small";
 import { StyledProjectCard } from "./StyledProjectCard";
-import { useWindowSize } from "../../hooks/useWindowSize";
-import { device } from "../../helpers/consts";
-import useIsTouchDevice from "../../hooks/useIsTouchDevice";
 
 interface ProjectCardProps {
   areas: Area[];

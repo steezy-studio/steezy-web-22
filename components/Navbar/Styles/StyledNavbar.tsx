@@ -12,8 +12,8 @@ export const StyledNavbar = styled.nav`
   left: ${spaces.xxxl}px;
   height: 60px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  /* justify-content: space-between; */
+  /* align-items: center; */
   ${breakpoint.monitor} {
     right: ${spaces.xxxxxl}px;
     left: ${spaces.xxxxxl}px;
@@ -35,11 +35,22 @@ export const StyledNavbar = styled.nav`
 `;
 
 export const NavLinks = styled(motion.div)`
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
+  width: fit-content;
+  padding: 0 ${spaces.xl}px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  column-gap: ${spaces.l}px;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
   align-items: center;
+  /* border: 1px solid ${colors.black}; */
+  border-radius: 999px;
+  margin: 0 auto;
+  &:hover {
+    background-color: ${colors.white};
+  }
   ${breakpoint.tabletLandscape} {
     position: fixed;
     inset: 0;
