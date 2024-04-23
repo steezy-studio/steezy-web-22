@@ -115,9 +115,6 @@ export const OurStudioSliderImg = styled(Image)`
   width: 100%;
   height: 100%;
   border-radius: ${({ theme }) => theme.bRad};
-  ${breakpoint.monitor} {
-    min-height: 600px;
-  }
 `;
 
 export const ValuesList = styled.div`

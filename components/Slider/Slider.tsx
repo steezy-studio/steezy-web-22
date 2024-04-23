@@ -1,15 +1,6 @@
 import { useAnimationControls } from "framer-motion";
-import {
-  MouseEventHandler,
-  ReactNode,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { transition } from "../../helpers/consts";
-import { useWindowSize } from "../../hooks/useWindowSize";
 import { HoverProvider } from "../../pages/_app";
 import {
   Slide,
@@ -17,213 +8,126 @@ import {
   Slides,
   StyledSlider,
 } from "./Styles/StyledSlider";
-import { clearEmptyVals } from "./clearEmptyVals";
-import { isCursorWithinBounds } from "./isCursorWithinBounds";
 
 interface SliderProps {
   children: ReactNode[];
-  config?: { [key: number]: { slidesCount?: number; step: number } };
-  offsetNav?: number;
+  config?: { [key: number]: { step: number } };
+  navigationWidth?: number;
 }
 
-const Slider = ({
-  children: _children,
-  config,
-  offsetNav = 1,
-}: SliderProps) => {
+const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
   const [position, setPosition] = useState(0);
-  const [slidesPerView, setSlidesPerView] = useState(0);
-  const [step, setstep] = useState(1);
-  const { cursorType, setCursorType, cursorRef } = useContext(HoverProvider);
+  const [step, setstep] = useState(2);
+  const { setCursorType } = useContext(HoverProvider);
   const controls = useAnimationControls();
-  const { w } = useWindowSize();
 
   const imageSlideRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
-  const itemWidth = useRef<number>(null);
-  const totalWidth = useRef<number>(null);
-  const children = clearEmptyVals(_children);
-  console.log(step, slidesPerView);
+  const offset = useRef<number>(0);
+  const maxOffset = useRef<number>(0);
 
-  // handle breakpoints
+  function getBound(side: "left" | "right") {
+    return containerRef.current.querySelector(`.${side}`) as HTMLDivElement;
+  }
+
   useEffect(() => {
-    setPosition(0);
-    controls.start({
-      x: `${0}px`,
-    });
+    const handleResize = () => {
+      maxOffset.current =
+        sliderRef.current.clientWidth - containerRef.current.clientWidth;
+      offset.current = 0;
+      setPosition(0);
+      controls.start({ x: "0px" });
 
-    const sortedDevices = Object.keys(config).sort(
-      (a, b) => Number(a) - Number(b)
-    );
-    const currentDeviceKey =
-      sortedDevices.find((key) => w < Number(key) || w === Number(key)) ||
-      sortedDevices[sortedDevices.length - 1];
-    setSlidesPerView(config[currentDeviceKey].slidesCount || 0);
-    setstep(config[currentDeviceKey].step || 1);
-  }, [w]);
+      const sortedDevices = Object.keys(config).sort();
+      const currentDeviceKey =
+        sortedDevices.find(
+          (key) => innerWidth < Number(key) || innerWidth === Number(key)
+        ) || sortedDevices[sortedDevices.length - 1];
+      setstep(config[currentDeviceKey].step);
+    };
 
-  // calculate item width and total width
-  useLayoutEffect(() => {
-    const columnGap = Number(
-      getComputedStyle(sliderRef.current).getPropertyValue("--column-gap")
-    );
-    const slidesEl = containerRef.current.querySelector(
-      "[data-slides]"
-    ) as HTMLElement;
+    handleResize();
+    addEventListener("resize", handleResize);
+    return () => {
+      removeEventListener("resize", handleResize);
+    };
+  }, []);
 
-    const images = [...imageSlideRef.current.children];
-    const imgPromises = images.map((image) => {
-      return new Promise((resolve) => {
-        if (slidesPerView === 0) {
-          (image as HTMLImageElement).onload = resolve;
-        } else {
-          resolve("");
-        }
-      });
-    });
+  useEffect(() => {
+    const rightBound = getBound("right");
+    const leftBound = getBound("left");
+    rightBound.style.display = "block";
+    leftBound.style.display = "block";
 
-    Promise.all(imgPromises).then(() => {
-      const slidesChildren = slidesEl.children;
-      itemWidth.current = 0;
-      totalWidth.current = 0;
+    if (offset.current <= 0) {
+      leftBound.style.display = "none";
+    }
 
-      for (const slide of slidesChildren) {
-        const slideEl = slide as HTMLElement;
-        if (slidesPerView) {
-          slideEl.style.width = `${
-            containerRef.current.clientWidth / slidesPerView -
-            columnGap -
-            columnGap / children.length
-          }px`;
-        }
-        totalWidth.current += slide.clientWidth + columnGap;
-      }
-      totalWidth.current -= columnGap;
-
-      slidesEl.style.width = `${totalWidth.current}px`;
-      itemWidth.current = slidesPerView
-        ? containerRef.current.clientWidth / slidesPerView
-        : totalWidth.current / children.length;
-    });
-  }, [slidesPerView]);
+    if (offset.current >= maxOffset.current) {
+      rightBound.style.display = "none";
+    }
+  }, [position]);
 
   const handleIndexChange = (dir) => {
-    const nextPosition = position + dir * step;
-    const columnGap = Number(
-      getComputedStyle(sliderRef.current).getPropertyValue("--column-gap")
+    const maxPosition = Math.ceil(children.length / step);
+    const slides = sliderRef.current.children;
+    const nextPosition = Math.min(
+      Math.max(position + step * dir, 0),
+      maxPosition
+    );
+    setPosition(nextPosition);
+
+    let distance = 0;
+    const columnGap = parseInt(
+      window
+        .getComputedStyle(sliderRef.current)
+        .getPropertyValue("--column-gap")
     );
 
-    if (
-      nextPosition < 0 ||
-      nextPosition > children.length - Math.trunc(slidesPerView)
-    ) {
-      return;
+    for (let i = 0; i < step; i++) {
+      distance += slides?.item(i + position)?.clientWidth || 0;
+      distance += columnGap;
     }
-    setPosition(nextPosition);
-    const maxSteps = children.length - Math.trunc(slidesPerView);
+    offset.current += distance * dir;
+    if (offset.current < 0) {
+      offset.current = 0;
+    }
 
-    const compensateOffset =
-      (containerRef.current.clientWidth -
-        itemWidth.current * Math.floor(slidesPerView) +
-        2 * columnGap) *
-      (nextPosition / maxSteps);
-
-    const x = itemWidth.current * nextPosition - compensateOffset;
-    if (!slidesPerView && x > totalWidth.current) {
-      return;
+    if (offset.current > maxOffset.current) {
+      offset.current = maxOffset.current;
     }
 
     controls.start({
-      x: `${-x}px`,
+      x: `${-offset.current}px`,
     });
-  };
-
-  const handleSliderMouseEnter: MouseEventHandler<HTMLDivElement> = (e) => {
-    setCursorType("hover");
-  };
-
-  const handleSliderMouseLeave: MouseEventHandler<HTMLDivElement> = (e) => {
-    setCursorType("normal");
-  };
-
-  const handleNextPossibleIndex = () => {
-    const containerBB = containerRef.current.getBoundingClientRect();
-    const cursorX = Number(cursorRef.current.dataset.x);
-    const nextPossibleIndex =
-      cursorX <= containerBB.width / 2 ? position - 1 : position + 1;
-    const cursorInBounds = isCursorWithinBounds(
-      containerRef.current,
-      cursorX,
-      offsetNav
-    );
-    const leftBound = containerRef.current.querySelector(
-      ".left"
-    ) as HTMLDivElement;
-    const rightBound = containerRef.current.querySelector(
-      ".right"
-    ) as HTMLDivElement;
-
-    if (cursorInBounds && nextPossibleIndex < 0) {
-      leftBound.style.pointerEvents = "none";
-    } else {
-      leftBound.style.pointerEvents = "all";
-    }
-
-    if (
-      cursorInBounds &&
-      nextPossibleIndex > children.length - Math.floor(slidesPerView)
-    ) {
-      rightBound.style.pointerEvents = "none";
-    } else {
-      rightBound.style.pointerEvents = "all";
-    }
-  };
-
-  const handleClick = (e) => {
-    if (
-      !isCursorWithinBounds(
-        containerRef.current,
-        Number(cursorRef.current.dataset.x),
-        offsetNav
-      )
-    ) {
-      return;
-    }
-    e.preventDefault();
-    const dir = cursorType === "left" ? -1 : 1;
-    handleIndexChange(dir);
   };
 
   return (
     <StyledSlider
       ref={containerRef}
-      onMouseEnter={handleSliderMouseEnter}
-      onMouseMove={handleNextPossibleIndex}
-      onMouseLeave={handleSliderMouseLeave}
+      onMouseEnter={() => setCursorType("hover")}
+      onMouseLeave={() => setCursorType("normal")}
     >
       <SliderBound
         className='left'
-        onClick={handleClick}
+        onClick={() => handleIndexChange(-1)}
         onMouseEnter={() => setCursorType("left")}
         onMouseLeave={() => setCursorType("hover")}
-        style={{ width: `${(100 * offsetNav) / 2}%` }}
+        style={{ width: `${(100 * navigationWidth) / 2}%` }}
       />
       <SliderBound
         className='right'
         onMouseEnter={() => setCursorType("right")}
         onMouseLeave={() => setCursorType("hover")}
-        onClick={handleClick}
-        style={{ width: `${(100 * offsetNav) / 2}%` }}
+        onClick={() => handleIndexChange(1)}
+        style={{ width: `${(100 * navigationWidth) / 2}%` }}
       />
       <Slides
         data-slides
         ref={sliderRef}
         animate={controls}
         transition={transition}
-        onAnimationComplete={() => {
-          handleNextPossibleIndex();
-        }}
       >
         {children.map((batch, i) => {
           return (

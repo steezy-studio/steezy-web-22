@@ -21,8 +21,8 @@ export const Slides = styled(motion.div)`
   grid-auto-columns: max-content;
   column-gap: ${spaces.xs}px;
   --column-gap: ${spaces.xs};
+  width: fit-content;
   height: 100%;
-  z-index: 3;
 `;
 
 export const SliderBound = styled.div`

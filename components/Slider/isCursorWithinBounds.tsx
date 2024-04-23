@@ -5,9 +5,10 @@ export const isCursorWithinBounds = (
 ) => {
   const containerBB = container.getBoundingClientRect();
   const offsetNavAmount = (offsetX * containerBB.width) / 2;
-  const leftBound = [containerBB.x, containerBB.x + offsetNavAmount];
+  const safeZone = 0.2 * containerBB.width;
+  const leftBound = [containerBB.x, containerBB.x + offsetNavAmount + safeZone];
   const rightBound = [
-    containerBB.x + containerBB.width - offsetNavAmount,
+    containerBB.x + containerBB.width - offsetNavAmount + safeZone,
     containerBB.x + containerBB.width,
   ];
 
