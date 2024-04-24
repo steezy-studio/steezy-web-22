@@ -4,16 +4,16 @@ import {
   CartLineQuantity,
   CartLineQuantityAdjustButton,
 } from "@shopify/hydrogen-react";
+import { useContext } from "react";
+import { HoverProvider } from "../../pages/_app";
+import Minus from "../Icons/Minus";
+import Plus from "../Icons/Plus";
+import { Small } from "../Typo/Small";
 import {
   AdjustButtonWrapper,
-  AdjustButtons,
   QuantityField,
   StyledCartQuantityInput,
 } from "./Styles/StyledCartQuantityInput";
-import Plus from "../Icons/Plus";
-import Minus from "../Icons/Minus";
-import { useContext } from "react";
-import { HoverProvider } from "../../pages/_app";
 
 interface CartQuantityInputProps {}
 
@@ -21,39 +21,40 @@ const CartQuantityInput = ({}: CartQuantityInputProps) => {
   const { setCursorType } = useContext(HoverProvider);
   return (
     <StyledCartQuantityInput>
+      <CartLineQuantityAdjustButton
+        adjust='decrease'
+        as='span'
+        onMouseEnter={() => {
+          setCursorType("hover");
+        }}
+        onMouseLeave={() => {
+          setCursorType("normal");
+        }}
+      >
+        <AdjustButtonWrapper>
+          <Minus />
+        </AdjustButtonWrapper>
+      </CartLineQuantityAdjustButton>
       <QuantityField>
-        <CartLineQuantity />
+        <Small className='medium'>
+          <CartLineQuantity />
+        </Small>
       </QuantityField>
-      <AdjustButtons>
-        <CartLineQuantityAdjustButton
-          adjust='increase'
-          as='span'
-          onMouseEnter={() => {
-            setCursorType("hover");
-          }}
-          onMouseLeave={() => {
-            setCursorType("normal");
-          }}
-        >
-          <AdjustButtonWrapper>
-            <Plus />
-          </AdjustButtonWrapper>
-        </CartLineQuantityAdjustButton>
-        <CartLineQuantityAdjustButton
-          adjust='decrease'
-          as={"span"}
-          onMouseEnter={() => {
-            setCursorType("hover");
-          }}
-          onMouseLeave={() => {
-            setCursorType("normal");
-          }}
-        >
-          <AdjustButtonWrapper className='minus'>
-            <Minus />
-          </AdjustButtonWrapper>
-        </CartLineQuantityAdjustButton>
-      </AdjustButtons>
+
+      <CartLineQuantityAdjustButton
+        adjust='increase'
+        as={"span"}
+        onMouseEnter={() => {
+          setCursorType("hover");
+        }}
+        onMouseLeave={() => {
+          setCursorType("normal");
+        }}
+      >
+        <AdjustButtonWrapper className='minus'>
+          <Plus />
+        </AdjustButtonWrapper>
+      </CartLineQuantityAdjustButton>
     </StyledCartQuantityInput>
   );
 };

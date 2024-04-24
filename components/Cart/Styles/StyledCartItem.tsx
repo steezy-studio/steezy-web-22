@@ -6,7 +6,8 @@ export const StyledCartItem = styled.div`
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-areas: "title title" "quantity price";
-  row-gap: ${spaces.l}px;
+  row-gap: ${spaces.m}px;
+  align-items: center;
   ${breakpoint.phone} {
     align-items: end;
   }

@@ -5,7 +5,6 @@ import {
   CartLineProvider,
   useCart,
 } from "@shopify/hydrogen-react";
-import { AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import {
   Dispatch,
@@ -18,7 +17,9 @@ import {
 import { easing } from "../../helpers/animationConfig";
 import { colors } from "../../helpers/consts";
 import { formatPrice } from "../../helpers/formatPrice";
+import { HoverProvider } from "../../pages/_app";
 import { DisableScroll } from "../../pagestyles/DisableScroll";
+import BlurOverlay from "../BlurOverlay/BlurOverlay";
 import Link from "../Link/Link";
 import Burger from "../Navbar/Burger";
 import Scrollbar from "../Scrollbar/Scrollbar";
@@ -38,8 +39,6 @@ import {
   StyledCart,
   TotalPrice,
 } from "./Styles/StyledCart";
-import { HoverProvider } from "../../pages/_app";
-import BlurOverlay from "../BlurOverlay/BlurOverlay";
 
 interface CartProps {}
 
@@ -95,7 +94,7 @@ const Cart = ({}: CartProps) => {
                   Your cart is empty, like our souls
                 </Large>
                 <Link href={"/products"} onClick={() => setShowCart(false)}>
-                  Fill it up
+                  Go fill it up
                 </Link>
               </EmptyCart>
             ) : (
