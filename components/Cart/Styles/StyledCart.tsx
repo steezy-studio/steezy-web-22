@@ -71,7 +71,10 @@ export const CartContent = styled.div`
   flex-grow: 1;
 `;
 
-export const EmptyCart = styled.div``;
+export const EmptyCart = styled.div`
+  display: grid;
+  row-gap: ${spaces.m}px;
+`;
 
 export const CartFooter = styled.div``;
 
