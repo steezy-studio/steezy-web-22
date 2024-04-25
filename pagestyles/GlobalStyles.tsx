@@ -11,8 +11,6 @@ export const GlobalStyle = createGlobalStyle`
     background-color:${colors.white};
     font-family: "agrandir", Arial, Helvetica, sans-serif;
   }
-  body {
-  }
   main {
     padding: ${spaces.xxxl}px ${spaces.xxxl}px 0 ${spaces.xxxl}px;
     ${breakpoint.monitor} {

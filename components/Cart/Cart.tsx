@@ -69,7 +69,6 @@ const Cart = ({}: CartProps) => {
 
   return (
     <>
-      {showCart && <DisableScroll />}
       <StyledCart>
         <Drawer
           initial={false}

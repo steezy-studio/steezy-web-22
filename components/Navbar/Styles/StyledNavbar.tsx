@@ -1,7 +1,8 @@
-import { motion } from "framer-motion";
+import { Variants, animate, motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint, colors } from "../../../helpers/consts";
 import { spaces } from "../../../helpers/spaces";
+import Image from "next/image";
 
 export const StyledNavbar = styled.nav`
   position: fixed;
@@ -35,38 +36,14 @@ export const StyledNavbar = styled.nav`
 `;
 
 export const NavLinks = styled(motion.div)`
-  /* width: 100%; */
-  height: 100%;
-  width: fit-content;
-  padding: 0 ${spaces.xl}px;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
   display: flex;
-  justify-content: center;
-  column-gap: ${spaces.l}px;
-  background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(5px);
-  align-items: center;
-  /* border: 1px solid ${colors.black}; */
-  border-radius: 999px;
-  margin: 0 auto;
-  &:hover {
-    background-color: ${colors.white};
-  }
-  ${breakpoint.tabletLandscape} {
-    position: fixed;
-    inset: 0;
-    display: grid;
-    justify-items: end;
-    align-content: center;
-    row-gap: ${spaces.xs}px;
-    background-color: ${colors.white};
-    padding: 0 ${spaces.xl}px;
-  }
-  ${breakpoint.tabletPortrait} {
-    padding: 0 ${spaces.l}px;
-  }
-  ${breakpoint.phone} {
-    padding: 0 ${spaces.l}px;
-  }
+  flex-direction: column;
+  justify-content: flex-end;
+  row-gap: ${spaces.xs}px;
+  padding: ${spaces.m}px ${spaces.xxxl}px ${spaces.xxxl}px;
 `;
 
 export const LinksBlock = styled(motion.div)`
@@ -140,7 +117,7 @@ export const NavbarCart = styled.div`
   &:hover {
     background-color: ${colors.white};
     > * {
-      color: ${colors.black};
+      color: ${colors.black} !important;
     }
   }
 `;
@@ -167,23 +144,23 @@ export const NavHeader = styled(motion.div)`
 
 export const linksBlockVariants = {
   initial: {
-    y: "-100%",
+    backdropFilter: "blur(0px)",
     transition: {
-      duration: 0.3,
+      duration: 1,
       when: "afterChildren",
     },
   },
   animate: {
-    y: "0%",
+    backdropFilter: "blur(250px)",
     transition: {
-      duration: 0.3,
+      duration: 1,
       when: "beforeChildren",
     },
   },
   exit: {
-    y: "-100%",
+    backdropFilter: "blur(0px)",
     transition: {
-      duration: 0.3,
+      duration: 1,
       when: "afterChildren",
     },
   },
@@ -193,4 +170,31 @@ export const NavlinksMask = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
+`;
+
+export const dividerAnimation = {
+  variants: {
+    initial: {
+      scaleX: 0,
+    },
+    animate: {
+      scaleX: 1,
+    },
+    exit: {
+      scaleX: 0,
+    },
+  } as Variants,
+  animate: null,
+  duration: 0.7,
+};
+
+export const VegaW = styled(motion.div)`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 99;
+`;
+
+export const Vega = styled(Image)`
+  display: block;
 `;

@@ -15,11 +15,6 @@
 }
 @font-face {
   font-family: "agrandir";
-  src: url("/fonts/PPAgrandir-Medium.woff");
-  font-weight: 500;
-}
-@font-face {
-  font-family: "agrandir";
-  src: url("/fonts/PPAgrandir-Light.woff");
-  font-weight: 300;
+  src: url("/fonts/Agrandir.ttf");
+  font-feature-settings: "ss07";
 }

@@ -1,42 +1,38 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { useContext } from "react";
-import styled from "styled-components";
 import { HoverProvider } from "../../pages/_app";
+import { DisableScroll } from "../../pagestyles/DisableScroll";
+import { StyledBlurOverlay } from "./StyledBlurOverlay";
 
 interface BlurOverlayProps {
   onClick?: () => void;
   visible: boolean;
+  amount?: number;
 }
 
-const StyledBlurOverlay = styled(motion.div)`
-  pointer-events: all;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  inset: 0;
-  z-index: 1;
-`;
-
-const BlurOverlay = ({ onClick, visible }: BlurOverlayProps) => {
+const BlurOverlay = ({ onClick, visible, amount = 5 }: BlurOverlayProps) => {
   const { setCursorType } = useContext(HoverProvider);
 
   return (
     <AnimatePresence>
       {visible && (
-        <StyledBlurOverlay
-          key={"overlay"}
-          onClick={onClick}
-          onMouseEnter={() => {
-            setCursorType("hover");
-          }}
-          onMouseLeave={() => {
-            setCursorType("normal");
-          }}
-          initial={{ backdropFilter: "blur(0px)" }}
-          animate={{ backdropFilter: "blur( 5px )" }}
-          exit={{ backdropFilter: "blur(0px)" }}
-          transition={{ duration: 0.5 }}
-        />
+        <>
+          <DisableScroll />
+          <StyledBlurOverlay
+            key={"overlay"}
+            onClick={onClick}
+            onMouseEnter={() => {
+              setCursorType("hover");
+            }}
+            onMouseLeave={() => {
+              setCursorType("normal");
+            }}
+            initial={{ backdropFilter: "blur(0px)" }}
+            animate={{ backdropFilter: `blur(${amount}px)` }}
+            exit={{ backdropFilter: "blur(0px)" }}
+            transition={{ duration: 0.5 }}
+          />
+        </>
       )}
     </AnimatePresence>
   );
