@@ -2,23 +2,31 @@ import { GetStaticProps } from "next";
 import getClient from "../apollo/client";
 import AutoSlider from "../components/AutoSlider/AutoSlider";
 import ClientQuote from "../components/ClientQuote/ClientQuote";
+import FeaturedProducts from "../components/FeaturedProducts/FeaturedProducts";
 import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
 import Navbar from "../components/Navbar/Navbar";
 import ProjectsGrid from "../components/ProjectsGrid/ProjectsGrid";
 import ProjectsSlider from "../components/ProjectsSlider/ProjectsSlider";
+import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 import SectionHeader from "../components/SectionHeader/SectionHeader";
 import ServicesSection from "../components/ServicesSection/ServicesSection";
 import { Micro } from "../components/Typo/Micro";
 import strings from "../data/strings";
 import { Areas, Query } from "../generated/preprTypes";
+import {
+  ProductConnection,
+  QueryRoot,
+  QueryRootProductsArgs,
+} from "../generated/shopifyTypes";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
+import { GET_PRODUCTS } from "../graphql/GetProducts";
+import { indetifiers } from "../helpers/consts";
 import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
 import {
   FeaturedGrid,
   HeroFooter,
   IndexApparel,
-  IndexApparelGrid,
   IndexGrid,
   IndexHeroSection,
   IndexLatestProjects,
@@ -28,15 +36,6 @@ import {
   LandingPageHeroLogotype,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
-import {
-  MediaImage,
-  ProductConnection,
-  QueryRoot,
-  QueryRootProductsArgs,
-} from "../generated/shopifyTypes";
-import { GET_PRODUCTS } from "../graphql/GetProducts";
-import { indetifiers } from "../helpers/consts";
-import ProductCard from "../components/ProductCard/ProductCard";
 
 interface indexProps {
   projects: EnhancedProject[];
@@ -90,23 +89,23 @@ const Index = ({ projects, areas, latestProjects, products }: indexProps) => {
         </IndexLatestProjects>
 
         <IndexQuotesSlider>
-          <AutoSlider
-            interval={5000}
-            list={[
-              `„I appreciate the creative approach, multi\u2011dimensional overlap and fast & transparent communication with steezy.studio“`,
-              `„I appreciate the creative approach, multi\u2011dimensional overlap and fast & transparent communication with steezy.studio“`,
-              `„I appreciate the creative approach, multi\u2011dimensional overlap and fast & transparent communication with steezy.studio“`,
-            ].map((text, j, a) => {
-              return (
-                <ClientQuote
-                  key={j}
-                  quote={text}
-                  clientName='John Doe'
-                  clientRole='CEO'
-                />
-              );
-            })}
-          />
+          <RevealAnimation>
+            <AutoSlider
+              interval={5000}
+              list={landingpageStrings.quotes.map(
+                ({ name, position, quote }, j, a) => {
+                  return (
+                    <ClientQuote
+                      key={j}
+                      quote={quote}
+                      clientName={name}
+                      clientRole={position}
+                    />
+                  );
+                }
+              )}
+            />
+          </RevealAnimation>
         </IndexQuotesSlider>
         <FeaturedGrid>
           <SectionHeader
@@ -119,55 +118,12 @@ const Index = ({ projects, areas, latestProjects, products }: indexProps) => {
           </IndexGrid>
         </FeaturedGrid>
         <IndexApparel>
-          <SectionHeader
+          <FeaturedProducts
+            products={products}
             header='Steezy apparel'
             url='/apparel'
             linkText='Whole collection'
           />
-          <IndexApparelGrid>
-            {products.nodes.map(
-              (
-                { title, metafields, priceRange, availableForSale, handle },
-                i
-              ) => {
-                const _metafields = metafields || [];
-                const gridImageRef = _metafields.find(
-                  (metafield) => metafield?.key === "grid_image"
-                );
-                const gridImageHoverRef = _metafields.find(
-                  (metafield) => metafield?.key === "grid_image_hover"
-                );
-                const gridImage = (gridImageRef?.reference as MediaImage).image;
-                const gridImageHover =
-                  (gridImageHoverRef?.reference as MediaImage)?.image || null;
-                return (
-                  <ProductCard
-                    key={handle}
-                    title={title}
-                    slug={handle}
-                    availableForSale={availableForSale}
-                    price={priceRange.minVariantPrice}
-                    hoverCover={
-                      gridImageHover
-                        ? {
-                            src: gridImageHover.url,
-                            alt: title,
-                            width: gridImageHover.width,
-                            height: gridImageHover.height,
-                          }
-                        : null
-                    }
-                    cover={{
-                      src: gridImage?.url || "",
-                      alt: title,
-                      width: gridImage?.width,
-                      height: gridImage?.height,
-                    }}
-                  />
-                );
-              }
-            )}
-          </IndexApparelGrid>
         </IndexApparel>
         <IndexServices>
           <ServicesSection areas={areas} />

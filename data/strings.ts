@@ -126,7 +126,6 @@ export default {
         "skoda.svg",
         "mcdonalds.svg",
         "nike.svg",
-        "eggo.svg",
         "adidas.svg",
         "footshop.svg",
         "infinit.svg",
@@ -134,11 +133,9 @@ export default {
         "tullamore-dew.svg",
         "kfc.svg",
         "garret.svg",
-        "adastra.svg",
         "unicredit-bank.svg",
         "new-era.svg",
         "jic.svg",
-        "manya.svg",
         "sap.svg",
         "siemens.svg",
         "ctp.svg",
@@ -290,18 +287,37 @@ export default {
     },
     quotes: [
       {
-        __typename: "Quote",
-        name: "ADAM KŘENA",
+        quote:
+          "The cooperation with\nSteezy exceeded our\nexpectations in almost all\nrespects. I was looking\nforward to every\nnext meeting.",
+        name: "Roman Svačina",
+        position: "Managing Director at Infinit wellness",
+      },
+      {
+        quote: "Skilled creatives\nwith amazing results!",
+        name: "Adam Křena",
         position: "Head of Atelier @footshop",
-        quote: [
-          {
-            type: "text",
-            body: "I appreciate the creative approach, multi-dimensional overlap, fast and transparent communication in cooperation with ",
-          },
-          { type: "link", body: "steezy.studio", href: "/studio" },
-        ],
+      },
+      {
+        quote:
+          "We have chosen Steezy for their youthful, fresh and original ideas, which they always think through and elaborate in detail.",
+        name: "Daniel Urminský",
+        position: "Country Manager @Isobar",
       },
     ],
+    // quotes: [
+    //   {
+    //     __typename: "Quote",
+    //     name: "ADAM KŘENA",
+    //     position: "Head of Atelier @footshop",
+    //     quote: [
+    //       {
+    //         type: "text",
+    //         body: "I appreciate the creative approach, multi-dimensional overlap, fast and transparent communication in cooperation with ",
+    //       },
+    //       { type: "link", body: "steezy.studio", href: "/studio" },
+    //     ],
+    //   },
+    // ],
   },
 
   globals: {

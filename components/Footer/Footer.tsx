@@ -24,7 +24,12 @@ const Footer = ({}: FooterProps) => {
       <ContactInfo>
         <Large>
           {router.asPath === "/contact" ? (
-            <Link href={`#`}>{strings.footer.ig}</Link>
+            <Link
+              href={`https://www.instagram.com/steezy.studio/`}
+              target='_blank'
+            >
+              {strings.footer.ig}
+            </Link>
           ) : (
             <Link href={`mailto:${strings.globals.email}`}>
               {strings.globals.email}

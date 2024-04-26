@@ -142,11 +142,10 @@ export const BrandsHeader = styled.div`
 
 export const Logotypes = styled.div`
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   column-gap: 30px;
   width: 100%;
   ${breakpoint.tabletPortrait} {
-    grid-template-columns: repeat(6, 1fr);
   }
   ${breakpoint.phone} {
     grid-template-columns: repeat(3, 1fr);

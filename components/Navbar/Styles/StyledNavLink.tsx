@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint, colors } from "../../../helpers/consts";
-import { spaces } from "../../../helpers/spaces";
 
 export const StyledNavLink = styled(motion.a)`
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 7vw;
+  font-size: 12vh;
+  font-weight: 300;
   letter-spacing: -0.01em;
   line-height: 1em;
   margin-top: 0.2em;

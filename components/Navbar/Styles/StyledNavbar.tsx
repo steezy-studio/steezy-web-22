@@ -44,45 +44,7 @@ export const NavLinks = styled(motion.div)`
   justify-content: flex-end;
   row-gap: ${spaces.xs}px;
   padding: ${spaces.m}px ${spaces.xxxl}px ${spaces.xxxl}px;
-`;
-
-export const LinksBlock = styled(motion.div)`
-  border-radius: 999px;
-  height: 100%;
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  border: 1px solid ${colors.black};
-  background-color: ${colors.white};
-  flex-shrink: 0;
-  padding: 0 ${spaces.s}px;
-  &.stretch {
-    flex-shrink: 1;
-    width: 100%;
-  }
-  ${breakpoint.tabletLandscape} {
-    display: grid;
-    height: auto;
-    justify-content: end;
-    justify-items: end;
-    width: 100%;
-    border: unset;
-    background-color: unset;
-    border: 1px solid ${colors.black};
-    width: fit-content;
-    padding: 0 ${spaces.m}px;
-    transform: translateX(${spaces.m}px);
-    &.stretch {
-      border: 0px solid ${colors.black};
-    }
-    &.active {
-      background-color: ${colors.primary400};
-    }
-  }
-  ${breakpoint.phone} {
-    padding: 0 ${spaces.s}px;
-  }
+  background-color: rgba(255, 255, 255, 0.1);
 `;
 
 export const PhoneDecoration = styled(motion.div)`
@@ -142,7 +104,7 @@ export const NavHeader = styled(motion.div)`
   }
 `;
 
-export const linksBlockVariants = {
+export const navLinksVariants = {
   initial: {
     backdropFilter: "blur(0px)",
     transition: {
@@ -189,6 +151,7 @@ export const dividerAnimation = {
 };
 
 export const VegaW = styled(motion.div)`
+  pointer-events: none;
   position: absolute;
   bottom: 0;
   right: 0;

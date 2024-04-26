@@ -2,6 +2,7 @@ import styled, { keyframes } from "styled-components";
 import * as RadixDialog from "@radix-ui/react-dialog";
 import { breakpoint, colors } from "../../../helpers/consts";
 import u from "../../../helpers/unit";
+import { motion } from "framer-motion";
 
 export const StyledDialog = styled(RadixDialog.Root)``;
 
@@ -68,11 +69,15 @@ export const Trigger = styled(RadixDialog.Trigger)`
 `;
 
 export const Overlay = styled(RadixDialog.Overlay)`
-  position: fixed;
+  width: 100%;
+  height: 100%;
   backdrop-filter: blur(5px);
   width: 100vw;
   height: 100vh;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 99999998;
 `;
+
+export const OverlayW = styled(motion.div)``;

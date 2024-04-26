@@ -18,6 +18,7 @@ import {
 } from "../../helpers/enhanceProjects";
 import {
   Filter,
+  FilterW,
   ProjectsHero,
   ProjectsHeroFilters,
   StyledProjects,
@@ -56,8 +57,9 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
             {areas.items.map(({ area_name, _slug, projects }) => {
               const isActive = router.query.area === _slug;
               return (
-                <Medium className='big' key={_slug}>
+                <FilterW>
                   <Link
+                    key={_slug}
                     href={`/projects/${_slug}`}
                     className={`agrandir no-underline ${
                       isActive ? "active" : ""
@@ -70,7 +72,7 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
                       <Nano className='no-underline'>{projects.length}</Nano>
                     </Filter>
                   </Link>
-                </Medium>
+                </FilterW>
               );
             })}
           </ProjectsHeroFilters>

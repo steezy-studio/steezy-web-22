@@ -11,15 +11,16 @@ interface ClientQuoteProps {
   clientRole: string;
 }
 
+const createTransition = (delay) =>
+  ({
+    delay: delay,
+    duration: 1.7,
+    ease: easingInOutCubic,
+  } as Transition);
+
 const ClientQuote = ({ quote, clientName, clientRole }: ClientQuoteProps) => {
   const delay = 0.02;
 
-  const createTransition = (delay) =>
-    ({
-      delay: delay,
-      duration: 1.7,
-      ease: easingInOutCubic,
-    } as Transition);
   return (
     <StyledClientQuote>
       <Large className='smaller'>
@@ -42,9 +43,9 @@ const ClientQuote = ({ quote, clientName, clientRole }: ClientQuoteProps) => {
       </Large>
       <QuoteClient>
         <Micro
-          initial={{ y: `100%`, skewY: "3deg" }}
+          initial={{ y: `110%`, skewY: "3deg" }}
           animate={{ y: `0%`, skewY: "0deg" }}
-          exit={{ y: `-100%`, skewY: "3deg" }}
+          exit={{ y: `-110%`, skewY: "3deg" }}
           transition={createTransition(delay)}
         >
           {clientName}

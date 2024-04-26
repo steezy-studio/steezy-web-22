@@ -26,9 +26,10 @@ export const Loop = styled(motion.video)`
   }
 `;
 
-export const Showreel = styled.div`
+export const Showreel = styled(motion.div)`
   position: relative;
   width: 80vw;
+  aspect-ratio: 16 / 9;
   max-height: 80vh;
   ${breakpoint.phone} {
     width: ${({ theme }) => `calc(100vw - ${theme.pageMargin} * 2)`};

@@ -1,6 +1,5 @@
 import { AnimatePresence } from "framer-motion";
 import { useContext, useState } from "react";
-import { MoneyV2 } from "../../generated/shopifyTypes";
 import { easing } from "../../helpers/animationConfig";
 import { formatPrice } from "../../helpers/formatPrice";
 import { HoverProvider } from "../../pages/_app";
@@ -19,6 +18,7 @@ import {
 } from "./StyledProductCard";
 import RevealAnimation from "../RevealAnimation/RevealAnimation";
 import useIsTouchDevice from "../../hooks/useIsTouchDevice";
+import { MoneyV2 } from "@shopify/hydrogen-react/storefront-api-types";
 
 interface Image {
   src: string;

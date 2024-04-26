@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import {
   AutoSliderItem,
   Indicator,
@@ -13,14 +13,18 @@ interface AutoSliderProps {
   interval?: number;
 }
 
-// TODO solve different heights of the list items
-
 const AutoSlider = ({ list, interval = 3000 }: AutoSliderProps) => {
   const [index, setindex] = useState<number>(0);
   const controls = useAnimationControls();
   const ref = React.useRef<HTMLDivElement>(null);
+  const height = useRef<number>(0);
 
   const changeIndex = (i: number) => {
+    ref.current.style.height = `unset`;
+    ref.current.style.height =
+      Math.max(ref?.current?.clientHeight || 0, height.current) + "px";
+
+    height.current = ref.current.clientHeight;
     setindex(i);
   };
 

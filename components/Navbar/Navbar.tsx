@@ -25,9 +25,10 @@ import {
   Vega,
   VegaW,
   dividerAnimation,
-  linksBlockVariants,
+  navLinksVariants,
 } from "./Styles/StyledNavbar";
 import { DisableScroll } from "../../pagestyles/DisableScroll";
+import RevealAnimation from "../RevealAnimation/RevealAnimation";
 
 interface NavbarProps {
   areas: Area[];
@@ -64,11 +65,11 @@ const Navbar = ({ areas, header }: NavbarProps) => {
                 ease: [0.65, 0.05, 0.36, 1],
                 duration: 0.6,
               }}
-              variants={linksBlockVariants}
+              variants={navLinksVariants}
             >
               <VegaW
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1, transition: { delay: 10 } }}
+                animate={{ opacity: 1, transition: { delay: 5 } }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
               >
@@ -114,7 +115,9 @@ const Navbar = ({ areas, header }: NavbarProps) => {
         <NavlinksMask>
           {header && !isTabletPortrait && (
             <NavHeader>
-              <Nano>{header}</Nano>
+              <RevealAnimation delay={0.5}>
+                <Nano>{header}</Nano>
+              </RevealAnimation>
             </NavHeader>
           )}
         </NavlinksMask>

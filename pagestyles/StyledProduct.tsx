@@ -12,6 +12,14 @@ export const ProductSection = styled.section`
   align-items: start;
 `;
 
+export const ProductGalleryGrid = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: ${spaces.xs}px;
+  column-gap: ${spaces.xs}px;
+  margin-top: ${spaces.xxl}px;
+`;
+
 export const ProductOptions = styled.div`
   display: grid;
   row-gap: ${spaces.l}px;
@@ -40,6 +48,10 @@ export const ProductGalleryImg = styled(Image)`
   border-radius: ${({ theme }) => theme.bRad};
 `;
 
-export const ProductProjects = styled.section`
+export const ProductFeaturedProducts = styled.section`
+  margin-top: ${spaces.xxxxl}px;
+`;
+
+export const ProductFeaturedProjects = styled.section`
   margin-top: ${spaces.xxxxl}px;
 `;

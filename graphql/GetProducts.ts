@@ -8,8 +8,9 @@ export const GET_PRODUCTS = gql`
     $transform: ImageTransformInput
     $imagesFirst2: Int
     $identifiers: [HasMetafieldsIdentifier!]!
+    $query: String
   ) {
-    products(first: $first, after: $after) {
+    products(first: $first, after: $after, query: $query) {
       nodes {
         title
         handle

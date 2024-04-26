@@ -5,13 +5,19 @@ import { spaces } from "../../helpers/spaces";
 
 export const StyledAutoSlider = styled.div`
   overflow-y: hidden;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   row-gap: ${spaces.xl}px;
 `;
 
-export const AutoSliderItem = styled(motion.div)``;
+export const AutoSliderItem = styled(motion.div)`
+  height: 100%;
+`;
 
-export const SliderItems = styled(motion.div)``;
+export const SliderItems = styled(motion.div)`
+  height: 100%;
+`;
 
 export const Indicators = styled.div`
   display: flex;

@@ -86,23 +86,7 @@ export const IndexApparel = styled.section`
   }
 `;
 
-export const IndexApparelGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: ${spaces.s}px;
-  margin-top: ${spaces.l}px;
-  ${breakpoint.tabletPortrait} {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  ${breakpoint.phone} {
-    grid-template-columns: repeat(1, 1fr);
-    gap: ${spaces.xs}px;
-    > :nth-child(4) {
-      display: none;
-    }
-  }
-`;
-
 export const IndexServices = styled.section`
   margin-top: ${spaces.xxxxl}px;
+  margin-bottom: ${spaces.xxxxl}px;
 `;

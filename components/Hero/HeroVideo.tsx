@@ -37,7 +37,12 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
         open={open}
         onOpenChange={onOpenChange}
         content={
-          <Showreel>
+          <Showreel
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 3 }}
+          >
             <Vimeo autoplay video={"927412733"} responsive />
           </Showreel>
         }

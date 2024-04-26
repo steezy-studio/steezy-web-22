@@ -76,7 +76,6 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
       Math.max(position + step * dir, 0),
       maxPosition
     );
-    setPosition(nextPosition);
 
     let distance = 0;
     const columnGap = parseInt(
@@ -101,6 +100,7 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
     controls.start({
       x: `${-offset.current}px`,
     });
+    setPosition(nextPosition + 1);
   };
 
   return (

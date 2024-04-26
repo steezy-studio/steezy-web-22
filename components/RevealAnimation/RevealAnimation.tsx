@@ -1,6 +1,7 @@
 "use client";
 
-import { ReactNode } from "react";
+import { useInView } from "framer-motion";
+import { ReactNode, useRef } from "react";
 import { CSSProperties } from "styled-components";
 import { easing } from "../../helpers/animationConfig";
 import {
@@ -32,34 +33,38 @@ const RevealAnimation = ({
   y,
   as,
   style,
-  margin,
+  margin = "0% 0%",
   once = true,
 }: TextAnimationProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once, margin });
+
   return disable ? (
     <StyledRevealAnimation as={as} style={style}>
       {children}
     </StyledRevealAnimation>
   ) : (
     <StyledRevealAnimation
+      ref={ref}
       style={{ overflow: noCrop ? "unset" : "hidden", ...style }}
       as={as}
     >
       <RevealAnimationInner
-        initial={{
-          y: y ? y[0] : "70%",
-          skew: noSkew ? 0 : 20,
-          opacity: 0,
-        }}
-        whileInView={{
-          y: y ? y[1] : "0%",
-          skew: 0,
-          opacity: 1,
+        animate={isInView ? "animate" : "initial"}
+        initial='initial'
+        variants={{
+          initial: {
+            y: y ? y[0] : "70%",
+            skew: noSkew ? 0 : 20,
+            opacity: 0,
+          },
+          animate: {
+            y: y ? y[1] : "0%",
+            skew: 0,
+            opacity: 1,
+          },
         }}
         transition={{ delay: 0.5 * delay, ease: easing, duration: duration }}
-        viewport={{
-          once: once,
-          margin: margin ? margin : "0% 0%",
-        }}
       >
         {children}
       </RevealAnimationInner>

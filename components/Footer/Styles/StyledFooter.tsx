@@ -6,7 +6,7 @@ export const StyledFooter = styled.footer`
   display: grid;
   grid-gap: ${spaces.l}px;
   margin-top: ${spaces.xxl}px;
-  padding-bottom: 100px;
+  padding-bottom: ${spaces.xl}px;
   ${breakpoint.smallNotebook} {
     margin-top: ${spaces.xxxl}px;
   }
