@@ -49,10 +49,9 @@ const Index = ({ projects, areas, latestProjects, products }: indexProps) => {
 
   return (
     <>
-      {/* TODO add og image */}
       <Head
         ogDescription={landingpageStrings.hero.subHeader}
-        ogImageSrc={""}
+        ogImageSrc={"/images/studio-hero.jpg"}
         pageName={"STEEZY Studio"}
         ogTitle={"STEEZY Studio"}
       />

@@ -28,7 +28,6 @@ const Head = ({ pageName, ogTitle, ogImageSrc, ogDescription }: Props) => {
       <meta property='og:title' content={ogTitle} />
       <meta property='og:description' content={ogDescription} />
       <meta property='og:type' content='website' />
-      {/* <meta property="og:url" content="https://www.imdb.com/title/tt0117500/" /> */}
       {!!ogImageSrc && <meta property='og:image' content={ogImageSrc} />}
     </NextHead>
   );

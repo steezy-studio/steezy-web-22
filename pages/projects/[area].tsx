@@ -47,7 +47,7 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
           activeArea?.area_description || allProjects.area_description
         }
         ogTitle={activeArea?.area_name || allProjects.area_name}
-        ogImageSrc={""}
+        ogImageSrc={"/images/slider-05.jpg"}
       />
       <Navbar areas={areas.items} header={activeArea?.area_name} />
 

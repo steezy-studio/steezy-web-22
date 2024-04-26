@@ -75,7 +75,7 @@ const product = ({
         pageName={[`Apparel`, product.title]}
         ogDescription={product.description}
         ogTitle={product.title}
-        ogImageSrc={""}
+        ogImageSrc={product.images.nodes[0].url}
       />
       <ProductProvider data={product}>
         <StyledProduct>

@@ -6,16 +6,14 @@ import HTMLReactParser, {
 } from "html-react-parser";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import getClient from "../../apollo/client";
-import RevealAnimation from "../../components/RevealAnimation/RevealAnimation";
 import ClientQuote from "../../components/ClientQuote/ClientQuote";
-import GridItem from "../../components/GridItem/GridItem";
 import Head from "../../components/Head/Head";
 import Link from "../../components/Link/Link";
 import Navbar from "../../components/Navbar/Navbar";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import ProjectGridVimeo from "../../components/ProjectGridVimeo/ProjectGridVimeo";
-import SectionHeader from "../../components/SectionHeader/SectionHeader";
-import Slider from "../../components/Slider/Slider";
+import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
+import RevealAnimation from "../../components/RevealAnimation/RevealAnimation";
 import { Nano } from "../../components/Typo/Nano";
 import { Small } from "../../components/Typo/Small";
 import Video from "../../components/Video/Video";
@@ -43,7 +41,6 @@ import {
   SimilarProjectsSlider,
   StyledProject,
 } from "../../pagestyles/StyledProject";
-import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
 
 interface ProjectProps {
   projectData: {
