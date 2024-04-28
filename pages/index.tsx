@@ -14,11 +14,6 @@ import ServicesSection from "../components/ServicesSection/ServicesSection";
 import { Micro } from "../components/Typo/Micro";
 import strings from "../data/strings";
 import { Areas, Query } from "../generated/preprTypes";
-import {
-  ProductConnection,
-  QueryRoot,
-  QueryRootProductsArgs,
-} from "../generated/shopifyTypes";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
 import { GET_PRODUCTS } from "../graphql/GetProducts";
 import { device, indetifiers } from "../helpers/consts";
@@ -37,6 +32,11 @@ import {
   StyledIndex,
 } from "../pagestyles/StyledIndex";
 import { useWindowSize } from "../hooks/useWindowSize";
+import {
+  ProductConnection,
+  QueryRoot,
+  QueryRootProductsArgs,
+} from "@shopify/hydrogen-react/storefront-api-types";
 
 interface indexProps {
   projects: EnhancedProject[];
