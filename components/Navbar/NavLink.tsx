@@ -1,15 +1,22 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { HoverProvider } from "../../pages/_app";
-import { StyledNavLink } from "./Styles/StyledNavLink";
+import { NavIcon, NavIconW, StyledNavLink } from "./Styles/StyledNavLink";
 
 interface NavLinkProps {
   href: string;
   children: string;
   active: boolean;
   delay?: number;
+  iconSrc?: string;
 }
 
-const NavLink = ({ href, children, active, delay = 0 }: NavLinkProps) => {
+const NavLink = ({
+  href,
+  children,
+  active,
+  delay = 0,
+  iconSrc,
+}: NavLinkProps) => {
   const { setCursorType } = useContext(HoverProvider);
   return (
     <StyledNavLink
@@ -24,6 +31,11 @@ const NavLink = ({ href, children, active, delay = 0 }: NavLinkProps) => {
       className={`${active ? `active` : ``}`}
       href={href}
     >
+      {active && (
+        <NavIconW>
+          <NavIcon src={iconSrc} />
+        </NavIconW>
+      )}
       {children}
     </StyledNavLink>
   );

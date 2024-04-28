@@ -9,6 +9,7 @@ export const Small = styled(motion.p)`
   letter-spacing: 0.03em;
   font-family: "agrandir";
   font-weight: 300;
+  max-width: 600px;
   &.difference {
     color: ${colors.white};
     mix-blend-mode: difference;

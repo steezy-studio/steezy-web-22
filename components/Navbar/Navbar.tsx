@@ -4,19 +4,22 @@ import { useRouter } from "next/router";
 import { Fragment, useContext, useState } from "react";
 import strings from "../../data/strings";
 import { Area } from "../../generated/preprTypes";
-import { device, transition } from "../../helpers/consts";
+import { device } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { HoverProvider } from "../../pages/_app";
+import { DisableScroll } from "../../pagestyles/DisableScroll";
 import { CartToggleContext } from "../Cart/Cart";
 import Divider from "../Divider/Divider";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
 import Logo from "../Logo/Logo";
+import RevealAnimation from "../RevealAnimation/RevealAnimation";
 import { Nano } from "../Typo/Nano";
 import Burger from "./Burger";
 import NavLink from "./NavLink";
 import {
   NavHeader,
+  NavItem,
   NavLinks,
   NavbarCart,
   NavlinksMask,
@@ -27,8 +30,6 @@ import {
   dividerAnimation,
   navLinksVariants,
 } from "./Styles/StyledNavbar";
-import { DisableScroll } from "../../pagestyles/DisableScroll";
-import RevealAnimation from "../RevealAnimation/RevealAnimation";
 
 interface NavbarProps {
   areas: Area[];
@@ -69,7 +70,7 @@ const Navbar = ({ areas, header }: NavbarProps) => {
             >
               <VegaW
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1, transition: { delay: 5 } }}
+                animate={{ opacity: 1, transition: { delay: 8 } }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
               >
@@ -80,26 +81,30 @@ const Navbar = ({ areas, header }: NavbarProps) => {
                   alt='Vincent vega'
                 />
               </VegaW>
-              {/* {areas.map(({ area_name, _slug, is_default }, i) => ( */}
-              <NavLink
-                active={router.asPath === `/projects/all-projects`}
-                href={`/projects/all-projects`}
-              >
-                {`Projects`}
-              </NavLink>
               <Divider {...dividerAnimation} />
-              {strings.navData.map(({ link, name }, i) => (
-                <Fragment key={i}>
-                  <NavLink
-                    delay={(i + 1) * navLinksDelay}
-                    active={router.asPath === link}
-                    href={link}
-                  >
-                    {name}
-                  </NavLink>
-                  <Divider {...dividerAnimation} delay={(i + 1) * 0.7} />
-                </Fragment>
-              ))}
+              {strings.navData.map(
+                ({ link, name, iconName, activePaths }, i) => {
+                  const isActive =
+                    router.asPath.includes(link) ||
+                    activePaths.some((path) => router.asPath.includes(path));
+
+                  const delay = (i + 1) * navLinksDelay;
+                  return (
+                    <Fragment key={i}>
+                      <NavLink
+                        delay={delay}
+                        active={isActive}
+                        href={link}
+                        iconSrc={`/icons/${iconName}`}
+                      >
+                        {name}
+                      </NavLink>
+
+                      <Divider {...dividerAnimation} delay={(i + 1) * 0.7} />
+                    </Fragment>
+                  );
+                }
+              )}
               <PhoneDecoration
                 variants={{ open: { opacity: 1 }, close: { opacity: 0 } }}
               >

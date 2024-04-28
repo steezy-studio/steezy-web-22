@@ -47,6 +47,12 @@ export const NavLinks = styled(motion.div)`
   background-color: rgba(255, 255, 255, 0.1);
 `;
 
+export const NavItem = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+
 export const PhoneDecoration = styled(motion.div)`
   display: none;
   ${breakpoint.tabletLandscape} {

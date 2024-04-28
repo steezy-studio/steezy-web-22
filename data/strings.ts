@@ -332,16 +332,28 @@ export default {
   },
   navData: [
     {
+      name: "projects",
+      link: "/projects/all-projects",
+      activePaths: ["/project"],
+      iconName: "w95_projects.png",
+    },
+    {
       name: "studio",
       link: "/studio",
+      activePaths: [],
+      iconName: "w95_studio.png",
     },
     {
       name: "steezy apparel",
       link: "/apparel",
+      activePaths: [],
+      iconName: "w95_apparel.png",
     },
     {
       name: "get in touch",
       link: "/contact",
+      activePaths: [],
+      iconName: "w95_contacts.png",
     },
   ],
 } as const;

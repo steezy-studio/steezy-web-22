@@ -43,6 +43,8 @@ const FeaturedProducts = ({
                 title={title}
                 slug={handle}
                 availableForSale={availableForSale}
+                animateInView
+                animateOrder={i}
                 price={priceRange.minVariantPrice}
                 hoverCover={
                   gridImageHover

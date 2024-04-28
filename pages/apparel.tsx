@@ -1,5 +1,6 @@
 import { GetStaticProps } from "next";
 import getClient from "../apollo/client";
+import Head from "../components/Head/Head";
 import Navbar from "../components/Navbar/Navbar";
 import ProductCard from "../components/ProductCard/ProductCard";
 import ProjectsSlider from "../components/ProjectsSlider/ProjectsSlider";
@@ -14,6 +15,7 @@ import {
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import { GET_PROJECTS } from "../graphql/GetAllProjects";
 import { GET_PRODUCTS } from "../graphql/GetProducts";
+import { indetifiers } from "../helpers/consts";
 import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
 import {
   ApparelOtherProjects,
@@ -21,8 +23,6 @@ import {
   ProductsGridSection,
   StyledApparel,
 } from "../pagestyles/StyledApparel";
-import { allProjects, indetifiers } from "../helpers/consts";
-import Head from "../components/Head/Head";
 
 interface apparelProps {
   products: ProductConnection;
@@ -64,6 +64,7 @@ const apparel = ({ products, areas, projects }: apparelProps) => {
                     key={handle}
                     title={title}
                     slug={handle}
+                    animateOrder={i}
                     availableForSale={availableForSale}
                     price={priceRange.minVariantPrice}
                     hoverCover={

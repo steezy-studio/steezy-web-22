@@ -1,5 +1,5 @@
-import { AnimatePresence } from "framer-motion";
-import { useContext, useState } from "react";
+import { AnimatePresence, LayoutGroup, useInView } from "framer-motion";
+import { useContext, useEffect, useRef, useState } from "react";
 import { easing } from "../../helpers/animationConfig";
 import { formatPrice } from "../../helpers/formatPrice";
 import { HoverProvider } from "../../pages/_app";
@@ -34,6 +34,8 @@ interface ProductCardProps {
   slug: string;
   cover: Image;
   hoverCover: Image;
+  animateOrder?: number;
+  animateInView?: boolean;
 }
 
 const ProductCard = ({
@@ -43,60 +45,79 @@ const ProductCard = ({
   hoverCover,
   availableForSale,
   slug,
+  animateOrder,
+  animateInView,
 }: ProductCardProps) => {
   const { setCursorType } = useContext(HoverProvider);
-  const [hover, sethover] = useState<boolean>(false);
+  const [hover, sethover] = useState<boolean>(true);
   const isTouchDevice = useIsTouchDevice();
+  const allowHover = useRef<boolean>(false);
   const transition = { ease: easing, duration: 0.3 };
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount: 0 });
+
+  useEffect(() => {
+    const shouldAnimate = animateInView ? inView : true;
+    if (animateOrder !== undefined && shouldAnimate) {
+      setTimeout(() => {
+        sethover(false);
+        allowHover.current = true;
+      }, (Math.pow((animateOrder + 1) * 0.2, 0.4) + 2) * 1000);
+    }
+  }, [animateOrder, inView, animateInView]);
 
   return (
     <RevealAnimation>
       <StyledProductCard
         onMouseEnter={() => {
+          if (!allowHover.current) return;
           setCursorType("hover");
           sethover(true);
         }}
         onMouseLeave={() => {
+          if (!allowHover.current) return;
           setCursorType("normal");
           sethover(false);
         }}
         className={`${!availableForSale ? "inactive" : ""}`}
-        href={`/product/${slug}`}
+        href={`/apparel/${slug}`}
       >
-        <ProductCardInfo>
+        <ProductCardInfo ref={ref}>
           <ProductCardInfoHeader>
             <Small className='white'>{title}</Small>
           </ProductCardInfoHeader>
           <ProductCardInfoFooter>
-            <AnimatePresence mode='popLayout'>
-              <Small
-                className='white'
-                layout={"position"}
-                key={slug + "price"}
-                transition={transition}
-              >
-                {formatPrice(price.amount, price.currencyCode, "en-GB")}
-              </Small>
-              <Small
-                className='white'
-                layout={"position"}
-                key={slug + "avaibility"}
-                transition={transition}
-              >
-                {availableForSale ? "in stock" : "out of stock"}
-              </Small>
-              {!isTouchDevice && hover && (
-                <ProductCardButton
+            <LayoutGroup id='productCard'>
+              <AnimatePresence mode='popLayout'>
+                <Small
+                  className='white'
                   layout={"position"}
-                  key={slug + "button"}
-                  initial={{ y: "150%" }}
-                  animate={{ y: "0%", transition }}
-                  exit={{ y: "150%", transition }}
+                  key={slug + "price"}
+                  transition={transition}
                 >
-                  <Nano>buy now</Nano>
-                </ProductCardButton>
-              )}
-            </AnimatePresence>
+                  {formatPrice(price.amount, price.currencyCode, "en-GB")}
+                </Small>
+                <Small
+                  className='white'
+                  layout={"position"}
+                  key={slug + "avaibility"}
+                  transition={transition}
+                >
+                  {availableForSale ? "in stock" : "out of stock"}
+                </Small>
+                {!isTouchDevice && hover && (
+                  <ProductCardButton
+                    layout={"position"}
+                    key={slug + "button"}
+                    initial={{ y: "150%" }}
+                    animate={{ y: "0%", transition }}
+                    exit={{ y: "150%", transition }}
+                  >
+                    <Nano>buy now</Nano>
+                  </ProductCardButton>
+                )}
+              </AnimatePresence>
+            </LayoutGroup>
           </ProductCardInfoFooter>
         </ProductCardInfo>
         <ProductCardCoverW>

@@ -31,10 +31,7 @@ export const ProductGallery = styled.div`
   row-gap: ${spaces.xs}px;
 `;
 
-export const ProductInfo = styled.div`
-  position: sticky;
-  top: ${spaces.xxxxl}px;
-`;
+export const ProductInfo = styled.div``;
 
 export const ProductText = styled.div`
   display: grid;

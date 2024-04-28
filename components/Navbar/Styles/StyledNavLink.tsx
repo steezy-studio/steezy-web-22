@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { breakpoint, colors } from "../../../helpers/consts";
 
 export const StyledNavLink = styled(motion.a)`
+  display: flex;
+  align-items: center;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 12vh;
@@ -20,15 +22,25 @@ export const StyledNavLink = styled(motion.a)`
     color: ${colors.black};
   }
   &.active {
-    font-style: oblique 15deg;
-    font-stretch: 170%;
+    /* font-style: oblique 15deg;
+    font-stretch: 170%; */
   }
-  ${breakpoint.tabletLandscape} {
-  }
-  ${breakpoint.tabletPortrait} {
-  }
-  ${breakpoint.phone} {
-  }
-  ${breakpoint.miniPhone} {
-  }
+`;
+
+export const NavIconW = styled(motion.div)`
+  display: block;
+  position: relative;
+  height: 0.8em;
+  margin-bottom: 0.2em;
+  aspect-ratio: 1;
+  margin-right: 0.2em;
+`;
+
+export const NavIcon = styled.img`
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: block;
+  height: 100%;
 `;
