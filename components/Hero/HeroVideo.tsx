@@ -6,9 +6,8 @@ import {
 } from "../../hooks/useIntersectionObserver";
 import { HoverProvider } from "../../pages/_app";
 import Dialog from "../Dialog/Dialog";
-import { Loop, Showreel, StyledHeroVideo } from "./Styles/StyledHeroVideo";
-import { Large } from "../Typo/Large";
 import { PlayButton } from "./Styles/StyledHero";
+import { Loop, Showreel, StyledHeroVideo } from "./Styles/StyledHeroVideo";
 
 interface VideoProps {
   src: string;
@@ -52,7 +51,7 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
             onMouseLeave={() => setCursorType("normal")}
           >
             <PlayButton>
-              <Large className='underline big white tac wide'>play video</Large>
+              <span className='underline big white tac wide'>play video</span>
             </PlayButton>
             <Loop
               whileHover={{ scale: 1.15 }}

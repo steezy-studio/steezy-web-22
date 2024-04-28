@@ -6,10 +6,8 @@ import { usePathname } from "next/navigation";
 interface LogoProps {}
 
 const Logo = ({}: LogoProps) => {
-  const [hover, toggleHover] = useState(false);
   const { setCursorType } = useContext(HoverProvider);
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <StyledLogo

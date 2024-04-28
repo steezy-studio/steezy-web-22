@@ -7,7 +7,7 @@ export const StyledNavLink = styled(motion.a)`
   align-items: center;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 12vh;
+  font-size: 9vh;
   font-weight: 300;
   letter-spacing: -0.01em;
   line-height: 1em;
@@ -24,6 +24,21 @@ export const StyledNavLink = styled(motion.a)`
   &.active {
     /* font-style: oblique 15deg;
     font-stretch: 170%; */
+  }
+  ${breakpoint.smallNotebook} {
+    font-size: 8vh;
+  }
+  ${breakpoint.tabletLandscape} {
+    font-size: 9vh;
+  }
+  ${breakpoint.tabletPortrait} {
+    font-size: 4vh;
+  }
+  ${breakpoint.phone} {
+    font-size: 35px;
+  }
+  ${breakpoint.miniPhone} {
+    font-size: 26px;
   }
 `;
 

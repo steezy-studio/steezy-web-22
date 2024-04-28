@@ -1,7 +1,7 @@
 import { useCart } from "@shopify/hydrogen-react";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import strings from "../../data/strings";
 import { Area } from "../../generated/preprTypes";
 import { device } from "../../helpers/consts";
@@ -19,7 +19,6 @@ import Burger from "./Burger";
 import NavLink from "./NavLink";
 import {
   NavHeader,
-  NavItem,
   NavLinks,
   NavbarCart,
   NavlinksMask,
@@ -45,6 +44,15 @@ const Navbar = ({ areas, header }: NavbarProps) => {
   const { lines } = useCart();
   const router = useRouter();
   const navLinksDelay = 0.1;
+
+  useEffect(() => {
+    const videos = document.querySelectorAll("video");
+    if (isMenuOpen) {
+      videos.forEach((video) => video.pause());
+    } else {
+      videos.forEach((video) => video.play());
+    }
+  }, [isMenuOpen]);
 
   return (
     <>
@@ -75,7 +83,7 @@ const Navbar = ({ areas, header }: NavbarProps) => {
                 transition={{ duration: 1 }}
               >
                 <Vega
-                  src={"/images/vega.gif"}
+                  src={"/images/vega_opt.gif"}
                   width={490}
                   height={476}
                   alt='Vincent vega'

@@ -45,6 +45,15 @@ export const NavLinks = styled(motion.div)`
   row-gap: ${spaces.xs}px;
   padding: ${spaces.m}px ${spaces.xxxl}px ${spaces.xxxl}px;
   background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  ${breakpoint.smallNotebook} {
+    padding: ${spaces.m}px ${spaces.xl}px ${spaces.xl}px;
+  }
+  ${breakpoint.tabletPortrait} {
+    padding: ${spaces.m}px ${spaces.l}px ${spaces.l}px;
+    align-items: end;
+  }
 `;
 
 export const NavItem = styled.div`
@@ -55,7 +64,7 @@ export const NavItem = styled.div`
 
 export const PhoneDecoration = styled(motion.div)`
   display: none;
-  ${breakpoint.tabletLandscape} {
+  /* ${breakpoint.tabletLandscape} {
     position: absolute;
     bottom: ${spaces.xl}px;
     left: ${spaces.xl}px;
@@ -70,7 +79,7 @@ export const PhoneDecoration = styled(motion.div)`
   ${breakpoint.phone} {
     bottom: ${spaces.l}px;
     left: ${spaces.l}px;
-  }
+  } */
 `;
 
 export const NavbarCart = styled.div`
@@ -112,21 +121,21 @@ export const NavHeader = styled(motion.div)`
 
 export const navLinksVariants = {
   initial: {
-    backdropFilter: "blur(0px)",
+    opacity: 0,
     transition: {
       duration: 1,
       when: "afterChildren",
     },
   },
   animate: {
-    backdropFilter: "blur(250px)",
+    opacity: 1,
     transition: {
       duration: 1,
       when: "beforeChildren",
     },
   },
   exit: {
-    backdropFilter: "blur(0px)",
+    opacity: 0,
     transition: {
       duration: 1,
       when: "afterChildren",
@@ -162,6 +171,9 @@ export const VegaW = styled(motion.div)`
   bottom: 0;
   right: 0;
   z-index: 99;
+  ${breakpoint.tabletLandscape} {
+    display: none;
+  }
 `;
 
 export const Vega = styled(Image)`

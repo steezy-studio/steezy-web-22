@@ -7,6 +7,6 @@ export const StyledAreaTag = styled.div`
   padding: 0px 8px;
   border-radius: 8px;
   ${breakpoint.tabletPortrait} {
-    padding: 0px 7px 2px 7px;
+    padding: 2px 9px 0px;
   }
 `;

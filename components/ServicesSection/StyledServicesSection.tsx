@@ -27,6 +27,9 @@ export const ServicesList = styled.div`
   ${breakpoint.tabletPortrait} {
     grid-template-columns: repeat(2, 1fr);
   }
+  ${breakpoint.miniPhone} {
+    column-gap: ${spaces.s}px;
+  }
 `;
 
 export const SubServicesList = styled.div`

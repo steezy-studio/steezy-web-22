@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
   main {
     padding: ${spaces.xxxl}px ${spaces.xxxl}px 0 ${spaces.xxxl}px;
     ${breakpoint.monitor} {
-      padding: ${spaces.xxxxxl}px ${spaces.xxxl}px 0 ${spaces.xxxxxl}px;
+      padding: ${spaces.xxxl}px ${spaces.xxxxxl}px 0 ${spaces.xxxxxl}px;
     }
     ${breakpoint.smallNotebook} {
       padding: ${spaces.xxxl}px ${spaces.xl}px 0 ${spaces.xl}px;

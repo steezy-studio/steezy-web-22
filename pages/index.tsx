@@ -21,7 +21,7 @@ import {
 } from "../generated/shopifyTypes";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
 import { GET_PRODUCTS } from "../graphql/GetProducts";
-import { indetifiers } from "../helpers/consts";
+import { device, indetifiers } from "../helpers/consts";
 import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
 import {
   FeaturedGrid,
@@ -36,6 +36,7 @@ import {
   LandingPageHeroLogotype,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
+import { useWindowSize } from "../hooks/useWindowSize";
 
 interface indexProps {
   projects: EnhancedProject[];
@@ -46,6 +47,7 @@ interface indexProps {
 
 const Index = ({ projects, areas, latestProjects, products }: indexProps) => {
   const landingpageStrings = strings.landingPage;
+  const { w } = useWindowSize();
 
   return (
     <>
@@ -58,7 +60,15 @@ const Index = ({ projects, areas, latestProjects, products }: indexProps) => {
       <Navbar areas={areas.items} header={landingpageStrings.navbar.header} />
       <StyledIndex>
         <IndexHeroSection>
-          <Hero asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }} />
+          <Hero
+            asset={{
+              url:
+                w <= device.phone
+                  ? `/videos/steezy-loop-phone.mp4`
+                  : `/videos/steezy-loop.mp4`,
+              _type: "Video",
+            }}
+          />
           <HeroFooter>
             <Micro as='h1'>
               We work for world-known brands while sharing our knowledge and
@@ -113,7 +123,10 @@ const Index = ({ projects, areas, latestProjects, products }: indexProps) => {
             linkText='all projects'
           />
           <IndexGrid>
-            <ProjectsGrid projects={projects} />
+            <ProjectsGrid
+              projects={projects}
+              projectsPerPage={w <= device.phone ? 5 : 10}
+            />
           </IndexGrid>
         </FeaturedGrid>
         <IndexApparel>
