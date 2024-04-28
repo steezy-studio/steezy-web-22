@@ -54,6 +54,9 @@ export const NavLinks = styled(motion.div)`
     padding: ${spaces.m}px ${spaces.l}px ${spaces.l}px;
     align-items: end;
   }
+  ${breakpoint.monitor} {
+    padding: ${spaces.m}px ${spaces.xxxxxl}px ${spaces.xxxl}px;
+  }
 `;
 
 export const NavItem = styled.div`

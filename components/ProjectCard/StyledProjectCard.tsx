@@ -12,7 +12,7 @@ export const StyledProjectCard = styled.div`
   &.wide {
     padding-bottom: ${(9 / 16) * 100}%;
   }
-  ${breakpoint.tabletPortrait} {
+  ${breakpoint.phone} {
     padding-bottom: ${(5 / 4) * 100}%;
     &.wide {
       padding-bottom: ${(5 / 4) * 100}%;

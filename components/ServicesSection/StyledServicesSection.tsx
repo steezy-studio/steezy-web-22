@@ -24,7 +24,7 @@ export const ServicesList = styled.div`
   ${breakpoint.smallNotebook} {
     gap: ${spaces.xl}px;
   }
-  ${breakpoint.tabletPortrait} {
+  ${breakpoint.custom(700)} {
     grid-template-columns: repeat(2, 1fr);
   }
   ${breakpoint.miniPhone} {

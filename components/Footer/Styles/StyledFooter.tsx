@@ -14,7 +14,7 @@ export const StyledFooter = styled.footer`
     padding-bottom: ${spaces.xl}px;
   }
   ${breakpoint.phone} {
-    margin-top: ${spaces.l}px;
+    margin-top: ${spaces.xxxl}px;
   }
 `;
 

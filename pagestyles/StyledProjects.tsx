@@ -17,7 +17,9 @@ export const ProjectsHeroFilters = styled.div`
   flex-wrap: wrap;
   row-gap: ${spaces.s}px;
   column-gap: ${spaces.l}px;
-  /* justify-content: space-between; */
+  ${breakpoint.tabletLandscape} {
+    column-gap: ${spaces.m}px;
+  }
 `;
 
 export const Filter = styled.span`
@@ -28,4 +30,17 @@ export const Filter = styled.span`
 export const FilterW = styled.span`
   font-size: 30px;
   font-weight: 500;
+  ${breakpoint.custom(1650)} {
+    font-size: 24px;
+  }
+  ${breakpoint.custom(1300)} {
+    font-size: 21px;
+  }
+  ${breakpoint.tabletLandscape} {
+    font-size: 18px;
+  }
+`;
+
+export const ProjectsGridW = styled.div`
+  margin-bottom: ${spaces.xxxl}px;
 `;

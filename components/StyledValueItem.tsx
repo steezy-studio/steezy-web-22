@@ -1,12 +1,12 @@
-import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint, colors } from "../helpers/consts";
+import { spaces } from "../helpers/spaces";
 
 export const StyledValueItem = styled.div<{ order: number }>`
   position: relative;
   display: grid;
   grid-template-columns: 250px 1fr;
-  column-gap: ${({ theme }) => `calc( ${theme.pageMargin} )`};
+  column-gap: ${spaces.l}px;
   ${breakpoint.smallNotebook} {
     grid-template-columns: 230px 1fr;
   }
@@ -37,6 +37,9 @@ export const ValueBody = styled.div`
 export const ValueHeader = styled.div`
   display: grid;
   grid-row-gap: 30px;
+  ${breakpoint.tabletLandscape} {
+    row-gap: 20px;
+  }
   ${breakpoint.phone} {
     grid-row-gap: 10px;
   }

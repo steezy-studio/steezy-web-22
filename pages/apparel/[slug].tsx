@@ -36,7 +36,7 @@ import { formatPrice } from "../../helpers/formatPrice";
 import {
   ProductFeaturedProducts,
   ProductFeaturedProjects,
-  ProductGallery,
+  ProductHeroVideo,
   ProductGalleryGrid,
   ProductGalleryImg,
   ProductInfo,
@@ -81,13 +81,13 @@ const product = ({
         <StyledProduct>
           <Navbar areas={areas.items} header={product.title} />
           <ProductSection>
-            <ProductGallery>
+            <ProductHeroVideo>
               {video && (
                 <Video
                   src={video.sources.find(({ format }) => format === "mp4").url}
                 />
               )}
-            </ProductGallery>
+            </ProductHeroVideo>
             <ProductInfo>
               <ProductText>
                 <Medium className='medium'>{product.title}</Medium>

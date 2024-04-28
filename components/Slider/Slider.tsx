@@ -15,6 +15,9 @@ interface SliderProps {
   navigationWidth?: number;
 }
 
+// TODO fix end slide
+// TODO bug with step one on studio page
+
 const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
   const [position, setPosition] = useState(0);
   const [step, setstep] = useState(2);
@@ -39,11 +42,14 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
       setPosition(0);
       controls.start({ x: "0px" });
 
-      const sortedDevices = Object.keys(config).sort();
+      const sortedDevices = Object.keys(config).sort(
+        (a, b) => Number(a) - Number(b)
+      );
       const currentDeviceKey =
         sortedDevices.find(
           (key) => innerWidth < Number(key) || innerWidth === Number(key)
         ) || sortedDevices[sortedDevices.length - 1];
+
       setstep(config[currentDeviceKey].step);
     };
 

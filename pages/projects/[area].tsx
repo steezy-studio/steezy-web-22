@@ -5,7 +5,6 @@ import Head from "../../components/Head/Head";
 import Link from "../../components/Link/Link";
 import Navbar from "../../components/Navbar/Navbar";
 import ProjectsGrid from "../../components/ProjectsGrid/ProjectsGrid";
-import { Medium } from "../../components/Typo/Medium";
 import { Nano } from "../../components/Typo/Nano";
 import strings from "../../data/strings";
 import { Areas, Query } from "../../generated/preprTypes";
@@ -19,6 +18,7 @@ import {
 import {
   Filter,
   FilterW,
+  ProjectsGridW,
   ProjectsHero,
   ProjectsHeroFilters,
   StyledProjects,
@@ -77,7 +77,9 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
             })}
           </ProjectsHeroFilters>
         </ProjectsHero>
-        <ProjectsGrid projects={projects} />
+        <ProjectsGridW>
+          <ProjectsGrid projects={projects} />
+        </ProjectsGridW>
       </StyledProjects>
     </>
   );

@@ -85,9 +85,13 @@ export const StudioServicesSectionW = styled.div`
 export const StudioServiceCover = styled(Image)`
   width: 100%;
   max-height: 80vh;
+  height: auto;
+  min-height: 600px;
   margin-top: ${spaces.xxl}px;
   object-fit: cover;
   border-radius: ${({ theme }) => theme.bRad};
+  ${breakpoint.phone} {
+  }
 `;
 
 export const ValuesCoverW = styled.div`
@@ -112,14 +116,21 @@ export const OurStudio = styled.div``;
 
 export const OurStudioSliderImg = styled(Image)`
   object-fit: cover;
+  display: block;
   width: 100%;
   height: 100%;
   border-radius: ${({ theme }) => theme.bRad};
+  ${breakpoint.phone} {
+    width: 80vw;
+  }
 `;
 
 export const ValuesList = styled.div`
   display: grid;
   row-gap: ${spaces.xxl}px;
+  ${breakpoint.tabletPortrait} {
+    row-gap: ${spaces.m}px;
+  }
   ${breakpoint.phone} {
     row-gap: ${spaces.l}px;
   }

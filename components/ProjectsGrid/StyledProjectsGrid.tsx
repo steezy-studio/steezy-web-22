@@ -20,7 +20,7 @@ export const GridRow = styled.div`
   &:nth-child(2n) {
     grid-template-columns: ${1}fr ${3.16}fr;
   }
-  ${breakpoint.tabletPortrait} {
+  ${breakpoint.phone} {
     grid-template-columns: unset;
     row-gap: ${spaces.xs}px;
     &:nth-child(2n) {

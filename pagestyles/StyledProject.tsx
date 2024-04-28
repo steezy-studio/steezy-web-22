@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
+import Image from "next/image";
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
 import { spaces } from "../helpers/spaces";
-import u from "../helpers/unit";
-import Image from "next/image";
 
 export const StyledProject = styled.div``;
 
@@ -11,23 +10,41 @@ export const ProjectHeroHeader = styled.div`
   display: grid;
   grid-template-columns: 3fr 1fr;
   column-gap: ${spaces.xl}px;
+  ${breakpoint.phone} {
+    grid-template-columns: unset;
+  }
 `;
 
 export const ProjectHeroRoles = styled.div`
   display: grid;
   align-content: start;
   row-gap: ${spaces.xl}px;
+  ${breakpoint.tabletLandscape} {
+    row-gap: ${spaces.l}px;
+  }
+  ${breakpoint.phone} {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: ${spaces.m}px;
+    margin-top: ${spaces.xl}px;
+  }
 `;
 
 export const ProjectHeroRole = styled.div`
   display: grid;
   align-content: start;
   row-gap: ${spaces.s}px;
+  ${breakpoint.tabletLandscape} {
+    row-gap: ${spaces.xxs}px;
+  }
 `;
 
 export const ProjectDescription = styled.div`
   padding: ${spaces.xxxl}px 0;
   max-width: 600px;
+  ${breakpoint.tabletLandscape} {
+    padding: ${spaces.xxl}px 0;
+  }
 `;
 
 export const ProjectGrid = styled.div`
@@ -44,6 +61,7 @@ export const ProjectGridRow = styled(motion.div)`
   grid-auto-columns: 1fr;
   grid-auto-flow: column;
   column-gap: ${spaces.xs}px;
+  row-gap: ${spaces.xs}px;
   &.blockquote {
     grid-template-areas: ". blockquote";
     &.reverse {
@@ -64,6 +82,7 @@ export const ProjectGridRow = styled(motion.div)`
 `;
 
 export const ProjectDetailImg = styled(Image)`
+  display: block;
   width: 100%;
   height: 100%;
   border-radius: ${({ theme }) => theme.bRad};
@@ -79,5 +98,5 @@ export const ProjectGridBlockquote = styled.div`
 `;
 
 export const SimilarProjectsSlider = styled.section`
-  margin-top: ${spaces.xxxl}px;
+  margin: ${spaces.xxxl}px 0;
 `;

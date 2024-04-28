@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 import { spaces } from "../helpers/spaces";
+import { breakpoint } from "../helpers/consts";
 
 export const StyledContact = styled.div``;
 
@@ -9,6 +10,10 @@ export const ContactHero = styled.div`
   margin-top: ${spaces.l}px;
   grid-template-columns: 1fr 1fr;
   column-gap: ${spaces.m}px;
+  ${breakpoint.phone} {
+    grid-template-columns: unset;
+    row-gap: ${spaces.m}px;
+  }
 `;
 
 export const ContactHeroCover = styled(Image)`
@@ -22,6 +27,9 @@ export const ContactInfo = styled.div`
   align-content: start;
   row-gap: ${spaces.xl}px;
   margin-left: ${spaces.xl}px;
+  ${breakpoint.phone} {
+    margin-left: 0;
+  }
 `;
 
 export const ContactDetails = styled.div`
@@ -57,4 +65,8 @@ export const FoundersGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   column-gap: ${spaces.m}px;
   margin-top: ${spaces.l}px;
+  ${breakpoint.phone} {
+    grid-template-columns: unset;
+    row-gap: ${spaces.m}px;
+  }
 `;

@@ -57,6 +57,7 @@ export const breakpoint = {
   helperLargeNotebook: `@media (min-width: 1600px) and (max-width: ${device.largeNotebook}px)`,
   largeNotebook: `@media (max-width: ${device.largeNotebook}px)`,
   monitor: `@media (min-width: ${device.monitor}px) `,
+  custom: (maxWidth: number) => `@media (max-width: ${maxWidth}px) `,
 } as const;
 
 export const theme = (width: number) => ({

@@ -16,13 +16,14 @@ export const GridItemAreas = styled.div`
   display: flex;
   gap: ${spaces.xxs}px;
   ${breakpoint.tabletPortrait} {
-    bottom: ${spaces.s}px;
-    left: ${spaces.s}px;
+    bottom: ${spaces.xs}px;
+    left: ${spaces.xs}px;
+    flex-direction: column;
+    align-items: flex-start;
   }
   ${breakpoint.phone} {
     flex-wrap: wrap;
-    bottom: ${spaces.xs}px;
-    left: ${spaces.xs}px;
+    flex-direction: row;
   }
 `;
 
