@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../../consts/colors";
+import { colors } from "../../../helpers/consts";
 // import "simplebar/dist/simplebar.min.css";
 
 export const StyledScrollbar = styled.div<{ $neutral: boolean }>`
@@ -147,7 +147,7 @@ export const StyledScrollbar = styled.div<{ $neutral: boolean }>`
     position: absolute;
     content: "";
     background: ${({ $neutral }) =>
-      $neutral ? colors.gray500 : colors.yellow400};
+      $neutral ? colors.gray500 : colors.primary400};
     left: 2px;
     right: 2px;
     opacity: 1;
@@ -163,21 +163,6 @@ export const StyledScrollbar = styled.div<{ $neutral: boolean }>`
     top: 0;
     width: 6px;
     &:before,
-    /* &:after {
-      content: "";
-      background-image: url("/icons/scrollbar-arrow.svg");
-      background-repeat: no-repeat;
-      background-position: center;
-      display: block;
-      position: absolute;
-      z-index: 2;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 30px;
-      background-color: ${({ $neutral }) =>
-      $neutral ? colors.gray500 : colors.yellow400};
-    } */
     &:after {
       content: "";
       top: unset;
