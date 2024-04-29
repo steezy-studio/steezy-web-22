@@ -8,6 +8,8 @@ import {
   Slides,
   StyledSlider,
 } from "./Styles/StyledSlider";
+import { useSwipe } from "../../hooks/useSwipe";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 interface SliderProps {
   children: ReactNode[];
@@ -15,14 +17,12 @@ interface SliderProps {
   navigationWidth?: number;
 }
 
-// TODO fix end slide
-// TODO bug with step one on studio page
-
 const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
   const [position, setPosition] = useState(0);
   const [step, setstep] = useState(2);
   const { setCursorType } = useContext(HoverProvider);
   const controls = useAnimationControls();
+  const { w } = useWindowSize();
 
   const imageSlideRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -30,6 +30,50 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
   const offset = useRef<number>(0);
   const maxOffset = useRef<number>(0);
 
+  const handleIndexChange = (dir) => {
+    const maxPosition = Math.ceil(children.length / step);
+    const slides = sliderRef.current.children;
+    const nextPosition = Math.min(
+      Math.max(position + step * dir, 0),
+      maxPosition
+    );
+    const rightBound = getBound("right");
+    const leftBound = getBound("left");
+
+    let distance = 0;
+    const columnGap = parseInt(
+      window
+        .getComputedStyle(sliderRef.current)
+        .getPropertyValue("--column-gap")
+    );
+
+    for (let i = 0; i < step; i++) {
+      distance += slides?.item(i + nextPosition)?.clientWidth || 0;
+      distance += columnGap;
+    }
+    offset.current += distance * dir;
+
+    if (offset.current < 0) {
+      offset.current = 0;
+      leftBound.style.display = "none";
+    } else {
+      leftBound.style.display = "block";
+    }
+
+    if (offset.current > maxOffset.current) {
+      offset.current = maxOffset.current;
+      rightBound.style.display = "none";
+    } else {
+      rightBound.style.display = "block";
+    }
+
+    controls.start({
+      x: `${-offset.current}px`,
+    });
+    setPosition(nextPosition);
+  };
+
+  useSwipe({ ref: containerRef, cb: handleIndexChange });
   function getBound(side: "left" | "right") {
     return containerRef.current.querySelector(`.${side}`) as HTMLDivElement;
   }
@@ -54,60 +98,7 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
     };
 
     handleResize();
-    addEventListener("resize", handleResize);
-    return () => {
-      removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    const rightBound = getBound("right");
-    const leftBound = getBound("left");
-    rightBound.style.display = "block";
-    leftBound.style.display = "block";
-
-    if (offset.current <= 0) {
-      leftBound.style.display = "none";
-    }
-
-    if (offset.current >= maxOffset.current) {
-      rightBound.style.display = "none";
-    }
-  }, [position]);
-
-  const handleIndexChange = (dir) => {
-    const maxPosition = Math.ceil(children.length / step);
-    const slides = sliderRef.current.children;
-    const nextPosition = Math.min(
-      Math.max(position + step * dir, 0),
-      maxPosition
-    );
-
-    let distance = 0;
-    const columnGap = parseInt(
-      window
-        .getComputedStyle(sliderRef.current)
-        .getPropertyValue("--column-gap")
-    );
-
-    for (let i = 0; i < step; i++) {
-      distance += slides?.item(i + position)?.clientWidth || 0;
-      distance += columnGap;
-    }
-    offset.current += distance * dir;
-    if (offset.current < 0) {
-      offset.current = 0;
-    }
-
-    if (offset.current > maxOffset.current) {
-      offset.current = maxOffset.current;
-    }
-
-    controls.start({
-      x: `${-offset.current}px`,
-    });
-    setPosition(nextPosition + 1);
-  };
+  }, [w]);
 
   return (
     <StyledSlider
@@ -120,7 +111,7 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
         onClick={() => handleIndexChange(-1)}
         onMouseEnter={() => setCursorType("left")}
         onMouseLeave={() => setCursorType("hover")}
-        style={{ width: `${(100 * navigationWidth) / 2}%` }}
+        style={{ width: `${(100 * navigationWidth) / 2}%`, display: "none" }}
       />
       <SliderBound
         className='right'
