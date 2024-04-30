@@ -6,25 +6,26 @@ import useIsTouchDevice from "./useIsTouchDevice";
 interface UseSwipeProps {
   ref: MutableRefObject<HTMLDivElement>;
   cb: (direction: number) => void;
+  deps?: any[];
 }
 
-export function useSwipe({ ref, cb }: UseSwipeProps) {
+export function useSwipe({ ref, cb, deps = [] }: UseSwipeProps) {
   const isTouchDevice = useIsTouchDevice();
 
   useEffect(() => {
     if (!isTouchDevice) return;
     let initialX: number | null = null;
-    const html = document.querySelector("body");
+    const body = document.querySelector("html");
 
     function handleTouchStart(e: TouchEvent) {
       initialX = e.changedTouches[0].clientX;
-      html.style.overflow = "hidden";
+      body.style.overflow = "hidden";
     }
 
     function handleTouchEnd(e: TouchEvent) {
       if (initialX === null) return;
       const swipeAmoumt = Math.abs(e.changedTouches[0].clientX - initialX);
-      html.style.overflow = "scroll";
+      body.style.overflow = "scroll";
       if (swipeAmoumt < 100) return;
       const direction = e.changedTouches[0].clientX - initialX > 0 ? -1 : 1;
       initialX === null;
@@ -37,5 +38,5 @@ export function useSwipe({ ref, cb }: UseSwipeProps) {
       ref.current?.removeEventListener("touchend", handleTouchStart);
       ref.current?.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [isTouchDevice]);
+  }, [isTouchDevice, ...deps]);
 }

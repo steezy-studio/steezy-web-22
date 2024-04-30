@@ -44,7 +44,10 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
 
   const handleIndexChange = (dir) => {
     const slides = sliderRef.current.children;
-    const nextPosition = position + step * dir;
+    const nextPosition = Math.min(
+      slides.length,
+      Math.max(position + step * dir, 0)
+    );
     const rightBound = getBound("right");
     const leftBound = getBound("left");
     const safezone = 100;
@@ -61,6 +64,7 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
     for (let i = 0; i < step; i++) {
       const itemIndex = dir === 1 ? position + i : position - i - 1;
       const slide = slides?.item(itemIndex);
+      console.log(itemIndex, nextPosition);
 
       distance += slide?.clientWidth || 0;
       distance += columnGap;
@@ -90,7 +94,7 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
     setPosition(nextPosition);
   };
 
-  useSwipe({ ref: containerRef, cb: handleIndexChange });
+  useSwipe({ ref: containerRef, cb: handleIndexChange, deps: [position] });
   function getBound(side: "left" | "right") {
     return containerRef.current.querySelector(`.${side}`) as HTMLDivElement;
   }
