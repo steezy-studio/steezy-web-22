@@ -31,11 +31,11 @@ const NavLink = ({
       className={`${active ? `active` : ``}`}
       href={href}
     >
-      {active && (
+      {/* {active && (
         <NavIconW>
           <NavIcon src={iconSrc} />
         </NavIconW>
-      )}
+      )} */}
       {children}
     </StyledNavLink>
   );

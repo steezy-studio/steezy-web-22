@@ -22,8 +22,8 @@ export const StyledNavLink = styled(motion.a)`
     color: ${colors.black};
   }
   &.active {
-    /* font-style: oblique 15deg;
-    font-stretch: 170%; */
+    font-style: oblique 15deg;
+    font-stretch: 170%;
   }
   ${breakpoint.smallNotebook} {
     font-size: 8vh;

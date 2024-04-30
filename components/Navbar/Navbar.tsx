@@ -1,7 +1,7 @@
 import { useCart } from "@shopify/hydrogen-react";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import strings from "../../data/strings";
 import { Area } from "../../generated/preprTypes";
 import { device } from "../../helpers/consts";
@@ -37,6 +37,7 @@ interface NavbarProps {
 
 const Navbar = ({ areas, header }: NavbarProps) => {
   const [isMenuOpen, openMenu] = useState(false);
+  const [showVega, setshowVega] = useState<boolean>(false);
   const { setCursorType } = useContext(HoverProvider);
   const { setShowCart } = useContext(CartToggleContext);
   const { w } = useWindowSize();
@@ -44,6 +45,8 @@ const Navbar = ({ areas, header }: NavbarProps) => {
   const { lines } = useCart();
   const router = useRouter();
   const navLinksDelay = 0.1;
+  const timeout = useRef<NodeJS.Timeout>(null);
+  const wasVegaDisplayed = useRef<boolean>(false);
 
   useEffect(() => {
     const videos = document.querySelectorAll("video");
@@ -52,6 +55,18 @@ const Navbar = ({ areas, header }: NavbarProps) => {
     } else {
       videos.forEach((video) => video.play());
     }
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    if (wasVegaDisplayed.current || !isMenuOpen) return;
+    timeout.current = setTimeout(() => {
+      setshowVega(true);
+      wasVegaDisplayed.current = true;
+    }, 8000);
+
+    return () => {
+      clearTimeout(timeout.current);
+    };
   }, [isMenuOpen]);
 
   return (
@@ -76,19 +91,26 @@ const Navbar = ({ areas, header }: NavbarProps) => {
               }}
               variants={navLinksVariants}
             >
-              <VegaW
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1, transition: { delay: 8 } }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-              >
-                <Vega
-                  src={"/images/vega_opt.gif"}
-                  width={490}
-                  height={476}
-                  alt='Vincent vega'
-                />
-              </VegaW>
+              <AnimatePresence>
+                {showVega && (
+                  <VegaW
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1 }}
+                    onAnimationComplete={() =>
+                      setTimeout(() => setshowVega(false), 5000)
+                    }
+                  >
+                    <Vega
+                      src={"/images/vega_opt.gif"}
+                      width={490}
+                      height={476}
+                      alt='Vincent vega'
+                    />
+                  </VegaW>
+                )}
+              </AnimatePresence>
               <Divider {...dividerAnimation} />
               {strings.navData.map(
                 ({ link, name, iconName, activePaths }, i) => {
