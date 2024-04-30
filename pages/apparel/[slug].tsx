@@ -46,6 +46,7 @@ import {
   ProductText,
   StyledProduct,
 } from "../../pagestyles/StyledProduct";
+import SectionHeader from "../../components/SectionHeader/SectionHeader";
 
 interface productProps {
   areas: Areas;
@@ -144,6 +145,7 @@ const product = ({
             </ProductInfo>
           </ProductSection>
           <ProductGallery>
+            <SectionHeader header='How to drip our drip' />
             <Slider>
               {product.images.nodes.map(({ url, width, height }, i) => (
                 <ProductGalleryImg

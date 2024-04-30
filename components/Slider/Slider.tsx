@@ -44,6 +44,7 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
 
   const handleIndexChange = (dir) => {
     const slides = sliderRef.current.children;
+    // const nextPosition = position + step * dir;
     const nextPosition = Math.min(
       slides.length,
       Math.max(position + step * dir, 0)

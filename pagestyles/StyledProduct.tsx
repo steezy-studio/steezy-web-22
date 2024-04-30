@@ -19,6 +19,8 @@ export const ProductSection = styled.section`
 
 export const ProductGallery = styled.section`
   margin-top: ${spaces.xxl}px;
+  display: grid;
+  row-gap: ${spaces.m}px;
 `;
 
 export const ProductOptions = styled.div`
@@ -39,6 +41,7 @@ export const ProductText = styled.div`
 export const ProductGalleryImg = styled(Image)`
   display: block;
   width: 100%;
+  max-width: 80vw;
   height: 100%;
   max-height: 80vh;
   object-fit: cover;
