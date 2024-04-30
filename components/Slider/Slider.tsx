@@ -1,5 +1,13 @@
 import { useAnimationControls } from "framer-motion";
-import { ReactNode, useContext, useEffect, useRef, useState } from "react";
+import {
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { transition } from "../../helpers/consts";
 import { HoverProvider } from "../../pages/_app";
 import {
@@ -10,6 +18,7 @@ import {
 } from "./Styles/StyledSlider";
 import { useSwipe } from "../../hooks/useSwipe";
 import { useWindowSize } from "../../hooks/useWindowSize";
+import { usePathname } from "next/navigation";
 
 interface SliderProps {
   children: ReactNode[];
@@ -22,23 +31,25 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
   const [step, setstep] = useState(2);
   const { setCursorType } = useContext(HoverProvider);
   const controls = useAnimationControls();
+  const pathname = usePathname();
   const { w } = useWindowSize();
 
   const imageSlideRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
   const sliderRef = useRef<HTMLDivElement>(null);
   const offset = useRef<number>(0);
   const maxOffset = useRef<number>(0);
+  const cutoffOffset = useRef<number>(0);
 
   const handleIndexChange = (dir) => {
-    const maxPosition = Math.ceil(children.length / step);
     const slides = sliderRef.current.children;
-    const nextPosition = Math.min(
-      Math.max(position + step * dir, 0),
-      maxPosition
-    );
+    const nextPosition = position + step * dir;
     const rightBound = getBound("right");
     const leftBound = getBound("left");
+    const safezone = 100;
+    maxOffset.current =
+      sliderRef.current.clientWidth - containerRef.current.clientWidth;
 
     let distance = 0;
     const columnGap = parseInt(
@@ -48,23 +59,29 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
     );
 
     for (let i = 0; i < step; i++) {
-      distance += slides?.item(i + nextPosition)?.clientWidth || 0;
+      const itemIndex = dir === 1 ? position + i : position - i - 1;
+      const slide = slides?.item(itemIndex);
+
+      distance += slide?.clientWidth || 0;
       distance += columnGap;
     }
     offset.current += distance * dir;
 
-    if (offset.current < 0) {
+    if (offset.current <= safezone) {
       offset.current = 0;
       leftBound.style.display = "none";
     } else {
       leftBound.style.display = "block";
     }
 
-    if (offset.current > maxOffset.current) {
+    if (offset.current >= maxOffset.current - safezone) {
+      cutoffOffset.current = offset.current - maxOffset.current;
       offset.current = maxOffset.current;
       rightBound.style.display = "none";
     } else {
       rightBound.style.display = "block";
+      offset.current += cutoffOffset.current;
+      cutoffOffset.current = 0;
     }
 
     controls.start({
@@ -78,27 +95,29 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
     return containerRef.current.querySelector(`.${side}`) as HTMLDivElement;
   }
 
-  useEffect(() => {
-    const handleResize = () => {
-      maxOffset.current =
-        sliderRef.current.clientWidth - containerRef.current.clientWidth;
-      offset.current = 0;
-      setPosition(0);
-      controls.start({ x: "0px" });
+  useLayoutEffect(() => {
+    maxOffset.current =
+      sliderRef.current.clientWidth - containerRef.current.clientWidth;
+    cutoffOffset.current = 0;
+    offset.current = 0;
+    setPosition(0);
+    controls.start({ x: "0px" });
 
-      const sortedDevices = Object.keys(config).sort(
-        (a, b) => Number(a) - Number(b)
-      );
-      const currentDeviceKey =
-        sortedDevices.find(
-          (key) => innerWidth < Number(key) || innerWidth === Number(key)
-        ) || sortedDevices[sortedDevices.length - 1];
+    const rightBound = getBound("right");
+    const leftBound = getBound("left");
+    leftBound.style.display = "none";
+    rightBound.style.display = "block";
 
-      setstep(config[currentDeviceKey].step);
-    };
+    const sortedDevices = Object.keys(config || {})?.sort(
+      (a, b) => Number(a) - Number(b)
+    );
+    const currentDeviceKey =
+      sortedDevices.find(
+        (key) => innerWidth < Number(key) || innerWidth === Number(key)
+      ) || sortedDevices[sortedDevices.length - 1];
 
-    handleResize();
-  }, [w]);
+    setstep(config?.[currentDeviceKey]?.step || 1);
+  }, [w, pathname, step]);
 
   return (
     <StyledSlider

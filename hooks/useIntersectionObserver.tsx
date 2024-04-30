@@ -27,6 +27,8 @@ export const videoCallback = (
 
   entries.forEach((entry) => {
     if (!videoRef.current) return;
-    entry.isIntersecting ? playVideo() : videoRef.current.pause();
+    videoRef.current.onloadeddata = () => {
+      entry.isIntersecting ? playVideo() : videoRef.current.pause();
+    };
   });
 };

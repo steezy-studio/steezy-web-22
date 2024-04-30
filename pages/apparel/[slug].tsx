@@ -8,15 +8,16 @@ import {
   Video as VideoType,
 } from "@shopify/hydrogen-react/storefront-api-types";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import getClient from "../../apollo/client";
+import FeaturedProducts from "../../components/FeaturedProducts/FeaturedProducts";
 import Head from "../../components/Head/Head";
 import QuantitySelect from "../../components/Inputs/QuantitySelect";
 import VariantsSelect from "../../components/Inputs/VariantsSelect";
 import Link from "../../components/Link/Link";
 import Navbar from "../../components/Navbar/Navbar";
 import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
-import RevealAnimation from "../../components/RevealAnimation/RevealAnimation";
+import Slider from "../../components/Slider/Slider";
 import { Large } from "../../components/Typo/Large";
 import { Medium } from "../../components/Typo/Medium";
 import { Small } from "../../components/Typo/Small";
@@ -36,16 +37,15 @@ import { formatPrice } from "../../helpers/formatPrice";
 import {
   ProductFeaturedProducts,
   ProductFeaturedProjects,
-  ProductHeroVideo,
-  ProductGalleryGrid,
+  ProductGallery,
   ProductGalleryImg,
+  ProductHeroVideo,
   ProductInfo,
   ProductOptions,
   ProductSection,
   ProductText,
   StyledProduct,
 } from "../../pagestyles/StyledProduct";
-import FeaturedProducts from "../../components/FeaturedProducts/FeaturedProducts";
 
 interface productProps {
   areas: Areas;
@@ -82,11 +82,9 @@ const product = ({
           <Navbar areas={areas.items} header={product.title} />
           <ProductSection>
             <ProductHeroVideo>
-              {video && (
-                <Video
-                  src={video.sources.find(({ format }) => format === "mp4").url}
-                />
-              )}
+              <Video
+                src={video.sources.find(({ format }) => format === "mp4").url}
+              />
             </ProductHeroVideo>
             <ProductInfo>
               <ProductText>
@@ -97,47 +95,57 @@ const product = ({
                     product.priceRange.maxVariantPrice.currencyCode
                   )}
                 </Large>
-                <div>
-                  <Small>Tax included</Small>
-                  <Small>Shipping only in Czechia</Small>
-                </div>
+                {product.availableForSale && (
+                  <div>
+                    <Small>Tax included</Small>
+                    <Small>Shipping only in Czechia</Small>
+                  </div>
+                )}
               </ProductText>
-              <ProductOptions>
-                <VariantsSelect
-                  variants={product.variants}
-                  onChange={(id) =>
-                    setproductVariant((p) => ({
-                      ...p,
-                      merchandiseId: id,
-                    }))
-                  }
-                />
-                <QuantitySelect
-                  quantityAvaible={
-                    product.variants.nodes.find(
-                      (x) => x.id === productVariant.merchandiseId
-                    ).quantityAvailable
-                  }
-                  onQuantityChange={(val) => {
-                    setproductVariant((p) => ({ ...p, quantity: val }));
-                  }}
-                />
-              </ProductOptions>
-              <Large>
-                <Link
-                  href={""}
-                  onClick={() => {
-                    linesAdd([productVariant]);
-                  }}
-                >
-                  add to cart
-                </Link>
-              </Large>
+              {product.availableForSale ? (
+                <Fragment>
+                  <ProductOptions>
+                    <VariantsSelect
+                      variants={product.variants}
+                      onChange={(id) =>
+                        setproductVariant((p) => ({
+                          ...p,
+                          merchandiseId: id,
+                        }))
+                      }
+                    />
+                    <QuantitySelect
+                      quantityAvaible={
+                        product.variants.nodes?.find(
+                          (x) => x.id === productVariant.merchandiseId
+                        )?.quantityAvailable
+                      }
+                      onQuantityChange={(val) => {
+                        setproductVariant((p) => ({ ...p, quantity: val }));
+                      }}
+                    />
+                  </ProductOptions>
+                  <Large>
+                    <Link
+                      href={""}
+                      onClick={() => {
+                        linesAdd([productVariant]);
+                      }}
+                    >
+                      add to cart
+                    </Link>
+                  </Large>
+                </Fragment>
+              ) : (
+                <ProductOptions>
+                  <Large>out of stock</Large>
+                </ProductOptions>
+              )}
             </ProductInfo>
           </ProductSection>
-          <ProductGalleryGrid>
-            {product.images.nodes.map(({ url, width, height }, i) => (
-              <RevealAnimation>
+          <ProductGallery>
+            <Slider>
+              {product.images.nodes.map(({ url, width, height }, i) => (
                 <ProductGalleryImg
                   key={i}
                   src={url}
@@ -145,9 +153,9 @@ const product = ({
                   height={height}
                   width={width}
                 />
-              </RevealAnimation>
-            ))}
-          </ProductGalleryGrid>
+              ))}
+            </Slider>
+          </ProductGallery>
           <ProductFeaturedProducts>
             <FeaturedProducts
               products={featuredProducts}

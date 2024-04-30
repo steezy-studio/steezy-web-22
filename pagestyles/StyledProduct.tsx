@@ -17,15 +17,8 @@ export const ProductSection = styled.section`
   }
 `;
 
-export const ProductGalleryGrid = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  row-gap: ${spaces.xs}px;
-  column-gap: ${spaces.xs}px;
+export const ProductGallery = styled.section`
   margin-top: ${spaces.xxl}px;
-  ${breakpoint.phone} {
-    grid-template-columns: unset;
-  }
 `;
 
 export const ProductOptions = styled.div`
@@ -44,8 +37,10 @@ export const ProductText = styled.div`
 `;
 
 export const ProductGalleryImg = styled(Image)`
+  display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  max-height: 80vh;
   object-fit: cover;
   border-radius: ${({ theme }) => theme.bRad};
 `;

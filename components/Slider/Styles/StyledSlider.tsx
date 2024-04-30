@@ -10,7 +10,7 @@ export const StyledSlider = styled(motion.div)`
 `;
 
 export const Slide = styled.div`
-  width: 100%;
+  width: fit-content;
   height: 100%;
   z-index: 1;
 `;
@@ -31,8 +31,20 @@ export const SliderBound = styled.div`
   z-index: 2;
   &.left {
     left: 0;
+    /* background: linear-gradient(
+      -90deg,
+      rgba(255, 255, 255, 0),
+      80%,
+      rgba(255, 255, 255, 1)
+    ); */
   }
   &.right {
     right: 0;
+    /* background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0),
+      80%,
+      rgba(255, 255, 255, 1)
+    ); */
   }
 `;

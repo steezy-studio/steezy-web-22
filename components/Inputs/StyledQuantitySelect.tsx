@@ -22,4 +22,5 @@ export const QuantityInput = styled.input`
 
 export const QuantityIconWrapper = styled.div`
   padding: ${spaces.s}px;
+  display: flex;
 `;
