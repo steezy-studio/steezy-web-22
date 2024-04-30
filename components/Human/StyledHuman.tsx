@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
 import { spaces } from "../../helpers/spaces";
-import { colors } from "../../helpers/consts";
+import { breakpoint, colors } from "../../helpers/consts";
 
 export const StyledHuman = styled.div`
   position: relative;
@@ -10,6 +10,9 @@ export const StyledHuman = styled.div`
   height: 100%;
   aspect-ratio: 1.2;
   border-radius: ${({ theme }) => theme.bRad};
+  ${breakpoint.phone} {
+    aspect-ratio: 1;
+  }
 `;
 
 export const HumanCover = styled(Image)`
@@ -46,6 +49,9 @@ export const HumanInfoGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   column-gap: ${spaces.m}px;
   row-gap: ${spaces.s}px;
+  ${breakpoint.phone} {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const HumanInfoCol = styled.div`

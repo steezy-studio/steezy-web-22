@@ -19,12 +19,18 @@ export const ProjectsHeroFilters = styled.div`
   column-gap: ${spaces.l}px;
   ${breakpoint.tabletLandscape} {
     column-gap: ${spaces.m}px;
+    row-gap: ${spaces.xxs}px;
   }
 `;
 
 export const Filter = styled.span`
   display: flex;
   column-gap: ${spaces.xxs}px;
+  ${breakpoint.phone} {
+    span:nth-child(2) {
+      display: none;
+    }
+  }
 `;
 
 export const FilterW = styled.span`

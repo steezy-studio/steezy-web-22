@@ -27,6 +27,9 @@ export const ProductCardInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  ${breakpoint.phone} {
+    /* display: none; */
+  }
 `;
 
 export const ProductCardCoverW = styled(motion.div)`

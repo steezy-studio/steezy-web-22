@@ -24,9 +24,9 @@ export const ProjectHeroRoles = styled.div`
   }
   ${breakpoint.phone} {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     column-gap: ${spaces.m}px;
-    margin-top: ${spaces.xl}px;
+    margin-top: ${spaces.l}px;
   }
 `;
 

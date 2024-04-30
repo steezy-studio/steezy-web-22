@@ -38,6 +38,9 @@ export const ContactDetails = styled.div`
   row-gap: ${spaces.xl}px;
   grid-template-columns: 1fr 1fr;
   height: 100%;
+  ${breakpoint.phone} {
+    column-gap: ${spaces.m}px;
+  }
 `;
 
 export const ContactSocials = styled.div`

@@ -59,13 +59,8 @@ const Contact = ({ areas }: ContactProps) => {
               <RevealAnimation delay={0.2}>
                 <ContactDetail>
                   <Nano>BRNO OFFICE</Nano>
-                  <Small>
-                    STEEZY, s.r.o. <br />
-                    Obilní trh 4, 602 00 Brno <br />
-                    Czech Republic <br />
-                    <br />
-                    IČ: 07812558 <br />
-                    DIČ (VAT): CZ07812558
+                  <Small className='break-lines'>
+                    {`STEEZY, s.r.o.\nObilní trh 4, 602 00 Brno\nCzech Republic\n\nIČ: 07812558\nDIČ (VAT): CZ07812558`}
                   </Small>
                 </ContactDetail>
               </RevealAnimation>
