@@ -6,7 +6,7 @@ export const StyledCartItem = styled.div`
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-areas: "title title" "quantity price";
-  row-gap: ${spaces.m}px;
+  row-gap: ${spaces.s}px;
   align-items: center;
   ${breakpoint.phone} {
     align-items: end;
@@ -25,4 +25,6 @@ export const QuantityContainer = styled.div`
 
 export const CartItemSize = styled.div`
   /* display: flex; */
+  display: grid;
+  row-gap: ${spaces.s}px;
 `;

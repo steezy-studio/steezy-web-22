@@ -32,6 +32,7 @@ import {
   CartContent,
   CartFooter,
   CartHeader,
+  CartHeaderI,
   CartItemWrapper,
   CartItems,
   Drawer,
@@ -39,6 +40,8 @@ import {
   StyledCart,
   TotalPrice,
 } from "./Styles/StyledCart";
+import { Micro } from "../Typo/Micro";
+import { Nano } from "../Typo/Nano";
 
 interface CartProps {}
 
@@ -81,7 +84,14 @@ const Cart = ({}: CartProps) => {
           transition={{ ease: easing, duration: 0.5 }}
         >
           <CartHeader>
-            <Large className='uppercase black'>Cart</Large>
+            <CartHeaderI>
+              <Large className='uppercase black'>Cart</Large>
+              <Nano>
+                <Link href={"/apparel"} className='agrandir'>
+                  all products
+                </Link>
+              </Nano>
+            </CartHeaderI>
             <CartCloseWrapper>
               <Burger onClick={() => setShowCart(false)} isOpen />
             </CartCloseWrapper>

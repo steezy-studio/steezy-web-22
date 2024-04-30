@@ -48,6 +48,11 @@ export const CartHeader = styled.div`
   align-items: center;
 `;
 
+export const CartHeaderI = styled.div`
+  display: grid;
+  row-gap: ${spaces.xs}px;
+`;
+
 export const CartCloseWrapper = styled.div`
   width: 60px;
   div {
