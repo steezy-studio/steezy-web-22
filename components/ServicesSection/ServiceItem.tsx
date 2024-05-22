@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Area } from "../../generated/preprTypes";
+import { isVideoAsset } from "../../helpers/isVideoAsset";
+import isTouchDevice from "../../helpers/isTouchDevice";
 import { HoverProvider } from "../../pages/_app";
 import RevealAnimation from "../RevealAnimation/RevealAnimation";
 import { Medium } from "../Typo/Medium";
@@ -14,7 +16,6 @@ import {
   StyledServiceItem,
 } from "./StyledServiceItem";
 import { SubServicesList } from "./StyledServicesSection";
-import useIsTouchDevice from "../../hooks/useIsTouchDevice";
 
 interface ServiceItemProps {
   area: Area;
@@ -28,7 +29,6 @@ const ServiceItem = ({ area, i }: ServiceItemProps) => {
   const [hover, sethover] = useState<boolean>(false);
   const isEven = i % 2 === 0;
   const { setCursorType } = useContext(HoverProvider);
-  const isTouchDevice = useIsTouchDevice();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -49,12 +49,12 @@ const ServiceItem = ({ area, i }: ServiceItemProps) => {
     <StyledServiceItem
       ref={ref}
       onMouseEnter={() => {
-        if (isTouchDevice) return;
+        if (isTouchDevice()) return;
         sethover(true);
         setCursorType("hover");
       }}
       onMouseLeave={() => {
-        if (isTouchDevice) return;
+        if (isTouchDevice()) return;
         sethover(false);
         setCursorType("normal");
       }}
@@ -69,7 +69,7 @@ const ServiceItem = ({ area, i }: ServiceItemProps) => {
         transition={{ duration: 0.3 }}
       >
         <ServiceItemProjectInner>
-          {img.url ? (
+          {!isVideoAsset(img.url) ? (
             <ServiceItemProjectImg
               src={img.url}
               alt={area.projects[0].project_grid_name}

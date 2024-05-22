@@ -47,6 +47,7 @@ interface indexProps {
 
 const Index = ({ projects, areas, latestProjects, products }: indexProps) => {
   const landingpageStrings = strings.landingPage;
+
   const { w } = useWindowSize();
 
   return (

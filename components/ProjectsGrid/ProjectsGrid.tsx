@@ -21,7 +21,7 @@ interface ProjectsGridProps {
 
 const ProjectsGrid = ({
   projects,
-  projectsPerPage = 10,
+  projectsPerPage = 14,
 }: ProjectsGridProps) => {
   const [visibleProjectsCount, setvisibleProjectsCount] =
     useState<number>(projectsPerPage);

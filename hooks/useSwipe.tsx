@@ -1,7 +1,7 @@
 "use client";
 
 import { MutableRefObject, useEffect } from "react";
-import useIsTouchDevice from "./useIsTouchDevice";
+import isTouchDevice from "../helpers/isTouchDevice";
 
 interface UseSwipeProps {
   ref: MutableRefObject<HTMLDivElement>;
@@ -10,10 +10,8 @@ interface UseSwipeProps {
 }
 
 export function useSwipe({ ref, cb, deps = [] }: UseSwipeProps) {
-  const isTouchDevice = useIsTouchDevice();
-
   useEffect(() => {
-    if (!isTouchDevice) return;
+    if (!isTouchDevice()) return;
     let initialX: number | null = null;
     const html = document.querySelector("html");
 

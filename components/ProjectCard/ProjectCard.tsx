@@ -11,7 +11,7 @@ import {
   useIntersectionObserver,
   videoCallback,
 } from "../../hooks/useIntersectionObserver";
-import useIsTouchDevice from "../../hooks/useIsTouchDevice";
+import isTouchDevice from "../../helpers/isTouchDevice";
 import AreaTag from "../AreaTag/AreaTag";
 import {
   GridItemAreas,
@@ -23,6 +23,7 @@ import {
 } from "../GridItem/Styles/StyledGridItem";
 import { Small } from "../Typo/Small";
 import { StyledProjectCard } from "./StyledProjectCard";
+import { isVideoAsset } from "../../helpers/isVideoAsset";
 
 interface ProjectCardProps {
   areas: Area[];
@@ -44,7 +45,6 @@ const ProjectCard = ({
   _static,
 }: ProjectCardProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const isTouchDevice = useIsTouchDevice();
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
   );
@@ -67,10 +67,10 @@ const ProjectCard = ({
     <StyledProjectCard className={wide ? "wide" : ""}>
       <GridItemCoverWrapper>
         <GridItemGrad
-          animate={{ opacity: _static || isTouchDevice ? 1 : hover ? 1 : 0 }}
+          animate={{ opacity: _static || isTouchDevice() ? 1 : hover ? 1 : 0 }}
           transition={{ duration: 0.2 }}
         />
-        {cover[0].url ? (
+        {!isVideoAsset(cover[0].url) ? (
           <GridItemCover
             src={cover[0].url}
             width={cover[0].width}
@@ -78,7 +78,7 @@ const ProjectCard = ({
             blurDataURL={cover[0].url}
             height={cover[0].height}
             style={{
-              transform: `scale(${isTouchDevice ? 1 : hover ? 1.05 : 1})`,
+              transform: `scale(${isTouchDevice() ? 1 : hover ? 1.05 : 1})`,
             }}
             alt={projectName}
           />
@@ -93,7 +93,7 @@ const ProjectCard = ({
             muted={true}
             loop={true}
             style={{
-              transform: `scale(${isTouchDevice ? 1 : hover ? 1.05 : 1})`,
+              transform: `scale(${isTouchDevice() ? 1 : hover ? 1.05 : 1})`,
             }}
           />
         )}
@@ -106,7 +106,7 @@ const ProjectCard = ({
       </GridItemAreas>
       <GridItemHeader
         animate={{
-          y: _static || isTouchDevice ? "0%" : hover ? "0%" : "-200%",
+          y: _static || isTouchDevice() ? "0%" : hover ? "0%" : "-200%",
         }}
       >
         <Small className='white medium'>{stripHtmlTags(projectName)}</Small>

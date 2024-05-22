@@ -17,7 +17,7 @@ import {
   StyledProductCard,
 } from "./StyledProductCard";
 import RevealAnimation from "../RevealAnimation/RevealAnimation";
-import useIsTouchDevice from "../../hooks/useIsTouchDevice";
+import isTouchDevice from "../../helpers/isTouchDevice";
 import { MoneyV2 } from "@shopify/hydrogen-react/storefront-api-types";
 
 interface Image {
@@ -50,7 +50,6 @@ const ProductCard = ({
 }: ProductCardProps) => {
   const { setCursorType } = useContext(HoverProvider);
   const [hover, sethover] = useState<boolean>(true);
-  const isTouchDevice = useIsTouchDevice();
   const allowHover = useRef<boolean>(false);
   const transition = { ease: easing, duration: 0.3 };
   const ref = useRef<HTMLDivElement>(null);
@@ -105,7 +104,7 @@ const ProductCard = ({
                 >
                   {availableForSale ? "in stock" : "out of stock"}
                 </Small>
-                {!isTouchDevice && hover && (
+                {!isTouchDevice() && hover && (
                   <ProductCardButton
                     layout={"position"}
                     key={slug + "button"}
