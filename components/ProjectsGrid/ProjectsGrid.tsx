@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EnhancedProject } from "../../helpers/enhanceProjects";
 import GridItem from "../GridItem/GridItem";
 import Link from "../Link/Link";
@@ -26,6 +26,10 @@ const ProjectsGrid = ({
   const [visibleProjectsCount, setvisibleProjectsCount] =
     useState<number>(projectsPerPage);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setvisibleProjectsCount(projectsPerPage);
+  }, [projectsPerPage]);
 
   return (
     <StyledProjectsGrid>

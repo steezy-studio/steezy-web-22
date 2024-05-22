@@ -7,10 +7,6 @@ export const StyledIndex = styled.div``;
 
 export const IndexHeroSection = styled.section``;
 
-export const IndexLatestProjects = styled.section`
-  margin-top: ${spaces.xxl}px;
-`;
-
 export const IndexSliderW = styled.div``;
 
 export const LandingHeroPageLogotypes = styled.div`
@@ -63,26 +59,19 @@ export const IndexQuoteClient = styled.div`
   overflow: hidden;
 `;
 
-export const IndexQuotesSlider = styled(motion.section)`
-  max-width: 1500px;
-  margin: ${spaces.xxxxl}px 0;
-  ${breakpoint.tabletPortrait} {
-    margin: ${spaces.xxl}px 0;
-  }
-`;
-
 export const FeaturedGrid = styled.div`
   display: grid;
   row-gap: ${spaces.l}px;
+  margin-top: ${spaces.xxxxl}px;
   ${breakpoint.tabletPortrait} {
     row-gap: ${spaces.m}px;
   }
 `;
 
 export const IndexApparel = styled.section`
-  margin-top: ${spaces.xxxxl}px;
+  margin: ${spaces.xxxxl}px 0;
   ${breakpoint.tabletLandscape} {
-    margin-top: ${spaces.xxl}px;
+    margin: ${spaces.xxl}px 0;
   }
 `;
 

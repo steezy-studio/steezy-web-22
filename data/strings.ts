@@ -32,6 +32,25 @@ export default {
       paragraph:
         "We form a diverse team of professionals with specializations in classical and digital creative fields. We build on an analysis of the problem and we think in the context of time and relevant markets. We combine the latest technology and knowledge in the field while taking into account the cultural environment and value propositions.",
     },
+    quotes: [
+      {
+        quote:
+          "The cooperation with\nSteezy exceeded our\nexpectations in almost all\nrespects. I was looking\nforward to every\nnext meeting.",
+        name: "Roman Svačina",
+        position: "Managing Director at Infinit wellness",
+      },
+      {
+        quote: "Skilled creatives\nwith amazing results!",
+        name: "Adam Křena",
+        position: "Head of Atelier @footshop",
+      },
+      {
+        quote:
+          "We have chosen Steezy for their youthful, fresh and original ideas, which they always think through and elaborate in detail.",
+        name: "Daniel Urminský",
+        position: "Country Manager @Isobar",
+      },
+    ],
     values: {
       header: "Our key values",
       list: [
@@ -285,25 +304,6 @@ export default {
         { type: "text", body: "behind\u00a0distinctive\nbrands" },
       ],
     },
-    quotes: [
-      {
-        quote:
-          "The cooperation with\nSteezy exceeded our\nexpectations in almost all\nrespects. I was looking\nforward to every\nnext meeting.",
-        name: "Roman Svačina",
-        position: "Managing Director at Infinit wellness",
-      },
-      {
-        quote: "Skilled creatives\nwith amazing results!",
-        name: "Adam Křena",
-        position: "Head of Atelier @footshop",
-      },
-      {
-        quote:
-          "We have chosen Steezy for their youthful, fresh and original ideas, which they always think through and elaborate in detail.",
-        name: "Daniel Urminský",
-        position: "Country Manager @Isobar",
-      },
-    ],
     // quotes: [
     //   {
     //     __typename: "Quote",

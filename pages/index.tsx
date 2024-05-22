@@ -1,14 +1,15 @@
+import {
+  ProductConnection,
+  QueryRoot,
+  QueryRootProductsArgs,
+} from "@shopify/hydrogen-react/storefront-api-types";
 import { GetStaticProps } from "next";
 import getClient from "../apollo/client";
-import AutoSlider from "../components/AutoSlider/AutoSlider";
-import ClientQuote from "../components/ClientQuote/ClientQuote";
 import FeaturedProducts from "../components/FeaturedProducts/FeaturedProducts";
 import Head from "../components/Head/Head";
 import Hero from "../components/Hero/Hero";
 import Navbar from "../components/Navbar/Navbar";
 import ProjectsGrid from "../components/ProjectsGrid/ProjectsGrid";
-import ProjectsSlider from "../components/ProjectsSlider/ProjectsSlider";
-import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 import SectionHeader from "../components/SectionHeader/SectionHeader";
 import ServicesSection from "../components/ServicesSection/ServicesSection";
 import { Micro } from "../components/Typo/Micro";
@@ -18,36 +19,27 @@ import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
 import { GET_PRODUCTS } from "../graphql/GetProducts";
 import { device, indetifiers } from "../helpers/consts";
 import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
+import { useWindowSize } from "../hooks/useWindowSize";
 import {
   FeaturedGrid,
   HeroFooter,
   IndexApparel,
   IndexGrid,
   IndexHeroSection,
-  IndexLatestProjects,
-  IndexQuotesSlider,
   IndexServices,
   LandingHeroPageLogotypes,
   LandingPageHeroLogotype,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
-import { useWindowSize } from "../hooks/useWindowSize";
-import {
-  ProductConnection,
-  QueryRoot,
-  QueryRootProductsArgs,
-} from "@shopify/hydrogen-react/storefront-api-types";
 
 interface indexProps {
   projects: EnhancedProject[];
-  latestProjects: EnhancedProject[];
   areas: Areas;
   products: ProductConnection;
 }
 
-const Index = ({ projects, areas, latestProjects, products }: indexProps) => {
+const Index = ({ projects, areas, products }: indexProps) => {
   const landingpageStrings = strings.landingPage;
-
   const { w } = useWindowSize();
 
   return (
@@ -89,34 +81,6 @@ const Index = ({ projects, areas, latestProjects, products }: indexProps) => {
           </HeroFooter>
         </IndexHeroSection>
 
-        <IndexLatestProjects>
-          <ProjectsSlider
-            header='Latest projects'
-            linkText={"All projects"}
-            url={"/projects/all-projects"}
-            projects={latestProjects}
-          />
-        </IndexLatestProjects>
-
-        <IndexQuotesSlider>
-          <RevealAnimation>
-            <AutoSlider
-              interval={5000}
-              list={landingpageStrings.quotes.map(
-                ({ name, position, quote }, j, a) => {
-                  return (
-                    <ClientQuote
-                      key={j}
-                      quote={quote}
-                      clientName={name}
-                      clientRole={position}
-                    />
-                  );
-                }
-              )}
-            />
-          </RevealAnimation>
-        </IndexQuotesSlider>
         <FeaturedGrid>
           <SectionHeader
             header='Featured projects'
@@ -126,10 +90,13 @@ const Index = ({ projects, areas, latestProjects, products }: indexProps) => {
           <IndexGrid>
             <ProjectsGrid
               projects={projects}
-              projectsPerPage={w <= device.phone ? 5 : 10}
+              projectsPerPage={w <= device.phone ? 5 : 14}
             />
           </IndexGrid>
         </FeaturedGrid>
+        <IndexServices>
+          <ServicesSection areas={areas} />
+        </IndexServices>
         <IndexApparel>
           <FeaturedProducts
             products={products}
@@ -138,9 +105,6 @@ const Index = ({ projects, areas, latestProjects, products }: indexProps) => {
             linkText='Whole collection'
           />
         </IndexApparel>
-        <IndexServices>
-          <ServicesSection areas={areas} />
-        </IndexServices>
         {/* <InstagramFeed images={null} /> */}
       </StyledIndex>
     </>
@@ -168,28 +132,18 @@ export const getStaticProps: GetStaticProps = async () => {
   });
 
   const {
-    data: {
-      FeaturedGrid: featuredGrid,
-      Projects: latestProjects,
-      Areas: areas,
-    },
+    data: { Projects: projects, Areas: areas },
   } = await preprClient.query<Query>({
     query: GET_LANDINGPAGE,
     variables: { sortLatestProjects: "changed_on_DESC" },
   });
 
-  const enhancedFeaturedGrid = enhanceProjects(
-    featuredGrid.featured_projects,
-    areas
-  );
-
-  const enhancedLatestProjects = enhanceProjects(latestProjects.items, areas);
+  const projectsGrid = enhanceProjects(projects.items, areas);
 
   return {
     props: {
       areas: areas,
-      projects: enhancedFeaturedGrid,
-      latestProjects: enhancedLatestProjects,
+      projects: projectsGrid,
       products,
     },
     revalidate: Number(process.env.REVALIDATE),

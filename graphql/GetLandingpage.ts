@@ -7,7 +7,7 @@ export const GET_LANDINGPAGE = gql`
     Areas(sort: area_order_ASC) {
       ...FragmentGetAreas
     }
-    Projects(sort: $sortLatestProjects, limit: 10) {
+    Projects(sort: $sortLatestProjects, limit: 14) {
       items {
         project_grid_name
         grid_image {
@@ -25,26 +25,6 @@ export const GET_LANDINGPAGE = gql`
         }
         _id
         _slug
-      }
-    }
-    FeaturedGrid {
-      featured_projects {
-        _slug
-        _id
-        project_grid_name
-        grid_image {
-          url(format: "webp")
-          _type
-          description
-          width
-          height
-          cdn_files {
-            _id
-            _type
-            profile
-            url
-          }
-        }
       }
     }
   }

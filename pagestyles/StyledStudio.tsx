@@ -16,6 +16,10 @@ export const StudioHero = styled.section`
   }
 `;
 
+export const StudioLatestProjects = styled.section`
+  margin-top: ${spaces.xxl}px;
+`;
+
 export const TextBlock = styled(motion.div)`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -77,6 +81,14 @@ export const ValuesSection = styled.section`
 `;
 
 export const StudioServices = styled.section``;
+
+export const StudioQuotesSlider = styled(motion.section)`
+  max-width: 1500px;
+  margin: ${spaces.xxxxl}px 0 ${spaces.xl}px;
+  ${breakpoint.tabletPortrait} {
+    margin: ${spaces.xxl}px 0;
+  }
+`;
 
 export const StudioServicesSectionW = styled.div`
   margin-top: ${spaces.xxxl}px;

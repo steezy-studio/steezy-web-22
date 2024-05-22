@@ -1,10 +1,13 @@
 import { GetStaticProps } from "next";
 import { useState } from "react";
 import getClient from "../apollo/client";
+import AutoSlider from "../components/AutoSlider/AutoSlider";
+import ClientQuote from "../components/ClientQuote/ClientQuote";
 import Head from "../components/Head/Head";
 import HeaderLine from "../components/HeaderLine/HeaderLine";
 import Hero from "../components/Hero/Hero";
 import Navbar from "../components/Navbar/Navbar";
+import ProjectsSlider from "../components/ProjectsSlider/ProjectsSlider";
 import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 import ServicesSection from "../components/ServicesSection/ServicesSection";
 import Slider from "../components/Slider/Slider";
@@ -14,8 +17,11 @@ import { Micro } from "../components/Typo/Micro";
 import { Small } from "../components/Typo/Small";
 import ValueItem from "../components/ValueItem";
 import strings from "../data/strings";
-import { Areas } from "../generated/preprTypes";
+import { Areas, Query } from "../generated/preprTypes";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
+import { GET_LATEST_PROJECTS } from "../graphql/GetLatestProjects";
+import { device } from "../helpers/consts";
+import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
 import {
   BrandsHeader,
   BrandsSection,
@@ -24,6 +30,8 @@ import {
   OurStudio,
   OurStudioSliderImg,
   StudioHero,
+  StudioLatestProjects,
+  StudioQuotesSlider,
   StudioServiceCover,
   StudioServices,
   StudioServicesSectionW,
@@ -36,13 +44,13 @@ import {
   ValuesList,
   ValuesSection,
 } from "../pagestyles/StyledStudio";
-import { device } from "../helpers/consts";
 
 interface StudioProps {
   areas: Areas;
+  latestProjects: EnhancedProject[];
 }
 
-const Studio = ({ areas }: StudioProps) => {
+const Studio = ({ areas, latestProjects }: StudioProps) => {
   const studioStrings = strings.studioPage;
   const [focusedValue, setFocusedValue] = useState(0);
 
@@ -64,6 +72,14 @@ const Studio = ({ areas }: StudioProps) => {
           </Large>
           <Hero asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }} />
         </StudioHero>
+        <StudioLatestProjects>
+          <ProjectsSlider
+            header='Latest projects'
+            linkText={"All projects"}
+            url={"/projects/all-projects"}
+            projects={latestProjects}
+          />
+        </StudioLatestProjects>
         <RevealAnimation>
           <TextBlock>
             <TextBlockHeader>
@@ -126,10 +142,29 @@ const Studio = ({ areas }: StudioProps) => {
         </ValuesSection>
 
         <StudioServices>
-          <Large>
+          <StudioQuotesSlider>
+            <RevealAnimation>
+              <AutoSlider
+                interval={5000}
+                list={studioStrings.quotes.map(
+                  ({ name, position, quote }, j, a) => {
+                    return (
+                      <ClientQuote
+                        key={j}
+                        quote={quote}
+                        clientName={name}
+                        clientRole={position}
+                      />
+                    );
+                  }
+                )}
+              />
+            </RevealAnimation>
+          </StudioQuotesSlider>
+          {/* <Large>
             We’re able to cover the client’s needs from strategy and art
             direction to production, design and communication.
-          </Large>
+          </Large> */}
           <StudioServiceCover
             src={"/images/studio-hero.jpg"}
             width={2101}
@@ -163,9 +198,26 @@ const Studio = ({ areas }: StudioProps) => {
 export const getStaticProps: GetStaticProps = async () => {
   const client = getClient();
   try {
-    const data = await client.query({ query: GET_ALL_AREAS });
+    const areasReq = client.query<Query>({ query: GET_ALL_AREAS });
+    const latestProjectsReq = client.query<Query>({
+      query: GET_LATEST_PROJECTS,
+    });
+    const [
+      {
+        data: { Areas: areas },
+      },
+      {
+        data: { FeaturedGrid: latestProjects },
+      },
+    ] = await Promise.all([areasReq, latestProjectsReq]);
+
+    const enhancedLatestProjects = enhanceProjects(
+      latestProjects.featured_projects,
+      areas
+    );
+
     return {
-      props: { areas: data.data.Areas },
+      props: { areas, latestProjects: enhancedLatestProjects },
       revalidate: Number(process.env.REVALIDATE),
     };
   } catch (e) {
