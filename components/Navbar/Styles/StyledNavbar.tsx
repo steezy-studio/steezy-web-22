@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { breakpoint, colors } from "../../../helpers/consts";
 import { spaces } from "../../../helpers/spaces";
 import Image from "next/image";
+import Link from "next/link";
 
 export const StyledNavbar = styled.nav`
   position: fixed;
@@ -102,7 +103,7 @@ export const NavbarCart = styled.div`
   }
 `;
 
-export const ContactUs = styled.a`
+export const ContactUs = styled(Link)`
   display: grid;
   grid-auto-flow: column;
   align-items: center;

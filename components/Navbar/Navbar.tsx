@@ -29,6 +29,7 @@ import {
   dividerAnimation,
   navLinksVariants,
 } from "./Styles/StyledNavbar";
+import Portal from "../Portal/Portal";
 
 interface NavbarProps {
   areas: Area[];
@@ -145,31 +146,44 @@ const Navbar = ({ areas, header }: NavbarProps) => {
           </>
         )}
       </AnimatePresence>
-      <StyledNavbar>
-        <Logo />
-        <NavlinksMask>
-          {header && !isTabletPortrait && (
-            <NavHeader>
-              <RevealAnimation delay={0.5}>
-                <Nano>{header}</Nano>
-              </RevealAnimation>
-            </NavHeader>
-          )}
-        </NavlinksMask>
+      <Portal selector={"body"}>
+        <StyledNavbar>
+          <Logo />
+          <NavlinksMask>
+            {!isTabletPortrait && (
+              <AnimatePresence mode='wait'>
+                {header && (
+                  <NavHeader
+                    key={header}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <Nano>{header}</Nano>
+                  </NavHeader>
+                )}
+              </AnimatePresence>
+            )}
+          </NavlinksMask>
 
-        {lines.length !== 0 && (
-          <NavbarCart
-            onClick={() => {
-              setShowCart((p) => !p);
-            }}
-            onMouseEnter={() => setCursorType("hover")}
-            onMouseLeave={() => setCursorType("normal")}
-          >
-            <Nano className='white'>{lines.length}</Nano>
-          </NavbarCart>
-        )}
-        <Burger onClick={() => openMenu((prev) => !prev)} isOpen={isMenuOpen} />
-      </StyledNavbar>
+          {lines.length !== 0 && (
+            <NavbarCart
+              onClick={() => {
+                setShowCart((p) => !p);
+              }}
+              onMouseEnter={() => setCursorType("hover")}
+              onMouseLeave={() => setCursorType("normal")}
+            >
+              <Nano className='white'>{lines.length}</Nano>
+            </NavbarCart>
+          )}
+          <Burger
+            onClick={() => openMenu((prev) => !prev)}
+            isOpen={isMenuOpen}
+          />
+        </StyledNavbar>
+      </Portal>
     </>
   );
 };

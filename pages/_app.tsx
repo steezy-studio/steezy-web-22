@@ -10,6 +10,7 @@ import { useWindowSize } from "../hooks/useWindowSize";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
 import Cart, { CartToggleProvider } from "../components/Cart/Cart";
 import CartProvider from "../components/Cart/CartProvider";
+import PageTransition from "../components/PageTransition/PageTransition";
 
 export const HoverProvider = React.createContext<{
   setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,27 +32,27 @@ function MyApp({ Component, pageProps }) {
       <CartProvider>
         <ThemeProvider theme={theme(w)}>
           <GlobalStyle />
-          <main ref={containerRef}>
-            <Cursor
-              isCursorDisabled={isCursorDisabled}
-              cursorType={cursorType}
-              cursorRef={cursorRef}
-            />
-            <HoverProvider.Provider
-              value={{
-                setIsCursorDisabled,
-                setCursorType,
-                cursorType,
-                cursorRef,
-              }}
-            >
-              <Layout>
+          <PageTransition>
+            <main ref={containerRef}>
+              {/* <Cursor
+                isCursorDisabled={isCursorDisabled}
+                cursorType={cursorType}
+                cursorRef={cursorRef}
+              /> */}
+              <HoverProvider.Provider
+                value={{
+                  setIsCursorDisabled,
+                  setCursorType,
+                  cursorType,
+                  cursorRef,
+                }}
+              >
                 <Cart />
                 <Component {...pageProps} />
                 <Footer />
-              </Layout>
-            </HoverProvider.Provider>
-          </main>
+              </HoverProvider.Provider>
+            </main>
+          </PageTransition>
         </ThemeProvider>
       </CartProvider>
     </CartToggleProvider>

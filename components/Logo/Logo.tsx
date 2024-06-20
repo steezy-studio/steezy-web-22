@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { HoverProvider } from "../../pages/_app";
 import { StyledLogo } from "./Styles/StyledLogo";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 interface LogoProps {}
 
@@ -14,7 +15,7 @@ const Logo = ({}: LogoProps) => {
       onMouseEnter={() => setCursorType("hover")}
       onMouseLeave={() => setCursorType("normal")}
     >
-      <a href={"/"}>
+      <Link href={"/"}>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='257'
@@ -494,7 +495,7 @@ const Logo = ({}: LogoProps) => {
             </g>
           </g>
         </svg>
-      </a>
+      </Link>
     </StyledLogo>
   );
 };

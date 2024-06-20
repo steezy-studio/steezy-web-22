@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint, colors } from "../../../helpers/consts";
+import Link from "next/link";
 
-export const StyledNavLink = styled(motion.a)`
+export const StyledNavLink = styled(motion(Link))`
   display: flex;
   align-items: center;
   text-decoration: none;
