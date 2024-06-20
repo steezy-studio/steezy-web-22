@@ -12,6 +12,7 @@ export const StyledGridItem = styled(motion.a)`
 export const GridItemAreas = styled.div`
   position: absolute;
   bottom: ${spaces.m}px;
+  z-index: 2;
   left: ${spaces.m}px;
   display: flex;
   gap: ${spaces.xxs}px;
@@ -35,27 +36,52 @@ export const GridItemCoverWrapper = styled.div`
   height: 100%;
 `;
 
-export const GridItemGrad = styled(motion.div)`
+export const GridItemHoverOverlay = styled(motion.div)`
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0) 30%);
+  backdrop-filter: blur(20px);
+`;
+
+export const GridItemPhoneOverlay = styled.div`
+  display: none;
+  ${breakpoint.phone} {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.2);
+  }
 `;
 
 export const GridItemHeader = styled(motion.div)`
   position: absolute;
-  top: ${spaces.m}px;
-  left: ${spaces.m}px;
-  right: ${spaces.m}px;
+  width: 100%;
+  padding: ${spaces.m}px;
+  display: flex;
+  align-items: center;
   z-index: 2;
+  overflow: hidden;
+  &.tac {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    text-align: center;
+  }
+  &.tal {
+    text-align: left;
+  }
   ${breakpoint.tabletPortrait} {
-    top: ${spaces.s}px;
-    left: ${spaces.s}px;
-    right: ${spaces.s}px;
+    width: calc(100% - ${2 * spaces.s}px);
   }
 `;
+
+export const GridItemHeaderInner = styled(motion.div)``;
 
 export const GridItemVideo = styled.video`
   width: 100%;
