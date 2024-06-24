@@ -8,6 +8,7 @@ interface NavLinkProps {
   active: boolean;
   delay?: number;
   iconSrc?: string;
+  onClick?: () => void;
 }
 
 const NavLink = ({
@@ -15,11 +16,13 @@ const NavLink = ({
   children,
   active,
   delay = 0,
+  onClick,
   iconSrc,
 }: NavLinkProps) => {
   const { setCursorType } = useContext(HoverProvider);
   return (
     <StyledNavLink
+      onClick={onClick}
       onMouseEnter={() => setCursorType("hover")}
       onMouseLeave={() => setCursorType("normal")}
       variants={{

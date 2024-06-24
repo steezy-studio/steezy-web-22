@@ -62,7 +62,6 @@ const Project = ({ projectData, areas }: ProjectProps) => {
         ogImageSrc={project.hero_image[0].url}
         pageName={[`Project`, project.project_detail_name]}
       />
-      <Navbar areas={areas.items} header={project.company_name} />
       <StyledProject>
         <ProjectHeroHeader>
           <RevealAnimation>

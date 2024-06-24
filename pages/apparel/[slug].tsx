@@ -80,7 +80,6 @@ const product = ({
       />
       <ProductProvider data={product}>
         <StyledProduct>
-          <Navbar areas={areas.items} header={product.title} />
           <ProductSection>
             <ProductHeroVideo>
               <Video

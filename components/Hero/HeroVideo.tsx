@@ -18,19 +18,9 @@ interface VideoProps {
 const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { setCursorType } = useContext(HoverProvider);
-  // useIntersectionObserver(videoRef, (entries) =>
-  //   videoCallback(entries, videoRef)
-  // );
-
-  useEffect(() => {
-    if (open) {
-      // videoRef.current.pause();
-    } else {
-      // videoRef.current.play().catch((e) => {
-      /* error handler */
-      // });
-    }
-  }, [open]);
+  useIntersectionObserver(videoRef, (entries) =>
+    videoCallback(entries, videoRef)
+  );
 
   return (
     <>
@@ -55,16 +45,16 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
             <PlayButton>
               <span className='underline big white tac wide'>play video</span>
             </PlayButton>
-            {/* <Loop
+            <Loop
               whileHover={{ scale: 1.15 }}
               transition={{ duration: 0.3 }}
-              // ref={videoRef}
+              ref={videoRef}
               src={src}
-              // autoPlay={true}
-              // playsInline={true}
-              // muted={true}
-              // loop={true}
-            /> */}
+              autoPlay={true}
+              playsInline={true}
+              muted={true}
+              loop={true}
+            />
           </StyledHeroVideo>
         }
       />

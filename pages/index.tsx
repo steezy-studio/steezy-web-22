@@ -50,7 +50,6 @@ const Index = ({ projects, areas, products }: indexProps) => {
         pageName={"STEEZY Studio"}
         ogTitle={"STEEZY Studio"}
       />
-      <Navbar areas={areas.items} header={landingpageStrings.navbar.header} />
       <StyledIndex>
         <IndexHeroSection>
           <Hero

@@ -40,7 +40,6 @@ const apparel = ({ products, areas, projects }: apparelProps) => {
         ogImageSrc={""}
       />
       <StyledApparel>
-        <Navbar areas={areas.items} header='steezy apparel' />
         <ProductsGridSection>
           <Medium className='medium'>Spring/Summer 2024</Medium>
           <ProductsGrid>
