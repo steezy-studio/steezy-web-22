@@ -39,7 +39,7 @@ const Navbar = ({ header }: NavbarProps) => {
       });
     } else {
       videos.forEach((video) => {
-        video.paused && video.play().catch((e) => console.error(e));
+        video.paused && video.play().catch(() => {});
       });
     }
   }, [areNavlinksOpen, router.asPath]);

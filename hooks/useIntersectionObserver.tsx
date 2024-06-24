@@ -22,8 +22,7 @@ export const videoCallback = (
   entries.forEach((entry) => {
     if (!videoRef.current) return;
     if (entry.isIntersecting) {
-      videoRef.current.paused &&
-        videoRef.current.play().catch((e) => console.error(e));
+      videoRef.current.paused && videoRef.current.play().catch(() => {});
     } else {
       !videoRef.current.paused && videoRef.current.pause();
     }
