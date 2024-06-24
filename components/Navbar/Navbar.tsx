@@ -1,12 +1,13 @@
 import { useCart } from "@shopify/hydrogen-react";
 import { AnimatePresence } from "framer-motion";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { device } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { HoverProvider } from "../../pages/_app";
 import { CartToggleContext } from "../Cart/Cart";
 import Logo from "../Logo/Logo";
 import Portal from "../Portal/Portal";
+import { RootVideosControllerContext } from "../RootVideosController/RootVideosController";
 import { Nano } from "../Typo/Nano";
 import Burger from "./Burger";
 import { NavbarContext } from "./NavbarControls";
@@ -16,7 +17,6 @@ import {
   NavlinksMask,
   StyledNavbar,
 } from "./Styles/StyledNavbar";
-import { useRouter } from "next/router";
 
 interface NavbarProps {
   header?: string;
@@ -25,24 +25,11 @@ interface NavbarProps {
 const Navbar = ({ header }: NavbarProps) => {
   const { setAreNavlinksOpen, areNavlinksOpen } = useContext(NavbarContext);
   const { setCursorType } = useContext(HoverProvider);
+  const { setPauseAllVideos } = useContext(RootVideosControllerContext);
   const { setShowCart } = useContext(CartToggleContext);
   const { w } = useWindowSize();
   const isTabletPortrait = w <= device.tabletPortrait;
   const { lines } = useCart();
-  const router = useRouter();
-
-  useEffect(() => {
-    const videos = document.querySelectorAll("video");
-    if (areNavlinksOpen) {
-      videos.forEach((video) => {
-        !video.paused && video.pause();
-      });
-    } else {
-      videos.forEach((video) => {
-        video.paused && video.play().catch(() => {});
-      });
-    }
-  }, [areNavlinksOpen, router.asPath]);
 
   return (
     <>
@@ -79,7 +66,10 @@ const Navbar = ({ header }: NavbarProps) => {
             </NavbarCart>
           )}
           <Burger
-            onClick={() => setAreNavlinksOpen((prev) => !prev)}
+            onClick={() => {
+              setPauseAllVideos(!areNavlinksOpen);
+              setAreNavlinksOpen((prev) => !prev);
+            }}
             isOpen={areNavlinksOpen}
           />
         </StyledNavbar>

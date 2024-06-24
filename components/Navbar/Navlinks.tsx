@@ -8,7 +8,9 @@ import { DisableScroll } from "../../pagestyles/DisableScroll";
 import Divider from "../Divider/Divider";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
+import Portal from "../Portal/Portal";
 import NavLink from "./NavLink";
+import { NavbarContext } from "./NavbarControls";
 import {
   PhoneDecoration,
   SNavLinks,
@@ -17,8 +19,6 @@ import {
   dividerAnimation,
   navLinksVariants,
 } from "./Styles/SNavlinks";
-import { NavbarContext } from "./NavbarControls";
-import Portal from "../Portal/Portal";
 
 interface NavlinksProps {}
 

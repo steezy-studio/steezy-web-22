@@ -13,6 +13,7 @@ import { theme } from "../helpers/consts";
 import { useGA } from "../hooks/useGA";
 import { useWindowSize } from "../hooks/useWindowSize";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
+import RootVideosController from "../components/RootVideosController/RootVideosController";
 
 export const HoverProvider = React.createContext<{
   setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
@@ -32,34 +33,36 @@ function MyApp({ Component, pageProps }) {
     <CartToggleProvider>
       <CartProvider>
         <NavbarControls>
-          <ThemeProvider theme={theme(w)}>
-            <GlobalStyle />
-            <NavbarControls>
-              <HoverProvider.Provider
-                value={{
-                  setIsCursorDisabled,
-                  setCursorType,
-                  cursorType,
-                  cursorRef,
-                }}
-              >
-                <Navbar />
-                <PageTransition>
-                  <main>
-                    {/* <Cursor
+          <RootVideosController>
+            <ThemeProvider theme={theme(w)}>
+              <GlobalStyle />
+              <NavbarControls>
+                <HoverProvider.Provider
+                  value={{
+                    setIsCursorDisabled,
+                    setCursorType,
+                    cursorType,
+                    cursorRef,
+                  }}
+                >
+                  <Navbar />
+                  <PageTransition>
+                    <main>
+                      {/* <Cursor
                 isCursorDisabled={isCursorDisabled}
                 cursorType={cursorType}
                 cursorRef={cursorRef}
               /> */}
-                    <Navlinks />
-                    <Cart />
-                    <Component {...pageProps} />
-                    <Footer />
-                  </main>
-                </PageTransition>
-              </HoverProvider.Provider>
-            </NavbarControls>
-          </ThemeProvider>
+                      <Navlinks />
+                      <Cart />
+                      <Component {...pageProps} />
+                      <Footer />
+                    </main>
+                  </PageTransition>
+                </HoverProvider.Provider>
+              </NavbarControls>
+            </ThemeProvider>
+          </RootVideosController>
         </NavbarControls>
       </CartProvider>
     </CartToggleProvider>

@@ -13,20 +13,16 @@ import { easing } from "../../helpers/animationConfig";
 import isTouchDevice from "../../helpers/isTouchDevice";
 import { isVideoAsset } from "../../helpers/isVideoAsset";
 import stripHtmlTags from "../../helpers/stripHtmlTags";
-import {
-  useIntersectionObserver,
-  videoCallback,
-} from "../../hooks/useIntersectionObserver";
 import AreaTag from "../AreaTag/AreaTag";
 import {
   GridItemAreas,
   GridItemCover,
   GridItemCoverWrapper,
-  GridItemHoverOverlay,
   GridItemHeader,
-  GridItemVideo,
   GridItemHeaderInner,
+  GridItemHoverOverlay,
   GridItemPhoneOverlay,
+  GridItemVideo,
 } from "../GridItem/Styles/StyledGridItem";
 import { Small } from "../Typo/Small";
 import { StyledProjectCard } from "./StyledProjectCard";
@@ -86,9 +82,9 @@ const ProjectCard = ({
     }
   }, [_static, hover]);
 
-  useIntersectionObserver(videoRef, (entries) =>
-    videoCallback(entries, videoRef)
-  );
+  // useIntersectionObserver(videoRef, (entries) =>
+  //   videoCallback(entries, videoRef)
+  // );
 
   const options: HTMLReactParserOptions = {
     replace: (domNode) => {
