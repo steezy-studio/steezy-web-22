@@ -22,14 +22,6 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
     videoCallback(entries, videoRef)
   );
 
-  useEffect(() => {
-    if (open) {
-      videoRef.current.pause();
-    } else {
-      videoRef.current.play();
-    }
-  }, [open]);
-
   return (
     <>
       <Dialog

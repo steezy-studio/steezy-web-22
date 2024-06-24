@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { breakpoint, colors } from "../../../helpers/consts";
+import { breakpoint } from "../../../helpers/consts";
 
 export const StyledHeroVideo = styled.div<{ ratio?: number }>`
   position: relative;

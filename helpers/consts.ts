@@ -4,8 +4,16 @@ export const colors = {
   primary300: "#f5ede5",
   primary400: "#FFE96F",
   black: "#000000",
-  gray400: "#888",
-  gray500: "#333",
+  gray1000: "#161616",
+  gray900: "#262626",
+  gray800: "#393939",
+  gray700: "#525252",
+  gray600: "#6f6f6f",
+  gray500: "#8d8d8d",
+  gray400: "#a8a8a8",
+  gray300: "#E5E5DF",
+  gray200: "#e0e0e0",
+  gray100: "#f4f4f4",
   white: "#FFFFFF",
 } as const;
 

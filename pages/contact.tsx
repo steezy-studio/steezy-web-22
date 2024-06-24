@@ -39,7 +39,6 @@ const Contact = ({ areas }: ContactProps) => {
         ogDescription={strings.contactPage.hero.subHeader}
         ogImageSrc={"/images/contact-hero.jpg"}
       />
-      <Navbar areas={areas.items} />
 
       <StyledContact>
         <ContactHero>

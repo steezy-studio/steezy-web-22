@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { spaces } from "../../../helpers/spaces";
 import Image from "next/image";
 import { breakpoint } from "../../../helpers/consts";
+import Link from "next/link";
 
-export const StyledGridItem = styled(motion.a)`
+export const StyledGridItem = styled(motion(Link))`
   all: unset;
   display: block;
 `;

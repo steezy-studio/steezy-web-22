@@ -1,15 +1,18 @@
 import React, { MutableRefObject, useRef, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import Cursor, { CursorTypes } from "../components/Cursor/Cursor";
+import Cart, { CartToggleProvider } from "../components/Cart/Cart";
+import CartProvider from "../components/Cart/CartProvider";
+import { CursorTypes } from "../components/Cursor/Cursor";
 import Footer from "../components/Footer/Footer";
-import Layout from "../components/Layout/Layout";
+import Navbar from "../components/Navbar/Navbar";
+import NavbarControls from "../components/Navbar/NavbarControls";
+import Navlinks from "../components/Navbar/Navlinks";
+import PageTransition from "../components/PageTransition/PageTransition";
 import "../css/fonts.css";
 import { theme } from "../helpers/consts";
 import { useGA } from "../hooks/useGA";
 import { useWindowSize } from "../hooks/useWindowSize";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
-import Cart, { CartToggleProvider } from "../components/Cart/Cart";
-import CartProvider from "../components/Cart/CartProvider";
 
 export const HoverProvider = React.createContext<{
   setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,7 +24,6 @@ export const HoverProvider = React.createContext<{
 function MyApp({ Component, pageProps }) {
   const { w } = useWindowSize();
   useGA();
-  const containerRef = useRef(null);
   const [isCursorDisabled, setIsCursorDisabled] = useState(false);
   const [cursorType, setCursorType] = useState<CursorTypes>("normal");
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -29,30 +31,36 @@ function MyApp({ Component, pageProps }) {
   return (
     <CartToggleProvider>
       <CartProvider>
-        <ThemeProvider theme={theme(w)}>
-          <GlobalStyle />
-          <main ref={containerRef}>
-            <Cursor
-              isCursorDisabled={isCursorDisabled}
-              cursorType={cursorType}
-              cursorRef={cursorRef}
-            />
-            <HoverProvider.Provider
-              value={{
-                setIsCursorDisabled,
-                setCursorType,
-                cursorType,
-                cursorRef,
-              }}
-            >
-              <Layout>
-                <Cart />
-                <Component {...pageProps} />
-                <Footer />
-              </Layout>
-            </HoverProvider.Provider>
-          </main>
-        </ThemeProvider>
+        <NavbarControls>
+          <ThemeProvider theme={theme(w)}>
+            <GlobalStyle />
+            <NavbarControls>
+              <HoverProvider.Provider
+                value={{
+                  setIsCursorDisabled,
+                  setCursorType,
+                  cursorType,
+                  cursorRef,
+                }}
+              >
+                <Navbar />
+                <PageTransition>
+                  <main>
+                    {/* <Cursor
+                isCursorDisabled={isCursorDisabled}
+                cursorType={cursorType}
+                cursorRef={cursorRef}
+              /> */}
+                    <Navlinks />
+                    <Cart />
+                    <Component {...pageProps} />
+                    <Footer />
+                  </main>
+                </PageTransition>
+              </HoverProvider.Provider>
+            </NavbarControls>
+          </ThemeProvider>
+        </NavbarControls>
       </CartProvider>
     </CartToggleProvider>
   );

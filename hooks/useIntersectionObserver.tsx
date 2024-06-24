@@ -1,4 +1,4 @@
-import React, { ReactHTMLElement } from "react";
+import React from "react";
 
 export function useIntersectionObserver(
   ref: React.MutableRefObject<Element>,
@@ -19,16 +19,12 @@ export const videoCallback = (
   entries: IntersectionObserverEntry[],
   videoRef: React.MutableRefObject<HTMLVideoElement>
 ) => {
-  async function playVideo() {
-    try {
-      await videoRef.current.play();
-    } catch (err) {}
-  }
-
   entries.forEach((entry) => {
     if (!videoRef.current) return;
-    videoRef.current.onloadeddata = () => {
-      entry.isIntersecting ? playVideo() : videoRef.current.pause();
-    };
+    if (entry.isIntersecting) {
+      videoRef.current.paused && videoRef.current.play().catch(() => {});
+    } else {
+      !videoRef.current.paused && videoRef.current.pause();
+    }
   });
 };
