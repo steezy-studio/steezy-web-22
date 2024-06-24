@@ -1,29 +1,35 @@
+"use client";
+
+import { useAnimationControls } from "framer-motion";
 import {
   DOMNode,
   Element,
   HTMLReactParserOptions,
   domToReact,
 } from "html-react-parser";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Area, Asset } from "../../generated/preprTypes";
+import { easing } from "../../helpers/animationConfig";
+import isTouchDevice from "../../helpers/isTouchDevice";
+import { isVideoAsset } from "../../helpers/isVideoAsset";
 import stripHtmlTags from "../../helpers/stripHtmlTags";
 import {
   useIntersectionObserver,
   videoCallback,
 } from "../../hooks/useIntersectionObserver";
-import isTouchDevice from "../../helpers/isTouchDevice";
 import AreaTag from "../AreaTag/AreaTag";
 import {
   GridItemAreas,
   GridItemCover,
   GridItemCoverWrapper,
-  GridItemGrad,
+  GridItemHoverOverlay,
   GridItemHeader,
   GridItemVideo,
+  GridItemHeaderInner,
+  GridItemPhoneOverlay,
 } from "../GridItem/Styles/StyledGridItem";
 import { Small } from "../Typo/Small";
 import { StyledProjectCard } from "./StyledProjectCard";
-import { isVideoAsset } from "../../helpers/isVideoAsset";
 
 interface ProjectCardProps {
   areas: Area[];
@@ -45,6 +51,41 @@ const ProjectCard = ({
   _static,
 }: ProjectCardProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const overlayAnimationControls = useAnimationControls();
+  const headerAnimationControls = useAnimationControls();
+
+  useEffect(() => {
+    if (_static || isTouchDevice()) {
+      overlayAnimationControls.set({ opacity: 0 });
+      headerAnimationControls.set({ y: `0%`, skewY: 0, opacity: 1 });
+      return;
+    }
+    if (hover) {
+      overlayAnimationControls.start({
+        opacity: 1,
+        transition: { duration: 0.4, ease: easing },
+      });
+      headerAnimationControls.start({
+        y: `0%`,
+        skewY: 0,
+        opacity: 1,
+        transition: { duration: 0.4, ease: easing },
+      });
+      return;
+    } else {
+      overlayAnimationControls.start({
+        opacity: 0,
+        transition: { duration: 3, ease: easing },
+      });
+      headerAnimationControls.start({
+        y: `120%`,
+        skewY: 1,
+        opacity: 0,
+        transition: { duration: 0.4, ease: easing },
+      });
+    }
+  }, [_static, hover]);
+
   useIntersectionObserver(videoRef, (entries) =>
     videoCallback(entries, videoRef)
   );
@@ -66,10 +107,8 @@ const ProjectCard = ({
   return (
     <StyledProjectCard className={wide ? "wide" : ""}>
       <GridItemCoverWrapper>
-        <GridItemGrad
-          animate={{ opacity: _static || isTouchDevice() ? 1 : hover ? 1 : 0 }}
-          transition={{ duration: 0.2 }}
-        />
+        <GridItemPhoneOverlay />
+        <GridItemHoverOverlay animate={overlayAnimationControls} />
         {!isVideoAsset(cover[0].url) ? (
           <GridItemCover
             src={cover[0].url}
@@ -77,9 +116,6 @@ const ProjectCard = ({
             placeholder={`blur`}
             blurDataURL={cover[0].url}
             height={cover[0].height}
-            style={{
-              transform: `scale(${isTouchDevice() ? 1 : hover ? 1.05 : 1})`,
-            }}
             alt={projectName}
           />
         ) : (
@@ -92,9 +128,6 @@ const ProjectCard = ({
             playsInline={true}
             muted={true}
             loop={true}
-            style={{
-              transform: `scale(${isTouchDevice() ? 1 : hover ? 1.05 : 1})`,
-            }}
           />
         )}
       </GridItemCoverWrapper>
@@ -104,12 +137,10 @@ const ProjectCard = ({
             <AreaTag key={area_name} areaName={area_name} />
           ))}
       </GridItemAreas>
-      <GridItemHeader
-        animate={{
-          y: _static || isTouchDevice() ? "0%" : hover ? "0%" : "-200%",
-        }}
-      >
-        <Small className='white medium'>{stripHtmlTags(projectName)}</Small>
+      <GridItemHeader className={_static ? "tal" : "tac"}>
+        <GridItemHeaderInner animate={headerAnimationControls}>
+          <Small className='white medium'>{stripHtmlTags(projectName)}</Small>
+        </GridItemHeaderInner>
       </GridItemHeader>
     </StyledProjectCard>
   );
