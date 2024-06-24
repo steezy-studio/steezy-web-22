@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { HoverProvider } from "../../pages/_app";
-import { NavIcon, NavIconW, StyledNavLink } from "./Styles/StyledNavLink";
+import { StyledNavLink } from "./Styles/StyledNavLink";
 
 interface NavLinkProps {
   href: string;

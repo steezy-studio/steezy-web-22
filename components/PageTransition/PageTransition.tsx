@@ -2,8 +2,10 @@
 
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
+import { useContext } from "react";
 import { easing } from "../../helpers/animationConfig";
 import { colors } from "../../helpers/consts";
+import { RootVideosControllerContext } from "../RootVideosController/RootVideosController";
 import { SPageTransition } from "./SPageTransition";
 
 interface PageTransitionProps {
@@ -12,12 +14,17 @@ interface PageTransitionProps {
 
 const PageTransition = ({ children }: PageTransitionProps) => {
   const { asPath } = useRouter();
+  const { setPauseAllVideos } = useContext(RootVideosControllerContext);
 
   return (
-    <AnimatePresence mode={"sync"}>
+    <AnimatePresence
+      mode={"sync"}
+      onExitComplete={() => setPauseAllVideos(false)}
+    >
       <SPageTransition
         key={asPath}
         initial={"initial"}
+        onAnimationStart={() => setPauseAllVideos(true)}
         animate={"animate"}
         exit={"exit"}
         style={{ zIndex: 9991 }}
