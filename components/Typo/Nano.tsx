@@ -7,7 +7,7 @@ import { StyledStudio } from "../../pagestyles/StyledStudio";
 import { StyledFooter } from "../Footer/Styles/StyledFooter";
 import { GridItemAreas } from "../GridItem/Styles/StyledGridItem";
 import { StyledHero } from "../Hero/Styles/StyledHero";
-import { PhoneDecoration } from "../Navbar/Styles/StyledNavbar";
+import { PhoneDecoration } from "../Navbar/Styles/SNavlinks";
 
 export const Nano = styled(motion.span)`
   font-size: 11px;
