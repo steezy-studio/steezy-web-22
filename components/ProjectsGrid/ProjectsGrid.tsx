@@ -1,6 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { EnhancedProject } from "../../helpers/enhanceProjects";
 import GridItem from "../GridItem/GridItem";
@@ -25,7 +24,6 @@ const ProjectsGrid = ({
 }: ProjectsGridProps) => {
   const [visibleProjectsCount, setvisibleProjectsCount] =
     useState<number>(projectsPerPage);
-  const pathname = usePathname();
 
   useEffect(() => {
     setvisibleProjectsCount(projectsPerPage);
@@ -47,10 +45,7 @@ const ProjectsGrid = ({
               <GridRow key={j}>
                 {row.map((project, i) => {
                   return (
-                    <RevealAnimation
-                      key={project._slug + pathname}
-                      delay={i * 0.3}
-                    >
+                    <RevealAnimation key={project._slug} delay={i * 0.3}>
                       <GridItem
                         slug={project._slug}
                         wide={(i + j) % 2 === 0}
