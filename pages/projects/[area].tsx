@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import getClient from "../../apollo/client";
 import Head from "../../components/Head/Head";
 import Link from "../../components/Link/Link";
-import Navbar from "../../components/Navbar/Navbar";
 import ProjectsGrid from "../../components/ProjectsGrid/ProjectsGrid";
 import { Nano } from "../../components/Typo/Nano";
 import strings from "../../data/strings";
@@ -56,9 +55,8 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
             {areas.items.map(({ area_name, _slug, projects }) => {
               const isActive = router.query.area === _slug;
               return (
-                <FilterW>
+                <FilterW key={_slug}>
                   <Link
-                    key={_slug}
                     href={`/projects/${_slug}`}
                     className={`agrandir no-underline ${
                       isActive ? "active" : ""

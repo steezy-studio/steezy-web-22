@@ -1,21 +1,17 @@
-import { Variants, animate, motion } from "framer-motion";
+import { motion } from "framer-motion";
+import Link from "next/link";
 import styled from "styled-components";
 import { breakpoint, colors } from "../../../helpers/consts";
 import { spaces } from "../../../helpers/spaces";
-import Image from "next/image";
-import Link from "next/link";
 
 export const StyledNavbar = styled.nav`
   position: fixed;
-  /* pointer-events: none; */
   z-index: 99999;
   top: ${spaces.m}px;
   right: ${spaces.xxxl}px;
   left: ${spaces.xxxl}px;
   height: 60px;
   display: flex;
-  /* justify-content: space-between; */
-  /* align-items: center; */
   ${breakpoint.monitor} {
     right: ${spaces.xxxxxl}px;
     left: ${spaces.xxxxxl}px;

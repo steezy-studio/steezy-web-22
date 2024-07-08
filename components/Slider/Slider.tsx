@@ -1,14 +1,9 @@
 import { useAnimationControls } from "framer-motion";
-import {
-  ReactNode,
-  useCallback,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { usePathname } from "next/navigation";
+import { ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { transition } from "../../helpers/consts";
+import { useSwipe } from "../../hooks/useSwipe";
+import { useWindowSize } from "../../hooks/useWindowSize";
 import { HoverProvider } from "../../pages/_app";
 import {
   Slide,
@@ -16,9 +11,6 @@ import {
   Slides,
   StyledSlider,
 } from "./Styles/StyledSlider";
-import { useSwipe } from "../../hooks/useSwipe";
-import { useWindowSize } from "../../hooks/useWindowSize";
-import { usePathname } from "next/navigation";
 
 interface SliderProps {
   children: ReactNode[];
@@ -100,7 +92,7 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
     return containerRef.current.querySelector(`.${side}`) as HTMLDivElement;
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     maxOffset.current =
       sliderRef.current.clientWidth - containerRef.current.clientWidth;
     cutoffOffset.current = 0;
