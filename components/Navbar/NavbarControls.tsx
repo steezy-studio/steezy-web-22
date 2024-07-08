@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface NavbarControlsProps {
   children: React.ReactNode;
@@ -26,6 +26,10 @@ const NavbarControls = ({ children }: NavbarControlsProps) => {
     scope: pathname,
     isOpen: false,
   });
+
+  useEffect(() => {
+    setAreNavlinksOpen({ scope: pathname, isOpen: false });
+  }, [pathname]);
 
   const isOpen = (scope: string) => {
     if (areNavlinksOpen.scope === scope) {
