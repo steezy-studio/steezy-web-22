@@ -24,7 +24,7 @@ interface NavlinksProps {}
 const Navlinks = ({}: NavlinksProps) => {
   const timeout = useRef<NodeJS.Timeout>(null);
   const router = useRouter();
-  const { isOpen: _isOpen, setIsOpen } = useContext(NavbarContext);
+  const { isOpen: _isOpen } = useContext(NavbarContext);
 
   const isOpen = _isOpen(router.pathname);
   const [showVega, setshowVega] = useState<boolean>(false);
@@ -93,9 +93,6 @@ const Navlinks = ({}: NavlinksProps) => {
                 delay={delay}
                 active={isActive}
                 href={link}
-                onClick={() => {
-                  setIsOpen(router.pathname, false);
-                }}
                 iconSrc={`/icons/${iconName}`}
               >
                 {name}
