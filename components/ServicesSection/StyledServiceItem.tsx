@@ -7,6 +7,13 @@ export const StyledServiceItem = styled.div``;
 export const ServiceItemProject = styled(motion.div)`
   position: absolute;
   pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+`;
+
+export const ServiceItemContent = styled.div`
+  position: relative;
+  z-index: 2;
 `;
 
 export const ServiceItemProjectInner = styled.div`
