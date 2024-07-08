@@ -1,14 +1,14 @@
 "use client";
 import { Variants, motion } from "framer-motion";
-import styled from "styled-components";
 import Image from "next/image";
+import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
 import { spaces } from "../../../helpers/spaces";
 
 export const SNavLinks = styled(motion.div)`
   position: fixed;
   inset: 0;
-  z-index: 999;
+  z-index: 9;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

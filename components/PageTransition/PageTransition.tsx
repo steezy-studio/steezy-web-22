@@ -23,11 +23,10 @@ const PageTransition = ({ children }: PageTransitionProps) => {
     >
       <SPageTransition
         key={asPath}
-        initial={"initial"}
         onAnimationStart={() => setPauseAllVideos(true)}
+        initial={"initial"}
         animate={"animate"}
         exit={"exit"}
-        style={{ zIndex: 9991 }}
         variants={{
           initial: {
             y: `100%`,
@@ -35,11 +34,7 @@ const PageTransition = ({ children }: PageTransitionProps) => {
           },
           animate: {
             y: `0%`,
-            zIndex: 9991,
             backgroundColor: colors.white,
-            transitionEnd: {
-              zIndex: 1,
-            },
           },
           exit: {
             y: `0%`,

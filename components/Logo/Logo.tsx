@@ -2,19 +2,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext } from "react";
 import { HoverProvider } from "../../pages/_app";
-import { NavbarContext } from "../Navbar/NavbarControls";
 import { StyledLogo } from "./Styles/StyledLogo";
 
 interface LogoProps {}
 
 const Logo = ({}: LogoProps) => {
   const { setCursorType } = useContext(HoverProvider);
-  const { setAreNavlinksOpen } = useContext(NavbarContext);
   const pathname = usePathname();
 
   return (
     <StyledLogo
-      onClick={() => setAreNavlinksOpen(false)}
       onMouseEnter={() => setCursorType("hover")}
       onMouseLeave={() => setCursorType("normal")}
     >

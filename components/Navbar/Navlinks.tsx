@@ -8,7 +8,6 @@ import { DisableScroll } from "../../pagestyles/DisableScroll";
 import Divider from "../Divider/Divider";
 import Instagram from "../Icons/Instagram";
 import Vimeo from "../Icons/Vimeo";
-import Portal from "../Portal/Portal";
 import NavLink from "./NavLink";
 import { NavbarContext } from "./NavbarControls";
 import {
@@ -24,14 +23,16 @@ interface NavlinksProps {}
 
 const Navlinks = ({}: NavlinksProps) => {
   const timeout = useRef<NodeJS.Timeout>(null);
-  const { areNavlinksOpen, setAreNavlinksOpen } = useContext(NavbarContext);
+  const router = useRouter();
+  const { isOpen: _isOpen, setIsOpen } = useContext(NavbarContext);
+
+  const isOpen = _isOpen(router.pathname);
   const [showVega, setshowVega] = useState<boolean>(false);
   const wasVegaDisplayed = useRef<boolean>(false);
-  const router = useRouter();
   const navLinksDelay = 0.1;
 
   useEffect(() => {
-    if (wasVegaDisplayed.current || !areNavlinksOpen) return;
+    if (wasVegaDisplayed.current || !isOpen) return;
     timeout.current = setTimeout(() => {
       setshowVega(true);
       wasVegaDisplayed.current = true;
@@ -40,17 +41,17 @@ const Navlinks = ({}: NavlinksProps) => {
     return () => {
       clearTimeout(timeout.current);
     };
-  }, [areNavlinksOpen]);
+  }, [isOpen]);
 
   return (
-    <Portal selector='body'>
+    <>
       <DisableScroll />
       <SNavLinks
         initial={false}
-        animate={areNavlinksOpen ? "animate" : "exit"}
+        animate={isOpen ? "animate" : "exit"}
         style={{
           transformOrigin: "100% 0%",
-          pointerEvents: areNavlinksOpen ? "all" : "none",
+          pointerEvents: isOpen ? "all" : "none",
         }}
         transition={{
           type: "tween",
@@ -93,7 +94,7 @@ const Navlinks = ({}: NavlinksProps) => {
                 active={isActive}
                 href={link}
                 onClick={() => {
-                  setAreNavlinksOpen(false);
+                  setIsOpen(router.pathname, false);
                 }}
                 iconSrc={`/icons/${iconName}`}
               >
@@ -111,7 +112,7 @@ const Navlinks = ({}: NavlinksProps) => {
           <Vimeo />
         </PhoneDecoration>
       </SNavLinks>
-    </Portal>
+    </>
   );
 };
 

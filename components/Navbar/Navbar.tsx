@@ -1,5 +1,6 @@
 import { useCart } from "@shopify/hydrogen-react";
 import { AnimatePresence } from "framer-motion";
+import { useRouter } from "next/router";
 import { useContext } from "react";
 import { device } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
@@ -23,7 +24,9 @@ interface NavbarProps {
 }
 
 const Navbar = ({ header }: NavbarProps) => {
-  const { setAreNavlinksOpen, areNavlinksOpen } = useContext(NavbarContext);
+  const { isOpen: _isOpen, setIsOpen } = useContext(NavbarContext);
+  const { pathname } = useRouter();
+  const isOpen = _isOpen(pathname);
   const { setCursorType } = useContext(HoverProvider);
   const { setPauseAllVideos } = useContext(RootVideosControllerContext);
   const { setShowCart } = useContext(CartToggleContext);
@@ -67,10 +70,10 @@ const Navbar = ({ header }: NavbarProps) => {
           )}
           <Burger
             onClick={() => {
-              setPauseAllVideos(!areNavlinksOpen);
-              setAreNavlinksOpen((prev) => !prev);
+              setPauseAllVideos(!isOpen);
+              setIsOpen(pathname, !isOpen);
             }}
-            isOpen={areNavlinksOpen}
+            isOpen={isOpen}
           />
         </StyledNavbar>
       </Portal>
