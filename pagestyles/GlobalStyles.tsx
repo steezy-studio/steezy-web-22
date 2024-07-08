@@ -39,4 +39,21 @@ export const GlobalStyle = createGlobalStyle`
       color: inherit;
     }
   }
+  /* lenis */
+  .lenis {
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
 `;

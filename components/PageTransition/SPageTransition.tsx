@@ -5,8 +5,8 @@ import { colors } from "../../helpers/consts";
 
 export const SPageTransition = styled(motion.div)`
   position: fixed;
+  width: 100vw;
+  height: 100vh;
   inset: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
   background-color: ${colors.white};
 `;

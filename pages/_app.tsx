@@ -8,12 +8,13 @@ import Navbar from "../components/Navbar/Navbar";
 import NavbarControls from "../components/Navbar/NavbarControls";
 import Navlinks from "../components/Navbar/Navlinks";
 import PageTransition from "../components/PageTransition/PageTransition";
+import RootVideosController from "../components/RootVideosController/RootVideosController";
 import "../css/fonts.css";
 import { theme } from "../helpers/consts";
 import { useGA } from "../hooks/useGA";
 import { useWindowSize } from "../hooks/useWindowSize";
+import LenisContext from "../lib/Lenis";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
-import RootVideosController from "../components/RootVideosController/RootVideosController";
 
 export const HoverProvider = React.createContext<{
   setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
@@ -47,17 +48,19 @@ function MyApp({ Component, pageProps }) {
                 >
                   <Navbar />
                   <PageTransition>
-                    <main>
-                      {/* <Cursor
+                    <LenisContext>
+                      <main>
+                        {/* <Cursor
                 isCursorDisabled={isCursorDisabled}
                 cursorType={cursorType}
                 cursorRef={cursorRef}
               /> */}
-                      <Navlinks />
-                      <Cart />
-                      <Component {...pageProps} />
-                      <Footer />
-                    </main>
+                        <Navlinks />
+                        <Cart />
+                        <Component {...pageProps} />
+                        <Footer />
+                      </main>
+                    </LenisContext>
                   </PageTransition>
                 </HoverProvider.Provider>
               </NavbarControls>
