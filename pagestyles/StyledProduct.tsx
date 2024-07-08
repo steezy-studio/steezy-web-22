@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
-import { spaces } from "../helpers/spaces";
 import { breakpoint } from "../helpers/consts";
+import { spaces } from "../helpers/spaces";
 
 export const StyledProduct = styled.div``;
 
@@ -41,9 +41,8 @@ export const ProductText = styled.div`
 export const ProductGalleryImg = styled(Image)`
   display: block;
   width: 100%;
-  max-width: 80vw;
-  height: 100%;
-  max-height: 80vh;
+  padding: 0 ${spaces.xxs}px;
+  height: 80vh;
   object-fit: cover;
   border-radius: ${({ theme }) => theme.bRad};
 `;

@@ -15,9 +15,9 @@ import Head from "../../components/Head/Head";
 import QuantitySelect from "../../components/Inputs/QuantitySelect";
 import VariantsSelect from "../../components/Inputs/VariantsSelect";
 import Link from "../../components/Link/Link";
-import Navbar from "../../components/Navbar/Navbar";
+import Marquee from "../../components/Marquee/Marquee";
 import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
-import Slider from "../../components/Slider/Slider";
+import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import { Large } from "../../components/Typo/Large";
 import { Medium } from "../../components/Typo/Medium";
 import { Small } from "../../components/Typo/Small";
@@ -46,7 +46,6 @@ import {
   ProductText,
   StyledProduct,
 } from "../../pagestyles/StyledProduct";
-import SectionHeader from "../../components/SectionHeader/SectionHeader";
 
 interface productProps {
   areas: Areas;
@@ -145,9 +144,10 @@ const product = ({
           </ProductSection>
           <ProductGallery>
             <SectionHeader header='How to drip our drip' />
-            <Slider>
+            <Marquee useDragVelocity speed={0.1}>
               {product.images.nodes.map(({ url, width, height }, i) => (
                 <ProductGalleryImg
+                  draggable={false}
                   key={i}
                   src={url}
                   alt={product.title}
@@ -155,7 +155,7 @@ const product = ({
                   width={width}
                 />
               ))}
-            </Slider>
+            </Marquee>
           </ProductGallery>
           <ProductFeaturedProducts>
             <FeaturedProducts

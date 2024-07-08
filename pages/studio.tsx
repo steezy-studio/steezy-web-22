@@ -6,11 +6,10 @@ import ClientQuote from "../components/ClientQuote/ClientQuote";
 import Head from "../components/Head/Head";
 import HeaderLine from "../components/HeaderLine/HeaderLine";
 import Hero from "../components/Hero/Hero";
-import Navbar from "../components/Navbar/Navbar";
+import Marquee from "../components/Marquee/Marquee";
 import ProjectsSlider from "../components/ProjectsSlider/ProjectsSlider";
 import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 import ServicesSection from "../components/ServicesSection/ServicesSection";
-import Slider from "../components/Slider/Slider";
 import { Large } from "../components/Typo/Large";
 import { Medium } from "../components/Typo/Medium";
 import { Micro } from "../components/Typo/Micro";
@@ -20,7 +19,6 @@ import strings from "../data/strings";
 import { Areas, Query } from "../generated/preprTypes";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import { GET_LATEST_PROJECTS } from "../graphql/GetLatestProjects";
-import { device } from "../helpers/consts";
 import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
 import {
   BrandsHeader,
@@ -94,15 +92,10 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
         </RevealAnimation>
 
         <OurStudio>
-          <Slider
-            config={{
-              [device.monitor]: { step: 2 },
-              [device.phone]: { step: 1 },
-              [device.largeNotebook]: { step: 2 },
-            }}
-          >
+          <Marquee useDragVelocity speed={0.1}>
             {studioStrings.slider.map((img, i) => (
               <OurStudioSliderImg
+                draggable={false}
                 key={i}
                 src={`/images/studio/${img.src}`}
                 width={img.height}
@@ -110,7 +103,7 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
                 alt='studio'
               />
             ))}
-          </Slider>
+          </Marquee>
         </OurStudio>
 
         <ValuesSection id='values-section'>

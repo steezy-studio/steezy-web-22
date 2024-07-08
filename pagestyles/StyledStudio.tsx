@@ -130,7 +130,8 @@ export const OurStudioSliderImg = styled(Image)`
   object-fit: cover;
   display: block;
   width: 100%;
-  height: 100%;
+  height: 50vh;
+  padding: 0 ${spaces.xxs}px;
   border-radius: ${({ theme }) => theme.bRad};
   ${breakpoint.phone} {
     width: 80vw;

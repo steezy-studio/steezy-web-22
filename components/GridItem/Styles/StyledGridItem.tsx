@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import styled from "styled-components";
-import { spaces } from "../../../helpers/spaces";
 import Image from "next/image";
-import { breakpoint } from "../../../helpers/consts";
 import Link from "next/link";
+import styled from "styled-components";
+import { breakpoint } from "../../../helpers/consts";
+import { spaces } from "../../../helpers/spaces";
 
 export const StyledGridItem = styled(motion(Link))`
   all: unset;
