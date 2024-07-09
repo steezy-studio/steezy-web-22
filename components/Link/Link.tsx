@@ -1,6 +1,6 @@
-import NextLink, { LinkProps as NextLinkProps } from "next/link";
+import { LinkProps as NextLinkProps } from "next/link";
 import { useContext } from "react";
-import { HoverProvider } from "../../pages/_app";
+import { HoverProvider } from "../Cursor/CursorProvider";
 import { LinkBg, StyledLink } from "./Styles/StyledLink";
 
 interface LinkProps extends NextLinkProps {

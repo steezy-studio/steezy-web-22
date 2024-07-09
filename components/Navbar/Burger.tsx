@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useContext } from "react";
-import { HoverProvider } from "../../pages/_app";
+import { HoverProvider } from "../Cursor/CursorProvider";
 import { BurgerSvg, StyledBurger } from "./Styles/StyledBurger";
 
 interface BurgerProps {

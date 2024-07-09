@@ -13,7 +13,6 @@ export const StyledBurger = styled.div`
   aspect-ratio: 1;
   flex-shrink: 0;
   position: relative;
-  z-index: 9999999;
   padding: 10px;
   svg {
     width: 100%;

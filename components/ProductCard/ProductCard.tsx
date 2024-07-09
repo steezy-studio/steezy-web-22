@@ -1,8 +1,11 @@
+import { MoneyV2 } from "@shopify/hydrogen-react/storefront-api-types";
 import { AnimatePresence, LayoutGroup, useInView } from "framer-motion";
 import { useContext, useEffect, useRef, useState } from "react";
 import { easing } from "../../helpers/animationConfig";
 import { formatPrice } from "../../helpers/formatPrice";
-import { HoverProvider } from "../../pages/_app";
+import _isTouchDevice from "../../helpers/isTouchDevice";
+import { HoverProvider } from "../Cursor/CursorProvider";
+import RevealAnimation from "../RevealAnimation/RevealAnimation";
 import { Nano } from "../Typo/Nano";
 import { Small } from "../Typo/Small";
 import {
@@ -16,9 +19,6 @@ import {
   ProductCardInfoHeader,
   StyledProductCard,
 } from "./StyledProductCard";
-import RevealAnimation from "../RevealAnimation/RevealAnimation";
-import _isTouchDevice from "../../helpers/isTouchDevice";
-import { MoneyV2 } from "@shopify/hydrogen-react/storefront-api-types";
 
 interface Image {
   src: string;

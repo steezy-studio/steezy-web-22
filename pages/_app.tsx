@@ -1,8 +1,7 @@
-import React, { MutableRefObject, useRef, useState } from "react";
 import { ThemeProvider } from "styled-components";
 import Cart, { CartToggleProvider } from "../components/Cart/Cart";
 import CartProvider from "../components/Cart/CartProvider";
-import { CursorTypes } from "../components/Cursor/Cursor";
+import CursorProvider from "../components/Cursor/CursorProvider";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 import NavbarControls from "../components/Navbar/NavbarControls";
@@ -16,19 +15,9 @@ import { useWindowSize } from "../hooks/useWindowSize";
 import LenisContext from "../lib/Lenis";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
 
-export const HoverProvider = React.createContext<{
-  setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
-  setCursorType: React.Dispatch<React.SetStateAction<CursorTypes>>;
-  cursorType: CursorTypes;
-  cursorRef: MutableRefObject<HTMLDivElement>;
-}>(null);
-
 function MyApp({ Component, pageProps }) {
   const { w } = useWindowSize();
   useGA();
-  const [isCursorDisabled, setIsCursorDisabled] = useState(false);
-  const [cursorType, setCursorType] = useState<CursorTypes>("normal");
-  const cursorRef = useRef<HTMLDivElement>(null);
 
   return (
     <CartToggleProvider>
@@ -37,24 +26,12 @@ function MyApp({ Component, pageProps }) {
           <RootVideosController>
             <ThemeProvider theme={theme(w)}>
               <GlobalStyle />
-              <NavbarControls>
-                <HoverProvider.Provider
-                  value={{
-                    setIsCursorDisabled,
-                    setCursorType,
-                    cursorType,
-                    cursorRef,
-                  }}
-                >
+              <CursorProvider>
+                <NavbarControls>
                   <Navbar />
                   <PageTransition>
                     <LenisContext>
                       <main>
-                        {/* <Cursor
-                isCursorDisabled={isCursorDisabled}
-                cursorType={cursorType}
-                cursorRef={cursorRef}
-              /> */}
                         <Navlinks />
                         <Cart />
                         <Component {...pageProps} />
@@ -62,8 +39,8 @@ function MyApp({ Component, pageProps }) {
                       </main>
                     </LenisContext>
                   </PageTransition>
-                </HoverProvider.Provider>
-              </NavbarControls>
+                </NavbarControls>
+              </CursorProvider>
             </ThemeProvider>
           </RootVideosController>
         </NavbarControls>

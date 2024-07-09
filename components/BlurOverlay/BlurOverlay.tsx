@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { useContext } from "react";
-import { HoverProvider } from "../../pages/_app";
 import { DisableScroll } from "../../pagestyles/DisableScroll";
+import { HoverProvider } from "../Cursor/CursorProvider";
 import { StyledBlurOverlay } from "./StyledBlurOverlay";
 
 interface BlurOverlayProps {

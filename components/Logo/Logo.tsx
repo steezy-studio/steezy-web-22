@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext } from "react";
-import { HoverProvider } from "../../pages/_app";
+import { HoverProvider } from "../Cursor/CursorProvider";
 import { StyledLogo } from "./Styles/StyledLogo";
 
 interface LogoProps {}

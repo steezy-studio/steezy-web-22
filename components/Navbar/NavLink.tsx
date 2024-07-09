@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { HoverProvider } from "../../pages/_app";
+import { HoverProvider } from "../Cursor/CursorProvider";
 import { StyledNavLink } from "./Styles/StyledNavLink";
 
 interface NavLinkProps {

@@ -4,7 +4,7 @@ import { ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { transition } from "../../helpers/consts";
 import { useSwipe } from "../../hooks/useSwipe";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import { HoverProvider } from "../../pages/_app";
+import { HoverProvider } from "../Cursor/CursorProvider";
 import {
   Slide,
   SliderBound,

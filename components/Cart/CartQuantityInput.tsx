@@ -5,7 +5,7 @@ import {
   CartLineQuantityAdjustButton,
 } from "@shopify/hydrogen-react";
 import { useContext } from "react";
-import { HoverProvider } from "../../pages/_app";
+import { HoverProvider } from "../Cursor/CursorProvider";
 import Minus from "../Icons/Minus";
 import Plus from "../Icons/Plus";
 import { Small } from "../Typo/Small";

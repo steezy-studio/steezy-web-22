@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import { breakpoint, ColorKeys, colors } from "../../helpers/consts";
-import { HoverProvider } from "../../pages/_app";
+import { ColorKeys, colors } from "../../helpers/consts";
+import { HoverProvider } from "../Cursor/CursorProvider";
 
 interface InstagramProps {
   fill?: ColorKeys;

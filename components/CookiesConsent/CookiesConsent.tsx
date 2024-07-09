@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useCookies } from "react-cookie";
 import strings from "../../data/strings";
 import { cookiesConsts, cookiesSettings } from "../../helpers/consts";
-import { HoverProvider } from "../../pages/_app";
+import { HoverProvider } from "../Cursor/CursorProvider";
 import { Micro } from "../Typo/Micro";
 import {
   CookiesButton,
@@ -36,7 +36,8 @@ const CookiesConsent = ({}: CookiesConsentProps) => {
           )
         }
         onMouseEnter={() => setCursorType("hover")}
-        onMouseLeave={() => setCursorType("normal")}>
+        onMouseLeave={() => setCursorType("normal")}
+      >
         <Micro>{cookiesStrings.button}</Micro>
       </CookiesButton>
     </StyledCookiesConsent>

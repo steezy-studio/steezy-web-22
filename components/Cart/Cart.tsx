@@ -17,13 +17,13 @@ import {
 import { easing } from "../../helpers/animationConfig";
 import { colors } from "../../helpers/consts";
 import { formatPrice } from "../../helpers/formatPrice";
-import { HoverProvider } from "../../pages/_app";
-import { DisableScroll } from "../../pagestyles/DisableScroll";
 import BlurOverlay from "../BlurOverlay/BlurOverlay";
+import { HoverProvider } from "../Cursor/CursorProvider";
 import Link from "../Link/Link";
 import Burger from "../Navbar/Burger";
 import Scrollbar from "../Scrollbar/Scrollbar";
 import { Large } from "../Typo/Large";
+import { Nano } from "../Typo/Nano";
 import { Small } from "../Typo/Small";
 import CartItem from "./CartItem";
 import {
@@ -40,8 +40,6 @@ import {
   StyledCart,
   TotalPrice,
 } from "./Styles/StyledCart";
-import { Micro } from "../Typo/Micro";
-import { Nano } from "../Typo/Nano";
 
 interface CartProps {}
 

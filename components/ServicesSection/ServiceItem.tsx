@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Area } from "../../generated/preprTypes";
 import isTouchDevice from "../../helpers/isTouchDevice";
 import { isVideoAsset } from "../../helpers/isVideoAsset";
-import { HoverProvider } from "../../pages/_app";
+import { HoverProvider } from "../Cursor/CursorProvider";
 import RevealAnimation from "../RevealAnimation/RevealAnimation";
 import { Medium } from "../Typo/Medium";
 import { Small } from "../Typo/Small";

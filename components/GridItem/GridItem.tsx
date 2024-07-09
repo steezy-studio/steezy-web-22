@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Area, Asset } from "../../generated/preprTypes";
-import { HoverProvider } from "../../pages/_app";
+import { HoverProvider } from "../Cursor/CursorProvider";
 import ProjectCard from "../ProjectCard/ProjectCard";
 import { StyledGridItem } from "./Styles/StyledGridItem";
 

@@ -6,7 +6,7 @@ import { spaces } from "../../../helpers/spaces";
 
 export const StyledNavbar = styled.nav`
   position: fixed;
-  z-index: 99999;
+  z-index: 9;
   top: ${spaces.m}px;
   right: ${spaces.xxxl}px;
   left: ${spaces.xxxl}px;
