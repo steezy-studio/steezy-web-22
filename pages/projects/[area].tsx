@@ -4,6 +4,7 @@ import getClient from "../../apollo/client";
 import Head from "../../components/Head/Head";
 import Link from "../../components/Link/Link";
 import ProjectsGrid from "../../components/ProjectsGrid/ProjectsGrid";
+import { Medium } from "../../components/Typo/Medium";
 import { Nano } from "../../components/Typo/Nano";
 import strings from "../../data/strings";
 import { Areas, Query } from "../../generated/preprTypes";
@@ -56,19 +57,19 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
               const isActive = router.query.area === _slug;
               return (
                 <FilterW key={_slug}>
-                  <Link
-                    href={`/projects/${_slug}`}
-                    className={`agrandir no-underline ${
-                      isActive ? "active" : ""
-                    }`}
-                  >
-                    <Filter>
-                      <span style={{ textDecoration: "underline" }}>
-                        {area_name}
-                      </span>
-                      <Nano className='no-underline'>{projects.length}</Nano>
-                    </Filter>
-                  </Link>
+                  <Medium className='editorial underline'>
+                    <Link
+                      href={`/projects/${_slug}`}
+                      className={`no-underline ${isActive ? "active" : ""}`}
+                    >
+                      <Filter>
+                        <span className='underline'>{area_name}</span>
+                        <Nano className='helvetica no-underline'>
+                          {projects.length}
+                        </Nano>
+                      </Filter>
+                    </Link>
+                  </Medium>
                 </FilterW>
               );
             })}

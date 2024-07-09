@@ -5,7 +5,7 @@ import Human from "../components/Human/Human";
 import Instagram from "../components/Icons/Instagram";
 import Vimeo from "../components/Icons/Vimeo";
 import Link from "../components/Link/Link";
-import Navbar from "../components/Navbar/Navbar";
+import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 import SectionHeader from "../components/SectionHeader/SectionHeader";
 import { Large } from "../components/Typo/Large";
 import { Nano } from "../components/Typo/Nano";
@@ -24,7 +24,6 @@ import {
   FoundersGrid,
   StyledContact,
 } from "../pagestyles/StyledContact";
-import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 
 interface ContactProps {
   areas: Areas;
@@ -71,10 +70,7 @@ const Contact = ({ areas }: ContactProps) => {
                     <br />
                     <br />
                     Send your portfolio to{" "}
-                    <Link
-                      href={"mailto: hello@steezy.studio"}
-                      className='agrandir'
-                    >
+                    <Link href={"mailto: hello@steezy.studio"}>
                       hello@steezy.studio
                     </Link>
                   </Small>
@@ -90,16 +86,11 @@ const Contact = ({ areas }: ContactProps) => {
                 <ContactDetail className='align-end'>
                   <Nano>New Business & media</Nano>
                   <Small>
-                    <Link
-                      href={"mailto: hello@steezy.studio"}
-                      className='agrandir'
-                    >
+                    <Link href={"mailto: hello@steezy.studio"}>
                       hello@steezy.studio
                     </Link>
                     <br />
-                    <Link href={"tel: +420728088996"} className='agrandir'>
-                      (+420) 728 088 996
-                    </Link>
+                    <Link href={"tel: +420728088996"}>(+420) 728 088 996</Link>
                   </Small>
                 </ContactDetail>
               </RevealAnimation>

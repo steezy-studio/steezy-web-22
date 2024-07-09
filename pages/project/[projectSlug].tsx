@@ -9,7 +9,6 @@ import getClient from "../../apollo/client";
 import ClientQuote from "../../components/ClientQuote/ClientQuote";
 import Head from "../../components/Head/Head";
 import Link from "../../components/Link/Link";
-import Navbar from "../../components/Navbar/Navbar";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import ProjectGridVimeo from "../../components/ProjectGridVimeo/ProjectGridVimeo";
 import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
@@ -81,9 +80,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                   <RevealAnimation key={i} delay={i * 0.3}>
                     <ProjectHeroRole>
                       <Nano>{fact.header}</Nano>
-                      <Small className='medium break-lines'>
-                        {fact.content}
-                      </Small>
+                      <Small className='bold break-lines'>{fact.content}</Small>
                     </ProjectHeroRole>
                   </RevealAnimation>
                 );
@@ -93,7 +90,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
         </ProjectHeroHeader>
         <RevealAnimation>
           <ProjectDescription>
-            <Small className='medium'>{project.project_description}</Small>
+            <Small className='bold'>{project.project_description}</Small>
           </ProjectDescription>
         </RevealAnimation>
         <ProjectGrid>
@@ -149,7 +146,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
                     className={`blockquote ${row.alignment ? "reverse" : ""}`}
                   >
                     <ProjectGridBlockquote>
-                      <Small className='medium' as={"span"}>
+                      <Small className='bold' as={"span"}>
                         {HTMLReactParser(row.blockquote_text, {
                           replace(domNode) {
                             if (domNode instanceof Element && domNode.attribs) {

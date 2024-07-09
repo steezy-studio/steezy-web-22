@@ -1,6 +1,5 @@
-import React from "react";
-import { StyledAreaTag } from "./StyledAreaTag";
 import { Nano } from "../Typo/Nano";
+import { StyledAreaTag } from "./StyledAreaTag";
 
 interface AreaTagProps {
   areaName: string;
@@ -9,7 +8,7 @@ interface AreaTagProps {
 const AreaTag = ({ areaName }: AreaTagProps) => {
   return (
     <StyledAreaTag>
-      <Nano className='lowcase'>{areaName.toLowerCase()}</Nano>
+      <Nano>{areaName.toLowerCase()}</Nano>
     </StyledAreaTag>
   );
 };

@@ -85,7 +85,7 @@ const Cart = ({}: CartProps) => {
             <CartHeaderI>
               <Large className='uppercase black'>Cart</Large>
               <Nano>
-                <Link href={"/apparel"} className='agrandir'>
+                <Link href={"/apparel"} className=''>
                   all products
                 </Link>
               </Nano>

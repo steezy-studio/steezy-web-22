@@ -1,7 +1,6 @@
 import { GetStaticProps } from "next";
 import getClient from "../apollo/client";
 import Head from "../components/Head/Head";
-import Navbar from "../components/Navbar/Navbar";
 import ProductCard from "../components/ProductCard/ProductCard";
 import ProjectsSlider from "../components/ProjectsSlider/ProjectsSlider";
 import { Medium } from "../components/Typo/Medium";
@@ -41,7 +40,7 @@ const apparel = ({ products, areas, projects }: apparelProps) => {
       />
       <StyledApparel>
         <ProductsGridSection>
-          <Medium className='medium'>Spring/Summer 2024</Medium>
+          <Medium className='bold'>Spring/Summer 2024</Medium>
           <ProductsGrid>
             {products.nodes.map(
               (

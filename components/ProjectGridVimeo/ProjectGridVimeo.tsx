@@ -1,30 +1,16 @@
-import Vimeo from "@u-wave/react-vimeo";
 import { motion } from "framer-motion";
 import { useContext, useRef, useState } from "react";
-import styled from "styled-components";
 import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 import { HoverProvider } from "../Cursor/CursorProvider";
+import {
+  Overlay,
+  StyledProjectGridVimeo,
+  VimeoWrapper,
+} from "./StyledProjectGridVimeo";
 
 interface ProjectGridVimeoProps {
   vimeoId: string | number;
 }
-
-const StyledProjectGridVimeo = styled(motion.div)`
-  position: relative;
-`;
-
-export const VimeoWrapper = styled(Vimeo)`
-  width: 100%;
-  height: 100%;
-`;
-
-const Overlay = styled.div`
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-`;
 
 const ProjectGridVimeo = ({ vimeoId }: ProjectGridVimeoProps) => {
   const [isPaused, setIsPaused] = useState(true);

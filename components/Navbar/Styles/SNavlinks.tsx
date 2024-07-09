@@ -29,26 +29,6 @@ export const SNavLinks = styled(motion.div)`
   }
 `;
 
-export const PhoneDecoration = styled(motion.div)`
-  display: none;
-  /* ${breakpoint.tabletLandscape} {
-    position: absolute;
-    bottom: ${spaces.xl}px;
-    left: ${spaces.xl}px;
-    display: grid;
-    column-gap: ${spaces.xs}px;
-    grid-template-columns: max-content auto;
-  }
-  ${breakpoint.tabletPortrait} {
-    bottom: ${spaces.l}px;
-    left: ${spaces.l}px;
-  }
-  ${breakpoint.phone} {
-    bottom: ${spaces.l}px;
-    left: ${spaces.l}px;
-  } */
-`;
-
 export const dividerAnimation = {
   variants: {
     initial: {

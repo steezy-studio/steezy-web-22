@@ -37,8 +37,8 @@ const Footer = ({}: FooterProps) => {
           )}
         </Large>
         <DetailedContact>
-          <Micro className='lowcase'>{footerStrings.address}</Micro>
-          <Micro className='lowcase'>
+          <Micro className='lowcase break-lines'>{footerStrings.address}</Micro>
+          <Micro className='lowcase break-lines'>
             {strings.globals.phone + `\n` + footerStrings.other}
           </Micro>
           <FooterSocials>

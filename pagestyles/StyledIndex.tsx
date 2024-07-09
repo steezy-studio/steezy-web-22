@@ -6,6 +6,11 @@ export const StyledIndex = styled.div``;
 
 export const IndexHeroSection = styled.section``;
 
+export const IndexHeroClaim = styled.div`
+  margin: ${spaces.xxxl}px 0 ${spaces.xxxxl}px;
+  text-align: center;
+`;
+
 export const IndexSliderW = styled.div``;
 
 export const LandingHeroPageLogotypes = styled.div`
@@ -47,6 +52,10 @@ export const HeroFooter = styled.div`
     align-items: start;
     row-gap: ${spaces.l}px;
   }
+`;
+
+export const HeroFooterPerex = styled.div`
+  max-width: 500px;
 `;
 
 export const IndexQuote = styled.div`

@@ -1,28 +1,15 @@
-import styled from "styled-components";
-import { breakpoint, colors } from "../../helpers/consts";
-import { addColorClasses } from "../../helpers/colorClasses";
 import { motion } from "framer-motion";
+import styled from "styled-components";
+import { breakpoint } from "../../helpers/consts";
 
 export const Small = styled(motion.p)`
   font-size: 19px;
   line-height: 1.3em;
   letter-spacing: 0.03em;
-  font-family: "agrandir";
-  font-weight: 300;
+  font-weight: 400;
   max-width: 600px;
-  &.difference {
-    color: ${colors.white};
-    mix-blend-mode: difference;
-  }
-  &.medium {
-    font-weight: 400;
-  }
-  &.break-lines {
-    white-space: pre-wrap;
-  }
-  &.uppercase {
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+  &.bold {
+    font-weight: 500;
   }
   &.big-lh {
     line-height: 1.7em;
@@ -33,5 +20,4 @@ export const Small = styled(motion.p)`
   ${breakpoint.tabletLandscape} {
     font-size: 16px;
   }
-  ${addColorClasses()}
 `;

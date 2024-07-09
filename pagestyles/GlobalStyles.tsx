@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { addColorClasses } from "../helpers/colorClasses";
 import { breakpoint, colors } from "../helpers/consts";
 import { spaces } from "../helpers/spaces";
 
@@ -9,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`
     width:100%;
     height:100%;
     background-color:${colors.white};
-    font-family: "agrandir", Arial, Helvetica, sans-serif;
+    font-family: "helvetica-now", Helvetica, Arial, sans-serif;
   }
   main {
     padding: ${spaces.xxxl}px ${spaces.xxxl}px 0 ${spaces.xxxl}px;
@@ -56,4 +57,38 @@ export const GlobalStyle = createGlobalStyle`
   .lenis.lenis-smooth iframe {
     pointer-events: none;
   }
+
+  /* typography */
+  .editorial {
+    font-family: "editorial-new", 'Times New Roman', Times, serif;
+  }
+  .helvetica {
+    font-family: "helvetica-now", Helvetica, Arial, sans-serif;
+  }
+  &.break-lines {
+    white-space: pre-wrap;
+  }
+  &.uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  &.difference {
+    color: ${colors.white};
+    mix-blend-mode: difference;
+  }
+  &.no-underline {
+    text-decoration: none;
+  }
+  &.wide {
+    max-width: unset;
+  }
+  &.tac {
+    text-align: center;
+  }
+  &.underline {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  ${addColorClasses()}
 `;

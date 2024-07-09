@@ -23,7 +23,7 @@ const ClientQuote = ({ quote, clientName, clientRole }: ClientQuoteProps) => {
 
   return (
     <StyledClientQuote>
-      <Large className='smaller'>
+      <Large>
         <AnimateTextRows
           motionProps={(i, ref) => ({
             initial: {

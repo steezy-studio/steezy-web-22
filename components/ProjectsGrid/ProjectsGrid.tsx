@@ -69,7 +69,7 @@ const ProjectsGrid = ({
                 setvisibleProjectsCount((prev) => prev + projectsPerPage);
               }}
             >
-              Show more
+              Explore More
             </Link>
           </Large>
         </LoadMoreProjects>

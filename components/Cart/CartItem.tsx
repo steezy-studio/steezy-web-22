@@ -1,10 +1,10 @@
 import { useCartLine } from "@shopify/hydrogen-react";
 import { formatPrice } from "../../helpers/formatPrice";
+import Link from "../Link/Link";
 import { Micro } from "../Typo/Micro";
 import { Small } from "../Typo/Small";
 import CartQuantityInput from "./CartQuantityInput";
 import { CartItemSize, StyledCartItem } from "./Styles/StyledCartItem";
-import Link from "../Link/Link";
 
 interface CartItemProps {}
 
@@ -16,10 +16,7 @@ const CartItem = ({}: CartItemProps) => {
       <CartItemSize style={{ gridArea: "title" }}>
         <div>
           <Small className='medium'>
-            <Link
-              href={`/apparel/${merchandise.product.handle}`}
-              className='agrandir'
-            >
+            <Link href={`/apparel/${merchandise.product.handle}`}>
               {merchandise.product.title}
             </Link>
           </Small>

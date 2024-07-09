@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
-import { breakpoint } from "../../../helpers/consts";
+import { spaces } from "../../../helpers/spaces";
 
 export const StyledShowreel = styled.div`
   position: relative;
@@ -8,29 +8,10 @@ export const StyledShowreel = styled.div`
 
 export const PlayButton = styled.div`
   position: absolute;
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  bottom: ${spaces.m}px;
+  left: ${spaces.l}px;
   pointer-events: none;
   z-index: 991;
-  span {
-    font-family: "migra-italic", Arial, Helvetica, sans-serif;
-    color: white;
-    font-size: 7vw;
-    text-decoration: underline;
-    text-underline-offset: 0.1em;
-    text-decoration-thickness: 2px;
-    ${breakpoint.tabletPortrait} {
-      font-size: 50px;
-    }
-    ${breakpoint.phone} {
-      font-size: 60px;
-    }
-    ${breakpoint.miniPhone} {
-      font-size: 50px;
-    }
-  }
 `;
 
 export const ShowreelCover = styled(Image)`

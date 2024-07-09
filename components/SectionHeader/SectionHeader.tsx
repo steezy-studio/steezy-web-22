@@ -1,9 +1,7 @@
 import React, { ReactNode } from "react";
-import { StyledSectionHeader } from "./StyledSectionHeader";
-import { Medium } from "../Typo/Medium";
-import { Micro } from "../Typo/Micro";
-import HeaderLine from "../HeaderLine/HeaderLine";
 import Link from "../Link/Link";
+import { Medium } from "../Typo/Medium";
+import { StyledSectionHeader } from "./StyledSectionHeader";
 
 export interface SectionHeaderProps {
   header: string;
@@ -20,13 +18,13 @@ const SectionHeader = ({
 }: SectionHeaderProps) => {
   return (
     <StyledSectionHeader>
-      <Medium className='medium'>{header}</Medium>
+      <Medium className='bold'>{header}</Medium>
       {linkText && url && (
-        <Link href={url} className='no-underline agrandir' target={target}>
-          <HeaderLine>
-            <Micro>{linkText}</Micro>
-          </HeaderLine>
-        </Link>
+        <Medium className='editorial'>
+          <Link href={url} target={target}>
+            {linkText}
+          </Link>
+        </Medium>
       )}
     </StyledSectionHeader>
   );

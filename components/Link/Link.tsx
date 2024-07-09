@@ -1,10 +1,10 @@
 import { LinkProps as NextLinkProps } from "next/link";
-import { useContext } from "react";
+import { ReactNode, useContext } from "react";
 import { HoverProvider } from "../Cursor/CursorProvider";
 import { LinkBg, StyledLink } from "./Styles/StyledLink";
 
 interface LinkProps extends NextLinkProps {
-  children: JSX.Element | JSX.Element[] | string;
+  children: ReactNode | ReactNode[] | string;
   className?: string;
   target?: string;
   onClick?: () => void;

@@ -2,6 +2,7 @@ import Vimeo from "@u-wave/react-vimeo";
 import { useContext } from "react";
 import { HoverProvider } from "../Cursor/CursorProvider";
 import Dialog from "../Dialog/Dialog";
+import { Big } from "../Typo/Big";
 import { PlayButton } from "./Styles/StyledShowreel";
 import {
   Loop,
@@ -39,7 +40,7 @@ const ShowreelVideo = ({ src, open, onOpenChange }: ShowreelProps) => {
             onMouseLeave={() => setCursorType("normal")}
           >
             <PlayButton>
-              <span className='underline big white tac wide'>play video</span>
+              <Big className='white underline'>Play Video</Big>
             </PlayButton>
             <Loop
               whileHover={{ scale: 1.15 }}

@@ -87,7 +87,7 @@ const product = ({
             </ProductHeroVideo>
             <ProductInfo>
               <ProductText>
-                <Medium className='medium'>{product.title}</Medium>
+                <Medium className='bold'>{product.title}</Medium>
                 <Large>
                   {formatPrice(
                     product.priceRange.maxVariantPrice.amount,

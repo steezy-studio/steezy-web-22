@@ -6,12 +6,9 @@ import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import strings from "../../data/strings";
 import { DisableScroll } from "../../pagestyles/DisableScroll";
 import Divider from "../Divider/Divider";
-import Instagram from "../Icons/Instagram";
-import Vimeo from "../Icons/Vimeo";
 import NavLink from "./NavLink";
 import { NavbarContext } from "./NavbarControls";
 import {
-  PhoneDecoration,
   SNavLinks,
   Vega,
   VegaW,
@@ -85,29 +82,17 @@ const Navlinks = ({}: NavlinksProps) => {
           const isActive =
             router.asPath.includes(link) ||
             activePaths.some((path) => router.asPath.includes(path));
-
           const delay = (i + 1) * navLinksDelay;
+
           return (
             <Fragment key={i}>
-              <NavLink
-                delay={delay}
-                active={isActive}
-                href={link}
-                iconSrc={`/icons/${iconName}`}
-              >
+              <NavLink delay={delay} active={isActive} href={link}>
                 {name}
               </NavLink>
-
               <Divider {...dividerAnimation} delay={(i + 1) * 0.7} />
             </Fragment>
           );
         })}
-        <PhoneDecoration
-          variants={{ open: { opacity: 1 }, close: { opacity: 0 } }}
-        >
-          <Instagram />
-          <Vimeo />
-        </PhoneDecoration>
       </SNavLinks>
     </>
   );

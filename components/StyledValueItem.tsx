@@ -47,8 +47,7 @@ export const ValueHeader = styled.div`
 
 export const Order = styled.span`
   font-size: 100px;
-  font-family: "migra-italic";
-  font-weight: 400;
+  font-family: "editorial-new";
   letter-spacing: 0.02em;
   color: ${colors.black};
   position: absolute;

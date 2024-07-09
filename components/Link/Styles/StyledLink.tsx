@@ -1,22 +1,19 @@
+import Link from "next/link";
 import styled from "styled-components";
 import { colors } from "../../../helpers/consts";
-import Link from "next/link";
 
 export const LinkBg = styled.span`
   display: block;
-  width: 100%;
+  width: 110%;
+  height: 120%;
   position: absolute;
-  height: 0.85em;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   background-color: ${colors.primary400};
   mix-blend-mode: multiply;
-  transform: scaleX(0);
-  transform-origin: 0 0;
+  transform: translate(-50%, -50%) scaleX(0);
+  transform-origin: 0;
   transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
-  &.agrandir {
-    height: 1.1em;
-  }
 `;
 
 export const StyledLink = styled(Link)`
@@ -29,7 +26,7 @@ export const StyledLink = styled(Link)`
   text-underline-offset: 3px;
   &:hover {
     .bg {
-      transform: scaleX(1);
+      transform: translate(-50%, -50%) scaleX(1);
     }
   }
   &.no-underline {
@@ -38,7 +35,7 @@ export const StyledLink = styled(Link)`
   &.active,
   &.active a {
     .bg {
-      transform: scaleX(1);
+      transform: translate(-50%, -50%) scaleX(1);
     }
   }
 `;

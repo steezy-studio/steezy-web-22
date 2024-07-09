@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import strings from "../data/strings";
 import { device } from "../helpers/consts";
+import { romanizeNums } from "../helpers/romanizeNums";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import { useWindowSize } from "../hooks/useWindowSize";
 import HeaderLine from "./HeaderLine/HeaderLine";
@@ -33,9 +34,7 @@ const ValueItem = ({
   isFocused,
 }: ValueItemProps) => {
   const valueRef = useRef(null);
-  let _order = order + 1;
-
-  const formatedOrder = _order < 10 ? `0${_order}` : String(_order);
+  const formatedOrder = `${romanizeNums(order + 1)}.`;
   const [scrollDirection, setScrollDirection] = useState("down");
   const { w } = useWindowSize();
   const isTooSmall = w > device.tabletPortrait;

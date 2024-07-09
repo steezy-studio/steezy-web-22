@@ -14,7 +14,8 @@ import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 import SectionHeader from "../components/SectionHeader/SectionHeader";
 import ServicesSection from "../components/ServicesSection/ServicesSection";
 import Showreel from "../components/Showreel/Showreel";
-import { Micro } from "../components/Typo/Micro";
+import { Big } from "../components/Typo/Big";
+import { Small } from "../components/Typo/Small";
 import strings from "../data/strings";
 import { Areas, Query } from "../generated/preprTypes";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
@@ -25,8 +26,10 @@ import { useWindowSize } from "../hooks/useWindowSize";
 import {
   FeaturedGrid,
   HeroFooter,
+  HeroFooterPerex,
   IndexApparel,
   IndexGrid,
+  IndexHeroClaim,
   IndexHeroSection,
   IndexQuoteClient,
   IndexServices,
@@ -55,6 +58,11 @@ const Index = ({ projects, areas, products }: indexProps) => {
       />
       <StyledIndex>
         <IndexHeroSection>
+          <IndexHeroClaim>
+            <RevealAnimation delay={0.3}>
+              <Big>We show the world how great you are</Big>
+            </RevealAnimation>
+          </IndexHeroClaim>
           <Showreel
             asset={{
               url:
@@ -65,10 +73,12 @@ const Index = ({ projects, areas, products }: indexProps) => {
             }}
           />
           <HeroFooter>
-            <Micro as='h1'>
-              We work for world-known brands while sharing our knowledge and
-              passion with local start-ups and cultural pioneers.
-            </Micro>
+            <HeroFooterPerex>
+              <Small as='h2'>
+                We work for world-known brands while sharing our knowledge and
+                passion with local start-ups and cultural pioneers.
+              </Small>
+            </HeroFooterPerex>
             <LandingHeroPageLogotypes>
               {landingpageStrings.hero.clients.logotypes.map(
                 ({ src, alt }, i) => (
@@ -87,7 +97,7 @@ const Index = ({ projects, areas, products }: indexProps) => {
           <SectionHeader
             header='Featured projects'
             url='/projects/all-projects'
-            linkText='all projects'
+            linkText='All Projects'
           />
           <IndexGrid>
             <ProjectsGrid
@@ -104,7 +114,7 @@ const Index = ({ projects, areas, products }: indexProps) => {
             products={products}
             header='Steezy apparel'
             url='/apparel'
-            linkText='Whole collection'
+            linkText='Whole Collection'
           />
         </IndexApparel>
         <IndexQuoteClient>
