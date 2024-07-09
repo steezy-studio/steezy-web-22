@@ -24,6 +24,7 @@ const PageTransition = ({ children }: PageTransitionProps) => {
       <SPageTransition
         key={asPath}
         onAnimationStart={() => setPauseAllVideos(true)}
+        onAnimationComplete={() => setPauseAllVideos(false)}
         initial={"initial"}
         animate={"animate"}
         exit={"exit"}

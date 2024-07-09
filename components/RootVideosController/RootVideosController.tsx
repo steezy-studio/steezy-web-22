@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { useDidUpdateEffect } from "../../hooks/useDidUpdateEffect";
 
 interface RootVideosControllerProps {
   children: React.ReactNode;
@@ -42,12 +43,14 @@ const RootVideosController = ({ children }: RootVideosControllerProps) => {
     return () => observer.disconnect();
   }, [pauseAllVideos]);
 
-  useEffect(() => {
+  useDidUpdateEffect(() => {
     if (!allVideoElements.current) return;
     if (pauseAllVideos === null) return;
 
-    if (!pauseAllVideos) {
-      allVideoElements.current.forEach((video) => video.play().catch(() => {}));
+    if (pauseAllVideos === false) {
+      allVideoElements.current.forEach((video) => {
+        video.play().catch(() => {});
+      });
       suspendObserver.current = false;
       return;
     }
