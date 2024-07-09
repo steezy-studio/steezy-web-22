@@ -6,8 +6,8 @@ import { ProjectHeroRole } from "../../pagestyles/StyledProject";
 import { StyledStudio } from "../../pagestyles/StyledStudio";
 import { StyledFooter } from "../Footer/Styles/StyledFooter";
 import { GridItemAreas } from "../GridItem/Styles/StyledGridItem";
-import { StyledHero } from "../Hero/Styles/StyledHero";
 import { PhoneDecoration } from "../Navbar/Styles/SNavlinks";
+import { StyledShowreel } from "../Showreel/Styles/StyledShowreel";
 
 export const Nano = styled(motion.span)`
   font-size: 11px;
@@ -37,7 +37,7 @@ export const Nano = styled(motion.span)`
   ${breakpoint.phone} {
     font-size: 12px;
   }
-  ${StyledHero} & {
+  ${StyledShowreel} & {
     white-space: pre-wrap;
     &.perex {
       line-height: 1.6em;

@@ -2,7 +2,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
 
-export const StyledHero = styled.div`
+export const StyledShowreel = styled.div`
   position: relative;
 `;
 
@@ -33,7 +33,7 @@ export const PlayButton = styled.div`
   }
 `;
 
-export const HeroCover = styled(Image)`
+export const ShowreelCover = styled(Image)`
   width: 100%;
   height: 100%;
   object-fit: cover;

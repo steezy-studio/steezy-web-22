@@ -6,8 +6,8 @@ import { ProjectHeroRole } from "../../pagestyles/StyledProject";
 import { StyledStudio } from "../../pagestyles/StyledStudio";
 import { StyledFooter } from "../Footer/Styles/StyledFooter";
 import { GridItemAreas } from "../GridItem/Styles/StyledGridItem";
-import { StyledHero } from "../Hero/Styles/StyledHero";
 import { PhoneDecoration } from "../Navbar/Styles/SNavlinks";
+import { StyledShowreel } from "../Showreel/Styles/StyledShowreel";
 
 export const Micro = styled(motion.span)`
   font-size: 14px;
@@ -32,7 +32,7 @@ export const Micro = styled(motion.span)`
   ${breakpoint.tabletLandscape} {
     font-size: 11px;
   }
-  ${StyledHero} & {
+  ${StyledShowreel} & {
     white-space: pre-wrap;
     &.perex {
       line-height: 1.6em;

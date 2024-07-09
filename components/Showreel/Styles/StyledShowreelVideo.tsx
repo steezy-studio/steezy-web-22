@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
 
-export const StyledHeroVideo = styled.div<{ ratio?: number }>`
+export const StyledShowreelVideo = styled.div<{ ratio?: number }>`
   position: relative;
   overflow: hidden;
   aspect-ratio: 2;

@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
 import { spaces } from "../helpers/spaces";
@@ -57,6 +56,7 @@ export const IndexQuote = styled.div`
 
 export const IndexQuoteClient = styled.div`
   overflow: hidden;
+  margin-bottom: ${spaces.xxxxl}px;
 `;
 
 export const FeaturedGrid = styled.div`

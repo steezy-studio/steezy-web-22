@@ -149,6 +149,10 @@ export const ValuesList = styled.div`
   }
 `;
 
+export const StudioShowreelW = styled.div`
+  margin-top: ${spaces.xxxxl}px;
+`;
+
 export const BrandsSection = styled.section`
   display: grid;
   grid-template-columns: 350px 1fr;

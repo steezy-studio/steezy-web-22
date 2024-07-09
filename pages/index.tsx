@@ -5,13 +5,15 @@ import {
 } from "@shopify/hydrogen-react/storefront-api-types";
 import { GetStaticProps } from "next";
 import getClient from "../apollo/client";
+import AutoSlider from "../components/AutoSlider/AutoSlider";
+import ClientQuote from "../components/ClientQuote/ClientQuote";
 import FeaturedProducts from "../components/FeaturedProducts/FeaturedProducts";
 import Head from "../components/Head/Head";
-import Hero from "../components/Hero/Hero";
-import Navbar from "../components/Navbar/Navbar";
 import ProjectsGrid from "../components/ProjectsGrid/ProjectsGrid";
+import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 import SectionHeader from "../components/SectionHeader/SectionHeader";
 import ServicesSection from "../components/ServicesSection/ServicesSection";
+import Showreel from "../components/Showreel/Showreel";
 import { Micro } from "../components/Typo/Micro";
 import strings from "../data/strings";
 import { Areas, Query } from "../generated/preprTypes";
@@ -26,6 +28,7 @@ import {
   IndexApparel,
   IndexGrid,
   IndexHeroSection,
+  IndexQuoteClient,
   IndexServices,
   LandingHeroPageLogotypes,
   LandingPageHeroLogotype,
@@ -52,7 +55,7 @@ const Index = ({ projects, areas, products }: indexProps) => {
       />
       <StyledIndex>
         <IndexHeroSection>
-          <Hero
+          <Showreel
             asset={{
               url:
                 w <= device.phone
@@ -104,6 +107,25 @@ const Index = ({ projects, areas, products }: indexProps) => {
             linkText='Whole collection'
           />
         </IndexApparel>
+        <IndexQuoteClient>
+          <RevealAnimation>
+            <AutoSlider
+              interval={5000}
+              list={landingpageStrings.quotes.map(
+                ({ name, position, quote }, j, a) => {
+                  return (
+                    <ClientQuote
+                      key={j}
+                      quote={quote}
+                      clientName={name}
+                      clientRole={position}
+                    />
+                  );
+                }
+              )}
+            />
+          </RevealAnimation>
+        </IndexQuoteClient>
         {/* <InstagramFeed images={null} /> */}
       </StyledIndex>
     </>

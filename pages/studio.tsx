@@ -1,15 +1,13 @@
 import { GetStaticProps } from "next";
 import { useState } from "react";
 import getClient from "../apollo/client";
-import AutoSlider from "../components/AutoSlider/AutoSlider";
-import ClientQuote from "../components/ClientQuote/ClientQuote";
 import Head from "../components/Head/Head";
 import HeaderLine from "../components/HeaderLine/HeaderLine";
-import Hero from "../components/Hero/Hero";
 import Marquee from "../components/Marquee/Marquee";
 import ProjectsSlider from "../components/ProjectsSlider/ProjectsSlider";
 import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 import ServicesSection from "../components/ServicesSection/ServicesSection";
+import Showreel from "../components/Showreel/Showreel";
 import { Large } from "../components/Typo/Large";
 import { Medium } from "../components/Typo/Medium";
 import { Micro } from "../components/Typo/Micro";
@@ -29,10 +27,10 @@ import {
   OurStudioSliderImg,
   StudioHero,
   StudioLatestProjects,
-  StudioQuotesSlider,
   StudioServiceCover,
   StudioServices,
   StudioServicesSectionW,
+  StudioShowreelW,
   StyledStudio,
   TextBlock,
   TextBlockBody,
@@ -67,7 +65,6 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
             We're creative house building strong visual identities and
             strategies behind inspiring brands.
           </Large>
-          <Hero asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }} />
         </StudioHero>
         <StudioLatestProjects>
           <ProjectsSlider
@@ -134,29 +131,10 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
         </ValuesSection>
 
         <StudioServices>
-          <StudioQuotesSlider>
-            <RevealAnimation>
-              <AutoSlider
-                interval={5000}
-                list={studioStrings.quotes.map(
-                  ({ name, position, quote }, j, a) => {
-                    return (
-                      <ClientQuote
-                        key={j}
-                        quote={quote}
-                        clientName={name}
-                        clientRole={position}
-                      />
-                    );
-                  }
-                )}
-              />
-            </RevealAnimation>
-          </StudioQuotesSlider>
-          {/* <Large>
+          <Large className='wide'>
             We’re able to cover the client’s needs from strategy and art
             direction to production, design and communication.
-          </Large> */}
+          </Large>
           <StudioServiceCover
             src={"/images/studio-hero.jpg"}
             width={2101}
@@ -166,6 +144,11 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
           <StudioServicesSectionW>
             <ServicesSection areas={areas} />
           </StudioServicesSectionW>
+          <StudioShowreelW>
+            <Showreel
+              asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }}
+            />
+          </StudioShowreelW>
         </StudioServices>
 
         <BrandsSection>

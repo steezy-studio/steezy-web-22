@@ -2,16 +2,20 @@ import Vimeo from "@u-wave/react-vimeo";
 import { useContext } from "react";
 import { HoverProvider } from "../Cursor/CursorProvider";
 import Dialog from "../Dialog/Dialog";
-import { PlayButton } from "./Styles/StyledHero";
-import { Loop, Showreel, StyledHeroVideo } from "./Styles/StyledHeroVideo";
+import { PlayButton } from "./Styles/StyledShowreel";
+import {
+  Loop,
+  Showreel,
+  StyledShowreelVideo,
+} from "./Styles/StyledShowreelVideo";
 
-interface VideoProps {
+interface ShowreelProps {
   src: string;
   open?: boolean;
   onOpenChange?: () => void;
 }
 
-const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
+const ShowreelVideo = ({ src, open, onOpenChange }: ShowreelProps) => {
   const { setCursorType } = useContext(HoverProvider);
 
   return (
@@ -30,7 +34,7 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
           </Showreel>
         }
         trigger={
-          <StyledHeroVideo
+          <StyledShowreelVideo
             onMouseEnter={() => setCursorType("hover")}
             onMouseLeave={() => setCursorType("normal")}
           >
@@ -46,11 +50,11 @@ const HeroVideo = ({ src, open, onOpenChange }: VideoProps) => {
               muted={true}
               loop={true}
             />
-          </StyledHeroVideo>
+          </StyledShowreelVideo>
         }
       />
     </>
   );
 };
 
-export default HeroVideo;
+export default ShowreelVideo;

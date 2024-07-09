@@ -1,27 +1,27 @@
 import { useState } from "react";
 import { Asset } from "../../generated/preprTypes";
 import RevealAnimation from "../RevealAnimation/RevealAnimation";
-import HeroVideo from "./HeroVideo";
-import { HeroCover, StyledHero } from "./Styles/StyledHero";
+import ShowreelVideo from "./ShowreelVideo";
+import { ShowreelCover, StyledShowreel } from "./Styles/StyledShowreel";
 
-interface HeroProps {
+interface ShowreelProps {
   asset: Asset;
 }
 
-const Hero = ({ asset }: HeroProps) => {
+const Showreel = ({ asset }: ShowreelProps) => {
   const [openDialog, setOpenDialog] = useState(false);
 
   return (
-    <StyledHero>
+    <StyledShowreel>
       <RevealAnimation delay={0.3} style={{ zIndex: 99 }}>
         {asset._type === "Video" ? (
-          <HeroVideo
+          <ShowreelVideo
             src={asset.url}
             open={openDialog}
             onOpenChange={() => setOpenDialog((prev) => !prev)}
           />
         ) : (
-          <HeroCover
+          <ShowreelCover
             src={asset.url}
             width={asset.width}
             height={asset.height}
@@ -31,8 +31,8 @@ const Hero = ({ asset }: HeroProps) => {
           />
         )}
       </RevealAnimation>
-    </StyledHero>
+    </StyledShowreel>
   );
 };
 
-export default Hero;
+export default Showreel;
