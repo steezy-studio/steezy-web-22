@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import styled from "styled-components";
 
-export const StyledServiceItem = styled.div``;
+export const StyledServiceItem = styled(Link)`
+  all: unset;
+`;
 
 export const ServiceItemProject = styled(motion.div)`
   position: absolute;

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Area } from "../../generated/preprTypes";
 import isTouchDevice from "../../helpers/isTouchDevice";
@@ -24,7 +23,7 @@ interface ServiceItemProps {
 
 const ServiceItem = ({ area, i }: ServiceItemProps) => {
   const img = area.projects[0].grid_image[0];
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLAnchorElement>(null);
   const previewProjectRef = useRef<HTMLDivElement>(null);
   const [hover, sethover] = useState<boolean>(false);
   const isEven = i % 2 === 0;
@@ -57,6 +56,7 @@ const ServiceItem = ({ area, i }: ServiceItemProps) => {
         sethover(false);
         setCursorType("normal");
       }}
+      href={`/projects/${area._slug}`}
     >
       <ServiceItemProject
         ref={previewProjectRef}
@@ -83,9 +83,7 @@ const ServiceItem = ({ area, i }: ServiceItemProps) => {
 
       <ServiceItemContent>
         <RevealAnimation delay={0.2 * i}>
-          <Medium className='medium'>
-            <Link href={`/projects/${area._slug}`}>{area.area_name}</Link>
-          </Medium>
+          <Medium className='medium'>{area.area_name}</Medium>
           <SubServicesList>
             <Small className='big-lh break-lines'>{area.sub_areas}</Small>
           </SubServicesList>
