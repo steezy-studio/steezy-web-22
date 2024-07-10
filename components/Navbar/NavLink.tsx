@@ -1,38 +1,43 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { easing } from "../../helpers/animationConfig";
 import { HoverProvider } from "../Cursor/CursorProvider";
-import { StyledNavLink } from "./Styles/StyledNavLink";
+import {
+  NavLinkArrow,
+  NavLinkInner,
+  StyledNavLink,
+} from "./Styles/StyledNavLink";
 
 interface NavLinkProps {
   href: string;
   children: string;
   active: boolean;
-  delay?: number;
   onClick?: () => void;
 }
 
-const NavLink = ({
-  href,
-  children,
-  active,
-  delay = 0,
-  onClick,
-}: NavLinkProps) => {
+const NavLink = ({ href, children, active, onClick }: NavLinkProps) => {
   const { setCursorType } = useContext(HoverProvider);
+  const [hover, sethover] = useState<boolean>(false);
   return (
     <StyledNavLink
       onClick={onClick}
-      onMouseEnter={() => setCursorType("hover")}
-      onMouseLeave={() => setCursorType("normal")}
-      variants={{
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
+      onMouseEnter={() => {
+        setCursorType("hover");
+        sethover(true);
       }}
-      transition={{ delay: delay }}
+      onMouseLeave={() => {
+        setCursorType("normal");
+        sethover(false);
+      }}
       className={`${active ? `active` : ``} editorial`}
       href={href}
     >
-      {children}
+      <NavLinkInner
+        animate={{ x: !active && hover ? "0em" : "-1em" }}
+        transition={{ ease: easing }}
+      >
+        <NavLinkArrow>{"\u2192\u00a0"}</NavLinkArrow>
+        {children}
+      </NavLinkInner>
     </StyledNavLink>
   );
 };

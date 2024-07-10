@@ -1,20 +1,14 @@
 "use client";
 
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/router";
-import { Fragment, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import strings from "../../data/strings";
 import { DisableScroll } from "../../pagestyles/DisableScroll";
 import Divider from "../Divider/Divider";
 import NavLink from "./NavLink";
 import { NavbarContext } from "./NavbarControls";
-import {
-  SNavLinks,
-  Vega,
-  VegaW,
-  dividerAnimation,
-  navLinksVariants,
-} from "./Styles/SNavlinks";
+import { SNavLinks, Vega, VegaW, navLinksVariants } from "./Styles/SNavlinks";
 
 interface NavlinksProps {}
 
@@ -77,7 +71,6 @@ const Navlinks = ({}: NavlinksProps) => {
             </VegaW>
           )}
         </AnimatePresence>
-        <Divider {...dividerAnimation} />
         {strings.navData.map(({ link, name, iconName, activePaths }, i) => {
           const isActive =
             router.asPath.includes(link) ||
@@ -85,12 +78,21 @@ const Navlinks = ({}: NavlinksProps) => {
           const delay = (i + 1) * navLinksDelay;
 
           return (
-            <Fragment key={i}>
-              <NavLink delay={delay} active={isActive} href={link}>
+            <motion.div
+              variants={{
+                initial: { opacity: 0 },
+                animate: { opacity: 1 },
+                exit: { opacity: 0 },
+              }}
+              transition={{ delay: delay }}
+              key={i}
+            >
+              {i === 0 && <Divider />}
+              <NavLink active={isActive} href={link}>
                 {name}
               </NavLink>
-              <Divider {...dividerAnimation} delay={(i + 1) * 0.7} />
-            </Fragment>
+              <Divider />
+            </motion.div>
           );
         })}
       </SNavLinks>

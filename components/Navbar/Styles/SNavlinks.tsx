@@ -63,22 +63,18 @@ export const Vega = styled(Image)`
 export const navLinksVariants = {
   initial: {
     opacity: 0,
-    transition: {
-      duration: 1,
-      when: "afterChildren",
-    },
   },
   animate: {
     opacity: 1,
     transition: {
-      duration: 1,
+      duration: 0.5,
       when: "beforeChildren",
     },
   },
   exit: {
     opacity: 0,
     transition: {
-      duration: 1,
+      duration: 0.5,
       when: "afterChildren",
     },
   },

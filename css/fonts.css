@@ -4,6 +4,12 @@
   font-weight: 400;
 }
 @font-face {
+  font-family: "editorial-new";
+  src: url("/fonts/editorial-new-ultralight-italic.woff");
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
   font-family: "helvetica-now";
   src: url("/fonts/helvetica-now-display-medium.woff");
   font-weight: 500;

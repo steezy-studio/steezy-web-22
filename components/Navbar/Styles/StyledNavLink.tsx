@@ -11,9 +11,10 @@ export const StyledNavLink = styled(motion(Link))`
   font-size: 9vh;
   font-weight: 300;
   letter-spacing: -0.01em;
-  line-height: 1em;
+  line-height: 1.1em;
   margin-top: 0.2em;
   transition: all 0.3s;
+  overflow: hidden;
   &:hover {
     font-style: oblique 10deg;
     font-stretch: 120%;
@@ -23,8 +24,7 @@ export const StyledNavLink = styled(motion(Link))`
     color: ${colors.black};
   }
   &.active {
-    font-style: oblique 15deg;
-    font-stretch: 170%;
+    font-style: italic;
   }
   ${breakpoint.smallNotebook} {
     font-size: 8vh;
@@ -41,4 +41,13 @@ export const StyledNavLink = styled(motion(Link))`
   ${breakpoint.miniPhone} {
     font-size: 26px;
   }
+`;
+
+export const NavLinkInner = styled(motion.div)`
+  width: 100%;
+  display: flex;
+`;
+
+export const NavLinkArrow = styled.div`
+  width: 1em;
 `;
