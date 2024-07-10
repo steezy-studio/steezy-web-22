@@ -1,14 +1,12 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
-import { breakpoint, colors } from "../../helpers/consts";
+import { breakpoint } from "../../helpers/consts";
 
 export const Micro = styled(motion.span)`
   font-size: 14px;
   font-weight: 400;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   line-height: 1.5em;
-  color: ${colors.black};
-  display: inline-block;
   max-width: 400px;
   /* extends global .uppercase class */
   &.uppercase {

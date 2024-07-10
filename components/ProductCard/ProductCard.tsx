@@ -117,7 +117,7 @@ const ProductCard = ({
                     animate={{ y: "0%", transition }}
                     exit={{ y: "150%", transition }}
                   >
-                    <Nano>buy now</Nano>
+                    <Nano className='uppercase'>buy now</Nano>
                   </ProductCardButton>
                 )}
               </AnimatePresence>

@@ -1,14 +1,14 @@
 "use client";
 
-import styled from "styled-components";
 import { motion } from "framer-motion";
-import { colors, breakpoint } from "../../../helpers/consts";
+import styled from "styled-components";
+import { breakpoint, colors } from "../../../helpers/consts";
 import { spaces } from "../../../helpers/spaces";
 
 export const StyledCart = styled.div`
   position: fixed;
   inset: 0;
-  z-index: 999999999;
+  z-index: 9;
   pointer-events: none;
   height: 100dvh;
 `;
@@ -45,7 +45,7 @@ export const Drawer = styled(motion.div)`
 export const CartHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 export const CartHeaderI = styled.div`

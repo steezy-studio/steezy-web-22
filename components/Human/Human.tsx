@@ -1,4 +1,6 @@
-import React from "react";
+import RevealAnimation from "../RevealAnimation/RevealAnimation";
+import { Large } from "../Typo/Large";
+import { Micro } from "../Typo/Micro";
 import {
   HumanCover,
   HumanCoverW,
@@ -8,9 +10,6 @@ import {
   HumanInfoGrid,
   StyledHuman,
 } from "./StyledHuman";
-import { Large } from "../Typo/Large";
-import { Nano } from "../Typo/Nano";
-import RevealAnimation from "../RevealAnimation/RevealAnimation";
 
 interface HumanProps {
   name: string;
@@ -52,12 +51,12 @@ const Human = ({
           <Large className='white'>{name}</Large>
           <HumanInfoGrid>
             <HumanInfoCol>
-              <Nano className='white'>{position}</Nano>
-              <Nano className='white'>{roles}</Nano>
+              <Micro className='white'>{position}</Micro>
+              <Micro className='white'>{roles}</Micro>
             </HumanInfoCol>
             <HumanInfoCol>
-              <Nano className='white'>{email}</Nano>
-              <Nano className='white'>{phone}</Nano>
+              <Micro className='white'>{email}</Micro>
+              <Micro className='white'>{phone}</Micro>
             </HumanInfoCol>
           </HumanInfoGrid>
         </HumanInfo>

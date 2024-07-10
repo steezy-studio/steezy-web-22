@@ -1,13 +1,13 @@
 import Image from "next/image";
 import styled from "styled-components";
-import { spaces } from "../helpers/spaces";
 import { breakpoint } from "../helpers/consts";
+import { spaces } from "../helpers/spaces";
 
 export const StyledContact = styled.div``;
 
 export const ContactHero = styled.div`
   display: grid;
-  margin-top: ${spaces.l}px;
+  margin-top: ${spaces.xxl}px;
   grid-template-columns: 1fr 1fr;
   column-gap: ${spaces.m}px;
   ${breakpoint.phone} {
@@ -22,24 +22,13 @@ export const ContactHeroCover = styled(Image)`
   border-radius: ${({ theme }) => theme.bRad};
 `;
 
-export const ContactInfo = styled.div`
-  display: grid;
-  align-content: start;
-  row-gap: ${spaces.xl}px;
-  margin-left: ${spaces.xl}px;
-  ${breakpoint.phone} {
-    margin-left: 0;
-  }
-`;
-
 export const ContactDetails = styled.div`
-  display: grid;
-  column-gap: ${spaces.xl}px;
+  display: flex;
+  column-gap: ${spaces.xxl}px;
   row-gap: ${spaces.xl}px;
-  grid-template-columns: 1fr 1fr;
   height: 100%;
   ${breakpoint.phone} {
-    column-gap: ${spaces.m}px;
+    column-gap: ${spaces.l}px;
   }
 `;
 
@@ -54,8 +43,8 @@ export const ContactDetail = styled.div`
   align-content: start;
   max-width: 250px;
   row-gap: ${spaces.m}px;
-  &.align-end {
-    align-self: end;
+  &.wide {
+    max-width: unset;
   }
 `;
 

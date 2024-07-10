@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styled from "styled-components";
+import { breakpoint } from "../../helpers/consts";
 import { spaces } from "../../helpers/spaces";
-import { breakpoint, colors } from "../../helpers/consts";
 
 export const StyledHuman = styled.div`
   position: relative;
@@ -30,7 +30,11 @@ export const HumanCoverW = styled.div`
 `;
 
 export const HumanInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: absolute;
+  top: ${spaces.m}px;
   bottom: ${spaces.m}px;
   right: ${spaces.m}px;
   left: ${spaces.m}px;

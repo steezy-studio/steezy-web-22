@@ -21,6 +21,7 @@ import BlurOverlay from "../BlurOverlay/BlurOverlay";
 import { HoverProvider } from "../Cursor/CursorProvider";
 import Link from "../Link/Link";
 import Burger from "../Navbar/Burger";
+import Portal from "../Portal/Portal";
 import Scrollbar from "../Scrollbar/Scrollbar";
 import { Large } from "../Typo/Large";
 import { Nano } from "../Typo/Nano";
@@ -69,7 +70,7 @@ const Cart = ({}: CartProps) => {
   }, [pathname]);
 
   return (
-    <>
+    <Portal selector='body'>
       <StyledCart>
         <Drawer
           initial={false}
@@ -83,8 +84,8 @@ const Cart = ({}: CartProps) => {
         >
           <CartHeader>
             <CartHeaderI>
-              <Large className='uppercase black'>Cart</Large>
-              <Nano>
+              <Large>Cart</Large>
+              <Nano className='uppercase'>
                 <Link href={"/apparel"} className=''>
                   all products
                 </Link>
@@ -97,9 +98,7 @@ const Cart = ({}: CartProps) => {
           <CartContent>
             {lines.length === 0 ? (
               <EmptyCart>
-                <Large className='black'>
-                  Your cart is empty, like our souls
-                </Large>
+                <Large>Your cart is empty, like our souls</Large>
                 <Link href={"/products"} onClick={() => setShowCart(false)}>
                   Go fill it up
                 </Link>
@@ -123,10 +122,8 @@ const Cart = ({}: CartProps) => {
           {!(lines.length === 0) && (
             <CartFooter>
               <TotalPrice>
-                <Large className='black'>Total</Large>
-                <Large className='black'>
-                  {formatPrice(cost?.totalAmount?.amount)}
-                </Large>
+                <Large>Total</Large>
+                <Large>{formatPrice(cost?.totalAmount?.amount)}</Large>
               </TotalPrice>
               <CartCheckoutButtonW
                 onMouseEnter={() => {
@@ -145,7 +142,7 @@ const Cart = ({}: CartProps) => {
         </Drawer>
         <BlurOverlay visible={showCart} onClick={() => setShowCart(false)} />
       </StyledCart>
-    </>
+    </Portal>
   );
 };
 

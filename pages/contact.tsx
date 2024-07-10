@@ -5,11 +5,9 @@ import Human from "../components/Human/Human";
 import Instagram from "../components/Icons/Instagram";
 import Vimeo from "../components/Icons/Vimeo";
 import Link from "../components/Link/Link";
-import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 import SectionHeader from "../components/SectionHeader/SectionHeader";
 import { Large } from "../components/Typo/Large";
 import { Nano } from "../components/Typo/Nano";
-import { Small } from "../components/Typo/Small";
 import strings from "../data/strings";
 import { Areas } from "../generated/preprTypes";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
@@ -17,8 +15,6 @@ import {
   ContactDetail,
   ContactDetails,
   ContactHero,
-  ContactHeroCover,
-  ContactInfo,
   ContactSocials,
   Founders,
   FoundersGrid,
@@ -41,61 +37,42 @@ const Contact = ({ areas }: ContactProps) => {
 
       <StyledContact>
         <ContactHero>
-          <RevealAnimation>
-            <ContactHeroCover
-              src={"/images/contact-hero.jpg"}
-              alt={"Contact"}
-              height={1815}
-              width={1089}
-            />
-          </RevealAnimation>
-          <ContactInfo>
-            <RevealAnimation delay={0.1}>
-              <Large>Brno Office</Large>
-            </RevealAnimation>
-            <ContactDetails>
-              <RevealAnimation delay={0.2}>
-                <ContactDetail>
-                  <Nano>BRNO OFFICE</Nano>
-                  <Small className='break-lines'>
-                    {`STEEZY, s.r.o.\nObilní trh 4, 602 00 Brno\nCzech Republic\n\nIČ: 07812558\nDIČ (VAT): CZ07812558`}
-                  </Small>
-                </ContactDetail>
-              </RevealAnimation>
-              <RevealAnimation delay={0.3}>
-                <ContactDetail>
-                  <Nano>Recruiment</Nano>
-                  <Small>
-                    We’re always looking for new talents
-                    <br />
-                    <br />
-                    Send your portfolio to{" "}
-                    <Link href={"mailto: hello@steezy.studio"}>
-                      hello@steezy.studio
-                    </Link>
-                  </Small>
-                </ContactDetail>
-              </RevealAnimation>
-              <RevealAnimation delay={0.4}>
-                <ContactSocials>
-                  <Instagram />
-                  <Vimeo />
-                </ContactSocials>
-              </RevealAnimation>
-              <RevealAnimation delay={0.5}>
-                <ContactDetail className='align-end'>
-                  <Nano>New Business & media</Nano>
-                  <Small>
-                    <Link href={"mailto: hello@steezy.studio"}>
-                      hello@steezy.studio
-                    </Link>
-                    <br />
-                    <Link href={"tel: +420728088996"}>(+420) 728 088 996</Link>
-                  </Small>
-                </ContactDetail>
-              </RevealAnimation>
-            </ContactDetails>
-          </ContactInfo>
+          <ContactDetails>
+            <ContactDetail>
+              <Nano className='uppercase'>Brno Office</Nano>
+              <Nano className='break-lines'>
+                {`STEEZY, s.r.o.\nObilní trh 4, 602 00 Brno\nCzech Republic\n\nIČ: 07812558\nDIČ (VAT): CZ07812558`}
+              </Nano>
+              <ContactSocials>
+                <Instagram />
+                <Vimeo />
+              </ContactSocials>
+            </ContactDetail>
+            <ContactDetail>
+              <Nano className='uppercase'>Recruiment</Nano>
+              <Nano>
+                <span>
+                  We’re always looking for new talents
+                  <br />
+                  Send your portfolio to{" "}
+                </span>
+                <Link href={"mailto: hello@steezy.studio"}>
+                  hello@steezy.studio
+                </Link>
+              </Nano>
+            </ContactDetail>
+          </ContactDetails>
+
+          <ContactDetail className='wide'>
+            <Nano>New Business & media</Nano>
+            <Large>
+              <Link href={"mailto: hello@steezy.studio"}>
+                hello@steezy.studio
+              </Link>
+              <br />
+              <Link href={"tel: +420728088996"}>(+420) 728 088 996</Link>
+            </Large>
+          </ContactDetail>
         </ContactHero>
         <Founders>
           <SectionHeader header='Get in touch with co-founders' />
