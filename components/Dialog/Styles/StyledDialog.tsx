@@ -1,8 +1,7 @@
-import styled, { keyframes } from "styled-components";
 import * as RadixDialog from "@radix-ui/react-dialog";
-import { breakpoint, colors } from "../../../helpers/consts";
-import u from "../../../helpers/unit";
 import { motion } from "framer-motion";
+import styled, { keyframes } from "styled-components";
+import { breakpoint, colors } from "../../../helpers/consts";
 
 export const StyledDialog = styled(RadixDialog.Root)``;
 
@@ -22,7 +21,7 @@ export const Content = styled(RadixDialog.Content)`
   top: 50%;
   left: 50%;
   background-color: ${colors.black};
-  z-index: 99999999;
+  z-index: 999;
   animation: ${contentShow} 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 `;
 
@@ -77,7 +76,7 @@ export const Overlay = styled(RadixDialog.Overlay)`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 99999998;
+  z-index: 999;
 `;
 
 export const OverlayW = styled(motion.div)``;

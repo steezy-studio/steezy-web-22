@@ -4,34 +4,54 @@ import {
   CartProvider as ShopifyCartProvider,
   ShopifyProvider,
 } from "@shopify/hydrogen-react";
-import { ReactNode, useContext } from "react";
-import { CartToggleContext } from "../../components/Cart/Cart";
+import { usePathname } from "next/navigation";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface CartProviderProps {
   children: ReactNode;
 }
 
+export const CartToggleContext = createContext<{
+  showCart: boolean;
+  setShowCart: Dispatch<SetStateAction<boolean>>;
+}>(null);
+
 const CartProvider = ({ children }: CartProviderProps) => {
-  const { setShowCart } = useContext(CartToggleContext);
+  const [showCart, setShowCart] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setShowCart(false);
+  }, [pathname]);
+
   return (
-    <ShopifyProvider
-      countryIsoCode='CZ'
-      languageIsoCode='EN'
-      storeDomain={"https://f93b41-4a.myshopify.com"}
-      storefrontApiVersion='2024-01'
-      storefrontToken={process.env.NEXT_PUBLIC_SHOPIFY_ACCESS_TOKEN}
-    >
-      <ShopifyCartProvider
-        onLineAdd={() => {
-          setShowCart(true);
-        }}
-        onLineAddComplete={() => {
-          setShowCart(true);
-        }}
+    <CartToggleContext.Provider value={{ setShowCart, showCart }}>
+      <ShopifyProvider
+        countryIsoCode='CZ'
+        languageIsoCode='EN'
+        storeDomain={"https://f93b41-4a.myshopify.com"}
+        storefrontApiVersion='2024-01'
+        storefrontToken={process.env.NEXT_PUBLIC_SHOPIFY_ACCESS_TOKEN}
       >
-        {children}
-      </ShopifyCartProvider>
-    </ShopifyProvider>
+        <ShopifyCartProvider
+          onLineAdd={() => {
+            setShowCart(true);
+          }}
+          onLineAddComplete={() => {
+            setShowCart(true);
+          }}
+        >
+          {children}
+        </ShopifyCartProvider>
+      </ShopifyProvider>
+    </CartToggleContext.Provider>
   );
 };
 

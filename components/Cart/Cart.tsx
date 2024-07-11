@@ -5,15 +5,7 @@ import {
   CartLineProvider,
   useCart,
 } from "@shopify/hydrogen-react";
-import { usePathname } from "next/navigation";
-import {
-  Dispatch,
-  SetStateAction,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { useContext, useEffect } from "react";
 import { easing } from "../../helpers/animationConfig";
 import { colors } from "../../helpers/consts";
 import { formatPrice } from "../../helpers/formatPrice";
@@ -22,11 +14,13 @@ import { HoverProvider } from "../Cursor/CursorProvider";
 import Link from "../Link/Link";
 import Burger from "../Navbar/Burger";
 import Portal from "../Portal/Portal";
+import { RootVideosControllerContext } from "../RootVideosController/RootVideosController";
 import Scrollbar from "../Scrollbar/Scrollbar";
 import { Large } from "../Typo/Large";
 import { Nano } from "../Typo/Nano";
 import { Small } from "../Typo/Small";
 import CartItem from "./CartItem";
+import { CartToggleContext } from "./CartProvider";
 import {
   CartCheckoutButtonW,
   CartCloseWrapper,
@@ -44,30 +38,15 @@ import {
 
 interface CartProps {}
 
-export const CartToggleContext = createContext<{
-  showCart: boolean;
-  setShowCart: Dispatch<SetStateAction<boolean>>;
-}>(null);
-
-export const CartToggleProvider = ({ children }) => {
-  const [showCart, setShowCart] = useState(false);
-
-  return (
-    <CartToggleContext.Provider value={{ showCart, setShowCart }}>
-      {children}
-    </CartToggleContext.Provider>
-  );
-};
-
 const Cart = ({}: CartProps) => {
   const { lines, cost } = useCart();
-  const pathname = usePathname();
-  const { setShowCart, showCart } = useContext(CartToggleContext);
   const { setCursorType } = useContext(HoverProvider);
+  const { showCart, setShowCart } = useContext(CartToggleContext);
+  const { setPauseAllVideos } = useContext(RootVideosControllerContext);
 
   useEffect(() => {
-    setShowCart(false);
-  }, [pathname]);
+    setPauseAllVideos(showCart);
+  }, [showCart]);
 
   return (
     <Portal selector='body'>

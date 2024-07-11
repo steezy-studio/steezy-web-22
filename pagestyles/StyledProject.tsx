@@ -4,12 +4,15 @@ import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
 import { spaces } from "../helpers/spaces";
 
-export const StyledProject = styled.div``;
+export const StyledProject = styled.div`
+  margin-top: ${spaces.xl}px;
+`;
 
 export const ProjectHeroHeader = styled.div`
   display: grid;
   grid-template-columns: 3fr 1fr;
   column-gap: ${spaces.xl}px;
+  margin-top: ${spaces.l}px;
   ${breakpoint.phone} {
     grid-template-columns: unset;
   }

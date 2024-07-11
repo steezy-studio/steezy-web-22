@@ -13,6 +13,7 @@ import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import ProjectGridVimeo from "../../components/ProjectGridVimeo/ProjectGridVimeo";
 import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
 import RevealAnimation from "../../components/RevealAnimation/RevealAnimation";
+import { Large } from "../../components/Typo/Large";
 import { Nano } from "../../components/Typo/Nano";
 import { Small } from "../../components/Typo/Small";
 import Video from "../../components/Video/Video";
@@ -27,6 +28,7 @@ import {
   EnhancedProject,
   enhanceProjects,
 } from "../../helpers/enhanceProjects";
+import stripHtmlTags from "../../helpers/stripHtmlTags";
 import {
   ProjectDescription,
   ProjectDetailImg,
@@ -62,6 +64,7 @@ const Project = ({ projectData, areas }: ProjectProps) => {
         pageName={[`Project`, project.project_detail_name]}
       />
       <StyledProject>
+        <Large>{stripHtmlTags(project.project_detail_name)}</Large>
         <ProjectHeroHeader>
           <RevealAnimation>
             <ProjectCard

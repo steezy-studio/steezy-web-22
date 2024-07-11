@@ -1,5 +1,5 @@
 import { ThemeProvider } from "styled-components";
-import Cart, { CartToggleProvider } from "../components/Cart/Cart";
+import Cart from "../components/Cart/Cart";
 import CartProvider from "../components/Cart/CartProvider";
 import CursorProvider from "../components/Cursor/CursorProvider";
 import Footer from "../components/Footer/Footer";
@@ -20,32 +20,30 @@ function MyApp({ Component, pageProps }) {
   useGA();
 
   return (
-    <CartToggleProvider>
-      <CartProvider>
-        <NavbarControls>
-          <RootVideosController>
-            <ThemeProvider theme={theme(w)}>
-              <GlobalStyle />
-              <CursorProvider>
-                <NavbarControls>
-                  <Navbar />
-                  <PageTransition>
-                    <LenisContext>
-                      <main>
-                        <Navlinks />
-                        <Cart />
-                        <Component {...pageProps} />
-                        <Footer />
-                      </main>
-                    </LenisContext>
-                  </PageTransition>
-                </NavbarControls>
-              </CursorProvider>
-            </ThemeProvider>
-          </RootVideosController>
-        </NavbarControls>
-      </CartProvider>
-    </CartToggleProvider>
+    <CartProvider>
+      <NavbarControls>
+        <RootVideosController>
+          <ThemeProvider theme={theme(w)}>
+            <GlobalStyle />
+            <CursorProvider>
+              <NavbarControls>
+                <Navbar />
+                <PageTransition>
+                  <LenisContext>
+                    <main>
+                      <Navlinks />
+                      <Cart />
+                      <Component {...pageProps} />
+                      <Footer />
+                    </main>
+                  </LenisContext>
+                </PageTransition>
+              </NavbarControls>
+            </CursorProvider>
+          </ThemeProvider>
+        </RootVideosController>
+      </NavbarControls>
+    </CartProvider>
   );
 }
 

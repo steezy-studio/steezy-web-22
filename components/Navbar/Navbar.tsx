@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useContext } from "react";
 import { device } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import { CartToggleContext } from "../Cart/Cart";
+import { CartToggleContext } from "../Cart/CartProvider";
 import { HoverProvider } from "../Cursor/CursorProvider";
 import Logo from "../Logo/Logo";
 import Portal from "../Portal/Portal";

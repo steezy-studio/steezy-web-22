@@ -82,10 +82,6 @@ const ProjectCard = ({
     }
   }, [_static, hover]);
 
-  // useIntersectionObserver(videoRef, (entries) =>
-  //   videoCallback(entries, videoRef)
-  // );
-
   const options: HTMLReactParserOptions = {
     replace: (domNode) => {
       if (domNode instanceof Element && domNode.attribs) {
@@ -133,11 +129,13 @@ const ProjectCard = ({
             <AreaTag key={area_name} areaName={area_name} />
           ))}
       </GridItemAreas>
-      <GridItemHeader className={_static ? "tal" : "tac"}>
-        <GridItemHeaderInner animate={headerAnimationControls}>
-          <Small className='white bold'>{stripHtmlTags(projectName)}</Small>
-        </GridItemHeaderInner>
-      </GridItemHeader>
+      {!_static && (
+        <GridItemHeader className={_static ? "tal" : "tac"}>
+          <GridItemHeaderInner animate={headerAnimationControls}>
+            <Small className='white bold'>{stripHtmlTags(projectName)}</Small>
+          </GridItemHeaderInner>
+        </GridItemHeader>
+      )}
     </StyledProjectCard>
   );
 };
