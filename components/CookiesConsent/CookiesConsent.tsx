@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useCookies } from "react-cookie";
 import strings from "../../data/strings";
 import { cookiesConsts, cookiesSettings } from "../../helpers/consts";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import { Micro } from "../Typo/Micro";
 import {
   CookiesButton,
@@ -14,7 +14,7 @@ interface CookiesConsentProps {}
 
 const CookiesConsent = ({}: CookiesConsentProps) => {
   const cookiesStrings = strings.globals.cookiesConsent;
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
   const [cookies, setCookies] = useCookies();
   const consent = cookies[cookiesConsts.cookiesConsent] || "";
 

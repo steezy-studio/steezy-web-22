@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { ColorKeys, colors } from "../../helpers/consts";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 
 interface InstagramProps {
   fill?: ColorKeys;
@@ -19,7 +19,7 @@ const StyledInstagram = styled.a`
 `;
 
 const Instagram = ({ fill = "black", as = "a" }: InstagramProps) => {
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
   return (
     <StyledInstagram
       as={as}

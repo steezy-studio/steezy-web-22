@@ -4,11 +4,13 @@ import {
   QueryRootProductsArgs,
 } from "@shopify/hydrogen-react/storefront-api-types";
 import { GetStaticProps } from "next";
+import { useContext, useEffect } from "react";
 import getClient from "../apollo/client";
 import AutoSlider from "../components/AutoSlider/AutoSlider";
 import ClientQuote from "../components/ClientQuote/ClientQuote";
 import FeaturedProducts from "../components/FeaturedProducts/FeaturedProducts";
 import Head from "../components/Head/Head";
+import { NavbarContext } from "../components/Navbar/NavbarControls";
 import ProjectsGrid from "../components/ProjectsGrid/ProjectsGrid";
 import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 import SectionHeader from "../components/SectionHeader/SectionHeader";
@@ -47,6 +49,10 @@ interface indexProps {
 const Index = ({ projects, areas, products }: indexProps) => {
   const landingpageStrings = strings.landingPage;
   const { w } = useWindowSize();
+  const { setNavbarHeader } = useContext(NavbarContext);
+  useEffect(() => {
+    setNavbarHeader(landingpageStrings.navbar.header);
+  }, []);
 
   return (
     <>

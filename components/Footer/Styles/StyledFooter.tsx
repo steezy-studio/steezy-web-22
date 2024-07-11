@@ -31,7 +31,8 @@ export const ContactInfo = styled.div`
 
 export const DetailedContact = styled.div`
   display: grid;
-  grid-template-columns: auto auto;
+  grid-auto-flow: column;
+  grid-auto-columns: auto;
   justify-content: start;
   align-items: center;
   grid-gap: 60px;
@@ -44,13 +45,17 @@ export const DetailedContact = styled.div`
   }
 `;
 
-export const FooterSocials = styled.div`
+export const PhoneOnly = styled.div`
   display: none;
   ${breakpoint.phone} {
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: start;
-    align-items: center;
-    column-gap: 10px;
+    display: block;
   }
+`;
+
+export const FooterSocials = styled.div`
+  display: grid;
+  grid-auto-flow: row;
+  justify-content: start;
+  align-items: center;
+  column-gap: 10px;
 `;

@@ -1,15 +1,17 @@
 import { GetStaticProps } from "next";
+import { useContext, useEffect } from "react";
 import getClient from "../apollo/client";
 import Head from "../components/Head/Head";
 import Human from "../components/Human/Human";
 import Instagram from "../components/Icons/Instagram";
 import Vimeo from "../components/Icons/Vimeo";
 import Link from "../components/Link/Link";
+import { NavbarContext } from "../components/Navbar/NavbarControls";
 import SectionHeader from "../components/SectionHeader/SectionHeader";
 import { Large } from "../components/Typo/Large";
+import { Micro } from "../components/Typo/Micro";
 import { Nano } from "../components/Typo/Nano";
 import strings from "../data/strings";
-import { Areas } from "../generated/preprTypes";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import {
   ContactDetail,
@@ -21,11 +23,15 @@ import {
   StyledContact,
 } from "../pagestyles/StyledContact";
 
-interface ContactProps {
-  areas: Areas;
-}
+interface ContactProps {}
 
-const Contact = ({ areas }: ContactProps) => {
+const Contact = ({}: ContactProps) => {
+  const contactStrings = strings.contactPage;
+  const { setNavbarHeader } = useContext(NavbarContext);
+  useEffect(() => {
+    setNavbarHeader(contactStrings.navbar.header);
+  }, []);
+
   return (
     <>
       <Head
@@ -39,10 +45,10 @@ const Contact = ({ areas }: ContactProps) => {
         <ContactHero>
           <ContactDetails>
             <ContactDetail>
-              <Nano className='uppercase'>Brno Office</Nano>
-              <Nano className='break-lines'>
+              <Micro className='uppercase'>Brno Office</Micro>
+              <Micro className='break-lines'>
                 {`STEEZY, s.r.o.\nObilní trh 4, 602 00 Brno\nCzech Republic\n\nIČ: 07812558\nDIČ (VAT): CZ07812558`}
-              </Nano>
+              </Micro>
               <ContactSocials>
                 <Instagram />
                 <Vimeo />

@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { breakpoint } from "../../helpers/consts";
 
 export const Medium = styled.p`
-  font-size: 28px;
+  /* variable is used for optical correction of Editorial New  */
+  --medium-font-size: 28px;
+  font-size: var(--medium-font-size);
   font-weight: 400;
   line-height: 1.3em;
   letter-spacing: 0.04em;
@@ -10,16 +12,19 @@ export const Medium = styled.p`
   &.bold {
     font-weight: 500;
   }
+  &.editorial {
+    font-size: calc(var(--medium-font-size) * 1.2);
+    letter-spacing: 0em;
+  }
   ${breakpoint.smallNotebook} {
-    font-size: 21px;
+    --medium-font-size: 21px;
     max-width: 500px;
   }
   ${breakpoint.tabletLandscape} {
-    font-size: 18px;
+    --medium-font-size: 18px;
     max-width: 450px;
   }
   ${breakpoint.phone} {
-    font-size: 18px;
     max-width: 400px;
   }
   ${breakpoint.monitor} {

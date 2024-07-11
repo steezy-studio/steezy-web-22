@@ -3,7 +3,11 @@ import { easingInOutCubic } from "../../helpers/animationConfig";
 import AnimateTextRows from "../AnimateTextRows/AnimateTextRows";
 import { Large } from "../Typo/Large";
 import { Micro } from "../Typo/Micro";
-import { QuoteClient, StyledClientQuote } from "./StyledClientQuote";
+import {
+  QuoteClient,
+  QuoteClientInner,
+  StyledClientQuote,
+} from "./StyledClientQuote";
 
 interface ClientQuoteProps {
   quote: string;
@@ -42,16 +46,18 @@ const ClientQuote = ({ quote, clientName, clientRole }: ClientQuoteProps) => {
         </AnimateTextRows>
       </Large>
       <QuoteClient>
-        <Micro
-          initial={{ y: `110%`, skewY: "3deg" }}
+        <QuoteClientInner
+          initial={{ y: `110%`, skewY: "0deg" }}
           animate={{ y: `0%`, skewY: "0deg" }}
-          exit={{ y: `-110%`, skewY: "3deg" }}
+          exit={{ y: `-110%`, skewY: "0deg" }}
           transition={createTransition(delay)}
         >
-          {clientName}
-          <br />
-          {clientRole}
-        </Micro>
+          <Micro>
+            {clientName}
+            <br />
+            {clientRole}
+          </Micro>
+        </QuoteClientInner>
       </QuoteClient>
     </StyledClientQuote>
   );

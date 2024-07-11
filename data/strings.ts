@@ -7,6 +7,7 @@ export default {
   },
   contactPage: {
     head: { pageName: "Contact" },
+    navbar: { header: "Contact" },
     hero: {
       subHeader:
         "Do you have an interesting story to tell?\nGet in touch right now.",

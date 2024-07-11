@@ -46,7 +46,7 @@ export const ValueHeader = styled.div`
 `;
 
 export const Order = styled.span`
-  font-size: 100px;
+  font-size: 80px;
   font-family: "editorial-new";
   letter-spacing: 0.02em;
   color: ${colors.black};
@@ -54,7 +54,7 @@ export const Order = styled.span`
   left: 0;
   top: -0.52em;
   ${breakpoint.largeNotebook} {
-    font-size: 70px;
+    font-size: 60px;
   }
   ${breakpoint.smallNotebook} {
     font-size: 60px;

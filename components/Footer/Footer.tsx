@@ -1,7 +1,5 @@
 import { useRouter } from "next/router";
 import strings from "../../data/strings";
-import Instagram from "../Icons/Instagram";
-import Vimeo from "../Icons/Vimeo";
 import Link from "../Link/Link";
 import { Large } from "../Typo/Large";
 import { Micro } from "../Typo/Micro";
@@ -37,14 +35,26 @@ const Footer = ({}: FooterProps) => {
           )}
         </Large>
         <DetailedContact>
+          <FooterSocials>
+            <Micro className='lowcase break-lines'>{`Follow us`}</Micro>
+            <Micro>
+              <Link
+                href={"https://instagram.com/steezy.studio"}
+                target='_blank'
+              >
+                {"instagram.com/steezy.studio"}
+              </Link>
+            </Micro>
+            <Micro>
+              <Link href={"https://vimeo.com/steezy.studio"} target='_blank'>
+                {"vimeo.com/steezy.studio"}
+              </Link>
+            </Micro>
+          </FooterSocials>
           <Micro className='lowcase break-lines'>{footerStrings.address}</Micro>
           <Micro className='lowcase break-lines'>
             {strings.globals.phone + `\n` + footerStrings.other}
           </Micro>
-          <FooterSocials>
-            <Instagram />
-            <Vimeo />
-          </FooterSocials>
         </DetailedContact>
       </ContactInfo>
     </StyledFooter>

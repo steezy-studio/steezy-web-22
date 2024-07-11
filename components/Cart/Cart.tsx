@@ -10,7 +10,7 @@ import { easing } from "../../helpers/animationConfig";
 import { colors } from "../../helpers/consts";
 import { formatPrice } from "../../helpers/formatPrice";
 import BlurOverlay from "../BlurOverlay/BlurOverlay";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import Link from "../Link/Link";
 import Burger from "../Navbar/Burger";
 import Portal from "../Portal/Portal";
@@ -40,7 +40,7 @@ interface CartProps {}
 
 const Cart = ({}: CartProps) => {
   const { lines, cost } = useCart();
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
   const { showCart, setShowCart } = useContext(CartToggleContext);
   const { setPauseAllVideos } = useContext(RootVideosControllerContext);
 

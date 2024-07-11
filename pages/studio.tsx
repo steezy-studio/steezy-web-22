@@ -1,9 +1,11 @@
 import { GetStaticProps } from "next";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import getClient from "../apollo/client";
+import { CursorContext } from "../components/Cursor/CursorProvider";
 import Head from "../components/Head/Head";
 import HeaderLine from "../components/HeaderLine/HeaderLine";
 import Marquee from "../components/Marquee/Marquee";
+import { NavbarContext } from "../components/Navbar/NavbarControls";
 import ProjectsSlider from "../components/ProjectsSlider/ProjectsSlider";
 import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
 import ServicesSection from "../components/ServicesSection/ServicesSection";
@@ -49,6 +51,11 @@ interface StudioProps {
 const Studio = ({ areas, latestProjects }: StudioProps) => {
   const studioStrings = strings.studioPage;
   const [focusedValue, setFocusedValue] = useState(0);
+  const { setCursorType } = useContext(CursorContext);
+  const { setNavbarHeader } = useContext(NavbarContext);
+  useEffect(() => {
+    setNavbarHeader(studioStrings.navbar.header);
+  }, []);
 
   return (
     <>
@@ -88,8 +95,11 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
           </TextBlock>
         </RevealAnimation>
 
-        <OurStudio>
-          <Marquee useDragVelocity speed={0.1}>
+        <OurStudio
+          onMouseEnter={() => setCursorType("swipe")}
+          onMouseLeave={() => setCursorType("normal")}
+        >
+          <Marquee useDragVelocity speedMultiplier={0.1} stopOnHover>
             {studioStrings.slider.map((img, i) => (
               <OurStudioSliderImg
                 draggable={false}
@@ -131,7 +141,7 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
         </ValuesSection>
 
         <StudioServices>
-          <Large className='wide'>
+          <Large>
             We’re able to cover the client’s needs from strategy and art
             direction to production, design and communication.
           </Large>

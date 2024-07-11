@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useContext } from "react";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import { BurgerSvg, StyledBurger } from "./Styles/StyledBurger";
 
 interface BurgerProps {
@@ -18,7 +18,7 @@ const Line = (props) => (
 );
 
 const Burger = ({ onClick, isOpen }: BurgerProps) => {
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
   return (
     <StyledBurger
       onClick={onClick}

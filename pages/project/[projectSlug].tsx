@@ -5,10 +5,12 @@ import HTMLReactParser, {
   domToReact,
 } from "html-react-parser";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
+import { useContext, useEffect } from "react";
 import getClient from "../../apollo/client";
 import ClientQuote from "../../components/ClientQuote/ClientQuote";
 import Head from "../../components/Head/Head";
 import Link from "../../components/Link/Link";
+import { NavbarContext } from "../../components/Navbar/NavbarControls";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import ProjectGridVimeo from "../../components/ProjectGridVimeo/ProjectGridVimeo";
 import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
@@ -17,11 +19,7 @@ import { Large } from "../../components/Typo/Large";
 import { Nano } from "../../components/Typo/Nano";
 import { Small } from "../../components/Typo/Small";
 import Video from "../../components/Video/Video";
-import {
-  Areas,
-  Query,
-  QuerySimilar_ProjectsArgs,
-} from "../../generated/preprTypes";
+import { Query, QuerySimilar_ProjectsArgs } from "../../generated/preprTypes";
 import { GET_PROJECT } from "../../graphql/GetProject";
 import { GET_SIMILAR_PROJECTS } from "../../graphql/GetSimilarProjects";
 import {
@@ -48,12 +46,15 @@ interface ProjectProps {
     project: EnhancedProject[];
     similar_projects: EnhancedProject[];
   };
-  areas: Areas;
 }
 
-const Project = ({ projectData, areas }: ProjectProps) => {
+const Project = ({ projectData }: ProjectProps) => {
   const { project: _project, similar_projects } = projectData;
   const project = _project[0];
+  const { setNavbarHeader } = useContext(NavbarContext);
+  useEffect(() => {
+    setNavbarHeader(project.company_name);
+  }, []);
 
   return (
     <>

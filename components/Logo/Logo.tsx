@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext } from "react";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import { StyledLogo } from "./Styles/StyledLogo";
 
 interface LogoProps {}
 
 const Logo = ({}: LogoProps) => {
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
   const pathname = usePathname();
 
   return (

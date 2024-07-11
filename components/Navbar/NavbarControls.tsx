@@ -10,6 +10,8 @@ interface NavbarControlsProps {
 interface NavbarContext {
   isOpen: (scope: string) => boolean;
   setIsOpen: (scope: string, isOpen: boolean) => void;
+  navbarHeader?: string;
+  setNavbarHeader?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface NavlinksState {
@@ -26,6 +28,7 @@ const NavbarControls = ({ children }: NavbarControlsProps) => {
     scope: pathname,
     isOpen: false,
   });
+  const [navbarHeader, setNavbarHeader] = useState<string>(null);
 
   useEffect(() => {
     setAreNavlinksOpen({ scope: pathname, isOpen: false });
@@ -47,6 +50,8 @@ const NavbarControls = ({ children }: NavbarControlsProps) => {
       value={{
         isOpen,
         setIsOpen,
+        navbarHeader,
+        setNavbarHeader,
       }}
     >
       {children}

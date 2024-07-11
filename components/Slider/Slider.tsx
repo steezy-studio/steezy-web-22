@@ -4,7 +4,7 @@ import { ReactNode, useContext, useEffect, useRef, useState } from "react";
 import { transition } from "../../helpers/consts";
 import { useSwipe } from "../../hooks/useSwipe";
 import { useWindowSize } from "../../hooks/useWindowSize";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import {
   Slide,
   SliderBound,
@@ -21,7 +21,7 @@ interface SliderProps {
 const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
   const [position, setPosition] = useState(0);
   const [step, setstep] = useState(2);
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
   const controls = useAnimationControls();
   const pathname = usePathname();
   const { w } = useWindowSize();

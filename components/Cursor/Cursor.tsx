@@ -3,7 +3,7 @@ import { MutableRefObject, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { colors } from "../../helpers/consts";
 
-export type CursorTypes = "normal" | "left" | "right" | "hover";
+export type CursorTypes = "normal" | "left" | "right" | "hover" | "swipe";
 
 interface CursorProps {
   isCursorDisabled?: boolean;
@@ -63,7 +63,7 @@ const Cursor = ({ isCursorDisabled, cursorType, cursorRef }: CursorProps) => {
       <motion.div
         animate={{
           rotate:
-            cursorType === "hover"
+            cursorType === "hover" || cursorType === "swipe"
               ? 45
               : cursorType === "left"
               ? 180 + 45
@@ -73,7 +73,9 @@ const Cursor = ({ isCursorDisabled, cursorType, cursorRef }: CursorProps) => {
           scale:
             cursorType === "hover"
               ? 1.5
-              : cursorType === "left" || cursorType === "right"
+              : cursorType === "left" ||
+                cursorType === "right" ||
+                cursorType === "swipe"
               ? 7
               : 1,
           opacity: isCursorDisabled ? 0 : 1,
@@ -85,25 +87,61 @@ const Cursor = ({ isCursorDisabled, cursorType, cursorRef }: CursorProps) => {
           vectorEffect='non-scaling-stroke'
           style={{ transform: "rotate(-45deg)" }}
           animate={{
-            opacity: cursorType === "left" || cursorType === "right" ? 1 : 0,
+            opacity:
+              cursorType === "left" ||
+              cursorType === "right" ||
+              cursorType === "swipe"
+                ? 1
+                : 0,
           }}
         >
-          <line
-            y1='10'
-            x2='20'
-            y2='10'
-            fill='none'
-            stroke='#000'
-            strokeMiterlimit='10'
-            strokeWidth='0.5'
-          />
-          <polyline
-            points='10 20 20 10 10 0'
-            fill='none'
-            stroke='#000'
-            strokeMiterlimit='10'
-            strokeWidth='0.5'
-          />
+          {!(cursorType === "swipe") ? (
+            <g>
+              <line
+                y1='10'
+                x2='20'
+                y2='10'
+                fill='none'
+                stroke='#000'
+                strokeMiterlimit='10'
+                strokeWidth='0.5'
+              />
+              <polyline
+                points='10 20 20 10 10 0'
+                fill='none'
+                stroke='#000'
+                strokeMiterlimit='10'
+                strokeWidth='0.5'
+              />
+            </g>
+          ) : (
+            <g>
+              <line
+                x1='0'
+                y1='10'
+                x2='20'
+                y2='10'
+                fill='none'
+                stroke='#000'
+                strokeMiterlimit='10'
+                strokeWidth='.5'
+              />
+              <polyline
+                points='15 15 20 10 15 5'
+                fill='none'
+                stroke='#000'
+                strokeMiterlimit='10'
+                strokeWidth='.5'
+              />
+              <polyline
+                points='5 5 0 10 5 15'
+                fill='none'
+                stroke='#000'
+                strokeMiterlimit='10'
+                strokeWidth='.5'
+              />
+            </g>
+          )}
         </motion.svg>
       </motion.div>
     </StyledCursor>

@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { easing } from "../../helpers/animationConfig";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import {
   NavLinkArrow,
   NavLinkInner,
@@ -15,7 +15,7 @@ interface NavLinkProps {
 }
 
 const NavLink = ({ href, children, active, onClick }: NavLinkProps) => {
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
   const [hover, sethover] = useState<boolean>(false);
   return (
     <StyledNavLink

@@ -1,10 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
 import getClient from "../../apollo/client";
 import Head from "../../components/Head/Head";
 import Link from "../../components/Link/Link";
+import { NavbarContext } from "../../components/Navbar/NavbarControls";
 import ProjectsGrid from "../../components/ProjectsGrid/ProjectsGrid";
-import { Medium } from "../../components/Typo/Medium";
 import { Nano } from "../../components/Typo/Nano";
 import strings from "../../data/strings";
 import { Areas, Query } from "../../generated/preprTypes";
@@ -32,9 +33,13 @@ interface ProjectsProps {
 const Projects = ({ areas, projects }: ProjectsProps) => {
   const router = useRouter();
 
+  const { setNavbarHeader } = useContext(NavbarContext);
   const activeArea = areas.items.find(
     (area) => area._slug === router.query.area
   );
+  useEffect(() => {
+    setNavbarHeader(activeArea.area_name);
+  }, []);
 
   return (
     <>
@@ -56,20 +61,18 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
             {areas.items.map(({ area_name, _slug, projects }) => {
               const isActive = router.query.area === _slug;
               return (
-                <FilterW key={_slug}>
-                  <Medium className='editorial underline'>
-                    <Link
-                      href={`/projects/${_slug}`}
-                      className={`no-underline ${isActive ? "active" : ""}`}
-                    >
-                      <Filter>
-                        <span className='underline'>{area_name}</span>
-                        <Nano className='helvetica no-underline'>
-                          {projects.length}
-                        </Nano>
-                      </Filter>
-                    </Link>
-                  </Medium>
+                <FilterW key={_slug} className='editorial'>
+                  <Link
+                    href={`/projects/${_slug}`}
+                    className={`no-underline ${isActive ? "active" : ""}`}
+                  >
+                    <Filter>
+                      <span className='underline'>{area_name}</span>
+                      <Nano className='helvetica no-underline'>
+                        {projects.length}
+                      </Nano>
+                    </Filter>
+                  </Link>
                 </FilterW>
               );
             })}

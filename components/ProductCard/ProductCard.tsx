@@ -4,7 +4,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { easing } from "../../helpers/animationConfig";
 import { formatPrice } from "../../helpers/formatPrice";
 import _isTouchDevice from "../../helpers/isTouchDevice";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import RevealAnimation from "../RevealAnimation/RevealAnimation";
 import { Nano } from "../Typo/Nano";
 import { Small } from "../Typo/Small";
@@ -48,7 +48,7 @@ const ProductCard = ({
   animateOrder,
   animateInView,
 }: ProductCardProps) => {
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
   const [hover, sethover] = useState<boolean>(true);
   const [isTouchDevice, setIsTouchDevice] = useState<boolean>(false);
   const allowHover = useRef<boolean>(false);

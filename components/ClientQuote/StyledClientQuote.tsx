@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { spaces } from "../../helpers/spaces";
 
@@ -13,3 +14,5 @@ export const StyledClientQuote = styled.div`
 export const QuoteClient = styled.div`
   overflow-y: hidden;
 `;
+
+export const QuoteClientInner = styled(motion.div)``;

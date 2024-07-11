@@ -1,7 +1,7 @@
 import React, { MutableRefObject, useRef, useState } from "react";
 import Cursor, { CursorTypes } from "./Cursor";
 
-export const HoverProvider = React.createContext<{
+export const CursorContext = React.createContext<{
   setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
   setCursorType: React.Dispatch<React.SetStateAction<CursorTypes>>;
   cursorType: CursorTypes;
@@ -13,7 +13,7 @@ const CursorProvider = ({ children }) => {
   const [cursorType, setCursorType] = useState<CursorTypes>("normal");
   const cursorRef = useRef<HTMLDivElement>(null);
   return (
-    <HoverProvider.Provider
+    <CursorContext.Provider
       value={{
         setIsCursorDisabled,
         setCursorType,
@@ -27,7 +27,7 @@ const CursorProvider = ({ children }) => {
         isCursorDisabled={isCursorDisabled}
       />
       {children}
-    </HoverProvider.Provider>
+    </CursorContext.Provider>
   );
 };
 

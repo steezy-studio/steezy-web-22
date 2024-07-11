@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Area, Asset } from "../../generated/preprTypes";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import ProjectCard from "../ProjectCard/ProjectCard";
 import { StyledGridItem } from "./Styles/StyledGridItem";
 
@@ -22,7 +22,7 @@ const GridItem = ({
   wide,
 }: GridItemProps) => {
   const [hover, sethover] = useState(false);
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
 
   return (
     <StyledGridItem

@@ -8,7 +8,7 @@ import {
   Video as VideoType,
 } from "@shopify/hydrogen-react/storefront-api-types";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import getClient from "../../apollo/client";
 import FeaturedProducts from "../../components/FeaturedProducts/FeaturedProducts";
 import Head from "../../components/Head/Head";
@@ -16,6 +16,7 @@ import QuantitySelect from "../../components/Inputs/QuantitySelect";
 import VariantsSelect from "../../components/Inputs/VariantsSelect";
 import Link from "../../components/Link/Link";
 import Marquee from "../../components/Marquee/Marquee";
+import { NavbarContext } from "../../components/Navbar/NavbarControls";
 import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import { Large } from "../../components/Typo/Large";
@@ -65,6 +66,10 @@ const product = ({
     merchandiseId: product.variants.nodes[0].id,
     quantity: 1,
   });
+  const { setNavbarHeader } = useContext(NavbarContext);
+  useEffect(() => {
+    setNavbarHeader(product.title);
+  }, []);
 
   const video = product.metafields.find((mf) => mf?.key === "product_video")
     .reference as VideoType;
@@ -144,7 +149,7 @@ const product = ({
           </ProductSection>
           <ProductGallery>
             <SectionHeader header='How to drip our drip' />
-            <Marquee useDragVelocity speed={0.1}>
+            <Marquee useDragVelocity speedMultiplier={0.1}>
               {product.images.nodes.map(({ url, width, height }, i) => (
                 <ProductGalleryImg
                   draggable={false}

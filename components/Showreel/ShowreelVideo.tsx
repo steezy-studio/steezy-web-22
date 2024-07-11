@@ -1,6 +1,6 @@
 import Vimeo from "@u-wave/react-vimeo";
 import { useContext } from "react";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import Dialog from "../Dialog/Dialog";
 import { Big } from "../Typo/Big";
 import { PlayButton } from "./Styles/StyledShowreel";
@@ -17,7 +17,7 @@ interface ShowreelProps {
 }
 
 const ShowreelVideo = ({ src, open, onOpenChange }: ShowreelProps) => {
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
 
   return (
     <>

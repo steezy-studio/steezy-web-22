@@ -9,7 +9,7 @@ import { MarqueeBlock, MarqueeInner, MarqueeItem, SMarquee } from "./SMarquee";
 interface MarqueeProps {
   children: JSX.Element | JSX.Element[];
   stopOnHover?: boolean;
-  speed?: number;
+  speedMultiplier?: number;
   useDragVelocity?: boolean;
   direction?: "left" | "right";
 }
@@ -17,7 +17,7 @@ interface MarqueeProps {
 const Marquee = ({
   children,
   stopOnHover = false,
-  speed = 1 / 5,
+  speedMultiplier = 1 / 5,
   useDragVelocity,
   direction = "left",
 }: MarqueeProps) => {
@@ -25,8 +25,11 @@ const Marquee = ({
   const ref = useRef<HTMLDivElement>(null);
   const [multiplier, setMultiplier] = useState<number>(1);
   const hover = useRef<boolean>(false);
-  const dragVelocity = useRef<number>(0);
+  const swipeVelocity = useRef<number>(0);
   const dir = direction === "left" ? -1 : 1;
+  const fixedSpeed = 10;
+  const velocity = useRef<number>(fixedSpeed * speedMultiplier);
+  const friction = useRef<number>(0);
 
   const baseX = useMotionValue(0);
   const lenis = useLenis();
@@ -34,23 +37,32 @@ const Marquee = ({
   const bind = useDrag((state) => {
     if (!useDragVelocity) return;
     if (state.delta[0] === 0) return;
-    dragVelocity.current = state.delta[0] * 0.3;
+    swipeVelocity.current = state.delta[0] * 0.3;
   }, {});
 
-  useAnimationFrame((t, delta) => {
+  useAnimationFrame((t, d) => {
     if (!innerRef.current) return;
-    if (!hover.current) {
-      dragVelocity.current *= 0.99;
-      // flip velocity, animation looks better
-      const velocity = -1 * dir * lenis?.velocity!;
-      const innerWidth = innerRef.current.clientWidth;
-      const offsetX = dir * (delta * speed) - velocity - dragVelocity.current;
-      const _baseX = baseX.get() || 0;
 
-      baseX.set(_baseX + offsetX);
-      if (innerWidth * (2 / 3) <= Math.abs(_baseX) || _baseX >= 0) {
-        baseX.set(-innerWidth * (1 / 3) - velocity - dragVelocity.current);
-      }
+    const innerWidth = innerRef.current.clientWidth;
+    // flip velocity, directions matches the scroll direction
+    const scrollVelocity = -1 * dir * lenis?.velocity!;
+
+    if (hover.current) {
+      friction.current -= 0.05;
+      friction.current = Math.max(0, friction.current);
+    } else {
+      friction.current += 0.05;
+      friction.current = Math.min(1, friction.current);
+    }
+    velocity.current = fixedSpeed * friction.current * speedMultiplier;
+    swipeVelocity.current *= 0.98;
+    const offsetX =
+      dir * velocity.current - scrollVelocity - swipeVelocity.current;
+    let _baseX = baseX.get() || 0;
+
+    baseX.set(_baseX + offsetX);
+    if (innerWidth * (2 / 3) <= Math.abs(_baseX) || _baseX >= 0) {
+      baseX.set(-innerWidth * (1 / 3) - scrollVelocity - swipeVelocity.current);
     }
   });
 

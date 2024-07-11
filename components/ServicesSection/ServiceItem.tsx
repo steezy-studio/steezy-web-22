@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Area } from "../../generated/preprTypes";
 import isTouchDevice from "../../helpers/isTouchDevice";
 import { isVideoAsset } from "../../helpers/isVideoAsset";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import RevealAnimation from "../RevealAnimation/RevealAnimation";
 import { Medium } from "../Typo/Medium";
 import { Small } from "../Typo/Small";
@@ -27,7 +27,7 @@ const ServiceItem = ({ area, i }: ServiceItemProps) => {
   const previewProjectRef = useRef<HTMLDivElement>(null);
   const [hover, sethover] = useState<boolean>(false);
   const isEven = i % 2 === 0;
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
 
   useEffect(() => {
     if (!ref.current) return;

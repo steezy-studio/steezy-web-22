@@ -1,6 +1,6 @@
 import { LinkProps as NextLinkProps } from "next/link";
 import { ReactNode, useContext } from "react";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import { LinkBg, StyledLink } from "./Styles/StyledLink";
 
 interface LinkProps extends NextLinkProps {
@@ -11,7 +11,7 @@ interface LinkProps extends NextLinkProps {
 }
 
 const Link = ({ href, children, className, onClick, target }: LinkProps) => {
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
   return (
     <StyledLink
       href={href}

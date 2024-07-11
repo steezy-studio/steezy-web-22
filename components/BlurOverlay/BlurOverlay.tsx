@@ -1,7 +1,7 @@
 import { AnimatePresence } from "framer-motion";
 import { useContext } from "react";
 import { DisableScroll } from "../../pagestyles/DisableScroll";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import { StyledBlurOverlay } from "./StyledBlurOverlay";
 
 interface BlurOverlayProps {
@@ -11,7 +11,7 @@ interface BlurOverlayProps {
 }
 
 const BlurOverlay = ({ onClick, visible, amount = 5 }: BlurOverlayProps) => {
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
 
   return (
     <AnimatePresence>

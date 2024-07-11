@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { device } from "../../helpers/consts";
 import { useWindowSize } from "../../hooks/useWindowSize";
 import { CartToggleContext } from "../Cart/CartProvider";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import Logo from "../Logo/Logo";
 import Portal from "../Portal/Portal";
 import { RootVideosControllerContext } from "../RootVideosController/RootVideosController";
@@ -19,15 +19,17 @@ import {
   StyledNavbar,
 } from "./Styles/StyledNavbar";
 
-interface NavbarProps {
-  header?: string;
-}
+interface NavbarProps {}
 
-const Navbar = ({ header }: NavbarProps) => {
-  const { isOpen: _isOpen, setIsOpen } = useContext(NavbarContext);
+const Navbar = ({}: NavbarProps) => {
+  const {
+    isOpen: _isOpen,
+    setIsOpen,
+    navbarHeader,
+  } = useContext(NavbarContext);
   const { pathname } = useRouter();
   const isOpen = _isOpen(pathname);
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
   const { setPauseAllVideos } = useContext(RootVideosControllerContext);
   const { setShowCart } = useContext(CartToggleContext);
   const { w } = useWindowSize();
@@ -40,21 +42,19 @@ const Navbar = ({ header }: NavbarProps) => {
         <StyledNavbar>
           <Logo />
           <NavlinksMask>
-            {!isTabletPortrait && (
-              <AnimatePresence mode='wait'>
-                {header && (
-                  <NavHeader
-                    key={header}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <Nano>{header}</Nano>
-                  </NavHeader>
-                )}
-              </AnimatePresence>
-            )}
+            <AnimatePresence mode='wait'>
+              {!isTabletPortrait && !isOpen && navbarHeader && (
+                <NavHeader
+                  key={navbarHeader}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.7 }}
+                >
+                  <Nano className='uppercase'>{navbarHeader}</Nano>
+                </NavHeader>
+              )}
+            </AnimatePresence>
           </NavlinksMask>
 
           {lines.length !== 0 && (

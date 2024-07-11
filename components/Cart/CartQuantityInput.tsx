@@ -5,7 +5,7 @@ import {
   CartLineQuantityAdjustButton,
 } from "@shopify/hydrogen-react";
 import { useContext } from "react";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import Minus from "../Icons/Minus";
 import Plus from "../Icons/Plus";
 import { Small } from "../Typo/Small";
@@ -18,7 +18,7 @@ import {
 interface CartQuantityInputProps {}
 
 const CartQuantityInput = ({}: CartQuantityInputProps) => {
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
   return (
     <StyledCartQuantityInput>
       <CartLineQuantityAdjustButton

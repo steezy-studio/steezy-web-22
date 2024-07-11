@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
-import u from "../helpers/unit";
 import { spaces } from "../helpers/spaces";
 
 export const StyledProjects = styled.div``;
@@ -17,9 +16,11 @@ export const ProjectsHeroFilters = styled.div`
   flex-wrap: wrap;
   row-gap: ${spaces.s}px;
   column-gap: ${spaces.l}px;
-  ${breakpoint.tabletLandscape} {
+  ${breakpoint.smallNotebook} {
     column-gap: ${spaces.m}px;
-    row-gap: ${spaces.xxs}px;
+  }
+  ${breakpoint.tabletLandscape} {
+    row-gap: ${spaces.xs}px;
   }
 `;
 
@@ -34,15 +35,21 @@ export const Filter = styled.span`
 `;
 
 export const FilterW = styled.span`
-  font-size: 30px;
+  font-size: 40px;
   font-weight: 500;
-  ${breakpoint.custom(1650)} {
-    font-size: 24px;
+  ${breakpoint.custom(1700)} {
+    font-size: 35px;
   }
-  ${breakpoint.custom(1300)} {
+  ${breakpoint.custom(1600)} {
+    font-size: 30px;
+  }
+  ${breakpoint.custom(1250)} {
+    font-size: 25px;
+  }
+  ${breakpoint.custom(1080)} {
     font-size: 21px;
   }
-  ${breakpoint.tabletLandscape} {
+  ${breakpoint.custom(900)} {
     font-size: 18px;
   }
 `;

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useContext, useRef, useState } from "react";
 import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
-import { HoverProvider } from "../Cursor/CursorProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import {
   Overlay,
   StyledProjectGridVimeo,
@@ -14,7 +14,7 @@ interface ProjectGridVimeoProps {
 
 const ProjectGridVimeo = ({ vimeoId }: ProjectGridVimeoProps) => {
   const [isPaused, setIsPaused] = useState(true);
-  const { setCursorType, setIsCursorDisabled } = useContext(HoverProvider);
+  const { setCursorType, setIsCursorDisabled } = useContext(CursorContext);
   const ref = useRef<HTMLDivElement>(null);
 
   useIntersectionObserver(
