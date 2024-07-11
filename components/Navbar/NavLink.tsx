@@ -1,9 +1,11 @@
-import { useContext, useState } from "react";
-import { easing } from "../../helpers/animationConfig";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CursorContext } from "../Cursor/CursorProvider";
 import {
-  NavLinkArrow,
+  NavLinkGif,
+  NavLinkGifW,
+  NavLinkGifWI,
   NavLinkInner,
+  NavlinkChildrenW,
   StyledNavLink,
 } from "./Styles/StyledNavLink";
 
@@ -16,7 +18,23 @@ interface NavLinkProps {
 
 const NavLink = ({ href, children, active, onClick }: NavLinkProps) => {
   const { setCursorType } = useContext(CursorContext);
+  const ref = useRef<HTMLDivElement>(null);
+  const gifRef = useRef<HTMLDivElement>(null);
   const [hover, sethover] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const handleMouseMove = (e: MouseEvent) => {
+      gifRef.current.style.top = `${e.clientY}px`;
+      gifRef.current.style.left = `${e.clientX}px`;
+    };
+    ref.current.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      if (!ref.current) return;
+      ref.current.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
   return (
     <StyledNavLink
       onClick={onClick}
@@ -31,12 +49,33 @@ const NavLink = ({ href, children, active, onClick }: NavLinkProps) => {
       className={`${active ? `active` : ``} editorial`}
       href={href}
     >
-      <NavLinkInner
-        animate={{ x: !active && hover ? "0em" : "-1em" }}
-        transition={{ ease: easing }}
-      >
-        <NavLinkArrow>{"\u2192\u00a0"}</NavLinkArrow>
-        {children}
+      <NavLinkInner ref={ref}>
+        <NavLinkGifWI ref={gifRef}>
+          <NavLinkGifW
+            animate={hover ? "hover" : "initial"}
+            variants={{
+              initial: {
+                rotate: 0,
+                scale: 0,
+                opacity: 0,
+              },
+              hover: {
+                rotate: (Math.random() < 0.5 ? 1 : -1) * 30,
+                scale: 1,
+                opacity: 1,
+              },
+            }}
+            transition={{ duration: 0.2 }}
+          >
+            <NavLinkGif
+              src={"/images/studio/studio_1.jpg"}
+              width={200}
+              height={200}
+              alt={children}
+            />
+          </NavLinkGifW>
+        </NavLinkGifWI>
+        <NavlinkChildrenW>{children}</NavlinkChildrenW>
       </NavLinkInner>
     </StyledNavLink>
   );

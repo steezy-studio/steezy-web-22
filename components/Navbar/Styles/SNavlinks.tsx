@@ -12,7 +12,7 @@ export const SNavLinks = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  row-gap: ${spaces.xs}px;
+  row-gap: 0;
   padding: ${spaces.m}px ${spaces.xxxl}px ${spaces.xxxl}px;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(50px);
