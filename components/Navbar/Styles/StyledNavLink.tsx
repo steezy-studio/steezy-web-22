@@ -15,10 +15,6 @@ export const StyledNavLink = styled(motion(Link))`
   margin-top: 0.2em;
   transition: all 0.3s;
   overflow: hidden;
-  &:hover {
-    font-style: oblique 10deg;
-    font-stretch: 120%;
-  }
   &,
   &:visited {
     color: ${colors.black};
