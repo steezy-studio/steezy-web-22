@@ -13,20 +13,36 @@ export const GlobalStyle = createGlobalStyle`
     font-family: "helvetica-now", Helvetica, Arial, sans-serif;
   }
   main {
-    padding: ${spaces.xxxl}px ${spaces.xxxl}px 0 ${spaces.xxxl}px;
+    padding: ${spaces.xxxl}px var(--page-side-padding) 0 ${spaces.xxxl}px;
     ${breakpoint.monitor} {
-      padding: ${spaces.xxxl}px ${spaces.xxxxxl}px 0 ${spaces.xxxxxl}px;
+      padding: ${spaces.xxxl}px var(--page-side-padding) 0 ${spaces.xxxxxl}px;
     }
     ${breakpoint.smallNotebook} {
-      padding: ${spaces.xxxl}px ${spaces.xl}px 0 ${spaces.xl}px;
+      padding: ${spaces.xxxl}px var(--page-side-padding) 0 ${spaces.xl}px;
     }
     ${breakpoint.tabletPortrait} {
-      padding: ${spaces.xxl}px ${spaces.l}px 0 ${spaces.l}px;
+      padding: ${spaces.xxl}px var(--page-side-padding) 0 ${spaces.l}px;
     }
     ${breakpoint.phone} {
-      padding: ${spaces.xxl}px ${spaces.m}px 0 ${spaces.m}px;
+      padding: ${spaces.xxl}px var(--page-side-padding) 0 ${spaces.m}px;
     }
   }
+  :root {
+    --page-side-padding: ${spaces.xxxl}px;
+    ${breakpoint.monitor} {
+      --page-side-padding: ${spaces.xxxxxl}px;
+    }
+    ${breakpoint.smallNotebook} {
+      --page-side-padding: ${spaces.xl}px;
+    }
+    ${breakpoint.tabletPortrait} {
+      --page-side-padding: ${spaces.l}px;
+    }
+    ${breakpoint.phone} {
+      --page-side-padding: ${spaces.m}px;
+    }
+  }
+
   * {
     margin: 0;
     padding: 0;

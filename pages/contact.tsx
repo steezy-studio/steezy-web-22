@@ -10,7 +10,6 @@ import { NavbarContext } from "../components/Navbar/NavbarControls";
 import SectionHeader from "../components/SectionHeader/SectionHeader";
 import { Large } from "../components/Typo/Large";
 import { Micro } from "../components/Typo/Micro";
-import { Nano } from "../components/Typo/Nano";
 import strings from "../data/strings";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import {
@@ -55,8 +54,8 @@ const Contact = ({}: ContactProps) => {
               </ContactSocials>
             </ContactDetail>
             <ContactDetail>
-              <Nano className='uppercase'>Recruiment</Nano>
-              <Nano>
+              <Micro className='uppercase'>Recruiment</Micro>
+              <Micro>
                 <span>
                   We’re always looking for new talents
                   <br />
@@ -65,12 +64,12 @@ const Contact = ({}: ContactProps) => {
                 <Link href={"mailto: hello@steezy.studio"}>
                   hello@steezy.studio
                 </Link>
-              </Nano>
+              </Micro>
             </ContactDetail>
           </ContactDetails>
 
           <ContactDetail className='wide'>
-            <Nano>New Business & media</Nano>
+            <Micro>New Business & media</Micro>
             <Large>
               <Link href={"mailto: hello@steezy.studio"}>
                 hello@steezy.studio

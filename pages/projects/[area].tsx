@@ -6,6 +6,7 @@ import Head from "../../components/Head/Head";
 import Link from "../../components/Link/Link";
 import { NavbarContext } from "../../components/Navbar/NavbarControls";
 import ProjectsGrid from "../../components/ProjectsGrid/ProjectsGrid";
+import ScrollTopButton from "../../components/ScrollTopButton/ScrollTopButton";
 import { Nano } from "../../components/Typo/Nano";
 import strings from "../../data/strings";
 import { Areas, Query } from "../../generated/preprTypes";
@@ -81,6 +82,7 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
         <ProjectsGridW>
           <ProjectsGrid projects={projects} />
         </ProjectsGridW>
+        <ScrollTopButton />
       </StyledProjects>
     </>
   );
