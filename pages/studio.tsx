@@ -103,6 +103,7 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
             {studioStrings.slider.map((img, i) => (
               <OurStudioSliderImg
                 draggable={false}
+                priority
                 key={i}
                 src={`/images/studio/${img.src}`}
                 width={img.height}

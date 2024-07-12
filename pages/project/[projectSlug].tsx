@@ -120,6 +120,7 @@ const Project = ({ projectData }: ProjectProps) => {
                               height={img.height}
                               blurDataURL={img.url}
                               placeholder={"blur"}
+                              priority
                               alt={project.project_detail_name}
                             />
                           </motion.div>

@@ -109,6 +109,7 @@ const ProjectCard = ({
             blurDataURL={cover[0].url}
             height={cover[0].height}
             alt={projectName}
+            priority
           />
         ) : (
           <GridItemVideo

@@ -153,6 +153,7 @@ const product = ({
               {product.images.nodes.map(({ url, width, height }, i) => (
                 <ProductGalleryImg
                   draggable={false}
+                  priority
                   key={i}
                   src={url}
                   alt={product.title}

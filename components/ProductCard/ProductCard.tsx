@@ -136,6 +136,7 @@ const ProductCard = ({
               width={cover.width}
               height={cover.height}
               alt={title}
+              priority
             />
           </ProductCardCoverWI>
           {hoverCover && (
