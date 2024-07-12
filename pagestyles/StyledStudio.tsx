@@ -138,17 +138,6 @@ export const OurStudioSliderImg = styled(Image)`
   }
 `;
 
-export const ValuesList = styled.div`
-  display: grid;
-  row-gap: ${spaces.xxl}px;
-  ${breakpoint.tabletPortrait} {
-    row-gap: ${spaces.m}px;
-  }
-  ${breakpoint.phone} {
-    row-gap: ${spaces.l}px;
-  }
-`;
-
 export const StudioShowreelW = styled.div`
   margin-top: ${spaces.xxxxl}px;
 `;

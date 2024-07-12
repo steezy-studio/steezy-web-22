@@ -1,5 +1,5 @@
 import { GetStaticProps } from "next";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import getClient from "../apollo/client";
 import { CursorContext } from "../components/Cursor/CursorProvider";
 import Head from "../components/Head/Head";
@@ -14,7 +14,7 @@ import { Large } from "../components/Typo/Large";
 import { Medium } from "../components/Typo/Medium";
 import { Micro } from "../components/Typo/Micro";
 import { Small } from "../components/Typo/Small";
-import ValueItem from "../components/ValueItem";
+import ValuesList from "../components/ValueItem/ValuesList";
 import strings from "../data/strings";
 import { Areas, Query } from "../generated/preprTypes";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
@@ -39,7 +39,6 @@ import {
   TextBlockHeader,
   ValuesCover,
   ValuesCoverW,
-  ValuesList,
   ValuesSection,
 } from "../pagestyles/StyledStudio";
 
@@ -50,7 +49,6 @@ interface StudioProps {
 
 const Studio = ({ areas, latestProjects }: StudioProps) => {
   const studioStrings = strings.studioPage;
-  const [focusedValue, setFocusedValue] = useState(0);
   const { setCursorType } = useContext(CursorContext);
   const { setNavbarHeader } = useContext(NavbarContext);
   useEffect(() => {
@@ -115,22 +113,7 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
         </OurStudio>
 
         <ValuesSection id='values-section'>
-          <ValuesList>
-            {studioStrings.values.list.map(({ header, perex }, i) => {
-              const n = i + 1;
-              return (
-                <ValueItem
-                  onFocusChange={(id) => setFocusedValue(id)}
-                  isFocused={focusedValue === i}
-                  id={i}
-                  order={i}
-                  header={header}
-                  perex={perex}
-                  key={i}
-                />
-              );
-            })}
-          </ValuesList>
+          <ValuesList list={studioStrings.values.list} />
           <ValuesCoverW>
             <ValuesCover
               src={"/images/studio/studio_3.jpg"}

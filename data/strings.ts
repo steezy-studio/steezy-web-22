@@ -1,4 +1,4 @@
-export default {
+const data = {
   footer: {
     cta: "Are you interested? Tell us your story!",
     address: "STEEZY, s.r.o.\nObilní trh 4, 602 00 Brno\nCzech Republic",
@@ -376,4 +376,6 @@ export default {
       iconName: "w95_contacts.png",
     },
   ],
-} as const;
+};
+
+export default data;

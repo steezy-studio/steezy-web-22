@@ -1,21 +1,30 @@
 import styled from "styled-components";
-import { breakpoint, colors } from "../helpers/consts";
-import { spaces } from "../helpers/spaces";
+import { breakpoint, colors } from "../../helpers/consts";
+import { spaces } from "../../helpers/spaces";
 
-export const StyledValueItem = styled.div<{ order: number }>`
+export const StyledValueItem = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: 250px 1fr;
   column-gap: ${spaces.l}px;
+  padding: ${spaces.xxl}px 0;
+  &:first-child {
+    padding-top: 0;
+  }
+  &:last-child {
+    padding-bottom: 0;
+  }
   ${breakpoint.smallNotebook} {
     grid-template-columns: 230px 1fr;
   }
   ${breakpoint.tabletPortrait} {
     grid-template-columns: unset;
+    padding: ${spaces.m}px 0;
     row-gap: 30px;
   }
   ${breakpoint.phone} {
     width: 80%;
+    padding: ${spaces.l}px 0;
   }
 `;
 
