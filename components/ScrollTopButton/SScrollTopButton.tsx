@@ -21,6 +21,11 @@ export const SScrollTopButton = styled.div`
   pointer-events: none;
   transform: translateX(50%) scale(0);
   transform-origin: 50% 50%;
+  color: ${colors.black};
+  &:hover {
+    background-color: ${colors.black};
+    color: ${colors.white};
+  }
   &.visible {
     pointer-events: all;
     opacity: 1;

@@ -26,7 +26,7 @@ const ScrollTopButton = ({}: ScrollTopButtonProps) => {
       className={visible ? "visible" : ""}
       onClick={handleClick}
     >
-      <Arrow fill='black' />
+      <Arrow />
     </SScrollTopButton>
   );
 };

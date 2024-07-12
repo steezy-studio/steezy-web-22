@@ -1,15 +1,17 @@
 "use client";
 
 import styled from "styled-components";
-import { ColorKeys, colors } from "../../helpers/consts";
+import { ColorKeys } from "../../helpers/consts";
 
 interface ArrowProps {
   fill?: ColorKeys;
 }
 
-const SArrow = styled.svg``;
+const SArrow = styled.svg`
+  stroke: currentColor;
+`;
 
-const Arrow = ({ fill = "white" }: ArrowProps) => {
+const Arrow = ({}: ArrowProps) => {
   return (
     <SArrow
       xmlns='http://www.w3.org/2000/svg'
@@ -18,7 +20,7 @@ const Arrow = ({ fill = "white" }: ArrowProps) => {
       <polyline
         points='.35355 53.90465 53.55109 .70711 106.74864 53.90465'
         fill='none'
-        stroke={colors[fill]}
+        stroke={"currentColor"}
         strokeMiterlimit='10'
         vectorEffect={"non-scaling-stroke"}
       />
@@ -28,7 +30,7 @@ const Arrow = ({ fill = "white" }: ArrowProps) => {
         x2='53.55109'
         y2='107.10219'
         fill='none'
-        stroke={colors[fill]}
+        stroke={"currentColor"}
         strokeMiterlimit='10'
         vectorEffect={"non-scaling-stroke"}
       />
