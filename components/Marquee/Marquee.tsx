@@ -30,6 +30,7 @@ const Marquee = ({
   const fixedSpeed = 10;
   const velocity = useRef<number>(fixedSpeed * speedMultiplier);
   const friction = useRef<number>(0);
+  const inView = useRef<boolean>(false);
 
   const baseX = useMotionValue(0);
   const lenis = useLenis();
@@ -42,7 +43,7 @@ const Marquee = ({
 
   useAnimationFrame((t, d) => {
     if (!innerRef.current) return;
-
+    if (!inView.current) return;
     const innerWidth = innerRef.current.clientWidth;
     // flip velocity, directions matches the scroll direction
     const scrollVelocity = -1 * dir * lenis?.velocity!;
@@ -77,9 +78,19 @@ const Marquee = ({
       // Show the marquee after the multiplier is set
       ref.current.style.visibility = "visible";
     };
+    const handlePresence = (visible: boolean) => {
+      inView.current = visible;
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => handlePresence(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(ref.current!);
     handleResize();
     addEventListener("resize", handleResize);
     return () => {
+      observer.disconnect();
       removeEventListener("resize", handleResize);
     };
   }, []);
