@@ -1,11 +1,10 @@
 import { MoneyV2 } from "@shopify/hydrogen-react/storefront-api-types";
-import { AnimatePresence, LayoutGroup, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
 import { useContext, useEffect, useRef, useState } from "react";
 import { easing } from "../../helpers/animationConfig";
 import { formatPrice } from "../../helpers/formatPrice";
 import _isTouchDevice from "../../helpers/isTouchDevice";
 import { CursorContext } from "../Cursor/CursorProvider";
-import RevealAnimation from "../RevealAnimation/RevealAnimation";
 import { Nano } from "../Typo/Nano";
 import { Small } from "../Typo/Small";
 import {
@@ -71,87 +70,65 @@ const ProductCard = ({
   }, [animateOrder, inView, animateInView]);
 
   return (
-    <RevealAnimation>
-      <StyledProductCard
-        onMouseEnter={() => {
-          if (!allowHover.current) return;
-          setCursorType("hover");
-          sethover(true);
-        }}
-        onMouseLeave={() => {
-          if (!allowHover.current) return;
-          setCursorType("normal");
-          sethover(false);
-        }}
-        className={`${!availableForSale ? "inactive" : ""}`}
-        href={`/apparel/${slug}`}
-      >
-        <ProductCardInfo ref={ref}>
-          <ProductCardInfoHeader>
-            <Small className='white'>{title}</Small>
-          </ProductCardInfoHeader>
-          <ProductCardInfoFooter>
-            <LayoutGroup id='productCard'>
-              <AnimatePresence mode='popLayout'>
-                <Small
-                  className='white'
-                  layout={"position"}
-                  key={slug + "price"}
-                  transition={transition}
-                >
-                  {formatPrice(price.amount, price.currencyCode, "en-GB")}
-                </Small>
-                <Small
-                  className='white'
-                  layout={"position"}
-                  key={slug + "avaibility"}
-                  transition={transition}
-                >
-                  {availableForSale ? "in stock" : "out of stock"}
-                </Small>
-                {!isTouchDevice && hover && (
-                  <ProductCardButton
-                    layout={"position"}
-                    key={slug + "button"}
-                    initial={{ y: "150%" }}
-                    animate={{ y: "0%", transition }}
-                    exit={{ y: "150%", transition }}
-                  >
-                    <Nano className='uppercase'>buy now</Nano>
-                  </ProductCardButton>
-                )}
-              </AnimatePresence>
-            </LayoutGroup>
-          </ProductCardInfoFooter>
-        </ProductCardInfo>
-        <ProductCardCoverW>
-          <ProductCardInfoGrad />
-          <ProductCardCoverWI
-            animate={{ opacity: hoverCover && hover ? 0 : 1 }}
-            transition={{ duration: 0.2 }}
-            style={{ zIndex: 2 }}
-          >
+    <StyledProductCard
+      onMouseEnter={() => {
+        if (!allowHover.current) return;
+        setCursorType("hover");
+        sethover(true);
+      }}
+      onMouseLeave={() => {
+        if (!allowHover.current) return;
+        setCursorType("normal");
+        sethover(false);
+      }}
+      className={`${!availableForSale ? "inactive" : ""}`}
+      href={`/apparel/${slug}`}
+    >
+      <ProductCardInfo ref={ref}>
+        <ProductCardInfoHeader>
+          <Small className='white'>{title}</Small>
+        </ProductCardInfoHeader>
+        <ProductCardInfoFooter
+          className={!isTouchDevice && hover ? "hover" : ""}
+        >
+          <Small className='white'>
+            {formatPrice(price.amount, price.currencyCode, "en-GB")}
+          </Small>
+          <Small className='white'>
+            {availableForSale ? "in stock" : "out of stock"}
+          </Small>
+          <ProductCardButton>
+            <Nano className='uppercase'>buy now</Nano>
+          </ProductCardButton>
+        </ProductCardInfoFooter>
+      </ProductCardInfo>
+      <ProductCardCoverW>
+        <ProductCardInfoGrad />
+        <ProductCardCoverWI
+          animate={{ opacity: hoverCover && hover ? 0 : 1 }}
+          transition={{ duration: 0.2 }}
+          style={{ zIndex: 2 }}
+        >
+          <ProductCardCover
+            src={cover.src}
+            width={cover.width}
+            height={cover.height}
+            alt={title}
+            priority
+          />
+        </ProductCardCoverWI>
+        {hoverCover && (
+          <ProductCardCoverWI>
             <ProductCardCover
-              src={cover.src}
-              width={cover.width}
-              height={cover.height}
+              src={hoverCover.src}
+              width={hoverCover.width}
+              height={hoverCover.height}
               alt={title}
-              priority
             />
           </ProductCardCoverWI>
-          {hoverCover && (
-            <ProductCardCoverWI>
-              <ProductCardCover
-                src={hoverCover.src}
-                width={hoverCover.width}
-                height={hoverCover.height}
-                alt={title}
-              />
-            </ProductCardCoverWI>
-          )}
-        </ProductCardCoverW>
-      </StyledProductCard>
-    </RevealAnimation>
+        )}
+      </ProductCardCoverW>
+    </StyledProductCard>
   );
 };
 

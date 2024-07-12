@@ -1,12 +1,14 @@
-import Image from "next/image";
-import styled from "styled-components";
-import { spaces } from "../../helpers/spaces";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import styled from "styled-components";
 import { breakpoint, colors } from "../../helpers/consts";
+import { spaces } from "../../helpers/spaces";
 
 export const StyledProductCard = styled(Link)`
   all: unset;
+  --product-card-button-height: 60px;
+  --product-card-button-margin-top: ${spaces.m}px;
   display: block;
   aspect-ratio: 9/16;
   overflow: hidden;
@@ -27,9 +29,6 @@ export const ProductCardInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  ${breakpoint.phone} {
-    /* display: none; */
-  }
 `;
 
 export const ProductCardCoverW = styled(motion.div)`
@@ -41,10 +40,15 @@ export const ProductCardCoverW = styled(motion.div)`
 `;
 
 export const ProductCardInfoFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  row-gap: ${spaces.xs}px;
+  transition: transform 0.2s;
+  transform: translateY(
+    calc(
+      var(--product-card-button-height) + var(--product-card-button-margin-top)
+    )
+  );
+  &.hover {
+    transform: translateY(0);
+  }
 `;
 
 export const ProductCardInfoHeader = styled.div``;
@@ -74,9 +78,10 @@ export const ProductCardCover = styled(Image)`
 export const ProductCardButton = styled(motion.div)`
   background-color: ${colors.white};
   flex-basis: 100%;
-  height: 60px;
+  height: var(--product-card-button-height);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  margin-top: var(--product-card-button-margin-top);
 `;
