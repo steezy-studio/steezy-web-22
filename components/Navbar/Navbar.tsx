@@ -46,10 +46,10 @@ const Navbar = ({}: NavbarProps) => {
               {!isTabletPortrait && !isOpen && navbarHeader && (
                 <NavHeader
                   key={navbarHeader}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.7 }}
+                  initial={{ y: "100%" }}
+                  animate={{ y: "0%" }}
+                  exit={{ y: "-100%" }}
+                  transition={{ duration: 0.5 }}
                 >
                   <Nano className='uppercase'>{navbarHeader}</Nano>
                 </NavHeader>
