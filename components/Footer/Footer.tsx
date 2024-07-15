@@ -25,18 +25,18 @@ const Footer = ({}: FooterProps) => {
         <Micro>{footerStrings.cta}</Micro>
         <ContactInfo>
           <Large>
-            {router.asPath === "/contact" ? (
+            {/* {router.asPath === "/contact" ? (
               <Link
                 href={`https://www.instagram.com/steezy.studio/`}
                 target='_blank'
               >
                 {strings.footer.ig}
               </Link>
-            ) : (
-              <Link href={`mailto:${strings.globals.email}`}>
-                {strings.globals.email}
-              </Link>
-            )}
+            ) : ( */}
+            <Link href={`mailto:${strings.globals.email}`}>
+              {strings.globals.email}
+            </Link>
+            {/* )} */}
           </Large>
           <DetailedContact>
             <FooterSocials>
