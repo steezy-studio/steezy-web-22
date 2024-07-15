@@ -1,49 +1,68 @@
-import React, { Fragment } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CursorContext } from "../Cursor/CursorProvider";
+import Instagram from "../Icons/Instagram";
+import RevealAnimation from "../RevealAnimation/RevealAnimation";
+import SectionHeader from "../SectionHeader/SectionHeader";
+import { IgPlaceholder } from "../SectionHeader/StyledSectionHeader";
 import {
   IgFeed,
-  IgLinkW,
-  IgPost,
-  IgPostW,
-  StyledInstagramFeed,
+  IgFeedImage,
+  IgPostLink,
+  SInstagramFeed,
 } from "./StyledInstagramFeed";
-import SectionHeader from "../SectionHeader/SectionHeader";
-import Instagram from "../Icons/Instagram";
 
-interface InstagramFeedProps {
-  images: {
-    url: string;
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
-  }[];
-}
+interface InstagramFeedProps {}
 
-const InstagramFeed = ({ images }: InstagramFeedProps) => {
+type ImageData = {
+  src: string;
+  alt: string;
+  href: string;
+};
+
+const InstagramFeed = ({}: InstagramFeedProps) => {
+  const [imagesData, setImagesData] = useState<ImageData[]>([]);
+  const { setCursorType } = useContext(CursorContext);
+
+  useEffect(() => {
+    fetch("/api/get-instagram").then((res) => {
+      res.json().then((data) => {
+        setImagesData(data.images);
+      });
+    });
+  }, []);
+
   return (
-    <StyledInstagramFeed>
-      <SectionHeader
-        header='More from Steezy Studio'
-        linkText={
-          <IgLinkW>
-            <Instagram as={"span"} />
-            Check our profile
-          </IgLinkW>
-        }
-        url='https://www.instagram.com/steezystudio/'
-        target='_blank'
-      />
-      <IgFeed>
-        {images &&
-          images.map(({ alt, height, width, src, url }, i) => {
-            return (
-              <IgPostW key={i} href={url} target='_blank'>
-                <IgPost src={src} alt={alt} width={width} height={height} />
-              </IgPostW>
-            );
-          })}
-      </IgFeed>
-    </StyledInstagramFeed>
+    <RevealAnimation>
+      <SInstagramFeed>
+        <SectionHeader
+          header='More from Steezy Studio'
+          target='_blank'
+          linkText={
+            <>
+              <Instagram as='span' />
+              <span>Check Our Profile</span>
+            </>
+          }
+          url='https://www.instagram.com/steezystudio/'
+        />
+        <IgFeed>
+          {imagesData.length === 0
+            ? new Array(5).fill(0).map((_, i) => <IgPlaceholder key={i} />)
+            : imagesData?.map((image, i) => (
+                <IgPostLink href={image.href} target='_blank' key={i}>
+                  <IgFeedImage
+                    onMouseEnter={() => setCursorType("hover")}
+                    onMouseLeave={() => setCursorType("normal")}
+                    src={image.src}
+                    alt={image.alt}
+                    width={500}
+                    height={500}
+                  />
+                </IgPostLink>
+              ))}
+        </IgFeed>
+      </SInstagramFeed>
+    </RevealAnimation>
   );
 };
 

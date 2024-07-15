@@ -4,17 +4,20 @@ import { spaces } from "../../../helpers/spaces";
 
 export const StyledFooter = styled.footer`
   display: grid;
-  grid-gap: ${spaces.l}px;
+  row-gap: ${spaces.xxl}px;
   margin-top: ${spaces.xxl}px;
-  padding-bottom: ${spaces.xl}px;
   ${breakpoint.smallNotebook} {
+    row-gap: ${spaces.xxxl}px;
     margin-top: ${spaces.xxxl}px;
   }
+`;
+
+export const FooterInner = styled.div`
+  display: grid;
+  grid-gap: ${spaces.l}px;
+  padding-bottom: ${spaces.xl}px;
   ${breakpoint.tabletLandscape} {
     padding-bottom: ${spaces.xl}px;
-  }
-  ${breakpoint.phone} {
-    margin-top: ${spaces.xxxl}px;
   }
 `;
 

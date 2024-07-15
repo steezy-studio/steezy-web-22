@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import Link from "../Link/Link";
 import { Medium } from "../Typo/Medium";
-import { StyledSectionHeader } from "./StyledSectionHeader";
+import { LinkTextInner, StyledSectionHeader } from "./StyledSectionHeader";
 
 export interface SectionHeaderProps {
   header: string;
@@ -22,7 +22,7 @@ const SectionHeader = ({
       {linkText && url && (
         <Medium className='editorial'>
           <Link href={url} target={target}>
-            {linkText}
+            <LinkTextInner>{linkText}</LinkTextInner>
           </Link>
         </Medium>
       )}

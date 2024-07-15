@@ -149,7 +149,12 @@ const product = ({
           </ProductSection>
           <ProductGallery>
             <SectionHeader header='How to drip our drip' />
-            <Marquee useDragVelocity speedMultiplier={0.1}>
+            <Marquee
+              useDragVelocity
+              stopOnHover
+              speedMultiplier={0.1}
+              useScrollVelocity={false}
+            >
               {product.images.nodes.map(({ url, width, height }, i) => (
                 <ProductGalleryImg
                   draggable={false}

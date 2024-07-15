@@ -11,6 +11,7 @@ interface MarqueeProps {
   stopOnHover?: boolean;
   speedMultiplier?: number;
   useDragVelocity?: boolean;
+  useScrollVelocity?: boolean;
   direction?: "left" | "right";
 }
 
@@ -19,6 +20,7 @@ const Marquee = ({
   stopOnHover = false,
   speedMultiplier = 1 / 5,
   useDragVelocity,
+  useScrollVelocity,
   direction = "left",
 }: MarqueeProps) => {
   const innerRef = useRef<HTMLDivElement>(null);
@@ -46,7 +48,7 @@ const Marquee = ({
     if (!inView.current) return;
     const innerWidth = innerRef.current.clientWidth;
     // flip velocity, directions matches the scroll direction
-    const scrollVelocity = -1 * dir * lenis?.velocity!;
+    const scrollVelocity = useScrollVelocity ? -1 * dir * lenis?.velocity! : 0;
 
     if (hover.current) {
       friction.current -= 0.05;
