@@ -38,7 +38,7 @@
     "html-react-parser": "^5.1.9",
     "lenis": "^1.1.6",
     "locomotive-scroll": "^4.1.4",
-    "next": "^14.1.4",
+    "next": "^14.2.4",
     "puppeteer": "^22.1.0",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",

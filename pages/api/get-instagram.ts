@@ -5,6 +5,7 @@ export const revalidate = 60 * 60 * 24;
 export default async function handler(req, res) {
   const install = require(`puppeteer/internal/node/install.js`).downloadBrowser;
   await install();
+
   const browser = await puppeteer.launch({
     args: [
       "--use-gl=angle",
