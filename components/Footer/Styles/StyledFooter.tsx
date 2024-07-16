@@ -10,6 +10,10 @@ export const StyledFooter = styled.footer`
     row-gap: ${spaces.xxxl}px;
     margin-top: ${spaces.xxxl}px;
   }
+  ${breakpoint.tabletLandscape} {
+    margin-top: ${spaces.xxl}px;
+    row-gap: ${spaces.xxl}px;
+  }
 `;
 
 export const FooterInner = styled.div`

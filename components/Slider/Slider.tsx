@@ -57,7 +57,6 @@ const Slider = ({ children, config, navigationWidth = 1 }: SliderProps) => {
     for (let i = 0; i < step; i++) {
       const itemIndex = dir === 1 ? position + i : position - i - 1;
       const slide = slides?.item(itemIndex);
-      console.log(itemIndex, nextPosition);
 
       distance += slide?.clientWidth || 0;
       distance += columnGap;

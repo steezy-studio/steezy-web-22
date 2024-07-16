@@ -26,9 +26,6 @@ export const StyledNavLink = styled(motion(Link))`
   ${breakpoint.smallNotebook} {
     font-size: 8vh;
   }
-  ${breakpoint.tabletLandscape} {
-    font-size: 9vh;
-  }
   ${breakpoint.tabletPortrait} {
     font-size: 4vh;
   }

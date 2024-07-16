@@ -10,7 +10,7 @@ export const StyledAreaTag = styled.div`
     display: block;
     transform: translateY(0.02em);
   }
-  ${breakpoint.tabletPortrait} {
-    padding: 0px 9px 2px;
+  ${breakpoint.tabletLandscape} {
+    padding: 0px 6px 0px;
   }
 `;

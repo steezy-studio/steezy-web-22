@@ -133,9 +133,7 @@ const ProjectCard = ({
       {!_static && (
         <GridItemHeader className={_static ? "tal" : "tac"}>
           <GridItemHeaderInner animate={headerAnimationControls}>
-            <Small className='white bold underline'>
-              {stripHtmlTags(projectName)}
-            </Small>
+            <Small className='white bold'>{stripHtmlTags(projectName)}</Small>
           </GridItemHeaderInner>
         </GridItemHeader>
       )}

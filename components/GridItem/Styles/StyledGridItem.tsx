@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
-import { breakpoint } from "../../../helpers/consts";
+import { breakpoint, colors } from "../../../helpers/consts";
 import { spaces } from "../../../helpers/spaces";
 
 export const StyledGridItem = styled(motion(Link))`
@@ -48,7 +48,7 @@ export const GridItemHoverOverlay = styled(motion.div)`
 
 export const GridItemPhoneOverlay = styled.div`
   display: none;
-  ${breakpoint.phone} {
+  ${breakpoint.tabletLandscape} {
     display: block;
     position: absolute;
     inset: 0;
@@ -71,8 +71,20 @@ export const GridItemHeader = styled(motion.div)`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    color: ${colors.white};
     justify-content: center;
     text-align: center;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    ${breakpoint.tabletLandscape} {
+      text-decoration: none;
+      top: 0;
+      justify-content: start;
+      left: 0;
+      transform: unset;
+      text-align: left;
+    }
   }
   &.tal {
     text-align: left;
