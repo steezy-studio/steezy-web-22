@@ -6,19 +6,19 @@ import { spaces } from "../helpers/spaces";
 export const StyledProduct = styled.div``;
 
 export const ProductSection = styled.section`
-  display: grid;
-  grid-template-columns: 2fr 1fr;
+  display: flex;
   margin-top: ${spaces.xl}px;
   column-gap: ${spaces.xl}px;
   align-items: start;
   ${breakpoint.phone} {
-    grid-template-columns: unset;
+    flex-direction: column;
     row-gap: ${spaces.xl}px;
   }
 `;
 
 export const ProductGallery = styled.section`
   margin-top: ${spaces.xxl}px;
+  flex-grow: 1;
   display: grid;
   row-gap: ${spaces.m}px;
 `;
@@ -31,7 +31,12 @@ export const ProductOptions = styled.div`
 
 export const ProductHeroVideo = styled.div``;
 
-export const ProductInfo = styled.div``;
+export const ProductInfo = styled.div`
+  min-width: 400px;
+  ${breakpoint.smallNotebook} {
+    min-width: 300px;
+  }
+`;
 
 export const ProductText = styled.div`
   display: grid;

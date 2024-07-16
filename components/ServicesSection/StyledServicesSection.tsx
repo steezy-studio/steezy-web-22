@@ -21,6 +21,9 @@ export const ServicesList = styled.div`
   grid-template-columns: repeat(3, 1fr);
   row-gap: ${spaces.xxxl}px;
   column-gap: ${spaces.xxxxl}px;
+  ${breakpoint.custom(1500)} {
+    column-gap: ${spaces.xxl}px;
+  }
   ${breakpoint.smallNotebook} {
     gap: ${spaces.xl}px;
   }

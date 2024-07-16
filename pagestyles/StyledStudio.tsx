@@ -172,6 +172,9 @@ export const Logotypes = styled.div`
 export const Logo = styled(motion.img)`
   width: 100%;
   max-width: 120px;
+  ${breakpoint.smallNotebook} {
+    max-width: 100px;
+  }
   ${breakpoint.phone} {
     &:nth-child(n + 16) {
       display: none;

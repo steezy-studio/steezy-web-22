@@ -16,6 +16,7 @@ export const StyledValueItem = styled.div`
   }
   ${breakpoint.smallNotebook} {
     grid-template-columns: 230px 1fr;
+    padding: ${spaces.xl}px 0;
   }
   ${breakpoint.tabletPortrait} {
     grid-template-columns: unset;
@@ -46,11 +47,11 @@ export const ValueBody = styled.div`
 export const ValueHeader = styled.div`
   display: grid;
   grid-row-gap: 30px;
-  ${breakpoint.tabletLandscape} {
-    row-gap: 20px;
+  ${breakpoint.smallNotebook} {
+    row-gap: ${spaces.s}px;
   }
   ${breakpoint.phone} {
-    grid-row-gap: 10px;
+    grid-row-gap: ${spaces.xs}px;
   }
 `;
 
@@ -66,7 +67,7 @@ export const Order = styled.span`
     font-size: 60px;
   }
   ${breakpoint.smallNotebook} {
-    font-size: 60px;
+    font-size: 50px;
     position: relative;
   }
   ${breakpoint.tabletLandscape} {

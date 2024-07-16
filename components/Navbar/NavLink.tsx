@@ -20,13 +20,15 @@ const NavLink = ({ href, children, active, onClick }: NavLinkProps) => {
   const { setCursorType } = useContext(CursorContext);
   const ref = useRef<HTMLDivElement>(null);
   const gifRef = useRef<HTMLDivElement>(null);
+  const coord = useRef<{ x: number; y: number }>({ x: -100, y: -100 });
   const [hover, sethover] = useState<boolean>(false);
 
   useEffect(() => {
     if (!ref.current) return;
     const handleMouseMove = (e: MouseEvent) => {
-      gifRef.current.style.top = `${e.clientY}px`;
-      gifRef.current.style.left = `${e.clientX}px`;
+      gifRef.current.style.top = `${coord.current.x}px`;
+      gifRef.current.style.left = `${coord.current.y}px`;
+      coord.current = { x: e.clientY, y: e.clientX };
     };
     ref.current.addEventListener("mousemove", handleMouseMove);
     return () => {

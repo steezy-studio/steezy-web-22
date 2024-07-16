@@ -15,7 +15,7 @@ export const Small = styled(motion.p)`
     line-height: 1.7em;
   }
   ${breakpoint.smallNotebook} {
-    font-size: 18px;
+    font-size: 17px;
   }
   ${breakpoint.tabletLandscape} {
     font-size: 16px;

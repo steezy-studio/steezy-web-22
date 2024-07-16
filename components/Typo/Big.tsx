@@ -19,7 +19,7 @@ export const Big = styled.h1`
     text-underline-offset: 3px;
   }
   ${breakpoint.smallNotebook} {
-    font-size: 80px;
+    font-size: 70px;
   }
   ${breakpoint.tabletLandscape} {
     font-size: 60px;

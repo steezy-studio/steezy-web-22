@@ -17,7 +17,7 @@ export const GridItemAreas = styled.div`
   left: ${spaces.m}px;
   display: flex;
   gap: ${spaces.xxs}px;
-  ${breakpoint.tabletPortrait} {
+  ${breakpoint.smallNotebook} {
     bottom: ${spaces.xs}px;
     left: ${spaces.xs}px;
     flex-direction: column;
@@ -76,6 +76,9 @@ export const GridItemHeader = styled(motion.div)`
   }
   &.tal {
     text-align: left;
+  }
+  ${breakpoint.smallNotebook} {
+    padding: ${spaces.s}px;
   }
   ${breakpoint.tabletPortrait} {
     width: calc(100% - ${2 * spaces.s}px);

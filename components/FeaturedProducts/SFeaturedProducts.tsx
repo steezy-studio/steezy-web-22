@@ -8,7 +8,7 @@ export const SFeaturedProducts = styled.div``;
 export const FeaturedProductsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: ${spaces.s}px;
+  gap: ${spaces.xs}px;
   margin-top: ${spaces.l}px;
   ${breakpoint.tabletPortrait} {
     grid-template-columns: repeat(2, 1fr);

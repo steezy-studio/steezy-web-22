@@ -83,7 +83,9 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
           <TextBlock>
             <TextBlockHeader>
               <HeaderLine>
-                <Micro>{studioStrings.intro.header}</Micro>
+                <Micro className='uppercase'>
+                  {studioStrings.intro.header}
+                </Micro>
               </HeaderLine>
               <Medium className='medium'>{studioStrings.intro.perex}</Medium>
             </TextBlockHeader>
@@ -145,7 +147,7 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
         <BrandsSection>
           <BrandsHeader>
             <HeaderLine>
-              <Micro>{studioStrings.brands.header}</Micro>
+              <Micro className='uppercase'>{studioStrings.brands.header}</Micro>
             </HeaderLine>
           </BrandsHeader>
           <Logotypes>

@@ -179,6 +179,7 @@ const Project = ({ projectData }: ProjectProps) => {
         <ProjectDetailQuote>
           {project.client_quote && (
             <ClientQuote
+              animated={false}
               clientName={project.client_name}
               clientRole={project.client_position}
               quote={project.client_quote}

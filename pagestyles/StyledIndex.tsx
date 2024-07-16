@@ -9,6 +9,9 @@ export const IndexHeroSection = styled.section``;
 export const IndexHeroClaim = styled.div`
   margin: ${spaces.xxxl}px 0 ${spaces.xxxxl}px;
   text-align: center;
+  ${breakpoint.smallNotebook} {
+    margin: ${spaces.xl}px 0 ${spaces.xxxl}px;
+  }
 `;
 
 export const IndexSliderW = styled.div``;

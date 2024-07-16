@@ -22,7 +22,7 @@ export const ProjectHeroRoles = styled.div`
   display: grid;
   align-content: start;
   row-gap: ${spaces.xl}px;
-  ${breakpoint.tabletLandscape} {
+  ${breakpoint.smallNotebook} {
     row-gap: ${spaces.l}px;
   }
   ${breakpoint.phone} {

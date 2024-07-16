@@ -50,7 +50,7 @@ export const device = {
   tabletLandscape: 1200,
   smallNotebook: 1440,
   largeNotebook: 1920,
-  monitor: 2500,
+  monitor: 1921,
 } as const;
 
 export type DevicesKeys = keyof typeof device;

@@ -28,7 +28,7 @@ export const Drawer = styled(motion.div)`
   flex-direction: column;
   row-gap: ${spaces.xxl}px;
   ${breakpoint.monitor} {
-    width: 800px;
+    width: 600px;
   }
   ${breakpoint.smallNotebook} {
     width: 500px;
