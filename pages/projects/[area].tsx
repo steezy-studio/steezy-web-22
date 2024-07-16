@@ -6,6 +6,7 @@ import Head from "../../components/Head/Head";
 import Link from "../../components/Link/Link";
 import { NavbarContext } from "../../components/Navbar/NavbarControls";
 import ProjectsGrid from "../../components/ProjectsGrid/ProjectsGrid";
+import RevealAnimation from "../../components/RevealAnimation/RevealAnimation";
 import ScrollTopButton from "../../components/ScrollTopButton/ScrollTopButton";
 import { Nano } from "../../components/Typo/Nano";
 import strings from "../../data/strings";
@@ -59,22 +60,24 @@ const Projects = ({ areas, projects }: ProjectsProps) => {
       <StyledProjects>
         <ProjectsHero>
           <ProjectsHeroFilters>
-            {areas.items.map(({ area_name, _slug, projects }) => {
+            {areas.items.map(({ area_name, _slug, projects }, i) => {
               const isActive = router.query.area === _slug;
               return (
-                <FilterW key={_slug} className='editorial'>
-                  <Link
-                    href={`/projects/${_slug}`}
-                    className={`no-underline ${isActive ? "active" : ""}`}
-                  >
-                    <Filter>
-                      <span className='underline'>{area_name}</span>
-                      <Nano className='helvetica no-underline'>
-                        {projects.length}
-                      </Nano>
-                    </Filter>
-                  </Link>
-                </FilterW>
+                <RevealAnimation key={_slug} delay={i * 0.2} noCrop>
+                  <FilterW className='editorial'>
+                    <Link
+                      href={`/projects/${_slug}`}
+                      className={`no-underline ${isActive ? "active" : ""}`}
+                    >
+                      <Filter>
+                        <span className='underline'>{area_name}</span>
+                        <Nano className='helvetica no-underline'>
+                          {projects.length}
+                        </Nano>
+                      </Filter>
+                    </Link>
+                  </FilterW>
+                </RevealAnimation>
               );
             })}
           </ProjectsHeroFilters>

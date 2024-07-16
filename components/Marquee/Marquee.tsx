@@ -3,11 +3,11 @@
 import { useDrag } from "@use-gesture/react";
 import { useAnimationFrame, useMotionValue } from "framer-motion";
 import { useLenis } from "lenis/react";
-import { useEffect, useRef, useState } from "react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { MarqueeBlock, MarqueeInner, MarqueeItem, SMarquee } from "./SMarquee";
 
 interface MarqueeProps {
-  children: JSX.Element | JSX.Element[];
+  children: ReactNode;
   stopOnHover?: boolean;
   speedMultiplier?: number;
   useDragVelocity?: boolean;
@@ -20,7 +20,7 @@ const Marquee = ({
   stopOnHover = false,
   speedMultiplier = 1 / 5,
   useDragVelocity,
-  useScrollVelocity,
+  useScrollVelocity = true,
   direction = "left",
 }: MarqueeProps) => {
   const innerRef = useRef<HTMLDivElement>(null);

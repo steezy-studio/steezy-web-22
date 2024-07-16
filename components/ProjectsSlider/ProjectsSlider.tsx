@@ -18,7 +18,7 @@ interface ProjectsSliderProps extends SectionHeaderProps {
 
 const ProjectsSlider = ({ projects, ...rest }: ProjectsSliderProps) => {
   return (
-    <RevealAnimation>
+    <RevealAnimation noCrop>
       <StyledProjectsSlider>
         <SectionHeader {...rest} />
         <SliderW>

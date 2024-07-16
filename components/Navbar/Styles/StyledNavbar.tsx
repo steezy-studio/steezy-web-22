@@ -12,6 +12,7 @@ export const StyledNavbar = styled.nav`
   left: ${spaces.xxxl}px;
   height: 60px;
   display: flex;
+  pointer-events: none;
   ${breakpoint.monitor} {
     right: ${spaces.xxxxxl}px;
     left: ${spaces.xxxxxl}px;
@@ -45,6 +46,7 @@ export const NavbarCart = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 999px;
+  pointer-events: all;
   border: 1px solid ${colors.black};
   background-color: ${colors.black};
   &:hover {

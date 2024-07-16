@@ -60,7 +60,7 @@ const InstagramFeed = ({}: InstagramFeedProps) => {
   }, []);
 
   return (
-    <RevealAnimation>
+    <RevealAnimation noCrop>
       <SInstagramFeed>
         <SectionHeader
           header='More from Steezy Studio'

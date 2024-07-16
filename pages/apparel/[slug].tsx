@@ -11,11 +11,11 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { Fragment, useContext, useEffect, useState } from "react";
 import getClient from "../../apollo/client";
 import FeaturedProducts from "../../components/FeaturedProducts/FeaturedProducts";
+import Gallery from "../../components/Gallery/Gallery";
 import Head from "../../components/Head/Head";
 import QuantitySelect from "../../components/Inputs/QuantitySelect";
 import VariantsSelect from "../../components/Inputs/VariantsSelect";
 import Link from "../../components/Link/Link";
-import Marquee from "../../components/Marquee/Marquee";
 import { NavbarContext } from "../../components/Navbar/NavbarControls";
 import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
 import SectionHeader from "../../components/SectionHeader/SectionHeader";
@@ -149,12 +149,7 @@ const product = ({
           </ProductSection>
           <ProductGallery>
             <SectionHeader header='How to drip our drip' />
-            <Marquee
-              useDragVelocity
-              stopOnHover
-              speedMultiplier={0.1}
-              useScrollVelocity={false}
-            >
+            <Gallery>
               {product.images.nodes.map(({ url, width, height }, i) => (
                 <ProductGalleryImg
                   draggable={false}
@@ -166,7 +161,7 @@ const product = ({
                   width={width}
                 />
               ))}
-            </Marquee>
+            </Gallery>
           </ProductGallery>
           <ProductFeaturedProducts>
             <FeaturedProducts

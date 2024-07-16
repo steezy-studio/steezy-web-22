@@ -2,9 +2,9 @@ import { GetStaticProps } from "next";
 import { useContext, useEffect } from "react";
 import getClient from "../apollo/client";
 import { CursorContext } from "../components/Cursor/CursorProvider";
+import Gallery from "../components/Gallery/Gallery";
 import Head from "../components/Head/Head";
 import HeaderLine from "../components/HeaderLine/HeaderLine";
-import Marquee from "../components/Marquee/Marquee";
 import { NavbarContext } from "../components/Navbar/NavbarControls";
 import ProjectsSlider from "../components/ProjectsSlider/ProjectsSlider";
 import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
@@ -93,11 +93,8 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
           </TextBlock>
         </RevealAnimation>
 
-        <OurStudio
-          onMouseEnter={() => setCursorType("swipe")}
-          onMouseLeave={() => setCursorType("normal")}
-        >
-          <Marquee useDragVelocity speedMultiplier={0.1} stopOnHover>
+        <OurStudio>
+          <Gallery>
             {studioStrings.slider.map((img, i) => (
               <OurStudioSliderImg
                 draggable={false}
@@ -109,7 +106,7 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
                 alt='studio'
               />
             ))}
-          </Marquee>
+          </Gallery>
         </OurStudio>
 
         <ValuesSection id='values-section'>
