@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import strings from "../../data/strings";
 import InstagramFeed from "../InstagramFeed/InstagramFeed";
 import Link from "../Link/Link";
@@ -16,7 +15,6 @@ interface FooterProps {}
 
 const Footer = ({}: FooterProps) => {
   const footerStrings = strings.footer;
-  const router = useRouter();
 
   return (
     <StyledFooter>
