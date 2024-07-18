@@ -58,9 +58,13 @@ const AnimateTextRows = ({ children, motionProps }: AnimateTextRowsProps) => {
       <Text>
         {rows &&
           rows.map((row, i) => (
-            <motion.div key={i} {...motionProps(i, containerRef)}>
+            <motion.span
+              key={i}
+              {...motionProps(i, containerRef)}
+              style={{ display: "block" }}
+            >
               {row.join(" ")}
-            </motion.div>
+            </motion.span>
           ))}
       </Text>
     </StyledAnimateTextRows>
