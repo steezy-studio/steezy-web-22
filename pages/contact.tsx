@@ -73,7 +73,9 @@ const Contact = ({}: ContactProps) => {
           </ContactDetails>
 
           <ContactCta className='wide'>
-            <Micro as={"h3"}>New Business & media</Micro>
+            <Micro as={"h3"} className='uppercase'>
+              New Business & media
+            </Micro>
             <Large as={"span"}>
               <Link href={"mailto: hello@steezy.studio"}>
                 hello@steezy.studio
