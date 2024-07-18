@@ -39,8 +39,9 @@ export const ContactInfo = styled.div`
   }
 `;
 
-export const DetailedContact = styled.div`
+export const DetailedContact = styled.address`
   display: grid;
+  font-style: normal;
   grid-auto-flow: column;
   grid-auto-columns: auto;
   justify-content: start;

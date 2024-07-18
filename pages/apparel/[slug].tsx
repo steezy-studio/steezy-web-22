@@ -92,8 +92,10 @@ const product = ({
             </ProductHeroVideo>
             <ProductInfo>
               <ProductText>
-                <Medium className='bold'>{product.title}</Medium>
-                <Large>
+                <Medium className='bold' as={"h1"}>
+                  {product.title}
+                </Medium>
+                <Large as={"span"}>
                   {formatPrice(
                     product.priceRange.maxVariantPrice.amount,
                     product.priceRange.maxVariantPrice.currencyCode
@@ -101,8 +103,8 @@ const product = ({
                 </Large>
                 {product.availableForSale && (
                   <div>
-                    <Small>Tax included</Small>
-                    <Small>Shipping only in Czechia</Small>
+                    <Small as={"span"}>Tax included</Small>
+                    <Small as={"span"}>Shipping only in Czechia</Small>
                   </div>
                 )}
               </ProductText>
@@ -129,7 +131,7 @@ const product = ({
                       }}
                     />
                   </ProductOptions>
-                  <Large>
+                  <Large as={"span"}>
                     <Link
                       href={""}
                       onClick={() => {
@@ -142,7 +144,7 @@ const product = ({
                 </Fragment>
               ) : (
                 <ProductOptions>
-                  <Large>out of stock</Large>
+                  <Large as={"span"}>out of stock</Large>
                 </ProductOptions>
               )}
             </ProductInfo>

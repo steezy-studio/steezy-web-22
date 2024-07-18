@@ -15,15 +15,18 @@ const CartItem = ({}: CartItemProps) => {
     <StyledCartItem>
       <CartItemSize style={{ gridArea: "title" }}>
         <div>
-          <Small>
+          <Small as={"header"}>
             <Link href={`/apparel/${merchandise.product.handle}`}>
               {merchandise.product.title.trim()}
             </Link>
           </Small>
         </div>
-        <Micro className='uppercase'>{`Size: ${merchandise.title}`}</Micro>
+        <Micro
+          className='uppercase'
+          as={"span"}
+        >{`Size: ${merchandise.title}`}</Micro>
       </CartItemSize>
-      <Small style={{ gridArea: "price" }}>
+      <Small style={{ gridArea: "price" }} as={"span"}>
         {formatPrice(cost.totalAmount.amount)}
       </Small>
       <CartQuantityInput />

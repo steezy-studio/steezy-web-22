@@ -83,7 +83,7 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
           <TextBlock>
             <TextBlockHeader>
               <HeaderLine>
-                <Micro className='uppercase'>
+                <Micro className='uppercase' as={"h2"}>
                   {studioStrings.intro.header}
                 </Micro>
               </HeaderLine>
@@ -124,7 +124,7 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
         </ValuesSection>
 
         <StudioServices>
-          <Large>
+          <Large as={"blockquote"}>
             We’re able to cover the client’s needs from strategy and art
             direction to production, design and communication.
           </Large>
@@ -147,7 +147,9 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
         <BrandsSection>
           <BrandsHeader>
             <HeaderLine>
-              <Micro className='uppercase'>{studioStrings.brands.header}</Micro>
+              <Micro className='uppercase' as={"h2"}>
+                {studioStrings.brands.header}
+              </Micro>
             </HeaderLine>
           </BrandsHeader>
           <Logotypes>

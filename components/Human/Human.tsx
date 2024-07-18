@@ -48,7 +48,9 @@ const Human = ({
           <HumanGradient />
         </HumanCoverW>
         <HumanInfo>
-          <Large className='white'>{name}</Large>
+          <Large className='white' as={"header"}>
+            {name}
+          </Large>
           <HumanInfoGrid>
             <HumanInfoCol>
               <Micro className='white'>{position}</Micro>

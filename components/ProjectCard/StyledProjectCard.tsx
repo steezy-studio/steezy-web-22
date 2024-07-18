@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { breakpoint } from "../../helpers/consts";
 
-export const StyledProjectCard = styled.div`
+export const StyledProjectCard = styled.article`
   position: relative;
   width: 100%;
   height: 100%;

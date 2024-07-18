@@ -86,7 +86,9 @@ const ProductCard = ({
     >
       <ProductCardInfo ref={ref}>
         <ProductCardInfoHeader>
-          <Small className='white'>{title}</Small>
+          <Small className='white' as={"header"}>
+            {title}
+          </Small>
         </ProductCardInfoHeader>
         <ProductCardInfoFooter
           className={!isTouchDevice && hover ? "hover" : ""}

@@ -59,7 +59,8 @@ export const NavLinkGif = styled(Image)`
   object-fit: cover;
 `;
 
-export const NavlinkChildrenW = styled.div`
+export const NavlinkChildrenW = styled.span`
+  display: block;
   position: relative;
   z-index: 2;
 `;

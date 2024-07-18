@@ -39,13 +39,15 @@ const apparel = ({ products, projects }: apparelProps) => {
     <>
       <Head
         pageName={"Apparel"}
-        ogDescription={"Spring/Summer 2024"}
+        ogDescription={"Summer / Autumn 2024"}
         ogTitle={"Apparel"}
         ogImageSrc={""}
       />
       <StyledApparel>
         <ProductsGridSection>
-          <Medium className='bold'>Spring/Summer 2024</Medium>
+          <Medium className='bold' as={"h1"}>
+            Summer / Autumn 2024
+          </Medium>
           <ProductsGrid>
             {products.nodes.map(
               (

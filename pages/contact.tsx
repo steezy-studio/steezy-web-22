@@ -44,7 +44,9 @@ const Contact = ({}: ContactProps) => {
         <ContactHero>
           <ContactDetails>
             <ContactCta>
-              <Micro className='uppercase'>Brno Office</Micro>
+              <Micro className='uppercase' as={"h1"}>
+                Brno Office
+              </Micro>
               <Micro className='break-lines'>
                 {`STEEZY, s.r.o.\nObilní trh 4, 602 00 Brno\nCzech Republic\n\nIČ: 07812558\nDIČ (VAT): CZ07812558`}
               </Micro>
@@ -54,7 +56,9 @@ const Contact = ({}: ContactProps) => {
               </ContactSocials>
             </ContactCta>
             <ContactCta>
-              <Micro className='uppercase'>Recruiment</Micro>
+              <Micro className='uppercase' as={"h2"}>
+                Recruiment
+              </Micro>
               <Micro>
                 <span>
                   We’re always looking for new talents
@@ -69,8 +73,8 @@ const Contact = ({}: ContactProps) => {
           </ContactDetails>
 
           <ContactCta className='wide'>
-            <Micro>New Business & media</Micro>
-            <Large>
+            <Micro as={"h3"}>New Business & media</Micro>
+            <Large as={"span"}>
               <Link href={"mailto: hello@steezy.studio"}>
                 hello@steezy.studio
               </Link>

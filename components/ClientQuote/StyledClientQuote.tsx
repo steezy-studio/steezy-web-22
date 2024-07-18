@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import { spaces } from "../../helpers/spaces";
 
-export const StyledClientQuote = styled.div`
+export const StyledClientQuote = styled.blockquote`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

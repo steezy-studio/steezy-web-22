@@ -80,7 +80,7 @@ export const IndexQuoteClient = styled.div`
   }
 `;
 
-export const FeaturedGrid = styled.div`
+export const FeaturedGrid = styled.section`
   display: grid;
   row-gap: ${spaces.l}px;
   margin-top: ${spaces.xxxxl}px;

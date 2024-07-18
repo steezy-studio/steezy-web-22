@@ -101,8 +101,10 @@ const Cart = ({}: CartProps) => {
           {!(lines.length === 0) && (
             <CartFooter>
               <TotalPrice>
-                <Large>Total</Large>
-                <Large>{formatPrice(cost?.totalAmount?.amount)}</Large>
+                <Large as={"span"}>Total</Large>
+                <Large as={"span"}>
+                  {formatPrice(cost?.totalAmount?.amount)}
+                </Large>
               </TotalPrice>
               <CartCheckoutButtonW
                 onMouseEnter={() => {
@@ -113,7 +115,9 @@ const Cart = ({}: CartProps) => {
                 }}
               >
                 <CartCheckoutButton style={{ all: "unset" }}>
-                  <Small className='white uppercase'>Continue</Small>
+                  <Small className='white uppercase' as={"span"}>
+                    Continue
+                  </Small>
                 </CartCheckoutButton>
               </CartCheckoutButtonW>
             </CartFooter>

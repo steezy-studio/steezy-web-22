@@ -50,6 +50,7 @@ const Navlinks = ({}: NavlinksProps) => {
           duration: 0.6,
         }}
         variants={navLinksVariants}
+        aria-hidden={!isOpen}
       >
         <AnimatePresence>
           {showVega && (

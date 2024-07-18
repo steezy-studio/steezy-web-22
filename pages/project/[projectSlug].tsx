@@ -84,7 +84,9 @@ const Project = ({ projectData }: ProjectProps) => {
                   <RevealAnimation key={i} delay={i * 0.3}>
                     <ProjectHeroRole>
                       <Nano>{fact.header}</Nano>
-                      <Small className='bold break-lines'>{fact.content}</Small>
+                      <Small className='bold break-lines' as={"span"}>
+                        {fact.content}
+                      </Small>
                     </ProjectHeroRole>
                   </RevealAnimation>
                 );
@@ -151,7 +153,7 @@ const Project = ({ projectData }: ProjectProps) => {
                     className={`blockquote ${row.alignment ? "reverse" : ""}`}
                   >
                     <ProjectGridBlockquote>
-                      <Small className='bold' as={"span"}>
+                      <Small className='bold' as={"p"}>
                         {HTMLReactParser(row.blockquote_text, {
                           replace(domNode) {
                             if (domNode instanceof Element && domNode.attribs) {

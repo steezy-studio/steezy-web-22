@@ -83,9 +83,13 @@ const ServiceItem = ({ area, i }: ServiceItemProps) => {
 
       <ServiceItemContent>
         <RevealAnimation delay={0.2 * i}>
-          <Medium className='bold service-header'>{area.area_name}</Medium>
+          <Medium className='bold service-header' as={"h3"}>
+            {area.area_name}
+          </Medium>
           <SubServicesList>
-            <Small className='big-lh break-lines'>{area.sub_areas}</Small>
+            <Small className='big-lh break-lines' as={"p"}>
+              {area.sub_areas}
+            </Small>
           </SubServicesList>
         </RevealAnimation>
       </ServiceItemContent>

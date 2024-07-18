@@ -18,6 +18,7 @@ const Link = ({ href, children, className, onClick, target }: LinkProps) => {
       onMouseEnter={() => setCursorType("hover")}
       onMouseLeave={() => setCursorType("normal")}
       target={target}
+      role={onClick ? "button" : "link"}
       className={className}
       onClick={(e) => {
         if (onClick) {

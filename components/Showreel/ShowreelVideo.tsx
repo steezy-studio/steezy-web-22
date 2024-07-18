@@ -40,7 +40,9 @@ const ShowreelVideo = ({ src, open, onOpenChange }: ShowreelProps) => {
             onMouseLeave={() => setCursorType("normal")}
           >
             <PlayButton>
-              <Big className='white underline'>Play Video</Big>
+              <Big className='white underline' as={"span"}>
+                Play Video
+              </Big>
             </PlayButton>
             <Loop
               whileHover={{ scale: 1.15 }}

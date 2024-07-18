@@ -91,7 +91,7 @@ export const ProjectDetailImg = styled(Image)`
   border-radius: ${({ theme }) => theme.bRad};
 `;
 
-export const ProjectGridBlockquote = styled.div`
+export const ProjectGridBlockquote = styled.blockquote`
   grid-area: blockquote;
   padding: ${spaces.xxxl}px 0;
   max-width: 600px;

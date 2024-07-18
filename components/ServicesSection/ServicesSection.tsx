@@ -14,7 +14,9 @@ const ServicesSection = ({ areas }: ServicesSectionProps) => {
     <StyledServicesSection>
       <RevealAnimation>
         <HeaderLine>
-          <Micro className='uppercase'>{"Services"}</Micro>
+          <Micro className='uppercase' as={"h2"}>
+            {"Services"}
+          </Micro>
         </HeaderLine>
       </RevealAnimation>
       <ServicesList>

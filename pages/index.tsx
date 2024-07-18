@@ -80,7 +80,7 @@ const Index = ({ projects, areas, products }: indexProps) => {
           />
           <HeroFooter>
             <HeroFooterPerex>
-              <Small as='h2'>
+              <Small as='p'>
                 We work for world-known brands while sharing our knowledge and
                 passion with local start-ups and cultural pioneers.
               </Small>

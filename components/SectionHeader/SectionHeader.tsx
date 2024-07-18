@@ -18,9 +18,11 @@ const SectionHeader = ({
 }: SectionHeaderProps) => {
   return (
     <StyledSectionHeader>
-      <Medium className='bold'>{header}</Medium>
+      <Medium className='bold' as={"h2"}>
+        {header}
+      </Medium>
       {linkText && url && (
-        <Medium className='editorial'>
+        <Medium className='editorial' as={"span"}>
           <Link href={url} target={target}>
             <LinkTextInner>{linkText}</LinkTextInner>
           </Link>

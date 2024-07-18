@@ -34,7 +34,7 @@ const ValueItem = ({ header, order, perex, id, isFocused }: ValueItemProps) => {
             transition={{ ease: easing, duration: 0.5 }}
           >
             <HeaderLine>
-              <Micro className='uppercase'>
+              <Micro className='uppercase' as={"h2"}>
                 {strings.studioPage.values.header}
               </Micro>
             </HeaderLine>
@@ -45,7 +45,9 @@ const ValueItem = ({ header, order, perex, id, isFocused }: ValueItemProps) => {
       <ValueBody>
         <Order>{formatedOrder}</Order>
         <ValueHeader>
-          <Medium className='medium'>{header}</Medium>
+          <Medium className='medium' as={"h3"}>
+            {header}
+          </Medium>
           <Small className='big-lh'>{perex}</Small>
         </ValueHeader>
       </ValueBody>
