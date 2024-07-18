@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import { ThemeProvider } from "styled-components";
 import Cart from "../components/Cart/Cart";
 import CartProvider from "../components/Cart/CartProvider";
@@ -15,10 +14,6 @@ import { useGA } from "../hooks/useGA";
 import { useWindowSize } from "../hooks/useWindowSize";
 import LenisContext from "../lib/Lenis";
 import { GlobalStyle } from "../pagestyles/GlobalStyles";
-const InstagramFeed = dynamic(
-  () => import("../components/InstagramFeed/InstagramFeed"),
-  { ssr: false }
-);
 
 function MyApp({ Component, pageProps }) {
   const { w } = useWindowSize();
