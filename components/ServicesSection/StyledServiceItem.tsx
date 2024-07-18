@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
+import { breakpoint } from "../../helpers/consts";
 
 export const StyledServiceItem = styled(Link)`
   all: unset;
@@ -17,6 +18,11 @@ export const ServiceItemProject = styled(motion.div)`
 export const ServiceItemContent = styled.div`
   position: relative;
   z-index: 2;
+  ${breakpoint.tabletLandscape} {
+    .service-header {
+      text-decoration: underline;
+    }
+  }
 `;
 
 export const ServiceItemProjectInner = styled.div`

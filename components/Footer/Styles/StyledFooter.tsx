@@ -14,6 +14,9 @@ export const StyledFooter = styled.footer`
     margin-top: ${spaces.xxl}px;
     row-gap: ${spaces.xxl}px;
   }
+  ${breakpoint.phone} {
+    margin-bottom: ${spaces.xl}px;
+  }
 `;
 
 export const FooterInner = styled.div`
@@ -50,6 +53,7 @@ export const DetailedContact = styled.div`
     justify-content: end;
   }
   ${breakpoint.phone} {
+    grid-auto-flow: row;
     justify-content: start;
   }
 `;

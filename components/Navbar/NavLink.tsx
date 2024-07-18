@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import isTouchDevice from "../../helpers/isTouchDevice";
 import { CursorContext } from "../Cursor/CursorProvider";
 import {
   NavLinkGif,
@@ -41,10 +42,12 @@ const NavLink = ({ href, children, active, onClick }: NavLinkProps) => {
     <StyledNavLink
       onClick={onClick}
       onMouseEnter={() => {
+        if (isTouchDevice()) return;
         setCursorType("hover");
         sethover(true);
       }}
       onMouseLeave={() => {
+        if (isTouchDevice()) return;
         setCursorType("normal");
         sethover(false);
       }}
@@ -55,6 +58,7 @@ const NavLink = ({ href, children, active, onClick }: NavLinkProps) => {
         <NavLinkGifWI ref={gifRef}>
           <NavLinkGifW
             animate={hover ? "hover" : "initial"}
+            initial='initial'
             variants={{
               initial: {
                 rotate: 0,

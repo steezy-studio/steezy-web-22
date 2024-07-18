@@ -8,6 +8,7 @@ import {
   ElfsightWrapper,
   IgFeed,
   IgFeedImage,
+  IgIconWrapper,
   IgPlaceholder,
   IgPostLink,
   SInstagramFeed,
@@ -67,7 +68,9 @@ const InstagramFeed = ({}: InstagramFeedProps) => {
           target='_blank'
           linkText={
             <>
-              <Instagram as='span' />
+              <IgIconWrapper>
+                <Instagram as='span' />
+              </IgIconWrapper>
               <span>Check Our Profile</span>
             </>
           }

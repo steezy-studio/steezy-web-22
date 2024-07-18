@@ -37,6 +37,11 @@ export const IgPostLink = styled.a`
       display: none;
     }
   }
+  ${breakpoint.phone} {
+    &:nth-child(n + 3) {
+      display: none;
+    }
+  }
 `;
 
 export const ElfsightWrapper = styled.div`
@@ -63,5 +68,11 @@ export const IgPlaceholder = styled.div`
     100% {
       background-color: ${colors.gray100};
     }
+  }
+`;
+
+export const IgIconWrapper = styled.span`
+  ${breakpoint.phone} {
+    display: none;
   }
 `;

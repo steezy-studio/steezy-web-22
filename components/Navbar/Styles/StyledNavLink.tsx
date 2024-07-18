@@ -27,19 +27,22 @@ export const StyledNavLink = styled(motion(Link))`
     font-size: 8vh;
   }
   ${breakpoint.tabletPortrait} {
-    font-size: 4vh;
+    font-size: 7vh;
   }
   ${breakpoint.phone} {
-    font-size: 35px;
+    font-size: 6vh;
   }
   ${breakpoint.miniPhone} {
-    font-size: 26px;
+    font-size: 5vh;
   }
 `;
 
 export const NavLinkInner = styled(motion.div)`
   width: 100%;
   display: flex;
+  ${breakpoint.tabletPortrait} {
+    justify-content: flex-end;
+  }
 `;
 
 export const NavLinkGifW = styled(motion.div)``;

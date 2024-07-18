@@ -32,8 +32,10 @@ export const TextBlock = styled(motion.div)`
     grid-template-columns: 1fr 1fr;
     align-items: end;
   }
-  ${breakpoint.phone} {
+  ${breakpoint.tabletPortrait} {
     grid-template-columns: unset;
+  }
+  ${breakpoint.phone} {
     width: 80%;
     margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
     grid-gap: 20px;
@@ -140,6 +142,9 @@ export const OurStudioSliderImg = styled(Image)`
 
 export const StudioShowreelW = styled.div`
   margin-top: ${spaces.xxxxl}px;
+  ${breakpoint.tabletPortrait} {
+    margin-top: ${spaces.xl}px;
+  }
 `;
 
 export const BrandsSection = styled.section`
@@ -149,6 +154,7 @@ export const BrandsSection = styled.section`
   align-items: start;
   ${breakpoint.tabletPortrait} {
     grid-template-columns: unset;
+    margin-top: ${spaces.xl}px;
     row-gap: ${spaces.l}px;
   }
 `;

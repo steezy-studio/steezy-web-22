@@ -25,7 +25,7 @@ export const Big = styled.h1`
     font-size: 60px;
   }
   ${breakpoint.tabletPortrait} {
-    font-size: 50px;
+    font-size: 40px;
   }
   ${breakpoint.phone} {
     font-size: 40px;

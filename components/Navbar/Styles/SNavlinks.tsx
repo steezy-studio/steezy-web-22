@@ -9,6 +9,7 @@ export const SNavLinks = styled(motion.div)`
   position: fixed;
   inset: 0;
   z-index: 9;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -22,7 +23,6 @@ export const SNavLinks = styled(motion.div)`
   }
   ${breakpoint.tabletPortrait} {
     padding: ${spaces.m}px ${spaces.l}px ${spaces.l}px;
-    align-items: end;
   }
   ${breakpoint.monitor} {
     padding: ${spaces.m}px ${spaces.xxxxxl}px ${spaces.xxxl}px;

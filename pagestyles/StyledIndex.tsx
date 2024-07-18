@@ -12,6 +12,12 @@ export const IndexHeroClaim = styled.div`
   ${breakpoint.smallNotebook} {
     margin: ${spaces.xl}px 0 ${spaces.xxxl}px;
   }
+  ${breakpoint.tabletPortrait} {
+    margin: ${spaces.l}px ${spaces.xxl}px ${spaces.xl}px;
+  }
+  ${breakpoint.phone} {
+    margin: ${spaces.l}px ${spaces.s}px ${spaces.xl}px;
+  }
 `;
 
 export const IndexSliderW = styled.div``;
@@ -69,6 +75,9 @@ export const IndexQuote = styled.div`
 export const IndexQuoteClient = styled.div`
   overflow: hidden;
   margin-bottom: ${spaces.xxxxl}px;
+  ${breakpoint.tabletPortrait} {
+    margin-bottom: ${spaces.xxl}px;
+  }
 `;
 
 export const FeaturedGrid = styled.div`
@@ -76,6 +85,7 @@ export const FeaturedGrid = styled.div`
   row-gap: ${spaces.l}px;
   margin-top: ${spaces.xxxxl}px;
   ${breakpoint.tabletPortrait} {
+    margin-top: ${spaces.xxl}px;
     row-gap: ${spaces.m}px;
   }
 `;

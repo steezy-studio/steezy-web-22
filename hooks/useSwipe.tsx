@@ -1,5 +1,6 @@
 "use client";
 
+import { useLenis } from "lenis/react";
 import { MutableRefObject, useEffect } from "react";
 import isTouchDevice from "../helpers/isTouchDevice";
 
@@ -10,6 +11,7 @@ interface UseSwipeProps {
 }
 
 export function useSwipe({ ref, cb, deps = [] }: UseSwipeProps) {
+  const lenis = useLenis();
   useEffect(() => {
     if (!isTouchDevice()) return;
     let initialX: number | null = null;
@@ -17,7 +19,7 @@ export function useSwipe({ ref, cb, deps = [] }: UseSwipeProps) {
 
     function handleTouchStart(e: TouchEvent) {
       initialX = e.changedTouches[0].clientX;
-      html.style.overflow = "hidden";
+      lenis?.stop();
     }
 
     function handleTouchEnd(e: TouchEvent) {
@@ -27,6 +29,7 @@ export function useSwipe({ ref, cb, deps = [] }: UseSwipeProps) {
       if (swipeAmoumt < 100) return;
       const direction = e.changedTouches[0].clientX - initialX > 0 ? -1 : 1;
       initialX === null;
+      lenis?.start();
       cb(direction);
     }
 
@@ -36,5 +39,5 @@ export function useSwipe({ ref, cb, deps = [] }: UseSwipeProps) {
       ref.current?.removeEventListener("touchend", handleTouchStart);
       ref.current?.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [isTouchDevice, ...deps]);
+  }, [isTouchDevice, lenis, ...deps]);
 }

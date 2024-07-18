@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { device } from "../../helpers/consts";
+import { useWindowSize } from "../../hooks/useWindowSize";
 import { SValuesList } from "./SValuesList";
 import ValueItem from "./ValueItem";
 
@@ -12,9 +14,14 @@ const ValuesList = ({ list }: ValuesListProps) => {
   const valueRef = useRef<HTMLDivElement>(null);
   const [focusedId, setFocusedId] = useState<number>(0);
   const inView = useRef<boolean>(false);
+  const { w } = useWindowSize();
 
   useEffect(() => {
     if (!valueRef.current) return;
+    if (w <= device.tabletPortrait) {
+      setFocusedId(0);
+      return;
+    }
     const handleIntersection = (entries: IntersectionObserverEntry[]) => {
       inView.current = entries.some((entry) => entry.isIntersecting);
       entries.forEach((entry) => {
@@ -33,7 +40,7 @@ const ValuesList = ({ list }: ValuesListProps) => {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [w]);
 
   return (
     <SValuesList ref={valueRef}>

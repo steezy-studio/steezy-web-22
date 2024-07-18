@@ -10,9 +10,12 @@ export const ProductSection = styled.section`
   margin-top: ${spaces.xl}px;
   column-gap: ${spaces.xl}px;
   align-items: start;
-  ${breakpoint.phone} {
+  ${breakpoint.tabletPortrait} {
     flex-direction: column;
+    margin-top: ${spaces.l}px;
     row-gap: ${spaces.xl}px;
+  }
+  ${breakpoint.phone} {
   }
 `;
 

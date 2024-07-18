@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
+import { breakpoint } from "../../../helpers/consts";
 import { spaces } from "../../../helpers/spaces";
 
 export const StyledShowreel = styled.div`
@@ -12,6 +13,10 @@ export const PlayButton = styled.div`
   left: ${spaces.l}px;
   pointer-events: none;
   z-index: 991;
+  ${breakpoint.tabletPortrait} {
+    bottom: ${spaces.s}px;
+    left: ${spaces.m}px;
+  }
 `;
 
 export const ShowreelCover = styled(Image)`

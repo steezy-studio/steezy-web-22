@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { spaces } from "../helpers/spaces";
 import { breakpoint } from "../helpers/consts";
+import { spaces } from "../helpers/spaces";
 
 export const StyledApparel = styled.div`
   margin-top: ${spaces.xl}px;
@@ -12,9 +12,6 @@ export const ProductsGrid = styled.section`
   column-gap: ${spaces.xs}px;
   row-gap: ${spaces.xs}px;
   ${breakpoint.tabletPortrait} {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  ${breakpoint.phone} {
     grid-template-columns: repeat(2, 1fr);
   }
   ${breakpoint.miniPhone} {

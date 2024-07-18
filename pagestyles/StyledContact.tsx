@@ -9,10 +9,15 @@ export const ContactHero = styled.div`
   display: grid;
   margin-top: ${spaces.xxl}px;
   grid-template-columns: 1fr 1fr;
+  grid-template-areas: "ContactDetails ContactCta";
   column-gap: ${spaces.m}px;
-  ${breakpoint.phone} {
+  ${breakpoint.tabletPortrait} {
     grid-template-columns: unset;
-    row-gap: ${spaces.m}px;
+    grid-template-areas: "ContactCta" "ContactDetails";
+    row-gap: ${spaces.xl}px;
+    margin-top: ${spaces.xl}px;
+  }
+  ${breakpoint.phone} {
   }
 `;
 
@@ -27,6 +32,7 @@ export const ContactDetails = styled.div`
   column-gap: ${spaces.xxl}px;
   row-gap: ${spaces.xl}px;
   height: 100%;
+  grid-area: ContactDetails;
   ${breakpoint.tabletLandscape} {
     column-gap: ${spaces.xl}px;
   }
@@ -41,8 +47,9 @@ export const ContactSocials = styled.div`
   column-gap: ${spaces.xs}px;
 `;
 
-export const ContactDetail = styled.div`
+export const ContactCta = styled.div`
   display: grid;
+  grid-area: ContactCta;
   align-content: start;
   max-width: 250px;
   row-gap: ${spaces.m}px;
@@ -53,6 +60,9 @@ export const ContactDetail = styled.div`
 
 export const Founders = styled.section`
   margin-top: ${spaces.xxxl}px;
+  ${breakpoint.tabletPortrait} {
+    margin-top: ${spaces.xxl}px;
+  }
 `;
 
 export const FoundersGrid = styled.div`
@@ -60,6 +70,10 @@ export const FoundersGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   column-gap: ${spaces.xs}px;
   margin-top: ${spaces.l}px;
+  ${breakpoint.tabletPortrait} {
+    grid-template-columns: unset;
+    row-gap: ${spaces.xs}px;
+  }
   ${breakpoint.phone} {
     grid-template-columns: unset;
     row-gap: ${spaces.m}px;

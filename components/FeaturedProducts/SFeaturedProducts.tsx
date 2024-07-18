@@ -10,7 +10,7 @@ export const FeaturedProductsGrid = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: ${spaces.xs}px;
   margin-top: ${spaces.l}px;
-  ${breakpoint.tabletPortrait} {
+  ${breakpoint.custom(750)} {
     grid-template-columns: repeat(2, 1fr);
   }
   ${breakpoint.phone} {

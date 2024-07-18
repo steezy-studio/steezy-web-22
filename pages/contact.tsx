@@ -13,7 +13,7 @@ import { Micro } from "../components/Typo/Micro";
 import strings from "../data/strings";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import {
-  ContactDetail,
+  ContactCta,
   ContactDetails,
   ContactHero,
   ContactSocials,
@@ -43,7 +43,7 @@ const Contact = ({}: ContactProps) => {
       <StyledContact>
         <ContactHero>
           <ContactDetails>
-            <ContactDetail>
+            <ContactCta>
               <Micro className='uppercase'>Brno Office</Micro>
               <Micro className='break-lines'>
                 {`STEEZY, s.r.o.\nObilní trh 4, 602 00 Brno\nCzech Republic\n\nIČ: 07812558\nDIČ (VAT): CZ07812558`}
@@ -52,8 +52,8 @@ const Contact = ({}: ContactProps) => {
                 <Instagram />
                 <Vimeo />
               </ContactSocials>
-            </ContactDetail>
-            <ContactDetail>
+            </ContactCta>
+            <ContactCta>
               <Micro className='uppercase'>Recruiment</Micro>
               <Micro>
                 <span>
@@ -65,10 +65,10 @@ const Contact = ({}: ContactProps) => {
                   hello@steezy.studio
                 </Link>
               </Micro>
-            </ContactDetail>
+            </ContactCta>
           </ContactDetails>
 
-          <ContactDetail className='wide'>
+          <ContactCta className='wide'>
             <Micro>New Business & media</Micro>
             <Large>
               <Link href={"mailto: hello@steezy.studio"}>
@@ -77,7 +77,7 @@ const Contact = ({}: ContactProps) => {
               <br />
               <Link href={"tel: +420728088996"}>(+420) 728 088 996</Link>
             </Large>
-          </ContactDetail>
+          </ContactCta>
         </ContactHero>
         <Founders>
           <SectionHeader header='Get in touch with co-founders' />

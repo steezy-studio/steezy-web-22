@@ -14,7 +14,7 @@ export const ProjectSliderItem = styled.div`
     width: 22vw;
   }
   ${breakpoint.tabletPortrait} {
-    width: 40vw;
+    width: 30vw;
   }
   ${breakpoint.phone} {
     width: 80vw;

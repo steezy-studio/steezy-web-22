@@ -11,6 +11,7 @@ interface MarqueeProps {
   stopOnHover?: boolean;
   speedMultiplier?: number;
   useDragVelocity?: boolean;
+  dragVelocityMultiplier?: number;
   useScrollVelocity?: boolean;
   direction?: "left" | "right";
 }
@@ -20,6 +21,7 @@ const Marquee = ({
   stopOnHover = false,
   speedMultiplier = 1 / 5,
   useDragVelocity,
+  dragVelocityMultiplier = 1,
   useScrollVelocity = true,
   direction = "left",
 }: MarqueeProps) => {
@@ -40,7 +42,7 @@ const Marquee = ({
   const bind = useDrag((state) => {
     if (!useDragVelocity) return;
     if (state.delta[0] === 0) return;
-    swipeVelocity.current = state.delta[0] * 0.3;
+    swipeVelocity.current = state.delta[0] * 0.3 * dragVelocityMultiplier;
   }, {});
 
   useAnimationFrame((t, d) => {
