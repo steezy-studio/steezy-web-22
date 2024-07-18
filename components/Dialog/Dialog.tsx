@@ -1,27 +1,19 @@
 import * as RadixDialog from "@radix-ui/react-dialog";
-import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import {
   Close,
   Content,
   Overlay,
-  OverlayW,
   StyledDialog,
   Trigger,
 } from "./Styles/StyledDialog";
-import { AnimatePresence, motion } from "framer-motion";
 
 interface DialogProps extends RadixDialog.DialogProps {
   content: JSX.Element;
   trigger: JSX.Element;
 }
 
-const Dialog = ({
-  content,
-  trigger,
-  onOpenChange,
-  open,
-  ...rest
-}: DialogProps) => {
+const Dialog = ({ content, trigger, onOpenChange, open }: DialogProps) => {
   return (
     <StyledDialog onOpenChange={onOpenChange}>
       <Trigger>{trigger}</Trigger>

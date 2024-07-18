@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Asset } from "../../generated/preprTypes";
 import RevealAnimation from "../RevealAnimation/RevealAnimation";
+import { RootVideosControllerContext } from "../RootVideosController/RootVideosController";
 import ShowreelVideo from "./ShowreelVideo";
 import { ShowreelCover, StyledShowreel } from "./Styles/StyledShowreel";
 
@@ -10,6 +11,11 @@ interface ShowreelProps {
 
 const Showreel = ({ asset }: ShowreelProps) => {
   const [openDialog, setOpenDialog] = useState(false);
+  const { setPauseAllVideos } = useContext(RootVideosControllerContext);
+
+  useEffect(() => {
+    setPauseAllVideos(openDialog);
+  }, [openDialog]);
 
   return (
     <StyledShowreel>
