@@ -27,6 +27,9 @@ export const ContactDetails = styled.div`
   column-gap: ${spaces.xxl}px;
   row-gap: ${spaces.xl}px;
   height: 100%;
+  ${breakpoint.tabletLandscape} {
+    column-gap: ${spaces.xl}px;
+  }
   ${breakpoint.phone} {
     column-gap: ${spaces.l}px;
   }
@@ -55,7 +58,7 @@ export const Founders = styled.section`
 export const FoundersGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: ${spaces.m}px;
+  column-gap: ${spaces.xs}px;
   margin-top: ${spaces.l}px;
   ${breakpoint.phone} {
     grid-template-columns: unset;

@@ -29,6 +29,9 @@ export const ProductCardInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  ${breakpoint.tabletLandscape} {
+    inset: ${spaces.s}px;
+  }
 `;
 
 export const ProductCardCoverW = styled(motion.div)`

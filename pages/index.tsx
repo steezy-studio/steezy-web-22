@@ -142,7 +142,6 @@ const Index = ({ projects, areas, products }: indexProps) => {
             />
           </RevealAnimation>
         </IndexQuoteClient>
-        {/* <InstagramFeed images={null} /> */}
       </StyledIndex>
     </>
   );

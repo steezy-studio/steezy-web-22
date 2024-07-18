@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
-import { colors } from "../../helpers/consts";
+import { breakpoint, colors } from "../../helpers/consts";
 import { spaces } from "../../helpers/spaces";
 
 export const SInstagramFeed = styled.div`
@@ -32,6 +32,11 @@ export const IgPostLink = styled.a`
   display: block;
   border-radius: 10px;
   overflow: hidden;
+  ${breakpoint.tabletLandscape} {
+    &:nth-child(5) {
+      display: none;
+    }
+  }
 `;
 
 export const ElfsightWrapper = styled.div`

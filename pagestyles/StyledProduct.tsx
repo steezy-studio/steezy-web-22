@@ -48,8 +48,12 @@ export const ProductGalleryImg = styled(Image)`
   width: 100%;
   padding: 0 ${spaces.xxs}px;
   height: 80vh;
+  min-height: 400px;
   object-fit: cover;
   border-radius: ${({ theme }) => theme.bRad};
+  ${breakpoint.tabletLandscape} {
+    height: 50vh;
+  }
 `;
 
 export const ProductFeaturedProducts = styled.section`

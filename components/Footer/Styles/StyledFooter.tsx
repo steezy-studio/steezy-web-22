@@ -42,9 +42,11 @@ export const DetailedContact = styled.div`
   grid-auto-columns: auto;
   justify-content: start;
   align-items: center;
-  grid-gap: 60px;
+  grid-gap: ${spaces.xl}px;
+  ${breakpoint.tabletLandscape} {
+    grid-gap: ${spaces.l}px;
+  }
   ${breakpoint.tabletPortrait} {
-    grid-gap: 30px;
     justify-content: end;
   }
   ${breakpoint.phone} {
