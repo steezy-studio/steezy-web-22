@@ -24,13 +24,9 @@ const ShowreelVideo = ({ src, open, onOpenChange }: ShowreelProps) => {
       <Dialog
         open={open}
         onOpenChange={onOpenChange}
+        title='Showreel'
         content={
-          <Showreel
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 3 }}
-          >
+          <Showreel>
             <Vimeo autoplay video={"927412733"} responsive />
           </Showreel>
         }

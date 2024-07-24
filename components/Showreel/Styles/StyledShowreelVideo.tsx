@@ -26,12 +26,8 @@ export const Loop = styled(motion.video)`
   }
 `;
 
-export const Showreel = styled(motion.div)`
-  position: relative;
-  width: 80vw;
+export const Showreel = styled.div`
+  width: calc(100vw - 2 * var(--page-side-padding));
   aspect-ratio: 16 / 9;
-  max-height: 80vh;
-  ${breakpoint.phone} {
-    width: ${({ theme }) => `calc(100vw - ${theme.pageMargin} * 2)`};
-  }
+  background-color: black;
 `;

@@ -22,7 +22,7 @@
   "homepage": "https://github.com/dominik2323/steezy-web-22#readme",
   "dependencies": {
     "@apollo/client": "^3.9.9",
-    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-select": "^2.0.0",
     "@shopify/hydrogen-react": "^2024.1.1",
