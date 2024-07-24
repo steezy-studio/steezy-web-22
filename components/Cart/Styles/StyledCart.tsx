@@ -79,6 +79,7 @@ export const CartContent = styled.div`
 export const EmptyCart = styled.div`
   display: grid;
   row-gap: ${spaces.m}px;
+  justify-items: start;
 `;
 
 export const CartFooter = styled.div``;
