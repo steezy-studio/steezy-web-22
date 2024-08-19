@@ -20,7 +20,9 @@ const Gallery = ({ children }: GalleryProps) => {
     >
       <Marquee
         useDragVelocity
-        dragVelocityMultiplier={isTouchDevice ? 1.5 : 1}
+        scrollVelocityMultiplier={0.4}
+        useScrollVelocity={isTouchDevice ? false : true}
+        dragVelocityMultiplier={isTouchDevice ? 2.5 : 1}
         speedMultiplier={isTouchDevice ? 0 : 0.1}
         stopOnHover
       >

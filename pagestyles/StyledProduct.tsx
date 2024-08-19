@@ -48,11 +48,10 @@ export const ProductText = styled.div`
 
 export const ProductGalleryImg = styled(Image)`
   display: block;
-  width: 100%;
+  width: auto;
   padding: 0 ${spaces.xxs}px;
-  height: 80vh;
-  min-height: 400px;
-  object-fit: cover;
+  height: 600px;
+  object-fit: contain;
   border-radius: ${({ theme }) => theme.bRad};
   ${breakpoint.tabletLandscape} {
     height: 50vh;
