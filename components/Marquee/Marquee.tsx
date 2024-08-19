@@ -13,6 +13,7 @@ interface MarqueeProps {
   useDragVelocity?: boolean;
   dragVelocityMultiplier?: number;
   useScrollVelocity?: boolean;
+  scrollVelocityMultiplier?: number;
   direction?: "left" | "right";
 }
 
@@ -23,6 +24,7 @@ const Marquee = ({
   useDragVelocity,
   dragVelocityMultiplier = 1,
   useScrollVelocity = true,
+  scrollVelocityMultiplier = 1,
   direction = "left",
 }: MarqueeProps) => {
   const innerRef = useRef<HTMLDivElement>(null);
@@ -35,22 +37,34 @@ const Marquee = ({
   const velocity = useRef<number>(fixedSpeed * speedMultiplier);
   const friction = useRef<number>(0);
   const inView = useRef<boolean>(false);
+  const hasDragged = useRef<boolean>(false);
 
   const baseX = useMotionValue(0);
   const lenis = useLenis();
 
-  const bind = useDrag((state) => {
-    if (!useDragVelocity) return;
-    if (state.delta[0] === 0) return;
-    swipeVelocity.current = state.delta[0] * 0.3 * dragVelocityMultiplier;
-  }, {});
+  const bind = useDrag(
+    (state) => {
+      if (state.dragging) {
+        lenis.stop();
+      } else {
+        lenis.start();
+      }
+      if (!useDragVelocity) return;
+      if (state.delta[0] === 0) return;
+      swipeVelocity.current =
+        -1 * state.delta[0] * 0.3 * dragVelocityMultiplier;
+    },
+    { filterTaps: true }
+  );
 
   useAnimationFrame((t, d) => {
     if (!innerRef.current) return;
     if (!inView.current) return;
     const innerWidth = innerRef.current.clientWidth;
     // flip velocity, directions matches the scroll direction
-    const scrollVelocity = useScrollVelocity ? -1 * dir * lenis?.velocity! : 0;
+    const scrollVelocity = useScrollVelocity
+      ? -1 * dir * scrollVelocityMultiplier * lenis?.velocity!
+      : 0;
 
     if (hover.current) {
       friction.current -= 0.05;
@@ -107,10 +121,15 @@ const Marquee = ({
 
   const clonedChildren = Array(multiplier).fill(children).flat();
 
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    swipeVelocity.current = 0;
+  };
+
   return (
     <SMarquee
       ref={ref}
       {...bind()}
+      onClick={handleClick}
       className={useDragVelocity ? "draggable" : ""}
       onMouseEnter={() => {
         if (stopOnHover) {

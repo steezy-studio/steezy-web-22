@@ -5,7 +5,7 @@ import styled from "styled-components";
 export const SMarquee = styled.div`
   overflow: hidden;
   width: 100%;
-  touch-action: none;
+  touch-action: cross-slide-y;
   &.draggable {
     cursor: grab;
     user-select: none;
