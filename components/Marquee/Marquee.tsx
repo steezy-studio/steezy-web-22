@@ -44,6 +44,8 @@ const Marquee = ({
 
   const bind = useDrag(
     (state) => {
+      const isScrolling = Math.abs(state.delta[0]) < Math.abs(state.delta[1]);
+      if (isScrolling) return;
       if (state.dragging) {
         lenis.stop();
       } else {
