@@ -4,6 +4,7 @@ import { useDrag } from "@use-gesture/react";
 import { useAnimationFrame, useMotionValue } from "framer-motion";
 import { useLenis } from "lenis/react";
 import { ReactNode, useEffect, useRef, useState } from "react";
+import isTouchDevice from "../../helpers/isTouchDevice";
 import { MarqueeBlock, MarqueeInner, MarqueeItem, SMarquee } from "./SMarquee";
 
 interface MarqueeProps {
@@ -13,6 +14,7 @@ interface MarqueeProps {
   useDragVelocity?: boolean;
   dragVelocityMultiplier?: number;
   useScrollVelocity?: boolean;
+  useClickVelocity?: boolean;
   scrollVelocityMultiplier?: number;
   direction?: "left" | "right";
 }
@@ -25,6 +27,7 @@ const Marquee = ({
   dragVelocityMultiplier = 1,
   useScrollVelocity = true,
   scrollVelocityMultiplier = 1,
+  useClickVelocity = true,
   direction = "left",
 }: MarqueeProps) => {
   const innerRef = useRef<HTMLDivElement>(null);
@@ -37,7 +40,6 @@ const Marquee = ({
   const velocity = useRef<number>(fixedSpeed * speedMultiplier);
   const friction = useRef<number>(0);
   const inView = useRef<boolean>(false);
-  const hasDragged = useRef<boolean>(false);
 
   const baseX = useMotionValue(0);
   const lenis = useLenis();
@@ -124,7 +126,18 @@ const Marquee = ({
   const clonedChildren = Array(multiplier).fill(children).flat();
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    swipeVelocity.current = 0;
+    if (isTouchDevice()) {
+      swipeVelocity.current = 0;
+      return;
+    }
+    if (!useClickVelocity) return;
+    const parentBB = ref.current?.getBoundingClientRect();
+    if (e.clientX - parentBB?.left > ref.current?.clientWidth / 2) {
+      // right
+      swipeVelocity.current += 10;
+    } else {
+      swipeVelocity.current += -10;
+    }
   };
 
   return (
