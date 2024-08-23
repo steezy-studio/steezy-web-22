@@ -16,19 +16,19 @@ export const GET_PROJECTS = gql`
           url
         }
       }
-      landingpage_grid_image {
-        url(format: "webp")
-        _type
-        description
-        width
-        height
-        cdn_files {
-          _id
-          _type
-          profile
-          url
-        }
-      }
+      # landingpage_grid_image {
+      #   url(format: "webp")
+      #   _type
+      #   description
+      #   width
+      #   height
+      #   cdn_files {
+      #     _id
+      #     _type
+      #     profile
+      #     url
+      #   }
+      # }
       project_grid_name
     }
   }

@@ -1,5 +1,4 @@
 import NextHead from "next/head";
-import React from "react";
 import { colors } from "../../helpers/consts";
 
 interface Props {
