@@ -12,8 +12,16 @@ export const GET_PROJECT = gql`
       company_name
       grid_image {
         url(format: "webp")
+        width
+        height
         description
         _type
+        cdn_files {
+          _id
+          _type
+          profile
+          url
+        }
       }
       hero_image {
         url(format: "webp")

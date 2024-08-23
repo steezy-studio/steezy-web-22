@@ -71,7 +71,7 @@ const Project = ({ projectData }: ProjectProps) => {
             <ProjectCard
               projectName={project.project_detail_name}
               areas={project.areas}
-              cover={project.hero_image}
+              cover={project.grid_image}
               videoThumb={project.grid_image[0].cover}
               wide={true}
               _static
@@ -153,7 +153,7 @@ const Project = ({ projectData }: ProjectProps) => {
                     className={`blockquote ${row.alignment ? "reverse" : ""}`}
                   >
                     <ProjectGridBlockquote>
-                      <Small className='bold' as={"p"}>
+                      <Small className='bold' as={"span"}>
                         {HTMLReactParser(row.blockquote_text, {
                           replace(domNode) {
                             if (domNode instanceof Element && domNode.attribs) {
