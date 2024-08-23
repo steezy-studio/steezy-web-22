@@ -13,6 +13,9 @@ export const StyledHuman = styled.div`
   ${breakpoint.phone} {
     aspect-ratio: 1;
   }
+  ${breakpoint.monitor} {
+    aspect-ratio: 1.4;
+  }
 `;
 
 export const HumanCover = styled(Image)`
