@@ -356,24 +356,28 @@ const data = {
       link: "/projects/all-projects",
       activePaths: ["/project"],
       iconName: "w95_projects.png",
+      cover: "/images/navlink-projects-cover.webp",
     },
     {
       name: "studio",
       link: "/studio",
       activePaths: [],
       iconName: "w95_studio.png",
+      cover: "/images/studio/studio_1.jpg",
     },
     {
       name: "steezy apparel",
       link: "/apparel",
       activePaths: [],
       iconName: "w95_apparel.png",
+      cover: "/images/navlink-apparel-cover.webp",
     },
     {
       name: "get in touch",
       link: "/contact",
       activePaths: [],
       iconName: "w95_contacts.png",
+      cover: "/images/contact-hero.jpg",
     },
   ],
 };

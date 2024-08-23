@@ -40,6 +40,7 @@ export const StyledNavLink = styled(motion(Link))`
 export const NavLinkInner = styled(motion.div)`
   width: 100%;
   display: flex;
+  /* overflow: hidden; */
   ${breakpoint.tabletPortrait} {
     justify-content: flex-end;
   }
@@ -49,6 +50,8 @@ export const NavLinkGifW = styled(motion.div)``;
 
 export const NavLinkGifWI = styled.div`
   position: absolute;
+  top: -100px;
+  left: -100px;
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 1;
@@ -57,6 +60,7 @@ export const NavLinkGifWI = styled.div`
 export const NavLinkGif = styled(Image)`
   display: block;
   object-fit: cover;
+  border-radius: ${({ theme }) => theme.bRad};
 `;
 
 export const NavlinkChildrenW = styled.span`

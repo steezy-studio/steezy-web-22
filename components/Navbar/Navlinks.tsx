@@ -72,30 +72,32 @@ const Navlinks = ({}: NavlinksProps) => {
             </VegaW>
           )}
         </AnimatePresence>
-        {strings.navData.map(({ link, name, iconName, activePaths }, i) => {
-          const isActive =
-            router.asPath.includes(link) ||
-            activePaths.some((path) => router.asPath.includes(path));
-          const delay = (i + 1) * navLinksDelay;
+        {strings.navData.map(
+          ({ link, name, iconName, activePaths, cover }, i) => {
+            const isActive =
+              router.asPath.includes(link) ||
+              activePaths.some((path) => router.asPath.includes(path));
+            const delay = (i + 1) * navLinksDelay;
 
-          return (
-            <motion.div
-              variants={{
-                initial: { opacity: 0 },
-                animate: { opacity: 1 },
-                exit: { opacity: 0 },
-              }}
-              transition={{ delay: delay }}
-              key={i}
-            >
-              {i === 0 && <Divider />}
-              <NavLink active={isActive} href={link}>
-                {name}
-              </NavLink>
-              <Divider />
-            </motion.div>
-          );
-        })}
+            return (
+              <motion.div
+                variants={{
+                  initial: { opacity: 0 },
+                  animate: { opacity: 1 },
+                  exit: { opacity: 0 },
+                }}
+                transition={{ delay: delay }}
+                key={i}
+              >
+                {i === 0 && <Divider />}
+                <NavLink active={isActive} href={link} cover={cover}>
+                  {name}
+                </NavLink>
+                <Divider />
+              </motion.div>
+            );
+          }
+        )}
       </SNavLinks>
     </>
   );

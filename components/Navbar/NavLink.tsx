@@ -14,10 +14,11 @@ interface NavLinkProps {
   href: string;
   children: string;
   active: boolean;
+  cover?: string;
   onClick?: () => void;
 }
 
-const NavLink = ({ href, children, active, onClick }: NavLinkProps) => {
+const NavLink = ({ href, children, active, cover, onClick }: NavLinkProps) => {
   const { setCursorType } = useContext(CursorContext);
   const ref = useRef<HTMLDivElement>(null);
   const gifRef = useRef<HTMLDivElement>(null);
@@ -55,32 +56,29 @@ const NavLink = ({ href, children, active, onClick }: NavLinkProps) => {
       href={href}
     >
       <NavLinkInner ref={ref}>
-        <NavLinkGifWI ref={gifRef}>
-          <NavLinkGifW
-            animate={hover ? "hover" : "initial"}
-            initial='initial'
-            variants={{
-              initial: {
-                rotate: 0,
-                scale: 0,
-                opacity: 0,
-              },
-              hover: {
-                rotate: (Math.random() < 0.5 ? 1 : -1) * 30,
-                scale: 1,
-                opacity: 1,
-              },
-            }}
-            transition={{ duration: 0.2 }}
-          >
-            <NavLinkGif
-              src={"/images/studio/studio_1.jpg"}
-              width={200}
-              height={200}
-              alt={children}
-            />
-          </NavLinkGifW>
-        </NavLinkGifWI>
+        {cover && (
+          <NavLinkGifWI ref={gifRef}>
+            <NavLinkGifW
+              animate={hover ? "hover" : "initial"}
+              initial='initial'
+              variants={{
+                initial: {
+                  rotate: 0,
+                  scale: 0,
+                  opacity: 0,
+                },
+                hover: {
+                  rotate: (Math.random() < 0.5 ? 1 : -1) * 20,
+                  scale: 1,
+                  opacity: 1,
+                },
+              }}
+              transition={{ duration: 0.2 }}
+            >
+              <NavLinkGif src={cover} width={200} height={200} alt={children} />
+            </NavLinkGifW>
+          </NavLinkGifWI>
+        )}
         <NavlinkChildrenW>{children}</NavlinkChildrenW>
       </NavLinkInner>
     </StyledNavLink>
