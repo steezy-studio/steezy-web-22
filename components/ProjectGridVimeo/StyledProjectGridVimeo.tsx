@@ -9,6 +9,8 @@ export const StyledProjectGridVimeo = styled(motion.div)`
 export const VimeoWrapper = styled(Vimeo)`
   width: 100%;
   height: 100%;
+  overflow: hidden;
+  border-radius: ${({ theme }) => theme.bRad};
 `;
 export const Overlay = styled.div`
   position: absolute;
