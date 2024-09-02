@@ -74,7 +74,7 @@ const InstagramFeed = ({}: InstagramFeedProps) => {
               <span>Check Our Profile</span>
             </>
           }
-          url='https://www.instagram.com/steezystudio/'
+          url='https://www.instagram.com/steezy.studio/'
         />
         <ElfsightWrapper ref={ref} tabIndex={-1}>
           <ElfsightWidget widgetId={"c9d65060-5ea8-42e4-b4bb-de098da0b587"} />
