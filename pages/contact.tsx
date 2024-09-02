@@ -57,7 +57,7 @@ const Contact = ({}: ContactProps) => {
             </ContactCta>
             <ContactCta>
               <Micro className='uppercase' as={"h2"}>
-                Recruiment
+                Recruitment
               </Micro>
               <Micro>
                 <span>
