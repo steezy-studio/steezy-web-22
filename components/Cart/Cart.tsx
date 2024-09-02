@@ -77,7 +77,9 @@ const Cart = ({}: CartProps) => {
           <CartContent>
             {lines.length === 0 ? (
               <EmptyCart>
-                <Large>Your cart is empty, like our souls</Large>
+                <Large>
+                  Your cart is empty. Just add some style with ease!
+                </Large>
                 <Link href={"/products"} onClick={() => setShowCart(false)}>
                   Go fill it up
                 </Link>
