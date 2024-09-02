@@ -104,7 +104,8 @@ const product = ({
                 {product.availableForSale && (
                   <div>
                     <Small as={"span"}>Tax included</Small>
-                    <Small as={"span"}>Shipping only in Czechia</Small>
+                    <br />
+                    <Small as={"span"}>Shipping worldwide</Small>
                   </div>
                 )}
               </ProductText>
