@@ -118,7 +118,7 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
           <ValuesList list={studioStrings.values.list} />
           <ValuesCoverW>
             <ValuesCover
-              src={"/images/studio/studio_3.jpg"}
+              src={"/images/studio_bullets.jpg"}
               width={1126}
               height={1437}
               alt='studio values'
