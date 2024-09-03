@@ -6,6 +6,7 @@ import {
 import { GetStaticProps } from "next";
 import { useContext, useEffect } from "react";
 import getClient from "../apollo/client";
+import { Query } from "../cms";
 import AutoSlider from "../components/AutoSlider/AutoSlider";
 import ClientQuote from "../components/ClientQuote/ClientQuote";
 import FeaturedProducts from "../components/FeaturedProducts/FeaturedProducts";
@@ -19,7 +20,7 @@ import Showreel from "../components/Showreel/Showreel";
 import { Big } from "../components/Typo/Big";
 import { Small } from "../components/Typo/Small";
 import strings from "../data/strings";
-import { Areas, Query } from "../generated/preprTypes";
+import { Areas } from "../generated/preprTypes";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
 import { GET_PRODUCTS } from "../graphql/GetProducts";
 import { device, indetifiers } from "../helpers/consts";
@@ -168,13 +169,13 @@ export const getStaticProps: GetStaticProps = async () => {
   });
 
   const {
-    data: { Projects: projects, Areas: areas },
+    data: { Areas: areas, Area: area },
   } = await preprClient.query<Query>({
     query: GET_LANDINGPAGE,
     variables: { sortLatestProjects: "changed_on_DESC" },
   });
 
-  const projectsGrid = enhanceProjects(projects.items, areas);
+  const projectsGrid = enhanceProjects(area.projects, areas);
 
   return {
     props: {

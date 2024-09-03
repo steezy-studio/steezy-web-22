@@ -7,6 +7,7 @@ import HTMLReactParser, {
 import { GetStaticPaths, GetStaticPropsContext } from "next";
 import { useContext, useEffect } from "react";
 import getClient from "../../apollo/client";
+import { Query } from "../../cms";
 import ClientQuote from "../../components/ClientQuote/ClientQuote";
 import Head from "../../components/Head/Head";
 import Link from "../../components/Link/Link";
@@ -19,7 +20,7 @@ import { Large } from "../../components/Typo/Large";
 import { Nano } from "../../components/Typo/Nano";
 import { Small } from "../../components/Typo/Small";
 import Video from "../../components/Video/Video";
-import { Query, QuerySimilar_ProjectsArgs } from "../../generated/preprTypes";
+import { QuerySimilar_ProjectsArgs } from "../../generated/preprTypes";
 import { GET_PROJECT } from "../../graphql/GetProject";
 import { GET_SIMILAR_PROJECTS } from "../../graphql/GetSimilarProjects";
 import {

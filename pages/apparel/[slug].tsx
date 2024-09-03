@@ -10,6 +10,7 @@ import {
 import { GetStaticPaths, GetStaticProps } from "next";
 import { Fragment, useContext, useEffect, useState } from "react";
 import getClient from "../../apollo/client";
+import { Query } from "../../cms";
 import FeaturedProducts from "../../components/FeaturedProducts/FeaturedProducts";
 import Gallery from "../../components/Gallery/Gallery";
 import Head from "../../components/Head/Head";
@@ -23,7 +24,7 @@ import { Large } from "../../components/Typo/Large";
 import { Medium } from "../../components/Typo/Medium";
 import { Small } from "../../components/Typo/Small";
 import Video from "../../components/Video/Video";
-import { Areas, Query, QueryProjectsArgs } from "../../generated/preprTypes";
+import { Areas, QueryProjectsArgs } from "../../generated/preprTypes";
 import { GET_ALL_AREAS } from "../../graphql/GetAllAreas";
 import { GET_PROJECTS } from "../../graphql/GetAllProjects";
 import { GET_PRODUCT } from "../../graphql/GetProduct";

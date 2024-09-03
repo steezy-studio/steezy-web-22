@@ -33,7 +33,7 @@ const ProjectsSlider = ({ projects, ...rest }: ProjectsSliderProps) => {
             navigationWidth={0.2}
           >
             {projects.map(
-              ({ project_grid_name, areas, _slug, grid_image }, i) => {
+              ({ project_grid_name, areas, _slug, grid_image_portrait }, i) => {
                 return (
                   <ProjectSliderItem key={i}>
                     <GridItem
@@ -41,7 +41,7 @@ const ProjectsSlider = ({ projects, ...rest }: ProjectsSliderProps) => {
                       wide={false}
                       projectName={project_grid_name}
                       slug={_slug}
-                      cover={grid_image}
+                      cover={grid_image_portrait}
                     />
                   </ProjectSliderItem>
                 );

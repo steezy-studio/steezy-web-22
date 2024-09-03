@@ -6,9 +6,9 @@ export const GET_PROJECTS = gql`
     items {
       _id
       _slug
-      grid_image {
+      grid_image_portrait: grid_image {
         _type
-        url(format: "webp")
+        url(format: "webp", preset: "9:16")
         width
         height
         description
@@ -16,19 +16,16 @@ export const GET_PROJECTS = gql`
           url
         }
       }
-      # landingpage_grid_image {
-      #   url(format: "webp")
-      #   _type
-      #   description
-      #   width
-      #   height
-      #   cdn_files {
-      #     _id
-      #     _type
-      #     profile
-      #     url
-      #   }
-      # }
+      grid_image {
+        _type
+        url(format: "webp", preset: "16:9")
+        width
+        height
+        description
+        cdn_files {
+          url
+        }
+      }
       project_grid_name
     }
   }

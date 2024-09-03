@@ -11,7 +11,7 @@ export const GET_PROJECT = gql`
       _id
       company_name
       grid_image {
-        url(format: "webp")
+        url(format: "webp", preset: "16:9")
         width
         height
         description

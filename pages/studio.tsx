@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next";
 import { useContext, useEffect } from "react";
 import getClient from "../apollo/client";
-import { CursorContext } from "../components/Cursor/CursorProvider";
+import { Query } from "../cms";
 import Gallery from "../components/Gallery/Gallery";
 import Head from "../components/Head/Head";
 import HeaderLine from "../components/HeaderLine/HeaderLine";
@@ -16,7 +16,7 @@ import { Micro } from "../components/Typo/Micro";
 import { Small } from "../components/Typo/Small";
 import ValuesList from "../components/ValueItem/ValuesList";
 import strings from "../data/strings";
-import { Areas, Query } from "../generated/preprTypes";
+import { Areas } from "../generated/preprTypes";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import { GET_LATEST_PROJECTS } from "../graphql/GetLatestProjects";
 import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
@@ -49,7 +49,6 @@ interface StudioProps {
 
 const Studio = ({ areas, latestProjects }: StudioProps) => {
   const studioStrings = strings.studioPage;
-  const { setCursorType } = useContext(CursorContext);
   const { setNavbarHeader } = useContext(NavbarContext);
   useEffect(() => {
     setNavbarHeader(studioStrings.navbar.header);

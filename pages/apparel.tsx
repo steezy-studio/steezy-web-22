@@ -1,12 +1,13 @@
 import { GetStaticProps } from "next";
 import { useContext, useEffect } from "react";
 import getClient from "../apollo/client";
+import { Query } from "../cms";
 import Head from "../components/Head/Head";
 import { NavbarContext } from "../components/Navbar/NavbarControls";
 import ProductCard from "../components/ProductCard/ProductCard";
 import ProjectsSlider from "../components/ProjectsSlider/ProjectsSlider";
 import { Medium } from "../components/Typo/Medium";
-import { Query, QueryProjectsArgs } from "../generated/preprTypes";
+import { QueryProjectsArgs } from "../generated/preprTypes";
 import {
   MediaImage,
   ProductConnection,
