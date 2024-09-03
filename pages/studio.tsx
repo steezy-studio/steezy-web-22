@@ -96,17 +96,21 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
 
         <OurStudio>
           <Gallery>
-            {studioStrings.slider.map((img, i) => (
-              <OurStudioSliderImg
-                draggable={false}
-                priority
-                key={i}
-                src={`/images/studio/${img.src}`}
-                width={img.height}
-                height={img.width}
-                alt='studio'
-              />
-            ))}
+            {studioStrings.slider.map((img, i) => {
+              // Hide ex gf to keep my sanity during development
+              if (!img.wsf && process.env.NODE_ENV === "development") return;
+              return (
+                <OurStudioSliderImg
+                  draggable={false}
+                  priority
+                  key={i}
+                  src={`/images/crew/${img.src}`}
+                  width={img.height}
+                  height={img.width}
+                  alt='studio'
+                />
+              );
+            })}
           </Gallery>
         </OurStudio>
 
