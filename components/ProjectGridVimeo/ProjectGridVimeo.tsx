@@ -22,7 +22,6 @@ const ProjectGridVimeo = ({ vimeoId }: ProjectGridVimeoProps) => {
     (entries) => {
       entries.forEach((entry) => {
         if (!isPaused) {
-          console.log(!entry.isIntersecting);
           setIsPaused(!entry.isIntersecting);
         }
       });

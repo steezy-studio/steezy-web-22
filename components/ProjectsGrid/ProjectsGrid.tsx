@@ -45,11 +45,6 @@ const ProjectsGrid = ({
               <GridRow key={j}>
                 {row.map((project, i) => {
                   const isWide = (i + j) % 2 === 0;
-                  console.log(
-                    project._slug,
-                    project.grid_image_portrait,
-                    project.grid_image
-                  );
                   return (
                     <RevealAnimation key={project._slug} delay={i * 0.3}>
                       <GridItem
