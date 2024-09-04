@@ -106,7 +106,7 @@ const Contact = ({}: ContactProps) => {
               index={1}
               name={"Tomáš Carda"}
               position={"Co-founder & Art director"}
-              roles={"Campagns, video, motion design "}
+              roles={"Campaigns, video, motion design "}
               email={"tomas.carda@steezy.studio"}
               cover={{
                 url: "/images/tomas-carda.jpg",

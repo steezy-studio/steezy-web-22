@@ -67,7 +67,7 @@ const Studio = ({ areas, latestProjects }: StudioProps) => {
         <StudioHero>
           <Large>
             We're creative house building strong visual identities and
-            strategies behind inspiring brands.
+            communication strategies behind inspiring brands.
           </Large>
         </StudioHero>
         <StudioLatestProjects>
