@@ -95,10 +95,10 @@ const Contact = ({}: ContactProps) => {
               roles={"Branding, webdesign, spatial design"}
               email={"jakub.maca@steezy.studio"}
               cover={{
-                url: "/images/jakub-maca.jpg",
+                url: "/images/jakub.webp",
                 alt: "Jakub Maca",
-                width: 1058,
-                heihgt: 896,
+                width: 1920,
+                heihgt: 1440,
               }}
               phone='(+420) 728 088 996'
             />
@@ -109,10 +109,10 @@ const Contact = ({}: ContactProps) => {
               roles={"Campaigns, video, motion design "}
               email={"tomas.carda@steezy.studio"}
               cover={{
-                url: "/images/tomas-carda.jpg",
+                url: "/images/tomas.webp",
                 alt: "Tomáš Carda",
-                width: 1058,
-                heihgt: 896,
+                width: 1920,
+                heihgt: 1440,
               }}
               phone='(+420) 728 088 996'
             />
