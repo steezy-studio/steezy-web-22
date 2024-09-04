@@ -11,6 +11,21 @@ export const FRAGMENT_GET_ALL_AREAS = gql`
       is_default
       projects {
         _id
+        project_grid_name
+        _slug
+        grid_image_portrait: grid_image {
+          width
+          url(format: "webp")
+          height
+          description
+          _id
+          cdn_files {
+            _id
+            _type
+            profile
+            url
+          }
+        }
         grid_image {
           width
           url(format: "webp")

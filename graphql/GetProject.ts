@@ -9,6 +9,7 @@ export const GET_PROJECT = gql`
     }
     Project(slug: $slug) {
       _id
+      _slug
       company_name
       grid_image {
         url(format: "webp", preset: "16:9")

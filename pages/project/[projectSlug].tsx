@@ -20,9 +20,9 @@ import { Large } from "../../components/Typo/Large";
 import { Nano } from "../../components/Typo/Nano";
 import { Small } from "../../components/Typo/Small";
 import Video from "../../components/Video/Video";
-import { QuerySimilar_ProjectsArgs } from "../../generated/preprTypes";
+import { QueryAreasArgs } from "../../generated/preprTypes";
+import { GET_ALL_AREAS } from "../../graphql/GetAllAreas";
 import { GET_PROJECT } from "../../graphql/GetProject";
-import { GET_SIMILAR_PROJECTS } from "../../graphql/GetSimilarProjects";
 import {
   EnhancedProject,
   enhanceProjects,
@@ -216,19 +216,30 @@ export const getStaticProps = async ({
     query: GET_PROJECT,
     variables: { slug: params.projectSlug },
   });
+  const enhancedProject = enhanceProjects([project], areas);
+
   const {
-    data: { Similar_Projects: similar_projects },
+    data: { Areas: _similar_projects },
   } = await client.query<Query>({
-    query: GET_SIMILAR_PROJECTS,
-    variables: { id: project._id, limit: 10 } as QuerySimilar_ProjectsArgs,
+    query: GET_ALL_AREAS,
+    variables: {
+      where: { _slug_any: enhancedProject[0].areas.map((x) => x._slug) },
+      limit: 10,
+    } as QueryAreasArgs,
   });
+
+  const similar_projects = _similar_projects.items
+    .map((x) => x.projects)
+    .flat()
+    .slice(0, 10)
+    .filter((x) => x._slug !== enhancedProject[0]._slug);
 
   return {
     props: {
       areas: areas,
       projectData: {
         project: enhanceProjects([project], areas),
-        similar_projects: enhanceProjects(similar_projects.items, areas),
+        similar_projects: enhanceProjects(similar_projects, areas),
       },
     },
     revalidate: Number(process.env.REVALIDATE),

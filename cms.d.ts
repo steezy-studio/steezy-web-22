@@ -1,4 +1,6 @@
 import {
+  Area as BaseArea,
+  Areas as BaseAreas,
   FeaturedGrid as BaseFeaturedGrid,
   Project as BaseProject,
   Projects as BaseProjects,
@@ -13,8 +15,12 @@ export type Projects = Omit<BaseProjects, "items"> & {
   items: Project[];
 };
 
-export type Area = Omit<BaseProject, "projects"> & {
+export type Area = Omit<BaseArea, "projects"> & {
   projects: Project[];
+};
+
+export type Areas = Omit<BaseAreas, "items"> & {
+  items: Area[];
 };
 
 export type FeturedGrid = Omit<BaseFeaturedGrid, "featured_projects"> & {
@@ -23,9 +29,10 @@ export type FeturedGrid = Omit<BaseFeaturedGrid, "featured_projects"> & {
 
 export type Query = Omit<
   BaseQuery,
-  "Projects" | "Project" | "Similar_Projects" | "Area"
+  "Projects" | "Project" | "Similar_Projects" | "Area" | "Areas"
 > & {
   Area: Area;
+  Areas: Areas;
   Projects: Projects;
   Project: Project;
   Similar_Projects: Projects;
