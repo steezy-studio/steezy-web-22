@@ -8,18 +8,27 @@ export const GET_PROJECT = gql`
       ...FragmentGetAreas
     }
     Project(slug: $slug) {
+      _id
+      _slug
       company_name
       grid_image {
-        url(format: "webp")
-        description
-        _type
-      }
-      hero_image {
-        url(format: "webp")
+        url(format: "webp", preset: "16:9")
         width
         height
         description
         _type
+        cover
+        cdn_files {
+          _id
+          _type
+          profile
+          url
+        }
+      }
+      hero_image {
+        url(format: "jpg")
+        width
+        height
       }
       project_detail_name
       client_name
@@ -42,24 +51,24 @@ export const GET_PROJECT = gql`
       next_project {
         _id
         _slug
-        landingpage_grid_image {
-          url(format: "webp")
-          _type
-          description
-          width
-          height
-          cdn_files {
-            _id
-            _type
-            profile
-            url
-          }
-        }
-        hero_image {
-          url
-          width
-          height
-        }
+        # landingpage_grid_image {
+        #   url(format: "webp")
+        #   _type
+        #   description
+        #   width
+        #   height
+        #   cdn_files {
+        #     _id
+        #     _type
+        #     profile
+        #     url
+        #   }
+        # }
+        # hero_image {
+        #   url
+        #   width
+        #   height
+        # }
         project_grid_name
       }
       project_description

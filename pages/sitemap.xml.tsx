@@ -1,9 +1,12 @@
 import fs from "fs";
 import { GetServerSideProps } from "next";
-import client from "../apollo/client";
-import { Query } from "../generated/types";
+import getClient from "../apollo/client";
+import { Query } from "../generated/preprTypes";
+import { QueryRoot } from "../generated/shopifyTypes";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import { GET_PROJECTS } from "../graphql/GetAllProjects";
+import { GET_PRODUCTS } from "../graphql/GetProducts";
+import { indetifiers } from "../helpers/consts";
 
 const Sitemap = () => {};
 
@@ -13,19 +16,41 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const siteUrl = "https://steezy.studio";
 
+  const client = getClient();
+  const shopifyClient = getClient("shopify");
+
   const projectAreas = client.query<Query>({ query: GET_ALL_AREAS });
+
   const projects = client.query<Query>({
     query: GET_PROJECTS,
     variables: { limit: null },
   });
+
+  const products = shopifyClient.query<QueryRoot>({
+    query: GET_PRODUCTS,
+    variables: {
+      first: 99,
+      variantsFirst2: 99,
+      imagesFirst2: 99,
+      identifiers: indetifiers,
+    },
+  });
+
   const timestamp = new Date().toISOString();
 
-  const [projectAreasData, projectsData] = await Promise.all([
+  const [projectAreasData, projectsData, productsData] = await Promise.all([
     projectAreas,
     projects,
+    products,
   ]);
 
   const dynamicPages = [
+    ...productsData.data.products.nodes.map((product) => {
+      return {
+        url: `apparel/${product.handle}`,
+        changed_on: timestamp,
+      };
+    }),
     ...projectAreasData.data.Areas.items.map((area) => {
       return {
         url: `projects/${area._slug}`,
@@ -88,7 +113,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     .join("")}
   </urlset>
 `;
-
   res.setHeader("Content-Type", "text/xml");
   res.write(sitemap);
   res.end();

@@ -1,62 +1,59 @@
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
-import u from "../helpers/unit";
+import { spaces } from "../helpers/spaces";
 
 export const StyledProjects = styled.div``;
 
 export const ProjectsHero = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10% 0;
-  ${breakpoint.tabletPortrait} {
-    height: auto;
-    padding: 20% 0;
-  }
-  ${breakpoint.phone} {
-    padding: 20% 0;
-  }
+  margin-top: ${spaces.xl}px;
+  margin-bottom: ${spaces.l}px;
 `;
-export const ProjectsHeroContent = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: ${({ theme }) => theme.pageMargin};
-  margin: auto 0;
-  // optical correction
-  transform: translateY(5%);
-  ${breakpoint.phone} {
-    grid-template-columns: unset;
+
+export const ProjectsHeroFilters = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: ${spaces.s}px;
+  column-gap: ${spaces.l}px;
+  ${breakpoint.smallNotebook} {
+    column-gap: ${spaces.m}px;
+  }
+  ${breakpoint.tabletLandscape} {
+    row-gap: ${spaces.xs}px;
   }
 `;
 
-export const ProjectsHeroFilters = styled.div``;
-
-export const ProjectsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: ${({ theme }) => theme.pageMargin};
-  row-gap: ${({ theme }) => u(1, theme.pageMargin)};
+export const Filter = styled.span`
+  display: flex;
+  column-gap: ${spaces.xxs}px;
   ${breakpoint.phone} {
-    grid-template-columns: unset;
-  }
-`;
-
-export const ProjectsGridColumn = styled.div`
-  &.odd {
-    margin-top: ${({ theme }) => u(-2, theme.pageMargin)};
-    ${breakpoint.largeNotebook} {
-      margin-top: ${({ theme }) => u(-3, theme.pageMargin)};
-    }
-    ${breakpoint.smallNotebook} {
-      margin-top: ${({ theme }) => u(-2, theme.pageMargin)};
+    span:nth-child(2) {
+      display: none;
     }
   }
 `;
 
-export const ProjectsGridItem = styled.div`
-  &:not(:last-child) {
-    margin-bottom: ${({ theme }) => u(1, theme.pageMargin)};
-    ${breakpoint.phone} {
-      margin-bottom: ${({ theme }) => u(2, theme.pageMargin)};
-    }
+export const FilterW = styled.span`
+  font-size: 40px;
+  font-weight: 500;
+  ${breakpoint.custom(1700)} {
+    font-size: 35px;
   }
+  ${breakpoint.custom(1600)} {
+    font-size: 30px;
+  }
+  ${breakpoint.custom(1250)} {
+    font-size: 25px;
+  }
+  ${breakpoint.custom(1080)} {
+    font-size: 21px;
+  }
+  ${breakpoint.custom(900)} {
+    font-size: 18px;
+  }
+`;
+
+export const ProjectsGridW = styled.div`
+  margin-bottom: ${spaces.xxxl}px;
 `;

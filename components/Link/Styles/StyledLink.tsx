@@ -1,88 +1,41 @@
+import Link from "next/link";
 import styled from "styled-components";
-import { breakpoint, colors } from "../../../helpers/consts";
-import { SubServicesList } from "../../../pagestyles/StyledStudio";
-import { StyledGridItem } from "../../GridItem/Styles/StyledGridItem";
-import { Medium } from "../../Typo/Medium";
-import { Micro } from "../../Typo/Micro";
+import { colors } from "../../../helpers/consts";
 
-export const StyledLink = styled.span`
-  &,
-  a {
-    /* cursor: pointer; */
-    position: relative;
-    font-family: inherit;
-    color: inherit;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-    &:after {
-      content: "";
-      display: block;
-      width: 100%;
-      position: absolute;
-      height: 0.85em;
-      top: 0;
-      background-color: ${colors.primary400};
-      left: 0;
-      z-index: -1;
-      transform: scaleX(0);
-      transform-origin: 0 0;
-      transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
+export const LinkBg = styled.span`
+  display: block;
+  width: 110%;
+  height: 120%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: ${colors.primary400};
+  mix-blend-mode: multiply;
+  transform: translate(-50%, -50%) scaleX(0);
+  transform-origin: 0;
+  transition: transform 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
+`;
+
+export const StyledLink = styled(Link)`
+  position: relative;
+  font-family: inherit;
+  color: inherit;
+  display: inline-block;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  &:hover {
+    .bg {
+      transform: translate(-50%, -50%) scaleX(1);
     }
-    &:hover {
-      &:after {
-        transform: scaleX(1);
-      }
-    }
-    &.active,
-    &.active a {
-      /* cursor: default; */
-      &:after {
-        transform: scaleX(1);
-      }
-    }
-    ${StyledGridItem} &, ${SubServicesList} & {
-      font-size: 28px;
-      font-weight: 300;
-      strong {
-        font-family: "migra-italic";
-        font-weight: 600;
-      }
-      &:hover {
-        &:after {
-          transform: unset;
-        }
-      }
-      &:after {
-        height: 1.2em;
-      }
-      &.hover {
-        &:after {
-          transform: scaleX(1);
-        }
-      }
-      ${breakpoint.largeNotebook} {
-        font-size: 24px;
-      }
-      ${breakpoint.tabletLandscape} {
-        font-size: 18px;
-      }
-      ${breakpoint.tabletPortrait} {
-        font-size: 16px;
-      }
-    }
-    ${SubServicesList} & {
-      line-height: 1.8em;
-    }
-    ${Medium} & {
-      &:after {
-        height: 1.2em;
-      }
-    }
-    ${Micro} & {
-      &:after {
-        height: 1.4em;
-      }
+  }
+  &.no-underline {
+    text-decoration: none !important;
+  }
+  &.active,
+  &.active a {
+    .bg {
+      transform: translate(-50%, -50%) scaleX(1);
     }
   }
 `;

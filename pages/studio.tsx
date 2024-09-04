@@ -1,62 +1,59 @@
-import { motion } from "framer-motion";
 import { GetStaticProps } from "next";
-import { useState } from "react";
-import { useTheme } from "styled-components";
-import client from "../apollo/client";
-import Animation from "../components/Animation/Animation";
+import { useContext, useEffect } from "react";
+import getClient from "../apollo/client";
+import { Query } from "../cms";
+import Gallery from "../components/Gallery/Gallery";
 import Head from "../components/Head/Head";
-import Hero from "../components/Hero/Hero";
-import ImageSlider from "../components/ImageSlider/ImageSlider";
-import Img from "../components/Img/Img";
-import Link from "../components/Link/Link";
-import Navbar from "../components/Navbar/Navbar";
+import HeaderLine from "../components/HeaderLine/HeaderLine";
+import { NavbarContext } from "../components/Navbar/NavbarControls";
+import ProjectsSlider from "../components/ProjectsSlider/ProjectsSlider";
+import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
+import ServicesSection from "../components/ServicesSection/ServicesSection";
+import Showreel from "../components/Showreel/Showreel";
 import { Large } from "../components/Typo/Large";
 import { Medium } from "../components/Typo/Medium";
 import { Micro } from "../components/Typo/Micro";
 import { Small } from "../components/Typo/Small";
-import ValueItem from "../components/ValueItem";
-import Video from "../components/Video/Video";
+import ValuesList from "../components/ValueItem/ValuesList";
 import strings from "../data/strings";
-import { Areas } from "../generated/types";
+import { Areas } from "../generated/preprTypes";
 import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
-import { device } from "../helpers/consts";
-import { useWindowSize } from "../hooks/useWindowSize";
+import { GET_LATEST_PROJECTS } from "../graphql/GetLatestProjects";
+import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
 import {
-  Blockquote,
-  BlockquoteSection,
+  BrandsHeader,
   BrandsSection,
-  BrandsText,
-  BrandsTextInner,
   Logo,
   Logotypes,
-  Outro,
-  Quote,
-  HeaderWithDashOffset,
-  ServicesList,
-  ServicesSection,
+  OurStudio,
+  OurStudioSliderImg,
+  StudioHero,
+  StudioLatestProjects,
+  StudioServiceCover,
+  StudioServices,
+  StudioServicesSectionW,
+  StudioShowreelW,
   StyledStudio,
-  SubServicesList,
   TextBlock,
   TextBlockBody,
   TextBlockHeader,
   ValuesCover,
-  ValuesCoverInner,
-  ValuesList,
+  ValuesCoverW,
   ValuesSection,
-  DividerPhoto,
 } from "../pagestyles/StyledStudio";
 
 interface StudioProps {
   areas: Areas;
+  latestProjects: EnhancedProject[];
 }
 
-const Studio = ({ areas }: StudioProps) => {
+const Studio = ({ areas, latestProjects }: StudioProps) => {
   const studioStrings = strings.studioPage;
-  const [focusedValue, setFocusedValue] = useState(0);
+  const { setNavbarHeader } = useContext(NavbarContext);
+  useEffect(() => {
+    setNavbarHeader(studioStrings.navbar.header);
+  }, []);
 
-  const theme = useTheme();
-
-  const { w } = useWindowSize();
   return (
     <>
       <Head
@@ -65,222 +62,135 @@ const Studio = ({ areas }: StudioProps) => {
         ogImageSrc={`/images/studio/studio_1.jpg`}
         ogTitle={studioStrings.hero.header.rest}
       />
-      <Navbar areas={areas?.items} />
 
       <StyledStudio>
-        <Hero
-          header={() => studioStrings.hero.header.rest}
-          perex={studioStrings.hero.subHeader}
-          asset={{
-            url: `/images/studio/studio_1.jpg`,
-            _type: `Image`,
-            width: 1920,
-            height: 1211,
-          }}
-        />
-        <Animation type='fadeFromBottom'>
+        <StudioHero>
+          <Large>
+            We're creative house building strong visual identities and
+            communication strategies behind inspiring brands.
+          </Large>
+        </StudioHero>
+        <StudioLatestProjects>
+          <ProjectsSlider
+            header='Latest projects'
+            linkText={"All projects"}
+            url={"/projects/all-projects"}
+            projects={latestProjects}
+          />
+        </StudioLatestProjects>
+        <RevealAnimation>
           <TextBlock>
             <TextBlockHeader>
-              <Micro className={"with-dash"}>
-                {studioStrings.intro.header}
-              </Micro>
-              <Medium className='big'>{studioStrings.intro.perex}</Medium>
+              <HeaderLine>
+                <Micro className='uppercase' as={"h2"}>
+                  {studioStrings.intro.header}
+                </Micro>
+              </HeaderLine>
+              <Medium className='medium'>{studioStrings.intro.perex}</Medium>
             </TextBlockHeader>
             <TextBlockBody>
               <Small>{studioStrings.intro.paragraph}</Small>
             </TextBlockBody>
           </TextBlock>
-        </Animation>
+        </RevealAnimation>
 
-        <Animation type='fadeFromBottom'>
-          <DividerPhoto>
-            <Img
-              src={"/images/studio/studio_2.jpg"}
-              layout={w <= device.phone ? `fill` : `responsive`}
-              width={2450}
-              height={1300}
-              objectFit={"cover"}
-            />
-          </DividerPhoto>
-        </Animation>
-
-        <ValuesSection id='values-section'>
-          <ValuesList>
-            {studioStrings.values.list.map(({ header, perex }, i) => {
-              const n = i + 1;
+        <OurStudio>
+          <Gallery>
+            {studioStrings.slider.map((img, i) => {
+              // Hide ex gf to keep my sanity during development
+              if (!img.wsf && process.env.NODE_ENV === "development") return;
               return (
-                <ValueItem
-                  onFocusChange={(id) => setFocusedValue(id)}
-                  isFocused={focusedValue === i}
-                  id={i}
-                  order={i}
-                  header={header}
-                  perex={perex}
+                <OurStudioSliderImg
+                  draggable={false}
+                  priority
                   key={i}
+                  src={`/images/crew/${img.src}`}
+                  width={img.height}
+                  height={img.width}
+                  alt='studio'
                 />
               );
             })}
-          </ValuesList>
-          <ValuesCover
-            data-scroll
-            data-scroll-sticky
-            data-scroll-target='#values-section'
-            data-scroll-offset={`${
-              -1 *
-              (Number(theme.pageMargin.split("px")[0]) * 2 +
-                Number(theme.navbarHeight.split("px")[0]))
-            }px,0%`}>
-            <ValuesCoverInner>
-              {/* <Video src={"/videos/loop_studio.mp4"} /> */}
-              <Img
-                src={"/images/studio/studio_3.jpg"}
-                layout={"intrinsic"}
-                width={1126}
-                height={1437}
-                objectFit={"cover"}
-              />
-            </ValuesCoverInner>
-          </ValuesCover>
+          </Gallery>
+        </OurStudio>
+
+        <ValuesSection id='values-section'>
+          <ValuesList list={studioStrings.values.list} />
+          <ValuesCoverW>
+            <ValuesCover
+              src={"/images/studio_bullets.jpg"}
+              width={1126}
+              height={1437}
+              alt='studio values'
+            />
+          </ValuesCoverW>
         </ValuesSection>
-        <Animation type='fadeFromBottom'>
-          <ImageSlider
-            imgList={strings.studioPage.slider.map((img, i) => ({
-              layout: "responsive",
-              priority: true,
-              width: 689,
-              height: 800,
-              src: `/images/studio/${img.src}`,
-              id: String(i),
-            }))}
+
+        <StudioServices>
+          <Large as={"blockquote"}>
+            We’re able to cover the client’s needs from strategy and art
+            direction to production, design and communication.
+          </Large>
+          <StudioServiceCover
+            src={"/images/studio-hero.jpg"}
+            width={2101}
+            height={1326}
+            alt='studio values'
           />
-        </Animation>
-        <ServicesSection>
-          <HeaderWithDashOffset>
-            <Animation type='fadeFromBottom'>
-              <Micro className='with-dash'>
-                {studioStrings.services.header}
-              </Micro>
-            </Animation>
-          </HeaderWithDashOffset>
-          <ServicesList>
-            {areas.items.map(
-              ({ sub_areas, area_name, _slug, is_default }, i) => {
-                if (is_default) return null;
-                return (
-                  <Animation type='fadeFromBottom' key={_slug} delay={0.2 * i}>
-                    <motion.div>
-                      <Medium className='big'>
-                        <Link href={`/projects/${_slug}`}>{area_name}</Link>
-                      </Medium>
-                      <SubServicesList>
-                        <Medium>{sub_areas}</Medium>
-                      </SubServicesList>
-                    </motion.div>
-                  </Animation>
-                );
-              }
-            )}
-          </ServicesList>
-        </ServicesSection>
-        <BlockquoteSection>
-          <Blockquote className='_1'>
-            <Img
-              src={"/images/studio/studio_4.jpg"}
-              width={1200}
-              height={1510}
-              layout={"intrinsic"}
+          <StudioServicesSectionW>
+            <ServicesSection areas={areas} />
+          </StudioServicesSectionW>
+          <StudioShowreelW>
+            <Showreel
+              asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }}
             />
+          </StudioShowreelW>
+        </StudioServices>
 
-            <Quote className='offset-y-1' data-scroll data-scroll-speed='2'>
-              <Large className='offset-x-1'>
-                {studioStrings.blockquotes[0].quote}
-              </Large>
-              <Micro className='with-dash reversed'>
-                {studioStrings.blockquotes[0].name}{" "}
-              </Micro>
-              <Micro className='lowcase dash-margin '>
-                {studioStrings.blockquotes[0].position}
-              </Micro>
-            </Quote>
-          </Blockquote>
-          <Blockquote className='_2'>
-            <Quote className='offset-y-2' data-scroll data-scroll-speed='2'>
-              <Large className='offset-x-2'>
-                {studioStrings.blockquotes[1].quote}
-              </Large>
-              <Micro className='with-dash dash-margin'>
-                {studioStrings.blockquotes[1].name}
-              </Micro>
-              <Micro className='lowcase dash-margin'>
-                {studioStrings.blockquotes[1].position}
-              </Micro>
-            </Quote>
-
-            <Img
-              src={"/images/studio/studio_5.jpg"}
-              width={1200}
-              height={1200}
-              objectFit={"cover"}
-              layout={"intrinsic"}
-            />
-          </Blockquote>
-        </BlockquoteSection>
         <BrandsSection>
-          <Animation type='fadeFromBottom'>
-            <BrandsText>
-              <HeaderWithDashOffset>
-                <Micro className='with-dash'>
-                  {studioStrings.brands.header}
-                </Micro>
-              </HeaderWithDashOffset>
-              <BrandsTextInner>
-                <Medium className='big'>{studioStrings.brands.claim}</Medium>
-                <Small>{studioStrings.brands.perex}</Small>
-              </BrandsTextInner>
-            </BrandsText>
-          </Animation>
-
+          <BrandsHeader>
+            <HeaderLine>
+              <Micro className='uppercase' as={"h2"}>
+                {studioStrings.brands.header}
+              </Micro>
+            </HeaderLine>
+          </BrandsHeader>
           <Logotypes>
             {studioStrings.brands.logotypes.map((src, i) => (
-              <Animation type='fadeFromBottom' key={src} delay={0.05 * i}>
+              <RevealAnimation key={src} delay={0.05 * i}>
                 <Logo src={`/logos/${src}`} />
-              </Animation>
+              </RevealAnimation>
             ))}
           </Logotypes>
         </BrandsSection>
-        <Outro>
-          <Blockquote className='_3'>
-            <Quote className='offset-y-3' data-scroll data-scroll-speed='2'>
-              <Large className='offset-x-2'>
-                {studioStrings.blockquotes[2].quote}
-              </Large>
-              <Micro className='with-dash reversed'>
-                {studioStrings.blockquotes[2].name}{" "}
-              </Micro>
-              <Micro className='lowcase dash-margin'>
-                {studioStrings.blockquotes[2].position}
-              </Micro>
-            </Quote>
-          </Blockquote>
-
-          <Img
-            src={`/images/studio/studio_6.jpg`}
-            width={2450}
-            height={1300}
-            objectFit={"cover"}
-            layout={w <= device.phone ? `fill` : `responsive`}
-          />
-        </Outro>
       </StyledStudio>
     </>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
+  const client = getClient();
   try {
-    const data = await client.query({ query: GET_ALL_AREAS });
+    const areasReq = client.query<Query>({ query: GET_ALL_AREAS });
+    const latestProjectsReq = client.query<Query>({
+      query: GET_LATEST_PROJECTS,
+    });
+    const [
+      {
+        data: { Areas: areas },
+      },
+      {
+        data: { FeaturedGrid: latestProjects },
+      },
+    ] = await Promise.all([areasReq, latestProjectsReq]);
+
+    const enhancedLatestProjects = enhanceProjects(
+      latestProjects.featured_projects,
+      areas
+    );
+
     return {
-      props: { areas: data.data.Areas },
+      props: { areas, latestProjects: enhancedLatestProjects },
       revalidate: Number(process.env.REVALIDATE),
     };
   } catch (e) {

@@ -1,86 +1,70 @@
 import { motion } from "framer-motion";
+import Image from "next/image";
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
-import u from "../helpers/unit";
+import { spaces } from "../helpers/spaces";
 
-export const StyledProject = styled.div``;
+export const StyledProject = styled.div`
+  margin-top: ${spaces.xl}px;
+`;
 
-export const Breadcrumbs = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: ${({ theme }) => u(0.25, theme.pageMargin)};
+export const ProjectHeroHeader = styled.div`
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  column-gap: ${spaces.xl}px;
+  margin-top: ${spaces.l}px;
   ${breakpoint.phone} {
-    display: none;
+    grid-template-columns: unset;
   }
 `;
 
 export const ProjectHeroRoles = styled.div`
   display: grid;
-  grid-auto-flow: column;
-  align-items: start;
-  flex-shrink: 0;
-  grid-gap: 90px;
-  ${breakpoint.tabletPortrait} {
-    grid-gap: 40px;
+  align-content: start;
+  row-gap: ${spaces.xl}px;
+  ${breakpoint.smallNotebook} {
+    row-gap: ${spaces.l}px;
   }
   ${breakpoint.phone} {
-    grid-auto-flow: unset;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 20px;
-    row-gap: 35px;
-  }
-`;
-export const ProjectHeroRole = styled.div`
-  display: grid;
-  grid-template-rows: auto 1fr;
-  grid-gap: 10px;
-  ${breakpoint.phone} {
-    grid-gap: 5px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: ${spaces.m}px;
+    margin-top: ${spaces.l}px;
   }
 `;
 
-export const ProjectHeroFooter = styled.div`
+export const ProjectHeroRole = styled.div`
   display: grid;
-  margin-left: auto;
-  grid-auto-flow: column;
-  grid-gap: ${({ theme }) => u(1, theme.pageMargin)};
-  ${breakpoint.tabletPortrait} {
-    margin-left: 0;
-  }
-  ${breakpoint.phone} {
-    grid-auto-flow: row;
-    width: 100%;
-    grid-gap: ${({ theme }) => u(2, theme.pageMargin)};
+  align-content: start;
+  row-gap: ${spaces.s}px;
+  ${breakpoint.tabletLandscape} {
+    row-gap: ${spaces.xxs}px;
   }
 `;
 
 export const ProjectDescription = styled.div`
-  padding: ${({ theme }) => u(1, theme.pageMargin)} 0;
-  width: ${({ theme }) => u(6, theme.pageMargin)};
+  padding: ${spaces.xxxl}px 0;
+  max-width: 600px;
   ${breakpoint.tabletLandscape} {
-    width: ${({ theme }) => u(9, theme.pageMargin)};
-    padding: ${({ theme }) => u(1, theme.pageMargin)} 0
-      ${({ theme }) => u(2, theme.pageMargin)};
-  }
-  ${breakpoint.phone} {
-    width: ${({ theme }) => u(14, theme.pageMargin)};
+    padding: ${spaces.xxl}px 0;
   }
 `;
 
 export const ProjectGrid = styled.div`
   display: grid;
-  grid-gap: ${({ theme }) => `calc(${theme.pageMargin} / 2)`};
-  ${breakpoint.phone} {
-    grid-gap: ${({ theme }) => `calc(${theme.pageMargin})`};
-  }
+  row-gap: ${spaces.xs}px;
+`;
+
+export const ProjectDetailQuote = styled.section`
+  margin: ${spaces.xxxxl}px 0;
 `;
 
 export const ProjectGridRow = styled(motion.div)`
   display: grid;
   grid-auto-columns: 1fr;
   grid-auto-flow: column;
-  grid-gap: ${({ theme }) => `calc(${theme.pageMargin} / 2)`};
+  column-gap: ${spaces.xs}px;
+  row-gap: ${spaces.xs}px;
   &.blockquote {
     grid-template-areas: ". blockquote";
     &.reverse {
@@ -89,7 +73,6 @@ export const ProjectGridRow = styled(motion.div)`
   }
   ${breakpoint.phone} {
     grid-auto-flow: row;
-    grid-gap: ${({ theme }) => `calc(${theme.pageMargin})`};
     ${breakpoint.phone} {
       &.blockquote {
         grid-template-areas: unset;
@@ -101,73 +84,22 @@ export const ProjectGridRow = styled(motion.div)`
   }
 `;
 
-export const ProjectGridBlockquote = styled.div`
+export const ProjectDetailImg = styled(Image)`
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: ${({ theme }) => theme.bRad};
+`;
+
+export const ProjectGridBlockquote = styled.blockquote`
   grid-area: blockquote;
-  padding: ${({ theme }) => u(1, theme.pageMargin)} 0;
+  padding: ${spaces.xxxl}px 0;
+  max-width: 600px;
   ${breakpoint.phone} {
-    padding: ${({ theme }) => u(2, theme.pageMargin)} 0;
     grid-area: unset;
   }
 `;
 
-export const ClientQuote = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: ${({ theme }) => theme.pageMargin};
-  margin-top: ${({ theme }) => u(2, theme.pageMargin)};
-  ${breakpoint.phone} {
-    grid-template-columns: unset;
-    grid-gap: 0;
-  }
-`;
-
-export const ClientQuoteLeft = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  &:after {
-    content: "“";
-    display: block;
-    transform: translateY(-0.15em);
-    font-weight: 600;
-    font-family: "migra-italic";
-    font-size: 110px;
-    margin-left: 40px;
-  }
-  ${breakpoint.smallNotebook} {
-    &:after {
-      font-size: 60px;
-    }
-  }
-  ${breakpoint.phone} {
-    flex-direction: column;
-    &:after {
-      margin-left: 0;
-      content: "„";
-    }
-  }
-`;
-
-export const ClientQuoteRight = styled.div`
-  max-width: 900px;
-  ${breakpoint.largeNotebook} {
-    max-width: 600px;
-  }
-  ${breakpoint.tabletPortrait} {
-    padding-right: ${({ theme }) => theme.pageMargin};
-  }
-`;
-
-export const NextProjectSection = styled(motion.div)`
-  margin-top: ${({ theme }) => u(2, theme.pageMargin)};
-`;
-
-export const NextProjectHead = styled.div`
-  display: grid;
-  grid-template-areas: "relatedProject backToProjects";
-  margin-bottom: 60px;
-  ${breakpoint.phone} {
-    grid-template-areas: "backToProjects" "relatedProject";
-    row-gap: 40px;
-    margin-bottom: 20px;
-  }
+export const SimilarProjectsSlider = styled.section`
+  margin: ${spaces.xxxl}px 0;
 `;

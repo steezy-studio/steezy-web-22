@@ -1,5 +1,7 @@
-import { createGlobalStyle, DefaultTheme } from "styled-components";
-import { colors } from "../helpers/consts";
+import { createGlobalStyle } from "styled-components";
+import { addColorClasses } from "../helpers/colorClasses";
+import { breakpoint, colors } from "../helpers/consts";
+import { spaces } from "../helpers/spaces";
 
 export const GlobalStyle = createGlobalStyle`
   html,
@@ -7,19 +9,45 @@ export const GlobalStyle = createGlobalStyle`
   {
     width:100%;
     height:100%;
-      background-color:${colors.primary300};
+    background-color:${colors.white};
+    font-family: "helvetica-now", Helvetica, Arial, sans-serif;
   }
-  body {
-      padding: ${({ theme }) => theme.pageMargin} !important;
-      padding-top: 0 !important;
-      padding-bottom: 0 !important;
+  main {
+    padding: ${spaces.xxxl}px var(--page-side-padding) 0 ${spaces.xxxl}px;
+    ${breakpoint.monitor} {
+      padding: ${spaces.xxxl}px var(--page-side-padding) 0 ${spaces.xxxxxl}px;
+    }
+    ${breakpoint.smallNotebook} {
+      padding: ${spaces.xxxl}px var(--page-side-padding) 0 ${spaces.xl}px;
+    }
+    ${breakpoint.tabletPortrait} {
+      padding: ${spaces.xxl}px var(--page-side-padding) 0 ${spaces.l}px;
+    }
+    ${breakpoint.phone} {
+      padding: ${spaces.xxl}px var(--page-side-padding) 0 ${spaces.m}px;
+    }
   }
+  :root {
+    --page-side-padding: ${spaces.xxxl}px;
+    ${breakpoint.monitor} {
+      --page-side-padding: ${spaces.xxxxxl}px;
+    }
+    ${breakpoint.smallNotebook} {
+      --page-side-padding: ${spaces.xl}px;
+    }
+    ${breakpoint.tabletPortrait} {
+      --page-side-padding: ${spaces.l}px;
+    }
+    ${breakpoint.phone} {
+      --page-side-padding: ${spaces.m}px;
+    }
+  }
+
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     cursor: none !important;
-    font-family: "agrandir", Arial, Helvetica, sans-serif;
   } 
   a {
     color: inherit;
@@ -28,78 +56,55 @@ export const GlobalStyle = createGlobalStyle`
       color: inherit;
     }
   }
-  body {
-    background-color: ${colors.primary300}; // important flag for Radix dialog
+  /* lenis */
+  .lenis {
+    height: 100vh;
+    overflow-y: auto;
   }
-  html.has-scroll-smooth {
-  position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-  overflow: hidden; 
-}
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
 
-html.has-scroll-dragging {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; }
-
-.has-scroll-smooth body {
-  overflow: hidden; }
-
-.has-scroll-smooth [data-scroll-container] {
-  min-height: 100vh; }
-
-[data-scroll-direction="horizontal"] [data-scroll-container] {
-  height: 100vh;
-  display: inline-block;
-  white-space: nowrap; }
-
-[data-scroll-direction="horizontal"] [data-scroll-section] {
-  display: inline-block;
-  vertical-align: top;
-  white-space: nowrap;
-  height: 100%; }
-
-.c-scrollbar {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 11px;
-  height: 100%;
-  transform-origin: center right;
-  transition: transform 0.3s, opacity 0.3s;
-  opacity: 0; }
-  .c-scrollbar:hover {
-    transform: scaleX(1.45); }
-  .c-scrollbar:hover, .has-scroll-scrolling .c-scrollbar, .has-scroll-dragging .c-scrollbar {
-    opacity: 1; }
-  [data-scroll-direction="horizontal"] .c-scrollbar {
-    width: 100%;
-    height: 10px;
-    top: auto;
-    bottom: 0;
-    transform: scaleY(1); }
-    [data-scroll-direction="horizontal"] .c-scrollbar:hover {
-      transform: scaleY(1.3); }
-
-.c-scrollbar_thumb {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: black;
-  opacity: 0.5;
-  width: 7px;
-  border-radius: 10px;
-  margin: 2px;
-  cursor: -webkit-grab;
-  cursor: grab; }
-  .has-scroll-dragging .c-scrollbar_thumb {
-    cursor: -webkit-grabbing;
-    cursor: grabbing; }
-  [data-scroll-direction="horizontal"] .c-scrollbar_thumb {
-    right: auto;
-    bottom: 0; }
+  /* typography */
+  .editorial {
+    font-family: "editorial-new", 'Times New Roman', Times, serif;
+  }
+  .helvetica {
+    font-family: "helvetica-now", Helvetica, Arial, sans-serif;
+  }
+  &.break-lines {
+    white-space: pre-wrap;
+  }
+  &.uppercase {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  &.difference {
+    color: ${colors.white};
+    mix-blend-mode: difference;
+  }
+  &.no-underline {
+    text-decoration: none;
+  }
+  &.wide {
+    max-width: unset;
+  }
+  &.tac {
+    text-align: center;
+  }
+  &.underline {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  ${addColorClasses()}
 `;

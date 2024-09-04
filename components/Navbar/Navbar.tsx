@@ -1,104 +1,83 @@
+import { useCart } from "@shopify/hydrogen-react";
+import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { useLocomotiveScroll } from "react-locomotive-scroll";
-import strings from "../../data/strings";
-import { Area } from "../../generated/types";
-import Fixed from "../Fixed/Fixed";
-import { HeroSocials } from "../Hero/Styles/StyledHero";
-import Instagram from "../Icons/Instagram";
-import Vimeo from "../Icons/Vimeo";
-import { StyledImg } from "../Img/Styles/StyledImg";
+import { useContext } from "react";
+import { device } from "../../helpers/consts";
+import { useWindowSize } from "../../hooks/useWindowSize";
+import { CartToggleContext } from "../Cart/CartProvider";
+import { CursorContext } from "../Cursor/CursorProvider";
 import Logo from "../Logo/Logo";
-import { Micro } from "../Typo/Micro";
+import Portal from "../Portal/Portal";
+import { RootVideosControllerContext } from "../RootVideosController/RootVideosController";
+import { Nano } from "../Typo/Nano";
 import Burger from "./Burger";
-import NavLink from "./NavLink";
+import { NavbarContext } from "./NavbarControls";
 import {
-  ContactUs,
-  NavLinks,
-  PhoneDecoration,
+  NavHeader,
+  NavbarCart,
+  NavlinksMask,
   StyledNavbar,
 } from "./Styles/StyledNavbar";
 
-interface NavbarProps {
-  areas: Area[];
-}
+interface NavbarProps {}
 
-const Navbar = ({ areas }: NavbarProps) => {
-  const [isMenuOpen, openMenu] = useState(false);
-  const router = useRouter();
-  const { scroll } = useLocomotiveScroll();
-  const hasSmoothScroll = !!scroll?.smooth;
+const Navbar = ({}: NavbarProps) => {
+  const {
+    isOpen: _isOpen,
+    setIsOpen,
+    navbarHeader,
+  } = useContext(NavbarContext);
+  const { pathname } = useRouter();
+  const isOpen = _isOpen(pathname);
+  const { setCursorType } = useContext(CursorContext);
+  const { setPauseAllVideos } = useContext(RootVideosControllerContext);
+  const { setShowCart } = useContext(CartToggleContext);
+  const { w } = useWindowSize();
+  const isTabletPortrait = w <= device.tabletPortrait;
+  const { lines } = useCart();
 
   return (
-    <Fixed id={"fixed-navbar"} hasSmoothScroll={hasSmoothScroll}>
-      <StyledNavbar hasSmoothScroll={hasSmoothScroll}>
-        <Logo />
-        <NavLinks
-          $hasSmoothScroll={hasSmoothScroll}
-          animate={isMenuOpen ? "open" : "close"}
-          initial={false}
-          style={{
-            transformOrigin: "100% 0%",
-            pointerEvents: isMenuOpen ? "all" : "none",
-          }}
-          transition={{
-            duration: 0.2,
-            type: "tween",
-            ease: [0.65, 0.05, 0.36, 1],
-          }}
-          variants={{
-            open: {
-              scaleX: 1,
-              transition: {
-                when: "beforeChildren",
-                staggerDirection: -1,
-                staggerChildren: 0.03,
-              },
-            },
-            close: {
-              scaleX: 0,
-              transition: {
-                when: "afterChildren",
-                staggerDirection: 1,
-                staggerChildren: 0.03,
-              },
-            },
-          }}>
-          {areas.map(({ area_name, _slug, is_default }) => (
-            <NavLink
-              active={router.asPath === `/projects/${_slug}`}
-              highlighted={is_default}
-              href={`/projects/${_slug}`}
-              key={_slug}>
-              {area_name}
-            </NavLink>
-          ))}
-          {strings.navData.map(({ highlighted, link, name }) => (
-            <NavLink
-              active={router.asPath === link}
-              highlighted={highlighted}
-              href={link}
-              key={link}>
-              {name}
-            </NavLink>
-          ))}
-          <PhoneDecoration
-            variants={{ open: { opacity: 1 }, close: { opacity: 0 } }}>
-            <ContactUs href={`/contact`}>
-              <StyledImg as={"img"} src={"/icons/contact-icon.svg"} />
-              <Micro className='uppercase break-lines'>
-                {strings.globals.tellUsYourStory}
-              </Micro>
-            </ContactUs>
-            <HeroSocials>
-              <Instagram />
-              <Vimeo />
-            </HeroSocials>
-          </PhoneDecoration>
-        </NavLinks>
-        <Burger onClick={() => openMenu((prev) => !prev)} isOpen={isMenuOpen} />
-      </StyledNavbar>
-    </Fixed>
+    <>
+      <Portal selector={"body"}>
+        <StyledNavbar>
+          <Logo />
+          <NavlinksMask>
+            <AnimatePresence mode='wait'>
+              {!isTabletPortrait && !isOpen && navbarHeader && (
+                <NavHeader
+                  key={navbarHeader}
+                  initial={{ y: "100%" }}
+                  animate={{ y: "0%" }}
+                  exit={{ y: "-100%" }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Nano className='uppercase'>{navbarHeader}</Nano>
+                </NavHeader>
+              )}
+            </AnimatePresence>
+          </NavlinksMask>
+
+          {lines.length !== 0 && (
+            <NavbarCart
+              onClick={() => {
+                setShowCart((p) => !p);
+              }}
+              onMouseEnter={() => setCursorType("hover")}
+              onMouseLeave={() => setCursorType("normal")}
+            >
+              <Nano className='white'>{lines.length}</Nano>
+            </NavbarCart>
+          )}
+          <Burger
+            onClick={() => {
+              setPauseAllVideos(!isOpen);
+              setIsOpen(pathname, !isOpen);
+            }}
+            isOpen={isOpen}
+          />
+        </StyledNavbar>
+      </Portal>
+    </>
   );
 };
 

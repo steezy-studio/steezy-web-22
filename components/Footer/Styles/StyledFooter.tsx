@@ -1,52 +1,75 @@
 import styled from "styled-components";
 import { breakpoint } from "../../../helpers/consts";
-import u from "../../../helpers/unit";
+import { spaces } from "../../../helpers/spaces";
 
 export const StyledFooter = styled.footer`
   display: grid;
-  grid-gap: ${({ theme }) => `calc(1.5 * ${theme.pageMargin})`};
-  margin-top: ${({ theme }) => u(2, theme.pageMargin)};
-  padding-bottom: 100px;
+  row-gap: ${spaces.xxl}px;
+  margin-top: ${spaces.xxl}px;
+  ${breakpoint.smallNotebook} {
+    row-gap: ${spaces.xxxl}px;
+    margin-top: ${spaces.xxxl}px;
+  }
   ${breakpoint.tabletLandscape} {
-    padding-bottom: 60px;
+    margin-top: ${spaces.xxl}px;
+    row-gap: ${spaces.xxl}px;
   }
   ${breakpoint.phone} {
-    margin-top: ${({ theme }) => u(4, theme.pageMargin)};
+    margin-bottom: ${spaces.xl}px;
+  }
+`;
+
+export const FooterInner = styled.div`
+  display: grid;
+  grid-gap: ${spaces.l}px;
+  padding-bottom: ${spaces.xl}px;
+  ${breakpoint.tabletLandscape} {
+    padding-bottom: ${spaces.xl}px;
   }
 `;
 
 export const ContactInfo = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: ${({ theme }) => theme.pageMargin};
-  ${breakpoint.phone} {
+  grid-gap: ${spaces.l}px;
+  ${breakpoint.tabletPortrait} {
+    justify-items: start;
     grid-template-columns: unset;
     grid-row-gap: 30px;
   }
 `;
 
-export const DetailedContact = styled.div`
+export const DetailedContact = styled.address`
   display: grid;
-  grid-template-columns: auto auto;
+  font-style: normal;
+  grid-auto-flow: column;
+  grid-auto-columns: auto;
   justify-content: start;
   align-items: center;
-  grid-gap: 60px;
+  grid-gap: ${spaces.xl}px;
+  ${breakpoint.tabletLandscape} {
+    grid-gap: ${spaces.l}px;
+  }
   ${breakpoint.tabletPortrait} {
-    grid-gap: 30px;
     justify-content: end;
   }
   ${breakpoint.phone} {
+    grid-auto-flow: row;
     justify-content: start;
   }
 `;
 
-export const FooterSocials = styled.div`
+export const PhoneOnly = styled.div`
   display: none;
   ${breakpoint.phone} {
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: start;
-    align-items: center;
-    column-gap: 10px;
+    display: block;
   }
+`;
+
+export const FooterSocials = styled.div`
+  display: grid;
+  grid-auto-flow: row;
+  justify-content: start;
+  align-items: center;
+  column-gap: 10px;
 `;

@@ -1,34 +1,20 @@
-import Vimeo from "@u-wave/react-vimeo";
 import { motion } from "framer-motion";
-import React, { useContext, useRef, useState } from "react";
-import styled from "styled-components";
+import { useContext, useRef, useState } from "react";
 import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
-import { HoverProvider } from "../../pages/_app";
+import { CursorContext } from "../Cursor/CursorProvider";
+import {
+  Overlay,
+  StyledProjectGridVimeo,
+  VimeoWrapper,
+} from "./StyledProjectGridVimeo";
 
 interface ProjectGridVimeoProps {
   vimeoId: string | number;
 }
 
-const StyledProjectGridVimeo = styled(motion.div)`
-  position: relative;
-`;
-
-export const VimeoWrapper = styled(Vimeo)`
-  width: 100%;
-  height: 100%;
-`;
-
-const Overlay = styled.div`
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-`;
-
 const ProjectGridVimeo = ({ vimeoId }: ProjectGridVimeoProps) => {
   const [isPaused, setIsPaused] = useState(true);
-  const { setCursorType, setIsCursorDisabled } = useContext(HoverProvider);
+  const { setCursorType, setIsCursorDisabled } = useContext(CursorContext);
   const ref = useRef<HTMLDivElement>(null);
 
   useIntersectionObserver(
@@ -49,7 +35,8 @@ const ProjectGridVimeo = ({ vimeoId }: ProjectGridVimeoProps) => {
     <motion.div ref={ref}>
       <StyledProjectGridVimeo
         onMouseEnter={() => setCursorType("hover")}
-        onMouseLeave={() => setCursorType("normal")}>
+        onMouseLeave={() => setCursorType("normal")}
+      >
         {isPaused && <Overlay onClick={() => setIsPaused(false)} />}
         <VimeoWrapper
           video={vimeoId}

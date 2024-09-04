@@ -1,8 +1,26 @@
 import styled from "styled-components";
 import { breakpoint } from "../helpers/consts";
-import u from "../helpers/unit";
+import { spaces } from "../helpers/spaces";
 
 export const StyledIndex = styled.div``;
+
+export const IndexHeroSection = styled.section``;
+
+export const IndexHeroClaim = styled.div`
+  margin: ${spaces.xxxl}px 0 ${spaces.xxxxl}px;
+  text-align: center;
+  ${breakpoint.smallNotebook} {
+    margin: ${spaces.xl}px 0 ${spaces.xxxl}px;
+  }
+  ${breakpoint.tabletPortrait} {
+    margin: ${spaces.l}px ${spaces.xxl}px ${spaces.xl}px;
+  }
+  ${breakpoint.phone} {
+    margin: ${spaces.l}px ${spaces.s}px ${spaces.xl}px;
+  }
+`;
+
+export const IndexSliderW = styled.div``;
 
 export const LandingHeroPageLogotypes = styled.div`
   display: grid;
@@ -17,12 +35,14 @@ export const LandingHeroPageLogotypes = styled.div`
   }
 `;
 
+export const IndexGrid = styled.div``;
+
 export const LandingPageHeroLogotype = styled.img`
   height: 40px;
-  ${breakpoint.smallNotebook} {
-    height: 40px;
+  ${breakpoint.tabletLandscape} {
+    height: 35px;
   }
-  ${breakpoint.phone} {
+  ${breakpoint.tabletPortrait} {
     height: 30px;
   }
   ${breakpoint.miniPhone} {
@@ -30,97 +50,54 @@ export const LandingPageHeroLogotype = styled.img`
   }
 `;
 
-export const LandingpageHeroClients = styled.div`
-  display: grid;
-  width: 100%;
-  grid-row-gap: 40px;
-  justify-content: end;
-  ${breakpoint.smallNotebook} {
-    grid-row-gap: 30px;
-  }
-  ${breakpoint.tabletLandscape} {
-    grid-row-gap: 10px;
-    justify-content: end;
-  }
+export const HeroFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: ${spaces.xl}px;
+  margin-top: ${spaces.l}px;
   ${breakpoint.tabletPortrait} {
-    justify-content: start;
-  }
-  ${breakpoint.phone} {
-    justify-content: start;
+    flex-direction: column;
+    align-items: start;
+    row-gap: ${spaces.l}px;
   }
 `;
 
-export const LandingpageGrid = styled.div`
+export const HeroFooterPerex = styled.div`
+  max-width: 500px;
+`;
+
+export const IndexQuote = styled.div`
   display: grid;
-  grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
-  ${breakpoint.phone} {
-    grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
-    margin-top: ${({ theme }) => u(3, theme.pageMargin)};
-  }
-  ${breakpoint.monitor} {
-    grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
-  }
+  row-gap: ${spaces.l}px;
 `;
 
-export const LandingpageGridRow = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: ${({ theme }) => theme.pageMargin};
-  &.blockquote {
-    position: relative;
-    z-index: 1;
-  }
-  ${breakpoint.phone} {
-    grid-template-columns: unset;
-    grid-gap: ${({ theme }) => `calc(3 * ${theme.pageMargin})`};
-  }
-`;
-
-export const GridItemWrapper = styled.div<{ offset_amount?: number }>`
-  width: 100%;
-  &.single {
-    width: 75%;
-    grid-column: 1/3;
-    justify-self: end;
-  }
-  &.offset:not(:last-child) {
-    margin-top: ${({ offset_amount }) => `${offset_amount}%`};
-  }
-  ${breakpoint.phone} {
-    &.single {
-      width: 100%;
-      grid-column: 1;
-      justify-self: initial;
-    }
-    &.offset:not(:last-child) {
-      margin-top: unset;
-    }
-  }
-`;
-
-export const Intro = styled.div`
-  width: ${({ theme }) => u(6, theme.pageMargin)};
-  margin-left: ${({ theme }) => u(4, theme.pageMargin)};
-  transform: translateY(${({ theme }) => u(2, theme.pageMargin)});
-  position: relative;
-  display: grid;
-  grid-gap: 60px;
-  ${breakpoint.tabletLandscape} {
-    margin-left: ${({ theme }) => u(3, theme.pageMargin)};
-  }
+export const IndexQuoteClient = styled.div`
+  overflow: hidden;
+  margin-bottom: ${spaces.xxxxl}px;
   ${breakpoint.tabletPortrait} {
-    display: none;
-    margin-left: unset;
-    width: ${({ theme }) => u(8, theme.pageMargin)};
-  }
-  ${breakpoint.phone} {
-    transform: unset;
-    grid-gap: 30px;
-    margin: ${({ theme }) => u(3, theme.pageMargin)} 0;
+    margin-bottom: ${spaces.xxl}px;
   }
 `;
 
-export const IntroWrapper = styled.div`
-  position: relative;
-  z-index: 2;
+export const FeaturedGrid = styled.section`
+  display: grid;
+  row-gap: ${spaces.l}px;
+  margin-top: ${spaces.xxxxl}px;
+  ${breakpoint.tabletPortrait} {
+    margin-top: ${spaces.xxl}px;
+    row-gap: ${spaces.m}px;
+  }
+`;
+
+export const IndexApparel = styled.section`
+  margin: ${spaces.xxxxl}px 0;
+  ${breakpoint.tabletLandscape} {
+    margin: ${spaces.xxl}px 0;
+  }
+`;
+
+export const IndexServices = styled.section`
+  margin-top: ${spaces.xxxxl}px;
+  margin-bottom: ${spaces.xxxxl}px;
 `;

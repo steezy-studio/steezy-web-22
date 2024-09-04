@@ -10,9 +10,19 @@ export const GET_AREA = gql`
       projects {
         _id
         _slug
+        grid_image_portrait: grid_image {
+          _type
+          url(format: "webp", preset: "9:16")
+          width
+          height
+          description
+          cdn_files {
+            url
+          }
+        }
         grid_image {
           _type
-          url(format: "webp")
+          url(format: "webp", preset: "16:9")
           width
           height
           description

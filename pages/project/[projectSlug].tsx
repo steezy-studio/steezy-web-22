@@ -1,149 +1,133 @@
 import { motion } from "framer-motion";
-import parse, { domToReact, Element } from "html-react-parser";
+import HTMLReactParser, {
+  DOMNode,
+  Element,
+  domToReact,
+} from "html-react-parser";
 import { GetStaticPaths, GetStaticPropsContext } from "next";
-import { useContext } from "react";
-import client from "../../apollo/client";
-import Animation from "../../components/Animation/Animation";
-import ClassicGrid from "../../components/ClassicGrid/ClassicGrid";
-import GridItem from "../../components/GridItem/GridItem";
+import { useContext, useEffect } from "react";
+import getClient from "../../apollo/client";
+import { Query } from "../../cms";
+import ClientQuote from "../../components/ClientQuote/ClientQuote";
 import Head from "../../components/Head/Head";
-import Hero from "../../components/Hero/Hero";
-import Img from "../../components/Img/Img";
-import { StyledImg } from "../../components/Img/Styles/StyledImg";
 import Link from "../../components/Link/Link";
-import { StyledLink } from "../../components/Link/Styles/StyledLink";
-import Navbar from "../../components/Navbar/Navbar";
+import { NavbarContext } from "../../components/Navbar/NavbarControls";
+import ProjectCard from "../../components/ProjectCard/ProjectCard";
 import ProjectGridVimeo from "../../components/ProjectGridVimeo/ProjectGridVimeo";
+import ProjectsSlider from "../../components/ProjectsSlider/ProjectsSlider";
+import RevealAnimation from "../../components/RevealAnimation/RevealAnimation";
 import { Large } from "../../components/Typo/Large";
-import { Medium } from "../../components/Typo/Medium";
-import { Micro } from "../../components/Typo/Micro";
+import { Nano } from "../../components/Typo/Nano";
+import { Small } from "../../components/Typo/Small";
 import Video from "../../components/Video/Video";
-import strings from "../../data/strings";
-import { Areas, Project as ProjectType, Query } from "../../generated/types";
+import { QueryAreasArgs } from "../../generated/preprTypes";
+import { GET_ALL_AREAS } from "../../graphql/GetAllAreas";
 import { GET_PROJECT } from "../../graphql/GetProject";
-import { colors, device } from "../../helpers/consts";
-import { enhanceProjects } from "../../helpers/enhanceProjects";
-import { useWindowSize } from "../../hooks/useWindowSize";
 import {
-  Breadcrumbs,
-  ClientQuote,
-  ClientQuoteLeft,
-  ClientQuoteRight,
-  NextProjectHead,
-  NextProjectSection,
+  EnhancedProject,
+  enhanceProjects,
+} from "../../helpers/enhanceProjects";
+import stripHtmlTags from "../../helpers/stripHtmlTags";
+import {
   ProjectDescription,
+  ProjectDetailImg,
+  ProjectDetailQuote,
   ProjectGrid,
   ProjectGridBlockquote,
   ProjectGridRow,
-  ProjectHeroFooter,
+  ProjectHeroHeader,
   ProjectHeroRole,
   ProjectHeroRoles,
+  SimilarProjectsSlider,
   StyledProject,
 } from "../../pagestyles/StyledProject";
-import { HoverProvider } from "../_app";
 
 interface ProjectProps {
-  projectData: ProjectType;
-  areas: Areas;
+  projectData: {
+    project: EnhancedProject[];
+    similar_projects: EnhancedProject[];
+  };
 }
 
-const Project = ({ projectData, areas }: ProjectProps) => {
-  const defaultArea = areas.items.find((area) => area.is_default);
-
-  const { setCursorType } = useContext(HoverProvider);
-  const { w } = useWindowSize();
+const Project = ({ projectData }: ProjectProps) => {
+  const { project: _project, similar_projects } = projectData;
+  const project = _project[0];
+  const { setNavbarHeader } = useContext(NavbarContext);
+  useEffect(() => {
+    setNavbarHeader(project.company_name);
+  }, []);
 
   return (
     <>
       <Head
-        ogTitle={projectData.project_detail_name}
-        ogDescription={projectData.project_description}
-        ogImageSrc={projectData.hero_image[0].url}
-        pageName={[`Project`, projectData.project_detail_name]}
+        ogTitle={project.project_detail_name}
+        ogDescription={project.project_description}
+        ogImageSrc={project.hero_image[0].url}
+        pageName={[`Project`, project.project_detail_name]}
       />
-      <Navbar areas={areas.items} />
       <StyledProject>
-        <Hero
-          asset={projectData.hero_image[0]}
-          header={() => projectData.project_detail_name}
-          subHeader={
-            w > device.phone ? (
-              <Breadcrumbs>
-                <Micro>
-                  <Link href={`/projects/${defaultArea._slug}`}>
-                    {defaultArea.area_name}
-                  </Link>
-                </Micro>
-                <div
-                  style={{
-                    height: 1,
-                    width: 20,
-                    backgroundColor: colors.black,
-                    display: "inline-block",
-                  }}
-                />
-                <Micro>{projectData.company_name}</Micro>
-              </Breadcrumbs>
-            ) : (
-              <StyledImg
-                className='client-logo'
-                as={"img"}
-                src={projectData.client_logo[0].url}
-              />
-            )
-          }>
-          <ProjectHeroFooter>
-            <ProjectHeroRoles>
-              {projectData.project_facts?.map((fact, i) => {
-                if (fact.__typename === "ProjectFacts") {
-                  return (
-                    <ProjectHeroRole key={i}>
-                      <Micro>{fact.header}</Micro>
-                      <Micro className='lowcase'>{fact.content}</Micro>
+        <Large>{stripHtmlTags(project.project_detail_name)}</Large>
+        <ProjectHeroHeader>
+          <RevealAnimation>
+            <ProjectCard
+              projectName={project.project_detail_name}
+              areas={project.areas}
+              cover={project.grid_image}
+              videoThumb={project.grid_image[0].cover}
+              wide={true}
+              _static
+            />
+          </RevealAnimation>
+          <ProjectHeroRoles>
+            {project.project_facts?.map((fact, i) => {
+              if (fact.__typename === "ProjectFacts") {
+                return (
+                  <RevealAnimation key={i} delay={i * 0.3}>
+                    <ProjectHeroRole>
+                      <Nano>{fact.header}</Nano>
+                      <Small className='bold break-lines' as={"span"}>
+                        {fact.content}
+                      </Small>
                     </ProjectHeroRole>
-                  );
-                }
-              })}
-            </ProjectHeroRoles>
-            {w > device.phone && (
-              <StyledImg
-                className='client-logo'
-                as={"img"}
-                src={projectData.client_logo[0].url}
-              />
-            )}
-          </ProjectHeroFooter>
-        </Hero>
-        <ProjectDescription>
-          <Medium>{projectData.project_description}</Medium>
-        </ProjectDescription>
+                  </RevealAnimation>
+                );
+              }
+            })}
+          </ProjectHeroRoles>
+        </ProjectHeroHeader>
+        <RevealAnimation>
+          <ProjectDescription>
+            <Small className='bold'>{project.project_description}</Small>
+          </ProjectDescription>
+        </RevealAnimation>
         <ProjectGrid>
-          {projectData.project_presentation?.map((row, i) => {
+          {project.project_presentation?.map((row, i) => {
             if (row.__typename === "ProjectGridRow") {
               return (
                 <ProjectGridRow key={`${i}_row`}>
                   {row.grid_item_image.map((img, i) => {
                     if (img._type === "Video") {
                       return (
-                        <Animation key={img._id} type='fadeFromBottom'>
+                        <RevealAnimation key={img._id}>
                           <Video src={img.cdn_files[0].url} />
-                        </Animation>
+                        </RevealAnimation>
                       );
                     }
                     if (img._type === "Photo") {
                       return (
-                        <Animation key={`${i}_col`} type={"fadeFromBottom"}>
+                        <RevealAnimation key={`${i}_col`} delay={i * 0.3}>
                           <motion.div>
-                            <Img
+                            <ProjectDetailImg
                               src={img.url || ``}
-                              width={img.width || 0}
-                              height={img.height || 0}
-                              layout={"responsive"}
+                              width={img.width}
+                              height={img.height}
                               blurDataURL={img.url}
                               placeholder={"blur"}
+                              priority
+                              alt={project.project_detail_name}
                             />
                           </motion.div>
-                        </Animation>
+                        </RevealAnimation>
                       );
                     }
                   })}
@@ -151,136 +135,70 @@ const Project = ({ projectData, areas }: ProjectProps) => {
               );
             }
             if (row.__typename === "ProjectGridVimeo") {
-              const vimeoIds = row.vimeo_id.split("\r\n");
+              const vimeoIds = row.vimeo_id
+                .split("\n")
+                .map((id) => parseInt(id));
 
               return (
-                <Animation key={`${i}_row`} type={"fadeFromBottom"}>
+                <RevealAnimation key={`${i}_row`}>
                   <ProjectGridRow>
                     {vimeoIds.map((id, i) => (
-                      <ProjectGridVimeo key={i} vimeoId={id} />
+                      <ProjectGridVimeo key={i} vimeoId={`${id}`} />
                     ))}
                   </ProjectGridRow>
-                </Animation>
+                </RevealAnimation>
               );
             }
             if (row.__typename === "ProjectGridBlockquote") {
               return (
-                <Animation key={`${i}_row`} type='fadeFromBottom'>
+                <RevealAnimation key={`${i}_row`}>
                   <ProjectGridRow
-                    className={`blockquote ${row.alignment ? "reverse" : ""}`}>
+                    className={`blockquote ${row.alignment ? "reverse" : ""}`}
+                  >
                     <ProjectGridBlockquote>
-                      <Medium>
-                        {parse(row.blockquote_text, {
+                      <Small className='bold' as={"span"}>
+                        {HTMLReactParser(row.blockquote_text, {
                           replace(domNode) {
                             if (domNode instanceof Element && domNode.attribs) {
                               if (domNode.name === "a") {
                                 return (
-                                  <StyledLink
-                                    as={"a"}
-                                    href={domNode.attribs.href}
-                                    onMouseEnter={() => setCursorType("hover")}
-                                    onMouseLeave={() =>
-                                      setCursorType("normal")
-                                    }>
-                                    {domToReact(domNode.children)}
-                                  </StyledLink>
+                                  <Link as={"a"} href={domNode.attribs.href}>
+                                    {domToReact(
+                                      (domNode as Element).children as DOMNode[]
+                                    )}
+                                  </Link>
                                 );
                               }
                               return domNode;
                             }
                           },
                         })}
-                      </Medium>
+                      </Small>
                     </ProjectGridBlockquote>
                   </ProjectGridRow>
-                </Animation>
+                </RevealAnimation>
               );
             }
           })}
         </ProjectGrid>
-        {projectData.client_quote && (
-          <Animation type='fadeFromBottom'>
-            <ClientQuote>
-              <ClientQuoteLeft>
-                <Img
-                  className='desktop'
-                  src={
-                    projectData.client_photo?.[0]?.url ||
-                    `/icons/avatar-default.svg`
-                  }
-                  width={250}
-                  height={250}
-                  layout={"responsive"}
-                />
-              </ClientQuoteLeft>
-              <ClientQuoteRight>
-                <Medium>{projectData.client_quote}</Medium>
-                <Img
-                  className='phone'
-                  src={
-                    projectData.client_photo?.[0]?.url ||
-                    `/icons/avatar-default.svg`
-                  }
-                  width={250}
-                  height={250}
-                  layout={"responsive"}
-                />
-                <Micro>{projectData.client_name}</Micro>
-                <br />
-                <Micro className='lowcase'>{projectData.client_position}</Micro>
-              </ClientQuoteRight>
-            </ClientQuote>
-          </Animation>
-        )}
-        {projectData.next_project.length > 0 && (
-          <NextProjectSection>
-            <NextProjectHead>
-              {w >= device.phone ? (
-                <Large className='related-project'>
-                  {strings.globals.relatedProject}
-                </Large>
-              ) : (
-                <Micro>{strings.globals.relatedProject}</Micro>
-              )}
-              <Large className='back-to-projects'>
-                <StyledLink
-                  as={"a"}
-                  href={"/projects/all-projects"}
-                  onMouseEnter={() => setCursorType("hover")}
-                  onMouseLeave={() => setCursorType("normal")}>
-                  {strings.globals.backToProjects}
-                </StyledLink>
-              </Large>
-            </NextProjectHead>
-            <ClassicGrid>
-              {(w >= device.phone
-                ? projectData.next_project
-                : [projectData.next_project[0]]
-              ).map(
-                (
-                  // @ts-ignore
-                  { project_grid_name, landingpage_grid_image, _slug, areas }
-                ) => (
-                  <GridItem
-                    type={landingpage_grid_image[0]._type}
-                    areas={areas}
-                    projectName={project_grid_name}
-                    videoThumb={landingpage_grid_image[0].cover}
-                    width={landingpage_grid_image[0].width}
-                    height={landingpage_grid_image[0].height}
-                    src={
-                      landingpage_grid_image[0]._type === "Video"
-                        ? landingpage_grid_image[0].cdn_files[0].url
-                        : landingpage_grid_image[0].url
-                    }
-                    slug={_slug}
-                    key={_slug}
-                  />
-                )
-              )}
-            </ClassicGrid>
-          </NextProjectSection>
-        )}
+        <ProjectDetailQuote>
+          {project.client_quote && (
+            <ClientQuote
+              animated={false}
+              clientName={project.client_name}
+              clientRole={project.client_position}
+              quote={project.client_quote}
+            />
+          )}
+        </ProjectDetailQuote>
+        <SimilarProjectsSlider>
+          <ProjectsSlider
+            projects={similar_projects}
+            header={"Related projects"}
+            linkText={"All projects"}
+            url='/projects/all-projects'
+          />
+        </SimilarProjectsSlider>
       </StyledProject>
     </>
   );
@@ -291,20 +209,37 @@ export const getStaticProps = async ({
 }: GetStaticPropsContext<{
   projectSlug: string;
 }>) => {
-  const data = await client.query<Query>({
+  const client = getClient();
+  const {
+    data: { Project: project, Areas: areas },
+  } = await client.query<Query>({
     query: GET_PROJECT,
     variables: { slug: params.projectSlug },
   });
+  const enhancedProject = enhanceProjects([project], areas);
+
+  const {
+    data: { Areas: _similar_projects },
+  } = await client.query<Query>({
+    query: GET_ALL_AREAS,
+    variables: {
+      where: { _slug_any: enhancedProject[0].areas.map((x) => x._slug) },
+      limit: 10,
+    } as QueryAreasArgs,
+  });
+
+  const similar_projects = _similar_projects.items
+    .map((x) => x.projects)
+    .flat()
+    .slice(0, 10)
+    .filter((x) => x._slug !== enhancedProject[0]._slug);
 
   return {
     props: {
-      areas: data.data.Areas,
+      areas: areas,
       projectData: {
-        ...data.data.Project,
-        next_project: enhanceProjects(
-          data.data.Project.next_project,
-          data.data.Areas
-        ),
+        project: enhanceProjects([project], areas),
+        similar_projects: enhanceProjects(similar_projects, areas),
       },
     },
     revalidate: Number(process.env.REVALIDATE),

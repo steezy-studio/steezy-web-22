@@ -1,34 +1,34 @@
-import React, { useContext } from "react";
-import NextLink, { LinkProps as NextLinkProps } from "next/link";
-import { StyledLink } from "./Styles/StyledLink";
-import { HoverProvider } from "../../pages/_app";
+import { LinkProps as NextLinkProps } from "next/link";
+import { ReactNode, useContext } from "react";
+import { CursorContext } from "../Cursor/CursorProvider";
+import { LinkBg, StyledLink } from "./Styles/StyledLink";
 
 interface LinkProps extends NextLinkProps {
-  children: JSX.Element | JSX.Element[] | string;
+  children: ReactNode | ReactNode[] | string;
   className?: string;
   target?: string;
+  onClick?: () => void;
 }
 
-const Link = ({ href, children, className, target, ...rest }: LinkProps) => {
-  const { setCursorType } = useContext(HoverProvider);
-
-  return target ? (
+const Link = ({ href, children, className, onClick, target }: LinkProps) => {
+  const { setCursorType } = useContext(CursorContext);
+  return (
     <StyledLink
-      className={className}
+      href={href}
       onMouseEnter={() => setCursorType("hover")}
-      onMouseLeave={() => setCursorType("normal")}>
-      <a href={href as string} target={target} {...rest}>
-        {children}
-      </a>
-    </StyledLink>
-  ) : (
-    <StyledLink
+      onMouseLeave={() => setCursorType("normal")}
+      target={target}
+      role={onClick ? "button" : "link"}
       className={className}
-      onMouseEnter={() => setCursorType("hover")}
-      onMouseLeave={() => setCursorType("normal")}>
-      <NextLink href={href} {...rest}>
-        {children}
-      </NextLink>
+      onClick={(e) => {
+        if (onClick) {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+    >
+      {children}
+      <LinkBg className={`bg ${className}`} />
     </StyledLink>
   );
 };

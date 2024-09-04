@@ -1,17 +1,25 @@
-import { Cookie, CookieSetOptions } from "universal-cookie";
+import { CookieSetOptions } from "universal-cookie";
 
 export const colors = {
   primary300: "#f5ede5",
-  primary400: "#F8D269",
+  primary400: "#FFE96F",
   black: "#000000",
-  gray400: "#b8afa6",
-  gray500: "#333",
+  gray1000: "#161616",
+  gray900: "#262626",
+  gray800: "#393939",
+  gray700: "#525252",
+  gray600: "#6f6f6f",
+  gray500: "#8d8d8d",
+  gray400: "#a8a8a8",
+  gray300: "#E5E5DF",
+  gray200: "#e0e0e0",
+  gray100: "#f4f4f4",
   white: "#FFFFFF",
 } as const;
 
 export type ColorKeys = keyof typeof colors;
 export type ColorKeysArray = ColorKeys[];
-export type ColorValues = typeof colors[ColorKeys];
+export type ColorValues = (typeof colors)[ColorKeys];
 
 export const allProjects = {
   _slug: "all-projects",
@@ -20,7 +28,20 @@ export const allProjects = {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget arcu mollis, faucibus erat eget, sollicitudin leo.",
 };
 
-export const projectsPerPage = 12;
+export const indetifiers = [
+  {
+    namespace: "custom",
+    key: "grid_image",
+  },
+  {
+    namespace: "custom",
+    key: "grid_image_hover",
+  },
+  {
+    namespace: "custom",
+    key: "product_video",
+  },
+];
 
 export const device = {
   miniPhone: 400,
@@ -29,8 +50,10 @@ export const device = {
   tabletLandscape: 1200,
   smallNotebook: 1440,
   largeNotebook: 1920,
-  monitor: 2500,
+  monitor: 1921,
 } as const;
+
+export type DevicesKeys = keyof typeof device;
 
 export const breakpoint = {
   miniPhone: `@media (max-width: ${device.miniPhone}px)`,
@@ -42,6 +65,7 @@ export const breakpoint = {
   helperLargeNotebook: `@media (min-width: 1600px) and (max-width: ${device.largeNotebook}px)`,
   largeNotebook: `@media (max-width: ${device.largeNotebook}px)`,
   monitor: `@media (min-width: ${device.monitor}px) `,
+  custom: (maxWidth: number) => `@media (max-width: ${maxWidth}px) `,
 } as const;
 
 export const theme = (width: number) => ({
@@ -50,17 +74,8 @@ export const theme = (width: number) => ({
       ? "15px"
       : width <= device.smallNotebook
       ? "20px"
-      : "40px",
-  navbarHeight:
-    width <= device.phone
-      ? "40px"
-      : width <= device.tabletLandscape
-      ? "50px"
-      : width <= device.smallNotebook
-      ? "60px"
-      : width <= device.largeNotebook
-      ? "70px"
-      : "80px",
+      : "120px",
+  bRad: width <= device.tabletPortrait ? "10px" : "15px",
 });
 export type Theme = typeof theme;
 

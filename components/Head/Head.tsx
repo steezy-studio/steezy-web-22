@@ -1,5 +1,4 @@
 import NextHead from "next/head";
-import React from "react";
 import { colors } from "../../helpers/consts";
 
 interface Props {
@@ -22,13 +21,12 @@ const Head = ({ pageName, ogTitle, ogImageSrc, ogDescription }: Props) => {
       <link rel='manifest' href='/manifest.json'></link>
 
       <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      <meta name='theme-color' content={colors.primary300} />
+      <meta name='theme-color' content={colors.white} />
       <meta name='description' content={ogDescription} />
 
       <meta property='og:title' content={ogTitle} />
       <meta property='og:description' content={ogDescription} />
       <meta property='og:type' content='website' />
-      {/* <meta property="og:url" content="https://www.imdb.com/title/tt0117500/" /> */}
       {!!ogImageSrc && <meta property='og:image' content={ogImageSrc} />}
     </NextHead>
   );

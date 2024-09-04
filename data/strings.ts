@@ -1,4 +1,4 @@
-export default {
+const data = {
   footer: {
     cta: "Are you interested? Tell us your story!",
     address: "STEEZY, s.r.o.\nObilní trh 4, 602 00 Brno\nCzech Republic",
@@ -7,6 +7,7 @@ export default {
   },
   contactPage: {
     head: { pageName: "Contact" },
+    navbar: { header: "Contact" },
     hero: {
       subHeader:
         "Do you have an interesting story to tell?\nGet in touch right now.",
@@ -16,6 +17,7 @@ export default {
   },
   studioPage: {
     head: { pageName: "Studio" },
+    navbar: { header: "We are STEEZY STUDIO" },
     hero: {
       subHeader:
         "Everything that looks beautiful, simple and intuitive on the outside requires a sh*t lot of time and effort, which cannot be seen at first glance.",
@@ -31,6 +33,25 @@ export default {
       paragraph:
         "We form a diverse team of professionals with specializations in classical and digital creative fields. We build on an analysis of the problem and we think in the context of time and relevant markets. We combine the latest technology and knowledge in the field while taking into account the cultural environment and value propositions.",
     },
+    quotes: [
+      {
+        quote:
+          "The cooperation with\nSteezy exceeded our\nexpectations in almost all\nrespects. I was looking\nforward to every\nnext meeting.",
+        name: "Roman Svačina",
+        position: "Managing Director at Infinit wellness",
+      },
+      {
+        quote: "Skilled creatives\nwith amazing results!",
+        name: "Adam Křena",
+        position: "Head of Atelier @footshop",
+      },
+      {
+        quote:
+          "We have chosen Steezy for their youthful, fresh and original ideas, which they always think through and elaborate in detail.",
+        name: "Daniel Urminský",
+        position: "Country Manager @Isobar",
+      },
+    ],
     values: {
       header: "Our key values",
       list: [
@@ -58,43 +79,118 @@ export default {
     },
     slider: [
       {
-        src: "studio_G1.jpg",
+        wsf: false,
+        src: "crew_1.jpg",
+        width: 1500,
+        height: 1125,
       },
       {
-        src: "studio_G2.jpg",
+        wsf: true,
+        src: "crew_2.jpg",
+        width: 1500,
+        height: 1000,
       },
       {
-        src: "studio_G3.jpg",
+        wsf: true,
+        src: "crew_3.jpg",
+        width: 1500,
+        height: 1000,
       },
       {
-        src: "studio_G4.jpg",
+        wsf: true,
+        src: "crew_4.jpg",
+        width: 1000,
+        height: 1500,
       },
       {
-        src: "studio_G5.jpg",
+        wsf: false,
+        src: "crew_5.jpg",
+        width: 1500,
+        height: 1125,
       },
       {
-        src: "studio_G6.jpg",
+        wsf: true,
+        src: "crew_6.jpg",
+        width: 1500,
+        height: 1000,
       },
       {
-        src: "studio_G7.jpg",
+        wsf: true,
+        src: "crew_7.jpg",
+        width: 1000,
+        height: 1500,
       },
       {
-        src: "studio_G8.jpg",
+        wsf: true,
+        src: "crew_8.jpg",
+        width: 1000,
+        height: 1500,
       },
       {
-        src: "studio_G9.jpg",
+        wsf: true,
+        src: "crew_9.jpg",
+        width: 1500,
+        height: 1000,
       },
       {
-        src: "studio_G10.jpg",
+        wsf: true,
+        src: "crew_10.jpg",
+        width: 1500,
+        height: 1000,
       },
       {
-        src: "studio_G11.jpg",
+        wsf: true,
+        src: "crew_11.jpg",
+        width: 1000,
+        height: 1500,
       },
       {
-        src: "studio_G12.jpg",
+        wsf: false,
+        src: "crew_12.jpg",
+        width: 1500,
+        height: 1000,
       },
       {
-        src: "studio_G13.jpg",
+        wsf: true,
+        src: "crew_13.jpg",
+        width: 1500,
+        height: 1000,
+      },
+      {
+        wsf: true,
+        src: "crew_14.jpg",
+        width: 1500,
+        height: 1000,
+      },
+      {
+        wsf: true,
+        src: "crew_15.jpg",
+        width: 1000,
+        height: 1500,
+      },
+      {
+        wsf: true,
+        src: "crew_16.jpg",
+        width: 1500,
+        height: 1000,
+      },
+      {
+        wsf: true,
+        src: "crew_17.jpg",
+        width: 1000,
+        height: 1500,
+      },
+      {
+        wsf: true,
+        src: "crew_18.jpg",
+        width: 1000,
+        height: 1500,
+      },
+      {
+        wsf: true,
+        src: "crew_19.jpg",
+        width: 1000,
+        height: 1500,
       },
     ],
     brands: {
@@ -114,7 +210,6 @@ export default {
         "skoda.svg",
         "mcdonalds.svg",
         "nike.svg",
-        "eggo.svg",
         "adidas.svg",
         "footshop.svg",
         "infinit.svg",
@@ -122,11 +217,9 @@ export default {
         "tullamore-dew.svg",
         "kfc.svg",
         "garret.svg",
-        "adastra.svg",
         "unicredit-bank.svg",
         "new-era.svg",
         "jic.svg",
-        "manya.svg",
         "sap.svg",
         "siemens.svg",
         "ctp.svg",
@@ -227,9 +320,13 @@ export default {
   },
   landingPage: {
     head: {},
+    navbar: {
+      header:
+        "WE’RE CREATIVE HOUSE BUILDING STRONG visual identities and communication strategies behind inspiring BRANDS",
+    },
     hero: {
       subHeader:
-        "Steezy is a creative studio focused on a comprehensive solutionS for visual communication.",
+        "We work for world-known brands while sharing our knowledge and passion with local start-ups and cultural pioneers.",
       header: { cta: "We show", rest: "\nthe\u00a0world how\ngreat you are" },
       clients: {
         header: "PROUDLY DESIGNING FOR",
@@ -274,18 +371,37 @@ export default {
     },
     quotes: [
       {
-        __typename: "Quote",
-        name: "ADAM KŘENA",
+        quote:
+          "The cooperation with\nSteezy exceeded our\nexpectations in almost all\nrespects. I was looking\nforward to every\nnext meeting.",
+        name: "Roman Svačina",
+        position: "Managing Director at Infinit wellness",
+      },
+      {
+        quote: "Skilled creatives\nwith amazing results!",
+        name: "Adam Křena",
         position: "Head of Atelier @footshop",
-        quote: [
-          {
-            type: "text",
-            body: "I appreciate the creative approach, multi-dimensional overlap, fast and transparent communication in cooperation with ",
-          },
-          { type: "link", body: "steezy.studio", href: "/studio" },
-        ],
+      },
+      {
+        quote:
+          "We have chosen Steezy for their youthful, fresh and original ideas, which they always think through and elaborate in detail.",
+        name: "Daniel Urminský",
+        position: "Country Manager @Isobar",
       },
     ],
+    // quotes: [
+    //   {
+    //     __typename: "Quote",
+    //     name: "ADAM KŘENA",
+    //     position: "Head of Atelier @footshop",
+    //     quote: [
+    //       {
+    //         type: "text",
+    //         body: "I appreciate the creative approach, multi-dimensional overlap, fast and transparent communication in cooperation with ",
+    //       },
+    //       { type: "link", body: "steezy.studio", href: "/studio" },
+    //     ],
+    //   },
+    // ],
   },
 
   globals: {
@@ -300,14 +416,34 @@ export default {
   },
   navData: [
     {
-      name: "studio",
-      link: "/studio",
-      highlighted: true,
+      name: "projects",
+      link: "/projects/all-projects",
+      activePaths: ["/project"],
+      iconName: "w95_projects.png",
+      cover: "/images/navlink-projects-cover.webp",
     },
     {
-      name: "contact",
+      name: "studio",
+      link: "/studio",
+      activePaths: [],
+      iconName: "w95_studio.png",
+      cover: "/images/studio/studio_1.jpg",
+    },
+    {
+      name: "steezy apparel",
+      link: "/apparel",
+      activePaths: [],
+      iconName: "w95_apparel.png",
+      cover: "/images/navlink-apparel-cover.webp",
+    },
+    {
+      name: "get in touch",
       link: "/contact",
-      highlighted: true,
+      activePaths: [],
+      iconName: "w95_contacts.png",
+      cover: "/images/contact-hero.jpg",
     },
   ],
-} as const;
+};
+
+export default data;

@@ -1,28 +1,38 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 
-const client = new ApolloClient({
-  uri: `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_TOKEN}`,
-  cache: new InMemoryCache(),
-  defaultOptions: {
-    watchQuery: {
-      fetchPolicy: "no-cache",
-      errorPolicy: "ignore",
-    },
-    query: {
-      fetchPolicy: "no-cache",
-      errorPolicy: "all",
-    },
-  },
-});
+let client: ApolloClient<any> | null = null;
 
-export const withApolloClient = (Page) => {
-  return (props) => {
-    return (
-      <ApolloProvider client={client}>
-        <Page {...props} />
-      </ApolloProvider>
-    );
-  };
-};
+function getClient(endpoint: "prepr" | "shopify" = "prepr") {
+  if (!client || typeof window === "undefined") {
+    const headers =
+      endpoint === "shopify"
+        ? {
+            "X-Shopify-Storefront-Access-Token":
+              process.env.NEXT_PUBLIC_SHOPIFY_ACCESS_TOKEN,
+          }
+        : {};
 
-export default client;
+    client = new ApolloClient({
+      uri:
+        endpoint === "shopify"
+          ? process.env.NEXT_PUBLIC_SHOPIFY_API_URL
+          : `${process.env.NEXT_PUBLIC_API_URL}/${process.env.NEXT_PUBLIC_TOKEN}`,
+      headers,
+      cache: new InMemoryCache(),
+      defaultOptions: {
+        watchQuery: {
+          fetchPolicy: "no-cache",
+          errorPolicy: "ignore",
+        },
+        query: {
+          fetchPolicy: "no-cache",
+          errorPolicy: "all",
+        },
+      },
+    });
+  }
+
+  return client;
+}
+
+export default getClient;

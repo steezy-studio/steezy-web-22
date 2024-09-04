@@ -1,4 +1,5 @@
-import { Areas, Project, Area } from "../generated/types";
+import { Project } from "../cms";
+import { Area, Areas } from "../generated/preprTypes";
 
 export const enhanceProjects = (projects: Project[], areas: Areas) => {
   return projects.map((project) => {

@@ -1,82 +1,51 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import { useRouter } from "next/router";
-import { Fragment, useContext, useEffect, useState } from "react";
-import client, { withApolloClient } from "../../apollo/client";
-import GridItem from "../../components/GridItem/GridItem";
+import { useContext, useEffect } from "react";
+import getClient from "../../apollo/client";
+import { Query } from "../../cms";
 import Head from "../../components/Head/Head";
-import { HeroSocials } from "../../components/Hero/Styles/StyledHero";
-import Instagram from "../../components/Icons/Instagram";
-import Vimeo from "../../components/Icons/Vimeo";
 import Link from "../../components/Link/Link";
-import { StyledLink } from "../../components/Link/Styles/StyledLink";
-import Navbar from "../../components/Navbar/Navbar";
-import { Large } from "../../components/Typo/Large";
-import { Medium } from "../../components/Typo/Medium";
+import { NavbarContext } from "../../components/Navbar/NavbarControls";
+import ProjectsGrid from "../../components/ProjectsGrid/ProjectsGrid";
+import RevealAnimation from "../../components/RevealAnimation/RevealAnimation";
+import ScrollTopButton from "../../components/ScrollTopButton/ScrollTopButton";
+import { Nano } from "../../components/Typo/Nano";
 import strings from "../../data/strings";
-import { Areas, Query } from "../../generated/types";
+import { Areas } from "../../generated/preprTypes";
 import { GET_ALL_AREAS } from "../../graphql/GetAllAreas";
 import { GET_AREA } from "../../graphql/GetArea";
-import { allProjects, device, projectsPerPage } from "../../helpers/consts";
+import { allProjects } from "../../helpers/consts";
 import {
   EnhancedProject,
   enhanceProjects,
 } from "../../helpers/enhanceProjects";
-import { useWindowSize } from "../../hooks/useWindowSize";
 import {
-  ProjectsGrid,
-  ProjectsGridColumn,
-  ProjectsGridItem,
+  Filter,
+  FilterW,
+  ProjectsGridW,
   ProjectsHero,
-  ProjectsHeroContent,
   ProjectsHeroFilters,
   StyledProjects,
 } from "../../pagestyles/StyledProjects";
-import { HoverProvider } from "../_app";
 
 interface ProjectsProps {
   areas: Areas;
   projects: EnhancedProject[];
-  projectsCount: number;
 }
 
-const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
+const Projects = ({ areas, projects }: ProjectsProps) => {
   const router = useRouter();
-  const { setCursorType } = useContext(HoverProvider);
-  const [projectsToDisplay, setProjectsToDisplay] = useState(projectsPerPage);
-  const { w } = useWindowSize();
 
-  // we dont use fetch pagination, because prepr.io doesnt support it for content references
-  // it is a drawback for controlling order of projects, which is more important than load time
-  const handleIndexInc = () => {
-    setProjectsToDisplay((prev) => prev + projectsPerPage);
-  };
-
-  useEffect(() => {
-    setProjectsToDisplay(projectsPerPage);
-  }, [router.asPath]);
-
-  console.log(projectsToDisplay);
-
+  const { setNavbarHeader } = useContext(NavbarContext);
   const activeArea = areas.items.find(
     (area) => area._slug === router.query.area
   );
-
-  const loadMoreButton = !(projectsToDisplay >= projectsCount) && (
-    <Large>
-      <StyledLink
-        onClick={handleIndexInc}
-        onMouseEnter={() => setCursorType("hover")}
-        onMouseLeave={() => setCursorType("normal")}>
-        more projects
-      </StyledLink>
-    </Large>
-  );
-
-  const paginatedProjects = projects.slice(0, projectsToDisplay);
+  useEffect(() => {
+    setNavbarHeader(activeArea.area_name);
+  }, []);
 
   return (
     <>
-      {/* TODO add og image */}
       <Head
         pageName={[
           strings.projectsPage.head.pageName,
@@ -86,100 +55,45 @@ const Projects = ({ areas, projects, projectsCount }: ProjectsProps) => {
           activeArea?.area_description || allProjects.area_description
         }
         ogTitle={activeArea?.area_name || allProjects.area_name}
-        ogImageSrc={""}
+        ogImageSrc={"/images/slider-05.jpg"}
       />
-      <Navbar areas={areas.items} />
 
       <StyledProjects>
         <ProjectsHero>
-          <ProjectsHeroContent>
-            <ProjectsHeroFilters>
-              {areas.items.map(({ area_name, _slug }) => {
-                const isActive = router.query.area === _slug;
-                return (
-                  <Large key={_slug}>
+          <ProjectsHeroFilters>
+            {areas.items.map(({ area_name, _slug, projects }, i) => {
+              const isActive = router.query.area === _slug;
+              return (
+                <RevealAnimation key={_slug} delay={i * 0.2} noCrop>
+                  <FilterW className='editorial'>
                     <Link
                       href={`/projects/${_slug}`}
-                      className={`${isActive ? "active" : ""}`}>
-                      {area_name}
+                      className={`no-underline ${isActive ? "active" : ""}`}
+                    >
+                      <Filter>
+                        <span className='underline'>{area_name}</span>
+                        <Nano className='helvetica no-underline'>
+                          {projects.length}
+                        </Nano>
+                      </Filter>
                     </Link>
-                  </Large>
-                );
-              })}
-            </ProjectsHeroFilters>
-            <Medium>
-              {activeArea?.area_description || allProjects.area_description}
-            </Medium>
-          </ProjectsHeroContent>
-          <HeroSocials>
-            <Instagram />
-            <Vimeo />
-          </HeroSocials>
+                  </FilterW>
+                </RevealAnimation>
+              );
+            })}
+          </ProjectsHeroFilters>
         </ProjectsHero>
-        <ProjectsGrid>
-          <ProjectsGridColumn className='even'>
-            {paginatedProjects.map(
-              ({ project_grid_name, _slug, grid_image, _id, areas }, i) => {
-                if (i % 2 !== 0 || w <= device.phone) {
-                  return (
-                    <Fragment key={_id + router.query.area}>
-                      <ProjectsGridItem>
-                        <GridItem
-                          type={grid_image[0]._type}
-                          areas={areas}
-                          height={grid_image?.[0].height}
-                          projectName={project_grid_name}
-                          slug={_slug}
-                          src={
-                            grid_image[0]._type === "Video"
-                              ? grid_image[0].cdn_files?.[0].url
-                              : grid_image[0].url
-                          }
-                          width={grid_image?.[0].width}
-                        />
-                      </ProjectsGridItem>
-                    </Fragment>
-                  );
-                }
-              }
-            )}
-            {w <= device.phone && loadMoreButton}
-          </ProjectsGridColumn>
-          {w > device.phone && (
-            <ProjectsGridColumn className='odd'>
-              {paginatedProjects.map(
-                ({ project_grid_name, _slug, grid_image, _id, areas }, i) => {
-                  if (i % 2 === 0) {
-                    return (
-                      <ProjectsGridItem key={_id + router.query.area}>
-                        <GridItem
-                          type={grid_image[0]._type}
-                          areas={areas}
-                          height={grid_image?.[0].height}
-                          projectName={project_grid_name}
-                          slug={_slug}
-                          src={
-                            grid_image[0]._type === "Video"
-                              ? grid_image[0].cdn_files[0].url
-                              : grid_image[0].url
-                          }
-                          width={grid_image?.[0].width}
-                        />
-                      </ProjectsGridItem>
-                    );
-                  }
-                }
-              )}
-              {loadMoreButton}
-            </ProjectsGridColumn>
-          )}
-        </ProjectsGrid>
+        <ProjectsGridW>
+          <ProjectsGrid projects={projects} />
+        </ProjectsGridW>
+        <ScrollTopButton />
       </StyledProjects>
     </>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const client = getClient();
   const areaReq = client.query<Query>({
     query: GET_AREA,
     variables: {
@@ -197,13 +111,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         areaData.data.Area.projects,
         areasData.data.Areas
       ),
-      projectsCount: areaData.data.Area.projects.length,
     },
     revalidate: Number(process.env.REVALIDATE),
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const client = getClient();
   const data = await client.query<Query>({ query: GET_ALL_AREAS });
 
   const paths = data.data.Areas.items.map(({ _slug }) => ({
@@ -216,4 +130,4 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export default withApolloClient(Projects);
+export default Projects;

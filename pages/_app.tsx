@@ -1,82 +1,49 @@
-import { useRouter } from "next/router";
-import React, { MutableRefObject, useRef, useState } from "react";
-import { LocomotiveScrollProvider } from "react-locomotive-scroll";
 import { ThemeProvider } from "styled-components";
-import Cursor, { CursorTypes } from "../components/Cursor/Cursor";
-import Fixed from "../components/Fixed/Fixed";
+import Cart from "../components/Cart/Cart";
+import CartProvider from "../components/Cart/CartProvider";
+import CursorProvider from "../components/Cursor/CursorProvider";
 import Footer from "../components/Footer/Footer";
-import { HeroSocials } from "../components/Hero/Styles/StyledHero";
-import Instagram from "../components/Icons/Instagram";
-import Vimeo from "../components/Icons/Vimeo";
-import Layout from "../components/Layout/Layout";
-import { device, theme } from "../helpers/consts";
-import { useWindowSize } from "../hooks/useWindowSize";
-import { GlobalStyle } from "../pagestyles/GlobalStyles";
+import Navbar from "../components/Navbar/Navbar";
+import NavbarControls from "../components/Navbar/NavbarControls";
+import Navlinks from "../components/Navbar/Navlinks";
+import PageTransition from "../components/PageTransition/PageTransition";
+import RootVideosController from "../components/RootVideosController/RootVideosController";
 import "../css/fonts.css";
+import { theme } from "../helpers/consts";
 import { useGA } from "../hooks/useGA";
-import CookiesConsent from "../components/CookiesConsent/CookiesConsent";
-import NoSSR from "../components/NoSSR/NoSSR";
-
-export const HoverProvider = React.createContext<{
-  setIsCursorDisabled: React.Dispatch<React.SetStateAction<boolean>>;
-  setCursorType: React.Dispatch<React.SetStateAction<CursorTypes>>;
-  cursorType: CursorTypes;
-  cursorRef: MutableRefObject<HTMLDivElement>;
-}>(null);
+import { useWindowSize } from "../hooks/useWindowSize";
+import LenisContext from "../lib/Lenis";
+import { GlobalStyle } from "../pagestyles/GlobalStyles";
 
 function MyApp({ Component, pageProps }) {
   const { w } = useWindowSize();
-  const { asPath, basePath, pathname } = useRouter();
   useGA();
-  const containerRef = useRef(null);
-  const [isCursorDisabled, setIsCursorDisabled] = useState(false);
-  const [cursorType, setCursorType] = useState<CursorTypes>("normal");
-  const cursorRef = useRef<HTMLDivElement>(null);
 
   return (
-    <ThemeProvider theme={theme(w)}>
-      <GlobalStyle />
-      <LocomotiveScrollProvider
-        options={{
-          smooth: pathname !== "/project/[projectSlug]",
-          tablet: {
-            smooth: pathname !== "/project/[projectSlug]",
-            breakpoint: device.phone,
-          },
-          smartphone: { smooth: false },
-        }}
-        watch={[asPath, w]}
-        containerRef={containerRef}>
-        <main data-scroll-container ref={containerRef}>
-          <Cursor
-            isCursorDisabled={isCursorDisabled}
-            cursorType={cursorType}
-            cursorRef={cursorRef}
-          />
-          <HoverProvider.Provider
-            value={{
-              setIsCursorDisabled,
-              setCursorType,
-              cursorType,
-              cursorRef,
-            }}>
-            {/* <NoSSR>
-              <CookiesConsent />
-            </NoSSR> */}
-            <Layout>
-              <Fixed id={"fixed-socials"}>
-                <HeroSocials>
-                  <Instagram />
-                  <Vimeo />
-                </HeroSocials>
-              </Fixed>
-              <Component {...pageProps} />
-              <Footer />
-            </Layout>
-          </HoverProvider.Provider>
-        </main>
-      </LocomotiveScrollProvider>
-    </ThemeProvider>
+    <CartProvider>
+      <NavbarControls>
+        <RootVideosController>
+          <ThemeProvider theme={theme(w)}>
+            <GlobalStyle />
+            <CursorProvider>
+              <NavbarControls>
+                <Navbar />
+                <PageTransition>
+                  <LenisContext>
+                    <main>
+                      <Navlinks />
+                      <Cart />
+                      <Component {...pageProps} />
+                      <Footer />
+                    </main>
+                  </LenisContext>
+                </PageTransition>
+              </NavbarControls>
+            </CursorProvider>
+          </ThemeProvider>
+        </RootVideosController>
+      </NavbarControls>
+    </CartProvider>
   );
 }
 

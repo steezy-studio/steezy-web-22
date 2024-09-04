@@ -6,40 +6,40 @@ export const StyledBurger = styled.div`
   pointer-events: all;
   align-items: center;
   justify-content: center;
-  background-color: ${colors.black};
-  position: absolute;
-  right: 0;
-  /* cursor: pointer; */
-  /* width: 80px; */
-  width: ${({ theme }) => theme.navbarHeight};
+  border: 1px solid ${colors.black};
+  border-radius: ${({ theme }) => theme.bRad};
   height: 100%;
+  backdrop-filter: blur(5px);
+  aspect-ratio: 1;
   flex-shrink: 0;
-  z-index: 9999999;
-  padding: 15px;
+  position: relative;
+  padding: 10px;
   svg {
     width: 100%;
     height: auto;
   }
   line {
-    stroke: ${colors.white};
+    stroke: ${colors.black};
   }
   &:hover {
-    background-color: ${colors.primary400};
+    background-color: ${colors.black};
     line {
-      stroke: ${colors.black};
+      stroke: ${colors.white};
     }
   }
-  ${breakpoint.largeNotebook} {
-    /* width: 70px; */
-  }
-  ${breakpoint.smallNotebook} {
-    /* width: 60px; */
-  }
-  ${breakpoint.tabletLandscape} {
-    /* width: 50px; */
+  &.open {
+    background-color: ${colors.black};
+    line {
+      stroke: ${colors.white};
+    }
+    &:hover {
+      background-color: ${colors.white};
+      line {
+        stroke: ${colors.black};
+      }
+    }
   }
   ${breakpoint.phone} {
-    /* width: 40px; */
     padding: 5px;
   }
 `;

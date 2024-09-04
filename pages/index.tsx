@@ -1,107 +1,91 @@
-import { motion } from "framer-motion";
+import {
+  ProductConnection,
+  QueryRoot,
+  QueryRootProductsArgs,
+} from "@shopify/hydrogen-react/storefront-api-types";
 import { GetStaticProps } from "next";
-import { Fragment, useContext } from "react";
-import client from "../apollo/client";
-import Animation from "../components/Animation/Animation";
-import GridItem from "../components/GridItem/GridItem";
+import { useContext, useEffect } from "react";
+import getClient from "../apollo/client";
+import { Query } from "../cms";
+import AutoSlider from "../components/AutoSlider/AutoSlider";
+import ClientQuote from "../components/ClientQuote/ClientQuote";
+import FeaturedProducts from "../components/FeaturedProducts/FeaturedProducts";
 import Head from "../components/Head/Head";
-import Hero from "../components/Hero/Hero";
-import { StyledLink } from "../components/Link/Styles/StyledLink";
-import Navbar from "../components/Navbar/Navbar";
-import { Large } from "../components/Typo/Large";
-import { Micro } from "../components/Typo/Micro";
+import { NavbarContext } from "../components/Navbar/NavbarControls";
+import ProjectsGrid from "../components/ProjectsGrid/ProjectsGrid";
+import RevealAnimation from "../components/RevealAnimation/RevealAnimation";
+import SectionHeader from "../components/SectionHeader/SectionHeader";
+import ServicesSection from "../components/ServicesSection/ServicesSection";
+import Showreel from "../components/Showreel/Showreel";
+import { Big } from "../components/Typo/Big";
+import { Small } from "../components/Typo/Small";
 import strings from "../data/strings";
-import {
-  Areas,
-  LandingpageGridRow as LandingpageGridRowType,
-  Query,
-} from "../generated/types";
+import { Areas } from "../generated/preprTypes";
 import { GET_LANDINGPAGE } from "../graphql/GetLandingpage";
-import { allProjects } from "../helpers/consts";
+import { GET_PRODUCTS } from "../graphql/GetProducts";
+import { device, indetifiers } from "../helpers/consts";
 import { EnhancedProject, enhanceProjects } from "../helpers/enhanceProjects";
-import { splitArray } from "../helpers/splitArray";
+import { useWindowSize } from "../hooks/useWindowSize";
 import {
-  GridItemWrapper,
-  Intro,
-  IntroWrapper,
+  FeaturedGrid,
+  HeroFooter,
+  HeroFooterPerex,
+  IndexApparel,
+  IndexGrid,
+  IndexHeroClaim,
+  IndexHeroSection,
+  IndexQuoteClient,
+  IndexServices,
   LandingHeroPageLogotypes,
-  LandingpageGrid,
-  LandingpageGridRow,
-  LandingpageHeroClients,
   LandingPageHeroLogotype,
   StyledIndex,
 } from "../pagestyles/StyledIndex";
-import { Blockquote, Quote } from "../pagestyles/StyledStudio";
-import { HoverProvider } from "./_app";
 
 interface indexProps {
-  landingpageGrid: LandingpageGridRowType[];
+  projects: EnhancedProject[];
   areas: Areas;
+  products: ProductConnection;
 }
 
-const Index = ({ landingpageGrid, areas }: indexProps) => {
+const Index = ({ projects, areas, products }: indexProps) => {
   const landingpageStrings = strings.landingPage;
-  const { setCursorType } = useContext(HoverProvider);
-
-  const [firstGridPart, secondGridPart] = splitArray<LandingpageGridRowType>(
-    landingpageGrid,
-    Math.floor(landingpageGrid.length / 2)
-  );
-
-  const landingpageGridWithQuotes = [
-    ...firstGridPart,
-    landingpageStrings.quotes[0],
-    ...secondGridPart,
-  ];
-
-  const renderTextWithLink = ({ type, body, href }, i) => {
-    if (type === `text`) {
-      return <Fragment key={i}>{body}</Fragment>;
-    }
-    if (type === `link`) {
-      return (
-        <Fragment key={i}>
-          <StyledLink
-            as={"a"}
-            href={href}
-            onMouseEnter={() => setCursorType("hover")}
-            onMouseLeave={() => setCursorType("normal")}>
-            {body}
-          </StyledLink>
-          <br />
-        </Fragment>
-      );
-    }
-  };
+  const { w } = useWindowSize();
+  const { setNavbarHeader } = useContext(NavbarContext);
+  useEffect(() => {
+    setNavbarHeader(landingpageStrings.navbar.header);
+  }, []);
 
   return (
     <>
-      {/* TODO add og image */}
       <Head
         ogDescription={landingpageStrings.hero.subHeader}
-        ogImageSrc={""}
+        ogImageSrc={"/images/studio-hero.jpg"}
         pageName={"STEEZY Studio"}
         ogTitle={"STEEZY Studio"}
       />
-      <Navbar areas={areas.items} />
       <StyledIndex>
-        <Hero
-          asset={{ url: `/videos/steezy-loop.mp4`, _type: "Video" }}
-          header={(openDialog, setOpenDialog) => (
-            <>
-              <StyledLink
-                as={`span`}
-                onMouseEnter={() => setCursorType("hover")}
-                onMouseLeave={() => setCursorType("normal")}
-                onClick={() => setOpenDialog(!openDialog)}>
-                {landingpageStrings.hero.header.cta}
-              </StyledLink>
-              {landingpageStrings.hero.header.rest}
-            </>
-          )}
-          perex={landingpageStrings.hero.subHeader}>
-          <LandingpageHeroClients>
-            <Micro>{landingpageStrings.hero.clients.header}</Micro>
+        <IndexHeroSection>
+          <IndexHeroClaim>
+            <RevealAnimation delay={0.3}>
+              <Big>We show the world how great you are</Big>
+            </RevealAnimation>
+          </IndexHeroClaim>
+          <Showreel
+            asset={{
+              url:
+                w <= device.phone
+                  ? `/videos/steezy-loop-phone.mp4`
+                  : `/videos/steezy-loop.mp4`,
+              _type: "Video",
+            }}
+          />
+          <HeroFooter>
+            <HeroFooterPerex>
+              <Small as='p'>
+                We work for world-known brands while sharing our knowledge and
+                passion with local start-ups and cultural pioneers.
+              </Small>
+            </HeroFooterPerex>
             <LandingHeroPageLogotypes>
               {landingpageStrings.hero.clients.logotypes.map(
                 ({ src, alt }, i) => (
@@ -113,127 +97,91 @@ const Index = ({ landingpageGrid, areas }: indexProps) => {
                 )
               )}
             </LandingHeroPageLogotypes>
-          </LandingpageHeroClients>
-        </Hero>
-        <IntroWrapper data-scroll data-scroll-speed='2'>
-          <Intro>
-            <Micro>{landingpageStrings.intro.subHeader}</Micro>
-            <div>
-              <Large as={`span`}>
-                {landingpageStrings.intro.perex.map(renderTextWithLink)}
-              </Large>
-            </div>
-          </Intro>
-        </IntroWrapper>
+          </HeroFooter>
+        </IndexHeroSection>
 
-        <LandingpageGrid>
-          {landingpageGridWithQuotes.map((row, i) => {
-            if (row.__typename === "Quote") {
-              return (
-                <LandingpageGridRow key={i} className={"blockquote"}>
-                  <GridItemWrapper
-                    className='single'
-                    data-scroll
-                    data-scroll-speed='1'>
-                    <Animation
-                      type={"fadeFromBottom"}
-                      delay={0.2}
-                      duration={1.2}>
-                      <motion.div>
-                        <Blockquote className='landingpage'>
-                          <Quote className=''>
-                            <Large className=''>
-                              {row.quote.map(renderTextWithLink)}
-                            </Large>
-                            <Micro className='with-dash reversed'>
-                              {row.name}{" "}
-                            </Micro>
-                            <Micro className='lowcase dash-margin'>
-                              {row.position}
-                            </Micro>
-                          </Quote>
-                        </Blockquote>
-                      </motion.div>
-                    </Animation>
-                  </GridItemWrapper>
-                </LandingpageGridRow>
-              );
-            }
-            if (row.__typename === `LandingpageGridRow`) {
-              const isSingle = row.grid_row.length === 1;
-
-              return (
-                <LandingpageGridRow key={row._id}>
-                  {row.grid_row.map(
-                    ({
-                      project_grid_name,
-                      landingpage_grid_image,
-                      _slug,
-                      _id,
-                      areas,
-                    }: EnhancedProject) => {
-                      return (
-                        <GridItemWrapper
-                          key={_id}
-                          offset_amount={row.offset_amount}
-                          className={`${row.offset ? "offset" : ""} ${
-                            isSingle ? "single" : ""
-                          }`}>
-                          <GridItem
-                            type={landingpage_grid_image[0]._type}
-                            areas={areas}
-                            projectName={project_grid_name}
-                            videoThumb={landingpage_grid_image[0].cover}
-                            width={landingpage_grid_image[0].width}
-                            height={landingpage_grid_image[0].height}
-                            src={
-                              landingpage_grid_image[0]._type === "Video"
-                                ? landingpage_grid_image[0].cdn_files[0].url
-                                : landingpage_grid_image[0].url
-                            }
-                            slug={_slug}
-                            key={_slug}
-                          />
-                        </GridItemWrapper>
-                      );
-                    }
-                  )}
-                </LandingpageGridRow>
-              );
-            }
-          })}
-          <LandingpageGridRow>
-            <div></div>
-            <Large>
-              <StyledLink
-                as={"a"}
-                href={`/projects/all-projects`}
-                onMouseEnter={() => setCursorType("hover")}
-                onMouseLeave={() => setCursorType("normal")}>
-                {strings.globals.allProjects}
-              </StyledLink>
-            </Large>
-          </LandingpageGridRow>
-        </LandingpageGrid>
+        <FeaturedGrid>
+          <SectionHeader
+            header='Featured projects'
+            url='/projects/all-projects'
+            linkText='All Projects'
+          />
+          <IndexGrid>
+            <ProjectsGrid
+              projects={projects}
+              projectsPerPage={w <= device.phone ? 5 : 14}
+            />
+          </IndexGrid>
+        </FeaturedGrid>
+        <IndexServices>
+          <ServicesSection areas={areas} />
+        </IndexServices>
+        <IndexApparel>
+          <FeaturedProducts
+            products={products}
+            header='Steezy apparel'
+            url='/apparel'
+            linkText='Whole Collection'
+          />
+        </IndexApparel>
+        <IndexQuoteClient>
+          <RevealAnimation>
+            <AutoSlider
+              interval={5000}
+              list={landingpageStrings.quotes.map(
+                ({ name, position, quote }, j, a) => {
+                  return (
+                    <ClientQuote
+                      key={j}
+                      quote={quote}
+                      clientName={name}
+                      clientRole={position}
+                    />
+                  );
+                }
+              )}
+            />
+          </RevealAnimation>
+        </IndexQuoteClient>
       </StyledIndex>
     </>
   );
 };
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await client.query<Query>({ query: GET_LANDINGPAGE });
+  const preprClient = getClient();
+  const shopifyClient = getClient("shopify");
 
-  const enhancedGrid =
-    data.data.LandingpageGrids.items[0].landingpage_projects_grid.map((row) => {
-      return {
-        ...row,
-        grid_row: enhanceProjects(row.grid_row, data.data.Areas),
-      };
-    });
+  const {
+    data: { products },
+  } = await shopifyClient.query<QueryRoot>({
+    query: GET_PRODUCTS,
+    variables: {
+      first: 4,
+      variantsFirst2: 99,
+      transform: {
+        maxWidth: null,
+        maxHeight: null,
+        preferredContentType: "WEBP",
+      },
+      imagesFirst2: 99,
+      identifiers: indetifiers,
+    } as QueryRootProductsArgs,
+  });
+
+  const {
+    data: { Areas: areas, Area: area },
+  } = await preprClient.query<Query>({
+    query: GET_LANDINGPAGE,
+    variables: { sortLatestProjects: "changed_on_DESC" },
+  });
+
+  const projectsGrid = enhanceProjects(area.projects, areas);
 
   return {
     props: {
-      landingpageGrid: enhancedGrid,
-      areas: data.data.Areas,
+      areas: areas,
+      projects: projectsGrid,
+      products,
     },
     revalidate: Number(process.env.REVALIDATE),
   };

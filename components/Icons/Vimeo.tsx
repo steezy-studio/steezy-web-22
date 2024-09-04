@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import { breakpoint, ColorKeys, colors } from "../../helpers/consts";
-import { HoverProvider } from "../../pages/_app";
+import { ColorKeys, colors } from "../../helpers/consts";
+import { CursorContext } from "../Cursor/CursorProvider";
 
 interface InstagramProps {
   fill?: ColorKeys;
@@ -10,6 +10,7 @@ interface InstagramProps {
 const StyledVimeo = styled.a`
   display: block;
   width: 21px;
+  height: 21px;
   svg {
     height: 100%;
     width: 21px;
@@ -17,7 +18,7 @@ const StyledVimeo = styled.a`
 `;
 
 const Vimeo = ({ fill = "black" }: InstagramProps) => {
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
   return (
     <StyledVimeo
       href='https://vimeo.com/steezystudio'
@@ -27,12 +28,14 @@ const Vimeo = ({ fill = "black" }: InstagramProps) => {
       }}
       onMouseLeave={() => {
         setCursorType("normal");
-      }}>
+      }}
+    >
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='25.053'
         height='21.606'
-        viewBox='0 0 25.053 21.606'>
+        viewBox='0 0 25.053 21.606'
+      >
         <defs>
           <clipPath id='clip-path'>
             <rect
@@ -49,7 +52,8 @@ const Vimeo = ({ fill = "black" }: InstagramProps) => {
           id='Group_6245'
           data-name='Group 6245'
           transform='translate(0)'
-          clipPath='url(#clip-path)'>
+          clipPath='url(#clip-path)'
+        >
           <path
             id='Path_14543'
             data-name='Path 14543'

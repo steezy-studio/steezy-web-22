@@ -9,11 +9,7 @@ interface LayoutProps {
 const StyledLayout = styled.div``;
 
 const Layout = ({ children }: LayoutProps) => {
-  return (
-    <StyledLayout data-scroll-container data-scroll-section>
-      {children}
-    </StyledLayout>
-  );
+  return <StyledLayout>{children}</StyledLayout>;
 };
 
 export default Layout;

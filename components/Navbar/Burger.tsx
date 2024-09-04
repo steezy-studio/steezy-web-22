@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useContext } from "react";
-import { HoverProvider } from "../../pages/_app";
+import { CursorContext } from "../Cursor/CursorProvider";
 import { BurgerSvg, StyledBurger } from "./Styles/StyledBurger";
 
 interface BurgerProps {
@@ -8,20 +8,30 @@ interface BurgerProps {
   isOpen: boolean;
 }
 
-const Line = (props) => <motion.line fill='none' strokeWidth='2' {...props} />;
+const Line = (props) => (
+  <motion.line
+    fill='none'
+    strokeWidth='1'
+    vectorEffect={"non-scaling-stroke"}
+    {...props}
+  />
+);
 
 const Burger = ({ onClick, isOpen }: BurgerProps) => {
-  const { setCursorType } = useContext(HoverProvider);
+  const { setCursorType } = useContext(CursorContext);
   return (
     <StyledBurger
       onClick={onClick}
+      className={isOpen ? "open" : ""}
       onMouseEnter={() => setCursorType("hover")}
-      onMouseLeave={() => setCursorType("normal")}>
+      onMouseLeave={() => setCursorType("normal")}
+    >
       <BurgerSvg
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 45 45'
         width={45}
-        height={45}>
+        height={45}
+      >
         <Line
           animate={isOpen ? "open" : "closed"}
           initial={false}

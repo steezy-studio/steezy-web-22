@@ -1,14 +1,16 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import styled from "styled-components";
-import { breakpoint, ColorKeys, colors } from "../../helpers/consts";
-import { HoverProvider } from "../../pages/_app";
+import { ColorKeys, colors } from "../../helpers/consts";
+import { CursorContext } from "../Cursor/CursorProvider";
 
 interface InstagramProps {
   fill?: ColorKeys;
+  as?: keyof JSX.IntrinsicElements;
 }
 
 const StyledInstagram = styled.a`
   width: 21px;
+  height: 21px;
   display: block;
   svg {
     width: 100%;
@@ -16,10 +18,11 @@ const StyledInstagram = styled.a`
   }
 `;
 
-const Instagram = ({ fill = "black" }: InstagramProps) => {
-  const { setCursorType } = useContext(HoverProvider);
+const Instagram = ({ fill = "black", as = "a" }: InstagramProps) => {
+  const { setCursorType } = useContext(CursorContext);
   return (
     <StyledInstagram
+      as={as}
       onMouseEnter={() => {
         setCursorType("hover");
       }}
@@ -27,12 +30,14 @@ const Instagram = ({ fill = "black" }: InstagramProps) => {
         setCursorType("normal");
       }}
       href='https://www.instagram.com/steezy.studio/'
-      target={`_blank`}>
+      target={`_blank`}
+    >
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='24.328'
         height='24.47'
-        viewBox='0 0 24.328 24.47'>
+        viewBox='0 0 24.328 24.47'
+      >
         <g id='Group_6243' data-name='Group 6243'>
           <path
             id='Path_14540'
