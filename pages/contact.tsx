@@ -114,7 +114,7 @@ const Contact = ({}: ContactProps) => {
                 width: 1920,
                 heihgt: 1440,
               }}
-              phone='(+420) 728 088 996'
+              phone='(+420) 733 388 019'
             />
           </FoundersGrid>
         </Founders>

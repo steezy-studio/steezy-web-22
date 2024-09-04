@@ -48,8 +48,8 @@ const Footer = ({}: FooterProps) => {
                 </Link>
               </Micro>
               <Micro>
-                <Link href={"https://vimeo.com/steezy.studio"} target='_blank'>
-                  {"vimeo.com/steezy.studio"}
+                <Link href={"https://vimeo.com/steezystudio"} target='_blank'>
+                  {"vimeo.com/steezystudio"}
                 </Link>
               </Micro>
             </FooterSocials>
