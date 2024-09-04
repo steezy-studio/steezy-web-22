@@ -60,7 +60,7 @@ export const Vega = styled(Image)`
   display: block;
 `;
 
-export const navLinksVariants = {
+export const navLinksVariants: Variants = {
   initial: {
     opacity: 0,
   },
@@ -69,6 +69,8 @@ export const navLinksVariants = {
     transition: {
       duration: 0.5,
       when: "beforeChildren",
+      staggerChildren: 0.1,
+      staggerDirection: 1,
     },
   },
   exit: {
@@ -76,6 +78,8 @@ export const navLinksVariants = {
     transition: {
       duration: 0.5,
       when: "afterChildren",
+      staggerChildren: 0.1,
+      staggerDirection: -1,
     },
   },
 };

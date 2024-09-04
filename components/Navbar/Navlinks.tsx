@@ -77,7 +77,6 @@ const Navlinks = ({}: NavlinksProps) => {
             const isActive =
               router.asPath.includes(link) ||
               activePaths.some((path) => router.asPath.includes(path));
-            const delay = (i + 1) * navLinksDelay;
 
             return (
               <motion.div
@@ -86,7 +85,7 @@ const Navlinks = ({}: NavlinksProps) => {
                   animate: { opacity: 1 },
                   exit: { opacity: 0 },
                 }}
-                transition={{ delay: delay }}
+                transition={{ duration: 0.3 }}
                 key={i}
               >
                 {i === 0 && <Divider />}
