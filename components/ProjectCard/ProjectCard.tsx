@@ -22,9 +22,9 @@ import {
   GridItemHeaderInner,
   GridItemHoverOverlay,
   GridItemPhoneOverlay,
-  GridItemVideo,
 } from "../GridItem/Styles/StyledGridItem";
 import { Small } from "../Typo/Small";
+import Video from "../Video/Video";
 import { StyledProjectCard } from "./StyledProjectCard";
 
 interface ProjectCardProps {
@@ -112,7 +112,7 @@ const ProjectCard = ({
             priority
           />
         ) : (
-          <GridItemVideo
+          <Video
             ref={videoRef}
             // @ts-ignore
             src={cover[0].cdn_files[0].url}

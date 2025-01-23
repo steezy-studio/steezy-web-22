@@ -191,12 +191,12 @@ export const getStaticProps: GetStaticProps = async () => {
 
     return {
       props: { areas, latestProjects: enhancedLatestProjects },
-      revalidate: Number(process.env.REVALIDATE),
+      revalidate: false,
     };
   } catch (e) {
     return {
       props: { areas: null },
-      revalidate: Number(process.env.REVALIDATE),
+      revalidate: false,
     };
   }
 };

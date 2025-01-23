@@ -129,12 +129,12 @@ export const getStaticProps: GetStaticProps = async () => {
     const data = await client.query({ query: GET_ALL_AREAS });
     return {
       props: { areas: data.data.Areas },
-      revalidate: Number(process.env.REVALIDATE),
+      revalidate: false,
     };
   } catch (e) {
     return {
       props: { areas: null },
-      revalidate: Number(process.env.REVALIDATE),
+      revalidate: false,
     };
   }
 };

@@ -219,8 +219,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       first: 4,
       variantsFirst2: 4,
       transform: {
-        maxWidth: null,
-        maxHeight: null,
+        maxWidth: 1920,
+        maxHeight: 1920,
         preferredContentType: "WEBP",
       },
       imagesFirst2: 1,
@@ -245,6 +245,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       projects: enhanceProjects(projects.items, areas),
       featuredProducts,
     },
+    revalidate: false,
   };
 };
 

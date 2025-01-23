@@ -7,9 +7,10 @@ export function useIntersectionObserver(
   deps: any[] = []
 ) {
   React.useEffect(() => {
-    if (ref.current) {
+    const activeRef = ref.current;
+    if (activeRef) {
       const observer = new IntersectionObserver(callback, options);
-      observer.observe(ref.current);
+      observer.observe(activeRef);
       return () => observer.disconnect();
     }
   }, [ref.current, options?.rootMargin, ...deps]);

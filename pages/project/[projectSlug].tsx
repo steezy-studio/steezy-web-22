@@ -22,6 +22,7 @@ import { Small } from "../../components/Typo/Small";
 import Video from "../../components/Video/Video";
 import { QueryAreasArgs } from "../../generated/preprTypes";
 import { GET_ALL_AREAS } from "../../graphql/GetAllAreas";
+import { GET_PROJECTS } from "../../graphql/GetAllProjects";
 import { GET_PROJECT } from "../../graphql/GetProject";
 import {
   EnhancedProject,
@@ -242,12 +243,20 @@ export const getStaticProps = async ({
         similar_projects: enhanceProjects(similar_projects, areas),
       },
     },
-    revalidate: Number(process.env.REVALIDATE),
+    revalidate: false,
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  return { paths: [], fallback: `blocking` };
+  const client = getClient();
+  const { data } = await client.query<Query>({
+    query: GET_PROJECTS,
+    variables: { limit: null },
+  });
+  const paths = data.Projects.items.map((project) => ({
+    params: { projectSlug: project._slug },
+  }));
+  return { paths, fallback: false };
 };
 
 export default Project;
