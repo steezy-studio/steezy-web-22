@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
+import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 
 interface VideoProps
   extends React.DetailedHTMLProps<
@@ -18,15 +19,29 @@ const StyledVideo = styled(motion.video)`
   border-radius: ${({ theme }) => theme.bRad};
 `;
 
-const Video = ({ src, className }: VideoProps, ref) => {
+const Video = ({ src, className, poster }: VideoProps, ref) => {
   const defRef = useRef<HTMLVideoElement>(null);
   const activeRef = ref ? ref : defRef;
+
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useIntersectionObserver(
+    activeRef,
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+        }
+      });
+    },
+    { rootMargin: "200px" }
+  );
 
   return (
     <StyledVideo
       ref={activeRef}
       className={className}
-      src={src}
+      src={shouldLoad ? src : undefined}
       autoPlay
       playsInline
       muted
