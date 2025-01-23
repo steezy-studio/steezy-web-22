@@ -135,8 +135,8 @@ export const getStaticProps: GetStaticProps = async () => {
       first: 99,
       variantsFirst2: 99,
       transform: {
-        maxWidth: null,
-        maxHeight: null,
+        maxWidth: 1920,
+        maxHeight: 1920,
         preferredContentType: "WEBP",
       },
       imagesFirst2: 99,
