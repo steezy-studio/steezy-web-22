@@ -242,7 +242,7 @@ export const getStaticProps = async ({
         similar_projects: enhanceProjects(similar_projects, areas),
       },
     },
-    revalidate: Number(process.env.REVALIDATE),
+    revalidate: false,
   };
 };
 

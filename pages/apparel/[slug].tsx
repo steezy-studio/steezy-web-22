@@ -245,6 +245,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       projects: enhanceProjects(projects.items, areas),
       featuredProducts,
     },
+    revalidate: false,
   };
 };
 

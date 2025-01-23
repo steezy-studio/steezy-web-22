@@ -112,7 +112,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         areasData.data.Areas
       ),
     },
-    revalidate: Number(process.env.REVALIDATE),
+    revalidate: false,
   };
 };
 

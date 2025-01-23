@@ -150,7 +150,7 @@ export const getStaticProps: GetStaticProps = async () => {
       areas,
       projects: enhanceProjects(projects.items, areas),
     },
-    revalidate: Number(process.env.REVALIDATE),
+    revalidate: false,
   };
 };
 

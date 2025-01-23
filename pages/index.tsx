@@ -183,7 +183,7 @@ export const getStaticProps: GetStaticProps = async () => {
       projects: projectsGrid,
       products,
     },
-    revalidate: Number(process.env.REVALIDATE),
+    revalidate: false,
   };
 };
 
