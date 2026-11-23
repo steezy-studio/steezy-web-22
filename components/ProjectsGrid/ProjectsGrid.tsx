@@ -67,7 +67,7 @@ const ProjectsGrid = ({
       </ProjectsGridRows>
       {projects.length > visibleProjectsCount && (
         <LoadMoreProjects>
-          <Large>
+          <Large as={"p"}>
             <Link
               href={"#"}
               onClick={() => {
