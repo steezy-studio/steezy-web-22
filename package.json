@@ -57,5 +57,8 @@
     "@types/react": "^17.0.40",
     "@types/styled-components": "^5.1.24",
     "babel-plugin-styled-components": "^2.0.6"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }
