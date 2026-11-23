@@ -58,9 +58,9 @@ const Index = ({ projects, areas, products }: indexProps) => {
   return (
     <>
       <Head
-        title={"STEEZY Studio – Branding & Design Studio from Brno and Prague"}
+        title={"STEEZY Studio – Branding & Design Studio from Brno"}
         ogDescription={
-          "Branding and design studio from Brno and Prague. Brand identity, web and e-commerce, video, motion and campaigns for world-known brands and bold start-ups."
+          "Branding and design studio from Brno, Czech Republic. Brand identity, web and e-commerce, video, motion and campaigns for world-known brands and bold start-ups."
         }
         ogImageSrc={"/images/studio-hero.jpg"}
         ogTitle={"STEEZY Studio – Branding & Design Studio"}
