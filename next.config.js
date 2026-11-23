@@ -1,4 +1,14 @@
 module.exports = {
+  // One canonical domain: the Czech domains used to serve a full copy of the
+  // site. steezy.studio -> www.steezy.studio is handled in Vercel domains.
+  async redirects() {
+    return ["www.steezy.cz", "steezy.cz"].map((host) => ({
+      source: "/:path*",
+      has: [{ type: "host", value: host }],
+      destination: "https://www.steezy.studio/:path*",
+      permanent: true,
+    }));
+  },
   compiler: {
     styledComponents: true,
   },

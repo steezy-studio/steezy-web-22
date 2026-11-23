@@ -10,6 +10,7 @@ import getClient from "../../apollo/client";
 import { Query } from "../../cms";
 import ClientQuote from "../../components/ClientQuote/ClientQuote";
 import Head from "../../components/Head/Head";
+import { ORGANIZATION_ID, SITE_URL, toPlainText } from "../../helpers/seo";
 import Link from "../../components/Link/Link";
 import { NavbarContext } from "../../components/Navbar/NavbarControls";
 import ProjectCard from "../../components/ProjectCard/ProjectCard";
@@ -65,6 +66,47 @@ const Project = ({ projectData }: ProjectProps) => {
         ogDescription={project.project_description}
         ogImageSrc={project.hero_image[0].url}
         pageName={[`Project`, project.project_detail_name]}
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: toPlainText(project.project_detail_name),
+            headline: toPlainText(project.project_detail_name),
+            description: toPlainText(project.project_description),
+            image: project.hero_image?.[0]?.url,
+            url: `${SITE_URL}/project/${project._slug}`,
+            creator: { "@id": ORGANIZATION_ID },
+            ...(project.company_name
+              ? {
+                  sourceOrganization: {
+                    "@type": "Organization",
+                    name: toPlainText(project.company_name),
+                  },
+                }
+              : {}),
+            ...(project.areas?.length
+              ? { genre: project.areas.map((area) => area.area_name) }
+              : {}),
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Projects",
+                item: `${SITE_URL}/projects/all-projects`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: toPlainText(project.project_detail_name),
+                item: `${SITE_URL}/project/${project._slug}`,
+              },
+            ],
+          },
+        ]}
       />
       <StyledProject>
         <Large>{stripHtmlTags(project.project_detail_name)}</Large>
