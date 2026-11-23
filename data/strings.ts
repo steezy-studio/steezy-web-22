@@ -12,7 +12,7 @@ const data = {
       subHeader:
         "Do you have an interesting story to tell?\nGet in touch right now.",
       perex:
-        "We support people who're not affraid to step out of line, who don't listen that something is not possible and who have courage to inspire the others.",
+        "We support people who're not afraid to step out of line, who don't listen that something is not possible and who have courage to inspire the others.",
     },
   },
   studioPage: {

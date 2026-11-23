@@ -24,8 +24,8 @@ export const canonicalUrl = (asPath: string): string => {
 };
 
 // Facts about the studio for search engines and AI assistants (schema.org).
-// Phone and the Prague street address are left out on purpose until they are
-// confirmed: they must match the footer and Google Business Profile exactly.
+// Name, address and phone must match the footer and Google Business Profile
+// exactly. The Prague studio is added together with the new website.
 export const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -37,40 +37,19 @@ export const organizationJsonLd = {
   logo: `${SITE_URL}/icon-512.png`,
   image: `${SITE_URL}/images/studio-hero.jpg`,
   description:
-    "STEEZY is a branding and design studio from Brno and Prague. We create brand identities, websites and e-commerce, product launches, video, motion and campaigns for market leaders and ambitious challengers.",
+    "STEEZY is a branding and design studio from Brno, Czech Republic. We create brand identities, websites and e-commerce, product launches, video, motion and campaigns for market leaders and ambitious challengers.",
   foundingDate: "2019",
   email: "hello@steezy.studio",
+  telephone: "+420 728 088 996",
   vatID: "CZ07812558",
   taxID: "07812558",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Obilní trh 310/4",
+    streetAddress: "Obilní trh 4",
     postalCode: "602 00",
     addressLocality: "Brno",
     addressCountry: "CZ",
   },
-  location: [
-    {
-      "@type": "Place",
-      name: "STEEZY Brno",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Obilní trh 310/4",
-        postalCode: "602 00",
-        addressLocality: "Brno",
-        addressCountry: "CZ",
-      },
-    },
-    {
-      "@type": "Place",
-      name: "STEEZY Prague",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Prague",
-        addressCountry: "CZ",
-      },
-    },
-  ],
   areaServed: "Worldwide",
   knowsAbout: [
     "Brand identity",

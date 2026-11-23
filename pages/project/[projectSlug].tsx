@@ -277,12 +277,19 @@ export const getStaticProps = async ({
     .slice(0, 10)
     .filter((x) => x._slug !== enhancedProject[0]._slug);
 
+  // Project cards only show each area's name and link. Sending the full area
+  // objects (each with all its projects) made every project page ~720 KB.
+  const slimAreas = (projects: EnhancedProject[]) =>
+    projects.map((item) => ({
+      ...item,
+      areas: item.areas.map(({ projects: _projects, ...area }) => area),
+    }));
+
   return {
     props: {
-      areas: areas,
       projectData: {
-        project: enhanceProjects([project], areas),
-        similar_projects: enhanceProjects(similar_projects, areas),
+        project: slimAreas(enhanceProjects([project], areas)),
+        similar_projects: slimAreas(enhanceProjects(similar_projects, areas)),
       },
     },
     revalidate: false,
