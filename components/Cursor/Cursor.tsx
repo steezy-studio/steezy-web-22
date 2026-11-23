@@ -14,7 +14,7 @@ interface CursorProps {
 const StyledCursor = styled(motion.div)`
   position: fixed;
   mix-blend-mode: difference;
-  z-index: 9999;
+  z-index: 2147483647; /* always on top, incl. cookie bar (z-index 999999) */
   pointer-events: none;
   div {
     width: 10px;
