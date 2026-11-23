@@ -22,7 +22,7 @@ const Footer = ({}: FooterProps) => {
       <FooterInner>
         <Micro>{footerStrings.cta}</Micro>
         <ContactInfo>
-          <Large>
+          <Large as={"p"}>
             {/* {router.asPath === "/contact" ? (
               <Link
                 href={`https://www.instagram.com/steezy.studio/`}

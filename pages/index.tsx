@@ -58,10 +58,12 @@ const Index = ({ projects, areas, products }: indexProps) => {
   return (
     <>
       <Head
-        ogDescription={landingpageStrings.hero.subHeader}
+        title={"STEEZY Studio – Branding & Design Studio from Brno and Prague"}
+        ogDescription={
+          "Branding and design studio from Brno and Prague. Brand identity, web and e-commerce, video, motion and campaigns for world-known brands and bold start-ups."
+        }
         ogImageSrc={"/images/studio-hero.jpg"}
-        pageName={"STEEZY Studio"}
-        ogTitle={"STEEZY Studio"}
+        ogTitle={"STEEZY Studio – Branding & Design Studio"}
       />
       <StyledIndex>
         <IndexHeroSection>

@@ -25,7 +25,7 @@ export const allProjects = {
   _slug: "all-projects",
   area_name: "All projects",
   area_description:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget arcu mollis, faucibus erat eget, sollicitudin leo.",
+    "Selected work by STEEZY Studio: branding, web and app design, video, motion design, campaigns and spatial design for brands from Czechia and around the world.",
 };
 
 export const indetifiers = [

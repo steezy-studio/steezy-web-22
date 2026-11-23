@@ -1,4 +1,3 @@
-import fs from "fs";
 import { GetServerSideProps } from "next";
 import getClient from "../apollo/client";
 import { Query } from "../generated/preprTypes";
@@ -7,15 +6,11 @@ import { GET_ALL_AREAS } from "../graphql/GetAllAreas";
 import { GET_PROJECTS } from "../graphql/GetAllProjects";
 import { GET_PRODUCTS } from "../graphql/GetProducts";
 import { indetifiers } from "../helpers/consts";
+import { SITE_URL } from "../helpers/seo";
 
 const Sitemap = () => {};
 
-export const getServerSideProps: GetServerSideProps = async ({
-  res,
-  locales,
-}) => {
-  const siteUrl = "https://steezy.studio";
-
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const client = getClient();
   const shopifyClient = getClient("shopify");
 
@@ -36,82 +31,48 @@ export const getServerSideProps: GetServerSideProps = async ({
     },
   });
 
-  const timestamp = new Date().toISOString();
-
   const [projectAreasData, projectsData, productsData] = await Promise.all([
     projectAreas,
     projects,
     products,
   ]);
 
-  const dynamicPages = [
-    ...productsData.data.products.nodes.map((product) => {
-      return {
-        url: `apparel/${product.handle}`,
-        changed_on: timestamp,
-      };
-    }),
-    ...projectAreasData.data.Areas.items.map((area) => {
-      return {
-        url: `projects/${area._slug}`,
-        changed_on: timestamp,
-      };
-    }),
-    ...projectsData.data.Projects.items.map((project) => {
-      return {
-        url: `project/${project._slug}`,
-        changed_on: timestamp,
-      };
-    }),
+  // Listed by hand: reading the pages folder does not work on Vercel (it
+  // picked up build internals like /___next_launcher and missed /studio).
+  const staticPaths = ["/", "/studio", "/contact", "/apparel"];
+
+  const paths = [
+    ...staticPaths,
+    ...projectAreasData.data.Areas.items.map(
+      (area) => `/projects/${area._slug}`
+    ),
+    ...projectsData.data.Projects.items.map(
+      (project) => `/project/${project._slug}`
+    ),
+    ...productsData.data.products.nodes.map(
+      (product) => `/apparel/${product.handle}`
+    ),
   ];
 
-  const staticPages = fs
-    .readdirSync(
-      {
-        development: "pages",
-        production: "./",
-      }[process.env.NODE_ENV]
-    )
-    .filter((staticPage) => {
-      return ![
-        "_app.tsx",
-        "_document.tsx",
-        "_error.tsx",
-        "sitemap.xml.tsx",
-        "project",
-        "projects",
-        "___next_launcher",
-        "___vc_bridge",
-        "package",
-        "node_modules",
-        "api",
-      ].includes(staticPage);
-    })
-    .map((staticPagePath) => {
-      let slug = staticPagePath.split(`.`)[0];
-      if (slug === `index`) slug = ``;
-      return {
-        url: slug,
-        changed_on: timestamp,
-      };
-    })
-    .flat();
+  const escapeXml = (value: string) =>
+    value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&apos;");
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${[...staticPages, ...dynamicPages]
-    .map((page) => {
-      return `
-        <url>
-          <loc>${`${siteUrl}/${page.url}`}</loc>
-          <lastmod>${page.changed_on}</lastmod>
-          <changefreq>monthly</changefreq>
-          <priority>1.0</priority>
-        </url>
-      `;
-    })
-    .join("")}
-  </urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${paths
+  .map(
+    (path) =>
+      `  <url><loc>${escapeXml(
+        `${SITE_URL}${path === "/" ? "/" : encodeURI(path)}`
+      )}</loc></url>`
+  )
+  .join("\n")}
+</urlset>
 `;
   res.setHeader("Content-Type", "text/xml");
   res.write(sitemap);
