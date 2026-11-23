@@ -1,5 +1,6 @@
 import Script from "next/script";
 import { ThemeProvider } from "styled-components";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Cart from "../components/Cart/Cart";
 import CartProvider from "../components/Cart/CartProvider";
 import CursorProvider from "../components/Cursor/CursorProvider";
@@ -51,6 +52,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           </ThemeProvider>
         </RootVideosController>
       </NavbarControls>
+      <SpeedInsights />
     </CartProvider>
   );
 }
